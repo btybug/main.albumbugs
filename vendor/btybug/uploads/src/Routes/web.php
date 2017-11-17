@@ -39,7 +39,10 @@ Route::group(['prefix' => 'apps'], function ($router) {
 });
 
 Route::group(['prefix' => 'gears'], function () {
-    Route::get('/', 'UnitsController@getIndex',true);
+    Route::get('/', function () {
+        return view("uploads::gears.units.list");
+    },true);
+    Route::get('/back-end', 'UnitsController@getIndex',true);
     Route::get('/front-end', 'UnitsController@getFrontend',true);
     Route::post('/upload', 'UnitsController@postUploadUnit');
     Route::get('/delete-variation/{slug}', 'UnitsController@postDeleteVariation');
@@ -53,7 +56,10 @@ Route::group(['prefix' => 'gears'], function () {
 });
 
 Route::group(['prefix' => 'layouts'], function () {
-    Route::get('/', 'PageSectionsController@getIndex',true);
+    Route::get('/', function () {
+        return view("uploads::gears.page_sections.list");
+    },true);
+    Route::get('/back-end', 'PageSectionsController@getIndex',true);
     Route::get('/front-end', 'PageSectionsController@getFrontend',true);
     Route::get('/settings/{slug}', 'PageSectionsController@getSettings',true);
     Route::get('/variations/{slug}', 'PageSectionsController@getVariations',true);

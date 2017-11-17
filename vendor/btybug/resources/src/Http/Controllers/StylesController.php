@@ -18,8 +18,8 @@ use App\Modules\Resources\Models\StyleUpload;
 use Datatables;
 use File;
 use Illuminate\Http\Request;
-use Btybug\btybug\Helpers\helpers;
-use Btybug\btybug\Helpers\helpers;
+use Sahakavatar\Cms\Helpers\helpers;
+use Sahakavatar\Cms\Helpers\helpers;
 use View;
 
 

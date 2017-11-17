@@ -69,7 +69,7 @@ class ModuleServiceProvider extends ServiceProvider
             ], 'console_general' => [
                 [
                     'title' => 'Validations',
-                    'url' => '/admin/console/general',
+                    'url' => '/admin/console/general/validations',
                 ],
                 [
                     'title' => 'Trigger & Events',

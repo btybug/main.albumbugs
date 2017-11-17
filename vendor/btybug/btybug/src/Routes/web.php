@@ -26,6 +26,7 @@
  */
 //Route::get('units/styles/{slug}/{path}', 'HomeController@unitStyles')->where('path', '.*');
 Route::get('public-x/custom/css/{file}', 'HomeController@unitStyles');
+Route::get('pages-optimize', 'HomeController@pagesOptimize');
 Route::get('public-x/custom/js/{file}', 'HomeController@unitScripts');
 //Route::get('units/scripts/{slug}/{path}', 'HomeController@unitScripts')->where('path', '.*');
 Route::get('units/img/{slug}/{path}', 'HomeController@unitImg')->where('path', '.*');

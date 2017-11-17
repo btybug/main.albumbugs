@@ -9,7 +9,7 @@ use App\Modules\Media\Models\MediaVariation;
 use App\Modules\Settings\Models\Settings;
 use File;
 use Image;
-use Btybug\btybug\Helpers\helpers;
+use Btybug\Cms\Helpers\helpers;
 use Validator;
 
 /**

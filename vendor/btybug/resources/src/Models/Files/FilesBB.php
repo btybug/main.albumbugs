@@ -12,7 +12,7 @@
 namespace Btybug\Resources\Models\Files;
 
 use App\Modules\Resources\Models\Files\traits\FilesPreview;
-use Btybug\btybug\Models\Eloquent\Abstractions\TplModel;
+use Sahakavatar\Cms\Models\Eloquent\Abstractions\TplModel;
 
 /**
  * Created by PhpStorm.

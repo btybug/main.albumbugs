@@ -158,7 +158,7 @@ class Routes
 
     public static function getRoutes()
     {
-        return \Route::getRoutes();
+        return Route::getRegisteredRoutes();
     }
 
     public static function registerPages($slug)

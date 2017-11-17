@@ -7,7 +7,7 @@ use App\Modules\Resources\Models\Validation as validateUpl;
 use File;
 use Illuminate\Http\Request;
 use Resources;
-use Btybug\btybug\Models\Templates\Units;
+use Sahakavatar\Cms\Models\Templates\Units;
 use View;
 
 

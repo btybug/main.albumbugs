@@ -3,7 +3,7 @@
 namespace Btybug\Resources\Models\Files;
 
 use File;
-use Btybug\btybug\Models\Templates\Units;
+use Sahakavatar\Cms\Models\Templates\Units;
 
 /**
  * Created by PhpStorm.

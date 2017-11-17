@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+
 Route::get('/', 'ModulesController@getChilds',true);
 
 //Route::get('/optimisation', function () {

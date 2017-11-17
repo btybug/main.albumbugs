@@ -61,7 +61,8 @@ class ModulesController extends Controller
 
     public function getUpdateCms()
     {
-        rmdir(__DIR__.'/../../../../../../vendor');
-        return redirect()->back();
+        $back=redirect()->back();
+        \File::deleteDirectory(__DIR__.'/../../../../../../vendor');
+        return $back;
     }
 }

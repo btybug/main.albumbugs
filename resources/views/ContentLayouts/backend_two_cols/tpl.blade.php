@@ -6,20 +6,3 @@
 <div class="col-md-9">
     @yield('content')
 </div>
-<style>
-    body, html {
-        height: 100%;
-    }
-
-    div#wrapper {
-        flex-direction: column;
-        display: flex;
-        height: 100%;
-    }
-
-    .adm-top {
-        overflow: auto;
-        flex: 1 100%;
-        display: flex;
-    }
-</style>

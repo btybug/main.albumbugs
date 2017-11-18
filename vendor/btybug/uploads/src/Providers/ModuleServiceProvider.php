@@ -82,11 +82,11 @@ class ModuleServiceProvider extends ServiceProvider
             'upload_apps' => [
                 [
                     'title' => 'Core Apps',
-                    'url' => '/admin/uploads/apps',
+                    'url' => '/admin/uploads/apps/core-apps',
                 ],
                 [
                     'title' => 'Extra Apps',
-                    'url' => '/admin/uploads/apps/extra',
+                    'url' => '/admin/uploads/apps/extra-apps',
                 ]
             ],
             'upload_market' => [

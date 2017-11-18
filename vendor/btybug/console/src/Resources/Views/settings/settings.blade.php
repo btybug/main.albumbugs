@@ -53,11 +53,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($settings) !!}
-                                            </div>
-                                        </div>
+                                        {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($settings) !!}
+
                                     </div>
                                     <!-- Button -->
                                     <div class="form-group">
@@ -111,11 +108,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($settings) !!}
-                                            </div>
-                                        </div>
+                                        {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($settings) !!}
                                     </div>
                                     <!-- Button -->
                                     <div class="form-group">

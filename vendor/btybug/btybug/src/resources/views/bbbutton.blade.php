@@ -41,7 +41,7 @@
         >
     </div>
     <div class="col-md-3">
-    <button type="button" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Cange
+    <button type="button" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
     </button>
     </div>
     <input

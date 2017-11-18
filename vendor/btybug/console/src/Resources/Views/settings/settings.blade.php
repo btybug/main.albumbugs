@@ -5,7 +5,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 panels_wrapper settings_panel">
                 <div class="panel panel-default panels accordion_panels" id="my-accordion">
                     <div class="panel-heading bg-black-darker text-white" role="tab" id="headingLinkSettings">
-                        <span class="panel_title">General Settings</span>
+                        <span class="panel_title">New Page Settings</span>
                         <a role="button" class="panelcollapsed collapsed" data-toggle="collapse"
                            data-parent="#accordion" href="#collapseLink3" aria-expanded="true"
                            aria-controls="collapseLink3">
@@ -35,7 +35,7 @@
                                                     {!! BBbutton2('unit','footer_unit','backend_footer','Select Footer',['class' => 'form-control input-md btn-info','data-type' => 'header','model' =>$settings]) !!}
                                                 </div>
                                                 <div class="for_button_1 col-xs-6 col-sm-6 col-md-2 col-lg-3">
-                                                    <input type="hidden" name="footer_enabled" value="0">
+                                                    <input type="hidden" name="footer" value="0">
                                                     {!! Form::checkbox('footer', 1, $settings, ['id' => 'page_header_active', ]) !!}
                                                     <label for="page_header_active">Enabled</label>
                                                 </div>
@@ -105,21 +105,9 @@
                                                     {!! BBbutton2('unit','footer_unit','backend_footer','Select Footer',['class' => 'form-control input-md btn-info','data-type' => 'header','model' =>$settings]) !!}
                                                 </div>
                                                 <div class="for_button_1 col-xs-6 col-sm-6 col-md-2 col-lg-3">
-                                                    <input type="hidden" name="footer_enabled" value="0">
-                                                    {!! Form::checkbox('footer', 1, $settings, ['id' => 'page_header_active', ]) !!}
+                                                    <input type="hidden" name="footer" value="0">
+                                                    {!! Form::checkbox('footer', 1, $site_settings, ['id' => 'page_header_active', ]) !!}
                                                     <label for="page_header_active">Enabled</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-2">
-                                                    <label>Page Icon</label>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <div class="input-group">
-                                                        {!! Form::text('page_icon',null,['class' => 'form-control icp icp-auto','data-placement' => 'bottomRight']) !!}
-                                                        <span style="height: 34px;width: 60px;"
-                                                              class="pull-left input-group-addon"></span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

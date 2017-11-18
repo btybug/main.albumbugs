@@ -3,6 +3,7 @@
 namespace Btybug\Console\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Services\SettingsService;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\Console\Services\BackendService;
@@ -102,10 +103,11 @@ class BackendController extends Controller
 
     public function postSiteSettings(
         Request $request,
-        AdminsettingRepository $adminsettings
+        AdminsettingRepository $adminsettings,
+        SettingsService $settingsService
     )
     {
-        $adminsettings->createOrUpdateToJson($request->except('_token'), 'backend_site_settings', 'backend_site_settings');
+        $settingsService->changeSitePageSettings($request->except('_token'));
         return redirect()->back()->with('message', 'sucsses');
     }
 

@@ -109,4 +109,8 @@ class AdminPagesRepository extends GeneralRepository
     {
         return $this->model()->where('url', $url)->orWhere('url', '/' . $url)->first();
     }
+
+    public function updateAll($data){
+        return $this->model()->whereNotNull('url')->update($data);
+    }
 }

@@ -257,9 +257,9 @@ function BBheaderBack()
 {
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
 
-    if($page && $page->header){
+    if($page){
         $settingsRepo = new \Btybug\btybug\Repositories\AdminsettingRepository();
-        $settings = $settingsRepo->findBy('section', 'backend_settings');
+        $settings = $settingsRepo->findBy('section', 'backend_site_settings');
         if ($settings && $settings->val) $data = json_decode($settings->val, true);
 
         if(isset($data['header_unit']))
@@ -273,7 +273,7 @@ function BBfooterBack()
 
     if($page && $page->footer){
         $settingsRepo = new \Btybug\btybug\Repositories\AdminsettingRepository();
-        $settings = $settingsRepo->findBy('section', 'backend_settings');
+        $settings = $settingsRepo->findBy('section', 'backend_site_settings');
         if ($settings && $settings->val) $data = json_decode($settings->val, true);
 
         if(isset($data['footer_unit']))
@@ -314,7 +314,7 @@ function BBgetPageLayout()
         if ($layout) return 'ContentLayouts.' . $layout->folder . '.' . $layout->layout;
     } else {
         $settingsRepo = new \Btybug\btybug\Repositories\AdminsettingRepository();
-        $settings = $settingsRepo->findBy('section', 'backend_settings');
+        $settings = $settingsRepo->findBy('section', 'backend_site_settings');
         if ($settings && $settings->val) $data = json_decode($settings->val, true);
 
         if (isset($data['backend_page_section']) && $data['backend_page_section']) {

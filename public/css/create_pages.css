@@ -8,9 +8,7 @@ body, nav, article, a, ul, li, p, h1, h2, img, span, input, button
 button:focus, button:hover{
     outline: 0;
 }
-body{
-    background-color: #1c2b36;
-}
+
 .middle-wrapper{
     padding: 0;
 }

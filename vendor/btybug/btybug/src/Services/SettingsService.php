@@ -28,7 +28,7 @@ class SettingsService extends GeneralService
         $this->adminPageRepo->updateAll([
             'footer'    => $data['footer'],
             'layout_id' => $data['backend_page_section'],
-            'settings'  => json_encode(['placeholders' => $data['placeholders']], true)
+            'settings'  => isset($data['placeholders']) ? json_encode(['placeholders' => $data['placeholders']], true) : null
         ]);
         $this->adminsettingRepository->createOrUpdateToJson($data, 'backend_site_settings', 'backend_site_settings');
     }

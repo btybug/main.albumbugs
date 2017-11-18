@@ -7,12 +7,19 @@
     @yield('content')
 </div>
 <style>
-    .adm-top {
-        overflow: auto;
-        height: calc(100vh - 55px);
+    body, html {
+        height: 100%;
     }
 
-    .adm-top>div {
-        height: calc(100vh - 55px);
+    div#wrapper {
+        flex-direction: column;
+        display: flex;
+        height: 100%;
+    }
+
+    .adm-top {
+        overflow: auto;
+        flex: 1 100%;
+        display: flex;
     }
 </style>

@@ -108,7 +108,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($settings) !!}
+                                        {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($site_settings) !!}
                                     </div>
                                     <!-- Button -->
                                     <div class="form-group">

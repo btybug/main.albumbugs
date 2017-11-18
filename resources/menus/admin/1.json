@@ -51,7 +51,7 @@
         "is_core": "yes"
       },{
         "title": "Settings",
-        "custom-link": "\/admin\/console\/backend",
+        "custom-link": "\/admin\/console\/settings",
         "icon": "fa fa-angle-right",
         "is_core": "yes"
       },{

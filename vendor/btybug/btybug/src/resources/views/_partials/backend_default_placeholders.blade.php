@@ -9,19 +9,21 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="col-md-12">
-        <label>Select Page Layout Placeholders</label>
-    </div>
-    <div class="col-md-12 layout-data">
-        <div id="placeholders">
-            @if($_this)
+@if($_this)
+    <div class="form-group">
+        <div class="col-md-12">
+            <label>Select Page Layout Placeholders</label>
+        </div>
+        <div class="col-md-12 layout-data">
+            <div id="placeholders">
+
                 @foreach($_this->placeholders as $key=>$placeholder)
                     @if(isset($placeholder['tag']))
                         {!! BBbutton2('unit',$key,$placeholder['tag'],isset($placeholder['title'])?$placeholder['title']:'Title Missing!!!',['class'=>'form-control input-md btn btn-info change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'placeholders','model'=>($system['placeholders'][$key])??null]) !!}
                     @endif
                 @endforeach
-            @endif
+            </div>
         </div>
     </div>
-</div>
+@endif
+

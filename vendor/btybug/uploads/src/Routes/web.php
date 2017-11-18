@@ -19,12 +19,13 @@ Route::get('/', 'ModulesController@getChilds',true);
 //});
 
 Route::group(['prefix' => 'modules'], function () {
+
     Route::get('/', 'ModulesController@getIndex',true)->name('modules_index');
+    Route::get('/core-modules', 'ModulesController@getCoreModules',true)->name('core_modules');
     Route::get('/update-cms', 'ModulesController@getUpdateCms',true)->name('update_cms');
-//    Route::get('/', 'ModulesController@getIndex')->name('modules_index');
     Route::get('/{repository}/{package}/explore', 'ModulesController@getExplore',true);
 
-    Route::group(['prefix' => 'extra'], function () {
+    Route::group(['prefix' => 'extra-packages'], function () {
         Route::get('/', 'PluginsController@getIndex',true)->name('plugins_index');
         Route::get('/{repository}/{package}/explore', 'PluginsController@getExplore',true);
     });

@@ -96,6 +96,7 @@ Route::group(['prefix' => 'settings'], function () {
     Route::get('/', 'BackendController@getIndex',true);
     Route::get('/general', 'BackendController@settings',true);
     Route::post('/general', 'BackendController@postSaveSettings');
+    Route::post('/site-settings', 'BackendController@postSiteSettings')->name('site_settings_console');
     Route::get('/css-js', 'BackendController@getCssJs',true);
     Route::post('/css-js', 'BackendController@postCssJs');
 });

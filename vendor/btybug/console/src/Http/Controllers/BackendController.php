@@ -77,20 +77,35 @@ class BackendController extends Controller
     /**
      * @param $slug
      */
-    public function settings()
+    public function settings(
+        AdminsettingRepository $adminsettings
+    )
     {
-        $adminsettings = new AdminsettingRepository();
         $settings = $adminsettings->getSettings('backend_settings', 'backend_settings');
-        $settings = json_decode($settings->val, true);
-        return view('console::settings.settings', compact('settings'));
+        $settings = ($settings) ? json_decode($settings->val, true) : null;
+
+        $site_settings = $adminsettings->getSettings('backend_site_settings', 'backend_site_settings');
+        $site_settings = ($site_settings) ? json_decode($site_settings->val, true) : null;
+        return view('console::settings.settings', compact('settings','site_settings'));
 
     }
 
 //{"header":"1","selcteunit":null,"header_unit":"58d0f2d9858ae.58d0f2d9a95df","backend_page_section":"default_page_section.main_v","placeholders":{"left_bar":{"enable":"1","value":"58d166ae1246f.58d166ae3d705"},"right_bar":{"enable":"0","value":null}}}
-    public function postSaveSettings(Request $request)
+    public function postSaveSettings(
+        Request $request,
+        AdminsettingRepository $adminsettings
+    )
     {
-        $adminsettings = new AdminsettingRepository();
         $adminsettings->createOrUpdateToJson($request->except('_token'), 'backend_settings', 'backend_settings');
+        return redirect()->back()->with('message', 'sucsses');
+    }
+
+    public function postSiteSettings(
+        Request $request,
+        AdminsettingRepository $adminsettings
+    )
+    {
+        $adminsettings->createOrUpdateToJson($request->except('_token'), 'backend_site_settings', 'backend_site_settings');
         return redirect()->back()->with('message', 'sucsses');
     }
 

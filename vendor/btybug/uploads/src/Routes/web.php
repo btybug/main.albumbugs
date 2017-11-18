@@ -94,7 +94,8 @@ Route::group(['prefix' => 'assets'], function () {
 });
 
 Route::group(['prefix' => 'market'], function ($router) {
-    Route::get('/', 'MarketController@getIndex',true)->name('composer_market');
+    Route::get('/', 'MarketController@getIndex',true)->name('market_index');
+    Route::get('/packages', 'MarketController@getPackages',true)->name('composer_market');
     Route::group(['prefix' => 'composer'], function ($router) {
         Route::get('/', 'ComposerController@getIndex',true)->name('composer_index');
         Route::post('/main', 'ComposerController@getMain')->name('composer_main');

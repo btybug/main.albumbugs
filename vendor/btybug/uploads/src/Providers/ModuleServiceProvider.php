@@ -92,11 +92,11 @@ class ModuleServiceProvider extends ServiceProvider
             'upload_market' => [
                 [
                     'title' => 'Market',
-                    'url' => '/admin/uploads/market',
+                    'url' => '/admin/uploads/market/packages',
                 ],
                 [
                     'title' => 'Composer',
-                    'url' => '/admin/uploads/composer',
+                    'url' => '/admin/uploads/market/composer',
                 ]
             ]
         ];

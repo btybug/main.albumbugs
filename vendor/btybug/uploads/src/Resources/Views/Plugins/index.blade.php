@@ -24,9 +24,9 @@
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a class="btn btn-sm  m-b-10 upload_module" href="{!! route('composer_index') !!}">
+                            <a class="btn btn-sm  m-b-10 upload_module" href="{!! route('composer_market') !!}">
                                 <i class="fa fa-steam-square" aria-hidden="true"></i>
-                                <span class="upload_module_text">Installer</span>
+                                <span class="upload_module_text">Market</span>
 
                             </a>
                         </div>

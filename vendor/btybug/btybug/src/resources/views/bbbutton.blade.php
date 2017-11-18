@@ -24,6 +24,7 @@
                data-id="{!! $indentificator !!}"
                class="page-layout-title form-control"
                title="info"
+               style="width: 100%;"
                @if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
                value="{!! $obj->title !!}"
                data-content="

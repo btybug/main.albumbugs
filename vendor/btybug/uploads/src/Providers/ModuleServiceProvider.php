@@ -72,11 +72,11 @@ class ModuleServiceProvider extends ServiceProvider
             'upload_modules' => [
                 [
                     'title' => 'Core Packages',
-                    'url' => '/admin/uploads/modules',
+                    'url' => '/admin/uploads/modules/core-packages',
                 ],
                 [
                     'title' => 'Extra Packages',
-                    'url' => '/admin/uploads/modules/extra',
+                    'url' => '/admin/uploads/modules/extra-packages',
                 ]
             ],
             'upload_apps' => [

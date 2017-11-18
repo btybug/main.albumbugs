@@ -6,8 +6,8 @@
         </div>
         <div class="row layouts_row">
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
-                <a href="{!! route('core_modules') !!}" class="ly_items">
-                    <h3>Core Modules</h3>
+                <a href="{!! route('core_packages') !!}" class="ly_items">
+                    <h3>Core Pachkages</h3>
                     <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                 </a>
             </div>

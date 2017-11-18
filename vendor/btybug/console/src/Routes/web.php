@@ -84,7 +84,7 @@ Route::group(['prefix' => 'structure'], function () {
 
     Route::group(['prefix' => 'menus'], function () {
         Route::get('/', 'MenusController@getIndex',true);
-        Route::get('/edit/{menu}/{role}', 'MenusController@getEdit',true);
+        Route::get('/edit/{menu}/{role}', 'MenusController@getEdit',true)->name('console_menu_edit');
         Route::post('/edit/{menu}/{role}', 'MenusController@postEdit');
         Route::post('/create', 'MenusController@postCreate');
         Route::post('/delete', 'MenusController@postDelete');

@@ -32,7 +32,7 @@ class MenuDeleteRequest extends Request
     {
         if ($this->isMethod('POST')) {
             return [
-                'id' => 'required|exists:demo_menus,id'
+                'slug' => 'required|exists:demo_menus,id'
             ];
         }
         return [];

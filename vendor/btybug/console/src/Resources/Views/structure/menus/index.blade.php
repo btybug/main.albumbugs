@@ -41,7 +41,7 @@
                                                 class="fa fa-trash-o"></i></a>
                                 @endif
                                 <a href="#" class="btn btn-primary"><i class="fa fa-clone"></i></a>
-                                <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                <a href="{!! route('console_menu_edit',[$menu->id,'superadmin']) !!}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             </th>
                         </tr>
                     @endforeach

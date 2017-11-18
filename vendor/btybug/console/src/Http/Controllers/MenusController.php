@@ -42,7 +42,7 @@ class MenusController extends Controller
         MenuRepository $menuRepository
     )
     {
-        $result = $menuRepository->findOrFail($request->id);
+        $result = $menuRepository->findOrFail($request->slug);
         $success = $result->delete();
         return \Response::json(['success' => $success, 'url' => url('admin/console/structure/menus')]);
     }

@@ -205,7 +205,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <ol class="bb-sortable-static bb-sortable-group">
-                        {!! renderPagesInMenu($pageGrouped,true,0,$children) !!}
+                        {!! renderPagesInMenu($pageGrouped,true,0,true) !!}
                     </ol>
                 </div>
             </div>

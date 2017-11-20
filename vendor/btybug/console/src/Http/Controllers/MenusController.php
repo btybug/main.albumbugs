@@ -73,7 +73,6 @@ class MenusController extends Controller
         $pageGrouped = $adminPagesRepository->getGroupedWithModule();
         $role = $roleRepository->findBy('slug', $slug);
         $data = $structureService->getMenuItems($menu, $role);
-
         return view('console::structure.menus.view', compact(['pageGrouped', 'page', 'slug', 'children', 'data', 'menu']));
     }
 

@@ -1,11 +1,9 @@
 <?php namespace Btybug\Console\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Btybug\btybug\Repositories\MenuRepository;
 use Btybug\Console\Http\Requests\Structure\MenuCreateRequest;
 use Btybug\Console\Http\Requests\Structure\MenuDeleteRequest;
-use Btybug\Console\Http\Requests\Structure\MenuEditRequest;
 use Btybug\Console\Repository\AdminPagesRepository;
 use Btybug\Console\Services\StructureService;
 use Btybug\User\Repository\RoleRepository;
@@ -58,8 +56,9 @@ class MenusController extends Controller
         $menu = $menuRepository->findOrFail($id);
         $pageGrouped = $adminPagesRepository->getGroupedWithModule();
         $roles = $roleRepository->getAllWithGuest();
-        return view('console::structure.menus.edit', compact(['pageGrouped', 'menu','roles']));
+        return view('console::structure.menus.edit', compact(['pageGrouped', 'menu', 'roles']));
     }
+
     public function getView(
         $id, $slug,
         MenuRepository $menuRepository,
@@ -68,13 +67,17 @@ class MenusController extends Controller
         StructureService $structureService
     )
     {
+        $children = false;
+        if ($id == 2) {
+            $children = true;
+        }
         $menu = $menuRepository->findOrFail($id);
         $page = $adminPagesRepository->first();
         $pageGrouped = $adminPagesRepository->getGroupedWithModule();
         $role = $roleRepository->findBy('slug', $slug);
         $data = $structureService->getMenuItems($menu, $role);
 
-        return view('console::structure.menus.view', compact(['pageGrouped', 'page', 'slug', 'data', 'menu']));
+        return view('console::structure.menus.view', compact(['pageGrouped', 'page', 'slug', 'children', 'data', 'menu']));
     }
 
     public function postEdit(

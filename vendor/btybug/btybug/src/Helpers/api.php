@@ -1514,7 +1514,7 @@ function generate_special_page(array $data){
     );
 }
 
-function renderPagesInMenu($data, $parent = true,$i = 0)
+function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
@@ -1590,8 +1590,8 @@ function renderPagesInMenu($data, $parent = true,$i = 0)
             $output .= '</li>';
         }
 
-        if (count($item->childs)) {
-            $output .= renderPagesInMenu($item->childs, false,$i = $i +1);
+        if (count($item->childs)&& $children) {
+            $output .= renderPagesInMenu($item->childs, false,$i = $i +1,$children);
         }
 
         if($parent){

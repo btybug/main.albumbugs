@@ -1513,3 +1513,75 @@ function generate_special_page(array $data){
         $data
     );
 }
+
+function renderPagesInMenu($data, $parent = true)
+{
+    $output = '';
+    // Loop through items
+    foreach ($data as $item) {
+        $output .= '<li data-id="'.$item->id.'" id="menu-item-1">';
+        $output .= '<div class="bb-menu-item">';
+        $output .= '<div class="bb-menu-item-title">';
+        $output .= '<i></i><span>'.$item->title.'</span>';
+        $output .= '<div class="bb-menu-actions pull-right">';
+        $output .= '<a href="javascript:" class="bb-menu-delete"><i class="fa fa-close"></i></a>';
+        $output .= '<a href="javascript:" class="bb-menu-collapse"><i class="fa fa-caret-down"></i></a>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="bb-menu-item-body">';
+        $output .= '<div class="bb-menu-form">';
+        $output .= '<div class="row">';
+        $output .= '<div class="col-md-4">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Icon</label>';
+        $output .= '<input type="text" data-placement="right" class="form-control input-sm icp-auto">';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="col-md-8">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Item Title</label>';
+        $output .= '<input type="text" class="form-control input-sm menu-item-title">';
+        $output .= '<input type="text" class="form-control input-sm menu-item-title">';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="row">';
+        $output .= '<div class="col-md-6">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Item URL</label>';
+        $output .= '<input type="text" class="form-control input-sm">';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="col-md-6">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Display Roles</label>';
+        $output .= '<select name="display_roles" class="form-control input-sm">';
+        $output .= '<option value="">All Visitors</option>';
+        $output .= '<option value="">Members Only</option>';
+        $output .= '<option value="">Guests Only</option>';
+        $output .= '<option value="specific">Specific Roles</option>';
+        $output .= '</select>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="form-group specific hide">';
+        $output .= '<label>Select Roles</label>';
+        $output .= '<select name="" multiple class="form-control input-sm">';
+        $output .= '<option value="">Normal User</option>';
+        $output .= '<option value="">Pro User</option>';
+        $output .= '<option value="">Editor</option>';
+        $output .= '<option value="">Contributor</option>';
+        $output .= '</select>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</li>';
+
+        if (count($item->childs)) {
+            $output .= renderPagesInMenu($item->childs, false);
+        }
+        // Return data tree
+        return $output;
+    }
+}

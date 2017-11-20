@@ -211,431 +211,433 @@
             <div class="row">
                 <div class="col-md-4">
                     <ol class="bb-sortable-static bb-sortable-group">
-                        <li data-id="frontend-pages" id="menu-item-front" class="no-nest">
-                            <div class="panel panel-default">
-                                <div class="bb-menu-item-title">
-                                    <i></i>
-                                    <strong>Frontend Pages</strong>
+                        {!! renderPagesInMenu($pageGrouped,true) !!}
 
-                                    <div class="bb-menu-actions pull-right">
-                                        <a href="javascript:" class="bb-menu-delete">
-                                            <i class="fa fa-close"></i>
-                                        </a>
-                                        <a href="javascript:" class="bb-menu-collapse expand group-expander">
-                                            <i class="fa fa-caret-up"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="panel-body bb-menu-group-body">
+                        {{--<li data-id="frontend-pages" id="menu-item-front" class="no-nest">--}}
+                            {{--<div class="panel panel-default">--}}
+                                {{--<div class="bb-menu-item-title">--}}
+                                    {{--<i></i>--}}
+                                    {{--<strong>Admin Pages</strong>--}}
 
-                                    <ol class="bb-sortable-static">
-                                        <li data-id="1" id="menu-item-1">
-                                            <div class="bb-menu-item">
-                                                <div class="bb-menu-item-title">
-                                                    <i></i>
-                                                    <span>Home</span>
+                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                            {{--<i class="fa fa-close"></i>--}}
+                                        {{--</a>--}}
+                                        {{--<a href="javascript:" class="bb-menu-collapse expand group-expander">--}}
+                                            {{--<i class="fa fa-caret-up"></i>--}}
+                                        {{--</a>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="panel-body bb-menu-group-body">--}}
 
-                                                    <div class="bb-menu-actions pull-right">
-                                                        <a href="javascript:" class="bb-menu-delete">
-                                                            <i class="fa fa-close"></i>
-                                                        </a>
-                                                        <a href="javascript:" class="bb-menu-collapse">
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="bb-menu-item-body">
-                                                    <div class="bb-menu-form">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Icon</label>
-                                                                    <input type="text" data-placement="right"
-                                                                           class="form-control input-sm icp-auto">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <label>Item Title</label>
-                                                                    <input type="text"
-                                                                           class="form-control input-sm menu-item-title">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                    {{--<ol class="bb-sortable-static">--}}
+                                        {{--<li data-id="1" id="menu-item-1">--}}
+                                            {{--<div class="bb-menu-item">--}}
+                                                {{--<div class="bb-menu-item-title">--}}
+                                                    {{--<i></i>--}}
+                                                    {{--<span>Home</span>--}}
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Item URL</label>
-                                                                    <input type="text" class="form-control input-sm">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Display Roles</label>
-                                                                    <select name="display_roles" class="form-control input-sm">
-                                                                        <option value="">All Visitors</option>
-                                                                        <option value="">Members Only</option>
-                                                                        <option value="">Guests Only</option>
-                                                                        <option value="specific">Specific Roles</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                                            {{--<i class="fa fa-close"></i>--}}
+                                                        {{--</a>--}}
+                                                        {{--<a href="javascript:" class="bb-menu-collapse">--}}
+                                                            {{--<i class="fa fa-caret-down"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="bb-menu-item-body">--}}
+                                                    {{--<div class="bb-menu-form">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-4">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Icon</label>--}}
+                                                                    {{--<input type="text" data-placement="right"--}}
+                                                                           {{--class="form-control input-sm icp-auto">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-8">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item Title</label>--}}
+                                                                    {{--<input type="text"--}}
+                                                                           {{--class="form-control input-sm menu-item-title">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                        <div class="form-group specific hide">
-                                                            <label>Select Roles</label>
-                                                            <select name="" multiple class="form-control input-sm">
-                                                                <option value="">Normal User</option>
-                                                                <option value="">Pro User</option>
-                                                                <option value="">Editor</option>
-                                                                <option value="">Contributor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li data-id="2" id="menu-item-2" class="level-1">
-                                            <div class="bb-menu-item">
-                                                <div class="bb-menu-item-title">
-                                                    <i></i>
-                                                    <span>About</span>
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item URL</label>--}}
+                                                                    {{--<input type="text" class="form-control input-sm">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Display Roles</label>--}}
+                                                                    {{--<select name="display_roles" class="form-control input-sm">--}}
+                                                                        {{--<option value="">All Visitors</option>--}}
+                                                                        {{--<option value="">Members Only</option>--}}
+                                                                        {{--<option value="">Guests Only</option>--}}
+                                                                        {{--<option value="specific">Specific Roles</option>--}}
+                                                                    {{--</select>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                    <div class="bb-menu-actions pull-right">
-                                                        <a href="javascript:" class="bb-menu-delete">
-                                                            <i class="fa fa-close"></i>
-                                                        </a>
-                                                        <a href="javascript:" class="bb-menu-collapse">
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="bb-menu-item-body">
-                                                    <div class="bb-menu-form">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Icon</label>
-                                                                    <input type="text" data-placement="right"
-                                                                           class="form-control input-sm icp-auto">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <label>Item Title</label>
-                                                                    <input type="text"
-                                                                           class="form-control input-sm menu-item-title">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {{--<div class="form-group specific hide">--}}
+                                                            {{--<label>Select Roles</label>--}}
+                                                            {{--<select name="" multiple class="form-control input-sm">--}}
+                                                                {{--<option value="">Normal User</option>--}}
+                                                                {{--<option value="">Pro User</option>--}}
+                                                                {{--<option value="">Editor</option>--}}
+                                                                {{--<option value="">Contributor</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li data-id="2" id="menu-item-2" class="level-1">--}}
+                                            {{--<div class="bb-menu-item">--}}
+                                                {{--<div class="bb-menu-item-title">--}}
+                                                    {{--<i></i>--}}
+                                                    {{--<span>About</span>--}}
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Item URL</label>
-                                                                    <input type="text" class="form-control input-sm">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Display Roles</label>
-                                                                    <select name="display_roles" class="form-control input-sm">
-                                                                        <option value="">All Visitors</option>
-                                                                        <option value="">Members Only</option>
-                                                                        <option value="">Guests Only</option>
-                                                                        <option value="specific">Specific Roles</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                                            {{--<i class="fa fa-close"></i>--}}
+                                                        {{--</a>--}}
+                                                        {{--<a href="javascript:" class="bb-menu-collapse">--}}
+                                                            {{--<i class="fa fa-caret-down"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="bb-menu-item-body">--}}
+                                                    {{--<div class="bb-menu-form">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-4">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Icon</label>--}}
+                                                                    {{--<input type="text" data-placement="right"--}}
+                                                                           {{--class="form-control input-sm icp-auto">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-8">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item Title</label>--}}
+                                                                    {{--<input type="text"--}}
+                                                                           {{--class="form-control input-sm menu-item-title">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                        <div class="form-group specific hide">
-                                                            <label>Select Roles</label>
-                                                            <select name="" multiple class="form-control input-sm">
-                                                                <option value="">Normal User</option>
-                                                                <option value="">Pro User</option>
-                                                                <option value="">Editor</option>
-                                                                <option value="">Contributor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li data-id="3" id="menu-item-3" class="level-2">
-                                            <div class="bb-menu-item">
-                                                <div class="bb-menu-item-title">
-                                                    <i></i>
-                                                    <span>Contact</span>
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item URL</label>--}}
+                                                                    {{--<input type="text" class="form-control input-sm">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Display Roles</label>--}}
+                                                                    {{--<select name="display_roles" class="form-control input-sm">--}}
+                                                                        {{--<option value="">All Visitors</option>--}}
+                                                                        {{--<option value="">Members Only</option>--}}
+                                                                        {{--<option value="">Guests Only</option>--}}
+                                                                        {{--<option value="specific">Specific Roles</option>--}}
+                                                                    {{--</select>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                    <div class="bb-menu-actions pull-right">
-                                                        <a href="javascript:" class="bb-menu-delete">
-                                                            <i class="fa fa-close"></i>
-                                                        </a>
-                                                        <a href="javascript:" class="bb-menu-collapse">
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="bb-menu-item-body">
-                                                    <div class="bb-menu-form">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Icon</label>
-                                                                    <input type="text" data-placement="right"
-                                                                           class="form-control input-sm icp-auto">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <label>Item Title</label>
-                                                                    <input type="text"
-                                                                           class="form-control input-sm menu-item-title">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {{--<div class="form-group specific hide">--}}
+                                                            {{--<label>Select Roles</label>--}}
+                                                            {{--<select name="" multiple class="form-control input-sm">--}}
+                                                                {{--<option value="">Normal User</option>--}}
+                                                                {{--<option value="">Pro User</option>--}}
+                                                                {{--<option value="">Editor</option>--}}
+                                                                {{--<option value="">Contributor</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li data-id="3" id="menu-item-3" class="level-2">--}}
+                                            {{--<div class="bb-menu-item">--}}
+                                                {{--<div class="bb-menu-item-title">--}}
+                                                    {{--<i></i>--}}
+                                                    {{--<span>Contact</span>--}}
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Item URL</label>
-                                                                    <input type="text" class="form-control input-sm">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Display Roles</label>
-                                                                    <select name="display_roles" class="form-control input-sm">
-                                                                        <option value="">All Visitors</option>
-                                                                        <option value="">Members Only</option>
-                                                                        <option value="">Guests Only</option>
-                                                                        <option value="specific">Specific Roles</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                                            {{--<i class="fa fa-close"></i>--}}
+                                                        {{--</a>--}}
+                                                        {{--<a href="javascript:" class="bb-menu-collapse">--}}
+                                                            {{--<i class="fa fa-caret-down"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="bb-menu-item-body">--}}
+                                                    {{--<div class="bb-menu-form">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-4">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Icon</label>--}}
+                                                                    {{--<input type="text" data-placement="right"--}}
+                                                                           {{--class="form-control input-sm icp-auto">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-8">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item Title</label>--}}
+                                                                    {{--<input type="text"--}}
+                                                                           {{--class="form-control input-sm menu-item-title">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                        <div class="form-group specific hide">
-                                                            <label>Select Roles</label>
-                                                            <select name="" multiple class="form-control input-sm">
-                                                                <option value="">Normal User</option>
-                                                                <option value="">Pro User</option>
-                                                                <option value="">Editor</option>
-                                                                <option value="">Contributor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li data-id="4" id="menu-item-4" class="level-3">
-                                            <div class="bb-menu-item">
-                                                <div class="bb-menu-item-title">
-                                                    <i></i>
-                                                    <span>Privacy</span>
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item URL</label>--}}
+                                                                    {{--<input type="text" class="form-control input-sm">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Display Roles</label>--}}
+                                                                    {{--<select name="display_roles" class="form-control input-sm">--}}
+                                                                        {{--<option value="">All Visitors</option>--}}
+                                                                        {{--<option value="">Members Only</option>--}}
+                                                                        {{--<option value="">Guests Only</option>--}}
+                                                                        {{--<option value="specific">Specific Roles</option>--}}
+                                                                    {{--</select>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                    <div class="bb-menu-actions pull-right">
-                                                        <a href="javascript:" class="bb-menu-delete">
-                                                            <i class="fa fa-close"></i>
-                                                        </a>
-                                                        <a href="javascript:" class="bb-menu-collapse">
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="bb-menu-item-body">
-                                                    <div class="bb-menu-form">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Icon</label>
-                                                                    <input type="text" data-placement="right"
-                                                                           class="form-control input-sm icp-auto">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <label>Item Title</label>
-                                                                    <input type="text"
-                                                                           class="form-control input-sm menu-item-title">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {{--<div class="form-group specific hide">--}}
+                                                            {{--<label>Select Roles</label>--}}
+                                                            {{--<select name="" multiple class="form-control input-sm">--}}
+                                                                {{--<option value="">Normal User</option>--}}
+                                                                {{--<option value="">Pro User</option>--}}
+                                                                {{--<option value="">Editor</option>--}}
+                                                                {{--<option value="">Contributor</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li data-id="4" id="menu-item-4" class="level-3">--}}
+                                            {{--<div class="bb-menu-item">--}}
+                                                {{--<div class="bb-menu-item-title">--}}
+                                                    {{--<i></i>--}}
+                                                    {{--<span>Privacy</span>--}}
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Item URL</label>
-                                                                    <input type="text" class="form-control input-sm">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Display Roles</label>
-                                                                    <select name="display_roles" class="form-control input-sm">
-                                                                        <option value="">All Visitors</option>
-                                                                        <option value="">Members Only</option>
-                                                                        <option value="">Guests Only</option>
-                                                                        <option value="specific">Specific Roles</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                                            {{--<i class="fa fa-close"></i>--}}
+                                                        {{--</a>--}}
+                                                        {{--<a href="javascript:" class="bb-menu-collapse">--}}
+                                                            {{--<i class="fa fa-caret-down"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="bb-menu-item-body">--}}
+                                                    {{--<div class="bb-menu-form">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-4">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Icon</label>--}}
+                                                                    {{--<input type="text" data-placement="right"--}}
+                                                                           {{--class="form-control input-sm icp-auto">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-8">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item Title</label>--}}
+                                                                    {{--<input type="text"--}}
+                                                                           {{--class="form-control input-sm menu-item-title">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                        <div class="form-group specific hide">
-                                                            <label>Select Roles</label>
-                                                            <select name="" multiple class="form-control input-sm">
-                                                                <option value="">Normal User</option>
-                                                                <option value="">Pro User</option>
-                                                                <option value="">Editor</option>
-                                                                <option value="">Contributor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li data-id="5" id="menu-item-5">
-                                            <div class="bb-menu-item">
-                                                <div class="bb-menu-item-title">
-                                                    <i></i>
-                                                    <span>Offers</span>
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item URL</label>--}}
+                                                                    {{--<input type="text" class="form-control input-sm">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Display Roles</label>--}}
+                                                                    {{--<select name="display_roles" class="form-control input-sm">--}}
+                                                                        {{--<option value="">All Visitors</option>--}}
+                                                                        {{--<option value="">Members Only</option>--}}
+                                                                        {{--<option value="">Guests Only</option>--}}
+                                                                        {{--<option value="specific">Specific Roles</option>--}}
+                                                                    {{--</select>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                    <div class="bb-menu-actions pull-right">
-                                                        <a href="javascript:" class="bb-menu-delete">
-                                                            <i class="fa fa-close"></i>
-                                                        </a>
-                                                        <a href="javascript:" class="bb-menu-collapse">
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="bb-menu-item-body">
-                                                    <div class="bb-menu-form">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Icon</label>
-                                                                    <input type="text" data-placement="right"
-                                                                           class="form-control input-sm icp-auto">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <label>Item Title</label>
-                                                                    <input type="text"
-                                                                           class="form-control input-sm menu-item-title">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {{--<div class="form-group specific hide">--}}
+                                                            {{--<label>Select Roles</label>--}}
+                                                            {{--<select name="" multiple class="form-control input-sm">--}}
+                                                                {{--<option value="">Normal User</option>--}}
+                                                                {{--<option value="">Pro User</option>--}}
+                                                                {{--<option value="">Editor</option>--}}
+                                                                {{--<option value="">Contributor</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li data-id="5" id="menu-item-5">--}}
+                                            {{--<div class="bb-menu-item">--}}
+                                                {{--<div class="bb-menu-item-title">--}}
+                                                    {{--<i></i>--}}
+                                                    {{--<span>Offers</span>--}}
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Item URL</label>
-                                                                    <input type="text" class="form-control input-sm">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Display Roles</label>
-                                                                    <select name="display_roles" class="form-control input-sm">
-                                                                        <option value="">All Visitors</option>
-                                                                        <option value="">Members Only</option>
-                                                                        <option value="">Guests Only</option>
-                                                                        <option value="specific">Specific Roles</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                                            {{--<i class="fa fa-close"></i>--}}
+                                                        {{--</a>--}}
+                                                        {{--<a href="javascript:" class="bb-menu-collapse">--}}
+                                                            {{--<i class="fa fa-caret-down"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="bb-menu-item-body">--}}
+                                                    {{--<div class="bb-menu-form">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-4">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Icon</label>--}}
+                                                                    {{--<input type="text" data-placement="right"--}}
+                                                                           {{--class="form-control input-sm icp-auto">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-8">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item Title</label>--}}
+                                                                    {{--<input type="text"--}}
+                                                                           {{--class="form-control input-sm menu-item-title">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                        <div class="form-group specific hide">
-                                                            <label>Select Roles</label>
-                                                            <select name="" multiple class="form-control input-sm">
-                                                                <option value="">Normal User</option>
-                                                                <option value="">Pro User</option>
-                                                                <option value="">Editor</option>
-                                                                <option value="">Contributor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li data-id="6" id="menu-item-6" class="level-1">
-                                            <div class="bb-menu-item">
-                                                <div class="bb-menu-item-title">
-                                                    <i></i>
-                                                    <span>Special Offers</span>
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item URL</label>--}}
+                                                                    {{--<input type="text" class="form-control input-sm">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Display Roles</label>--}}
+                                                                    {{--<select name="display_roles" class="form-control input-sm">--}}
+                                                                        {{--<option value="">All Visitors</option>--}}
+                                                                        {{--<option value="">Members Only</option>--}}
+                                                                        {{--<option value="">Guests Only</option>--}}
+                                                                        {{--<option value="specific">Specific Roles</option>--}}
+                                                                    {{--</select>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                    <div class="bb-menu-actions pull-right">
-                                                        <a href="javascript:" class="bb-menu-delete">
-                                                            <i class="fa fa-close"></i>
-                                                        </a>
-                                                        <a href="javascript:" class="bb-menu-collapse">
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="bb-menu-item-body">
-                                                    <div class="bb-menu-form">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Icon</label>
-                                                                    <input type="text" data-placement="right"
-                                                                           class="form-control input-sm icp-auto">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <label>Item Title</label>
-                                                                    <input type="text"
-                                                                           class="form-control input-sm menu-item-title">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {{--<div class="form-group specific hide">--}}
+                                                            {{--<label>Select Roles</label>--}}
+                                                            {{--<select name="" multiple class="form-control input-sm">--}}
+                                                                {{--<option value="">Normal User</option>--}}
+                                                                {{--<option value="">Pro User</option>--}}
+                                                                {{--<option value="">Editor</option>--}}
+                                                                {{--<option value="">Contributor</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li data-id="6" id="menu-item-6" class="level-1">--}}
+                                            {{--<div class="bb-menu-item">--}}
+                                                {{--<div class="bb-menu-item-title">--}}
+                                                    {{--<i></i>--}}
+                                                    {{--<span>Special Offers</span>--}}
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Item URL</label>
-                                                                    <input type="text" class="form-control input-sm">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Display Roles</label>
-                                                                    <select name="display_roles" class="form-control input-sm">
-                                                                        <option value="">All Visitors</option>
-                                                                        <option value="">Members Only</option>
-                                                                        <option value="">Guests Only</option>
-                                                                        <option value="specific">Specific Roles</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    {{--<div class="bb-menu-actions pull-right">--}}
+                                                        {{--<a href="javascript:" class="bb-menu-delete">--}}
+                                                            {{--<i class="fa fa-close"></i>--}}
+                                                        {{--</a>--}}
+                                                        {{--<a href="javascript:" class="bb-menu-collapse">--}}
+                                                            {{--<i class="fa fa-caret-down"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="bb-menu-item-body">--}}
+                                                    {{--<div class="bb-menu-form">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-4">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Icon</label>--}}
+                                                                    {{--<input type="text" data-placement="right"--}}
+                                                                           {{--class="form-control input-sm icp-auto">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-8">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item Title</label>--}}
+                                                                    {{--<input type="text"--}}
+                                                                           {{--class="form-control input-sm menu-item-title">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                                        <div class="form-group specific hide">
-                                                            <label>Select Roles</label>
-                                                            <select name="" multiple class="form-control input-sm">
-                                                                <option value="">Normal User</option>
-                                                                <option value="">Pro User</option>
-                                                                <option value="">Editor</option>
-                                                                <option value="">Contributor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ol>
+                                                        {{--<div class="row">--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Item URL</label>--}}
+                                                                    {{--<input type="text" class="form-control input-sm">--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="col-md-6">--}}
+                                                                {{--<div class="form-group">--}}
+                                                                    {{--<label>Display Roles</label>--}}
+                                                                    {{--<select name="display_roles" class="form-control input-sm">--}}
+                                                                        {{--<option value="">All Visitors</option>--}}
+                                                                        {{--<option value="">Members Only</option>--}}
+                                                                        {{--<option value="">Guests Only</option>--}}
+                                                                        {{--<option value="specific">Specific Roles</option>--}}
+                                                                    {{--</select>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
-                                </div>
-                            </div>
-                        </li>
+                                                        {{--<div class="form-group specific hide">--}}
+                                                            {{--<label>Select Roles</label>--}}
+                                                            {{--<select name="" multiple class="form-control input-sm">--}}
+                                                                {{--<option value="">Normal User</option>--}}
+                                                                {{--<option value="">Pro User</option>--}}
+                                                                {{--<option value="">Editor</option>--}}
+                                                                {{--<option value="">Contributor</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                    {{--</ol>--}}
+
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
                     </ol>
 
                     <textarea class="form-control" id="log" rows="15" placeholder="JSON LOG"></textarea>

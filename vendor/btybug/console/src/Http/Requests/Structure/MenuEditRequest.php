@@ -32,8 +32,7 @@ class MenuEditRequest extends Request
     {
         if ($this->isMethod('POST')) {
             return [
-                'id' => 'required|exists:demo_menus,id',
-                'slug' => 'required|exists:roles,slug',
+                'id' => 'required|exists:demo_menus,id'
             ];
         }
         return [];

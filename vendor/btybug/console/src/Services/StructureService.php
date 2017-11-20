@@ -179,6 +179,11 @@ class StructureService extends GeneralService
         }
     }
 
+    public function saveMenu($menu, $request)
+    {
+        return $menu->update(['json_data' => $request->json_data,'name' => $request->name]);
+    }
+
     /**
      * @param string $slug
      * @param $form

@@ -74,7 +74,7 @@ class MenusController extends Controller
     {
         $menu = $menuRepository->find($id);
         $role = $roleRepository->findBy('slug', $slug);
-        $structureService->editMenu($menu, $role, $request);
+        $structureService->saveMenu($menu, $request);
 
         return redirect()->to('admin/console/structure/menus');
     }

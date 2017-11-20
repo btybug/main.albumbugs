@@ -72,6 +72,8 @@ jQuery(function ($) {
                 return currentItem;
             }
         }
+
+        $("#menu-save").submit();
     });
 
     $('.bb-menu-settings').click(function () {

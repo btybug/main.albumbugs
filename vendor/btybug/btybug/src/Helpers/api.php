@@ -1514,7 +1514,7 @@ function generate_special_page(array $data){
     );
 }
 
-function renderPagesInMenu($data, $parent = true)
+function renderPagesInMenu($data, $parent = true,$i = 0)
 {
     $output = '';
     // Loop through items
@@ -1527,13 +1527,15 @@ function renderPagesInMenu($data, $parent = true)
             $output .= '<strong>'. ucfirst($item->title) .' Module Pages</strong>';
             $output .= '<div class="bb-menu-actions pull-right">';
             $output .= '<a href="javascript:" class="bb-menu-delete"> <i class="fa fa-close"></i></a>';
-            $output .= '<a href="javascript:" class="bb-menu-collapse expand group-expander"> <i class="fa caret-up"></i></a>';
+            $output .= '<a href="javascript:" class="bb-menu-collapse expand group-expander"> <i class="fa fa-caret-up"></i></a>';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="panel-body bb-menu-group-body">';
             $output .= '<ol class="bb-sortable-static">';
         }else{
-            $output .= '<li data-id="'.$item->id.'" id="menu-item-1">';
+            if($item->parent->parent == null) $i = 0;
+
+            $output .= '<li data-id="'.$item->id.'" id="menu-item-'.$item->id.'" class="level-'.$i.'">';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i><span>'.$item->title.'</span>';
@@ -1554,7 +1556,7 @@ function renderPagesInMenu($data, $parent = true)
             $output .= '<div class="col-md-8">';
             $output .= '<div class="form-group">';
             $output .= '<label>Item Title</label>';
-            $output .= '<input type="text" class="form-control input-sm menu-item-title">';
+            $output .= '<input type="text" value="'.$item->title.'" class="form-control input-sm menu-item-title">';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
@@ -1562,7 +1564,7 @@ function renderPagesInMenu($data, $parent = true)
             $output .= '<div class="col-md-6">';
             $output .= '<div class="form-group">';
             $output .= '<label>Item URL</label>';
-            $output .= '<input type="text" class="form-control input-sm">';
+            $output .= '<input type="text" value="'.$item->url.'" class="form-control input-sm">';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="col-md-6">';
@@ -1593,7 +1595,7 @@ function renderPagesInMenu($data, $parent = true)
         }
 
         if (count($item->childs)) {
-            $output .= renderPagesInMenu($item->childs, false);
+            $output .= renderPagesInMenu($item->childs, false,$i = $i +1);
         }
 
         if($parent){

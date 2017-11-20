@@ -1590,7 +1590,7 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
             $output .= '</li>';
         }
 
-        if (count($item->childs)&& $children) {
+        if (count($item->childs)) {
             $output .= renderPagesInMenu($item->childs, false,$i = $i +1,$children);
         }
 

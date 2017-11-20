@@ -205,7 +205,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <ol class="bb-sortable-static bb-sortable-group">
-                        {!! renderPagesInMenu($pageGrouped,true,0,true) !!}
+                        {!! renderPagesInMenu($pageGrouped,true,0,$children) !!}
                     </ol>
                 </div>
             </div>
@@ -225,5 +225,5 @@
     {!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}
     {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
-    {!! HTML::script('public/js/menus.js') !!}
+    {{--{!! HTML::script('public/js/menus.js') !!}--}}
 @stop

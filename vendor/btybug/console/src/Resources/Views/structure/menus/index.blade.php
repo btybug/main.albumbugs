@@ -39,9 +39,12 @@
                                        data-type="Menu"
                                        data-key="{!! $menu->id !!}" class="btn btn-danger trashBtn delete-button"><i
                                                 class="fa fa-trash-o"></i></a>
+                                    <a href="{!! route('console_menu_edit',[$menu->id,'superadmin']) !!}"
+                                       class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                 @endif
+
+                                <a href="#" class="btn btn-info"><i class="fa fa-eye"></i></a>
                                 <a href="#" class="btn btn-primary"><i class="fa fa-clone"></i></a>
-                                <a href="{!! route('console_menu_edit',[$menu->id,'superadmin']) !!}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             </th>
                         </tr>
                     @endforeach

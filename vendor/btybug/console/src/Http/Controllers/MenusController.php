@@ -67,10 +67,7 @@ class MenusController extends Controller
         StructureService $structureService
     )
     {
-        $children = false;
-        if ($id == 2) {
-            $children = true;
-        }
+        $children = ($id==1);
         $menu = $menuRepository->findOrFail($id);
         $page = $adminPagesRepository->first();
         $pageGrouped = $adminPagesRepository->getGroupedWithModule();

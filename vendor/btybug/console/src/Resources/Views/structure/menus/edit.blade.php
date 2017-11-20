@@ -42,18 +42,61 @@
                                         </div>
 
                                         <ul class="list-group bb-roles-list">
-                                            @foreach($roles as $role)
-                                                <li class="list-group-item" data-role="{{$role['slug']}}" data-title="{{$role['name']}}" data-display="show">
-                                                    <span class="bb-role-title">{{$role['name']}}</span>
+                                            <li class="list-group-item" data-role="guests" data-title="Guests" data-display="show">
+                                                <span class="bb-role-title">Guests</span>
 
-                                                    <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                        <i class="fa fa-chevron-right"></i>
-                                                    </a>
-                                                    <div class="pull-right">
-                                                        <input type="checkbox" class="bb-switch bb-role-toggle" checked name="{{$role['slug']}}">
-                                                    </div>
-                                                </li>
-                                            @endforeach
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="guests">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="normal-user" data-title="Normal User" data-display="show">
+                                                <span class="bb-role-title">Normal User</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="normal-user">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="pro-user" data-title="Pro User" data-display="show">
+                                                <span class="bb-role-title">Pro User</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="pro-user">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="editor" data-title="Editor" data-display="show">
+                                                <span class="bb-role-title">Editor</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="editor">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="contributor" data-title="Contributor" data-display="show">
+                                                <span class="bb-role-title">Contributor</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="contributor">
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-4">
@@ -167,12 +210,19 @@
 
             <!-- Menu -->
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <ol class="bb-sortable-static bb-sortable-group">
                         {!! renderPagesInMenu($pageGrouped,true) !!}
                     </ol>
 
                     {!! Form::textarea('json_data',null,['id' => 'log','placeholder' => 'JSON LOG', 'class' => 'form-control','rows' => 15]) !!}
+                </div>
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <ol class="bb-menu-area"></ol>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

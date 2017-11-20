@@ -215,15 +215,15 @@
 @stop
 {{--@include('tools::common_inc')--}}
 @section('CSS')
-    {!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}
+    {{--{!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}--}}
     {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
     {!! HTML::style('public/css/menus.css') !!}
 
 @stop
 
 @section('JS')
-    {!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}
-    {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
+    {{--{!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}--}}
+    {{--{!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}--}}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
     {{--{!! HTML::script('public/js/menus.js') !!}--}}
 @stop

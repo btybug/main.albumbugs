@@ -41,10 +41,10 @@
                                                 class="fa fa-trash-o"></i></a>
                                     <a href="{!! route('console_menu_edit',[$menu->id,'superadmin']) !!}"
                                        class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                @else
+                                    <a href="{!! route('console_menu_view',[$menu->id,'superadmin']) !!}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-clone"></i></a>
                                 @endif
-
-                                <a href="#" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="btn btn-primary"><i class="fa fa-clone"></i></a>
                             </th>
                         </tr>
                     @endforeach

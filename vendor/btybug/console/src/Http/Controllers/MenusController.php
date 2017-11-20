@@ -60,19 +60,38 @@ class MenusController extends Controller
         $roles = $roleRepository->getAllWithGuest();
         return view('console::structure.menus.edit', compact(['pageGrouped', 'menu','roles']));
     }
+    public function getView(
+        $id, $slug,
+        MenuRepository $menuRepository,
+        AdminPagesRepository $adminPagesRepository,
+        RoleRepository $roleRepository,
+        StructureService $structureService
+    )
+    {
+        $menu = $menuRepository->findOrFail($id);
+        $page = $adminPagesRepository->first();
+        $pageGrouped = $adminPagesRepository->getGroupedWithModule();
+        $role = $roleRepository->findBy('slug', $slug);
+        $data = $structureService->getMenuItems($menu, $role);
+
+        return view('console::structure.menus.view', compact(['pageGrouped', 'page', 'slug', 'data', 'menu']));
+    }
 
     public function postEdit(
         $id, $slug,
-        MenuEditRequest $request,
-        StructureService $structureService,
         MenuRepository $menuRepository,
-        RoleRepository $roleRepository
+        AdminPagesRepository $adminPagesRepository,
+        RoleRepository $roleRepository,
+        StructureService $structureService
     )
     {
-        $menu = $menuRepository->find($id);
+        $menu = $menuRepository->findOrFail($id);
+        $page = $adminPagesRepository->first();
+        $pageGrouped = $adminPagesRepository->getGroupedWithModule();
         $role = $roleRepository->findBy('slug', $slug);
-        $structureService->saveMenu($menu, $request);
+        $data = $structureService->getMenuItems($menu, $role);
 
         return redirect()->to('admin/console/structure/menus');
     }
+
 }

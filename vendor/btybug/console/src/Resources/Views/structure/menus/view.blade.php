@@ -14,13 +14,6 @@
                                 {!! Form::text('name',null,['class' => 'menu-name-field']) !!}
                             </h3>
 
-                            <div class="pull-right">
-                                <a href="javascript:" class="btn btn-warning btn-sm bb-menu-settings">
-                                    <i class="fa fa-cog"></i>
-                                </a>
-                                <a href="javascript:" class="btn btn-primary btn-sm bb-menu-save">Save</a>
-                                <a href="javascript:" class="btn btn-success btn-sm">Preview</a>
-                            </div>
                         </div>
 
                         <div class="panel-body general-menu-settings">
@@ -42,18 +35,61 @@
                                         </div>
 
                                         <ul class="list-group bb-roles-list">
-                                            @foreach($roles as $role)
-                                                <li class="list-group-item" data-role="{{$role['slug']}}" data-title="{{$role['name']}}" data-display="show">
-                                                    <span class="bb-role-title">{{$role['name']}}</span>
+                                            <li class="list-group-item" data-role="guests" data-title="Guests" data-display="show">
+                                                <span class="bb-role-title">Guests</span>
 
-                                                    <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                        <i class="fa fa-chevron-right"></i>
-                                                    </a>
-                                                    <div class="pull-right">
-                                                        <input type="checkbox" class="bb-switch bb-role-toggle" checked name="{{$role['slug']}}">
-                                                    </div>
-                                                </li>
-                                            @endforeach
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="guests">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="normal-user" data-title="Normal User" data-display="show">
+                                                <span class="bb-role-title">Normal User</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="normal-user">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="pro-user" data-title="Pro User" data-display="show">
+                                                <span class="bb-role-title">Pro User</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="pro-user">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="editor" data-title="Editor" data-display="show">
+                                                <span class="bb-role-title">Editor</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="editor">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item" data-role="contributor" data-title="Contributor" data-display="show">
+                                                <span class="bb-role-title">Contributor</span>
+
+                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+
+                                                <div class="pull-right">
+                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="contributor">
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-4">

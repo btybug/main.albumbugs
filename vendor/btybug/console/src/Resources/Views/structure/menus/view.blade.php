@@ -207,8 +207,6 @@
                     <ol class="bb-sortable-static bb-sortable-group">
                         {!! renderPagesInMenu($pageGrouped,true) !!}
                     </ol>
-
-                    {!! Form::textarea('json_data',null,['id' => 'log','placeholder' => 'JSON LOG', 'class' => 'form-control','rows' => 15]) !!}
                 </div>
             </div>
         </div>

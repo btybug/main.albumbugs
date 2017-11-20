@@ -56,12 +56,9 @@ class MenusController extends Controller
     )
     {
         $menu = $menuRepository->findOrFail($id);
-        $page = $adminPagesRepository->first();
         $pageGrouped = $adminPagesRepository->getGroupedWithModule();
-        $role = $roleRepository->findBy('slug', $slug);
-        $data = $structureService->getMenuItems($menu, $role);
-
-        return view('console::structure.menus.edit', compact(['pageGrouped', 'page', 'slug', 'data', 'menu']));
+        $roles = $roleRepository->getAllWithGuest();
+        return view('console::structure.menus.edit', compact(['pageGrouped', 'menu','roles']));
     }
 
     public function postEdit(

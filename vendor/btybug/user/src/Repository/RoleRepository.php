@@ -38,4 +38,16 @@ class RoleRepository extends GeneralRepository
         return $this->model()->where('access', '!=', 1)->get();
     }
 
+    public function getAllWithGuest()
+    {
+        $items = $this->getAll();
+        $items->push([
+            'id' => 0,
+           'name' => 'Guests',
+           'slug' => 'guests',
+           'special' => 'no-access'
+        ]);
+
+        return $items->sort()->toArray();
+    }
 }

@@ -1516,6 +1516,7 @@ function generate_special_page(array $data){
 
 function renderPagesInMenu($data, $parent = true,$i = 0)
 {
+    $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
     // Loop through items
     foreach ($data as $item) {
@@ -1581,12 +1582,7 @@ function renderPagesInMenu($data, $parent = true,$i = 0)
             $output .= '</div>';
             $output .= '<div class="form-group specific hide">';
             $output .= '<label>Select Roles</label>';
-            $output .= '<select name="" multiple class="form-control input-sm">';
-            $output .= '<option value="">Normal User</option>';
-            $output .= '<option value="">Pro User</option>';
-            $output .= '<option value="">Editor</option>';
-            $output .= '<option value="">Contributor</option>';
-            $output .= '</select>';
+            $output .= Form::select('roles[]',$roles->pluck('slug', 'name'),null,['multiple' => true,'class' => 'form-control input-sm']);
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';

@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Btybug\btybug\Repositories\MenuRepository;
 use Btybug\Console\Http\Requests\Structure\MenuCreateRequest;
 use Btybug\Console\Http\Requests\Structure\MenuDeleteRequest;
+use Btybug\Console\Http\Requests\Structure\MenuEditRequest;
 use Btybug\Console\Repository\AdminPagesRepository;
 use Btybug\Console\Services\StructureService;
 use Btybug\User\Repository\RoleRepository;
@@ -78,17 +79,15 @@ class MenusController extends Controller
 
     public function postEdit(
         $id, $slug,
+        MenuEditRequest $request,
+        StructureService $structureService,
         MenuRepository $menuRepository,
-        AdminPagesRepository $adminPagesRepository,
-        RoleRepository $roleRepository,
-        StructureService $structureService
+        RoleRepository $roleRepository
     )
     {
-        $menu = $menuRepository->findOrFail($id);
-        $page = $adminPagesRepository->first();
-        $pageGrouped = $adminPagesRepository->getGroupedWithModule();
+        $menu = $menuRepository->find($id);
         $role = $roleRepository->findBy('slug', $slug);
-        $data = $structureService->getMenuItems($menu, $role);
+        $structureService->saveMenu($menu, $request);
 
         return redirect()->to('admin/console/structure/menus');
     }

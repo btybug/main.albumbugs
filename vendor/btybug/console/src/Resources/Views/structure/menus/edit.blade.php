@@ -220,7 +220,11 @@
                 <div class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <ol class="bb-menu-area"></ol>
+                            <ol class="bb-menu-area">
+                                @if($menu->json_data)
+                                    {!! renderSavedPagesInMenu(json_decode($menu->json_data,true),false) !!}
+                                @endif
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -233,7 +237,7 @@
 @section('CSS')
     {!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}
     {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
-    {!! HTML::style('public/css/menus.css') !!}
+    {!! HTML::style('public/css/menus.css?v='.rand(1111,9999)) !!}
 
 @stop
 

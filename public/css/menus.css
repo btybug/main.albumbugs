@@ -129,4 +129,10 @@
     padding: 5px 0;
     width: 250px; }
 
+.bb-menu-area .level-1 {
+    margin-left: 20px; }
+.bb-menu-area .level-2 {
+    margin-left: 40px; }
+.bb-menu-area .level-3 {
+    margin-left: 60px; }
 /*# sourceMappingURL=style.css.map */

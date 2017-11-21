@@ -1296,7 +1296,7 @@ function BBGetMenu(
 
 function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon = true, $membershipSlug = null, $checkbox = false)
 {
-    $plugins = new \Avatar\Avatar\Repositories\Plugins();
+    $plugins = new \Btybug\Uploads\Repository\Plugins();
     $plugins->modules();
     $modules = $plugins->getPlugins()->toArray();
     $plugins->plugins();

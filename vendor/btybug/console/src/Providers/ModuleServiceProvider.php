@@ -84,6 +84,29 @@ class ModuleServiceProvider extends ServiceProvider
             'test' => 'Added from plugin'
         ]);
 
+        \Eventy::action('admin.menus', [
+            "title" => "Developer console",
+            "custom-link" => "#",
+            "icon" => "fa fa-ils",
+            "is_core" => "yes",
+            "children" => [
+                [
+                    "title" => "Structure",
+                    "custom-link" => "/admin/console/structure",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ], [
+                    "title" => "Settings",
+                    "custom-link" => "/admin/console/settings",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ], [
+                    "title" => "General",
+                    "custom-link" => "/admin/console/general",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"]
+            ]]);
+
         //TODO; remove when finish all
 //        \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/console');
     }

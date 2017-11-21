@@ -2,8 +2,8 @@
 
 namespace Btybug\Framework\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Btybug\Framework\Models\Optimzation;
+use Illuminate\Support\ServiceProvider;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,7 @@ class ModuleServiceProvider extends ServiceProvider
                 ]
             ],
             'framework_assets' => [
-               [
+                [
                     'title' => 'Js',
                     'url' => '/admin/framework/js',
                 ],
@@ -49,6 +49,21 @@ class ModuleServiceProvider extends ServiceProvider
         ];
 
         \Eventy::action('my.tab', $tabs);
+
+        \Eventy::action('admin.menus', [
+            "title" => "Framework",
+            "custom-link" => "#",
+            "icon" => "fa fa-thumbs-o-up",
+            "is_core" => "yes",
+            "children" => [
+                [
+                    "title" => "Css",
+                    "custom-link" => "/admin/framework/css",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ]
+            ]
+        ]);
 
         //TODO; remove when finish all
 //        \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/framework');

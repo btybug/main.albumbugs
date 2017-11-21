@@ -27,7 +27,7 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/uploads/gears/front-end',
                     'icon' => 'fa fa-cub'
                 ],
-            ],'upload_layouts' => [
+            ], 'upload_layouts' => [
                 [
                     'title' => 'Backend',
                     'url' => '/admin/uploads/layouts/back-end',
@@ -102,6 +102,38 @@ class ModuleServiceProvider extends ServiceProvider
         ];
 
         \Eventy::action('my.tab', $tubs);
+        \Eventy::action('admin.menus', [
+            "title" => "Uploads",
+            "custom-link" => "#",
+            "icon" => "fa fa-smile-o",
+            "is_core" => "yes",
+            "children" => [
+                [
+                    "title" => "Modules",
+                    "custom-link" => "/admin/uploads/modules",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],
+                [
+                    "title" => "Apps",
+                    "custom-link" => "/admin/uploads/apps",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],
+                [
+                    "title" => "Layouts",
+                    "custom-link" => "/admin/uploads/layouts",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],
+                [
+                    "title" => "Market",
+                    "custom-link" => "/admin/uploads/market",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ]
+            ]]);
+
 
         global $_PLUGIN_PROVIDERS;
 //        dd($_PLUGIN_PROVIDERS);
@@ -111,7 +143,7 @@ class ModuleServiceProvider extends ServiceProvider
             }
         }
         //TODO; remove when finish all
-     //   \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/uploads');
+        //   \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/uploads');
     }
 
     /**

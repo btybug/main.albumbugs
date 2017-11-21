@@ -26,6 +26,22 @@
                 </tr>
                 </thead>
                 <tfoot>
+                @if(count($core_menus))
+                    @foreach($core_menus as $key=>$core_menu)
+                        <tr>
+                            <th> {!! $core_menu['title'] !!} menu</th>
+                            <th>{!! $core_menu['title'] !!} Module</th>
+                            <th>core</th>
+                            <th></th>
+                            <th width="15%">
+                                    <a href="{!! route('console_menu_view',[$key,'superadmin']) !!}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-clone"></i></a>
+                            </th>
+                        </tr>
+                    @endforeach
+                @else
+                    NO Menus
+                @endif
                 @if(count($menus))
                     @foreach($menus as $menu)
                         <tr>

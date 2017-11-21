@@ -25,7 +25,7 @@ class FrontPagesRepository extends GeneralRepository
      */
     public function getGroupedWithModule()
     {
-        return $this->model->where('parent_id', NULL)->groupBy("module_id")->get();
+        return $this->model->where('parent_id', NULL)->get();
     }
 
     public function getMain()

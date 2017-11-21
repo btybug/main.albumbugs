@@ -1694,3 +1694,72 @@ function renderSavedPagesInMenu($data, $parent = true,$i = 0)
     // Return data tree
     return $output;
 }
+
+
+function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
+{
+    $roles = new \Btybug\User\Repository\RoleRepository();
+    $output = '';
+    // Loop through items
+    foreach ($data as $item) {
+        $output .= '<li data-id="'.$item->id.'" id="menu-item-'.$item->id.'" class="level-'.$i.'">';
+        $output .= '<div class="bb-menu-item">';
+        $output .= '<div class="bb-menu-item-title">';
+        $output .= '<i></i><span>'.$item->title.'</span>';
+        $output .= '<div class="bb-menu-actions pull-right">';
+        $output .= '<a href="javascript:" class="bb-menu-delete"><i class="fa fa-close"></i></a>';
+        $output .= '<a href="javascript:" class="bb-menu-collapse"><i class="fa fa-caret-down"></i></a>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="bb-menu-item-body">';
+        $output .= '<div class="bb-menu-form">';
+        $output .= '<div class="row">';
+        $output .= '<div class="col-md-4">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Icon</label>';
+        $output .= '<input type="text" data-placement="right" class="form-control input-sm icp-auto">';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="col-md-8">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Item Title</label>';
+        $output .= '<input type="text" value="'.$item->title.'" class="form-control input-sm menu-item-title">';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="row">';
+        $output .= '<div class="col-md-6">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Item URL</label>';
+        $output .= '<input type="text" value="'.$item->url.'" class="form-control input-sm">';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="col-md-6">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>Display Roles</label>';
+        $output .= '<select name="display_roles" class="form-control input-sm">';
+        $output .= '<option value="">All Visitors</option>';
+        $output .= '<option value="">Members Only</option>';
+        $output .= '<option value="">Guests Only</option>';
+        $output .= '<option value="specific">Specific Roles</option>';
+        $output .= '</select>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '<div class="form-group specific hide">';
+        $output .= '<label>Select Roles</label>';
+        $output .= Form::select('roles[]',$roles->pluck('slug', 'name'),null,['multiple' => true,'class' => 'form-control input-sm']);
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</li>';
+
+        if (count($item->childs)) {
+            $output .= renderFrontPagesInMenu($item->childs, false,$i +1,$children);
+        }
+
+    }
+    // Return data tree
+    return $output;
+}

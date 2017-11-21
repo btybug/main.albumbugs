@@ -59,7 +59,7 @@
             });
             $("body").on('change', '.select-type', function () {
                 var value = $(this).val();
-                window.location.href = "/admin/manage/structure/front-pages?type=" + value;
+                window.location.href = "/admin/front-site/structure/front-pages";
             });
 
             $('.classify-options').select2({
@@ -132,7 +132,7 @@
             $("body").on('change', '[name="user_id"]', function () {
                 var id = $(this).val();
                 $.ajax({
-                    url: '/admin/manage/structure/front-pages/user-avatar',
+                    url: '/admin/front-site/structure/front-pages/user-avatar',
                     data: {id: id},
                     type: 'POST',
                     headers: {

@@ -583,7 +583,6 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             }
 
             if ($item->type == 'custom') {
-                $output .= '<a href="' . url('/admin/front-site/structure/front-pages/new', $item->id) . '" class="btn"><i class="fa fa-plus"></i></a>';
                 $output .= '<a data-href="' . url('/admin/front-site/structure/front-pages/delete') . '" data-key="' . $item->id . '" data-type="Page ' . $item->title . '"  class="delete-button btn trashBtn"><i class="fa fa-trash"></i></a>';
             }
 //        $output .= '<a data-toggle="collapse" data-pagecolid="' . $item->id . '" data-parent="#accordion' . $item->id . '" href="#collapseOne' . $item->id . '" aria-expanded="true" aria-controls="collapseOne" class="link_name collapsed">';

@@ -39,13 +39,6 @@
             </div>
         </div>
 
-
-        <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">All Units Comes Auto</div>
-            <div class="panel-body">
-            </div>
-        </div>
-
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Main Content
                 <div class="pull-right">

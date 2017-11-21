@@ -182,7 +182,7 @@ class PagesController extends Controller
     )
     {
         $new = $frontendPageService->addNewPage();
-        if ($new) return redirect()->to('/admin/manage/structure/front-pages' . '?type=custom')->with('message', 'Congratulations: New Page Created Successfully');
+        if ($new) return redirect()->back()->with('message', 'Congratulations: New Page Created Successfully');
 
         return redirect()->back()->with('message', 'Page not Created');
     }

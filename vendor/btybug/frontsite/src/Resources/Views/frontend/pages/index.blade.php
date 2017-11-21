@@ -1,7 +1,7 @@
 @extends('btybug::layouts.mTabs',['index'=>'frontend_manage'])
 @section('tab')
     <div class="m-b-20 col-md-3 m-l-20">
-        {!! Form::select('type',['core' => 'Core','plugin' => "Module",'custom' => 'Custom','classify' => 'Classify','tags' => 'Tags'],$type,['class' => 'form-control select-type']) !!}
+        {!! Form::select('type',['core' => 'Core','plugin' => "Module",'custom' => 'Custom'],$type,['class' => 'form-control select-type']) !!}
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <article>

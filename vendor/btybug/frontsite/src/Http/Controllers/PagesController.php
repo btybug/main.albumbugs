@@ -94,8 +94,6 @@ class PagesController extends Controller
 
         $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
         $classifies = $classifierRepository->getAll();
-//        if ($page) $classifierPageRelations = ClassifierItemPage::where('front_page_id', $page->id)->groupBy('classifier_id')->get();
-
         if ($page) $tags = $page->tags;
 
         return view('manage::frontend.pages.index', compact(['page', 'pages', 'admins', 'classifies', 'tags', 'type', 'classifierPageRelations']));

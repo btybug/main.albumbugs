@@ -71,32 +71,14 @@ class PagesController extends Controller
     public function getIndex(
         Request $request,
         FrontPagesRepository $frontPagesRepository,
-        UserService $userService,
-        ClassifierRepository $classifierRepository
+        UserService $userService
     )
     {
-        $pageID = $request->get('p');
         $type = $request->get('type', 'core');
-        $tags = [];
-        $classifierPageRelations = [];
-        $pages = $frontPagesRepository->findAllByMultiple([
-            'type' => $type,
-            'parent_id' => NULL
-        ]);
-
-        if ($pageID) {
-            $page = $frontPagesRepository->find($pageID);
-        } else {
-            $page = $frontPagesRepository->findBy('type', $type);
-        }
-
-        if ($page && !$page->page_section) $page->page_section = 0;
+        $pages = $frontPagesRepository->getGroupedWithModule();
 
         $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
-        $classifies = $classifierRepository->getAll();
-        if ($page) $tags = $page->tags;
-
-        return view('manage::frontend.pages.index', compact(['page', 'pages', 'admins', 'classifies', 'tags', 'type', 'classifierPageRelations']));
+        return view('manage::frontend.pages.index', compact(['page', 'pages', 'admins', 'tags', 'type', 'classifierPageRelations']));
     }
 
     public function getSettings(

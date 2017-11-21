@@ -61,14 +61,14 @@ class MenusController extends Controller
     }
 
     public function getView(
-        $id, $slug,$flag=null,
+        $id, $slug,
         MenuRepository $menuRepository,
         AdminPagesRepository $adminPagesRepository,
         RoleRepository $roleRepository,
         StructureService $structureService
     )
     {
-        if($flag=='hook'){
+        if($slug=='hook'){
             $core_menus = \Config::get('admin_menus',[]);
             if(!isset($core_menus[$id]))abort(404);
             $menu=$core_menus[$id];

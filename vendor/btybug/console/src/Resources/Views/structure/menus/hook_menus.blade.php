@@ -1,6 +1,5 @@
 @extends('btybug::layouts.admin')
 @section('content')
-
     <div class="bb-menu-container">
         <div class="container-fluid">
             <!-- Settings -->

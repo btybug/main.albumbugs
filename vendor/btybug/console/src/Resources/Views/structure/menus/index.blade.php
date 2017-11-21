@@ -34,7 +34,7 @@
                             <th>core</th>
                             <th></th>
                             <th width="15%">
-                                    <a href="{!! route('console_menu_view',[$key,'superadmin','hook']) !!}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                    <a href="{!! route('console_menu_view',[$key,'hook']) !!}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                                     <a href="#" class="btn btn-primary"><i class="fa fa-clone"></i></a>
                             </th>
                         </tr>

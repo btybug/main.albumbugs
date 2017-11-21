@@ -559,11 +559,24 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
 
             $output .= ' <ol class="pagelisting">';
             $output .= '<li data-id="' . $item->id . '">';
-            $output .= '<div class="listinginfo">';
+            $title = 'core';
+            switch ($item->type) {
+                case  "custom" :
+                    $title = 'custom';
+                    $output .= '<div class="listinginfo" style="background: #36e0a0;">';
+                    break;
+                case  "plugin" :
+                    $title = 'plugin';
+                    $output .= '<div class="listinginfo" style="background: #e0223c;">';
+                    break;
+                default:
+                    $output .= '<div class="listinginfo">';
+                    break;
+            }
+
             $output .= '<div class="lsitingbutton">';
             if($item->content_type == "special"){
                 $settings = json_decode($item->settings,true);
-
                 $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin"></i></a>';
             }else{
                 $output .= '<a href="' . url('/admin/manage/structure/front-pages/settings', $item->id) . '" class="btn"><i class="fa fa-pencil"></i></a>';
@@ -583,7 +596,7 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             }
             $output .= '</button>';
 
-            $output .= '<span class="listingtitle">' . $item->title . '</span>';
+            $output .= '<span class="listingtitle">' . $item->title . ' - '. $title .'</span>';
             $output .= '</div>';
             /* Actions */
             /* Actions END */

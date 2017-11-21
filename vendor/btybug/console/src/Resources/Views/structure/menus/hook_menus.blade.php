@@ -33,7 +33,7 @@
 
                     <div class="form-group">
                         <label>Item URL</label>
-                        <input type="text" class="form-control input-sm" value="{url}" readonly>
+                        <input type="text" class="form-control input-sm" value="{custom-link}" readonly>
                     </div>
                 </div>
             </div>

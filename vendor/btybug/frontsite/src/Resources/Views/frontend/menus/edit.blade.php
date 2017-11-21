@@ -10,7 +10,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading menu-panel">
                             <h3 class="panel-title pull-left">
-                                <label>{!! $menu->name !!}</label>
+                                <label>{!! $menu->name !!} ddddddddddd</label>
                                 {!! Form::text('name',null,['class' => 'menu-name-field']) !!}
                             </h3>
 

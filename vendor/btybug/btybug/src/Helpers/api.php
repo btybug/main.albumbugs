@@ -1231,7 +1231,7 @@ function parametazor($url)
 
 function modules_path($path = '')
 {
-    return app()->basePath('vendor' . DS . 'sahak.avatar') . ($path ? DS . $path : $path);
+    return app()->basePath('vendor' . DS . 'btybug') . ($path ? DS . $path : $path);
 }
 
 function BBCheckLoginEnabled()
@@ -1775,3 +1775,4 @@ function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
     // Return data tree
     return $output;
 }
+function recursive_hook_menus(){}

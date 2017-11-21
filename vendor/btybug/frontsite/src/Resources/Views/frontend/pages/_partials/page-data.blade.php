@@ -22,13 +22,10 @@
                         @endif
                     </div>
                 </div>
+                {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayout($page) !!}
             </div>
         </div>
 
-        @if($page->type != 'classify' && $page->type != 'tags')
-            {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayout($page) !!}
-            {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayoutPlaceholders($page) !!}
-        @endif
 
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">All Hooks</div>

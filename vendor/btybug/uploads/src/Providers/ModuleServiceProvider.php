@@ -129,13 +129,13 @@ class ModuleServiceProvider extends ServiceProvider
                     "icon" => "fa fa-angle-right",
                     'children' => [
                         [
-                            "title" => "Backend",
+                            "title" => "Core apps",
                             "icon" => "fa fa-angle-right",
-                            'custom-link' => '/admin/uploads/layouts/back-end'
+                            'custom-link' => '/admin/uploads/apps/core-apps'
                         ], [
-                            "title" => "Frontend",
+                            "title" => "Extra apps",
                             "icon" => "fa fa-angle-right",
-                            'custom-link' => '/admin/uploads/layouts/front-end'
+                            'custom-link' => '/admin/uploads/apps/extra-apps'
                         ]
                     ]
                 ],
@@ -145,14 +145,15 @@ class ModuleServiceProvider extends ServiceProvider
                     "icon" => "fa fa-angle-right",
                     'children' => [
                         [
-                            "title" => "Core apps",
+                            "title" => "Backend",
                             "icon" => "fa fa-angle-right",
-                            'custom-link' => '/admin/uploads/apps/core-apps'
+                            'custom-link' => '/admin/uploads/layouts/back-end'
                         ], [
-                            "title" => "Extra apps",
+                            "title" => "Frontend",
                             "icon" => "fa fa-angle-right",
-                            'custom-link' => '/admin/uploads/apps/extra-apps'
+                            'custom-link' => '/admin/uploads/layouts/front-end'
                         ]
+
                     ]
                 ],
                 [

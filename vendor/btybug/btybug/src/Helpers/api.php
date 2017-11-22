@@ -5,9 +5,11 @@
  * Date: 7/18/17
  * Time: 5:23 PM
  */
-function module_path($path=''){
-    return app()->basePath().(DS.'vendor'.DS.'sahak.avatar').($path ? DS.$path : $path);
+function module_path($path = '')
+{
+    return app()->basePath() . (DS . 'vendor' . DS . 'sahak.avatar') . ($path ? DS . $path : $path);
 }
+
 function BBaddShortcode($key, $function)
 {
     $codes = \Config::get('shortcode.extra', []);
@@ -257,12 +259,12 @@ function BBheaderBack()
 {
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
 
-    if($page){
+    if ($page) {
         $settingsRepo = new \Btybug\btybug\Repositories\AdminsettingRepository();
         $settings = $settingsRepo->findBy('section', 'backend_site_settings');
         if ($settings && $settings->val) $data = json_decode($settings->val, true);
 
-        if(isset($data['header_unit']))
+        if (isset($data['header_unit']))
             return BBRenderUnits($data['header_unit']);
     }
 }
@@ -271,12 +273,12 @@ function BBfooterBack()
 {
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
 
-    if($page && $page->footer){
+    if ($page && $page->footer) {
         $settingsRepo = new \Btybug\btybug\Repositories\AdminsettingRepository();
         $settings = $settingsRepo->findBy('section', 'backend_site_settings');
         if ($settings && $settings->val) $data = json_decode($settings->val, true);
 
-        if(isset($data['footer_unit']))
+        if (isset($data['footer_unit']))
             return BBRenderUnits($data['footer_unit']);
     }
 }
@@ -309,7 +311,7 @@ function BBgetPageLayout()
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
     $data = [];
     if ($page->layout_id) {
-        $slug = explode('.',$page->layout_id);
+        $slug = explode('.', $page->layout_id);
         $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($slug[0]);
         if ($layout) return 'ContentLayouts.' . $layout->folder . '.' . $layout->layout;
     } else {
@@ -575,10 +577,10 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             }
 
             $output .= '<div class="lsitingbutton">';
-            if($item->content_type == "special"){
-                $settings = json_decode($item->settings,true);
+            if ($item->content_type == "special") {
+                $settings = json_decode($item->settings, true);
                 $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin"></i></a>';
-            }else{
+            } else {
                 $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="btn"><i class="fa fa-pencil"></i></a>';
             }
 
@@ -595,7 +597,7 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             }
             $output .= '</button>';
 
-            $output .= '<span class="listingtitle">' . $item->title . ' - '. $title .'</span>';
+            $output .= '<span class="listingtitle">' . $item->title . ' - ' . $title . '</span>';
             $output .= '</div>';
             /* Actions */
             /* Actions END */
@@ -721,7 +723,7 @@ function BBbutton2($type, $key, $tag, $text, $array = [])
         $array = 'data-array="true"';
     }
     $data_key = str_replace('[]', '', $key);
-    $html=View::make('btybug::bbbutton',compact('type','data_key','atributes','text','array','value','hiddenName'))->render();
+    $html = View::make('btybug::bbbutton', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName'))->render();
     return $html;
 }
 
@@ -1520,24 +1522,25 @@ function form_render($attr)
     }
 }
 
-function generate_special_page(array $data){
+function generate_special_page(array $data)
+{
     return \Btybug\FrontSite\Services\FrontendPageService::generateSpecialPage(
         $data
     );
 }
 
-function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
+function renderPagesInMenu($data, $parent = true, $i = 0, $children = true)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
     // Loop through items
     foreach ($data as $item) {
-        if($parent) {
+        if ($parent) {
             $output .= '<li data-id="' . $item->module_id . '" id="menu-item-front" class="no-nest">';
             $output .= '<div class="panel panel-default">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i>';
-            $output .= '<strong>'. ucfirst($item->title) .' Module Pages</strong>';
+            $output .= '<strong>' . ucfirst($item->title) . ' Module Pages</strong>';
             $output .= '<div class="bb-menu-actions pull-right">';
             $output .= '<a href="javascript:" class="bb-menu-delete"> <i class="fa fa-close"></i></a>';
             $output .= '<a href="javascript:" class="bb-menu-collapse expand group-expander"> <i class="fa fa-caret-up"></i></a>';
@@ -1545,13 +1548,13 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
             $output .= '</div>';
             $output .= '<div class="panel-body bb-menu-group-body">';
             $output .= '<ol class="bb-sortable-static">';
-        }else{
-            if($item->parent->parent == null) $i = 0;
+        } else {
+            if ($item->parent->parent == null) $i = 0;
 
-            $output .= '<li data-id="'.$item->id.'" id="menu-item-'.$item->id.'" class="level-'.$i.'">';
+            $output .= '<li data-id="' . $item->id . '" id="menu-item-' . $item->id . '" class="level-' . $i . '">';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
-            $output .= '<i></i><span>'.$item->title.'</span>';
+            $output .= '<i></i><span>' . $item->title . '</span>';
             $output .= '<div class="bb-menu-actions pull-right">';
             $output .= '<a href="javascript:" class="bb-menu-delete"><i class="fa fa-close"></i></a>';
             $output .= '<a href="javascript:" class="bb-menu-collapse"><i class="fa fa-caret-down"></i></a>';
@@ -1569,7 +1572,7 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
             $output .= '<div class="col-md-8">';
             $output .= '<div class="form-group">';
             $output .= '<label>Item Title</label>';
-            $output .= '<input type="text" value="'.$item->title.'" class="form-control input-sm menu-item-title">';
+            $output .= '<input type="text" value="' . $item->title . '" class="form-control input-sm menu-item-title">';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
@@ -1577,7 +1580,7 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
             $output .= '<div class="col-md-6">';
             $output .= '<div class="form-group">';
             $output .= '<label>Item URL</label>';
-            $output .= '<input type="text" value="'.$item->url.'" class="form-control input-sm item-url" readonly>';
+            $output .= '<input type="text" value="' . $item->url . '" class="form-control input-sm item-url" readonly>';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="col-md-6">';
@@ -1594,7 +1597,7 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
             $output .= '</div>';
             $output .= '<div class="form-group specific hide">';
             $output .= '<label>Select Roles</label>';
-            $output .= Form::select('roles[]',$roles->pluck('slug', 'name'),null,['multiple' => true,'class' => 'form-control input-sm']);
+            $output .= Form::select('roles[]', $roles->pluck('slug', 'name'), null, ['multiple' => true, 'class' => 'form-control input-sm']);
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
@@ -1603,10 +1606,10 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
         }
 
         if (count($item->childs)) {
-            $output .= renderPagesInMenu($item->childs, false,$i = $i +1,$children);
+            $output .= renderPagesInMenu($item->childs, false, $i = $i + 1, $children);
         }
 
-        if($parent){
+        if ($parent) {
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</li>';
@@ -1616,19 +1619,35 @@ function renderPagesInMenu($data, $parent = true,$i = 0,$children=true)
     return $output;
 }
 
-function renderSavedPagesInMenu($data, $parent = true,$i = 0)
+function get_pages_menu_array($data, $i = 0, $array = [])
+{
+    $array[$i]['title'] = $data[$i]['title'];
+    $array[$i]['custom-link'] = $data[$i]['url'];
+    $array[$i]['icon'] = $data[$i]['page_icon'];
+    $children = $data[$i]->childs;
+    if (count($children)) {
+        $array[$i]['children'] = get_pages_menu_array($children);
+    }
+    $i++;
+    if (isset($data[$i])) {
+        $array = get_pages_menu_array($data, $i, $array);
+    }
+    return $array;
+}
+
+function renderSavedPagesInMenu($data, $parent = true, $i = 0)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
 //    dd($data);
     // Loop through items
     foreach ($data as $item) {
-        if($parent) {
+        if ($parent) {
             $output .= '<li data-id="' . $item->module_id . '" id="menu-item-front" class="no-nest">';
             $output .= '<div class="panel panel-default">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i>';
-            $output .= '<strong>'. ucfirst($item->title) .' Module Pages</strong>';
+            $output .= '<strong>' . ucfirst($item->title) . ' Module Pages</strong>';
             $output .= '<div class="bb-menu-actions pull-right">';
             $output .= '<a href="javascript:" class="bb-menu-delete"> <i class="fa fa-close"></i></a>';
             $output .= '<a href="javascript:" class="bb-menu-collapse expand group-expander"> <i class="fa fa-caret-up"></i></a>';
@@ -1636,13 +1655,13 @@ function renderSavedPagesInMenu($data, $parent = true,$i = 0)
             $output .= '</div>';
             $output .= '<div class="panel-body bb-menu-group-body">';
             $output .= '<ol class="bb-sortable-static">';
-        }else{
+        } else {
 //            if($item->parent->parent == null) $i = 0;
 
-            $output .= '<li data-id="'.$item['id'].'" id="menu-item-'.$item['id'].'" class="level-'.$i.'">';
+            $output .= '<li data-id="' . $item['id'] . '" id="menu-item-' . $item['id'] . '" class="level-' . $i . '">';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
-            $output .= '<i></i><span>'.$item['title'].'</span>';
+            $output .= '<i></i><span>' . $item['title'] . '</span>';
             $output .= '<div class="bb-menu-actions pull-right">';
             $output .= '<a href="javascript:" class="bb-menu-delete"><i class="fa fa-close"></i></a>';
             $output .= '<a href="javascript:" class="bb-menu-collapse"><i class="fa fa-caret-down"></i></a>';
@@ -1660,7 +1679,7 @@ function renderSavedPagesInMenu($data, $parent = true,$i = 0)
             $output .= '<div class="col-md-8">';
             $output .= '<div class="form-group">';
             $output .= '<label>Item Title</label>';
-            $output .= '<input type="text" value="'.$item['title'].'" class="form-control input-sm menu-item-title">';
+            $output .= '<input type="text" value="' . $item['title'] . '" class="form-control input-sm menu-item-title">';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
@@ -1685,7 +1704,7 @@ function renderSavedPagesInMenu($data, $parent = true,$i = 0)
             $output .= '</div>';
             $output .= '<div class="form-group specific hide">';
             $output .= '<label>Select Roles</label>';
-            $output .= Form::select('roles[]',$roles->pluck('slug', 'name'),null,['multiple' => true,'class' => 'form-control input-sm']);
+            $output .= Form::select('roles[]', $roles->pluck('slug', 'name'), null, ['multiple' => true, 'class' => 'form-control input-sm']);
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
@@ -1694,10 +1713,10 @@ function renderSavedPagesInMenu($data, $parent = true,$i = 0)
         }
 
         if (isset($item['children'])) {
-            $output .= renderSavedPagesInMenu($item['children'], false,$i +1);
+            $output .= renderSavedPagesInMenu($item['children'], false, $i + 1);
         }
 
-        if($parent){
+        if ($parent) {
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</li>';
@@ -1708,16 +1727,16 @@ function renderSavedPagesInMenu($data, $parent = true,$i = 0)
 }
 
 
-function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
+function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
     // Loop through items
     foreach ($data as $item) {
-        $output .= '<li data-id="'.$item->id.'" id="menu-item-'.$item->id.'" class="level-'.$i.'">';
+        $output .= '<li data-id="' . $item->id . '" id="menu-item-' . $item->id . '" class="level-' . $i . '">';
         $output .= '<div class="bb-menu-item">';
         $output .= '<div class="bb-menu-item-title">';
-        $output .= '<i></i><span>'.$item->title.'</span>';
+        $output .= '<i></i><span>' . $item->title . '</span>';
         $output .= '<div class="bb-menu-actions pull-right">';
         $output .= '<a href="javascript:" class="bb-menu-delete"><i class="fa fa-close"></i></a>';
         $output .= '<a href="javascript:" class="bb-menu-collapse"><i class="fa fa-caret-down"></i></a>';
@@ -1735,7 +1754,7 @@ function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
         $output .= '<div class="col-md-8">';
         $output .= '<div class="form-group">';
         $output .= '<label>Item Title</label>';
-        $output .= '<input type="text" value="'.$item->title.'" class="form-control input-sm menu-item-title" readonly>';
+        $output .= '<input type="text" value="' . $item->title . '" class="form-control input-sm menu-item-title" readonly>';
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
@@ -1743,7 +1762,7 @@ function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
         $output .= '<div class="col-md-6">';
         $output .= '<div class="form-group">';
         $output .= '<label>Item URL</label>';
-        $output .= '<input type="text" value="'.$item->url.'" class="form-control input-sm item-url" readonly>';
+        $output .= '<input type="text" value="' . $item->url . '" class="form-control input-sm item-url" readonly>';
         $output .= '</div>';
         $output .= '</div>';
         $output .= '<div class="col-md-6">';
@@ -1760,7 +1779,7 @@ function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
         $output .= '</div>';
         $output .= '<div class="form-group specific hide">';
         $output .= '<label>Select Roles</label>';
-        $output .= Form::select('roles[]',$roles->pluck('slug', 'name'),null,['multiple' => true,'class' => 'form-control input-sm']);
+        $output .= Form::select('roles[]', $roles->pluck('slug', 'name'), null, ['multiple' => true, 'class' => 'form-control input-sm']);
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
@@ -1768,11 +1787,14 @@ function renderFrontPagesInMenu($data, $parent = true,$i = 0,$children=true)
         $output .= '</li>';
 
         if (count($item->childs)) {
-            $output .= renderFrontPagesInMenu($item->childs, false,$i +1,$children);
+            $output .= renderFrontPagesInMenu($item->childs, false, $i + 1, $children);
         }
 
     }
     // Return data tree
     return $output;
 }
-function recursive_hook_menus(){}
+
+function recursive_hook_menus()
+{
+}

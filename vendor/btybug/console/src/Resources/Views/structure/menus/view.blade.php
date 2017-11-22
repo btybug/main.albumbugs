@@ -1,223 +1,62 @@
 @extends('btybug::layouts.admin')
 @section('content')
-    {!! Form::model($menu,['id' => 'menu-save']) !!}
-    {!! Form::hidden('id',null) !!}
-    <div class="bb-menu-container">
-        <div class="container-fluid">
-            <!-- Settings -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading menu-panel">
-                            <h3 class="panel-title pull-left">
-                                <label>{!! $menu->name !!}</label>
-                                {!! Form::text('name',null,['class' => 'menu-name-field']) !!}
-                            </h3>
 
+    <script id="item-template" type="template">
+        <div class="bb-menu-item">
+            <div class="bb-menu-item-title">
+                <a href="javascript:" data-action="show-children"><i class="fa fa-plus"></i></a>
+                <span>{title}</span>
+
+                <div class="bb-menu-actions pull-right">
+                    <a href="javascript:" class="bb-menu-collapse">
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="bb-menu-item-body">
+                <div class="bb-menu-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Icon</label>
+                                <input type="text" data-placement="right" class="form-control input-sm" value="{icon}"
+                                       readonly>
+                            </div>
                         </div>
-
-                        <div class="panel-body general-menu-settings">
-                            <div class="bb-menu-form">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label class="text-primary">How menu display for different visitors types?</label>
-
-                                        <p>
-                                            <a href="javascript:" class="btn btn-xs btn-danger bb-bulk-roles" data-bulk="hide">Hide for all</a>
-                                            <a href="javascript:" class="btn btn-xs btn-success bb-bulk-roles" data-bulk="show">Show for all</a>
-                                            <a href="javascript:" class="btn btn-xs btn-primary bb-bulk-roles" data-bulk="members">Show for members</a>
-                                        </p>
-
-                                        <div class="form-group has-feedback">
-                                            <label>Filter roles</label>
-                                            <input type="text" class="form-control" id="bb-role-filter" placeholder="Type search keyword">
-                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                        </div>
-
-                                        <ul class="list-group bb-roles-list">
-                                            <li class="list-group-item" data-role="guests" data-title="Guests" data-display="show">
-                                                <span class="bb-role-title">Guests</span>
-
-                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </a>
-
-                                                <div class="pull-right">
-                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="guests">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item" data-role="normal-user" data-title="Normal User" data-display="show">
-                                                <span class="bb-role-title">Normal User</span>
-
-                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </a>
-
-                                                <div class="pull-right">
-                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="normal-user">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item" data-role="pro-user" data-title="Pro User" data-display="show">
-                                                <span class="bb-role-title">Pro User</span>
-
-                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </a>
-
-                                                <div class="pull-right">
-                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="pro-user">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item" data-role="editor" data-title="Editor" data-display="show">
-                                                <span class="bb-role-title">Editor</span>
-
-                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </a>
-
-                                                <div class="pull-right">
-                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="editor">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item" data-role="contributor" data-title="Contributor" data-display="show">
-                                                <span class="bb-role-title">Contributor</span>
-
-                                                <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </a>
-
-                                                <div class="pull-right">
-                                                    <input type="checkbox" class="bb-switch bb-role-toggle" checked name="contributor">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="what-to-show-panel hide" data-for="guests">
-                                            <div class="form-group">
-                                                <label>What to show for "Guests" role?</label>
-                                                <select name="guests_show" class="form-control input-sm">
-                                                    <option value="hide">Hide Only</option>
-                                                    <option value="unit">Render Unit</option>
-                                                    <option value="menu">Render another menu</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="unit">
-                                                <label>Select unit</label>
-                                                <button class="btn btn-primary form-control">BB Button for units</button>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="menu">
-                                                <label>Select menu</label>
-                                                <button class="btn btn-info form-control">BB Button for menus</button>
-                                            </div>
-                                        </div>
-                                        <div class="what-to-show-panel hide" data-for="normal-user">
-                                            <div class="form-group">
-                                                <label>What to show for "Normal User" role?</label>
-                                                <select name="normal-user_show" class="form-control input-sm">
-                                                    <option value="hide">Hide Only</option>
-                                                    <option value="unit">Render Unit</option>
-                                                    <option value="menu">Render another menu</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="unit">
-                                                <label>Select unit</label>
-                                                <button class="btn btn-primary form-control">BB Button for units</button>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="menu">
-                                                <label>Select menu</label>
-                                                <button class="btn btn-info form-control">BB Button for menus</button>
-                                            </div>
-                                        </div>
-                                        <div class="what-to-show-panel hide" data-for="pro-user">
-                                            <div class="form-group">
-                                                <label>What to show for "Pro User" role?</label>
-                                                <select name="pro-user_show" class="form-control input-sm">
-                                                    <option value="hide">Hide Only</option>
-                                                    <option value="unit">Render Unit</option>
-                                                    <option value="menu">Render another menu</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="unit">
-                                                <label>Select unit</label>
-                                                <button class="btn btn-primary form-control">BB Button for units</button>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="menu">
-                                                <label>Select menu</label>
-                                                <button class="btn btn-info form-control">BB Button for menus</button>
-                                            </div>
-                                        </div>
-                                        <div class="what-to-show-panel hide" data-for="editor">
-                                            <div class="form-group">
-                                                <label>What to show for "Editor" role?</label>
-                                                <select name="editor_show" class="form-control input-sm">
-                                                    <option value="hide">Hide Only</option>
-                                                    <option value="unit">Render Unit</option>
-                                                    <option value="menu">Render another menu</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="unit">
-                                                <label>Select unit</label>
-                                                <button class="btn btn-primary form-control">BB Button for units</button>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="menu">
-                                                <label>Select menu</label>
-                                                <button class="btn btn-info form-control">BB Button for menus</button>
-                                            </div>
-                                        </div>
-                                        <div class="what-to-show-panel hide" data-for="contributor">
-                                            <div class="form-group">
-                                                <label>What to show for "Contributor" role?</label>
-                                                <select name="contributor_show" class="form-control input-sm">
-                                                    <option value="hide">Hide Only</option>
-                                                    <option value="unit">Render Unit</option>
-                                                    <option value="menu">Render another menu</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="unit">
-                                                <label>Select unit</label>
-                                                <button class="btn btn-primary form-control">BB Button for units</button>
-                                            </div>
-
-                                            <div class="form-group hide" data-render="menu">
-                                                <label>Select menu</label>
-                                                <button class="btn btn-info form-control">BB Button for menus</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Item Title</label>
+                                <input type="text" class="form-control input-sm" value="{title}" readonly>
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Item URL</label>
+                        <input type="text" class="form-control input-sm" value="{custom-link}" readonly>
+                    </div>
                 </div>
             </div>
+        </div>
+    </script>
 
+
+    <div class="bb-menu-container">
+        <div class="container-fluid">
             <!-- Menu -->
             <div class="row">
-                <div class="col-md-10">
-                    <ol class="bb-sortable-static bb-sortable-group">
-                        {!! renderPagesInMenu($pageGrouped,true,0,$children) !!}
-                    </ol>
+                <div class="col-md-4">
+                    <ol class="bb-sortable-static"></ol>
                 </div>
             </div>
         </div>
     </div>
-    {!! Form::close() !!}
 @stop
 {{--@include('tools::common_inc')--}}
 @section('CSS')
     {{--{!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}--}}
     {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
-    {!! HTML::style('public/css/menus.css') !!}
+    {!! BBstyle(modules_path('console/src/Resources/assets/menu.css')) !!}
 
 @stop
 
@@ -225,5 +64,54 @@
     {{--{!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}--}}
     {{--{!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}--}}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+    {!! BBscript(modules_path('console/src/Resources/assets/jquery.menuRenderer.js')) !!}
     {{--{!! HTML::script('public/js/menus.js') !!}--}}
+    <script>
+        jQuery(function ($) {
+
+            $('.bb-sortable-static').menuRenderer({
+                JSONString: '{!! json_encode(get_pages_menu_array($pageGrouped),true) !!}',
+                itemTemplateSelector: '#item-template'
+            });
+
+            $('body')
+                .on('click', '.bb-menu-collapse', function () {
+                    var $this = $(this);
+                    var body = $this.closest('.bb-menu-item').find('.bb-menu-item-body');
+                    var bodyGroup = $this.closest('li').find('.bb-menu-group-body');
+                    var icon = $this.find('i');
+
+                    if ($this.hasClass("expand")) {
+                        body.slideUp();
+                        bodyGroup.slideUp();
+                        $this.removeClass("expand");
+                        icon.addClass("fa-caret-down");
+                        icon.removeClass('fa-caret-up');
+                    } else {
+                        body.slideDown();
+                        bodyGroup.slideDown();
+                        $this.addClass("expand");
+                        icon.removeClass("fa-caret-down");
+                        icon.addClass('fa-caret-up');
+                    }
+                })
+                .on('click', '[data-action=show-children]', function () {
+                    var $this = $(this);
+                    var icon = $this.find('i');
+                    var parentItem = $this.closest('.parent').find('ol').first();
+
+                    if ($this.hasClass("expand")) {
+                        parentItem.slideUp();
+                        $this.removeClass("expand");
+                        icon.removeClass("fa-minus");
+                        icon.addClass('fa-plus');
+                    } else {
+                        parentItem.slideDown();
+                        $this.addClass("expand");
+                        icon.addClass("fa-minus");
+                        icon.removeClass('fa-plus');
+                    }
+                });
+        });
+    </script>
 @stop

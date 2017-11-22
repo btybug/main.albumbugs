@@ -261,11 +261,11 @@
                 <div class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <ol class="bb-menu-area">
-                                @if($menu->json_data)
-                                    {!! renderSavedPagesInMenu(json_decode($menu->json_data,true),false) !!}
-                                @endif
-                            </ol>
+                            @if($menu->json_data)
+                            <ol class="bb-menu-area">{!! renderSavedPagesInMenu(json_decode($menu->json_data,true),false) !!}</ol>
+                            @else
+                                <ol class="bb-menu-area"></ol>
+                            @endif
                         </div>
                     </div>
                 </div>

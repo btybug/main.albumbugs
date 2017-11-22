@@ -106,23 +106,19 @@ class ModuleServiceProvider extends ServiceProvider
             "title" => "Uploads",
             "custom-link" => "#",
             "icon" => "fa fa-smile-o",
-            "is_core" => "yes",
             "children" => [
                 [
                     "title" => "Modules",
                     "custom-link" => "/admin/uploads/modules",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes",
                     'children' => [
                         [
                             "title" => "Core packages",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/modules/core-packages'
                         ], [
                             "title" => "Extra packages",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/modules/extra-packages'
                         ]
                     ]
@@ -131,17 +127,14 @@ class ModuleServiceProvider extends ServiceProvider
                     "title" => "Apps",
                     "custom-link" => "/admin/uploads/apps",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes",
                     'children' => [
                         [
                             "title" => "Backend",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/layouts/back-end'
                         ], [
                             "title" => "Frontend",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/layouts/front-end'
                         ]
                     ]
@@ -150,17 +143,14 @@ class ModuleServiceProvider extends ServiceProvider
                     "title" => "Layouts",
                     "custom-link" => "/admin/uploads/layouts",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes",
                     'children' => [
                         [
                             "title" => "Core apps",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/apps/core-apps'
                         ], [
                             "title" => "Extra apps",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/apps/extra-apps'
                         ]
                     ]
@@ -169,17 +159,14 @@ class ModuleServiceProvider extends ServiceProvider
                     "title" => "Market",
                     "custom-link" => "/admin/uploads/market",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes",
                     'children' => [
                         [
                             "title" => "Packages",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/market/packages'
                         ], [
                             "title" => "Composer",
                             "icon" => "fa fa-angle-right",
-                            "is_core" => "yes",
                             'custom-link' => '/admin/uploads/market/composer'
                         ]
                     ]

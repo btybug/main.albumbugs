@@ -18,7 +18,7 @@
                                 <a href="javascript:" class="btn btn-warning btn-sm bb-menu-settings">
                                     <i class="fa fa-cog"></i>
                                 </a>
-                                <a href="javascript:" class="btn btn-primary btn-sm bb-menu-save">Save</a>
+                                {!! Form::submit('Save',['class' => 'btn btn-primary btn-sm bb-menu-save']) !!}
                                 <a href="javascript:" class="btn btn-success btn-sm">Preview</a>
                             </div>
                         </div>
@@ -231,20 +231,25 @@
             <!-- Menu -->
             <div class="row">
                 <div class="col-md-4">
+                    <div data-placement="inline" class="icp icp-auto"></div>
                     <ol class="bb-sortable-static bb-sortable-group">
-                        <li data-id="front-pages" id="menu-item-front" class="no-nest">
+                        <li data-id="frontend-pages" id="menu-item-front" class="no-nest">
                             <div class="panel panel-default">
                                 <div class="bb-menu-item-title">
                                     <i></i>
-                                    <strong>Front Pages</strong>
+                                    <strong>Frontend Pages</strong>
+
                                     <div class="bb-menu-actions pull-right">
-                                        <a href="javascript:" class="bb-menu-delete"> <i class="fa fa-close"></i></a>
-                                        <a href="javascript:" class="bb-menu-collapse expand group-expander"> <i
-                                                    class="fa fa-caret-up"></i></a>
+                                        <a href="javascript:" class="bb-menu-delete">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                        <a href="javascript:" class="bb-menu-collapse expand group-expander">
+                                            <i class="fa fa-caret-up"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="panel-body bb-menu-group-body">
-                                    <ol>
+                                    <ol class="bb-sortable-static">
                                     {!! renderFrontPagesInMenu($pageGrouped,true) !!}
                                     </ol>
                                 </div>

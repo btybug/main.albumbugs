@@ -109,7 +109,7 @@ class ModuleServiceProvider extends ServiceProvider
             "children" => [
                 [
                     "title" => "Modules",
-                    "custom-link" => "/admin/uploads/modules",
+                    "custom-link" => "/admin/uploads/modules/core-packages",
                     "icon" => "fa fa-angle-right",
                     'children' => [
                         [

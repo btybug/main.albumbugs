@@ -70,7 +70,7 @@
         jQuery(function ($) {
 
             $('.bb-sortable-static').menuRenderer({
-                JSONString: '{!! json_encode([$menu],true) !!}',
+                JSONString: '{!! json_encode($menu,true) !!}',
                 itemTemplateSelector: '#item-template'
             });
 

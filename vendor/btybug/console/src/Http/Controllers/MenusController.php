@@ -68,6 +68,11 @@ class MenusController extends Controller
         StructureService $structureService
     )
     {
+        if($id==2){
+            $menu = \Config::get('admin_menus',[]);
+//            dd($menu);
+            return view('console::structure.menus.hook_menus',compact('menu'));
+        }
         if($slug=='hook'){
             $core_menus = \Config::get('admin_menus',[]);
             if(!isset($core_menus[$id]))abort(404);

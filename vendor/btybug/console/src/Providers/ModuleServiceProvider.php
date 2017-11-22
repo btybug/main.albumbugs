@@ -94,12 +94,53 @@ class ModuleServiceProvider extends ServiceProvider
                     "title" => "Structure",
                     "custom-link" => "/admin/console/structure",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
+                    "is_core" => "yes",
+                    "children" => [
+                        [
+                            "title" => "Pages",
+                            "custom-link" => "/admin/console/structure/pages",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ] ,[
+                            "title" => "Menus",
+                            "custom-link" => "/admin/console/structure/menus",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ],[
+                            "title" => "Classify",
+                            "custom-link" => "/admin/console/structure/classify",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ],[
+                            "title" => "URLS",
+                            "custom-link" => "/admin/console/structure/urls",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ],[
+                            "title" => "SETTINGS",
+                            "custom-link" => "/admin/console/structure/settings",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ],[
+                            "title" => "Tables",
+                            "custom-link" => "/admin/console/structure/tables",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ]
+                    ]
                 ], [
                     "title" => "Settings",
                     "custom-link" => "/admin/console/settings",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
+                    "is_core" => "yes",
+                    "children" => [
+                        [
+                            "title" => "General",
+                            "custom-link" => "/admin/console/settings/general",
+                            "icon" => "fa fa-angle-right",
+                            "is_core" => "yes"
+                        ]
+                        ]
                 ], [
                     "title" => "General",
                     "custom-link" => "/admin/console/general",

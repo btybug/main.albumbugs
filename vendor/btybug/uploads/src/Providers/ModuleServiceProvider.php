@@ -171,6 +171,21 @@ class ModuleServiceProvider extends ServiceProvider
                             'custom-link' => '/admin/uploads/market/composer'
                         ]
                     ]
+                ],[
+                    "title" => "Gears",
+                    "custom-link" => "/admin/uploads/gears",
+                    "icon" => "fa fa-angle-right",
+                    'children' => [
+                        [
+                            "title" => "Backend",
+                            "icon" => "fa fa-angle-right",
+                            'custom-link' => '/admin/uploads/gears/back-end'
+                        ], [
+                            "title" => "Frontend",
+                            "icon" => "fa fa-angle-right",
+                            'custom-link' => '/admin/uploads/gears/front-end'
+                        ]
+                    ]
                 ]
             ]]);
 

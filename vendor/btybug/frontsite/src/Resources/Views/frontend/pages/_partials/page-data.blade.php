@@ -26,6 +26,7 @@
             </div>
         </div>
 
+        {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getChildrenPageLayout($page) !!}
 
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">All Hooks</div>

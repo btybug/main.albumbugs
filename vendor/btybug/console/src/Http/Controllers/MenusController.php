@@ -79,7 +79,7 @@ class MenusController extends Controller
             $menu=$core_menus[$id];
             return view('console::structure.menus.hook_menus',compact('menu'));
         }else{
-            $children = ($id != 1);
+            $children = true;
             $menu = $menuRepository->findOrFail($id);
             $page = $adminPagesRepository->first();
             $pageGrouped = $adminPagesRepository->getGroupedWithModule();
@@ -87,7 +87,7 @@ class MenusController extends Controller
             $data = $structureService->getMenuItems($menu, $role);
         }
 
-        return view('console::structure.menus.view', compact(['pageGrouped', 'page', 'slug', 'children', 'data', 'menu']));
+        return view('console::structure.menus.edit', compact(['pageGrouped', 'page', 'slug', 'children', 'data', 'menu']));
     }
 
     public function postEdit(

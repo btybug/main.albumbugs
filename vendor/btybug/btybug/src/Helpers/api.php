@@ -558,57 +558,49 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
     if ($data) {
         foreach ($data as $item) {
             $children = $item->childs;
-
-            $output .= ' <ol class="pagelisting">';
             $output .= '<li data-id="' . $item->id . '">';
             $title = 'core';
+            $output .= '<div class="listinginfo bb-menu-item">';
             switch ($item->type) {
                 case  "custom" :
                     $title = 'custom';
-                    $output .= '<div class="listinginfo" style="background: #36e0a0;">';
+                    $output .= '<div class="lsitingbutton bb-menu-item-title" style="background: #36e0a0; !important">';
                     break;
                 case  "plugin" :
                     $title = 'plugin';
-                    $output .= '<div class="listinginfo" style="background: #e0223c;">';
+                    $output .= '<div class="lsitingbutton bb-menu-item-title" style="background: #e0223c;  !important">';
                     break;
                 default:
-                    $output .= '<div class="listinginfo">';
+                    $output .= '<div class="lsitingbutton bb-menu-item-title" style="background: #00c7e0;  !important">';
                     break;
             }
-
-            $output .= '<div class="lsitingbutton">';
+            $output .= '<span class="listingtitle">' . $item->title . ' - ' . $title . '</span>';
             if ($item->content_type == "special") {
                 $settings = json_decode($item->settings, true);
-                $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin"></i></a>';
+                $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin pull-right"></i></a>';
             } else {
-                $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="btn"><i class="fa fa-pencil"></i></a>';
+                $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';
             }
 
             if ($item->type == 'custom') {
-                $output .= '<a data-href="' . url('/admin/front-site/structure/front-pages/delete') . '" data-key="' . $item->id . '" data-type="Page ' . $item->title . '"  class="delete-button btn trashBtn"><i class="fa fa-trash"></i></a>';
+                $output .= '<a data-href="' . url('/admin/front-site/structure/front-pages/delete') . '" data-key="' . $item->id . '" data-type="Page ' . $item->title . '" style="cursor: pointer;"  class="delete-button pull-right trashBtn"><i class="fa fa-trash"></i></a>';
             }
 //        $output .= '<a data-toggle="collapse" data-pagecolid="' . $item->id . '" data-parent="#accordion' . $item->id . '" href="#collapseOne' . $item->id . '" aria-expanded="true" aria-controls="collapseOne" class="link_name collapsed">';
 //        $output .= $item->title;
 //        $output .= '</a>';
             $output .= '</div>';
-            $output .= '<button class="btn btn-collapse" type="button" data-caction="collapse">';
-            if (count($children)) {
-                $output .= '<i class="fa fa-minus" data-collapse="' . $item->id . '" aria-hidden="true"></i>';
-            }
-            $output .= '</button>';
-
-            $output .= '<span class="listingtitle">' . $item->title . ' - ' . $title . '</span>';
             $output .= '</div>';
             /* Actions */
             /* Actions END */
             if (count($children)) {
-                $output .= hierarchyAdminPagesListFull($children, false, $icon, 0);
+                $output .= '<ol>';
+                    $output .= hierarchyAdminPagesListFull($children, false, $icon, 0);
+                $output .= '</ol>';
             }
 
 //        $output .= '</li>';
             // If this is the top parent
             $output .= '</li>';
-            $output .= '</ol>';
         }
     }
     // Return data tree

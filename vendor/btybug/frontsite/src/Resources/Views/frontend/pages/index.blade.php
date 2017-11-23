@@ -12,8 +12,12 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <article>
-            <div class="col-md-8 col-md-offset-2">
-                {!! hierarchyAdminPagesListFull($pages) !!}
+            <div class="bb-menu-container">
+                <div class="col-md-8 col-md-offset-2 bb-menu-group-body">
+                    <ol class="bb-menu-area">
+                        {!! hierarchyAdminPagesListFull($pages) !!}
+                    </ol>
+                </div>
             </div>
         </article>
     </div>
@@ -23,12 +27,14 @@
 {{--@include('tools::common_inc')--}}
 @section('CSS')
     {!! HTML::style('public/css/create_pages.css') !!}
-    {!! HTML::style('public/css/menu.css?v=0.16') !!}
     {!! HTML::style('public/css/tool-css.css?v=0.23') !!}
     {!! HTML::style('public/css/page.css?v=0.15') !!}
     {!! HTML::style('public/css/admin_pages.css') !!}
     {!! HTML::style('public/css/jquery.tagit.css') !!}
     {!! HTML::style('public/css/select2/select2.min.css') !!}
+    {!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}
+    {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
+    {!! HTML::style('public/css/menus.css?v='.rand(1111,9999)) !!}
 
 @stop
 
@@ -36,11 +42,12 @@
     {!! HTML::script('public/js/create_pages.js') !!}
     {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
     {!! HTML::script('public/js/admin_pages.js') !!}
-    {!! HTML::script('public/js/nestedSortable/jquery.mjs.nestedSortable.js') !!}
     {!! HTML::script('public/js/bootbox/bootbox.min.js') !!}
-    {!! HTML::script('public/js/icon-plugin.js?v=0.4') !!}
-    {!! HTML::script('public/js/tag-it/tag-it.js') !!}
     {!! HTML::script('public/js/select2/select2.full.min.js') !!}
+    {!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}
+    {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
+    {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+    {!! HTML::script('public/js/menus.js') !!}
     <script>
 
         $(document).ready(function () {
@@ -60,39 +67,6 @@
             $("body").on('change', '.select-type', function () {
                 var value = $(this).val();
                 window.location.href = "/admin/front-site/structure/front-pages";
-            });
-
-            $('.classify-options').select2({
-                allowClear: false,
-                placeholder: 'Select an option'
-            });
-
-            $('#tags').tagit({
-                triggerKeys: ['enter', 'comma', 'tab', 'space'],
-                fieldName: 'tags[]',
-                availableTags: '',
-                autocomplete: ({
-                    source: function (request, response) {
-                        $.ajax({
-                            url: '/admin/manage/frontend/tags/clouds',
-                            data: {format: "json", term: request.term},
-                            dataType: 'json',
-                            type: 'GET',
-                            success: function (data) {
-                                response($.map(data.data, function (item) {
-                                    return {
-                                        label: item,
-                                        value: item
-                                    }
-                                }));
-                            },
-                            error: function (request, status, error) {
-                                alert(error);
-                            }
-                        })
-                    },
-                    minLength: 1
-                })
             });
 
 

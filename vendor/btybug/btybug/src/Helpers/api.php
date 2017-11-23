@@ -1658,7 +1658,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
         } else {
 //            if($item->parent->parent == null) $i = 0;
 
-            $output .= '<li data-id="' . $item['id'] . '" >';
+            $output .= '<li data-id="' . $item['id'] . '" data-title="' . $item['title'] . '" data-icon="' . $item['icon'] . '" data-url="' . $item['url'] . '">';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i><span>' . $item['title'] . '</span>';

@@ -18,7 +18,7 @@
 <div class="Settings_ui coresetting hide animated bounceInRight" data-settinglive="settings">
     <div class="container-fluid">
 
-        {!! Form::model($settings,['url'=>'/admin/uploads/gears/units/settings/'.$id, 'id'=>'add_custome_page','files'=>true]) !!}
+        {!! Form::model($settings,['url'=>'/admin/uploads/gears/settings/'.$id, 'id'=>'add_custome_page','files'=>true]) !!}
         <input name="itemname" type="hidden" data-parentitemname="itemname"/>
         {!! $htmlSettings !!}
         {!! Form::close() !!}

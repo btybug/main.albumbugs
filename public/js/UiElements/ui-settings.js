@@ -29,23 +29,23 @@ $('form button').attr('type','button');
 
 function savesettingevent(){
 	 setTimeout(function(){
-            var data=$('form').serialize();
-            var url=$('#add_custome_page').attr('action');
-            $.ajax({
-                type: "post",
-                datatype: "json",
-                url:url,
-                data: data,
-                headers: {
-                    'X-CSRF-TOKEN': $("input[name='_token']").val()
-                },
-                success: function (data) {
-                    if (! data.error) {
-                        $('#widget_container').html(data.html)
-                    }
-                }
-            });
-          }, 50);
+          var data=$('form').serialize();
+          var url=$('#add_custome_page').attr('action');
+          $.ajax({
+              type: "post",
+              datatype: "json",
+              url:url,
+              data: data,
+              headers: {
+                  'X-CSRF-TOKEN': $("input[name='_token']").val()
+              },
+              success: function (data) {
+                  if (! data.error) {
+                      $('#widget_container').html(data.html)
+                  }
+              }
+          });
+        }, 50);
 }
 
 

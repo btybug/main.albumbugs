@@ -1,5 +1,4 @@
 @extends('btybug::layouts.units')
-
 @section('content')
     <div class="previewlivesettingifream">
         <iframe src="{!! $data['body'] !!}">
@@ -9,7 +8,6 @@
 @stop
 
 @section('CSS')
-
     {!! HTML::style('public/css/preview-template.css') !!}
     {!! HTML::style("public/css/animate.css") !!}
     {!! HTML::style("public/css/preview-template.css") !!}

@@ -123,8 +123,8 @@ class CmsItemUploader
         $gearsArray = [
             'units' => [
                 'path' => config('paths.units_uplaod'),
-                'model' => "Btybug\\Cms\\Models\\Templates\\Units",
-                'variation' => "Btybug\\Cms\\Models\\Templates\\UnitsVariations",
+                'model' => "Btybug\\btybug\\Models\\Templates\\Units",
+                'variation' => "Btybug\\btybug\\Models\\Templates\\UnitsVariations",
                 'self_type' => 'units',
                 'required_keys' => [
                     'title' => true,
@@ -136,8 +136,8 @@ class CmsItemUploader
             ],
             'page_sections' => [
                 'path' => 'resources' . DS . 'views' . DS . 'ContentLayouts' . DS,
-                'model' => "Btybug\\Cms\\Models\\ContentLayouts\\ContentLayouts",
-                'variation' => "Btybug\\Cms\\Models\\ContentLayouts\\ContentLayoutVariations",
+                'model' => "Btybug\\btybug\\Models\\ContentLayouts\\ContentLayouts",
+                'variation' => "Btybug\\btybug\\Models\\ContentLayouts\\ContentLayoutVariations",
                 'self_type' => 'page_sections',
                 'required_keys' => [
                     'self_type' => true,

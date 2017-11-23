@@ -8,6 +8,7 @@
 
 namespace Btybug\btybug\Services;
 
+use Btybug\btybug\Models\ContentLayouts\ContentLayoutVariations;
 use File;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
@@ -123,8 +124,8 @@ class CmsItemUploader
         $gearsArray = [
             'units' => [
                 'path' => config('paths.units_uplaod'),
-                'model' => "Btybug\\btybug\\Models\\Templates\\Units",
-                'variation' => "Btybug\\btybug\\Models\\Templates\\UnitsVariations",
+                'model' => Units::class,
+                'variation' => UnitsVariations::class,
                 'self_type' => 'units',
                 'required_keys' => [
                     'title' => true,
@@ -136,8 +137,8 @@ class CmsItemUploader
             ],
             'page_sections' => [
                 'path' => 'resources' . DS . 'views' . DS . 'ContentLayouts' . DS,
-                'model' => "Btybug\\btybug\\Models\\ContentLayouts\\ContentLayouts",
-                'variation' => "Btybug\\btybug\\Models\\ContentLayouts\\ContentLayoutVariations",
+                'model' => ContentLayouts::class,
+                'variation' => ContentLayoutVariations::class,
                 'self_type' => 'page_sections',
                 'required_keys' => [
                     'self_type' => true,

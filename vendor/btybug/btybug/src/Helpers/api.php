@@ -1658,7 +1658,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
         } else {
 //            if($item->parent->parent == null) $i = 0;
 
-            $output .= '<li data-id="' . $item['id'] . '" id="menu-item-' . $item['id'] . '" class="level-' . $i . '">';
+            $output .= '<li data-id="' . $item['id'] . '" >';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i><span>' . $item['title'] . '</span>';
@@ -1709,12 +1709,15 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
+            if (isset($item['children'])) {
+                $output .= '<ol>';
+                $output .= renderSavedPagesInMenu($item['children'], false, $i + 1);
+                $output .= '</ol>';
+            }
             $output .= '</li>';
         }
 
-        if (isset($item['children'])) {
-            $output .= renderSavedPagesInMenu($item['children'], false, $i + 1);
-        }
+
 
         if ($parent) {
             $output .= '</div>';

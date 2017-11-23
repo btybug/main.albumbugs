@@ -1673,7 +1673,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '<div class="col-md-4">';
             $output .= '<div class="form-group">';
             $output .= '<label>Icon</label>';
-            $output .= '<input type="text" data-placement="right" class="form-control input-sm icp">';
+            $output .= '<input type="text" value="'.$item['icon'].'" data-placement="right" class="form-control input-sm icp readonly">';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="col-md-8">';
@@ -1687,7 +1687,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '<div class="col-md-6">';
             $output .= '<div class="form-group">';
             $output .= '<label>Item URL</label>';
-            $output .= '<input type="text" value="" class="form-control input-sm">';
+            $output .= '<input type="text" value="' . $item['url'] . '" class="form-control input-sm item-url" readonly>';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="col-md-6">';

@@ -88,7 +88,7 @@ class ComposerController extends Controller
             die();
         }
         if (file_exists(__DIR__ . '/../../composer/extracted')) {
-            include(__DIR__ . '/../../../composer/extracted/extracted/vendor/autoload.php');
+            require_once(__DIR__ . '/../../composer/extracted/extracted/vendor/autoload.php');
             $input = new \Symfony\Component\Console\Input\StringInput($command . ' ' . $package . ' -vvv -d ' . $path);
             $output = new \Symfony\Component\Console\Output\StreamOutput(fopen('php://output', 'w'));
             $app = new \Composer\Console\Application();

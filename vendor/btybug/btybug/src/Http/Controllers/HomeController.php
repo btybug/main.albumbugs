@@ -128,7 +128,8 @@ class HomeController extends Controller
             'btybug/console',
             'btybug/user',
             'btybug/frontsite',
-            'btybug/framework'
+            'btybug/framework',
+            "btybug.plugins/studios"
         ];
 
 //        dd($plugins);

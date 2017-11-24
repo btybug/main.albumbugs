@@ -49,14 +49,14 @@ class ComposerController extends Controller
     public function downloadComposer()
     {
         $installerURL = 'https://getcomposer.org/installer';
-        $installerFile = __DIR__ . '/../../../installer.php';
-        putenv('COMPOSER_HOME=' . __DIR__ . '/../../../composer/extracted/bin/composer');
+        $installerFile = __DIR__ . '/../../installer.php';
+        putenv('COMPOSER_HOME=' . __DIR__ . '/../../composer/extracted/bin/composer');
         if (!file_exists($installerFile)) {
 
             echo 'Downloading ' . $installerURL . PHP_EOL;
             flush();
             $ch = curl_init($installerURL);
-            curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/../../../composer/cacert.pem');
+            curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/../../composer/cacert.pem');
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
             curl_setopt($ch, CURLOPT_FILE, fopen($installerFile, 'w+'));
             if (curl_exec($ch)) {
@@ -81,7 +81,7 @@ class ComposerController extends Controller
         command:
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
-        putenv('COMPOSER_HOME=' . __DIR__ . '/../../../extracted/bin/composer');
+        putenv('COMPOSER_HOME=' . __DIR__ . '/../../extracted/bin/composer');
         if (!file_exists($_POST['path'])) {
 
             echo $_POST['path'];
@@ -102,11 +102,11 @@ class ComposerController extends Controller
 
     public function extractComposer()
     {
-        if (file_exists(__DIR__ . '/../../../composer.phar')) {
+        if (file_exists(__DIR__ . '/../../composer.phar')) {
             echo 'Extracting composer.phar ...' . PHP_EOL;
             flush();
-            $composer = new Phar(__DIR__ . '/../../../composer.phar');
-            $composer->extractTo(__DIR__ . '/../../../composer/extracted');
+            $composer = new Phar(__DIR__ . '/../../composer.phar');
+            $composer->extractTo(__DIR__ . '/../../composer/extracted');
             return 'Extraction complete.' . PHP_EOL;
         }
         return 'composer.phar does not exist';

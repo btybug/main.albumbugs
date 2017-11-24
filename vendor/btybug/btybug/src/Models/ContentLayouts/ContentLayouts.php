@@ -664,8 +664,11 @@ class ContentLayouts
     {
         $layout = self::findVariation($page->page_layout);
         if ($layout) {
-            $html = \View::make('btybug::_partials.children_layout', compact('layout','page'));
-            return $html;
+            if(count($page->childs)){
+                $settings = ($page->settings) ? json_decode($page->settings,true) : null;
+                $html = \View::make('btybug::_partials.children_layout', compact('layout','page','settings'));
+                return $html;
+            }
         }
     }
 

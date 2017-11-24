@@ -67,6 +67,9 @@ class FrontendPageService extends GeneralService
                 $data[$key] = $requestData[$key];
             }
         }
+        $children = $request->only('children','children_page_layout_settings');
+        if(count($children))   $data['settings'] = json_encode($children,true);
+
         $this->frontPagesRepository->update($page->id, $data);
 
         if ($request->get('page_access') && $request->roles)

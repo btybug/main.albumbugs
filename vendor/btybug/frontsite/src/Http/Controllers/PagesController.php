@@ -124,7 +124,10 @@ class PagesController extends Controller
         return view('manage::frontend.pages.general', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'roles']));
     }
 
-    public function postSettings(Request $request, FrontendPageService $frontendPageService)
+    public function postSettings(
+        Request $request,
+        FrontendPageService $frontendPageService
+    )
     {
         $updatedPage = $frontendPageService->saveSettings($request);
         if (isset($request->redirect_type) && $request->redirect_type == 'view') {

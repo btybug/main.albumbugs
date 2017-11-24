@@ -189,21 +189,21 @@ class ModuleServiceProvider extends ServiceProvider
                     ]
                 ],
                 [
-                    "title" => "assets",
+                    "title" => "Assets",
                     "custom-link" => "/admin/uploads/assets",
                     "icon" => "fa fa-angle-right",
                     'children' => [
                         [
                             "title" => "JS",
-                            "icon" => "fa fa-angle-right",
+                            "icon" => "fa fa-code",
                             'custom-link' => '/admin/uploads/assets/js'
                         ], [
                             "title" => "CSS",
-                            "icon" => "fa fa-angle-right",
+                            "icon" => "fa fa-css3",
                             'custom-link' => '/admin/uploads/assets/css'
                         ],[
                             "title" => "FONTS",
-                            "icon" => "fa fa-angle-right",
+                            "icon" => "fa fa-font",
                             'custom-link' => '/admin/uploads/assets/fonts'
                         ]
                     ]

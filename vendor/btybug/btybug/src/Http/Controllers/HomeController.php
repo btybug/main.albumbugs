@@ -119,21 +119,14 @@ class HomeController extends Controller
 
     public function pagesOptimize ()
     {
-        //        $package = new Plugins();
-        //        $package->modules();
-        //        $plugins = $package->getPlugins();
+        $package = new Plugins();
+        $package->plugins();
+        $plugins = $package->getPlugins();
+        $package->modules();
+        $modules = $package->getPlugins();
 
-        $plugins = [
-            'btybug/uploads',
-            'btybug/console',
-            'btybug/user',
-            'btybug/frontsite',
-            'btybug/framework',
-            "btybug.plugins/studios"
-        ];
-
-//        dd($plugins);
-        foreach ($plugins as $slug) {
+        $data = array_merge($modules,$plugins);
+        foreach ($data as $slug) {
             $t = Routes::registerPages($slug);
             var_dump($t);
         }

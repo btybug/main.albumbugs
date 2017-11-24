@@ -3,6 +3,7 @@
 namespace Btybug\btybug\Http\Controllers;
 
 use Btybug\btybug\Models\Routes;
+use Btybug\Uploads\Repository\Plugins;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Home;

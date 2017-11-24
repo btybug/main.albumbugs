@@ -171,7 +171,8 @@ class ModuleServiceProvider extends ServiceProvider
                             'custom-link' => '/admin/uploads/market/composer'
                         ]
                     ]
-                ],[
+                ],
+                [
                     "title" => "Gears",
                     "custom-link" => "/admin/uploads/gears",
                     "icon" => "fa fa-angle-right",
@@ -184,6 +185,26 @@ class ModuleServiceProvider extends ServiceProvider
                             "title" => "Frontend",
                             "icon" => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/gears/front-end'
+                        ]
+                    ]
+                ],
+                [
+                    "title" => "assets",
+                    "custom-link" => "/admin/uploads/assets",
+                    "icon" => "fa fa-angle-right",
+                    'children' => [
+                        [
+                            "title" => "JS",
+                            "icon" => "fa fa-angle-right",
+                            'custom-link' => '/admin/uploads/assets/js'
+                        ], [
+                            "title" => "CSS",
+                            "icon" => "fa fa-angle-right",
+                            'custom-link' => '/admin/uploads/assets/css'
+                        ],[
+                            "title" => "FONTS",
+                            "icon" => "fa fa-angle-right",
+                            'custom-link' => '/admin/uploads/assets/fonts'
                         ]
                     ]
                 ]

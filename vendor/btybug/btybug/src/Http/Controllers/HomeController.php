@@ -3,7 +3,6 @@
 namespace Btybug\btybug\Http\Controllers;
 
 use Btybug\btybug\Models\Routes;
-use Btybug\Uploads\Repository\Plugins;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Home;
@@ -120,14 +119,24 @@ class HomeController extends Controller
 
     public function pagesOptimize ()
     {
-        $package = new Plugins();
-        $package->plugins();
-        $plugins = $package->getPlugins();
-        $package->modules();
-        $modules = $package->getPlugins();
+//        $package = new Plugins();
+//        $package->plugins();
+//        $plugins = $package->getPlugins();
+//        $package->modules();
+//        $modules = $package->getPlugins();
+//
+//        $data = array_merge($modules,$plugins);
+        $plugins = [
+            'btybug/uploads',
+            'btybug/console',
+            'btybug/user',
+            'btybug/frontsite',
+            'btybug/framework',
+            "btybug.plugins/studios"
+        ];
 
-        $data = array_merge($modules,$plugins);
-        foreach ($data as $slug) {
+//        dd($plugins);
+        foreach ($plugins as $slug) {
             $t = Routes::registerPages($slug);
             var_dump($t);
         }

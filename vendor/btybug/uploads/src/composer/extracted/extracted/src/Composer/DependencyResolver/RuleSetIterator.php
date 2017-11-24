@@ -1,83 +1,94 @@
 <?php
 
 
+
+
+
+
+
+
+
+
+
 namespace Composer\DependencyResolver;
+
+
 
 
 class RuleSetIterator implements \Iterator
 {
-    protected $rules;
-    protected $types;
+protected $rules;
+protected $types;
 
-    protected $currentOffset;
-    protected $currentType;
-    protected $currentTypeOffset;
+protected $currentOffset;
+protected $currentType;
+protected $currentTypeOffset;
 
-    public function __construct(array $rules)
-    {
-        $this->rules = $rules;
-        $this->types = array_keys($rules);
-        sort($this->types);
+public function __construct(array $rules)
+{
+$this->rules = $rules;
+$this->types = array_keys($rules);
+sort($this->types);
 
-        $this->rewind();
-    }
+$this->rewind();
+}
 
-    public function rewind()
-    {
-        $this->currentOffset = 0;
+public function current()
+{
+return $this->rules[$this->currentType][$this->currentOffset];
+}
 
-        $this->currentTypeOffset = -1;
-        $this->currentType = -1;
+public function key()
+{
+return $this->currentType;
+}
 
-        do {
-            $this->currentTypeOffset++;
+public function next()
+{
+$this->currentOffset++;
 
-            if (!isset($this->types[$this->currentTypeOffset])) {
-                $this->currentType = -1;
-                break;
-            }
+if (!isset($this->rules[$this->currentType])) {
+return;
+}
 
-            $this->currentType = $this->types[$this->currentTypeOffset];
-        } while (isset($this->types[$this->currentTypeOffset]) && !sizeof($this->rules[$this->currentType]));
-    }
+if ($this->currentOffset >= sizeof($this->rules[$this->currentType])) {
+$this->currentOffset = 0;
 
-    public function current()
-    {
-        return $this->rules[$this->currentType][$this->currentOffset];
-    }
+do {
+$this->currentTypeOffset++;
 
-    public function key()
-    {
-        return $this->currentType;
-    }
+if (!isset($this->types[$this->currentTypeOffset])) {
+$this->currentType = -1;
+break;
+}
 
-    public function next()
-    {
-        $this->currentOffset++;
+$this->currentType = $this->types[$this->currentTypeOffset];
+} while (isset($this->types[$this->currentTypeOffset]) && !sizeof($this->rules[$this->currentType]));
+}
+}
 
-        if (!isset($this->rules[$this->currentType])) {
-            return;
-        }
+public function rewind()
+{
+$this->currentOffset = 0;
 
-        if ($this->currentOffset >= sizeof($this->rules[$this->currentType])) {
-            $this->currentOffset = 0;
+$this->currentTypeOffset = -1;
+$this->currentType = -1;
 
-            do {
-                $this->currentTypeOffset++;
+do {
+$this->currentTypeOffset++;
 
-                if (!isset($this->types[$this->currentTypeOffset])) {
-                    $this->currentType = -1;
-                    break;
-                }
+if (!isset($this->types[$this->currentTypeOffset])) {
+$this->currentType = -1;
+break;
+}
 
-                $this->currentType = $this->types[$this->currentTypeOffset];
-            } while (isset($this->types[$this->currentTypeOffset]) && !sizeof($this->rules[$this->currentType]));
-        }
-    }
+$this->currentType = $this->types[$this->currentTypeOffset];
+} while (isset($this->types[$this->currentTypeOffset]) && !sizeof($this->rules[$this->currentType]));
+}
 
-    public function valid()
-    {
-        return isset($this->rules[$this->currentType])
-            && isset($this->rules[$this->currentType][$this->currentOffset]);
-    }
+public function valid()
+{
+return isset($this->rules[$this->currentType])
+&& isset($this->rules[$this->currentType][$this->currentOffset]);
+}
 }

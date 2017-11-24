@@ -1,88 +1,136 @@
 <?php
 
 
+
+
+
+
+
+
 namespace JsonSchema\Entity;
+
+
+
+
 
 
 class JsonPointer
 {
 
-    private $filename;
+private $filename;
 
 
-    private $propertyPaths = array();
+private $propertyPaths = array();
 
 
-    public function __construct($value)
-    {
-        if (!is_string($value)) {
-            throw new \InvalidArgumentException('Ref value must be a string');
-        }
-
-        $splitRef = explode('#', $value, 2);
-        $this->filename = $splitRef[0];
-        if (array_key_exists(1, $splitRef)) {
-            $this->propertyPaths = $this->decodePropertyPaths($splitRef[1]);
-        }
-    }
 
 
-    private function decodePropertyPaths($propertyPathString)
-    {
-        $paths = array();
-        foreach (explode('/', trim($propertyPathString, '/')) as $path) {
-            $path = $this->decodePath($path);
-            if (is_string($path) && '' !== $path) {
-                $paths[] = $path;
-            }
-        }
 
-        return $paths;
-    }
 
-    private function decodePath($path)
-    {
-        return strtr($path, array('~1' => '/', '~0' => '~', '%25' => '%'));
-    }
+public function __construct($value)
+{
+if (!is_string($value)) {
+throw new \InvalidArgumentException('Ref value must be a string');
+}
 
-    public function withPropertyPaths(array $propertyPaths)
-    {
-        $new = clone $this;
-        $new->propertyPaths = $propertyPaths;
+$splitRef = explode('#', $value, 2);
+$this->filename = $splitRef[0];
+if (array_key_exists(1, $splitRef)) {
+$this->propertyPaths = $this->decodePropertyPaths($splitRef[1]);
+}
+}
 
-        return $new;
-    }
 
-    public function __toString()
-    {
-        return $this->getFilename() . $this->getPropertyPathAsString();
-    }
 
-    public function getFilename()
-    {
-        return $this->filename;
-    }
 
-    public function getPropertyPathAsString()
-    {
-        return rtrim('#/' . implode('/', $this->encodePropertyPaths()), '/');
-    }
 
-    private function encodePropertyPaths()
-    {
-        return array_map(
-            array($this, 'encodePath'),
-            $this->getPropertyPaths()
-        );
-    }
 
-    public function getPropertyPaths()
-    {
-        return $this->propertyPaths;
-    }
+private function decodePropertyPaths($propertyPathString)
+{
+$paths = array();
+foreach (explode('/', trim($propertyPathString, '/')) as $path) {
+$path = $this->decodePath($path);
+if (is_string($path) && '' !== $path) {
+$paths[] = $path;
+}
+}
 
-    private function encodePath($path)
-    {
-        return strtr($path, array('/' => '~1', '~' => '~0', '%' => '%25'));
-    }
+return $paths;
+}
+
+
+
+
+private function encodePropertyPaths()
+{
+return array_map(
+array($this, 'encodePath'),
+$this->getPropertyPaths()
+);
+}
+
+
+
+
+
+
+private function decodePath($path)
+{
+return strtr($path, array('~1' => '/', '~0' => '~', '%25' => '%'));
+}
+
+
+
+
+
+
+private function encodePath($path)
+{
+return strtr($path, array('/' => '~1', '~' => '~0', '%' => '%25'));
+}
+
+
+
+
+public function getFilename()
+{
+return $this->filename;
+}
+
+
+
+
+public function getPropertyPaths()
+{
+return $this->propertyPaths;
+}
+
+
+
+
+
+
+public function withPropertyPaths(array $propertyPaths)
+{
+$new = clone $this;
+$new->propertyPaths = $propertyPaths;
+
+return $new;
+}
+
+
+
+
+public function getPropertyPathAsString()
+{
+return rtrim('#/' . implode('/', $this->encodePropertyPaths()), '/');
+}
+
+
+
+
+public function __toString()
+{
+return $this->getFilename() . $this->getPropertyPathAsString();
+}
 }

@@ -1,186 +1,199 @@
 <?php
 
 
+
+
+
+
+
+
+
+
+
 namespace Composer\DependencyResolver;
+
+
+
+
 
 
 class Decisions implements \Iterator, \Countable
 {
-    const DECISION_LITERAL = 0;
-    const DECISION_REASON = 1;
+const DECISION_LITERAL = 0;
+const DECISION_REASON = 1;
 
-    protected $pool;
-    protected $decisionMap;
-    protected $decisionQueue = array();
+protected $pool;
+protected $decisionMap;
+protected $decisionQueue = array();
 
-    public function __construct($pool)
-    {
-        $this->pool = $pool;
-        $this->decisionMap = array();
-    }
+public function __construct($pool)
+{
+$this->pool = $pool;
+$this->decisionMap = array();
+}
 
-    public function decide($literal, $level, $why)
-    {
-        $this->addDecision($literal, $level);
-        $this->decisionQueue[] = array(
-            self::DECISION_LITERAL => $literal,
-            self::DECISION_REASON => $why,
-        );
-    }
+public function decide($literal, $level, $why)
+{
+$this->addDecision($literal, $level);
+$this->decisionQueue[] = array(
+self::DECISION_LITERAL => $literal,
+self::DECISION_REASON => $why,
+);
+}
 
-    protected function addDecision($literal, $level)
-    {
-        $packageId = abs($literal);
+public function satisfy($literal)
+{
+$packageId = abs($literal);
 
-        $previousDecision = isset($this->decisionMap[$packageId]) ? $this->decisionMap[$packageId] : null;
-        if ($previousDecision != 0) {
-            $literalString = $this->pool->literalToString($literal);
-            $package = $this->pool->literalToPackage($literal);
-            throw new SolverBugException(
-                "Trying to decide $literalString on level $level, even though $package was previously decided as " . (int)$previousDecision . "."
-            );
-        }
+return (
+$literal > 0 && isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] > 0 ||
+$literal < 0 && isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] < 0
+);
+}
 
-        if ($literal > 0) {
-            $this->decisionMap[$packageId] = $level;
-        } else {
-            $this->decisionMap[$packageId] = -$level;
-        }
-    }
+public function conflict($literal)
+{
+$packageId = abs($literal);
 
-    public function satisfy($literal)
-    {
-        $packageId = abs($literal);
+return (
+(isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] > 0 && $literal < 0) ||
+(isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] < 0 && $literal > 0)
+);
+}
 
-        return (
-            $literal > 0 && isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] > 0 ||
-            $literal < 0 && isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] < 0
-        );
-    }
+public function decided($literalOrPackageId)
+{
+return !empty($this->decisionMap[abs($literalOrPackageId)]);
+}
 
-    public function conflict($literal)
-    {
-        $packageId = abs($literal);
+public function undecided($literalOrPackageId)
+{
+return empty($this->decisionMap[abs($literalOrPackageId)]);
+}
 
-        return (
-            (isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] > 0 && $literal < 0) ||
-            (isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] < 0 && $literal > 0)
-        );
-    }
+public function decidedInstall($literalOrPackageId)
+{
+$packageId = abs($literalOrPackageId);
 
-    public function decided($literalOrPackageId)
-    {
-        return !empty($this->decisionMap[abs($literalOrPackageId)]);
-    }
+return isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] > 0;
+}
 
-    public function undecided($literalOrPackageId)
-    {
-        return empty($this->decisionMap[abs($literalOrPackageId)]);
-    }
+public function decisionLevel($literalOrPackageId)
+{
+$packageId = abs($literalOrPackageId);
+if (isset($this->decisionMap[$packageId])) {
+return abs($this->decisionMap[$packageId]);
+}
 
-    public function decidedInstall($literalOrPackageId)
-    {
-        $packageId = abs($literalOrPackageId);
+return 0;
+}
 
-        return isset($this->decisionMap[$packageId]) && $this->decisionMap[$packageId] > 0;
-    }
+public function decisionRule($literalOrPackageId)
+{
+$packageId = abs($literalOrPackageId);
 
-    public function decisionLevel($literalOrPackageId)
-    {
-        $packageId = abs($literalOrPackageId);
-        if (isset($this->decisionMap[$packageId])) {
-            return abs($this->decisionMap[$packageId]);
-        }
+foreach ($this->decisionQueue as $i => $decision) {
+if ($packageId === abs($decision[self::DECISION_LITERAL])) {
+return $decision[self::DECISION_REASON];
+}
+}
 
-        return 0;
-    }
+return null;
+}
 
-    public function decisionRule($literalOrPackageId)
-    {
-        $packageId = abs($literalOrPackageId);
+public function atOffset($queueOffset)
+{
+return $this->decisionQueue[$queueOffset];
+}
 
-        foreach ($this->decisionQueue as $i => $decision) {
-            if ($packageId === abs($decision[self::DECISION_LITERAL])) {
-                return $decision[self::DECISION_REASON];
-            }
-        }
+public function validOffset($queueOffset)
+{
+return $queueOffset >= 0 && $queueOffset < count($this->decisionQueue);
+}
 
-        return null;
-    }
+public function lastReason()
+{
+return $this->decisionQueue[count($this->decisionQueue) - 1][self::DECISION_REASON];
+}
 
-    public function atOffset($queueOffset)
-    {
-        return $this->decisionQueue[$queueOffset];
-    }
+public function lastLiteral()
+{
+return $this->decisionQueue[count($this->decisionQueue) - 1][self::DECISION_LITERAL];
+}
 
-    public function validOffset($queueOffset)
-    {
-        return $queueOffset >= 0 && $queueOffset < count($this->decisionQueue);
-    }
+public function reset()
+{
+while ($decision = array_pop($this->decisionQueue)) {
+$this->decisionMap[abs($decision[self::DECISION_LITERAL])] = 0;
+}
+}
 
-    public function lastReason()
-    {
-        return $this->decisionQueue[count($this->decisionQueue) - 1][self::DECISION_REASON];
-    }
+public function resetToOffset($offset)
+{
+while (count($this->decisionQueue) > $offset + 1) {
+$decision = array_pop($this->decisionQueue);
+$this->decisionMap[abs($decision[self::DECISION_LITERAL])] = 0;
+}
+}
 
-    public function reset()
-    {
-        while ($decision = array_pop($this->decisionQueue)) {
-            $this->decisionMap[abs($decision[self::DECISION_LITERAL])] = 0;
-        }
-    }
+public function revertLast()
+{
+$this->decisionMap[abs($this->lastLiteral())] = 0;
+array_pop($this->decisionQueue);
+}
 
-    public function resetToOffset($offset)
-    {
-        while (count($this->decisionQueue) > $offset + 1) {
-            $decision = array_pop($this->decisionQueue);
-            $this->decisionMap[abs($decision[self::DECISION_LITERAL])] = 0;
-        }
-    }
+public function count()
+{
+return count($this->decisionQueue);
+}
 
-    public function revertLast()
-    {
-        $this->decisionMap[abs($this->lastLiteral())] = 0;
-        array_pop($this->decisionQueue);
-    }
+public function rewind()
+{
+end($this->decisionQueue);
+}
 
-    public function lastLiteral()
-    {
-        return $this->decisionQueue[count($this->decisionQueue) - 1][self::DECISION_LITERAL];
-    }
+public function current()
+{
+return current($this->decisionQueue);
+}
 
-    public function count()
-    {
-        return count($this->decisionQueue);
-    }
+public function key()
+{
+return key($this->decisionQueue);
+}
 
-    public function rewind()
-    {
-        end($this->decisionQueue);
-    }
+public function next()
+{
+return prev($this->decisionQueue);
+}
 
-    public function current()
-    {
-        return current($this->decisionQueue);
-    }
+public function valid()
+{
+return false !== current($this->decisionQueue);
+}
 
-    public function key()
-    {
-        return key($this->decisionQueue);
-    }
+public function isEmpty()
+{
+return count($this->decisionQueue) === 0;
+}
 
-    public function next()
-    {
-        return prev($this->decisionQueue);
-    }
+protected function addDecision($literal, $level)
+{
+$packageId = abs($literal);
 
-    public function valid()
-    {
-        return false !== current($this->decisionQueue);
-    }
+$previousDecision = isset($this->decisionMap[$packageId]) ? $this->decisionMap[$packageId] : null;
+if ($previousDecision != 0) {
+$literalString = $this->pool->literalToString($literal);
+$package = $this->pool->literalToPackage($literal);
+throw new SolverBugException(
+"Trying to decide $literalString on level $level, even though $package was previously decided as ".(int) $previousDecision."."
+);
+}
 
-    public function isEmpty()
-    {
-        return count($this->decisionQueue) === 0;
-    }
+if ($literal > 0) {
+$this->decisionMap[$packageId] = $level;
+} else {
+$this->decisionMap[$packageId] = -$level;
+}
+}
 }

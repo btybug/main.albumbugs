@@ -1,4 +1,5 @@
 {
   "require": {
+    "btybug.plugins/studios": "dev-master"
   }
 }

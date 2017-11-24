@@ -13,7 +13,7 @@
                             <p>{!! $package['description'] !!}</p>
                             <p>Downloads:{!! $package['downloads'] !!}</p>
                             <p>Favers:{!! $package['favers'] !!}</p>
-                            <p><a href="{!! url('admin/avatar/composer?p='.$package['name']) !!}"
+                            <p><a href="{!! url('admin/uploads/market/composer?p='.$package['name']) !!}"
                                   class="btn btn-primary" role="button">Install</a> <a href="#" class="btn btn-default"
                                                                                        role="button">Uninstall</a></p>
                         </div>

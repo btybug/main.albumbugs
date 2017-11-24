@@ -531,4 +531,12 @@ class PagesController extends Controller
 
     }
 
+    public function postSortPages(
+        Request $request,
+        FrontendPageService $pageService
+    ){
+        $result = $pageService->sort($request->only('item','parent'));
+        return Response::json(['error' => $result]);
+    }
+
 }

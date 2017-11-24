@@ -36,6 +36,7 @@ Route::group(['prefix'=>'structure'], function () {
         Route::post('/settings/{id}', 'PagesController@postSettings');
         Route::get('/general/{id}', 'PagesController@getGeneral',true);
         Route::post('/user-avatar', 'PagesController@postUserAvatar');
+        Route::post('/sorting', 'PagesController@postSortPages');
         Route::post('/classify', 'PagesController@postClassify');
         Route::post('/new', 'PagesController@postNew');
         Route::get('/new/{parent_id}', 'PagesController@getAddChild');

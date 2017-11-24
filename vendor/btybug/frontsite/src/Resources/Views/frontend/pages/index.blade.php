@@ -51,6 +51,35 @@
     <script>
 
         $(document).ready(function () {
+            $('ol.bb-menu-area').nestedSortable({
+                items: 'li',
+                isTree: true,
+                stop: function(event, ui) {
+                    var item = $(ui.item).attr("data-id");
+                    var parent = $(ui.item).closest('ol').parent('li').attr("data-id");
+                    $.ajax({
+                        url: '/admin/front-site/structure/front-pages/sorting',
+                        data: {
+                            item: item,
+                            parent: parent
+                        },
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $("input[name='_token']").val()
+                        },
+                        dataType: 'json',
+                        beforeSend : function () {
+
+                        },
+                        success: function (data) {
+                            if (! data.error) {
+
+                            }
+                        }
+                    });
+
+                }
+            });
 
             $("body").on('click', '[data-collapse]', function () {
                 var id = $(this).attr('data-collapse');

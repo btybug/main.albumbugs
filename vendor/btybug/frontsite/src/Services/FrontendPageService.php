@@ -22,7 +22,7 @@ class FrontendPageService extends GeneralService
     private $settingsRepository;
     private $permissionRoleRepository;
 
-    public function __construct(
+    public function __construct (
         FrontPagesRepository $frontPagesRepository,
         AdminsettingRepository $settingsRepository,
         PermissionRoleRepository $permissionRoleRepository
@@ -33,7 +33,7 @@ class FrontendPageService extends GeneralService
         $this->permissionRoleRepository = $permissionRoleRepository;
     }
 
-    public static function checkAccess($page_id, $role_slug)
+    public static function checkAccess ($page_id, $role_slug)
     {
         if ($role_slug == SUPERADMIN) return true;
         $page = self::$frontPages->find($page_id);
@@ -46,15 +46,62 @@ class FrontendPageService extends GeneralService
         return false;
     }
 
-    public static function FrontPagesParentPermissionWithRole($page_id, $role_id)
+    public static function FrontPagesParentPermissionWithRole ($page_id, $role_id)
     {
         $page = new FrontPagesRepository();
         $result = $page->find($page_id);
+
         return $result->parent->permission_role()->where('role_id', $role_id)->first();
 
     }
 
-    public function saveSettings(
+    public static function generateSpecialPage (array $data)
+    {
+        if (
+            isset($data['module_id'])
+            && isset($data['url'])
+            && isset($data['file_path'])
+            && isset($data['edit_url'])
+        ) {
+            $pageRepo = new FrontPagesRepository();
+            if (isset($data['slug'])) {
+                if (isset($data['prefix'])) {
+                    $page = $pageRepo->findOneByMultiple(['slug' => $data['slug'], 'url' => $data['prefix'] . '/' . $data['url']]);
+                } else {
+                    $page = $pageRepo->findOneByMultiple(['slug' => $data['slug'], 'url' => $data['url']]);
+                }
+            } else {
+                if (isset($data['prefix'])) {
+                    $page = $pageRepo->findBy('url', $data['prefix'] . '/' . $data['url']);
+                } else {
+                    $page = $pageRepo->findBy('url', $data['url']);
+                }
+            }
+
+            if ($page) return false;
+
+            $frontPageRepo = new FrontPagesRepository();
+
+            return $frontPageRepo->create([
+                'user_id'              => \Auth::id(),
+                'title'                => (isset($data['title'])) ? $data['title'] : "New Page",
+                'slug'                 => (isset($data['slug'])) ? $data['slug'] : uniqid(),
+                'header'               => 0,
+                'footer'               => 0,
+                'status'               => (isset($data['status'])) ? $data['status'] : "published",
+                'page_access'          => (isset($data['page_access'])) ? $data['page_access'] : 1,
+                'page_layout'          => null,
+                'page_layout_settings' => null,
+                'url'                  => (isset($data['prefix'])) ? $data['prefix'] . '/' . $data['url'] : $data['url'],
+                'parent_id'            => (isset($data['parent_id'])) ? $data['parent_id'] : null,
+                'type'                 => 'plugin',
+                'content_type'         => 'special',
+                'settings'             => json_encode(['file_path' => $data['file_path'], 'edit_url' => $data['edit_url']], true)
+            ]);
+        }
+    }
+
+    public function saveSettings (
         Request $request
     )
     {
@@ -67,8 +114,8 @@ class FrontendPageService extends GeneralService
                 $data[$key] = $requestData[$key];
             }
         }
-        $children = $request->only('children','children_page_layout_settings');
-        if(count($children))   $data['settings'] = json_encode($children,true);
+        $children = $request->only('children', 'children_page_layout_settings');
+        if (count($children)) $data['settings'] = json_encode($children, true);
 
         $this->frontPagesRepository->update($page->id, $data);
 
@@ -78,12 +125,12 @@ class FrontendPageService extends GeneralService
         return $page;
     }
 
-    public function addNewPage(int $parentID = null)
+    public function addNewPage (int $parentID = null)
     {
         $parent = null;
         if ($parentID) {
             $parent = $this->frontPagesRepository->find($parentID);
-            if (!$parent) {
+            if (! $parent) {
                 return false;
             }
         }
@@ -93,16 +140,16 @@ class FrontendPageService extends GeneralService
         $defaultPageLayoutSettings = $this->settingsRepository->findBy('settingkey', 'placeholders');
         $slug = uniqid();
         $new = $this->frontPagesRepository->create([
-            'user_id' => \Auth::id(),
-            'title' => 'New Page',
-            'slug' => $slug,
-            'header' => ($header_enabled) ? $header_enabled->val : 0,
-            'footer' => ($footer_enabled) ? $footer_enabled->val : 0,
-            'page_layout' => $defaultPageLayout->val,
+            'user_id'              => \Auth::id(),
+            'title'                => 'New Page',
+            'slug'                 => $slug,
+            'header'               => ($header_enabled) ? $header_enabled->val : 0,
+            'footer'               => ($footer_enabled) ? $footer_enabled->val : 0,
+            'page_layout'          => $defaultPageLayout->val,
             'page_layout_settings' => json_decode($defaultPageLayoutSettings->val, true),
-            'url' => '',
-            'parent_id' => ($parent) ? $parent->id : null,
-            'type' => 'custom'
+            'url'                  => '',
+            'parent_id'            => ($parent) ? $parent->id : null,
+            'type'                 => 'custom'
         ]);
         $this->frontPagesRepository->update($new->id, [
             'url' => '/new-page(' . $new->id . ')',
@@ -111,58 +158,26 @@ class FrontendPageService extends GeneralService
         return $new;
     }
 
-    public function getPlaceholdersInUrl($pageLayoutSettings = [])
+    public function getPlaceholdersInUrl ($pageLayoutSettings = [])
     {
         if ($pageLayoutSettings) {
             return http_build_query($pageLayoutSettings);
         }
     }
 
-    public static function generateSpecialPage(array $data)
+    public function sort (array $data)
     {
-        if(
-            isset($data['module_id'])
-            && isset($data['url'])
-            && isset($data['file_path'])
-            && isset($data['edit_url'])
-        ){
-            $pageRepo = new FrontPagesRepository();
-            if(isset($data['slug'])){
-                if(isset($data['prefix'])){
-                    $page = $pageRepo->findOneByMultiple(['slug' => $data['slug'],'url' => $data['prefix'] .'/'.$data['url']]);
-                }else{
-                    $page = $pageRepo->findOneByMultiple(['slug' => $data['slug'],'url' => $data['url']]);
-                }
-            }else{
-                if(isset($data['prefix'])){
-                    $page = $pageRepo->findBy('url',$data['prefix'] .'/'.$data['url']);
-                }else{
-                    $page = $pageRepo->findBy('url',$data['url']);
-                }
+        $child = $this->frontPagesRepository->find($data['item']);
+
+        if ($child) {
+            $parent = null;
+            if ($data['parent']) {
+                $parent = $this->frontPagesRepository->find($data['parent']);
             }
-
-            if($page) return false;
-
-            $frontPageRepo = new FrontPagesRepository();
-            return $frontPageRepo->create([
-                'user_id' => \Auth::id(),
-                'title' => (isset($data['title'])) ? $data['title'] : "New Page",
-                'slug' => (isset($data['slug'])) ? $data['slug'] : uniqid(),
-                'header' => 0,
-                'footer' => 0,
-                'status' => (isset($data['status'])) ? $data['status'] : "published",
-                'page_access' => (isset($data['page_access'])) ? $data['page_access'] : 1,
-                'page_layout' => null,
-                'page_layout_settings' => null,
-                'url' => (isset($data['prefix'])) ? $data['prefix'] .'/'.$data['url'] : $data['url'],
-                'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
-                'type' => 'plugin',
-                'content_type' => 'special',
-                'settings' => json_encode(['file_path' => $data['file_path'],'edit_url' => $data['edit_url']], true)
-            ]);
+            $result = $this->frontPagesRepository->update($child->id, ['parent_id' => ($parent) ? $parent->id : null]);
+            if ($result) return true;
         }
+
+        return false;
     }
-
-
-
 }

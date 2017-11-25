@@ -662,9 +662,13 @@ class ContentLayouts
 
     public function scopeGetChildrenPageLayout($page)
     {
-        $layout = self::findVariation($page->page_layout);
-        if ($layout) {
-            $settings = ($page->settings) ? json_decode($page->settings,true) : null;
+        $settings = ($page->settings) ? json_decode($page->settings,true) : null;
+        if ($settings) {
+            $layout = null;
+            if(isset($settings['children']['page_layout'])){
+                $layout = self::findByVariation($page->page_layout);
+            }
+
             $html = \View::make('btybug::_partials.children_layout', compact('layout','page','settings'));
             return $html;
         }

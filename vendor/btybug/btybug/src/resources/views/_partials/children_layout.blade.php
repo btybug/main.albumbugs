@@ -26,18 +26,18 @@
                 </div>
             </div>
         </div>
-        @if(isset($_this))
+        @if(isset($layout))
             <div class="form-group">
                 <div class="col-md-12">
                     <label>Select Layout Placeholders</label>
                 </div>
                 <div class="col-md-12 layout-data">
                     <div id="placeholders">
-                        @if(isset($_this->placeholders) && is_array($_this->placeholders))
-                            @foreach($_this->placeholders as $key=>$placeholder)
+                        @if(isset($layout->placeholders) && is_array($layout->placeholders))
+                            @foreach($layout->placeholders as $key=>$placeholder)
                                 <div>
                                     @if(isset($placeholder['tag']))
-                                        {!! BBbutton2('unit',$key,$placeholder['tag'],(isset($placeholder['title'])?$placeholder['title']:'Sidebar'),['class'=>'btn btn-default change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'children_page_layout_settings','model'=>($page->page_layout_settings[$key])??null]) !!}
+                                        {!! BBbutton2('unit',$key,$placeholder['tag'],(isset($placeholder['title'])?$placeholder['title']:'Sidebar'),['class'=>'btn btn-default change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'children_page_layout_settings','model'=>($settings['children_page_layout_settings'][$key])??null]) !!}
                                     @endif
                                 </div>
                             @endforeach

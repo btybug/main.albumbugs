@@ -580,7 +580,16 @@ class ContentLayouts
         if (isset($this->placeholders)) {
             $_this = $this;
         }
-        return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top']))->render();
+
+        $enabledSelectLayout = true;
+        if($page->parent){
+            $settings = ($page->parent->settings) ? json_decode($page->parent->settings,true) : null;
+            if($settings && isset($settings['children']['enable_layout'])){
+              $enabledSelectLayout = $settings['children']['enable_layout'];
+            }
+        }
+
+        return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top','enabledSelectLayout']))->render();
     }
 
     protected function getAdminPageLayoutWidget($page, $hide_top = false)

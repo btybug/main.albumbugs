@@ -16,6 +16,7 @@
     </div>
 </div>
 
+@if($enabledSelectLayout)
 <div class="form-group">
     <div class="col-md-12">
         <label>Select Page Layout</label>
@@ -46,5 +47,4 @@
         </div>
     </div>
 </div>
-
-
+@endif

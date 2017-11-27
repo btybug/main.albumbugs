@@ -89,7 +89,7 @@ class HomeController extends Controller
                 $contentArray[$key] = $file;
                 $content .= $contentArray[$key];
             } else {
-                $content=$path."\r\n";
+                //$content=$path."\r\n";
                 //  $notFound.=$path."\r\n";
             }
         }

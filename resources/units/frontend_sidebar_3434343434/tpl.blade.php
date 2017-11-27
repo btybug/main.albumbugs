@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-lg-4 col-sm-6 text-center">
         <div class="well">
-            <h4>What is on your mind?</h4>
+            <h4>Front sidebar</h4>
             <div class="input-group">
                 <input type="text" id="userComment" class="form-control input-sm chat-input"
                        placeholder="Write your message here..."/>

@@ -46,9 +46,27 @@ class Home
 
                     return view('frontend.login', compact('page', 'settings'));
                 }
-                if (is_array($page->page_layout_settings)) {
-                    $settings = array_merge($settings, $page->page_layout_settings);
+
+                $parentPage = $page->parent;
+
+                if($parentPage && $page->page_layout == null){
+                    if($parentPage->settings) {
+                        $parentSettings = json_decode($parentPage->settings,true);
+                        if(isset($parentSettings['children']['page_layout'])){
+                            $page->page_layout = $parentSettings['children']['page_layout'];
+                        }
+
+                        if(isset($parentSettings['children_page_layout_settings'])){
+                            $settings = array_merge($settings,$parentSettings['children_page_layout_settings']);
+                        }
+                    }
+                }else{
+                    if (is_array($page->page_layout_settings)) {
+                        $settings = array_merge($settings, $page->page_layout_settings);
+                    }
                 }
+
+                
                 $page_settings = json_decode($page->settings, true);
                 if (!is_array($page_settings)) {
                     $page_settings = [];
@@ -58,6 +76,7 @@ class Home
             $settings['main_content'] = $page->main_content;
             $settings['content_type'] = $page->content_type;
             $settings['template'] = $page->template;
+//            dd($settings);
             return view('btybug::front_pages', compact('page', 'settings'));
         }
 

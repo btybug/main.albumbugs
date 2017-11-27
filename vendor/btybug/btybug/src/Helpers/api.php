@@ -95,11 +95,13 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
                     array_filter($settings, function ($value) {
                         return $value !== '';
                     });
+
                     array_filter($liveSettings, function ($value) {
                         return $value !== '';
                     });
-                    $settings = array_merge($liveSettings, $settings['settings']);
+                    $settings = array_merge($settings['settings'],$liveSettings);
                 }
+
                 $settings['main_view'] = $main_view;
                 return $section->render($settings);
             }

@@ -136,8 +136,8 @@ class FrontendPageService extends GeneralService
         }
         $header_enabled = $this->settingsRepository->findBy('settingkey', 'header_enabled');
         $footer_enabled = $this->settingsRepository->findBy('settingkey', 'footer_enabled');
-        $defaultPageLayout = $this->settingsRepository->findBy('settingkey', 'page_layout');
-        $defaultPageLayoutSettings = $this->settingsRepository->findBy('settingkey', 'placeholders');
+//        $defaultPageLayout = $this->settingsRepository->findBy('settingkey', 'page_layout');
+//        $defaultPageLayoutSettings = $this->settingsRepository->findBy('settingkey', 'placeholders');
         $slug = uniqid();
         $new = $this->frontPagesRepository->create([
             'user_id'              => \Auth::id(),
@@ -145,8 +145,6 @@ class FrontendPageService extends GeneralService
             'slug'                 => $slug,
             'header'               => ($header_enabled) ? $header_enabled->val : 0,
             'footer'               => ($footer_enabled) ? $footer_enabled->val : 0,
-            'page_layout'          => $defaultPageLayout->val,
-            'page_layout_settings' => json_decode($defaultPageLayoutSettings->val, true),
             'url'                  => '',
             'parent_id'            => ($parent) ? $parent->id : null,
             'type'                 => 'custom'

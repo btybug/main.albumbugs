@@ -167,7 +167,7 @@ class FrontendPageService extends GeneralService
     {
         $child = $this->frontPagesRepository->find($data['item']);
 
-        if ($child) {
+        if ($child && $child->type == 'custom') {
             $parent = null;
             if ($data['parent']) {
                 $parent = $this->frontPagesRepository->find($data['parent']);

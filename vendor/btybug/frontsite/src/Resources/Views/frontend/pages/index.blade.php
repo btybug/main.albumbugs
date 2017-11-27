@@ -56,28 +56,33 @@
                 isTree: true,
                 stop: function(event, ui) {
                     var item = $(ui.item).attr("data-id");
+                    var type = $(ui.item).attr("data-type");
                     var parent = $(ui.item).closest('ol').parent('li').attr("data-id");
-                    $.ajax({
-                        url: '/admin/front-site/structure/front-pages/sorting',
-                        data: {
-                            item: item,
-                            parent: parent
-                        },
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $("input[name='_token']").val()
-                        },
-                        dataType: 'json',
-                        beforeSend : function () {
 
-                        },
-                        success: function (data) {
-                            if (! data.error) {
+                    if(type == 'custom'){
+                        $.ajax({
+                            url: '/admin/front-site/structure/front-pages/sorting',
+                            data: {
+                                item: item,
+                                parent: parent
+                            },
+                            type: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $("input[name='_token']").val()
+                            },
+                            dataType: 'json',
+                            beforeSend : function () {
 
+                            },
+                            success: function (data) {
+                                if (! data.error) {
+
+                                }
                             }
-                        }
-                    });
-
+                        });
+                    }else{
+                        $("ol.bb-menu-area").sortable("cancel");
+                    }
                 }
             });
 

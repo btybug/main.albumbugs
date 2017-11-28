@@ -46,7 +46,7 @@ class ClassifyController extends Controller
         ClassifierService $service
     )
     {
-        return $service->save($request->only(['title','icon','type']));
+        return $service->save($request->only(['title','icon']));
     }
 
     public function postEdit($id, Request $request)

@@ -46,23 +46,22 @@ jQuery(function ($){
         var $this = $(this),
             list = $('#' + $this.data('to')),
             itemTemplate = '<li>' + $('#classify-item-template').html() + '</li>',
-
-            itemTitle = $('[name=item_title]'),
-            itemIcon = $('[name=item_icon]');
-            itemType = $('[name=type]');
-
+            parentID = '#' + $this.data('parent-id');
+            itemTitle = $(parentID + ' [name=item_title]');
+            itemIcon = $(parentID + ' [name=item_icon]');
         itemTemplate = itemTemplate.replace(new RegExp('{title}', 'g'), itemTitle.val());
         itemTemplate = itemTemplate.replace(new RegExp('{icon}', 'g'), itemIcon.val());
 
         // AJAX request to save in DB for main items
         if($this.data('to') === "bb-main-items"){
-            itemTemplate = itemTemplate.replace(new RegExp('{type}', 'g'), itemType.val());
-            postAjax('/admin/front-site/structure/classify/create', {title: itemTitle.val(), icon: itemIcon.val(),type: itemType.val()}, function (id){
+            postAjax('/admin/front-site/structure/classify/create', {title: itemTitle.val(), icon: itemIcon.val()}, function (id){
                 itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), id);
             });
         }
         // Add random IDs for children
         if($this.data('to') === "bb-children-items"){
+            //TODO: item model
+            // itemTemplate = itemTemplate.replace(new RegExp('{type}', 'g'), itemType.val());
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), ''+Math.floor((Math.random() * 999999) + 111111)+'');
         }
 
@@ -72,12 +71,16 @@ jQuery(function ($){
         itemTitle.val('');
         itemIcon.val('');
 
-        // Hide modal
-        $('#addItemModal').modal('hide');
-
         // Auto save
-        if($this.data('to') === "bb-main-items") saveMainItems();
-        if($this.data('to') === "bb-children-items") autoSave();
+        if($this.data('to') === "bb-main-items") {
+            // Hide modal
+            $('#addMainModal').modal('hide');
+            saveMainItems();
+        }
+        if($this.data('to') === "bb-children-items") {
+            $('#addItemModal').modal('hide');
+            autoSave();
+        }
 
     });
 

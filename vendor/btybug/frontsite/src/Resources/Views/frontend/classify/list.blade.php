@@ -34,15 +34,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Item URL</label>
-                        <input type="text" class="form-control input-sm item-url" value="/home" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Item Type</label>
-                        <input type="text" class="form-control input-sm item-type" value="{type}" readonly>
-                    </div>
                 </div>
             </div>
         </div>
@@ -66,21 +57,20 @@
                     </div>
                     <div class="form-group">
                         <label>Create Informative page</label>
-                        {!! Form::checkbox('informative',true,null,['class' => 'form-control input-sm']) !!}
+                        {!! Form::checkbox('informative',true,null) !!}
                     </div>
                     <div class="form-group">
                         <label>Create Child listing page</label>
-                        {!! Form::checkbox('listing',true,null,['class' => 'form-control input-sm']) !!}
+                        {!! Form::checkbox('listing',true,null) !!}
                     </div>
                     <div class="form-group">
                         <label>Create Tagged post page</label>
-                        {!! Form::checkbox('tagged',true,null,['class' => 'form-control input-sm']) !!}
+                        {!! Form::checkbox('tagged',true,null) !!}
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-sm hide add-item" data-to="bb-main-items">Save changes</button>
-                    <button type="button" class="btn btn-primary btn-sm hide add-item" data-to="bb-children-items">Save changes</button>
+                    <button type="button" class="btn btn-primary btn-sm add-item" data-parent-id="addItemModal" data-to="bb-children-items">Save changes</button>
                 </div>
             </div>
         </div>
@@ -105,8 +95,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-sm hide add-item" data-to="bb-main-items">Save changes</button>
-                    <button type="button" class="btn btn-primary btn-sm hide add-item" data-to="bb-children-items">Save changes</button>
+                    <button type="button" class="btn btn-primary btn-sm add-item" data-parent-id="addMainModal" data-to="bb-main-items">Save changes</button>
                 </div>
             </div>
         </div>
@@ -121,7 +110,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group">
-                                <button class="btn btn-default btn-block add-item-modal" data-to="bb-main-items" data-toggle="modal" data-target="#addItemModal">
+                                <button class="btn btn-default btn-block add-item-modal" data-to="bb-main-items" data-toggle="modal" data-target="#addMainModal">
                                     <i class="fa fa-plus"></i> Add Main Item
                                 </button>
                             </div>

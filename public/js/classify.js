@@ -289,10 +289,16 @@ jQuery(function ($){
         .on('click', '.bb-classify-delete', function () {
             var $this = $(this);
             var item = $this.closest('li');
-
-            item.slideUp(function () {
-                $(this).remove();
-                autoSave();
+            var classifyItem = $this.closest('.bb-classify-item');
+            postAjax('/admin/front-site/structure/classify/delete', {id: classifyItem.attr('data-id')}, function (data){
+                if(data.success){
+                    item.slideUp(function () {
+                        $(this).remove();
+                        saveMainItems();
+                    });
+                }else{
+                    alert("Classify not deleted!!!");
+                }
             });
         })
         .on('click', '#bb-main-items>li .bb-classify-item-title', function (){

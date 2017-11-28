@@ -80,10 +80,10 @@ Route::group(['prefix'=>'structure'], function () {
 
     Route::group(['prefix' => 'classify'], function () {
         Route::get('/', 'ClassifyController@getIndex',true);
-        Route::post('/', 'ClassifyController@postEditTerm');
         Route::post('/create', 'ClassifyController@postCreate');
-        Route::post('/edit/{id}', 'ClassifyController@postEdit');
         Route::post('/delete', 'ClassifyController@postDelete');
+
+        Route::post('/edit/{id}', 'ClassifyController@postEdit');
         Route::post('/delete-item', 'ClassifyController@postDeleteItem');
         Route::post('/term-create', 'ClassifyController@postTermCreate');
         Route::post('/term-edit/{id}', 'ClassifyController@postTermEdit');

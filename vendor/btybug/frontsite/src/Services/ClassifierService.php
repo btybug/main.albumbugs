@@ -33,6 +33,14 @@ class ClassifierService extends GeneralService
         return ($response) ? $response->id : null;
     }
 
+    public function delete ($id)
+    {
+        $deleted = false;
+        $response = $this->classifierRepository->findBy('id',$id);
+        if($response) $deleted = $response->delete();
+        return $deleted;
+    }
+
     public function getClassifierPageRelations(int $pageId)
     {
         return $this->classifierItemPageRepository

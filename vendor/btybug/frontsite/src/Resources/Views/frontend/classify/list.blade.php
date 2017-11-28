@@ -65,10 +65,42 @@
                         <input type="text" name="item_icon" class="form-control input-sm icp" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Type</label>
-                        {!! Form::select('type',
-                            ['' => 'Select Type','informative' => 'Informative','listing' => 'Listing'],
-                        null,['class' => 'form-control input-sm']) !!}
+                        <label>Create Informative page</label>
+                        {!! Form::checkbox('informative',true,null,['class' => 'form-control input-sm']) !!}
+                    </div>
+                    <div class="form-group">
+                        <label>Create Child listing page</label>
+                        {!! Form::checkbox('listing',true,null,['class' => 'form-control input-sm']) !!}
+                    </div>
+                    <div class="form-group">
+                        <label>Create Tagged post page</label>
+                        {!! Form::checkbox('tagged',true,null,['class' => 'form-control input-sm']) !!}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm hide add-item" data-to="bb-main-items">Save changes</button>
+                    <button type="button" class="btn btn-primary btn-sm hide add-item" data-to="bb-children-items">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addMainModal" tabindex="-1" role="dialog" aria-labelledby="addMainModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMainModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Item Title</label>
+                        <input type="text" class="form-control" name="item_title">
+                    </div>
+                    <div class="form-group">
+                        <label>Icon</label>
+                        <input type="text" name="item_icon" class="form-control input-sm icp" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -152,5 +184,5 @@
     {!! HTML::script('public/js/jquery.menuRenderer.js') !!}
     {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
-    {!! HTML::script('public/js/classify.js') !!}
+    {!! HTML::script('public/js/classify.js?v='.rand(1111,9999)) !!}
 @stop

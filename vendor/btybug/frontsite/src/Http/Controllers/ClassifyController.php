@@ -33,7 +33,7 @@ class ClassifyController extends Controller
         ClassifierRepository $classifierRepository
     )
     {
-        $classifiers = $classifierRepository->getAll();
+        $classifiers = $classifierRepository->getAll(['id','title','icon','type']);
         return view('manage::frontend.classify.list', compact(['classifiers']));
     }
 
@@ -222,17 +222,13 @@ class ClassifyController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function postDelete(Request $request)
+    public function postDelete(
+        Request $request,
+        ClassifierService $classifierService
+    )
     {
-        $deleted = false;
-        $classify = Classifier::find($request->slug);
-        if ($classify) {
-            if (!empty($classify->image)) {
-                unlink(base_path($classify->image));
-            }
-            $deleted = $classify->delete();
-        }
-        return \Response::json(['success' => $deleted, 'url' => url('/admin/manage/frontend/classify')]);
+        $deleted = $classifierService->delete($request->id);
+        return \Response::json(['success' => $deleted]);
     }
 
     public function postDeleteItem(Request $request)

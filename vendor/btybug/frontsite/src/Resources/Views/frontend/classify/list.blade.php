@@ -1,5 +1,44 @@
 @extends('btybug::layouts.mTabs',['index'=>'frontend_manage'])
 @section('tab')
+    <script type="template" id="classify-main-template">
+        <div class="bb-classify-item" data-id="{id}" data-title="{title}" data-icon="{icon}" data-type="{type}">
+            <div class="bb-classify-item-title">
+                <a href="javascript:" class="bb-classify-drag-handler">
+                    <i class="fa fa-arrows"></i>
+                </a>
+                <i class="fa {icon}"></i>
+                <span>{title}</span>
+
+                <div class="bb-classify-actions pull-right">
+                    <a href="javascript:" class="bb-classify-delete">
+                        <i class="fa fa-close"></i>
+                    </a>
+                    <a href="javascript:" class="bb-classify-collapse">
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="bb-classify-item-body">
+                <div class="bb-classify-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Icon</label>
+                                <input type="text" class="form-control input-sm icp" value="{icon}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Item Title</label>
+                                <input type="text" class="form-control input-sm classify-item-title" value="{title}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <script type="template" id="classify-item-template">
         <div class="bb-classify-item" data-id="{id}" data-title="{title}" data-icon="{icon}" data-type="{type}">
             <div class="bb-classify-item-title">
@@ -31,6 +70,20 @@
                             <div class="form-group">
                                 <label>Item Title</label>
                                 <input type="text" class="form-control input-sm classify-item-title" value="{title}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Create Informative page</label>
+                                {!! Form::checkbox('informative',true,null) !!}
+                            </div>
+                            <div class="form-group">
+                                <label>Create Child listing page</label>
+                                {!! Form::checkbox('listing',true,null) !!}
+                            </div>
+                            <div class="form-group">
+                                <label>Create Tagged post page</label>
+                                {!! Form::checkbox('tagged',true,null) !!}
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 @if($page)
-    
+
     {!! Form::model($page,['url' => url("/admin/front-site/structure/front-pages/settings", [$id]), 'id' => 'page_settings_form']) !!}
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
         <div class="panel panel-default custompanel m-t-20">

@@ -1,33 +1,33 @@
-jQuery(function ($){
+jQuery(function ($) {
 
     // Icon picker
     var $focusedIconInput;
     $('.icp-auto').iconpicker();
 
-    $(window).scroll(function() {
-        if($focusedIconInput !== null){
+    $(window).scroll(function () {
+        if ($focusedIconInput !== null) {
             repositionMenu();
         }
     });
 
     var MainItems = $("#log_main").val();
 
-    if(MainItems){
+    if (MainItems) {
         $('#bb-main-items').menuRenderer({
             JSONString: MainItems,
-            itemTemplateSelector: '#classify-item-template'
+            itemTemplateSelector: '#classify-main-template'
         });
 
         saveMainItems();
     }
 
     // Save children
-    $('.save-children').click(function (){
+    $('.save-children').click(function () {
         var jsonData = $("#log").val(),
             parenItem = $('[name=main_id]').val();
 
         // TODO: Remove in production
-        if(parenItem) localStorage.setItem(parenItem, jsonData);
+        if (parenItem) localStorage.setItem(parenItem, jsonData);
 
         // TODO: AJAx saving for production
         // $.post(ajaxurl, {id: parenItem}, function (jsonString){});
@@ -35,34 +35,43 @@ jQuery(function ($){
 
 
     // Before opening modal
-    $('.add-item-modal').click(function (){
+    $('.add-item-modal').click(function () {
         var dataTo = $(this).data("to");
         $('.add-item').addClass('hide');
-        $('.add-item[data-to='+dataTo+']').removeClass('hide');
+        $('.add-item[data-to=' + dataTo + ']').removeClass('hide');
     });
 
     // Add item "Main + Child"
-    $('.add-item').click(function (){
+    $('.add-item').click(function () {
         var $this = $(this),
             list = $('#' + $this.data('to')),
-            itemTemplate = '<li>' + $('#classify-item-template').html() + '</li>',
             parentID = '#' + $this.data('parent-id');
-            itemTitle = $(parentID + ' [name=item_title]');
-            itemIcon = $(parentID + ' [name=item_icon]');
+
+        if ($this.data('to') === "bb-children-items") {
+            itemTemplate = '<li>' + $('#classify-item-template').html() + '</li>';
+        } else {
+            itemTemplate = '<li>' + $('#classify-main-template').html() + '</li>';
+        }
+
+        itemTitle = $(parentID + ' [name=item_title]');
+        itemIcon = $(parentID + ' [name=item_icon]');
         itemTemplate = itemTemplate.replace(new RegExp('{title}', 'g'), itemTitle.val());
         itemTemplate = itemTemplate.replace(new RegExp('{icon}', 'g'), itemIcon.val());
 
         // AJAX request to save in DB for main items
-        if($this.data('to') === "bb-main-items"){
-            postAjax('/admin/front-site/structure/classify/create', {title: itemTitle.val(), icon: itemIcon.val()}, function (id){
+        if ($this.data('to') === "bb-main-items") {
+            postAjax('/admin/front-site/structure/classify/create', {
+                title: itemTitle.val(),
+                icon: itemIcon.val()
+            }, function (id) {
                 itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), id);
             });
         }
         // Add random IDs for children
-        if($this.data('to') === "bb-children-items"){
+        if ($this.data('to') === "bb-children-items") {
             //TODO: item model
             // itemTemplate = itemTemplate.replace(new RegExp('{type}', 'g'), itemType.val());
-            itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), ''+Math.floor((Math.random() * 999999) + 111111)+'');
+            itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), '' + Math.floor((Math.random() * 999999) + 111111) + '');
         }
 
         list.append(itemTemplate);
@@ -72,20 +81,20 @@ jQuery(function ($){
         itemIcon.val('');
 
         // Auto save
-        if($this.data('to') === "bb-main-items") {
+        if ($this.data('to') === "bb-main-items") {
             // Hide modal
             $('#addMainModal').modal('hide');
             saveMainItems();
         }
-        if($this.data('to') === "bb-children-items") {
+        if ($this.data('to') === "bb-children-items") {
             $('#addItemModal').modal('hide');
             autoSave();
         }
 
     });
 
-    function repositionMenu(){
-        if($focusedIconInput){
+    function repositionMenu() {
+        if ($focusedIconInput) {
             var elementTop = $focusedIconInput.offset().top,
                 elementLeft = $focusedIconInput.offset().left,
                 windowTop = $(window).scrollTop(),
@@ -96,7 +105,7 @@ jQuery(function ($){
                 iconContainerHeight = iconContainer.height(),
                 cssTop = actualTop + 30;
 
-            if(checker < actualTop){
+            if (checker < actualTop) {
                 cssTop = actualTop - iconContainerHeight;
             }
 
@@ -129,7 +138,7 @@ jQuery(function ($){
             cleanLevelClasses();
             autoSave();
         },
-        stop: function(event, ui) {
+        stop: function (event, ui) {
             if ($(ui.item).closest('ol').parent('li').hasClass("no-nest")) {
                 $("ol.bb-classify-area").sortable("cancel");
             }
@@ -139,26 +148,26 @@ jQuery(function ($){
 
     cleanLevelClasses();
 
-    function cleanLevelClasses(){
-        $('ol.bb-classify-area li').removeClass (function (index, className) {
-            return (className.match (/(^|\s)level-\S+/g) || []).join(' ');
+    function cleanLevelClasses() {
+        $('ol.bb-classify-area li').removeClass(function (index, className) {
+            return (className.match(/(^|\s)level-\S+/g) || []).join(' ');
         });
     }
 
-    function saveMainItems(){
+    function saveMainItems() {
         var ret = [];
 
-        $('#bb-main-items').children('li:not(.ui-sortable-placeholder):not(.ui-sortable-helper)').each(function() {
+        $('#bb-main-items').children('li:not(.ui-sortable-placeholder):not(.ui-sortable-helper)').each(function () {
 
             var $this = $(this),
                 $item = $this.find(".bb-classify-item").first();
 
             var data = {
-                id : $item.attr('data-id'),
-                icon : $item.attr('data-icon'),
-                title : $item.attr('data-title'),
-                url : $item.attr('data-url'),
-                type : $item.attr('data-type')
+                id: $item.attr('data-id'),
+                icon: $item.attr('data-icon'),
+                title: $item.attr('data-title'),
+                url: $item.attr('data-url'),
+                type: $item.attr('data-type')
             };
 
             ret.push(data);
@@ -167,10 +176,10 @@ jQuery(function ($){
         $("#log_main").val(JSON.stringify(ret, null, 4));
     }
 
-    function autoSave(){
+    function autoSave() {
         var ret = [];
 
-        $('#bb-children-items').children('li').each(function() {
+        $('#bb-children-items').children('li').each(function () {
             var level = _recursiveItems(this);
             ret.push(level);
         });
@@ -185,11 +194,11 @@ jQuery(function ($){
                 $item = $this.find(".bb-classify-item").first();
 
             var data = {
-                id : $item.attr('data-id'),
-                icon : $item.attr('data-icon'),
-                title : $item.attr('data-title'),
-                url : $item.attr('data-url'),
-                type : $item.attr('data-type')
+                id: $item.attr('data-id'),
+                icon: $item.attr('data-icon'),
+                title: $item.attr('data-title'),
+                url: $item.attr('data-url'),
+                type: $item.attr('data-type')
             };
 
             if (id) {
@@ -201,7 +210,7 @@ jQuery(function ($){
 
                 if ($(item).children('ol').children('li').length > 0) {
                     currentItem.children = [];
-                    $(item).children('ol').children('li').each(function() {
+                    $(item).children('ol').children('li').each(function () {
                         var level = _recursiveItems(this);
                         currentItem.children.push(level);
                     });
@@ -211,11 +220,11 @@ jQuery(function ($){
         }
     }
 
-    $('.bb-classify-save').click(function (){
+    $('.bb-classify-save').click(function () {
         autoSave();
     });
 
-    $('.bb-classify-settings').click(function (){
+    $('.bb-classify-settings').click(function () {
         var $this = $(this);
         var body = $this.closest('.panel').find('.panel-body');
 
@@ -228,7 +237,7 @@ jQuery(function ($){
         }
     });
 
-    $('.bb-sortable-static .bb-classify-item-title').each(function (){
+    $('.bb-sortable-static .bb-classify-item-title').each(function () {
         var $this = $(this);
 
         $this.append(
@@ -238,7 +247,7 @@ jQuery(function ($){
         );
     });
 
-    $('.bb-sortable-static:not(.bb-sortable-group)>li').each(function (){
+    $('.bb-sortable-static:not(.bb-sortable-group)>li').each(function () {
         var $this = $(this);
 
         var title = $this.find('.bb-classify-item-title>span').text();
@@ -250,7 +259,7 @@ jQuery(function ($){
     });
 
     $('body')
-        .on("focus",'input.icp', function (){
+        .on("focus", 'input.icp', function () {
             $focusedIconInput = $(this);
             repositionMenu();
         })
@@ -293,18 +302,18 @@ jQuery(function ($){
             var $this = $(this);
             var item = $this.closest('li');
             var classifyItem = $this.closest('.bb-classify-item');
-            postAjax('/admin/front-site/structure/classify/delete', {id: classifyItem.attr('data-id')}, function (data){
-                if(data.success){
+            postAjax('/admin/front-site/structure/classify/delete', {id: classifyItem.attr('data-id')}, function (data) {
+                if (data.success) {
                     item.slideUp(function () {
                         $(this).remove();
                         saveMainItems();
                     });
-                }else{
+                } else {
                     alert("Classify not deleted!!!");
                 }
             });
         })
-        .on('click', '#bb-main-items>li .bb-classify-item-title', function (){
+        .on('click', '#bb-main-items>li .bb-classify-item-title', function () {
             var $this = $(this),
                 item = $this.closest('.bb-classify-item'),
                 mainItemID = item.attr("data-id"),
@@ -321,11 +330,11 @@ jQuery(function ($){
             childrenList.html('');
 
             // Load children json
-            var loadChildrenJSON = function (jsonString){
+            var loadChildrenJSON = function (jsonString) {
                 childrenList.menuRenderer({
                     JSONString: jsonString,
                     itemTemplateSelector: '#classify-item-template',
-                    afterRender: function (){
+                    afterRender: function () {
                         autoSave();
                     }
                 });
@@ -340,7 +349,7 @@ jQuery(function ($){
             // Local storage for testing purposes
             // TODO: Remove this in production
             var jsonString = localStorage.getItem(mainItemID);
-            if(jsonString){
+            if (jsonString) {
                 loadChildrenJSON(jsonString);
             }
         });

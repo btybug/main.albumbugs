@@ -107,7 +107,10 @@ class FrontendPage extends Model
                             $page_roles[] = $perm->role->slug;
                         }
                     } else {
-                        $page_roles[] = $perm->role->slug;
+                        if(isset($perm->role->slug)){
+                            $page_roles[] = $perm->role->slug;
+                        }
+
                     }
 
                 }

@@ -77,10 +77,10 @@ class ModuleServiceProvider extends ServiceProvider
             'page_edit' => [
                 [
                     'title' => 'Settings',
-                    'url' => '/admin/front-site/frontend/pages/settings/{id}',
+                    'url' => '/admin/front-site/structure/front-pages/settings/{id}',
                 ], [
                     'title' => 'General',
-                    'url' => '/admin/front-site/frontend/pages/general/{id}',
+                    'url' => '/admin/front-site/structure/front-pages/general/{id}',
                 ],
             ],
             'manage_emails' => [

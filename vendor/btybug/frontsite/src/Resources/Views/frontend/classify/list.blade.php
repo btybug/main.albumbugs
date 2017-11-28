@@ -60,6 +60,12 @@
                         <label>Icon</label>
                         <input type="text" name="item_icon" class="form-control input-sm icp" readonly>
                     </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        {!! Form::select('type',
+                            ['' => 'Select Type','informative' => 'Informative','listing' => 'Listing'],
+                        null,['class' => 'form-control input-sm']) !!}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

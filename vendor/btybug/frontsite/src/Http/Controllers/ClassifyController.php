@@ -13,6 +13,8 @@ namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Urlmanager;
+use Btybug\FrontSite\Repository\ClassifierRepository;
+use Btybug\FrontSite\Services\ClassifierService;
 use Datatables;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
@@ -27,105 +29,24 @@ use Btybug\FrontSite\Models\FrontendPage;
  */
 class ClassifyController extends Controller
 {
-    public $masterClassifier = null;
-    /**
-     * @var null|string
-     */
-    private $home = null;
-    /**
-     * @var helpers|null
-     */
-    private $helpers = null;
-
-    public function __construct()
+    public function getIndex(
+        ClassifierRepository $classifierRepository
+    )
     {
-        $this->home = '/admin/manage/structure/classify';
-        $this->helpers = new helpers;
-        $this->masterClassifier = FrontendPage::where('slug', MASTER_CLASSIFIER)->first();
-    }
-
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getIndex(Request $request)
-    {
-        $id = $request->get('p');
-        $classifiers = Classifier::all();
-        $count = 0;
-        if (count(ClassifierItem::all())) {
-            $count = ClassifierItem::all()->last()->id;
-        }
-
-        $classifierItems = [];
-
-        if (count($classifiers)) {
-            $model = Classifier::find($id);
-            if ($model) {
-                $classifierItems = $model->classifierItem()->where('parent_id', NULL)->get();
-            } else {
-                $model = $classifiers->first();
-                $classifierItems = $classifiers->first()->classifierItem()->where('parent_id', NULL)->get();
-            }
-        }
-        return view('manage::frontend.classify.list', compact(['classifiers', 'classifierItems', 'count', 'model']));
+        $classifiers = $classifierRepository->getAll();
+        return view('manage::frontend.classify.list', compact(['classifiers']));
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreate(Request $request)
+    public function postCreate(
+        Request $request,
+        ClassifierService $service
+    )
     {
-        $classifyData = $request->except('_token', 'terms');
-
-        $v = \Validator::make($classifyData, ['title' => "required|unique:classifiers,title|unique:frontend_pages,title"]);
-
-        if ($v->fails()) return redirect()->back()->withErrors($v->messages());
-        $classifyData['id'] = uniqid();
-//        $classifyData['type'] = 'multiple';
-        $classifier = new Classifier($classifyData);
-        $classifier->buildSlug();
-        $classifier->save();
-
-        $newPageSaved = FrontendPage::create([
-            'user_id' => \Auth::id(),
-            'title' => $classifyData['title'],
-            'slug' => uniqid(),
-            'type' => 'classify',
-            'parent_id' => $this->masterClassifier->id,
-            'url' => '/all-classify/' . $classifier->slug
-        ]);
-
-        if ($newPageSaved) {
-            $urlManager = new Urlmanager([
-                'front_page_id' => $newPageSaved->id,
-                'url' => $newPageSaved->url,
-                'type' => 'classify'
-            ]);
-            $urlManager->save();
-        }
-        $newPageClassifier = new ClassifierItemPage([
-            'front_page_id' => $newPageSaved->id,
-            'classifier_id' => $classifier->id
-        ]);
-        $newPageClassifier->save();
-
-        if ($request->hasFile('image')) {
-            $imageName = uniqid() . '.' .
-                $request->file('image')->getClientOriginalExtension();
-
-            $path = '/public/img/classify/';
-            $request->file('image')->move(
-                base_path($path), $imageName
-            );
-
-            $classifier->update([
-                'image' => $path . $imageName
-            ]);
-        }
-
-        return redirect()->back();
+        return $service->save($request->only(['title','icon','type']));
     }
 
     public function postEdit($id, Request $request)

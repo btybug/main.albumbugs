@@ -1,7 +1,7 @@
 @extends('btybug::layouts.mTabs',['index'=>'frontend_manage'])
 @section('tab')
     <script type="template" id="classify-item-template">
-        <div class="bb-classify-item" data-id="{id}" data-title="{title}" data-icon="{icon}">
+        <div class="bb-classify-item" data-id="{id}" data-title="{title}" data-icon="{icon}" data-type="{type}">
             <div class="bb-classify-item-title">
                 <a href="javascript:" class="bb-classify-drag-handler">
                     <i class="fa fa-arrows"></i>
@@ -38,6 +38,10 @@
                     <div class="form-group">
                         <label>Item URL</label>
                         <input type="text" class="form-control input-sm item-url" value="/home" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Item Type</label>
+                        <input type="text" class="form-control input-sm item-type" value="{type}" readonly>
                     </div>
                 </div>
             </div>
@@ -97,7 +101,11 @@
                         <label>Selected Main ID</label>
                         <input type="text" name="main_id" class="form-control input-sm" value="0" readonly>
                     </div>
-                    <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG"></textarea>
+                    <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG">
+                        @if(count($classifiers))
+                            {!! json_encode($classifiers,true) !!}
+                        @endif
+                    </textarea>
                 </div>
                 <div class="col-md-8">
                     <div class="panel panel-default">

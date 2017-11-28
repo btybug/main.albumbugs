@@ -27,6 +27,12 @@ class ClassifierService extends GeneralService
 
     }
 
+    public function save (array $data)
+    {
+        $response = $this->classifierRepository->create($data + ['id' => uniqid()]);
+        return ($response) ? $response->id : null;
+    }
+
     public function getClassifierPageRelations(int $pageId)
     {
         return $this->classifierItemPageRepository

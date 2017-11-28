@@ -20,4 +20,9 @@ class ClassifierRepository extends GeneralRepository
         return new Classifier();
     }
 
+    public function getAll ()
+    {
+        return $this->model()->get(['id','title','icon','type']);
+    }
+
 }

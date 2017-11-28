@@ -10,8 +10,8 @@ jQuery(function ($){
         }
     });
 
-    // Load demo data for main TODO: Remove this
-    var MainItems = localStorage.getItem("MainItems");
+    var MainItems = $("#log_main").val();
+
     if(MainItems){
         $('#bb-main-items').menuRenderer({
             JSONString: MainItems,
@@ -49,21 +49,18 @@ jQuery(function ($){
 
             itemTitle = $('[name=item_title]'),
             itemIcon = $('[name=item_icon]');
+            itemType = $('[name=type]');
 
         itemTemplate = itemTemplate.replace(new RegExp('{title}', 'g'), itemTitle.val());
         itemTemplate = itemTemplate.replace(new RegExp('{icon}', 'g'), itemIcon.val());
 
         // AJAX request to save in DB for main items
         if($this.data('to') === "bb-main-items"){
-            // TODO: Uncomment the next lines to save in db and return id
-//                $.post(ajaxurl, {title: itemTitle.val(), icon: itemIcon.val()}, function (id){
-//                    itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), id);
-//                });
-
-            // TODO: Remove this in production
-            itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), ''+Math.floor((Math.random() * 999999) + 111111)+'');
+            itemTemplate = itemTemplate.replace(new RegExp('{type}', 'g'), itemType.val());
+            postAjax('/admin/front-site/structure/classify/create', {title: itemTitle.val(), icon: itemIcon.val(),type: itemType.val()}, function (id){
+                itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), id);
+            });
         }
-
         // Add random IDs for children
         if($this.data('to') === "bb-children-items"){
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), ''+Math.floor((Math.random() * 999999) + 111111)+'');
@@ -157,17 +154,14 @@ jQuery(function ($){
                 id : $item.attr('data-id'),
                 icon : $item.attr('data-icon'),
                 title : $item.attr('data-title'),
-                url : $item.attr('data-url')
+                url : $item.attr('data-url'),
+                type : $item.attr('data-type')
             };
 
             ret.push(data);
         });
 
         $("#log_main").val(JSON.stringify(ret, null, 4));
-
-        // TODO: Remove this in production
-        // Save in local storage
-        localStorage.setItem("MainItems", JSON.stringify(ret));
     }
 
     function autoSave(){
@@ -191,7 +185,8 @@ jQuery(function ($){
                 id : $item.attr('data-id'),
                 icon : $item.attr('data-icon'),
                 title : $item.attr('data-title'),
-                url : $item.attr('data-url')
+                url : $item.attr('data-url'),
+                type : $item.attr('data-type')
             };
 
             if (id) {

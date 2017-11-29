@@ -79,11 +79,11 @@
                                 {!! Form::checkbox('informative',true,'{informative}') !!}
                             </div>
                             <div class="form-group">
-                                <label>Create Child listing page !!}</label>
+                                <label>Create Child listing page</label>
                                 {!! Form::checkbox('listing',true,'{listing}') !!}
                             </div>
                             <div class="form-group">
-                                <label>Create Tagged post page {!! $tagged !!}</label>
+                                <label>Create Tagged post page</label>
                                 {!! Form::checkbox('tagged',true,'{tagged}') !!}
                             </div>
                         </div>

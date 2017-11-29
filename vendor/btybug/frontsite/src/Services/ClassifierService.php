@@ -97,7 +97,13 @@ class ClassifierService extends GeneralService
         $this->classifierItemRepository->deleteByCondition('classifier_id', $classifier_id);
     }
 
-    public function loadItems ($id) {
-        return;
+    public function loadItems ($id,bool $json = false,array $columns = ['*']) {
+        $data = $this->classifierItemRepository->model()->select($columns)->
+        with('children')
+            ->where('parent_id', 0)
+            ->where('classifier_id', $id)
+            ->get();
+
+        return ($json) ? json_encode($data,true) : $data;
     }
 }

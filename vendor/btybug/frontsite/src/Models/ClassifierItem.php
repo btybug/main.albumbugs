@@ -32,40 +32,9 @@ class ClassifierItem extends Model
     protected $primaryKey = 'id';
     protected $guarded = array('created_at');
 
-    /**
-     *
-     */
-    protected static function boot()
+    public function children()
     {
-        parent::boot();
-
-        static::deleting(function ($model) {
-            // before delete() method call this
-            $child = $model->child()->first();
-            while ($child) {
-                $nextChild = $child->child()->first();
-                $page = $child->page()->where('type', 'classify')->first();
-                if ($page) {
-                    $page->urlManager()->where('type', 'classify')->first()->delete();
-                    $page->delete();
-                }
-                $child->delete();
-                $child = $nextChild;
-            }
-            $modelPage = $model->page()->where('type', 'classify')->first();
-            if ($modelPage) {
-                $modelPage->urlManager()->where('type', 'classify')->first()->delete();
-                $modelPage->delete();
-            }
-
-            $model->child()->delete();
-        });
-    }
-
-    public function child()
-    {
-
-        return $this->hasMany('Btybug\FrontSite\Models\ClassifierItem', 'parent_id');
+        return $this->hasMany('Btybug\FrontSite\Models\ClassifierItem', 'parent_id')->with('children');
     }
 
     public function rebuildChildren()
@@ -162,7 +131,7 @@ class ClassifierItem extends Model
     public function getAllMediaFolders($tax_id)
     {
         $data = self::select('*')->
-        with('child')
+        with('child_items')
             ->where('parent_id', 0)
             ->where('classifier_id', $tax_id)
             ->get();

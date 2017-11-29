@@ -27,13 +27,13 @@ jQuery(function ($) {
             parenItem = $('[name=main_id]').val();
 
         if (parenItem) {
-            postAjax('/admin/front-site/structure/classify/generate-items', {id: parenItem, data: jsonData}, function (data) {
-                // loadChildrenJSON(jsonString);
+            postAjax('/admin/front-site/structure/classify/generate-items', {
+                id: parenItem,
+                data: jsonData
+            }, function (data) {
+                //TODO: message
             });
         }
-
-        // TODO: AJAx saving for production
-        // $.post(ajaxurl, {id: parenItem}, function (jsonString){});
     });
 
 
@@ -343,9 +343,8 @@ jQuery(function ($) {
             };
 
             // AJAX request to get json for children
-            // postAjax('/admin/front-site/structure/classify/get-items', {id: mainItemID}, function (jsonString) {
-            //     loadChildrenJSON(jsonString);
-            //
-            // });
+            postAjax('/admin/front-site/structure/classify/load-items', {id: mainItemID}, function (jsonString) {
+                loadChildrenJSON(jsonString);
+            });
         });
 });

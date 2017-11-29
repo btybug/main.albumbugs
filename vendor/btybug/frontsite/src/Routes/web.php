@@ -83,6 +83,7 @@ Route::group(['prefix'=>'structure'], function () {
         Route::post('/create', 'ClassifyController@postCreate')->name('classify_create');
         Route::post('/delete', 'ClassifyController@postDelete')->name('classify_delete');
         Route::post('/generate-items', 'ClassifyController@postGenerateItems')->name('classify_generate_items');
+        Route::post('/load-items', 'ClassifyController@loadItems')->name('classify_load_items');
 
         Route::post('/edit/{id}', 'ClassifyController@postEdit');
         Route::post('/delete-item', 'ClassifyController@postDeleteItem');

@@ -16,9 +16,9 @@
                             <div class="row left_part_publ">
                                 <div>
                                     <div class="row rows">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs ">
+                                        <div class="col-md-12 ">
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <i class="fa fa-universal-access" aria-hidden="true"></i><span
                                                         class="labls">Page access</span>
                                                 <div class="radio">
@@ -40,8 +40,209 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 roles-box {!! ($page->page_access == 1) ? "show" : "hide" !!}">
-                                                {!! Form::text('roles',$page->getRolesByPage($id,true),['data-allwotag' => $roles,'class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit' ,'id' => 'tagits']) !!}
+                                            <div class="col-md-10 roles-box {!! ($page->page_access == 1) ? "show" : "hide" !!}">
+                                                <div class="panel-body general-menu-settings">
+                                                    <div class="bb-menu-form">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label class="text-primary">How Page display for different visitors
+                                                                    types?</label>
+
+                                                                <p>
+                                                                    <a href="javascript:" class="btn btn-xs btn-danger bb-bulk-roles"
+                                                                       data-bulk="hide">Hide for all</a>
+                                                                    <a href="javascript:" class="btn btn-xs btn-success bb-bulk-roles"
+                                                                       data-bulk="show">Show for all</a>
+                                                                    <a href="javascript:" class="btn btn-xs btn-primary bb-bulk-roles"
+                                                                       data-bulk="members">Show for members</a>
+                                                                </p>
+
+                                                                <div class="form-group has-feedback">
+                                                                    <label>Filter roles</label>
+                                                                    <input type="text" class="form-control" id="bb-role-filter"
+                                                                           placeholder="Type search keyword">
+                                                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                                                </div>
+
+                                                                <ul class="list-group bb-roles-list">
+                                                                    <li class="list-group-item" data-role="guests" data-title="Guests"
+                                                                        data-display="show">
+                                                                        <span class="bb-role-title">Guests</span>
+
+                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                                            <i class="fa fa-chevron-right"></i>
+                                                                        </a>
+
+                                                                        <div class="pull-right">
+                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
+                                                                                   name="guests">
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item" data-role="normal-user" data-title="Normal User"
+                                                                        data-display="show">
+                                                                        <span class="bb-role-title">Normal User</span>
+
+                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                                            <i class="fa fa-chevron-right"></i>
+                                                                        </a>
+
+                                                                        <div class="pull-right">
+                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
+                                                                                   name="normal-user">
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item" data-role="pro-user" data-title="Pro User"
+                                                                        data-display="show">
+                                                                        <span class="bb-role-title">Pro User</span>
+
+                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                                            <i class="fa fa-chevron-right"></i>
+                                                                        </a>
+
+                                                                        <div class="pull-right">
+                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
+                                                                                   name="pro-user">
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item" data-role="editor" data-title="Editor"
+                                                                        data-display="show">
+                                                                        <span class="bb-role-title">Editor</span>
+
+                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                                            <i class="fa fa-chevron-right"></i>
+                                                                        </a>
+
+                                                                        <div class="pull-right">
+                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
+                                                                                   name="editor">
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item" data-role="contributor" data-title="Contributor"
+                                                                        data-display="show">
+                                                                        <span class="bb-role-title">Contributor</span>
+
+                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
+                                                                            <i class="fa fa-chevron-right"></i>
+                                                                        </a>
+
+                                                                        <div class="pull-right">
+                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
+                                                                                   name="contributor">
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="what-to-show-panel hide" data-for="guests">
+                                                                    <div class="form-group">
+                                                                        <label>What to show for "Guests" role?</label>
+                                                                        <select name="guests_show" class="form-control input-sm">
+                                                                            <option value="hide">Hide Only</option>
+                                                                            <option value="unit">Render Unit</option>
+                                                                            <option value="menu">Render another menu</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="unit">
+                                                                        <label>Select unit</label>
+                                                                        <button class="btn btn-primary form-control">BB Button for units
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="menu">
+                                                                        <label>Select menu</label>
+                                                                        <button class="btn btn-info form-control">BB Button for menus</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="what-to-show-panel hide" data-for="normal-user">
+                                                                    <div class="form-group">
+                                                                        <label>What to show for "Normal User" role?</label>
+                                                                        <select name="normal-user_show" class="form-control input-sm">
+                                                                            <option value="hide">Hide Only</option>
+                                                                            <option value="unit">Render Unit</option>
+                                                                            <option value="menu">Render another menu</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="unit">
+                                                                        <label>Select unit</label>
+                                                                        <button class="btn btn-primary form-control">BB Button for units
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="menu">
+                                                                        <label>Select menu</label>
+                                                                        <button class="btn btn-info form-control">BB Button for menus</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="what-to-show-panel hide" data-for="pro-user">
+                                                                    <div class="form-group">
+                                                                        <label>What to show for "Pro User" role?</label>
+                                                                        <select name="pro-user_show" class="form-control input-sm">
+                                                                            <option value="hide">Hide Only</option>
+                                                                            <option value="unit">Render Unit</option>
+                                                                            <option value="menu">Render another menu</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="unit">
+                                                                        <label>Select unit</label>
+                                                                        <button class="btn btn-primary form-control">BB Button for units
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="menu">
+                                                                        <label>Select menu</label>
+                                                                        <button class="btn btn-info form-control">BB Button for menus</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="what-to-show-panel hide" data-for="editor">
+                                                                    <div class="form-group">
+                                                                        <label>What to show for "Editor" role?</label>
+                                                                        <select name="editor_show" class="form-control input-sm">
+                                                                            <option value="hide">Hide Only</option>
+                                                                            <option value="unit">Render Unit</option>
+                                                                            <option value="menu">Render another menu</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="unit">
+                                                                        <label>Select unit</label>
+                                                                        <button class="btn btn-primary form-control">BB Button for units
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="menu">
+                                                                        <label>Select menu</label>
+                                                                        <button class="btn btn-info form-control">BB Button for menus</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="what-to-show-panel hide" data-for="contributor">
+                                                                    <div class="form-group">
+                                                                        <label>What to show for "Contributor" role?</label>
+                                                                        <select name="contributor_show" class="form-control input-sm">
+                                                                            <option value="hide">Hide Only</option>
+                                                                            <option value="unit">Render Unit</option>
+                                                                            <option value="menu">Render another menu</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="unit">
+                                                                        <label>Select unit</label>
+                                                                        <button class="btn btn-primary form-control">BB Button for units
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="form-group hide" data-render="menu">
+                                                                        <label>Select menu</label>
+                                                                        <button class="btn btn-info form-control">BB Button for menus</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{--{!! Form::text('roles',$page->getRolesByPage($id,true),['data-allwotag' => $roles,'class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit' ,'id' => 'tagits']) !!}--}}
                                             </div>
                                         </div>
                                     </div>
@@ -204,6 +405,10 @@
 @section('CSS')
     {!! HTML::style('public/css/create_pages.css') !!}
     {!!HTML::style( '/css/tag-it/jquery.tagit.css' ) !!}
+    {!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}
+    {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
+    {!! HTML::style('public/css/menus.css?v='.rand(1111,9999)) !!}
+
     <style>
         #main-wrapper {
             min-height: 1000px;
@@ -236,6 +441,10 @@
     {!! HTML::script("public/js/UiElements/bb_div.js?v.5") !!}
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
     {!! HTML::script('public/js/tag-it/tag-it.js') !!}
+    {!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}
+    {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
+    {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+    {!! HTML::script('public/js/menus.js') !!}
     <script>
 
         $(document).ready(function () {
@@ -247,25 +456,25 @@
                 }
             });
 
-            var getExt = $('#tagits').data('allwotag').split(',')
-            $('[data-tagit="tagit"]').tagit({
-                availableTags: getExt,
-                // This will make Tag-it submit a single form value, as a comma-delimited field.
-                autocomplete: {delay: 0, minLength: 0},
-                singleField: true,
-                singleFieldNode: $('.tagitext'),
-                beforeTagAdded: function (event, ui) {
-                    if (!ui.duringInitialization) {
-                        var exis = getExt.indexOf(ui.tagLabel);
-                        if (exis < 0) {
-                            $('.tagit-new input').val('');
-                            //alert('PLease add allow at tag')
-                            return false;
-                        }
-                    }
-
-                }
-            })
+//            var getExt = $('#tagits').data('allwotag').split(',')
+//            $('[data-tagit="tagit"]').tagit({
+//                availableTags: getExt,
+//                // This will make Tag-it submit a single form value, as a comma-delimited field.
+//                autocomplete: {delay: 0, minLength: 0},
+//                singleField: true,
+//                singleFieldNode: $('.tagitext'),
+//                beforeTagAdded: function (event, ui) {
+//                    if (!ui.duringInitialization) {
+//                        var exis = getExt.indexOf(ui.tagLabel);
+//                        if (exis < 0) {
+//                            $('.tagit-new input').val('');
+//                            //alert('PLease add allow at tag')
+//                            return false;
+//                        }
+//                    }
+//
+//                }
+//            })
 
 
             tinymce.init({

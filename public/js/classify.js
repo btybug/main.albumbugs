@@ -72,8 +72,12 @@ jQuery(function ($) {
         }
         // Add random IDs for children
         if ($this.data('to') === "bb-children-items") {
-            //TODO: item model
-            // itemTemplate = itemTemplate.replace(new RegExp('{type}', 'g'), itemType.val());
+            itemInformative = $(parentID + ' [name=informative]');
+            itemListing = $(parentID + ' [name=listing]');
+            itemTagged = $(parentID + ' [name=tagged]');
+            itemTemplate = itemTemplate.replace(new RegExp('{informative}', 'g'), itemInformative.is(':checked'));
+            itemTemplate = itemTemplate.replace(new RegExp('{listing}', 'g'), itemListing.is(':checked'));
+            itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'), itemTagged.is(':checked'));
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), '' + Math.floor((Math.random() * 999999) + 111111) + '');
         }
 
@@ -90,6 +94,9 @@ jQuery(function ($) {
             saveMainItems();
         }
         if ($this.data('to') === "bb-children-items") {
+            itemInformative.removeAttr('checked');
+            itemTagged.removeAttr('checked');
+            itemListing.removeAttr('checked');
             $('#addItemModal').modal('hide');
             autoSave();
         }
@@ -168,8 +175,7 @@ jQuery(function ($) {
             var data = {
                 id: $item.attr('data-id'),
                 icon: $item.attr('data-icon'),
-                title: $item.attr('data-title'),
-                url: $item.attr('data-url')
+                title: $item.attr('data-title')
             };
 
             ret.push(data);
@@ -199,8 +205,9 @@ jQuery(function ($) {
                 id: $item.attr('data-id'),
                 icon: $item.attr('data-icon'),
                 title: $item.attr('data-title'),
-                url: $item.attr('data-url'),
-                type: $item.attr('data-type')
+                informative: $item.attr('data-informative'),
+                listing: $item.attr('data-listing'),
+                tagged: $item.attr('data-tagged')
             };
 
             if (id) {
@@ -313,6 +320,14 @@ jQuery(function ($) {
                 } else {
                     alert("Classify not deleted!!!");
                 }
+            });
+        }).on('click', '.bb-classify-item-delete', function () {
+            var $this = $(this);
+            var item = $this.closest('li');
+            var classifyItem = $this.closest('.bb-classify-item');
+            item.slideUp(function () {
+                $(this).remove();
+                autoSave();
             });
         })
         .on('click', '#bb-main-items>li .bb-classify-item-title', function () {

@@ -89,9 +89,9 @@ class ClassifierService extends GeneralService
                 'icon'          => $item['icon'],
                 'parent_id'     => $parent,
                 'classifier_id' => $classifier_id,
-                'informative'   => (isset($item['informative']) && $item['informative'] == "true") ? 1 : 0,
-                'listing'       => (isset($item['listing']) && $item['listing'] == "true") ? 1 : 0,
-                'tagged'        => (isset($item['tagged']) && $item['tagged'] == "true") ? 1 : 0,
+                'informative'   => (isset($item['informative']) && $item['informative'] == "checked") ? 1 : 0,
+                'listing'       => (isset($item['listing']) && $item['listing'] == "checked") ? 1 : 0,
+                'tagged'        => (isset($item['tagged']) && $item['tagged'] == "checked") ? 1 : 0,
             ]);
 
             if (isset($item['children']) && $new) {

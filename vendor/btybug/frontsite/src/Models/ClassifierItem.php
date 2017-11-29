@@ -32,6 +32,21 @@ class ClassifierItem extends Model
     protected $primaryKey = 'id';
     protected $guarded = array('created_at');
 
+    public function getInformativeAttribute($value)
+    {
+        return ($value) ? "checked" : null;
+    }
+
+    public function getListingAttribute($value)
+    {
+        return ($value) ? "checked" : null;
+    }
+    
+    public function getTaggedAttribute($value)
+    {
+        return ($value) ? "checked" : null;
+    }
+
     public function children()
     {
         return $this->hasMany('Btybug\FrontSite\Models\ClassifierItem', 'parent_id')->with('children');

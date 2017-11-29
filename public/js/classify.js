@@ -75,9 +75,9 @@ jQuery(function ($) {
             itemInformative = $(parentID + ' [name=informative]');
             itemListing = $(parentID + ' [name=listing]');
             itemTagged = $(parentID + ' [name=tagged]');
-            itemTemplate = itemTemplate.replace(new RegExp('{informative}', 'g'), itemInformative.is(':checked'));
-            itemTemplate = itemTemplate.replace(new RegExp('{listing}', 'g'), itemListing.is(':checked'));
-            itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'), itemTagged.is(':checked'));
+            itemTemplate = itemTemplate.replace(new RegExp('{informative}', 'g'), $(parentID + ' [name=informative]:checked').val());
+            itemTemplate = itemTemplate.replace(new RegExp('{listing}', 'g'), $(parentID + ' [name=listing]:checked').val());
+            itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'),  $(parentID + ' [name=tagged]:checked').val());
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), '' + Math.floor((Math.random() * 999999) + 111111) + '');
         }
 

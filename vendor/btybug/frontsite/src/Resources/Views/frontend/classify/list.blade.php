@@ -76,15 +76,16 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Create Informative page</label>
-                                {!! Form::checkbox('informative',true,'{informative}') !!}
+                                <input type="checkbox" name="informative" value="checked" {informative}>
                             </div>
                             <div class="form-group">
                                 <label>Create Child listing page</label>
-                                {!! Form::checkbox('listing',true,'{listing}') !!}
+                                <input type="checkbox" name="listing" value="checked" {listing}>
                             </div>
                             <div class="form-group">
                                 <label>Create Tagged post page</label>
-                                {!! Form::checkbox('tagged',true,'{tagged}') !!}
+                                <input type="checkbox" name="tagged" value="checked" {tagged}>
+
                             </div>
                         </div>
                     </div>
@@ -111,15 +112,15 @@
                     </div>
                     <div class="form-group">
                         <label>Create Informative page</label>
-                        {!! Form::checkbox('informative',true,null) !!}
+                        {!! Form::checkbox('informative',"checked",null) !!}
                     </div>
                     <div class="form-group">
                         <label>Create Child listing page</label>
-                        {!! Form::checkbox('listing',true,null) !!}
+                        {!! Form::checkbox('listing',"checked",null) !!}
                     </div>
                     <div class="form-group">
                         <label>Create Tagged post page</label>
-                        {!! Form::checkbox('tagged',true,null) !!}
+                        {!! Form::checkbox('tagged',"checked",null) !!}
                     </div>
                 </div>
                 <div class="modal-footer">

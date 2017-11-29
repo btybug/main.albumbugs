@@ -119,7 +119,8 @@ class PagesController extends Controller
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
-        $roles = $frontPagesRepository->getRolesByParent($id, true);
+        $roles = explode(',',$frontPagesRepository->getRolesByParent($id, true));
+
 
         return view('manage::frontend.pages.general', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'roles']));
     }

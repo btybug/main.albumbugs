@@ -65,9 +65,10 @@
                                                                 </div>
 
                                                                 <ul class="list-group bb-roles-list">
+                                                                    @foreach($roles as $role)
                                                                     <li class="list-group-item" data-role="guests" data-title="Guests"
                                                                         data-display="show">
-                                                                        <span class="bb-role-title">Guests</span>
+                                                                        <span class="bb-role-title">{!! $role !!}</span>
 
                                                                         <a href="javascript:" class="pull-right text-info bb-what-to-show">
                                                                             <i class="fa fa-chevron-right"></i>
@@ -75,61 +76,10 @@
 
                                                                         <div class="pull-right">
                                                                             <input type="checkbox" class="bb-switch bb-role-toggle" checked
-                                                                                   name="guests">
+                                                                                   name="roles[]">
                                                                         </div>
                                                                     </li>
-                                                                    <li class="list-group-item" data-role="normal-user" data-title="Normal User"
-                                                                        data-display="show">
-                                                                        <span class="bb-role-title">Normal User</span>
-
-                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                                            <i class="fa fa-chevron-right"></i>
-                                                                        </a>
-
-                                                                        <div class="pull-right">
-                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
-                                                                                   name="normal-user">
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-group-item" data-role="pro-user" data-title="Pro User"
-                                                                        data-display="show">
-                                                                        <span class="bb-role-title">Pro User</span>
-
-                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                                            <i class="fa fa-chevron-right"></i>
-                                                                        </a>
-
-                                                                        <div class="pull-right">
-                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
-                                                                                   name="pro-user">
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-group-item" data-role="editor" data-title="Editor"
-                                                                        data-display="show">
-                                                                        <span class="bb-role-title">Editor</span>
-
-                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                                            <i class="fa fa-chevron-right"></i>
-                                                                        </a>
-
-                                                                        <div class="pull-right">
-                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
-                                                                                   name="editor">
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-group-item" data-role="contributor" data-title="Contributor"
-                                                                        data-display="show">
-                                                                        <span class="bb-role-title">Contributor</span>
-
-                                                                        <a href="javascript:" class="pull-right text-info bb-what-to-show">
-                                                                            <i class="fa fa-chevron-right"></i>
-                                                                        </a>
-
-                                                                        <div class="pull-right">
-                                                                            <input type="checkbox" class="bb-switch bb-role-toggle" checked
-                                                                                   name="contributor">
-                                                                        </div>
-                                                                    </li>
+                                                                    @endforeach
                                                                 </ul>
                                                             </div>
                                                             <div class="col-md-4">

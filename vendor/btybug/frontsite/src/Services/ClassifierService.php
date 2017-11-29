@@ -10,19 +10,23 @@ namespace Btybug\FrontSite\Services;
 
 use Btybug\btybug\Services\GeneralService;
 use Btybug\FrontSite\Repository\ClassifierItemPageRepository;
+use Btybug\FrontSite\Repository\ClassifierItemRepository;
 use Btybug\FrontSite\Repository\ClassifierRepository;
 
 class ClassifierService extends GeneralService
 {
     private $classifierRepository;
+    private $classifierItemRepository;
     private $classifierItemPageRepository;
 
     public function __construct(
         ClassifierRepository $classifierRepository,
+        ClassifierItemRepository $classifierItemRepository,
         ClassifierItemPageRepository $classifierItemPageRepository
     )
     {
         $this->classifierRepository = $classifierRepository;
+        $this->classifierItemRepository = $classifierItemRepository;
         $this->classifierItemPageRepository = $classifierItemPageRepository;
 
     }
@@ -59,4 +63,41 @@ class ClassifierService extends GeneralService
             ->toArray();
     }
 
+    public function generateItems ($id,$data)
+    {
+        $model = $this->classifierRepository->findBy('id',$id);
+        if($model && $data){
+            $this->cleanItems($model->id);
+            $this->addItems(json_decode($data,true), 0, $model->id);
+        }
+    }
+
+    private function addItems($data,$parent,$classifier_id){
+        if(count($data)){
+            foreach ($data as $item){
+                $new = $this->classifierItemRepository->create([
+                    'id' => uniqid(),
+                    'title' => $item['title'],
+                    'icon' => $item['icon'],
+                    'parent_id' => $parent,
+                    'classifier_id' => $classifier_id,
+                    'informative' => issetReturn($item, 'informative',0),
+                    'listing' => issetReturn($item, 'listing',0),
+                    'tagged' => issetReturn($item, 'tagged',0),
+                ]);
+
+                if(isset($item['children']) && $new){
+                    $this->addItems($item['children'], $new->id, $classifier_id);
+                }
+            }
+        }
+    }
+
+    private function cleanItems($classifier_id){
+        $this->classifierItemRepository->deleteByCondition('classifier_id', $classifier_id);
+    }
+
+    public function loadItems ($id) {
+        return;
+    }
 }

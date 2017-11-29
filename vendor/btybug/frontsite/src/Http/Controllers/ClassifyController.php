@@ -29,11 +29,12 @@ use Btybug\FrontSite\Models\FrontendPage;
  */
 class ClassifyController extends Controller
 {
-    public function getIndex(
+    public function getIndex (
         ClassifierRepository $classifierRepository
     )
     {
-        $classifiers = $classifierRepository->getAll(['id','title','icon','type']);
+        $classifiers = $classifierRepository->getAll(['id', 'title', 'icon', 'type']);
+
         return view('manage::frontend.classify.list', compact(['classifiers']));
     }
 
@@ -41,15 +42,15 @@ class ClassifyController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreate(
+    public function postCreate (
         Request $request,
         ClassifierService $service
     )
     {
-        return $service->save($request->only(['title','icon']));
+        return $service->save($request->only(['title', 'icon']));
     }
 
-    public function postEdit($id, Request $request)
+    public function postEdit ($id, Request $request)
     {
         $classifyData = $request->except('_token', 'terms');
         $v = \Validator::make($classifyData, ['title' => "required|unique:classifiers,title," . $id . ",id"]);
@@ -88,7 +89,7 @@ class ClassifyController extends Controller
      * @throws \Exception
      * @throws \Throwable
      */
-    public function postTaxonomyForm(Request $request)
+    public function postTaxonomyForm (Request $request)
     {
         $term = $request->get('terms');
         if ($term) {
@@ -113,7 +114,7 @@ class ClassifyController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function postTermEdit($id, Request $request)
+    public function postTermEdit ($id, Request $request)
     {
         $classifyData = $request->except('_token');
         $v = \Validator::make($classifyData, ['title' => "required"]);
@@ -159,7 +160,7 @@ class ClassifyController extends Controller
         return redirect()->back();
     }
 
-    public function postTermCreate(Request $request)
+    public function postTermCreate (Request $request)
     {
         $itemData = $request->except('_token');
 
@@ -169,23 +170,23 @@ class ClassifyController extends Controller
         $itemData['id'] = uniqid();
         $classifierItem = new ClassifierItem($itemData);
         $classifierItem->buildSlug();
-        $classifierItem->parent_id = isset($itemData['parent_id']) && $itemData['parent_id'] != '' ? $itemData['parent_id'] : NULL;
+        $classifierItem->parent_id = isset($itemData['parent_id']) && $itemData['parent_id'] != '' ? $itemData['parent_id'] : null;
 //        $classifierItem->parent_id = $classifierItem->parent()->first() ? $classifierItem->parent()->first()->id : NULL;//$classifierItem->classifier()->first()->id;
         $classifierItem->save();
         $newPageSaved = FrontendPage::create([
-            'user_id' => \Auth::id(),
-            'title' => $classifierItem->title,
-            'slug' => uniqid(),
-            'type' => 'classify',
+            'user_id'   => \Auth::id(),
+            'title'     => $classifierItem->title,
+            'slug'      => uniqid(),
+            'type'      => 'classify',
             'parent_id' => $classifierItem->parent()->first()
                 ? $classifierItem->parent()->first()->page()->where('type', 'classify')->first()->id
                 : $classifierItem->classifier()->first()->page()->where('type', 'classify')->first()->id,
-            'url' => $classifierItem->slug
+            'url'       => $classifierItem->slug
         ]);
 
         $newPageClassifier = new ClassifierItemPage([
-            'front_page_id' => $newPageSaved->id,
-            'classifier_id' => $classifierItem->classifier()->first()->id,
+            'front_page_id'      => $newPageSaved->id,
+            'classifier_id'      => $classifierItem->classifier()->first()->id,
             'classifier_item_id' => $classifierItem->id,
         ]);
         $newPageClassifier->save();
@@ -213,7 +214,7 @@ class ClassifyController extends Controller
      * @throws \Exception
      * @throws \Throwable
      */
-    public function postGenerateForm(Request $request)
+    public function postGenerateForm (Request $request)
     {
         $model = $request->except('_token');
 
@@ -222,23 +223,30 @@ class ClassifyController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function postDelete(
+    public function postDelete (
         Request $request,
         ClassifierService $classifierService
     )
     {
         $deleted = $classifierService->delete($request->id);
+
         return \Response::json(['success' => $deleted]);
     }
 
-    public function postDeleteItem(Request $request)
+    public function postGenerateItems (
+        Request $request,
+        ClassifierService $classifierService
+    )
     {
-        $deleted = false;
-        $classifierItem = ClassifierItem::find($request->slug);
-        if ($classifierItem) {
-            $deleted = $classifierItem->delete();
-        }
-        return \Response::json(['success' => $deleted, 'url' => url('/admin/manage/frontend/classify')]);
+        return $classifierService->generateItems($request->id,$request->data);
+    }
+
+    public function loadItems (
+        Request $request,
+        ClassifierService $classifierService
+    )
+    {
+        return $classifierService->loadItems($request->id);
     }
 
 }

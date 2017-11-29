@@ -26,8 +26,11 @@ jQuery(function ($) {
         var jsonData = $("#log").val(),
             parenItem = $('[name=main_id]').val();
 
-        // TODO: Remove in production
-        if (parenItem) localStorage.setItem(parenItem, jsonData);
+        if (parenItem) {
+            postAjax('/admin/front-site/structure/classify/generate-items', {id: parenItem, data: jsonData}, function (data) {
+                // loadChildrenJSON(jsonString);
+            });
+        }
 
         // TODO: AJAx saving for production
         // $.post(ajaxurl, {id: parenItem}, function (jsonString){});
@@ -166,8 +169,7 @@ jQuery(function ($) {
                 id: $item.attr('data-id'),
                 icon: $item.attr('data-icon'),
                 title: $item.attr('data-title'),
-                url: $item.attr('data-url'),
-                type: $item.attr('data-type')
+                url: $item.attr('data-url')
             };
 
             ret.push(data);
@@ -341,16 +343,9 @@ jQuery(function ($) {
             };
 
             // AJAX request to get json for children
-            // TODO: Uncomment the next lines for ajax
-            // $.post(ajaxurl, {id: mainItemID}, function (jsonString){
+            // postAjax('/admin/front-site/structure/classify/get-items', {id: mainItemID}, function (jsonString) {
             //     loadChildrenJSON(jsonString);
+            //
             // });
-
-            // Local storage for testing purposes
-            // TODO: Remove this in production
-            var jsonString = localStorage.getItem(mainItemID);
-            if (jsonString) {
-                loadChildrenJSON(jsonString);
-            }
         });
 });

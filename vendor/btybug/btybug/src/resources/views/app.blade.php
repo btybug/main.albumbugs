@@ -1,4 +1,3 @@
-
 @php
     if(!isset($page)){
         $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();

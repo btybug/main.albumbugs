@@ -1,9 +1,9 @@
 <?php
+
 namespace Btybug\btybug\Repositories;
 
 
 use Btybug\btybug\Models\Settings;
-use Btybug\btybug\Repositories\GeneralRepository;
 
 class AdminsettingRepository extends GeneralRepository
 {
@@ -236,8 +236,18 @@ class AdminsettingRepository extends GeneralRepository
         if ($result) {
             return $this->update($result->id, ['val' => json_encode($data, true)]);
         }
-            return $this->create(['section' => $section, 'settingkey' => $settingkey,
-                'val' => json_encode($data, true)]);
+        return $this->create(['section' => $section, 'settingkey' => $settingkey,
+            'val' => json_encode($data, true)]);
+    }
+
+    public function createOrUpdateOriginalToJson($data, $section, $settingkey)
+    {
+        $result = $this->findOneByMultiple(['section' => $section, 'settingkey' => $settingkey]);
+        if ($result) {
+            return $this->update($result->id, ['val' => json_encode($data, true)]);
+        }
+        return $this->create(['section' => $section, 'settingkey' => $settingkey,
+            'val' => json_encode($data, true)]);
     }
 
     public function createOrUpdate($data, $section, $settingkey)
@@ -264,5 +274,14 @@ class AdminsettingRepository extends GeneralRepository
     protected function model()
     {
         return new Settings();
+    }
+
+    public function findOneByMultipleSettingsArray(array $conditions)
+    {
+        $settings = $this->findOneByMultiple($conditions, ['val']);
+        if($settings){
+            $settings=json_decode($settings['val'],true);
+        }
+        return collect($settings);
     }
 }

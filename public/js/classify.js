@@ -75,10 +75,12 @@ jQuery(function ($) {
             itemInformative = $(parentID + ' [name=informative]');
             itemListing = $(parentID + ' [name=listing]');
             itemTagged = $(parentID + ' [name=tagged]');
+            var d = new Date();
+            var n = d.valueOf();
             itemTemplate = itemTemplate.replace(new RegExp('{informative}', 'g'), $(parentID + ' [name=informative]:checked').val());
             itemTemplate = itemTemplate.replace(new RegExp('{listing}', 'g'), $(parentID + ' [name=listing]:checked').val());
             itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'),  $(parentID + ' [name=tagged]:checked').val());
-            itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), '' + Math.floor((Math.random() * 999999) + 111111) + '');
+            itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), n);
         }
 
         list.append(itemTemplate);
@@ -87,7 +89,7 @@ jQuery(function ($) {
         itemTitle.val('');
         itemIcon.val('');
 
-        // Auto save
+        // Auto savee
         if ($this.data('to') === "bb-main-items") {
             // Hide modal
             $('#addMainModal').modal('hide');

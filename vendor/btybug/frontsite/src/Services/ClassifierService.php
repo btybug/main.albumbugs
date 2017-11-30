@@ -9,6 +9,7 @@
 namespace Btybug\FrontSite\Services;
 
 use Btybug\btybug\Services\GeneralService;
+use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\FrontSite\Repository\ClassifierItemPageRepository;
 use Btybug\FrontSite\Repository\ClassifierItemRepository;
 use Btybug\FrontSite\Repository\ClassifierRepository;
@@ -18,23 +19,29 @@ class ClassifierService extends GeneralService
     private $classifierRepository;
     private $classifierItemRepository;
     private $classifierItemPageRepository;
+    private $frontPagesRepository;
+    const CLASSIFY_PREFIX = 'f';
 
     public function __construct (
         ClassifierRepository $classifierRepository,
         ClassifierItemRepository $classifierItemRepository,
-        ClassifierItemPageRepository $classifierItemPageRepository
+        ClassifierItemPageRepository $classifierItemPageRepository,
+        FrontPagesRepository $frontPagesRepository
     )
     {
         $this->classifierRepository = $classifierRepository;
         $this->classifierItemRepository = $classifierItemRepository;
         $this->classifierItemPageRepository = $classifierItemPageRepository;
+        $this->frontPagesRepository = $frontPagesRepository;
 
     }
 
     public function save (array $data)
     {
         $response = $this->classifierRepository->create($data + ['id' => uniqid()]);
-
+        if($response) {
+            $this->generateFrontPage($response);
+        }
         return ($response) ? $response->id : null;
     }
 
@@ -84,7 +91,7 @@ class ClassifierService extends GeneralService
         if (count($data)) {
             $item = $data[$i];
             $new = $this->classifierItemRepository->create([
-                'id'            => uniqid(),
+                'id'            => $item['id'],
                 'title'         => $item['title'],
                 'icon'          => $item['icon'],
                 'parent_id'     => $parent,
@@ -94,6 +101,7 @@ class ClassifierService extends GeneralService
                 'tagged'        => (isset($item['tagged']) && $item['tagged'] == "checked") ? 1 : 0,
             ]);
 
+            $this->generateFrontPage($new);
             if (isset($item['children']) && $new) {
                 $this->addItems($item['children'], $new->id, $classifier_id, 0);
             }
@@ -114,5 +122,41 @@ class ClassifierService extends GeneralService
             ->get();
 
         return ($json) ? json_encode($data, true) : $data;
+    }
+
+    public function generateFrontPage ($classify)
+    {
+        $prefix = "/".self::CLASSIFY_PREFIX."/";
+        if($classify->parent_id){
+            $parentPage = $this->frontPagesRepository->findBy('slug', $classify->parent_id);
+            if($parentPage) $prefix = $parentPage->url .'/';
+        }
+
+        if(! $classify->parent_id && isset($classify->classifier_id)){
+            $parentPage = $this->frontPagesRepository->findBy('slug', $classify->classifier_id);
+            if($parentPage) $prefix = $parentPage->url .'/';
+        }
+
+        $url = $prefix.str_slug($classify->title);
+        $editPage = $this->frontPagesRepository->findBy('slug', $classify->id);
+        if($editPage){
+            $editPage->update([
+                'title' => $classify->title,
+                'url' => $url,
+                'user_id' => \Auth::id(),
+                'parent_id' => (isset($parentPage) && $parentPage) ? $parentPage->id : null
+            ]);
+        }else{
+            $this->frontPagesRepository->create([
+                'title' => $classify->title,
+                'slug' => $classify->id,
+                'url' => $url,
+                'user_id' => \Auth::id(),
+                'status' => "published",
+                'type' => "core",
+                'content_type' => "template",
+                'parent_id' => (isset($parentPage) && $parentPage) ? $parentPage->id : null
+            ]);
+        }
     }
 }

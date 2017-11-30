@@ -177,11 +177,13 @@
                         <label>Selected Main ID</label>
                         <input type="text" name="main_id" class="form-control input-sm" value="0" readonly>
                     </div>
+                    @if(count($classifiers))
                     <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG">
-                        @if(count($classifiers))
                             {!! json_encode($classifiers,true) !!}
-                        @endif
                     </textarea>
+                    @else
+                        <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG"></textarea>
+                    @endif
                 </div>
                 <div class="col-md-8">
                     <div class="panel panel-default">

@@ -178,9 +178,9 @@
                         <input type="text" name="main_id" class="form-control input-sm" value="0" readonly>
                     </div>
                     @if(count($classifiers))
-                    <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG">
-                            {!! json_encode($classifiers,true) !!}
-                    </textarea>
+                        <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG">
+                                {!! json_encode($classifiers,true) !!}
+                        </textarea>
                     @else
                         <textarea class="form-control" id="log_main" rows="15" placeholder="JSON LOG"></textarea>
                     @endif

@@ -46,8 +46,8 @@ Licensed under MIT
     }
 
     .classify .description {
-        height: 200px;
-        max-height: 200px;
+        height: 60px;
+        max-height: 60px;
     }
     .classify .product-item:after {
         content: ".";

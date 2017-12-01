@@ -1795,3 +1795,15 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
 function recursive_hook_menus()
 {
 }
+
+function get_classifier_items($classify_id){
+    $classifyRepo = new \Btybug\FrontSite\Repository\ClassifierRepository();
+    $classify = $classifyRepo->findby('id',$classify_id);
+    return ($classify) ? $classify->classifierItem : [];
+}
+
+function get_classifiers($array = false){
+    $classifyRepo = new \Btybug\FrontSite\Repository\ClassifierRepository();
+    $classifiers = $classifyRepo->pluck('title','id');
+    return ($array) ? $classifiers->toArray() : $classifiers;
+}

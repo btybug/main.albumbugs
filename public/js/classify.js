@@ -79,7 +79,7 @@ jQuery(function ($) {
             var n = d.valueOf();
             itemTemplate = itemTemplate.replace(new RegExp('{informative}', 'g'), $(parentID + ' [name=informative]:checked').val());
             itemTemplate = itemTemplate.replace(new RegExp('{listing}', 'g'), $(parentID + ' [name=listing]:checked').val());
-            itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'),  $(parentID + ' [name=tagged]:checked').val());
+            itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'), $(parentID + ' [name=tagged]:checked').val());
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), n);
         }
 
@@ -281,6 +281,7 @@ jQuery(function ($) {
             $focusedIconInput.val(icon);
             $focusedIconInput = null;
             $('.iconpicker-container').hide();
+            autoSave();
         })
         .on('input', '.classify-item-title', function () {
             var value = $(this).val();
@@ -288,6 +289,14 @@ jQuery(function ($) {
             $(this).closest('.bb-classify-item').attr('data-title', value);
 
             repositionMenu();
+            autoSave();
+        }).on('change', "#bb-children-items input[type='checkbox']", function () {
+            var name = $(this).attr('name');
+            var value = $(this).closest('.bb-classify-item [name=' + name + ']:checked').val();
+            if (value == undefined) value = "null";
+            $(this).closest('.bb-classify-item').attr('data-' + name, value);
+            repositionMenu();
+            autoSave();
         })
         .on('click', '.bb-classify-collapse', function () {
             var $this = $(this);
@@ -324,14 +333,14 @@ jQuery(function ($) {
                 }
             });
         }).on('click', '.bb-classify-item-delete', function () {
-            var $this = $(this);
-            var item = $this.closest('li');
-            var classifyItem = $this.closest('.bb-classify-item');
-            item.slideUp(function () {
-                $(this).remove();
-                autoSave();
-            });
-        })
+        var $this = $(this);
+        var item = $this.closest('li');
+        var classifyItem = $this.closest('.bb-classify-item');
+        item.slideUp(function () {
+            $(this).remove();
+            autoSave();
+        });
+    })
         .on('click', '#bb-main-items>li .bb-classify-item-title', function () {
             var $this = $(this),
                 item = $this.closest('.bb-classify-item'),

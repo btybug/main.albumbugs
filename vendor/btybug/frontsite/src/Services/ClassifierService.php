@@ -101,7 +101,10 @@ class ClassifierService extends GeneralService
                 'tagged'        => (isset($item['tagged']) && $item['tagged'] == "checked") ? 1 : 0,
             ]);
 
-            $this->generateFrontPage($new);
+            if($new->informative) $this->generateFrontPage($new,"informative");
+            if($new->listing) $this->generateFrontPage($new,"listing");
+            if($new->tagged) $this->generateFrontPage($new,"tagged");
+
             if (isset($item['children']) && $new) {
                 $this->addItems($item['children'], $new->id, $classifier_id, 0);
             }
@@ -124,7 +127,7 @@ class ClassifierService extends GeneralService
         return ($json) ? json_encode($data, true) : $data;
     }
 
-    public function generateFrontPage ($classify)
+    public function generateFrontPage ($classify,$classify_type = null)
     {
         $prefix = "/".self::CLASSIFY_PREFIX."/";
         if($classify->parent_id){
@@ -137,19 +140,25 @@ class ClassifierService extends GeneralService
             if($parentPage) $prefix = $parentPage->url .'/';
         }
 
+        $slug = $classify->id;
+        $title = $classify->title;
         $url = $prefix.str_slug($classify->title);
-        $editPage = $this->frontPagesRepository->findBy('slug', $classify->id);
+        if($classify_type) {
+            $slug = $slug.".".$classify_type;
+            $title = $title." ".$classify_type;
+        }
+        $editPage = $this->frontPagesRepository->findBy('slug', $slug);
         if($editPage){
             $editPage->update([
-                'title' => $classify->title,
+                'title' => $title,
                 'url' => $url,
                 'user_id' => \Auth::id(),
                 'parent_id' => (isset($parentPage) && $parentPage) ? $parentPage->id : null
             ]);
         }else{
             $this->frontPagesRepository->create([
-                'title' => $classify->title,
-                'slug' => $classify->id,
+                'title' => $title,
+                'slug' => $slug,
                 'url' => $url,
                 'user_id' => \Auth::id(),
                 'status' => "published",

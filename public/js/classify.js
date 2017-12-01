@@ -94,9 +94,7 @@ jQuery(function ($) {
             saveMainItems();
         }
         if ($this.data('to') === "bb-children-items") {
-            itemInformative.removeAttr('checked');
-            itemTagged.removeAttr('checked');
-            itemListing.removeAttr('checked');
+            description.val('');
             $('#addItemModal').modal('hide');
             autoSave();
         }

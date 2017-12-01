@@ -101,9 +101,9 @@ class ClassifierService extends GeneralService
                 'tagged'        => (isset($item['tagged']) && $item['tagged'] == "checked") ? 1 : 0,
             ]);
 
-            if($new->informative) $this->generateFrontPage($new,"informative");
-            if($new->listing) $this->generateFrontPage($new,"listing");
-            if($new->tagged) $this->generateFrontPage($new,"tagged");
+            ($new->informative) ? $this->generateFrontPage($new,"informative") : $this->deletePage($new,"informative");
+            ($new->listing) ? $this->generateFrontPage($new,"listing") : $this->deletePage($new,"listing");
+            ($new->tagged) ? $this->generateFrontPage($new,"tagged") : $this->deletePage($new,"tagged");
 
             if (isset($item['children']) && $new) {
                 $this->addItems($item['children'], $new->id, $classifier_id, 0);
@@ -167,5 +167,11 @@ class ClassifierService extends GeneralService
                 'parent_id' => (isset($parentPage) && $parentPage) ? $parentPage->id : null
             ]);
         }
+    }
+
+    public function deletePage ($classify,$classify_type)
+    {
+        $page = $this->frontPagesRepository->findBy('slug', $classify->id.".".$classify_type);
+        if($page) $page->delete();
     }
 }

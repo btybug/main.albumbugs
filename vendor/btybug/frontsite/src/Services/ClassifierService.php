@@ -97,7 +97,7 @@ class ClassifierService extends GeneralService
                 'icon'          => $item['icon'],
                 'parent_id'     => $parent,
                 'classifier_id' => $classifier_id,
-                'image'   => null,
+                'image'   => $item['image'],
                 'description'       => $item['description']
             ]);
 

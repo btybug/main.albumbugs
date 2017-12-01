@@ -76,7 +76,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Item Image</label>
-                                <input type="file" name="image"> {image}
+                                <input type="text" class="form-control item_img" placeholder="Enter image url" value="{image}" name="image">
                             </div>
                             <div class="form-group">
                                 <label>Item Description</label>
@@ -108,11 +108,11 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Item Image</label>
-                            <input type="file" name="image"> {image}
+                            <input type="text" class="form-control" placeholder="Enter image url" name="image">
                         </div>
                         <div class="form-group">
                             <label>Item Description</label>
-                            <textarea name="description" rows="5" class="form-control classify-item-textarea">{description}</textarea>
+                            <textarea name="description" rows="5" class="form-control classify-item-textarea"></textarea>
                         </div>
                     </div>
                 </div>

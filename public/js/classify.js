@@ -76,8 +76,8 @@ jQuery(function ($) {
             description = $(parentID + ' [name=description]');
             var d = new Date();
             var n = d.valueOf();
-            itemTemplate = itemTemplate.replace(new RegExp('{image}', 'g'), $(parentID + ' [name=image]').val());
-            itemTemplate = itemTemplate.replace(new RegExp('{description}', 'g'), $(parentID + ' [name=description]').val());
+            itemTemplate = itemTemplate.replace(new RegExp('{image}', 'g'), image.val());
+            itemTemplate = itemTemplate.replace(new RegExp('{description}', 'g'),description.val());
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), n);
         }
 
@@ -95,6 +95,7 @@ jQuery(function ($) {
         }
         if ($this.data('to') === "bb-children-items") {
             description.val('');
+            image.val('');
             $('#addItemModal').modal('hide');
             autoSave();
         }
@@ -282,6 +283,12 @@ jQuery(function ($) {
             var value = $(this).val();
             $(this).closest('.bb-classify-item').find('.bb-classify-item-title>span').text(value);
             $(this).closest('.bb-classify-item').attr('data-title', value);
+
+            repositionMenu();
+            autoSave();
+        }).on('input', '.item_img', function () {
+            var value = $(this).val();
+            $(this).closest('.bb-classify-item').attr('data-image', value);
 
             repositionMenu();
             autoSave();

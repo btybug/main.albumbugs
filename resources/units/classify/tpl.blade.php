@@ -5,7 +5,11 @@
                 <div class="col-md-4">
                     <div class="product-item">
                         <div class="pi-img-wrapper">
-                            <img src="http://keenthemes.com/assets/bootsnipp/k1.jpg" class="img-responsive" alt="{!! $item->title !!}">
+                            @if($item->image)
+                                <img src="{{ $item->image }}" class="img-responsive" alt="{!! $item->title !!}">
+                            @else
+                                <img src="http://keenthemes.com/assets/bootsnipp/k1.jpg" class="img-responsive" alt="{!! $item->title !!}">
+                            @endif
                             <div>
                                 <a href="#" class="btn">Zoom</a>
                                 <a href="#" class="btn">View</a>

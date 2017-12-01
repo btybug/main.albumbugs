@@ -44,6 +44,11 @@ Licensed under MIT
     .classify .product-item:hover {
         box-shadow: 5px 5px rgba(234, 234, 234, 0.9);
     }
+
+    .classify .description {
+        height: 200px;
+        max-height: 200px;
+    }
     .classify .product-item:after {
         content: ".";
         display: block;

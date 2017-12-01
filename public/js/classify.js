@@ -72,14 +72,12 @@ jQuery(function ($) {
         }
         // Add random IDs for children
         if ($this.data('to') === "bb-children-items") {
-            itemInformative = $(parentID + ' [name=informative]');
-            itemListing = $(parentID + ' [name=listing]');
-            itemTagged = $(parentID + ' [name=tagged]');
+            image = $(parentID + ' [name=image]');
+            description = $(parentID + ' [name=description]');
             var d = new Date();
             var n = d.valueOf();
-            itemTemplate = itemTemplate.replace(new RegExp('{informative}', 'g'), $(parentID + ' [name=informative]:checked').val());
-            itemTemplate = itemTemplate.replace(new RegExp('{listing}', 'g'), $(parentID + ' [name=listing]:checked').val());
-            itemTemplate = itemTemplate.replace(new RegExp('{tagged}', 'g'), $(parentID + ' [name=tagged]:checked').val());
+            itemTemplate = itemTemplate.replace(new RegExp('{image}', 'g'), $(parentID + ' [name=image]').val());
+            itemTemplate = itemTemplate.replace(new RegExp('{description}', 'g'), $(parentID + ' [name=description]').val());
             itemTemplate = itemTemplate.replace(new RegExp('{id}', 'g'), n);
         }
 
@@ -207,9 +205,8 @@ jQuery(function ($) {
                 id: $item.attr('data-id'),
                 icon: $item.attr('data-icon'),
                 title: $item.attr('data-title'),
-                informative: $item.attr('data-informative'),
-                listing: $item.attr('data-listing'),
-                tagged: $item.attr('data-tagged')
+                image: $item.attr('data-image'),
+                description: $item.attr('data-description')
             };
 
             if (id) {
@@ -287,6 +284,14 @@ jQuery(function ($) {
             var value = $(this).val();
             $(this).closest('.bb-classify-item').find('.bb-classify-item-title>span').text(value);
             $(this).closest('.bb-classify-item').attr('data-title', value);
+
+            repositionMenu();
+            autoSave();
+        })
+        .on('keyup', ".classify-item-textarea", function () {
+            var value = $(this).val();
+            var name = $(this).attr('name');
+            $(this).closest('.bb-classify-item').attr('data-' + name, value);
 
             repositionMenu();
             autoSave();

@@ -41,7 +41,7 @@
 
     <script type="template" id="classify-item-template">
         <div class="bb-classify-item" data-id="{id}" data-title="{title}" data-icon="{icon}"
-             data-informative="{informative}" data-listing="{listing}" data-tagged="{tagged}">
+             data-image="{image}" data-description="{description}">
             <div class="bb-classify-item-title">
                 <a href="javascript:" class="bb-classify-drag-handler">
                     <i class="fa fa-arrows"></i>
@@ -75,17 +75,12 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Create Informative page</label>
-                                <input type="checkbox" name="informative" value="checked" {informative}>
+                                <label>Item Image</label>
+                                <input type="file" name="image"> {image}
                             </div>
                             <div class="form-group">
-                                <label>Create Child listing page</label>
-                                <input type="checkbox" name="listing" value="checked" {listing}>
-                            </div>
-                            <div class="form-group">
-                                <label>Create Tagged post page</label>
-                                <input type="checkbox" name="tagged" value="checked" {tagged}>
-
+                                <label>Item Description</label>
+                                <textarea name="description" rows="5" class="form-control classify-item-textarea">{description}</textarea>
                             </div>
                         </div>
                     </div>
@@ -110,17 +105,15 @@
                         <label>Icon</label>
                         <input type="text" name="item_icon" class="form-control input-sm icp" readonly>
                     </div>
-                    <div class="form-group">
-                        <label>Create Informative page</label>
-                        {!! Form::checkbox('informative',"checked",null) !!}
-                    </div>
-                    <div class="form-group">
-                        <label>Create Child listing page</label>
-                        {!! Form::checkbox('listing',"checked",null) !!}
-                    </div>
-                    <div class="form-group">
-                        <label>Create Tagged post page</label>
-                        {!! Form::checkbox('tagged',"checked",null) !!}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Item Image</label>
+                            <input type="file" name="image"> {image}
+                        </div>
+                        <div class="form-group">
+                            <label>Item Description</label>
+                            <textarea name="description" rows="5" class="form-control classify-item-textarea">{description}</textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

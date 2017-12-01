@@ -39,9 +39,10 @@ class ClassifierService extends GeneralService
     public function save (array $data)
     {
         $response = $this->classifierRepository->create($data + ['id' => uniqid()]);
-        if($response) {
-            $this->generateFrontPage($response);
-        }
+        //was generated main page
+//        if($response) {
+//            $this->generateFrontPage($response);
+//        }
         return ($response) ? $response->id : null;
     }
 
@@ -96,14 +97,11 @@ class ClassifierService extends GeneralService
                 'icon'          => $item['icon'],
                 'parent_id'     => $parent,
                 'classifier_id' => $classifier_id,
-                'informative'   => (isset($item['informative']) && $item['informative'] == "checked") ? 1 : 0,
-                'listing'       => (isset($item['listing']) && $item['listing'] == "checked") ? 1 : 0,
-                'tagged'        => (isset($item['tagged']) && $item['tagged'] == "checked") ? 1 : 0,
+                'image'   => null,
+                'description'       => $item['description']
             ]);
 
-            ($new->informative) ? $this->generateFrontPage($new,"informative") : $this->deletePage($new,"informative");
-            ($new->listing) ? $this->generateFrontPage($new,"listing") : $this->deletePage($new,"listing");
-            ($new->tagged) ? $this->generateFrontPage($new,"tagged") : $this->deletePage($new,"tagged");
+//            ($new->informative) ? $this->generateFrontPage($new,"informative") : $this->deletePage($new,"informative");
 
             if (isset($item['children']) && $new) {
                 $this->addItems($item['children'], $new->id, $classifier_id, 0);

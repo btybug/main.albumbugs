@@ -246,7 +246,7 @@ class ClassifyController extends Controller
         ClassifierService $classifierService
     )
     {
-        return $classifierService->loadItems($request->id,true,['id','title','icon','informative','listing','tagged']);
+        return $classifierService->loadItems($request->id,true,['id','title','icon','image','description']);
     }
 
 }

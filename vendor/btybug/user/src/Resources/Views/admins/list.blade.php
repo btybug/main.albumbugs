@@ -3,7 +3,7 @@
 @section('tab')
     <div class="row">
         <div class="col-md-12">
-            <a href="{!! url("admin/users/admins/create") !!}" class="btn btn-info pull-right"><i
+            <a href="{{route('user_admin_create')}}" class="btn btn-info pull-right"><i
                         class="fa fa-plus"></i> Create Admin</a>
         </div>
         <div class="col-md-12 table-responsive p-0">
@@ -58,7 +58,7 @@
                                 @endif
                                 </span>
                                 @if(Auth::user()->can('users.admins.edit'))
-                                    <a href="{!! url('/admin/users/admins/edit',$admin->id)!!}"
+                                    <a href="{{ route('user_admin_edit',$admin->id)}}"
                                        class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a>
                                 @endif
 

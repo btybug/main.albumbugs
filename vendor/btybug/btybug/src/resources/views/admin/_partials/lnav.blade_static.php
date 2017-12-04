@@ -22,7 +22,7 @@
             <span class="htext">&nbsp;{{trans('admin/lnav.users')}}</span><span class="fa arrow"></span></a>
         <ul class="dropdown-menu nav-second-level" aria-expanded="true">
             @if(Auth::user()->can('users.site_users'))
-            <li><a href="{{ url('admin/users') }}"><i class="fa fa-angle-right"></i> &nbsp;{{trans('admin/lnav.site_users')}}</a>
+            <li><a href="{{ route('user_index') }}"><i class="fa fa-angle-right"></i> &nbsp;{{trans('admin/lnav.site_users')}}</a>
             </li>
             @endif
 

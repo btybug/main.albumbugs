@@ -16,7 +16,7 @@
                     <p><label>Active: </label> {{ ($user->active)? "Active" : "Inactive" }}</p>
                     <p><label>Role: </label> {{ $user->roles->first()->slug }}</p>
                     <p><label>Join Date: </label> {{ $user->created_at }}</p>
-                    <a href="{!! url('/admin/users/admins')!!}" class="btn btn-primary"> Back </a>
+                    <a href="{{ route('user_admin_index')}}" class="btn btn-primary"> Back </a>
                 </div>
             </div>
 

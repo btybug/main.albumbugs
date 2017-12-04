@@ -2,7 +2,7 @@
 @section('tab')
     <div class="row">
         <div class="col-sm-12">
-            <a class="btn btn-primary pull-right" href="{!! url('admin/users/roles/create') !!}">Create New Role</a>
+            <a class="btn btn-primary pull-right" href="{{route('user_roles_create')}}">Create New Role</a>
         </div>
 
         <div class="col-sm-12">
@@ -41,11 +41,11 @@
                                            class="delete-button btn btn-danger"><i
                                                     class="fa fa-trash-o f-s-14 "></i></a>
 
-                                        <a href="{!! url("admin/users/roles/edit",$role->id) !!}"
+                                        <a href="{{ route('user_roles_edit', $role->id) }}"
                                            class="btn btn-info edit-class">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{!! url('/admin/users/roles/permissions',$role->slug)!!}"
+                                        <a href="{{ url('user_roles_permissions',$role->slug) }}"
                                            class="btn btn-warning">
                                             <i class="fa fa-crop">Permissions</i>
                                         </a>

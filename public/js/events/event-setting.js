@@ -145,7 +145,7 @@ $(function () {
                                 event_namespace: eventbuilder.json['event_namespace'],
                                 function_namespace: getname
                             }
-                            sendajaxvar('/admin/manage/event/get-event-function-relations', data, eventbuilder.editbuilder)
+                            sendajaxvar('/admin/front-site/event/get-event-function-relations', data, eventbuilder.editbuilder)
                             $('[data-role="eventtab"], [data-role="eventtabcont"]').empty();
                             $('[data-panelevent]').removeClass('hide')
                             //$('[data-panelevent="functions"]').find('.badge').text('0')

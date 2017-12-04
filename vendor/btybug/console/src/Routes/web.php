@@ -21,19 +21,19 @@ Route::get('/optimisation', function () {
 });
 
 Route::group(['prefix' => 'structure'], function () {
-    Route::get('/', 'StructureController@getIndex',true);
+    Route::get('/', 'StructureController@getIndex',true)->name('index');
     Route::group(['prefix' => 'pages'], function () {
-        Route::get('/', 'StructureController@getPages',true);
-        Route::get('/settings/{id}', 'StructureController@getPageSettings',true);
+        Route::get('/', 'StructureController@getPages',true)->name('pages_index');
+        Route::get('/settings/{id}', 'StructureController@getPageSettings',true)->name('pages_settings');
         Route::post('/settings/{id}', 'StructureController@postPageSettings');
         Route::post('/', 'StructureController@postEdit');
         Route::post('/get-data', 'StructureController@postPageData');
     });
 
-    Route::get('/urls', 'StructureController@getUrls',true);
-    Route::get('/classify', 'StructureController@getClassify',true);
+    Route::get('/urls', 'StructureController@getUrls',true)->name('urls');
+    Route::get('/classify', 'StructureController@getClassify',true)->name('classify');
 //    Route::get('/settings', 'StructureController@getSettings');
-    Route::get('/tables', 'StructureController@getTables',true);
+    Route::get('/tables', 'StructureController@getTables',true)->name('tables');
 
     Route::group(['prefix' => 'fields'], function () {
         Route::get('/', 'StructureController@getFields');
@@ -78,12 +78,12 @@ Route::group(['prefix' => 'structure'], function () {
     });
 
     Route::group(['prefix' => 'settings'], function () {
-        Route::get('/', 'GeneralController@getIndex',true);
+        Route::get('/', 'GeneralController@getIndex',true)->name('settings_index');
         Route::post('/', 'GeneralController@postSettings');
     });
 
     Route::group(['prefix' => 'menus'], function () {
-        Route::get('/', 'MenusController@getIndex',true);
+        Route::get('/', 'MenusController@getIndex',true)->name('menus_index');
         Route::get('/edit/{menu}/{role}', 'MenusController@getEdit',true)->name('console_menu_edit');
         Route::get('/view/{menu}/{role}', 'MenusController@getView',true)->name('console_menu_view');
         Route::post('/edit/{menu}/{role}', 'MenusController@postEdit');
@@ -94,11 +94,11 @@ Route::group(['prefix' => 'structure'], function () {
 
 
 Route::group(['prefix' => 'settings'], function () {
-    Route::get('/', 'BackendController@getIndex',true);
-    Route::get('/general', 'BackendController@settings',true);
+    Route::get('/', 'BackendController@getIndex',true)->name('backend_settings_index');
+    Route::get('/general', 'BackendController@settings',true)->name('general');
     Route::post('/general', 'BackendController@postSaveSettings');
     Route::post('/site-settings', 'BackendController@postSiteSettings')->name('site_settings_console');
-    Route::get('/css-js', 'BackendController@getCssJs',true);
+    Route::get('/css-js', 'BackendController@getCssJs',true)->name('css-js');
     Route::post('/css-js', 'BackendController@postCssJs');
 });
 
@@ -107,8 +107,8 @@ Route::group(['prefix' => 'general'], function () {
     Route::get('/', function () {
         return view('console::structure.general.index');
     },true);
-    Route::get('/validations', 'GeneralController@getValidations',true);
-    Route::get('/trigger-events', 'GeneralController@getTriggerEvents',true);
+    Route::get('/validations', 'GeneralController@getValidations',true)->name('validations');
+    Route::get('/trigger-events', 'GeneralController@getTriggerEvents',true)->name('trigger_events');
 });
 
 Route::group(['prefix' => 'config'], function () {

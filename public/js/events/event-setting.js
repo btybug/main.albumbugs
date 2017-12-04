@@ -183,9 +183,9 @@ $(function () {
             saveevent: function (target) {
                 var aftersave = function (d) {
 
-                }
+                };
 
-                sendajaxvar('/admin/manage/event/save-event-function-relations', eventbuilder.json, aftersave)
+                sendajaxvar('/admin/front-site/event/save-event-function-relations', eventbuilder.json, aftersave);
             },
             removetab: function (target) {
                 var targetdata = target.data('id');

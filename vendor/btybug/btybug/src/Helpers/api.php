@@ -1098,12 +1098,13 @@ function hierarchyAdminPagesListPermissions($data, $parent = true, $icon = true,
 }
 
 //TODO transver in Manage
-function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $id = 0)
+function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $id = 0,$module = false)
 {
     $output = '';
     // Loop through items
     if ($data) {
         foreach ($data as $item) {
+            if($module && $module != $item->module_id) return false;
             $children = $item->childs;
 
             $output .= ' <ol class="pagelisting">';

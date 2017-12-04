@@ -12,6 +12,7 @@
 namespace Btybug\Uploads\Http\Controllers;
 
 use Btybug\btybug\Services\RenderService;
+use Btybug\Console\Repository\AdminPagesRepository;
 use Btybug\Uploads\Repository\Plugins;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -54,13 +55,19 @@ class ModulesController extends Controller
         return view('uploads::Modules.core', compact('plugins', 'selected', 'enabled'));
     }
 
-    public function getExplore($repository, $package)
+    public function getExplore(
+        $repository,
+        $package,
+        AdminPagesRepository $adminPagesRepository
+    )
     {
         $plugins = new Plugins();
         $plugins->modules();
         $plugin = $plugins->find($repository . '/' . $package);
         $units = $plugin->units();
-        return view('uploads::Explores.index', compact('plugin', 'units'));
+        $pages = $adminPagesRepository->PagesByModulesParent($plugin);
+
+        return view('uploads::Explores.index', compact('plugin', 'units','pages'));
     }
 
     public function getUpdateCms()

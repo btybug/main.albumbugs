@@ -1,167 +1,107 @@
 @extends('btybug::layouts.admin')
 @section('content')
-    <div class="col-md-4 ">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form class="form-inline" name="input" method="get" action="#" id="filter-tables">
+    <div class="row">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="units-tab" data-toggle="tab" href="#units" role="tab"
+                   aria-controls="units" aria-selected="true">Units</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pages-tab" data-toggle="tab" href="#pages" role="tab" aria-controls="pages"
+                   aria-selected="false">Pages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="menus-tab" data-toggle="tab" href="#menus" role="tab" aria-controls="menus"
+                   aria-selected="false">Menus</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="table-tab" data-toggle="tab" href="#table" role="tab" aria-controls="table"
+                   aria-selected="false">Tables</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="units" role="tabpanel" aria-labelledby="units-tab">
+                <div class="templates-list">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="muted">Date</h4>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> All Dates</label>
-                                    </div>
-                                    <p/>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> Especific Date</label>
-                                    </div>
-                                    <p></p>
-                                    <div class="input-daterange input-group" id="datepicker">
-                                        <span class="input-group-addon"><i
-                                                    class="glyphicon glyphicon-calendar"></i></span>
-                                        <input type="text" class="input-sm form-control" name="start_date"/>
-                                        <span class="input-group-addon"> - </span>
-                                        <input type="text" class="input-sm form-control" name="end_date"/>
-                                        <span class="input-group-addon"><i
-                                                    class="glyphicon glyphicon-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-12">
+                            <h3>Units</h3>
                         </div>
+                        <div class="raw tpl-list">
+                            @if($units)
+                                @foreach($units as $ui)
+                                    <div class="col-md-4">
+                                        <div class="row templates m-b-10 ">
+                                            <div class=" topRow p-l-0 p-r-0">
+                                                <img src="{!! url('/images/template-3.png')!!}" class="img-responsive"/>
+                                                <div class="tempalte_icon">
 
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="muted">Persons</h4>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> All Persons</label>
-                                    </div>
-                                    <p/>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> Especific Persons</label>
-                                    </div>
-                                    <p></p>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <select class="input-sm form-control">
-                                                <option>Person Name 1</option>
-                                                <option>Person Name 2</option>
-                                                <option>Person Name 3</option>
-                                                <option>Person Name 4</option>
-                                                <option>Person Name 5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                    <div>
+                                                        <a href="{!! url('/admin/uploads/units/units-variations', $ui->slug) !!}"
+                                                           class="m-r-10"><i class="fa fa-puzzle-piece f-s-14"></i> </a>
+                                                    </div>
 
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="muted">Files Types</h4>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> All Files</label>
-                                    </div>
-                                    <p/>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> Especific Files</label>
-                                    </div>
-                                    <p></p>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <select class="input-sm form-control">
-                                                <option>File Name 1</option>
-                                                <option>File Name 2</option>
-                                                <option>File Name 3</option>
-                                                <option>File Name 4</option>
-                                                <option>File Name 5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8 ">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 unit-box">
-                {{--@include('uploads::gears.units._partials.unit_box')--}}
-            </div>
-        </div>
-
-
-        <div class="templates-list">
-            <div class="row">
-                <div class="raw tpl-list">
-                    @if($units)
-                        @foreach($units as $ui)
-                            <div class="col-md-4">
-                                <div class="row templates m-b-10 ">
-                                    <div class=" topRow p-l-0 p-r-0">
-                                        <img src="{!! url('/images/template-3.png')!!}" class="img-responsive"/>
-                                        <div class="tempalte_icon">
-
-                                            <div>
-                                                <a href="{!! url('/admin/uploads/units/units-variations', $ui->slug) !!}"
-                                                   class="m-r-10"><i class="fa fa-puzzle-piece f-s-14"></i> </a></div>
-
-                                        </div>
-                                    </div>
-                                    {{-- <span>{{ isset($url) ? $url : '' }}</span>--}}
-                                    <div class=" templates-header ">
+                                                </div>
+                                            </div>
+                                            {{-- <span>{{ isset($url) ? $url : '' }}</span>--}}
+                                            <div class=" templates-header ">
                     <span class=" templates-title text-center"><i class="fa fa-bars f-s-13 m-r-5"
                                                                   aria-hidden="true"></i> {!! $ui->title!!}</span>
-                                        <div class=" templates-buttons text-center ">
+                                                <div class=" templates-buttons text-center ">
                         <span class="authorColumn"><i class="fa fa-user author-icon" aria-hidden="true"></i>
                             {!! @$unit->author !!},</span> <span class="dateColumn"><i
-                                                        class="fa fa-calendar calendar-icon"
-                                                        aria-hidden="true"></i> {!! BBgetDateFormat($ui->created_at) !!}</span>
+                                                                class="fa fa-calendar calendar-icon"
+                                                                aria-hidden="true"></i> {!! BBgetDateFormat($ui->created_at) !!}</span>
 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                @endforeach
+                            @else
+                                <div class="col-xs-12 addon-item">
+                                    NO Results
                                 </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <div class="col-xs-12 addon-item">
-                            NO Results
+                            @endif
+
+
                         </div>
-                    @endif
-
-
+                    </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="pages" role="tabpanel" aria-labelledby="pages-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Pages</h3>
+                    </div>
+                    <div class="raw tpl-list">
+                        @if(count($pages))
+                            <article>
+                                <div class="col-md-8 col-md-offset-2">
+                                    {!! hierarchyAdminPagesListHierarchy($pages,true, true, 0,$plugin->name) !!}
+                                </div>
+                            </article>
+                        @else
+                            No Result
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="menus" role="tabpanel" aria-labelledby="menus-tab">
+                No Menus
+            </div>
+            <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
+                No Tables
+            </div>
         </div>
-
-        <div class="loadding"><em class="loadImg"></em></div>
-        <nav aria-label="" class="text-center">
-            <ul class="pagination paginationStyle">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
 @stop
 @section('CSS')
     {!! HTML::style('public/css/new-store.css') !!}
     {!! HTML::style('public/js/bootstrap-select/css/bootstrap-select.min.css') !!}
+    {!! HTML::style('public/css/page.css?v=0.15') !!}
+    {!! HTML::style('public/css/create_pages.css') !!}
+
     <style>
         .child-tpl {
             width: 95% !important;
@@ -179,8 +119,35 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
-    <script>
+    {!! HTML::script('public/js/create_pages.js') !!}
+    {!! HTML::script('public/js/admin_pages.js') !!}
+    {!! HTML::script('public/js/nestedSortable/jquery.mjs.nestedSortable.js') !!}
 
+
+    <script>
+        $("body").on('click', '[data-collapse]', function () {
+            var id = $(this).attr('data-collapse');
+            $('li[data-id=' + id + '] ol').slideToggle();
+            $(this).toggleClass('fa-minus fa-plus');
+        });
+
+        $("body").on('click', 'li[data-id] .listinginfo', function () {
+            var item_id = $(this).parent('li[data-id]').attr('data-id');
+            $('.pagelisting .listinginfo.active_class').removeClass('active_class');
+            $('li[data-id=' + item_id + '] > .listinginfo').addClass('active_class');
+
+        });
+
+        fixbar()
+
+        function fixbar() {
+            var targetselector = $('.vertical-text');
+            if (targetselector.length > 0) {
+                var getwith = targetselector.width()
+                var left = 0 - getwith / 2 - 15;
+                targetselector.css({'left': left, 'top': getwith / 2})
+            }
+        }
 
         function confirm_delete(data) {
             var r = confirm("Are you sure !!!");

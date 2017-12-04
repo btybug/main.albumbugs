@@ -2,6 +2,7 @@
 
 namespace Btybug\btybug\Providers;
 
+use Btybug\btybug\Models\Routes;
 use Illuminate\Support\ServiceProvider;
 
 

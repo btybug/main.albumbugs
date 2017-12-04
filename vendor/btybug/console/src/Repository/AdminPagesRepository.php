@@ -82,7 +82,7 @@ class AdminPagesRepository extends GeneralRepository
 
     public function PagesByModulesParent($module)
     {
-        return self::model()->where('module_id', $module->slug)->where('parent_id', 0)->get();
+        return self::model()->where('module_id', $module->name)->where('parent_id', 0)->get();
     }
 
     public function childs()

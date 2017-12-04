@@ -10,7 +10,7 @@
             <ul class="list-unstyled menuList" id="components-list">
                 @foreach($plugins as $plugin)
                     <li class=" @if($selected->name==$plugin['name']) active @endif ">
-                        <a href="{!! route('modules_index',['p'=>$plugin['name']]) !!}"> <span
+                        <a href="{!! route('core_packages',['p'=>$plugin['name']]) !!}"> <span
                                     class="module_icon"></span> {!! $plugin['name'] !!}</a>
                     </li>
                 @endforeach

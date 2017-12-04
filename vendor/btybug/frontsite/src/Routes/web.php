@@ -28,13 +28,13 @@ Route::get('/test-unit/{id?}', function (\Illuminate\Http\Request $request) {
 Route::group(['prefix'=>'structure'], function () {
     Route::get('/',function (){
         return view("manage::structure");
-    },true);
+    },true)->name('structure_index');
     Route::group(['prefix' => 'front-pages'], function () {
         //front pages
-        Route::get('/', 'PagesController@getIndex',true);
-        Route::get('/settings/{param}', 'PagesController@getSettings',true);
+        Route::get('/', 'PagesController@getIndex',true)->name('front_pages_index');
+        Route::get('/settings/{param}', 'PagesController@getSettings',true)->name('frontsite_settings');
         Route::post('/settings/{id}', 'PagesController@postSettings');
-        Route::get('/general/{id}', 'PagesController@getGeneral',true);
+        Route::get('/general/{id}', 'PagesController@getGeneral',true)->name('frontsite_general');
         Route::post('/user-avatar', 'PagesController@postUserAvatar');
         Route::post('/sorting', 'PagesController@postSortPages');
         Route::post('/classify', 'PagesController@postClassify');
@@ -45,7 +45,7 @@ Route::group(['prefix'=>'structure'], function () {
         Route::post('/delete', 'PagesController@postDelete');
 
         Route::group(['prefix' => 'page-preview'], function () {
-            Route::get('/{id}', 'PagesController@getPagePreview',true);
+            Route::get('/{id}', 'PagesController@getPagePreview',true)->name('page_review_index');
             Route::post('/{id}', 'PagesController@postPagePreview');
         });
         Route::get('/page-test-preview/{id}', 'PagesController@getPageTestPreview');
@@ -55,7 +55,7 @@ Route::group(['prefix'=>'structure'], function () {
         Route::get('/live/{id}', 'PagesController@postPageLive');
 
         Route::post('/load-tpl', 'PagesController@loadTpl');
-        Route::get('/preview/{layout_id?}/{page_id?}', 'PagesController@getPreview',true);
+        Route::get('/preview/{layout_id?}/{page_id?}', 'PagesController@getPreview',true); // this method does not exist
         Route::post('/addchild', 'PagesController@postAddchild');
         Route::post('/changeparent', 'PagesController@postChangeparent');
         Route::get('/delete/{id}', 'PagesController@getDelete');
@@ -79,7 +79,7 @@ Route::group(['prefix'=>'structure'], function () {
     });
 
     Route::group(['prefix' => 'classify'], function () {
-        Route::get('/', 'ClassifyController@getIndex',true);
+        Route::get('/', 'ClassifyController@getIndex',true)->name('frontsite_classify');
         Route::post('/create', 'ClassifyController@postCreate')->name('classify_create');
         Route::post('/delete', 'ClassifyController@postDelete')->name('classify_delete');
         Route::post('/generate-items', 'ClassifyController@postGenerateItems')->name('classify_generate_items');
@@ -99,7 +99,7 @@ Route::group(['prefix'=>'structure'], function () {
     });
 
     Route::group(['prefix' => 'menus'], function () {
-        Route::get('/', 'MenusController@getIndex',true);
+        Route::get('/', 'MenusController@getIndex',true)->name('frontsite_menus');
 //        Route::get('/edit', 'MenusController@getEdit');
         Route::get('/edit/{id}', 'MenusController@getEdit',true)->name('edit_front_menu');
         Route::post('/edit/{id}', 'MenusController@postEdit',true)->name('post_edit_front_menu');
@@ -117,8 +117,8 @@ Route::group(['prefix'=>'structure'], function () {
     });
 
     Route::group(['prefix' => 'hooks'], function () {
-        Route::get('/', 'HooksController@getIndex',true);
-        Route::get('/edit/{id}', 'HooksController@getEdit',true);
+        Route::get('/', 'HooksController@getIndex',true)->name('frontsite_hooks_index');
+        Route::get('/edit/{id}', 'HooksController@getEdit',true)->name('frontsite_hooks_edit');
 
     });
     Route::group(['prefix' => 'filters'], function () {
@@ -127,31 +127,31 @@ Route::group(['prefix'=>'structure'], function () {
 });
 
 Route::group(['prefix' => 'settings'], function () {
-    Route::get('/', 'SettingsController@getIndex',true);
+    Route::get('/', 'SettingsController@getIndex',true)->name('forntsite_settings_index');
     Route::post('/', 'SettingsController@storeSystem');
-    Route::get('/login-registration', 'SettingsController@getLoginRegistration',true);
-    Route::get('/notifications', 'SettingsController@getNotifications',true);
-    Route::get('/url-menger', 'SettingsController@getUrlMenger',true);
-    Route::get('/adminemails', 'SettingsController@getAdminemails',true);
-    Route::get('/lang', 'SettingsController@getLang',true);
-    Route::get('/api-settings', 'SettingsController@getApi',true);
+    Route::get('/login-registration', 'SettingsController@getLoginRegistration',true)->name('frontsite_login_registration'); // this view does not exist
+    Route::get('/notifications', 'SettingsController@getNotifications',true)->name('frontsite_notifications');
+    Route::get('/url-menger', 'SettingsController@getUrlMenger',true)->name('frontsite_url_menger');
+    Route::get('/adminemails', 'SettingsController@getAdminemails',true)->name('frontsite_adminemails');
+    Route::get('/lang', 'SettingsController@getLang',true)->name('frontsite_lang');
+    Route::get('/api-settings', 'SettingsController@getApi',true)->name('frontsite_api_settings');
     Route::post('/page-settings', 'GeneralController@postSettings')->name('front_pages_general_settings');
     Route::get('/frontend', 'SettingsController@getFrontSettings',true)->name('font_site_settings_frontrnd');
     Route::post('/frontend', 'SettingsController@postFrontSettings')->name('post_font_site_settings_frontrnd');
 });
 
 Route::group(['prefix' => 'event'], function () {
-    Route::get('/', 'EventsController@getIndex',true);
+    Route::get('/', 'EventsController@getIndex',true)->name('frontsite_event_index');
     Route::post('/get-function-data', 'EventsController@postGetFunctionData');
     Route::post('/get-event-function-relations', 'EventsController@postGetEventFunctionRelation');
     Route::post('/save-event-function-relations', 'EventsController@postSaveEventFunctionRelation');
 });
 
 Route::group(['prefix' => 'emails'], function () {
-    Route::get('/{id?}', "EmailsController@getIndex",true);
-    Route::get('/settings', "EmailsController@getSettings",true);
+    Route::get('/{id?}', "EmailsController@getIndex",true)->name('frontsite_emails_index');
+    Route::get('/settings', "EmailsController@getSettings",true)->name('frontsite_emails_settings');
     Route::post('/settings', "EmailsController@postSettings");
-    Route::get('/update/{id?}', "EmailsController@getUpdate",true);
+    Route::get('/update/{id?}', "EmailsController@getUpdate",true)->name('frontsite_emails_update');
     Route::post('/update/{id}', "EmailsController@postUpdate");
     Route::get('/data/{id}', "EmailsController@getData");
     Route::post('/create-group', "EmailsController@postCreateGroup");

@@ -64,7 +64,7 @@
                                 @endif
                                 <td>
                                     @if(@$ui->have_settings)
-                                        <a href="/admin/uploads/gears/settings/{{$variation_data->id}}"
+                                        <a href="{{route('uploads_settings',$variation_data->id)}}"
                                            class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
                                     @endif
 

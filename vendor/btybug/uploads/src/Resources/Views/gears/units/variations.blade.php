@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Variations for [{{ $unit->title }}] unit
-                        <a href="{!! url('/admin/uploads/gears/settings', $unit->slug) !!}"
+                        <a href="{{route('uploads_settings', $unit->slug)}}"
                            class="btn btn-xs btn-success pull-right" id="new-variation"
                            style="color:#fff;">New Variation</a>
                     </h4>
@@ -35,7 +35,7 @@
                                        data-title="Template Variation Title">{{$variation_data->title}}</a></td>
                                 </td>
                                 <td>
-                                    <a href="{!! url('/admin/uploads/gears/settings', $variation_data->id) !!}"
+                                    <a href="{{ route('uploads_settings', $variation_data->id) }}"
                                        class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
                                     <a href="/admin/uploads/gears/delete-variation/{{ $variation_data->id }}"
                                        class="btn btn-danger btn-xs"

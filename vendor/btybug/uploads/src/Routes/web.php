@@ -45,16 +45,16 @@ Route::group(['prefix' => 'apps'], function ($router) {
 Route::group(['prefix' => 'gears'], function () {
     Route::get('/', function () {
         return view("uploads::gears.units.list");
-    },true);
-    Route::get('/back-end', 'UnitsController@getIndex',true);
-    Route::get('/front-end', 'UnitsController@getFrontend',true);
+    },true)->name('uploads_gears_index');
+    Route::get('/back-end', 'UnitsController@getIndex',true)->name('uploads_back_end');
+    Route::get('/front-end', 'UnitsController@getFrontend',true)->name('uploads_front_end');
     Route::post('/upload', 'UnitsController@postUploadUnit');
     Route::get('/delete-variation/{slug}', 'UnitsController@postDeleteVariation');
-    Route::get('/units-variations/{slug}', 'UnitsController@getUnitVariations',true);
+    Route::get('/units-variations/{slug}', 'UnitsController@getUnitVariations',true)->name('uploads_units_variations');
     Route::post('/units-variations/{slug}', 'UnitsController@postUnitVariations');
-    Route::get('/live-settings/{slug}', 'UnitsController@unitPreview',true);
-    Route::get('/settings/{slug?}', 'UnitsController@getSettings',true);
-    Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsController@unitPreviewIframe',true);
+    Route::get('/live-settings/{slug}', 'UnitsController@unitPreview',true)->name('uploads_live_settings');
+    Route::get('/settings/{slug?}', 'UnitsController@getSettings',true)->name('uploads_settings');
+    Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsController@unitPreviewIframe',true)->name('uploads_settings_iframe');
     Route::post('/settings/{id}/{save?}', 'UnitsController@postSettings');
     Route::post('/delete', 'UnitsController@postDelete');
 });
@@ -62,11 +62,11 @@ Route::group(['prefix' => 'gears'], function () {
 Route::group(['prefix' => 'layouts'], function () {
     Route::get('/', function () {
         return view("uploads::gears.page_sections.list");
-    },true);
-    Route::get('/back-end', 'PageSectionsController@getIndex',true);
-    Route::get('/front-end', 'PageSectionsController@getFrontend',true);
-    Route::get('/settings/{slug}', 'PageSectionsController@getSettings',true);
-    Route::get('/variations/{slug}', 'PageSectionsController@getVariations',true);
+    },true)->name('uploads_layout_index');
+    Route::get('/back-end', 'PageSectionsController@getIndex',true)->name('uploads_layouts_back_end');
+    Route::get('/front-end', 'PageSectionsController@getFrontend',true)->name('uploads_layouts_front_end');
+    Route::get('/settings/{slug}', 'PageSectionsController@getSettings',true)->name('uploads_layouts_settings');
+    Route::get('/variations/{slug}', 'PageSectionsController@getVariations',true)->name('uploads_layouts_variations');
     Route::post('/settings/{slug}/{save?}', 'PageSectionsController@postSettings');
     Route::post('/console', 'PageSectionsController@getConsole');
     Route::post('/make-active', 'PageSectionsController@postMakeActive');
@@ -76,10 +76,10 @@ Route::group(['prefix' => 'layouts'], function () {
 });
 
 Route::group(['prefix' => 'assets'], function () {
-    Route::get('/', 'AssetsController@getIndex',true);
-    Route::get('/js', 'AssetsController@getJs',true);
-    Route::get('/css', 'AssetsController@getCss',true);
-    Route::get('/fonts', 'AssetsController@getFonts',true);
+    Route::get('/', 'AssetsController@getIndex',true)->name('uploads_assets_index');
+    Route::get('/js', 'AssetsController@getJs',true)->name('uploads_assets_js');
+    Route::get('/css', 'AssetsController@getCss',true)->name('uploads_assets_css');
+    Route::get('/fonts', 'AssetsController@getFonts',true)->name('uploads_assets_fonts');
 
     Route::post('/', 'AssetsController@postUploadJs');
     Route::post('/change-version', 'AssetsController@postChangeVersion');

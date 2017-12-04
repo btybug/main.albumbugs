@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Variations for [{{ $pageSection->title }}] unit
-                        <a href="{!! url('/admin/uploads/layouts/settings', $pageSection->slug) !!}" class="btn btn-xs btn-success pull-right" id="new-variation"
+                        <a href="{{ route('uploads_layouts_settings', $pageSection->slug) }}" class="btn btn-xs btn-success pull-right" id="new-variation"
                            style="color:#fff;">New Variation</a>
                         <a href="#" class="btn btn-xs btn-primary pull-right">Primary hooks settings</a>
                     </h4>
@@ -35,7 +35,7 @@
                                        data-title="Template Variation Title">{{$variation_data->title}}</a></td>
                                 </td>
                                 <td>
-                                    <a href="{!! url('/admin/uploads/layouts/settings', $variation_data->id) !!}"
+                                    <a href="{{ route('uploads_layouts_settings', $variation_data->id) }}"
                                        class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
                                     <a href="#"
                                        class="btn btn-info btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;hooks</a>

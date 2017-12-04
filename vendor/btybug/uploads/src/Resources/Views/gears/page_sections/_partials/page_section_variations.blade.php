@@ -14,7 +14,7 @@
 
                     <a data-href="{!! url('/admin/uploads/layouts/delete') !!}" data-key="{!! $ui->slug !!}"
                        data-type="{!! $ui->title !!} Layout" class="p-a-r-10-t-0 delete-button btn btn-danger"><i class="fa fa-trash-o"></i></a>
-                    <a href="{!! url('/admin/uploads/layouts/variations', $ui->slug) !!}" style="position: absolute;top: 0%;left: 10px;"
+                    <a href="{{ route('uploads_layouts_variations', $ui->slug) }}" style="position: absolute;top: 0%;left: 10px;"
                        class="m-r-10 m-l-5 edit-button btn btn-info"><i class="fa fa-pencil-square-o"></i> </a>
 
 

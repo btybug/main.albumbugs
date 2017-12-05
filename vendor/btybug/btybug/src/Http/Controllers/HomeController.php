@@ -134,6 +134,7 @@ class HomeController extends Controller
             'btybug/framework',
             "btybug.plugins/studios",
             "btybug.hook/blog",
+            "gevorg/usermanagment",
         ];
 
 //        dd($plugins);

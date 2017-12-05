@@ -81,7 +81,7 @@ class ComposerController extends Controller
         command:
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
-        putenv('COMPOSER_HOME=' . __DIR__ . '/../../extracted/bin/composer');
+        putenv('COMPOSER_HOME=' . __DIR__ . '/../../composer/extracted/bin/composer');
         if (!file_exists($_POST['path'])) {
 
             echo $_POST['path'];

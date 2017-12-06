@@ -5,7 +5,7 @@
 {!! HTML::style("public/js/jquery-ui/jquery-ui.min.css") !!}
 {!! HTML::style("public/css/preview-template.css") !!}
 {!! HTML::style('public/css/cms.css') !!}
-{!! HTML::style('custom/css/'.$ui->slug.'.css') !!}
+{!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$ui->slug).'.css') !!}
 <body>
 {!! csrf_field() !!}
 @include('resources::assests.magicModal')
@@ -34,5 +34,5 @@
 {!! HTML::script("public/js/UiElements/ui-preview-setting.js?v=999") !!}
 {!! HTML::script("public/js/UiElements/ui-settings.js") !!}
 @if(isset($ui))
-    {!! HTML::script('custom/js/'.str_replace(' ','-',$ui->slug).'.js') !!}
+    {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$ui->slug).'.js') !!}
 @endif

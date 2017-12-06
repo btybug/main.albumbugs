@@ -90,11 +90,11 @@
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="user" class="label">Username</label>
-                        <input id="user" type="text" class="input">
+                        <input id="user" type="text" name="usernameOremail" class="input">
                     </div>
                     <div class="group">
                         <label for="pass" class="label">Password</label>
-                        <input id="pass" type="password" class="input" data-type="password">
+                        <input id="pass" type="password" class="input" name="password" data-type="password">
                     </div>
                     <div class="group">
                         <input id="check" type="checkbox" class="check" checked>

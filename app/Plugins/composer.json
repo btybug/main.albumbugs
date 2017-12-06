@@ -1,5 +1,5 @@
 {
   "require": {
-   
+    "btybug.hook/blog": "dev-master"
   }
 }

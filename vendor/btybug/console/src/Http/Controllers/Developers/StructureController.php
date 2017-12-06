@@ -51,7 +51,7 @@ class StructureController extends Controller
     {
         $tables = \DB::select('SHOW TABLES');
 
-        return view("modules::developers.structure.tables", compact(['tables']));
+        return view("console::structure.developers.structure.tables", compact(['tables']));
     }
 
     /**
@@ -82,7 +82,7 @@ class StructureController extends Controller
         }
 //        }
 
-        return view("modules::developers.structure.tables.columns", compact(['colums', 'table', 'core']));
+        return view("console::structure.developers.structure.tables.columns", compact(['colums', 'table', 'core']));
     }
 
     /**
@@ -94,7 +94,7 @@ class StructureController extends Controller
         $this->data['tbtypes'] = Migrations::types();
         $this->data['engine'] = Migrations::engine();
 
-        return view('modules::developers.structure.tables.create', $this->data);
+        return view('console::structure.developers.structure.tables.create', $this->data);
     }
 
     /**
@@ -140,7 +140,7 @@ class StructureController extends Controller
             }
         }
 
-        return view('modules::developers.structure.tables.field_column_iframe', compact(['json_data', 'table', 'column', 'field']));
+        return view('console::structure.developers.structure.tables.field_column_iframe', compact(['json_data', 'table', 'column', 'field']));
     }
 
     /**
@@ -182,7 +182,7 @@ class StructureController extends Controller
         $json_data['data_source_columns'] = $column;
         $json_data['data_source'] = 'related';
 
-        return view('modules::developers.structure.tables.search_column_iframe', compact(['table', 'column', 'json_data']));
+        return view('console::structure.developers.structure.tables.search_column_iframe', compact(['table', 'column', 'json_data']));
     }
 
     /**
@@ -205,7 +205,7 @@ class StructureController extends Controller
         $field = Fields::where('table_name', $table)->where('column_name', $column)->first();
         $tbtypes = Migrations::types();
 
-        return view("modules::developers.structure.tables.edit_column", compact(['column', 'table', 'tbtypes', 'column_info', 'length', 'dataType', 'keys', 'types', 'fields', 'state']));
+        return view("console::structure.developers.structure.tables.edit_column", compact(['column', 'table', 'tbtypes', 'column_info', 'length', 'dataType', 'keys', 'types', 'fields', 'state']));
     }
 
     /**
@@ -224,7 +224,7 @@ class StructureController extends Controller
             $this->data['columns'][$column->Field] = $column->Field;
         }
 
-        return view('modules::developers.structure.tables.add_column', $this->data);
+        return view('console::structure.developers.structure.tables.add_column', $this->data);
     }
 
     /**
@@ -271,7 +271,7 @@ class StructureController extends Controller
      */
     public function getForms()
     {
-        return view("modules::developers.structure.forms");
+        return view("console::structure.developers.structure.forms");
     }
 
     /**
@@ -279,7 +279,7 @@ class StructureController extends Controller
      */
     public function getMenus()
     {
-        return view("modules::developers.structure.menus");
+        return view("console::structure.developers.structure.menus");
     }
 
     /**
@@ -289,7 +289,7 @@ class StructureController extends Controller
     {
         $pageGrouped = AdminPages::where('parent_id', '=', '0')->get();
 
-        return view("modules::developers.structure.pages", compact(['pageGrouped']));
+        return view("console::structure.developers.structure.pages", compact(['pageGrouped']));
     }
 
     /**
@@ -297,7 +297,7 @@ class StructureController extends Controller
      */
     public function getBackendTheme()
     {
-        return view("modules::developers.structure.backend-themes");
+        return view("console::structure.developers.structure.backend-themes");
     }
 
     /**

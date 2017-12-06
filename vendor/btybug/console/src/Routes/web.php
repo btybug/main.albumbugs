@@ -33,8 +33,6 @@ Route::group(['prefix' => 'structure'], function () {
     Route::get('/urls', 'StructureController@getUrls',true)->name('urls');
     Route::get('/classify', 'StructureController@getClassify',true)->name('classify');
 //    Route::get('/settings', 'StructureController@getSettings');
-    Route::get('/tables', 'StructureController@getTables',true)->name('tables');
-
     Route::group(['prefix' => 'fields'], function () {
         Route::get('/', 'StructureController@getFields');
         Route::get('/create', 'StructureController@getCreateField');
@@ -92,12 +90,12 @@ Route::group(['prefix' => 'structure'], function () {
     });
 
     Route::group(['prefix' => 'tables'], function () {
-        Route::get('/', 'Developers\StructureController@getIndex');
-        Route::get('/edit/{table}', 'Developers\StructureController@getEditTable');
+        Route::get('/', 'Developers\StructureController@getIndex',true)->name('tables');
+        Route::get('/edit/{table}', 'Developers\StructureController@getEditTable',true);
         Route::post('/get-column', 'Developers\StructureController@postGetTableColumn');
         Route::get('/add-column/{table}', 'Developers\StructureController@getAddColumn');
         Route::post('/add-column/{table}', 'Developers\StructureController@postAddColumn');
-        Route::get('/edit-column/{table}/{column}', 'Developers\StructureController@getEditTableColumn');
+        Route::get('/edit-column/{table}/{column}', 'Developers\StructureController@getEditTableColumn',true);
         Route::post('/edit-column/{table}/{column}', 'Developers\FormsController@postFields');
         Route::get('/delete-column/{table}/{column}', 'Developers\StructureController@postDeleteColumn');
         Route::post('/edit-column-field/{table}/{column}', 'Developers\StructureController@postEditColumnField');

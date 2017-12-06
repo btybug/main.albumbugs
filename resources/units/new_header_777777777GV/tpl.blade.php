@@ -75,8 +75,6 @@
                     </li>
                 </ul>
             @endif
-
-            @endif
         </div>
     </nav>
 </header>

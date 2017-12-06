@@ -1,5 +1,6 @@
 {
   "require": {
-    "btybug.hook/blog": "dev-master"
+    "btybug.hook/blog": "dev-master",
+    "gevorg/usermanagment": "dev-master"
   }
 }

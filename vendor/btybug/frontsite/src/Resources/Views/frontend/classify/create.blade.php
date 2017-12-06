@@ -102,7 +102,7 @@
     {!! HTML::script('public/js/nestedSortable/jquery.mjs.nestedSortable.js') !!}
     {!! HTML::script('public/js/bootbox/js/bootbox.min.js') !!}
     {!! HTML::script('public/js/icon-plugin.js?v=0.4') !!}
-    {!! HTML::script("/resources/assets/js/UiElements/bb_styles.js?v.5") !!}
+    {!! HTML::script("/public/js/UiElements/bb_styles.js?v.5") !!}
     {!! HTML::script('public/js/admin_pages.js') !!}
     <script>
         $(document).ready(function () {

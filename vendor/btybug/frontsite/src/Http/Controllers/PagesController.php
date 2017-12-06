@@ -11,6 +11,7 @@
 
 namespace Btybug\FrontSite\Http\Controllers;
 
+use App\Events\PageCreateEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Response;
@@ -182,11 +183,14 @@ class PagesController extends Controller
     }
 
     public function postNew(
-        FrontendPageService $frontendPageService
+        FrontendPageService $frontendPageService,
+        Request $request
     )
     {
         $new = $frontendPageService->addNewPage();
-        if ($new) return redirect()->back()->with('message', 'Congratulations: New Page Created Successfully');
+        event(new PageCreateEvent($new,$request->all()));
+
+        if ($new) return redirect()->back();
 
         return redirect()->back()->with('message', 'Page not Created');
     }

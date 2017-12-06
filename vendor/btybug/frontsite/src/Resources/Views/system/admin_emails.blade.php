@@ -58,7 +58,7 @@
 
 
 @section('JS')
-    {!! HTML::script("/resources/assets/js/UiElements/bb_styles.js?v.5") !!}
+    {!! HTML::script("/public/js/UiElements/bb_styles.js?v.5") !!}
     {!! HTML::script('public/js/admin_pages.js') !!}
     {!! HTML::script('public/js/nestedSortable/jquery.mjs.nestedSortable.js') !!}
     {!! HTML::script('public/js/bootbox/js/bootbox.min.js') !!}

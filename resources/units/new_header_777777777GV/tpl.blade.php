@@ -56,7 +56,7 @@
                         <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt=""></a>
                         <ul>
 
-                            <li><a href=""><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
+                            <li><a href="{!! url('logout') !!}"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
                             </li>
                             @if(isset($settings['user_menu']))
                                 @php

@@ -16,6 +16,9 @@
                 <button id="dump-autoload" onclick="call('dump-autoload')" class="btn btn-success disabled">
                     dump-autoload
                 </button>
+                <button id="dump-autoload" onclick="call('clearcache')" class="btn btn-warning disabled">
+                    Clear Cache
+                </button>
             </div>
             <div class="form-inline">
                 <br/><br/>

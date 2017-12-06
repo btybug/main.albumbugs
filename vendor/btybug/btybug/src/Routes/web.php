@@ -112,7 +112,7 @@ Route::group(
                     });
 
 
-                Route::any('{all}', 'HomeController@pages')->where('all', '.*');
+            //    Route::any('{all}', 'HomeController@pages')->where('all', '.*');
             }
         }
     }

@@ -33,12 +33,13 @@ Route::group(['prefix' => 'structure'], function () {
     Route::get('/urls', 'StructureController@getUrls',true)->name('urls');
     Route::get('/classify', 'StructureController@getClassify',true)->name('classify');
 //    Route::get('/settings', 'StructureController@getSettings');
+
     Route::group(['prefix' => 'fields'], function () {
-        Route::get('/', 'StructureController@getFields');
-        Route::get('/create', 'StructureController@getCreateField');
-        Route::get('/create-new', 'StructureController@getCreateFieldNew');
+        Route::get('/', 'StructureController@getFields',true);
+        Route::get('/create', 'StructureController@getCreateField',true);
+        Route::get('/create-new', 'StructureController@getCreateFieldNew',true);
         Route::get('/edit/{id}', 'StructureController@getEditField');
-        Route::post('/edit/{id}', 'StructureController@postEditField');
+        Route::post('/edit/{id}', 'StructureController@postEditField',true);
         Route::post('/new', 'StructureController@postCreateField');
         Route::post('/change-status', 'StructureController@postChangeFieldStatus');
     });

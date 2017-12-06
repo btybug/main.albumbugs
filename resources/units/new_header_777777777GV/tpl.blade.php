@@ -50,29 +50,31 @@
                 </ul>
             @else
 
-                    @if(count($items))
-                        <ul class="nav navbar-nav navbar-right header-user">
-                            <li>
-                                <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt=""></a>
-                                <ul>
 
-                                    <li><a href=""><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
-                                    </li>
-                                    @if(isset($settings['user_menu']))
-                                        @php
-                                            $items = BBGetMenu($settings['user_menu'])
-                                        @endphp
+                <ul class="nav navbar-nav navbar-right header-user">
+                    <li>
+                        <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt=""></a>
+                        <ul>
+
+                            <li><a href=""><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
+                            </li>
+                            @if(isset($settings['user_menu']))
+                                @php
+                                    $items = BBGetMenu($settings['user_menu'])
+                                @endphp
+                                @if(count($items))
                                     @foreach($items as $item)
                                         <li><a href="{!! url($item->url) !!}"><i class="fa fa-sign-out"
                                                                                  aria-hidden="true"></i><span>{!! $item->title !!}</span></a>
                                         </li>
                                     @endforeach
-                                    @endif
+                                @endif
+                            @endif
 
-                                </ul>
-                            </li>
                         </ul>
-                @endif
+                    </li>
+                </ul>
+            @endif
 
             @endif
         </div>

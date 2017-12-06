@@ -19,6 +19,7 @@
     {!! BBCss() !!}
     {!! HTML::style('public/js/jquery-ui/jquery-ui.min.css') !!}
     {!! HTML::style('public/css/cms.css') !!}
+    {!! HTML::style('public-x/custom/css/'.str_replace(' ','-','main').'.css') !!}
     @yield('CSS')
     @stack('css')
 </head>
@@ -98,6 +99,7 @@
 {!! BBMainFrontJS() !!}
 {!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
 {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
+{!! HTML::script('public-x/custom/js/'.str_replace(' ','-','main').'.js') !!}
 
 @yield('JS')
 @stack('javascript')

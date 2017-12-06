@@ -90,6 +90,40 @@ Route::group(['prefix' => 'structure'], function () {
         Route::post('/create', 'MenusController@postCreate');
         Route::post('/delete', 'MenusController@postDelete');
     });
+
+    Route::group(['prefix' => 'tables'], function () {
+        Route::get('/', 'Developers\StructureController@getIndex');
+        Route::get('/edit/{table}', 'Developers\StructureController@getEditTable');
+        Route::post('/get-column', 'Developers\StructureController@postGetTableColumn');
+        Route::get('/add-column/{table}', 'Developers\StructureController@getAddColumn');
+        Route::post('/add-column/{table}', 'Developers\StructureController@postAddColumn');
+        Route::get('/edit-column/{table}/{column}', 'Developers\StructureController@getEditTableColumn');
+        Route::post('/edit-column/{table}/{column}', 'Developers\FormsController@postFields');
+        Route::get('/delete-column/{table}/{column}', 'Developers\StructureController@postDeleteColumn');
+        Route::post('/edit-column-field/{table}/{column}', 'Developers\StructureController@postEditColumnField');
+        Route::get('/render-column-field/{table}/{column}', 'Developers\StructureController@postLiveColumnField');
+        Route::get('/column-field-iframe/{table}/{column}', 'Developers\StructureController@getIframe');
+        Route::get('/column-field-search-iframe/{table}/{column}', 'Developers\StructureController@getSearchIframe');
+        Route::post('/field-live-save/{table}/{column}', 'Developers\StructureController@saveFieldData');
+        Route::post('/search-field-live-save/{table}/{column}', 'Developers\StructureController@saveSearchFieldData');
+        Route::post('/field-live-preview', 'Developers\StructureController@postFieldLivePreview');
+        Route::post('/search-field-live-preview', 'Developers\StructureController@postSearchFieldLivePreview');
+        Route::get('/table-names', 'Developers\StructureController@postTableNames');
+        Route::post('/get-table-columns', 'Developers\StructureController@postTableColumns');
+        Route::get('/optimize', function () {
+            Artisan::call('forms:optimize');
+            return redirect('admin');
+        });
+        Route::get('/create', 'Developers\StructureController@getCreate');
+        Route::post('/create', 'Developers\StructureController@postCreate');
+        Route::get('/fields/{table}/{column}', 'Developers\FormsController@getFields');
+//    Route::post('/fields/{table}/{column}', 'Developers\FormsController@postFields');
+        Route::group(['prefix' => 'field'], function () {
+            Route::get('/add-new-field/{count}', 'Developers\FormsController@addNewField');
+            Route::post('/delete', 'Developers\FormsController@deleteField');
+            Route::get('/render-column-fields/{table}/{column}', 'Developers\FormsController@renderColumnFields');
+        });
+    });
 });
 
 

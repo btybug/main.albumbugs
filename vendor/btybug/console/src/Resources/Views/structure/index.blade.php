@@ -36,6 +36,11 @@
                     <h3>Tables</h3>
                     <h2><i class="fa fa-bank" aria-hidden="true"></i></h2>
                 </a>
+            </div><div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
+                <a href="{{route('fields')}}" class="ly_items">
+                    <h3>Fields</h3>
+                    <h2><i class="fa fa-tint" aria-hidden="true"></i></h2>
+                </a>
             </div>
         </div>
     </div>

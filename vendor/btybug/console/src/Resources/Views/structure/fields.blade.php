@@ -2,10 +2,10 @@
 @section('tab')
     <div class="row m-b-10">
         <h3>All Fields</h3>
-        <div class="col-md-12">
-            <a href="{!! url('/admin/console/structure/fields/create') !!}" class="btn btn-primary"><i
-                        class="fa fa-plus"></i> Create New</a>
-        </div>
+        {{--<div class="col-md-12">--}}
+            {{--<a href="{!! url('/admin/console/structure/fields/create') !!}" class="btn btn-primary"><i--}}
+                        {{--class="fa fa-plus"></i> Create New</a>--}}
+        {{--</div>--}}
         <div class="col-md-12">
             <table class="table table-bordered">
                 <thead>

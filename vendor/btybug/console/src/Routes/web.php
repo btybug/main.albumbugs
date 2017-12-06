@@ -35,7 +35,7 @@ Route::group(['prefix' => 'structure'], function () {
 //    Route::get('/settings', 'StructureController@getSettings');
 
     Route::group(['prefix' => 'fields'], function () {
-        Route::get('/', 'StructureController@getFields',true);
+        Route::get('/', 'StructureController@getFields',true)->name("fields");
         Route::get('/create', 'StructureController@getCreateField',true);
         Route::get('/create-new', 'StructureController@getCreateFieldNew',true);
         Route::get('/edit/{id}', 'StructureController@getEditField',true);

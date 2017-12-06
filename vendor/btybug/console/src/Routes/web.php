@@ -148,3 +148,30 @@ Route::group(['prefix' => 'config'], function () {
     Route::get('/page-preview/{page_id}', 'StructureController@getPagePreview');
     Route::post('/page-preview/{page_id}', 'StructureController@postSavePageSettings');
 });
+
+Route::group(['prefix' => '/bburl'], function () {
+    Route::any('/unit/{slug}', 'Developers\BBurlsController@BBunit');
+    Route::any('/render-unit', 'Developers\BBurlsController@unitRender');
+    Route::any('/get-heading/{id}', 'Developers\BBurlsController@getHeading');
+    Route::any('/get-heading-keys', 'Developers\BBurlsController@getFileSourcehedindKeys');
+    Route::post('/unit-main', 'Developers\BBurlsController@getUnitMain');
+    Route::post('/unit-main-default', 'Developers\BBurlsController@getUnitMainDefault');
+    Route::post('/get-form-field-options', 'Developers\BBurlsController@getFormFieldOptions');
+    Route::post('/get-field-options-live', 'Developers\BBurlsController@getFieldOptionsLive');
+    Route::any('/layout', 'Developers\BBurlsController@BBlayout');
+    Route::post('/get-tables-lists', 'Developers\BBurlsController@getTableLists');
+    Route::post('/get-table-columns', 'Developers\BBurlsController@getTableColums');
+    Route::post('/get-column-rules', 'Developers\BBurlsController@getColumnRules');
+    Route::post('/get-file-data', 'Developers\BBurlsController@getFileData');
+    Route::post('/get-file-list', 'Developers\BBurlsController@getFileListing');
+    Route::post('/get-field-units', 'Developers\BBurlsController@getFieldUnitListing');
+    Route::post('/get-field-unit', 'Developers\BBurlsController@getFieldUnit');
+    Route::post('/get-page-layout-config-toarray', 'Developers\BBurlsController@getPageLayoutConfigToArray');
+    Route::post('/get-bb-button-data', 'Developers\BBurlsController@getBBbuttonData');
+    Route::post('/get-page-section-config-toarray', 'Developers\BBurlsController@getPageSectionConfigToArray');
+    Route::post('/get-bb-output', 'Developers\BBurlsController@getBBFunctionOutput');
+    Route::post('/get-output-bb', 'Developers\BBurlsController@getBBFunction');
+    Route::post('/get-section-render-and-data', 'Developers\BBurlsController@getSectionRenderAndData');
+    Route::post('/post-save-hooks', 'Developers\BBurlsController@postSaveHooks');
+    Route::post('/post-add-unit-to-hook', 'Developers\BBurlsController@postAddUnitToHook');
+});

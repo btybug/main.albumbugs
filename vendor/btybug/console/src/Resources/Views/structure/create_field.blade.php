@@ -278,7 +278,7 @@
                 }
                 $('input[name="selcteunit"]').val(variation)
                 data = {'variation_id': variation, 'data_action': data_action};
-                sendajaxvar('/admin/modules/bburl/get-page-layout-config-toarray', data, function (d) {
+                sendajaxvar('/admin/console/bburl/get-page-layout-config-toarray', data, function (d) {
                     if (!d.error) {
                         $('[data-unitname="btnunit"] [data-action="units"]').text('change');
                         $('[data-unitname="name"]').removeClass('hide');
@@ -315,7 +315,7 @@
                     'table': table,
                     'column': $(this).val()
                 }
-                sendajaxvar('/admin/modules/bburl/get-column-rules', data, function (d) {
+                sendajaxvar('/admin/console/bburl/get-column-rules', data, function (d) {
                     if (d) {
                         $('.core-val').html(d);
                     }
@@ -454,7 +454,7 @@
                     table = value;
                     var data = {}
                     data['table'] = value;
-                    sendajaxvar('/admin/modules/bburl/get-table-columns', data, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-table-columns', data, function (d) {
                         if (d) {
                             var option = ''
                             $('.table-columns').empty()
@@ -477,7 +477,7 @@
                     table = value;
                     var data = {}
                     data['table'] = value;
-                    sendajaxvar('/admin/modules/bburl/get-table-columns', data, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-table-columns', data, function (d) {
                         if (d) {
                             var option = ''
                             $('.second-table-columns').empty()
@@ -504,7 +504,7 @@
                     $('[data-previewoption]').removeClass('hidden');
 
                     var data = {value: value}
-                    sendajaxvar('/admin/modules/bburl/get-field-units', data, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-field-units', data, function (d) {
                         if (d) {
                             var option;
                             $('.field-type-units').empty();
@@ -529,7 +529,7 @@
                 var value = $(this).val();
                 if (typeof value != "undefined" && value != '') {
                     var data = {value: value}
-                    sendajaxvar('/admin/modules/bburl/get-field-unit', data, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-field-unit', data, function (d) {
                         if (!d.error) {
                             htmlsdata['field'] = d.html
                             htmlpreview()
@@ -564,7 +564,7 @@
 //                if (typeof key != "undefined" && typeof value != "undefined"
 //                    && typeof id != "undefined" && key != '' && value != '' && id != '') {
 //                    var data = {key : key, value : value, id : id};
-//                    sendajaxvar('/admin/modules/bburl/get-file-list', data, function (d) {
+//                    sendajaxvar('/admin/console/bburl/get-file-list', data, function (d) {
 //                        if(! d.error){
 //                            var type = $('.field-type').val();
 //                            var name = $('input[name=name]').val();
@@ -580,7 +580,7 @@
 //            $("body").on('click', '.file-item-dynamic', function () {
 //                var value = $(this).find('[data-value]').data('value');
 //                var data = {value: value};
-//                sendajaxvar('/admin/modules/bburl/get-file-data', data, function (d) {
+//                sendajaxvar('/admin/console/bburl/get-file-data', data, function (d) {
 //                    if (d) {
 //                        var option;
 //                        $('.file-key').empty();
@@ -614,7 +614,7 @@
                 optiondata['value'] = $('select[name="unit"]').val();
                 $('[name="settings"]').val(JSON.stringify(optiondata['options']));
                 if (!noajax) {
-                    sendajaxvar('/admin/modules/bburl/get-field-unit', optiondata, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-field-unit', optiondata, function (d) {
                         if (d) {
                             htmlsdata['field'] = d.html;
                             htmlpreview()

@@ -99,7 +99,7 @@
                     table = value;
                     var data = {}
                     data['table'] = value;
-                    sendajaxvar('/admin/modules/bburl/get-table-columns', data, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-table-columns', data, function (d) {
                         if (d) {
                             var option = ''
                             $('.table-columns').empty()
@@ -119,7 +119,7 @@
                     'table': table,
                     'column': $(this).val()
                 }
-                sendajaxvar('/admin/modules/bburl/get-column-rules', data, function (d) {
+                sendajaxvar('/admin/console/bburl/get-column-rules', data, function (d) {
                     if (d) {
                         $('.validation-preview').html(d);
                         $('#field_minimum_validation').val(d);
@@ -194,7 +194,7 @@
                 if (typeof key != "undefined" && typeof value != "undefined"
                     && typeof id != "undefined" && key != '' && value != '' && id != '') {
                     var data = {key: key, value: value, id: id};
-                    sendajaxvar('/admin/modules/bburl/get-file-list', data, function (d) {
+                    sendajaxvar('/admin/console/bburl/get-file-list', data, function (d) {
                         if (!d.error) {
                             var type = $('.field-type').val();
                             var name = $('input[name=name]').val();
@@ -211,7 +211,7 @@
             $("body").on('click', '.file-item-dynamic', function () {
                 var value = $(this).find('[data-value]').data('value');
                 var data = {value: value};
-                sendajaxvar('/admin/modules/bburl/get-file-data', data, function (d) {
+                sendajaxvar('/admin/console/bburl/get-file-data', data, function (d) {
                     if (d) {
                         var option;
                         $('.file-key').empty();

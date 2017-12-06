@@ -194,7 +194,7 @@
                 $.ajax({
                     type: "post",
                     datatype: "json",
-                    url: "/admin/modules/bburl/render-unit",
+                    url: "/admin/console/bburl/render-unit",
                     data: {id: key},
                     headers: {
                         'X-CSRF-TOKEN': $('[name="_token"]').val()

@@ -272,7 +272,7 @@
                     $("[data-key=some-unit]").attr('data-item', 'user_input');
                     $.ajax({
                         type: 'GET',
-                        url: "{!! url('/admin/modules/bburl/unit') !!}" + '/' + val,
+                        url: "{!! url('/admin/console/bburl/unit') !!}" + '/' + val,
                         datatype: 'json',
                         cache: false,
                         success: function (data) {
@@ -301,7 +301,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "{!! url('/admin/modules/bburl/get-heading') !!}" + '/' + id,
+                url: "{!! url('/admin/console/bburl/get-heading') !!}" + '/' + id,
                 datatype: 'json',
                 cache: false,
                 success: function (data) {
@@ -413,7 +413,7 @@
             var key = $(this).val();
             $.ajax({
                 type: 'POST',
-                url: "{!! url('/admin/modules/bburl/get-heading-keys') !!}",
+                url: "{!! url('/admin/console/bburl/get-heading-keys') !!}",
                 datatype: 'json',
                 data: {id: id, key: key},
                 headers: {
@@ -454,7 +454,7 @@
                 type: "post",
                 datatype: "json",
                 cache: false,
-                url: '/admin/modules/bburl/unit-main-default',
+                url: '/admin/console/bburl/unit-main-default',
                 data: {
                     'type': type
                 },

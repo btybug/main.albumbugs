@@ -12,6 +12,7 @@
 namespace Btybug\Console\Http\Controllers\Developers;
 
 use App\Http\Controllers\Controller;
+use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\Templates\Units;
 use Btybug\Console\Repository\AdminPagesRepository;
@@ -190,10 +191,14 @@ class StructureController extends Controller
      * @param $column
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getEditTableColumn($table, $column)
+    public function getEditTableColumn(
+        $table,
+        $column,
+        FieldsRepository $fieldsRepository
+    )
     {
-        $types = \App\Models\Fields::getFieldTypes();
-        $fields = \App\Models\Fields::where('table_name', $table)->where('column_name', $column)->get();
+        $types = [];//\App\Models\Fields::getFieldTypes();
+        $fields = $fieldsRepository->getByTableAndCol($table,$column);
         $state = 'current';
 
         $colums = \DB::select('SHOW COLUMNS FROM ' . $table);
@@ -202,7 +207,7 @@ class StructureController extends Controller
         if ($column_info) $column_info = $column_info[0];
         $length = Migrations::getLendth($column_info);
         $dataType = Migrations::getDataType($column_info);
-        $field = Fields::where('table_name', $table)->where('column_name', $column)->first();
+        $field = $fieldsRepository->findByTableAndCol($table,$column);
         $tbtypes = Migrations::types();
 
         return view("console::structure.developers.structure.tables.edit_column", compact(['column', 'table', 'tbtypes', 'column_info', 'length', 'dataType', 'keys', 'types', 'fields', 'state']));

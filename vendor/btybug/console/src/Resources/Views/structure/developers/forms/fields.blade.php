@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('btybug::layouts.admin')
 @section('content')
     <h2>table :{!! $table !!} |column:{!! $column !!}</h2>
     {!! Form::open(['class'=>'form-horizontal']) !!}

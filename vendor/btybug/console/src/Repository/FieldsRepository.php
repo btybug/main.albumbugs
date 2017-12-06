@@ -37,4 +37,14 @@ class FieldsRepository extends GeneralRepository
     {
         return $this->model()->where('table_name', $table_name)->where('status', self::ACTIVE)->where('available_for_users', '!=', 0)->get();
     }
+
+    public function getByTableAndCol($table,$column)
+    {
+        $this->model()->where('table_name', $table)->where('column_name', $column)->get();
+    }
+
+    public function findByTableAndCol($table,$column)
+    {
+        $this->model()->where('table_name', $table)->where('column_name', $column)->get();
+    }
 }

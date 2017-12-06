@@ -1,4 +1,4 @@
-@extends('btybug::layouts.admin')
+@extends('btybug::btybug::layouts.admin')
 @section('content')
 
     <div class="container">

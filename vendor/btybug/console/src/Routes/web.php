@@ -38,8 +38,8 @@ Route::group(['prefix' => 'structure'], function () {
         Route::get('/', 'StructureController@getFields',true);
         Route::get('/create', 'StructureController@getCreateField',true);
         Route::get('/create-new', 'StructureController@getCreateFieldNew',true);
-        Route::get('/edit/{id}', 'StructureController@getEditField');
-        Route::post('/edit/{id}', 'StructureController@postEditField',true);
+        Route::get('/edit/{id}', 'StructureController@getEditField',true);
+        Route::post('/edit/{id}', 'StructureController@postEditField');
         Route::post('/new', 'StructureController@postCreateField');
         Route::post('/change-status', 'StructureController@postChangeFieldStatus');
     });

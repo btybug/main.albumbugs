@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('btybug::layouts.admin')
 @section('content')
     {!! Form::open(['class'=>'form-horizontal']) !!}
     <!-- Form Name -->
@@ -70,7 +70,7 @@
                 </tr>
                 </thead>
                 <tbody id="field_list">
-                @if($fields->count())
+                @if(count($fields))
                     @foreach($fields as $count => $field)
                         @include('modules::developers._partials.custom_field')
                     @endforeach
@@ -92,11 +92,13 @@
     <div class="row m-b-10">
         <label class="col-md-12 control-label" for="engine"></label>
         <div class="col-md-6">
-            @foreach($fields as $count => $field)
-                <div class="form-group">
-                    @include('modules::developers.fields.' . $field->type)
-                </div>
-            @endforeach
+            @if(count($fields))
+                @foreach($fields as $count => $field)
+                    <div class="form-group">
+                        @include('modules::developers.fields.' . $field->type)
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -110,7 +112,7 @@
     @include('resources::assests.magicModal')
     @include('btybug::_partials.delete_modal')
 
-    @include('modules::developers._partials.mysql_error')
+    @include('console::structure.developers._partials.mysql_error')
     @include('resources::assests.magicModal')
 @stop
 

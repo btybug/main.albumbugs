@@ -159,9 +159,9 @@ class SettingsController extends Controller
     {
         $input = $request->except('_token');
         if ($request->file('site_logo')) {
-            File::cleanDirectory('resources/assets/images/logo/');
+            File::cleanDirectory(public_path('images/logo/'));
             $name = $request->file('site_logo')->getClientOriginalName();
-            $request->file('site_logo')->move('resources/assets/images/logo/', $name);
+            $request->file('site_logo')->move(public_path('images/logo/'), $name);
 
             $input['site_logo'] = $name;
         }

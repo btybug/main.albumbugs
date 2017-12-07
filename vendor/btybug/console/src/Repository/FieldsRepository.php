@@ -47,4 +47,13 @@ class FieldsRepository extends GeneralRepository
     {
         $this->model()->where('table_name', $table)->where('column_name', $column)->get();
     }
+
+    public function updateField($table,$column_old,$column)
+    {
+        $this->model()->where('table_name', $table)
+            ->where('column_name', $column_old)
+            ->update(['column_name' => $column]);
+    }
+
+
 }

@@ -298,9 +298,8 @@ class Migrations
                     }
                     $at->change();
                 }
-                \App\Models\Fields::where('table_name', $table_name)
-                    ->where('column_name', $column_old)
-                    ->update(['column_name' => $data['column'][0]['name']]);
+//                $fields = new FieldsRepository();
+//                $fields->updateField($table_name,$column_old,$data['column'][0]['name']);
                 if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
             });
         } catch (QueryException $e) {

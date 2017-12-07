@@ -1,10 +1,10 @@
 <div class="col-md-12">
-    {!! Form::open(['url' => url('/admin/console/structure/tables/edit-column',[$table,$table_column])]) !!}
+    {!! Form::open(['url' => url('/admin/console/structure/tables/edit-column',[$table,$table_column]),'id' => 'edit-column-form']) !!}
         <div class="form-group">
             <div class="col-md-6">
                 <label>
                     Name
-                    {!! Form::text('columns[0][name]',$column[0]->Field,['class' => 'form-control input-md']) !!}
+                    {!! Form::text('column[0][name]',$column[0]->Field,['class' => 'form-control input-md']) !!}
                 </label>
             </div><div class="col-md-6">
                 <label>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="form-group">
-            {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
+            {!! Form::button('Save',['class' => 'btn btn-info pull-right edit-column-btn','data-column' => $column[0]->Field]) !!}
         </div>
     {!! Form::close() !!}
 </div>

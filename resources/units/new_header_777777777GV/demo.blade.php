@@ -32,13 +32,13 @@
                 <nav>
                     @foreach($items as $item)
                         <a href="{!! url($item->url) !!}"><i
-                                        class="{!! $item->icon !!}"></i> {!! $item->title !!}</a>
+                                        class="{!! $item->icon !!}"></i> {!! $item->title !!} ddddddddddddddd</a>
                     @endforeach
                 </nav>
             @endif
         @endif
 
-        @if(!Auth::check())
+        @if(!Auth::check() || !isset($settings['no_login']))
             <ul class="custom_ul_login_register">
                 <li><a href="#"><i class="fa fa-user-plus"></i> Sign Up</a>
                 </li>

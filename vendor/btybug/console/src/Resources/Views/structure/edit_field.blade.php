@@ -230,6 +230,29 @@
 
         </div>
 
+        <div class="row">
+            <div class="panel panel-default p-0">
+                <div class="panel-heading">Input Preview</div>
+                <div class="panel-body">
+                    <div class="form-group col-md-6 m-b-10">
+
+                    </div>
+
+                    <div class="form-group col-md-6 m-b-10">
+                        <div class="col-md-12">
+                            {!! BBbutton2('icons','icon','icon','Field HTML',['class'=>'form-control input-md','data-type'=>'icon']) !!}
+                        </div>
+                        <div class="col-md-12">
+                            {!! BBbutton2('icons','tooltip','tooltip','Field Class',['class'=>'form-control input-md','data-type'=>'icon']) !!}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
         <input type="hidden" name="settings">
         <input type="text" class="hide" data-fieldtype="form" name="fieldhtmltype" value="{!! $field->field_html !!}">
         <input type="text" class="hide" data-fieldtype="formdefutl" name="custom_field_html"

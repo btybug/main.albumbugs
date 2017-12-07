@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Content</title>
-</head>
-<body>
+
 <section class="bty-slider">
     <div class="owl-carousel owl-theme slider-carousel">
         <div class="item">
@@ -119,7 +111,6 @@
         </div>
     </div>
 </section>
-</body>
 
 {!! BBstyle($_this->path.DS.'css'.DS.'owl.carousel.min.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'owl.theme.default.css') !!}
@@ -128,5 +119,3 @@
 
 {!! BBscript($_this->path.DS.'js'.DS.'owl.carousel.min.js') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
-
-</html>

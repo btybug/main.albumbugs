@@ -1,5 +1,6 @@
 <?php
 namespace Btybug\btybug\Models;
+use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;
 /**
@@ -202,7 +203,7 @@ class Migrations
     }
     public static function addcolumn($table, $data)
     {
-        $columns = $data['column'];
+        if(! isset($data['column']) && ! count($data['column'])) return \Response::json(['error' => true, "Column not found !!!"]);
         try {
             \Schema::table($table, function (Blueprint $table) use ($data) {
                 $columns = $data['column'];
@@ -228,6 +229,18 @@ class Migrations
                 }
                 if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
             });
+
+            foreach ($data['column'] as $column) {
+                if (isset($column['field']) && $column['field'] == 'yes') {
+                    $field = new FieldsRepository();
+                    $field->create([
+                        'name' => ucwords(str_replace("_"," ",$column['name'])),
+                        'slug' => uniqid(),
+                        'table_name' => $table,
+                        'column_name' => $column['name'],
+                    ]);
+                }
+            }
         } catch (QueryException $e) {
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);
         } catch (\Psy\Exception\FatalErrorException $e) {

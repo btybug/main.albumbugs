@@ -31,29 +31,6 @@
 
                     <div class="form-group col-md-12">
                         <div class="col-md-6">
-                            <label class="col-md-3 p-l-0">Saving Target</label>
-                            <div class="col-md-9">
-                                @if($field->structured_by == 'custom')
-                                    {!! Form::select('table_name',['' => 'Select table'] +BBGetTables(),null,['class' => 'form-control table-change']) !!}
-                                @else
-                                    <div class="form-control" readonly="true"
-                                         disabled="true"> {!! $field->table_name !!} </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="columns {!! ($field->table_name ) ? '' : 'hide' !!} col-md-6">
-                            <div class="col-md-12">
-                                @if($field->structured_by == 'custom')
-                                    {!! Form::select('column_name',BBGetTableColumn($field->table_name ),null,['class' => 'form-control table-columns']) !!}
-                                @else
-                                    <div class="form-control" readonly="true"
-                                         disabled="true"> {!! $field->column_name !!} </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-6">
                             <label class="col-md-3 p-l-0">Second Target</label>
                             <div class="col-md-9">
                                 {!! Form::select('second_table',['' => 'Select table'] +BBGetTables(),null,['class' => 'form-control second-table-change']) !!}
@@ -67,29 +44,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-12">
-                        <div class="col-md-6">
-                            <label class="col-md-3 p-l-0">Saving Target</label>
-                            <div class="col-md-9">
-                                @if($field->structured_by == 'custom')
-                                    {!! Form::select('second_table',['' => 'Select table'] +BBGetTables(),null,['class' => 'form-control second-table-change']) !!}
-                                @else
-                                    <div class="form-control" readonly="true"
-                                         disabled="true"> {!! $field->second_table !!} </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="second-columns {!! ($field->second_table ) ? '' : 'hide' !!} col-md-6">
-                            <div class="col-md-12">
-                                @if($field->structured_by == 'custom')
-                                    {!! Form::select('second_column',BBGetTableColumn($field->second_table ),null,['class' => 'form-control second-table-columns']) !!}
-                                @else
-                                    <div class="form-control" readonly="true"
-                                         disabled="true"> {!! $field->second_column !!} </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="form-group col-md-12">
                         <div class="col-md-6">
@@ -103,46 +57,6 @@
                             <label class="col-md-3 p-l-0">Extra Validation</label>
                             <div class="col-md-9">
                                 {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-6">
-                            <label class="col-md-3 p-l-0">
-                                Select Input
-                            </label>
-                            <div class="col-md-9" data-unitname="btnunit">
-                                <div class="col-sm-8 p-l-0" data-unitname="name">
-                                    <input name="selcteunit" class="form-control" readonly="readonly"
-                                           value="{!! ($unit) ? $unit->title : 'Nothing selected' !!}">
-                                </div>
-                                {!! BBbutton('units','unit','Select input',[
-                                     'class' => 'btn btn-default btn-dblue',
-                                     "data-type" => 'backend',
-                                     'data-sub' => "general_fields",
-                                     "model" => $field
-                                     ]) !!}
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 p-l-0">Field Html</label>
-                            <div class="col-sm-6">
-                                <div class="for_button_1 ">
-                                    {!! Form::select('field_html',[
-                                        'no' => 'No Html',
-                                        'default' => 'Default Html',
-                                        'custom' => 'Custom Html',
-                                    ],null,['class' => 'form-control','data-selectcustomfield']) !!}
-                                </div>
-                            </div>
-                            <div class="col-sm-3" data-selectcustomfieldhtml="custom">
-                                {!! BBbutton('units','custom_html','Select Field Html',[
-                                    'class' => 'form-control input-md btn-success',
-                                    "data-type" => 'frontend',
-                                    'data-sub' => "component",
-                                    'model' => $field->custom_html
-                                ]) !!}
                             </div>
                         </div>
                     </div>
@@ -240,10 +154,10 @@
 
                     <div class="form-group col-md-6 m-b-10">
                         <div class="col-md-12">
-                            {!! BBbutton2('icons','icon','icon','Field HTML',['class'=>'form-control input-md','data-type'=>'icon']) !!}
+                            {!! BBbutton2('unit','unit','fields','Field HTML',['class'=>'form-control input-md']) !!}
                         </div>
                         <div class="col-md-12">
-                            {!! BBbutton2('icons','tooltip','tooltip','Field Class',['class'=>'form-control input-md','data-type'=>'icon']) !!}
+                            {!! BBbutton2('class','field_class','class','Field Class',['class'=>'form-control input-md']) !!}
                         </div>
                     </div>
 

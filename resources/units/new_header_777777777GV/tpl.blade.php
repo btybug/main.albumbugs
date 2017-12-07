@@ -1,85 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Header</title>
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
+
 <body>
-<header class="bty-header">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img src="{!! BBgetSiteLogo() !!}" alt="">
-                    <span>{!! BBgetSiteName() !!}</span>
-                </a>
-            </div>
-            @if(isset($settings['menu_area']))
-                @php
-                    $items = BBGetMenu($settings['menu_area'])
-                @endphp
-                @if(count($items))
-                    <ul class="nav navbar-nav">
-                        @foreach($items as $item)
-                            <li><a href="{!! url($item->url) !!}"><i
-                                            class="{!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
-                        @endforeach
-                    </ul>
-                @endif
+
+<header class="header-login-signup">
+
+    <div class="header-limiter">
+
+        <h1>
+            <a href="#">
+                <img src="{!! BBgetSiteLogo() !!}" alt="">
+                <span>{!! BBgetSiteName() !!}</span>
+            </a>
+        </h1>
+        @if(isset($settings['menu_area']))
+            @php
+                $items = BBGetMenu($settings['menu_area'])
+            @endphp
+            @if(count($items))
+                <nav>
+                    @foreach($items as $item)
+                        <a href="{!! url($item->url) !!}"><i
+                                        class="{!! $item->icon !!}"></i> {!! $item->title !!}</a>
+                    @endforeach
+                </nav>
             @endif
-            @if(!Auth::check())
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="bty-btn-sign-up"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-                    </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            @else
+        @endif
 
+        @if(!Auth::check() || !isset($settings['no_login']))
+            <ul class="custom_ul_login_register">
+                <li><a href="#"><i class="fa fa-user-plus"></i> Sign Up</a>
+                </li>
+                <li><a href="#" data-toggle="modal" data-target="#login"><i class="fa fa-sign-in"></i> Login</a></li>
+            </ul>
+        @else
+            <ul class="nav navbar-nav navbar-right header-user">
+                <li>
+                    <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt="">{{Auth::user()->username}} <i class="fa fa-caret-down"></i></a>
+                    <ul>
 
-                <ul class="nav navbar-nav navbar-right header-user">
-                    <li>
-                        <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt=""></a>
-                        <ul>
-
-                            <li><a href="{!! url('logout') !!}"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
-                            </li>
-                            @if(isset($settings['user_menu']))
-                                @php
-                                    $items = BBGetMenu($settings['user_menu'])
-                                @endphp
-                                @if(count($items))
-                                    @foreach($items as $item)
-                                        <li><a href="{!! url($item->url) !!}"><i class="fa fa-sign-out"
-                                                                                 aria-hidden="true"></i><span>{!! $item->title !!}</span></a>
-                                        </li>
-                                    @endforeach
-                                @endif
+                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
+                        </li>
+                        @if(isset($settings['user_menu']))
+                            @php
+                                $items = BBGetMenu($settings['user_menu'])
+                            @endphp
+                            @if(count($items))
+                                @foreach($items as $item)
+                                    <li class="custom_li_style"><a href="{!! url($item->url) !!}" class="custom_link_style"><i class="fa fa-sign-out"
+                                                                             aria-hidden="true"></i><span>{!! $item->title !!}</span></a>
+                                    </li>
+                                @endforeach
                             @endif
+                        @endif
 
-                        </ul>
-                    </li>
-                </ul>
-            @endif
-        </div>
-    </nav>
+                    </ul>
+                </li>
+            </ul>
+        @endif
+    </div>
+
 </header>
 
-<div class="bty-log-reg">
+
+<div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['url'=>url('login')]) !!}
+                <fieldset>
+                    <h2>Please Login</h2>
+                    <hr class="colorgraph">
+                    <div class="form-group">
+                        <input type="text" name="usernameOremail" id="email" class="form-control input-lg" placeholder="Username or Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" value="">
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                        </label>
+                        <a href="http://albumbugs.dev/forgot" class="btn btn-link pull-right">Forgot Password?</a>
+                    </div>
+                    <hr class="colorgraph">
+                </fieldset>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-success" value="Login">
+            </div>
+            {!! Form::close() !!}
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script>
+
+    $(document).ready(function(){
+
+        var showHeaderAt = 150;
+
+        var win = $(window),
+            body = $('body');
+
+        // Show the fixed header only on larger screen devices
+
+        if(win.width() > 600){
+
+            // When we scroll more than 150px down, we set the
+            // "fixed" class on the body element.
+
+            win.on('scroll', function(e){
+
+                if(win.scrollTop() > showHeaderAt) {
+                    body.addClass('fixed');
+                }
+                else {
+                    body.removeClass('fixed');
+                }
+            });
+
+        }
+
+    });
+
+</script>
+{{--<div class="bty-log-reg">
     <div class="login-wrap">
         <div class="login-html">
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
@@ -140,7 +206,9 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 {!! BBstyle($_this->path.DS.'css'.DS.'main.css') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'main.js') !!}
+</body>
+
 </html>

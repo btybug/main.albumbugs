@@ -528,28 +528,29 @@ class StructureController extends Controller
         FieldService $fieldService
     )
     {
-        $isCol = \Schema::hasColumn($request->table, $request->column);
+        $table = $request->table;
+        $table_column = $request->column;
+        $isCol = \Schema::hasColumn($table, $table_column);
         if ($isCol) {
-            $columns = \DB::select('SHOW COLUMNS FROM ' . $request->table);
+            $columns = \DB::select('SHOW COLUMNS FROM ' . $table);
             $this->data['default'] = ['NULL', 'USER_DEFINED', 'CURRENT_TIMESTAMP'];
             $this->data['tbtypes'] = Migrations::types();
             $this->data['engine'] = Migrations::engine();
-            $this->data['table'] = $request->table;
+            $this->data['table'] = $table;
             $this->data['columns'] = $columns;
             foreach ($columns as $column) {
                 $after_columns[$column->Field] = $column->Field;
             }
             $this->data['after_columns'] = $after_columns;
-
             $db = env('DB_DATABASE');
-            $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = '$db' AND table_name ='$request->table'  AND column_name ='$request->column'"));
+            $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = '$db' AND table_name ='$table'  AND column_name ='$table_column'"));
             if ($column_info) {
                 $column_info = $column_info[0];
                 $length = Migrations::getLendth($column_info);
                 $type = Migrations::getDataType($column_info);
-                $column = \DB::select('SHOW COLUMNS FROM ' . $request->table .' WHERE FIELD="'.$request->column.'"');
-                $field = FieldService::fieldExists($request->table, $request->column);
-                $column_edit = \View("console::structure.developers._partials.columns_edit", compact('column', 'length', 'type', 'field'))->with($this->data)->render();
+                $column = \DB::select('SHOW COLUMNS FROM ' . $table .' WHERE FIELD="'.$table_column.'"');
+                $field = FieldService::fieldExists($table, $table_column);
+                $column_edit = \View("console::structure.developers._partials.columns_edit", compact('column', 'length', 'type', 'field','table','table_column'))->with($this->data)->render();
 
                 return \Response::json(['html' => $column_edit, 'error' => false]);
             }

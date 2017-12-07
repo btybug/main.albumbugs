@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    {!! Form::open(['url' => '']) !!}
+    {!! Form::open(['url' => url('/admin/console/structure/tables/edit-column',[$table,$table_column])]) !!}
         <div class="form-group">
             <div class="col-md-6">
                 <label>

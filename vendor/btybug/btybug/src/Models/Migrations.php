@@ -298,8 +298,26 @@ class Migrations
                     }
                     $at->change();
                 }
-//                $fields = new FieldsRepository();
-//                $fields->updateField($table_name,$column_old,$data['column'][0]['name']);
+
+                foreach ($columns as $column) {
+                    if (isset($column['field']) && $column['field'] == 'yes') {
+                        $field = new FieldsRepository();
+                        if($field->findByTableAndCol($table_name,$column_old)){
+                            $field->updateField($table_name,$column_old,$column['name']);
+                        }else{
+                            $field->create([
+                                'name' => ucwords(str_replace("_"," ",$column['name'])),
+                                'slug' => uniqid(),
+                                'table_name' => $table_name,
+                                'column_name' => $column['name'],
+                            ]);
+                        }
+                    }else if(isset($column['field']) && $column['field'] == 'no'){
+                        $field = new FieldsRepository();
+                        $field->findByTableAndColAndDelete($table_name,$column_old);
+                    }
+                }
+
                 if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
             });
         } catch (QueryException $e) {
@@ -419,9 +437,11 @@ class Migrations
     }
     public static function deleteColumn($table, $column)
     {
-        \Schema::table($table, function ($table) use ($column) {
-            $table->dropColumn($column);
-        });
+        if(\Schema::hasColumn($table,$column)){
+            \Schema::table($table, function ($table) use ($column) {
+                $table->dropColumn($column);
+            });
+        }
     }
     public function seperator($obj)
     {

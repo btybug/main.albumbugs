@@ -40,20 +40,25 @@ class FieldsRepository extends GeneralRepository
 
     public function getByTableAndCol($table,$column)
     {
-        $this->model()->where('table_name', $table)->where('column_name', $column)->get();
+        return $this->model()->where('table_name', $table)->where('column_name', $column)->get();
     }
 
     public function findByTableAndCol($table,$column)
     {
-        $this->model()->where('table_name', $table)->where('column_name', $column)->get();
+        return $this->model()->where('table_name', $table)->where('column_name', $column)->first();
     }
 
     public function updateField($table,$column_old,$column)
     {
-        $this->model()->where('table_name', $table)
+        return $this->model()->where('table_name', $table)
             ->where('column_name', $column_old)
-            ->update(['column_name' => $column]);
+            ->update(['column_name' => $column,'name' => ucwords(str_replace("_"," ",$column))]);
     }
 
+    public function findByTableAndColAndDelete($table,$column)
+    {
+        $field = $this->findByTableAndCol($table,$column);
+        if($field) $field->delete();
+    }
 
 }

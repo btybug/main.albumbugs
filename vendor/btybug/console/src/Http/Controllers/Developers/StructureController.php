@@ -13,6 +13,7 @@ namespace Btybug\Console\Http\Controllers\Developers;
 
 use App\Http\Controllers\Controller;
 use Btybug\Console\Repository\FieldsRepository;
+use Btybug\Console\Services\FieldService;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\Templates\Units;
 use Btybug\Console\Repository\AdminPagesRepository;
@@ -198,7 +199,7 @@ class StructureController extends Controller
     )
     {
         $types = [];//\App\Models\Fields::getFieldTypes();
-        $fields = $fieldsRepository->getByTableAndCol($table,$column);
+        $fields = $fieldsRepository->getByTableAndCol($table, $column);
         $state = 'current';
 
         $colums = \DB::select('SHOW COLUMNS FROM ' . $table);
@@ -207,7 +208,7 @@ class StructureController extends Controller
         if ($column_info) $column_info = $column_info[0];
         $length = Migrations::getLendth($column_info);
         $dataType = Migrations::getDataType($column_info);
-        $field = $fieldsRepository->findByTableAndCol($table,$column);
+        $field = $fieldsRepository->findByTableAndCol($table, $column);
         $tbtypes = Migrations::types();
 
         return view("console::structure.developers.structure.tables.edit_column", compact(['column', 'table', 'tbtypes', 'column_info', 'length', 'dataType', 'keys', 'types', 'fields', 'state']));
@@ -523,9 +524,37 @@ class StructureController extends Controller
     }
 
     public function postGetTableColumn(
-        Request $request
+        Request $request,
+        FieldService $fieldService
     )
     {
-        dd($request->all());
+        $isCol = \Schema::hasColumn($request->table, $request->column);
+        if ($isCol) {
+            $columns = \DB::select('SHOW COLUMNS FROM ' . $request->table);
+            $this->data['default'] = ['NULL', 'USER_DEFINED', 'CURRENT_TIMESTAMP'];
+            $this->data['tbtypes'] = Migrations::types();
+            $this->data['engine'] = Migrations::engine();
+            $this->data['table'] = $request->table;
+            $this->data['columns'] = $columns;
+            foreach ($columns as $column) {
+                $after_columns[$column->Field] = $column->Field;
+            }
+            $this->data['after_columns'] = $after_columns;
+
+            $db = env('DB_DATABASE');
+            $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = '$db' AND table_name ='$request->table'  AND column_name ='$request->column'"));
+            if ($column_info) {
+                $column_info = $column_info[0];
+                $length = Migrations::getLendth($column_info);
+                $type = Migrations::getDataType($column_info);
+                $column = \DB::select('SHOW COLUMNS FROM ' . $request->table .' WHERE FIELD="'.$request->column.'"');
+                $field = FieldService::fieldExists($request->table, $request->column);
+                $column_edit = \View("console::structure.developers._partials.columns_edit", compact('column', 'length', 'type', 'field'))->with($this->data)->render();
+
+                return \Response::json(['html' => $column_edit, 'error' => false]);
+            }
+        }
+
+        return \Response::json(['message' => "Column Not Found", 'error' => true]);
     }
 }

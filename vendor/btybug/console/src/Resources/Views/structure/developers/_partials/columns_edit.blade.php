@@ -11,6 +11,7 @@
                     Type
                     <select name="column[0][type]" class="form-control">@foreach($tbtypes as $k=>$v) <option value="{!! $k !!}"  {!! ($type == $k) ? "selected" : "null" !!} >{!! $v !!}</option> @endforeach</select>
                 </label>
+                
             </div>
         </div>
         <div class="form-group">

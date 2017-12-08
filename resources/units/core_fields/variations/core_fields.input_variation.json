@@ -1,6 +1,1 @@
-{
-  "title": "Default",
-  "settings": {
-  },
-  "id": "core_fields.input_variation"
-}
+{"title":"Default","settings":{"input_type":"text"},"id":"core_fields.input_variation"}

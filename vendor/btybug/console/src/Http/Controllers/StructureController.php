@@ -353,6 +353,14 @@ class StructureController extends Controller
         return redirect('admin/console/structure/fields')->with('message', 'Field Updated');
     }
 
+    public function postRenderFieldHtml(
+        Request $request,
+        StructureService $structureService
+    )
+    {
+        return \Response::json(['data' => BBRenderUnits($request->unit,$request->all())]);
+    }
+
 
     public function getCreateAdvanced()
     {

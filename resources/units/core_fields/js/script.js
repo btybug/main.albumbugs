@@ -469,12 +469,17 @@ $(document).ready(function () {
 });
 // Text Animation
 // Text Animation 1
-var paragraph = document.getElementsByClassName('bty-animation-1')[0],
-    text = paragraph.innerHTML,
-    chars = text.length,
-    newText = '',
-    char,
-    i;
+var paragraph = document.getElementsByClassName('bty-animation-1')[0];
+    var text,
+        chars,
+        newText = '',
+        char,
+        i;
+    if(paragraph != undefined){
+        text = paragraph.innerHTML;
+        chars = text.length;
+    }
+
 
 for (i = 0; i < chars; i += 1) {
     newText += '<i>' + text.charAt(i) + '</i>';

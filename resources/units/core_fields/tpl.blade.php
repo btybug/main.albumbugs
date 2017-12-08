@@ -1,7 +1,9 @@
 @if(isset($settings['input_type']))
     @if($settings['input_type'] == 'text')
-        <input class="bty-input-label-7" type="text" placeholder="Your name?">
-        <label>Name</label>
+        <input class="bty-input-label-7" type="text" placeholder="{!! issetReturn($settings,'placeholder') !!}">
+        <label>
+            {!! issetReturn($settings,'label',' ') !!}
+        </label>
         <label><i class="fa fa-question" aria-hidden="true"></i></label>
         <p>Lorem ipsum Lorem</p>
     @elseif($settings['input_type'] == 'textarea')

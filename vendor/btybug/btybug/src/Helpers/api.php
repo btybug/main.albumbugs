@@ -531,13 +531,18 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
                     $settings = [];
                 }
 
-                if (isset($source['field'])) {
-                    if (is_string($source['field'])) {
-                        $field = $source;
-                    } else {
-                        $field = $source['field'];
-                    }
+                $liveSettings = $source;
+                if (count($liveSettings) && is_array($liveSettings) && is_array($settings)) {
+                    array_filter($settings, function ($value) {
+                        return $value !== '';
+                    });
+
+                    array_filter($liveSettings, function ($value) {
+                        return $value !== '';
+                    });
+                    $settings = array_merge($settings,$liveSettings);
                 }
+
                 return $unit->render(compact(['variation', 'settings', 'source', 'field', 'cheked', 'data']));
             }
         }

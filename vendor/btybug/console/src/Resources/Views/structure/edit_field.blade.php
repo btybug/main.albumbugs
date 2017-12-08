@@ -1,7 +1,7 @@
 @extends('btybug::layouts.admin')
 @section('content')
     <div class="col-md-12" id="add-new-fields">
-        {!! Form::model($field,['url'=>['/admin/console/structure/fields/edit',$field->id],'class' => 'form-horizontal']) !!}
+        {!! Form::model($field,['url'=>['/admin/console/structure/fields/edit',$field->id],'class' => 'form-horizontal','id' => 'edit-field']) !!}
         <div class="row">
             <div class="col-md-6">
                 <h3 class="modal-title m-b-20 text-left" id="myModalLabel">Edit Field</h3>
@@ -148,7 +148,7 @@
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Input Preview</div>
                 <div class="panel-body">
-                    <div class="form-group col-md-6 m-b-10">
+                    <div class="form-group col-md-6 m-b-10 field-html-box">
 
                     </div>
 
@@ -245,38 +245,46 @@
 
         $(document).ready(function () {
 
-
-            function layoutData(variation) {
-                var data;
-                if (!variation) {
-                    variation = $('input[data-name="unit"]').val();
-                }
-                $('input[name="selcteunit"]').val(variation)
-                data = {'variation_id': variation};
-                sendajaxvar('/admin/console/bburl/get-page-layout-config-toarray', data, function (d) {
-                    if (!d.error) {
-                        $('[data-unitname="btnunit"] [data-action="units"]').text('change');
-                        $('[data-unitname="name"]').removeClass('hide');
-                        $.each(d, function (key, val) {
-                            if (typeof val == 'string') {
-                                $('[data-unitname="' + key + '"]').html(val)
-                            }
-                            if (typeof val == 'object') {
-                                $.each(val, function (k, v) {
-                                    $('[data-unitname="' + k + '"]').html(v)
-                                })
-                            }
-                        })
+            $("body").on("click", '.item-unit', function () {
+                var data = $("#edit-field").serialize();
+                sendajaxvar('/admin/console/structure/fields/render-html', data, function (d) {
+                    if (d) {
+                        $(".field-html-box").html(d.data);
                     }
                 })
+            })
 
-
-            }
-
-            $('body').on('change', 'input[data-name="unit"]', function () {
-                $('[data-unitname="btnunit"] [data-action="units"]').text('change');
-                layoutData($(this).val());
-            });
+            // function layoutData(variation) {
+            //     var data;
+            //     if (!variation) {
+            //         variation = $('input[data-name="unit"]').val();
+            //     }
+            //     $('input[name="selcteunit"]').val(variation)
+            //     data = {'variation_id': variation};
+            //     sendajaxvar('/admin/console/bburl/get-page-layout-config-toarray', data, function (d) {
+            //         if (!d.error) {
+            //             $('[data-unitname="btnunit"] [data-action="units"]').text('change');
+            //             $('[data-unitname="name"]').removeClass('hide');
+            //             $.each(d, function (key, val) {
+            //                 if (typeof val == 'string') {
+            //                     $('[data-unitname="' + key + '"]').html(val)
+            //                 }
+            //                 if (typeof val == 'object') {
+            //                     $.each(val, function (k, v) {
+            //                         $('[data-unitname="' + k + '"]').html(v)
+            //                     })
+            //                 }
+            //             })
+            //         }
+            //     })
+            //
+            //
+            // }
+            //
+            // $('body').on('change', 'input[data-name="unit"]', function () {
+            //     $('[data-unitname="btnunit"] [data-action="units"]').text('change');
+            //     layoutData($(this).val());
+            // });
 
 
             //layoutData();
@@ -636,12 +644,6 @@
                     }
                 });
             })
-
-            getajaxvar('/admin/console/structure/get-default-html', {}, function (d) {
-                if (d) {
-                    htmlsdata['default'] = d;
-                }
-            });
 
         });
     </script>

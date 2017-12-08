@@ -32,7 +32,6 @@
     {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
     <script src="{{ url("public/js/jquery-ui/jquery-ui.min.js") }}" type="text/javascript"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->title).'.js') !!}
     {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
     {!! HTML::script("public/js/UiElements/bb_iframejs.js") !!}
 </head>
@@ -73,6 +72,7 @@
 {!! BBJquery() !!}
 {!! BBMainFrontJS() !!}
 {!! BBJs() !!}
+{!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->title).'.js') !!}
 @yield('js')
 </body>
 </html>

@@ -1,12 +1,13 @@
-window.onload  = function (){
+
+$(function(){
     $('.slider-carousel').owlCarousel({
-        loop:true, //Зацикливаем слайдер
-        margin:0, //Отступ от картино если выводите больше 1
-        nav:false, //Отключил навигацию
-        autoplay:false, //Автозапуск слайдера
-        smartSpeed:1500, //Время движения слайда
-        autoplayTimeout:3000, //Время смены слайда
-        responsive:{ //Адаптация в зависимости от разрешения экрана
+        loop:true,
+        margin:0,
+        nav:false,
+        autoplay:true,
+        smartSpeed:1500,
+        autoplayTimeout:3000,
+        responsive:{
             0:{
                 items:1
             },
@@ -18,4 +19,4 @@ window.onload  = function (){
             }
         }
     });
-};
+});

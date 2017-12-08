@@ -1,4 +1,3 @@
-
 <section class="bty-slider">
     <div class="owl-carousel owl-theme slider-carousel">
         <div class="item">
@@ -112,10 +111,8 @@
     </div>
 </section>
 
+{!! BBscript($_this->path.DS.'js'.DS.'owl.carousel.min.js') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'owl.carousel.min.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'owl.theme.default.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
-
-
-{!! BBscript($_this->path.DS.'js'.DS.'owl.carousel.min.js') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}

@@ -12,6 +12,7 @@
 namespace Btybug\btybug\Http\Controllers\Admincp;
 
 use App\Http\Controllers\Controller;
+use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
@@ -36,16 +37,18 @@ class ModalityController extends Controller
      */
     private $helpers;
     private $menuRepo;
+    private $fieldsRepository;
 
 
     /**
      * ModalityController constructor.
      * @param Widget $widget
      */
-    public function __construct(MenuRepository $menuRepository)
+    public function __construct(MenuRepository $menuRepository,FieldsRepository $fieldsRepository)
     {
         $this->helpers = new helpers;
         $this->menuRepo = $menuRepository;
+        $this->fieldsRepository = $fieldsRepository;
     }
 
     /**
@@ -58,6 +61,7 @@ class ModalityController extends Controller
             'styles' => 'getStyles',
             'widgets' => 'getWidgets',
             'menus' => 'getMenus',
+            'fields' => 'getFields',
             'icons' => 'getIcons',
             'templates' => 'getTpls',
             'theme' => 'getTheme',
@@ -124,6 +128,20 @@ class ModalityController extends Controller
         if (!count($menus)) return \Response::json(['error' => true]);
 
         $html = View::make('btybug::styles.menus', compact('menus'))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function getFields($data)
+    {
+        $key = $data['key'];
+        isset($data['type']) ? $type = $data['type'] : $type = null;
+
+        $fields = $this->fieldsRepository->getBy('table_name', $type);
+
+        if (!count($fields)) return \Response::json(['error' => true]);
+
+        $html = View::make('btybug::styles.fields', compact('fields','type'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

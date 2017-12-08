@@ -140,3 +140,100 @@ section.bty-slider .slider-carousel .owl-dots .owl-dot.active span, section.bty-
 .bty-welcome .our-about p {
     font-size: 14px;
 }
+
+/*Responsive*/
+@media (min-width: 320px) and (max-width: 735px){
+    section.bty-slider .slider-carousel img{
+        height: 270px;
+    }
+    section.bty-slider .slider-carousel .head-slider p.title{
+        font-size: 30px;
+    }
+    section.bty-slider .slider-carousel .head-slider p.desc{
+        font-size: 14px;
+    }
+    .bty-welcome h2{
+        font-size: 35px;
+    }
+    .bty-welcome .our-about{
+        margin-bottom: 15px;
+    }
+    .bty-testimonials h2{
+        font-size: 35px;
+    }
+    .bty-testimonials .person:nth-of-type(2){
+        border: none;
+    }
+    footer.bty-footer .footer-top .subscribe h5{
+        text-align: left;
+    }
+    footer.bty-footer .footer-bottom-content .reserverd{
+        display: inline-block;
+    }
+    footer.bty-footer .footer-bottom-content .social{
+        display: inline-block;
+    }
+}
+@media (max-width: 375px){
+    footer.bty-footer{
+        text-align: center;
+    }
+    footer.bty-footer .footer-top .subscribe h5{
+        text-align: center;
+    }
+    footer.bty-footer .footer-bottom .social ul{
+        text-align: right;
+        padding: 0
+    }
+    footer.bty-footer .footer-bottom-content .reserverd{
+        display: block;
+    }
+}
+@media (min-width: 736px) and (max-width: 768px){
+    .bty-testimonials .person:nth-of-type(2){
+        border: none;
+    }
+    .bty-testimonials h2, .bty-welcome h2{
+        font-size: 50px;
+    }
+    section.bty-slider .slider-carousel img{
+        height: 350px;
+    }
+    section.bty-slider .slider-carousel .head-slider p.title{
+        font-size: 50px;
+    }
+    section.bty-slider .slider-carousel .head-slider p.desc{
+        font-size: 16px;
+    }
+    .bty-welcome .our-about{
+        margin-bottom: 20px;
+    }
+    footer.bty-footer .footer-top .subscribe h5{
+        text-align: left;
+    }
+    footer.bty-footer .footer-bottom-content .reserverd, footer.bty-footer .footer-bottom-content .social{
+        display: inline-block;
+    }
+    footer.bty-footer .footer-bottom-content .social{
+        float: right;
+    }
+}
+
+
+
+
+
+
+.custom_empty_section{
+    display: flex;
+    align-items: center;
+    min-height:400px;
+    margin: 5px 0;
+    width: 100%;
+    border:2px solid rgba(10, 10, 10, 0.2);
+    justify-content: center;
+}
+.custom_empty_section h2{
+    color: #ccc;
+    font-size: 100px;
+}

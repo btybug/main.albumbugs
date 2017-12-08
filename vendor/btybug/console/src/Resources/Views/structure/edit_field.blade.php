@@ -149,12 +149,11 @@
                 <div class="panel-heading">Input Preview</div>
                 <div class="panel-body">
                     <div class="form-group col-md-6 m-b-10 field-html-box">
-
+                            {!! BBRenderUnits($field->unit,$field->toArray()) !!}
                     </div>
-
                     <div class="form-group col-md-6 m-b-10">
                         <div class="col-md-12">
-                            {!! BBbutton2('unit','unit','fields','Field HTML',['class'=>'form-control input-md']) !!}
+                            {!! BBbutton2('unit','unit','fields','Field HTML',['class'=>'form-control input-md','model' => $field->toArray()]) !!}
                         </div>
                         <div class="col-md-12">
                             {!! BBbutton2('class','field_class','class','Field Class',['class'=>'form-control input-md']) !!}

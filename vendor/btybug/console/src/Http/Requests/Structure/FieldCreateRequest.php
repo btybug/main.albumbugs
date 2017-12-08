@@ -26,8 +26,6 @@ class FieldCreateRequest extends Request
         if ($this->isMethod('POST')) {
             return [
                 'name' => "required",
-                'table_name' => "required",
-                'column_name' => "required",
                 'unit' => 'required'
             ];
         }

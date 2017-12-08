@@ -336,7 +336,7 @@ class StructureController extends Controller
 
     public function postEditField(
         $id,
-        FieldCreateRequest $request,
+        Request $request,
         FieldsRepository $fieldsRepository,
         StructureService $structureService
     )

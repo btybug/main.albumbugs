@@ -343,11 +343,6 @@ class StructureController extends Controller
     {
         $data = $request->except(['_token']);
         $field = $fieldsRepository->findOrFail($id);
-        if ($field->structured_by != 'custom') {
-            $field->update(['json_data' => $request->get('settings', null), 'unit' => $request->get('unit', null)]);
-            return redirect('admin/console/structure/fields')->with('message', 'Field Updated');
-        }
-
         $structureService->fieldUpdate($data, $field);
 
         return redirect('admin/console/structure/fields')->with('message', 'Field Updated');

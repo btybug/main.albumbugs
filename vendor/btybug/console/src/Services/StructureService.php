@@ -457,8 +457,6 @@ class StructureService extends GeneralService
             'placeholder' => $data['placeholder'] != '' ? $data['placeholder'] : NULL,
             'icon' => $data['icon'] != '' ? $data['icon'] : NULL,
             'tooltip' => $data['tooltip'] != '' ? $data['tooltip'] : NULL,
-            'custom_html' => $data['custom_html'] != '' ? $data['custom_html'] : NULL,
-            'field_html' => $data['field_html'] != '' ? $data['field_html'] : 'no',
             'second_table' => isset($data['second_table']) && $data['second_table'] != '' ? $data['second_table'] : NULL,
             'second_column' => isset($data['second_column']) && $data['second_column'] != '' ? $data['second_column'] : NULL,
             'required' => $data['required'],

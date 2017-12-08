@@ -20,13 +20,15 @@
                             @if($field->structured_by == 'custom')
                                 {!! Form::text('name',null,['class' => 'form-control ']) !!}
                             @else
+                                {!! Form::hidden('name',null) !!}
                                 <div class="form-control" readonly="true" disabled="true"> {!! $field->name !!} </div>
                             @endif
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-
+                        {!! Form::hidden('table_name',null) !!}
+                        {!! Form::hidden('column_name',null) !!}
                     </div>
 
                     <div class="form-group col-md-12">

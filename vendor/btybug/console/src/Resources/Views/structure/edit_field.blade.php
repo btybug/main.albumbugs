@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="panel panel-default p-0">
-                <div class="panel-heading">Field Setting</div>
+                <div class="panel-heading">Saving & validation</div>
                 <div class="panel-body">
                     <div class="form-group col-md-12">
                         <div class="form-group col-md-4">

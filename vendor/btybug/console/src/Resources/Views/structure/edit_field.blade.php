@@ -20,12 +20,27 @@
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Field Setting</div>
                 <div class="panel-body">
-                    <div class="form-group col-md-6">
-                        {!! Form::hidden('table_name',null) !!}
-                        {!! Form::hidden('column_name',null) !!}
-                    </div>
-
                     <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
+                            <label class="col-md-3 p-l-0">Table</label>
+                            <div class="col-md-9">
+                                {!! Form::hidden('table_name',null) !!}
+                                <div class="form-control" readonly="true" disabled="true"> {!! $field->table_name !!} </div>
+                            </div>
+                            {!! Form::hidden('column_name',null) !!}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="col-md-3 p-l-0">Column</label>
+                            <div class="col-md-9">
+                                {!! Form::hidden('column_name',null) !!}
+                                <div class="form-control" readonly="true" disabled="true"> {!! $field->column_name !!} </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <a href="javascript:void(0)" class="btn btn-primary add-second"><i class="fa fa-plus"></i> add another</a>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 another-target hide">
                         <div class="col-md-6">
                             <label class="col-md-3 p-l-0">Second Target</label>
                             <div class="col-md-9">
@@ -39,7 +54,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="form-group col-md-12">
                         <div class="col-md-6">

@@ -121,6 +121,86 @@
                         ],null,['class' => 'form-control']) !!}
                         </div>
                     </div>
+                    <div class="col-md-6">
+                            <!-- Form Name -->
+                            <div class="row legend">
+                                <div class="col-xs-6">
+                                    <legend>Create Mapping</legend>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    {!! Form::button('Save',['class' => 'btn btn-success']) !!}
+                                </div>
+                            </div>
+                            <div class="row m-b-10">
+                                <label class="col-md-12 control-label" for="engine"></label>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-md-4 control-label" for="name">Mapping Name</label>
+                                        <div class="col-xs-8 col-md-8">
+                                            {!! Form::text('name',null,['class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-md-4 control-label" for="name">Data Source</label>
+                                        <div class="col-xs-8 col-md-8">
+                                            <!-- check if Data source is data-source -->
+                                            {!! Form::select('data_source',[
+                                             ''=>'-- Select Data source --',
+                                             'api'=>'From api',
+                                             'related'=>'Related',
+                                             'bb'=>'BB Functions',
+                                             'file'=>'File'], null,['class'=>'form-control','id'=>'data_source']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="select_op_box">
+                                        when selected Related
+                                        <div class="form-group data-source-box">
+                                            <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
+                                            <div class="col-md-4">
+                                                {!! Form::select('data_source_table_name',['' => 'Select Table'], null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group columns_list">
+                                            <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
+                                            <div class="col-md-4">
+                                                {!! Form::select('data_source_columns',['' => 'Select Column'] , null,['class' => 'form-control','id' => 'table_column']) !!}
+                                            </div>
+                                        </div>
+
+                                        when selected file
+                                        <div class="form-group">
+                                            <label class="col-xs-4 col-md-4 control-label" for="selectbasic">Files</label>
+                                            <div class="col-xs-8 col-md-8">
+                                                {!! BBbutton('files','file-unit','Select File',['class' => 'btn btn-warning btn-md input-md','data-type' => 'files','model' => null]) !!}
+                                            </div>
+                                        </div>
+                                        {{--<div class="data-source-box">--}}
+                                            {{--@if(isset($settings['data_source_type_val']))--}}
+                                                {{--<div class="form-group file-box">--}}
+                                                    {{--<div class="col-xs-8 col-md-offset-4">--}}
+                                                        {{--{!! Form::select('data_source_type_val',['' => 'Select Data Value'] + (array)\App\helpers\FieldHelper::getHeading($settings['file-unit']),$settings['data_source_type_val'],['class' => 'form-control','id' =>'data_source_type_val']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--@endif--}}
+                                            {{--@if(isset($settings['data_source_type_key']))--}}
+                                                {{--<div class="form-group file-box">--}}
+                                                    {{--<div class="col-xs-8 col-md-offset-4">--}}
+                                                        {{--{!! Form::select('data_source_type_key',['' => 'Select Data Key'] + (array)\App\helpers\FieldHelper::getHeading($settings['file-unit']),$settings['data_source_type_key'],['class' => 'form-control','id' =>'data_source_type_key']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--@if(isset($settings['data_source_type_default']))--}}
+                                                    {{--<div class="form-group file-box">--}}
+                                                        {{--<div class="col-xs-8 col-md-offset-4">--}}
+                                                            {{--{!! Form::select('data_source_type_default', ['' => 'Select Default'] + (array)\App\helpers\FieldHelper::getPluck($settings['file-unit'],$settings['data_source_type_key']),$settings['data_source_type_default'],['class' => 'form-control','id' =>'data_source_type_default']) !!}--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--@endif--}}
+                                            {{--@endif--}}
+                                        {{--</div>--}}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
                 </div>
             </div>
 
@@ -648,6 +728,308 @@
                 });
             })
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function dataSource() {
+                $('.data-source-box').remove();
+                $('.columns_list').remove();
+                $('.select_op_box').html('');
+//            $('#data_source_type_val').remove();
+//            $('#data_source_type_key').remove();
+//            $('#data_source_type_default').remove();
+                var val = $('#data_source').val();
+
+                var data_group = $('<div/>', {
+                    "class": 'form-group data-source-box'
+                });
+                switch (val) {
+                    case 'file':
+                        $('.file-box').remove();
+//                        $("[data-key=some-unit]").attr('data-item', 'data_source');
+                        //file functional
+                        var data_group_label = $('<label/>', {
+                            "class": 'col-md-4 control-label',
+                            "for": 'selectbasic',
+                            "text": 'Files'
+                        });
+
+                        data_group.append(data_group_label);
+
+                        var data_group_col = $('<div/>', {
+                            class: 'col-md-4'
+                        });
+                        data_group.append(data_group_col);
+                        var data_group_BB_unit = $('<button/>', {
+                            "class": 'btn btn-warning btn-md input-md BBbuttons',
+                            "type": 'button',
+                            "data-action": 'files',
+                            "data-key": 'file-unit',
+                            "data-type": "files",
+                            "text": "Select File"
+                        });
+
+                        data_group_col.append(data_group_BB_unit);
+
+                        var data_group_hidden = $('<input/>', {
+                            "type": 'hidden',
+                            "data-name": 'file-unit',
+                            "name": 'file-unit'
+                        });
+
+                        data_group_col.append(data_group_hidden);
+                        $('.select_op_box').append(data_group);
+                        break;
+                    case 'bb':
+                        $("[data-key=some-unit]").attr('data-item', 'data_source');
+                        var data_group_label = $('<label/>', {
+                            "class": 'col-md-4 control-label',
+                            "for": 'bbfunction',
+                            "text": 'Insert BB'
+                        });
+
+                        data_group.append(data_group_label);
+
+                        var data_group_col = $('<div/>', {
+                            class: 'col-md-4'
+                        });
+                        data_group.append(data_group_col);
+                        var data_group_BB_input = $('<input/>', {
+                            "class": 'btn btn-warning btn-md input-md',
+                            "type": 'text',
+                        });
+
+                        data_group_col.append(data_group_BB_input);
+                        $('.select_op_box').append(data_group);
+                        //bb functional
+                        break;
+                    case 'api':
+                        $("[data-key=some-unit]").attr('data-item', 'data_source');
+                        //api functional
+                        break;
+                    case 'related':
+                        $("[data-key=some-unit]").attr('data-item', 'data_source');
+                        $.ajax({
+                            type: 'GET',
+                            url: "{!! url('/admin/modules/tables/table-names') !!}",
+                            datatype: 'json',
+                            cache: false,
+                            success: function (data) {
+                                if (!data.error) {
+                                    var data_group_label = $('<label/>', {
+                                        "class": 'col-md-4 control-label',
+                                        "for": 'bbfunction',
+                                        "text": 'Select Table'
+                                    });
+
+                                    data_group.append(data_group_label);
+
+                                    var data_group_col = $('<div/>', {
+                                        class: 'col-md-4'
+                                    });
+                                    data_group.append(data_group_col);
+
+                                    var data_source_related = $('<select/>', {
+                                        "class": 'form-control',
+                                        "id": 'data_source_table_name',
+                                        "name": "data_source_table_name"
+                                    });
+
+                                    data_source_related.append($('<option>', {value: '', text: 'Select Table Name'}));
+
+                                    $.each(data.data, function (k, v) {
+                                        $(data_source_related).append("<option value='" + v + "'>" + v + "</option>");
+                                    });
+
+                                    data_group_col.append(data_source_related);
+                                    $('.select_op_box').append(data_group);
+                                }
+                            }
+                        });
+                        break;
+                    case 'user_input':
+                        $("[data-key=some-unit]").attr('data-item', 'user_input');
+                        $.ajax({
+                            type: 'GET',
+                            url: "{!! url('/admin/modules/bburl/unit') !!}" + '/' + val,
+                            datatype: 'json',
+                            cache: false,
+                            success: function (data) {
+                                if (!data.error) {
+                                    $('#inpur_result').html(data.field);
+                                    $('.data-box').html(data.settings_html);
+                                }
+
+                            }
+                        });
+                        break;
+                    default :
+                        $("[data-key=some-unit]").attr('data-item', '');
+                        break;
+                }
+            }
+
+            $('body').on('change', '#data_source', function () {
+                dataSource();
+            });
+
+            $("body").on('click', '.file-item-dynamic', function () {
+                var id = $("[name=file-unit]").val();
+                $('.file-box').remove();
+
+                $.ajax({
+                    type: 'GET',
+                    url: "{!! url('/admin/tools/mapping/get-heading') !!}" + '/' + id,
+                    datatype: 'json',
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+
+                            var form_group = $('<div/>', {
+                                class: 'form-group file-box'
+                            });
+
+                            var form_group_col = $('<div/>', {
+                                class: 'col-xs-8 col-md-offset-4'
+                            });
+                            form_group.append(form_group_col);
+
+                            var data_source_type_key = $('<select/>', {
+                                "class": 'form-control',
+                                "id": 'data_source_type_key',
+                                "name": "data_source_type_key"
+                            });
+
+                            form_group_col.append(data_source_type_key);
+
+                            data_source_type_key.append($('<option>', {value: '', text: 'Select Data Key'}));
+
+
+                            var form_group_val = $('<div/>', {
+                                class: 'form-group file-box'
+                            });
+
+                            var form_group_col_val = $('<div/>', {
+                                class: 'col-xs-8 col-md-offset-4'
+                            });
+                            form_group_val.append(form_group_col_val);
+
+                            var data_source_type_val = $('<select/>', {
+                                "class": 'form-control',
+                                "id": 'data_source_type_val',
+                                "name": "data_source_type_val",
+                                "option": {'': "select"}
+                            });
+
+                            form_group_col_val.append(data_source_type_val);
+                            data_source_type_val.append($('<option>', {value: '', text: 'Select Data Value'}));
+
+                            $.each(data.data, function (k, v) {
+                                $(data_source_type_key).append("<option value='" + v + "'>" + v + "</option>");
+                                $(data_source_type_val).append("<option value='" + v + "'>" + v + "</option>");
+                            });
+
+                            $('.data-source-box').append(form_group_val, form_group);
+
+                        }
+
+                    }
+                });
+
+            });
+
+            $("body").on('change', '#data_source_table_name', function () {
+                var val = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! url('/admin/tools/mapping/get-table-columns') !!}",
+                    datatype: 'json',
+                    data: {val: val},
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    cache: false,
+                    success: function (data) {
+                        $('.columns_list').remove();
+                        var data_group = $('<div/>', {
+                            "class": 'form-group columns_list'
+                        });
+                        var data_group_label = $('<label/>', {
+                            "class": 'col-md-4 control-label',
+                            "for": 'data_source_columns',
+                            "text": 'Select Column'
+                        });
+
+                        data_group.append(data_group_label);
+
+                        var data_group_col = $('<div/>', {
+                            class: 'col-md-4'
+                        });
+                        data_group.append(data_group_col);
+
+                        var data_source_related = $('<select/>', {
+                            "class": 'form-control',
+                            "id": 'table_column',
+                            "name": "data_source_columns"
+                        });
+
+                        data_source_related.append($('<option>', {value: '', text: 'Select Column'}));
+
+                        $.each(data.data, function (k, v) {
+                            $(data_source_related).append("<option value='" + v + "'>" + v + "</option>");
+                        });
+
+                        data_group_col.append(data_source_related);
+                        $('.select_op_box').append(data_group);
+                    }
+                });
+            });
+
+            $("body").on('change', '#data_source_type_key', function () {
+                var id = $("[name=file-unit]").val();
+                var key = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! url('/admin/tools/mapping/get-heading-keys') !!}",
+                    datatype: 'json',
+                    data: {id: id, key: key},
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    cache: false,
+                    success: function (data) {
+                        var form_group = $('<div/>', {
+                            class: 'form-group file-box'
+                        });
+
+                        var form_group_col = $('<div/>', {
+                            class: 'col-xs-8 col-md-offset-4'
+                        });
+                        form_group.append(form_group_col);
+
+                        var data_source_type_default = $('<select/>', {
+                            "class": 'form-control',
+                            "id": 'data_source_type_default',
+                            "name": "data_source_type_default"
+                        });
+
+                        form_group_col.append(data_source_type_default);
+
+                        data_source_type_default.append($('<option>', {value: '', text: 'Select Default Value'}));
+
+                        $.each(data, function (k, v) {
+                            $(data_source_type_default).append("<option value='" + v + "'>" + v + "</option>");
+                        });
+
+                        $('.data-source-box').append(form_group);
+                    }
+                });
+            });
         });
     </script>
 @endsection

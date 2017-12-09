@@ -84,10 +84,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="col-sm-3 p-l-0" for="default_value_field">Default value</label>
-                            <div class="col-md-6">
-                                {!! Form::text('default_value', null, ['class' => 'form-control','placeholder' => 'Enter default value', 'id' => 'default_value_field']) !!}
-                            </div>
+
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -122,6 +119,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        {{--TODO: make when selecte text and textarea--}}
+                        {{----}}
+                        {{--<label class="col-sm-3 p-l-0" for="default_value_field">Default value</label>--}}
+                        {{--<div class="col-md-6">--}}
+                            {{--{!! Form::text('default_value', null, ['class' => 'form-control','placeholder' => 'Enter default value', 'id' => 'default_value_field']) !!}--}}
+                        {{--</div>--}}
                             <!-- Form Name -->
                             <div class="row legend">
                                 <div class="col-xs-6">

@@ -1,10 +1,18 @@
 @extends('btybug::layouts.admin')
 @section('content')
-    <div class="col-md-12" id="add-new-fields">
+    <div class="col-md-12  m-t-20" id="add-new-fields">
         {!! Form::model($field,['url'=>['/admin/console/structure/fields/edit',$field->id],'class' => 'form-horizontal','id' => 'edit-field']) !!}
         <div class="row">
             <div class="col-md-6">
-                <h3 class="modal-title m-b-20 text-left" id="myModalLabel">Edit Field</h3>
+                <label class="col-md-3">Field Name</label>
+                <div class="col-md-9">
+                    @if($field->structured_by == 'custom')
+                        {!! Form::text('name',null,['class' => 'form-control ']) !!}
+                    @else
+                        {!! Form::hidden('name',null) !!}
+                        <div class="form-control" readonly="true" disabled="true"> {!! $field->name !!} </div>
+                    @endif
+                </div>
             </div>
             <div class="col-md-6">  {!! Form::submit('Save',['class' => 'btn btn-success pull-right m-r-25']) !!}</div>
         </div>
@@ -12,20 +20,6 @@
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Field Setting</div>
                 <div class="panel-body">
-
-
-                    <div class="form-group col-md-6 m-r-0">
-                        <label class="col-md-3">Field Name</label>
-                        <div class="col-md-9">
-                            @if($field->structured_by == 'custom')
-                                {!! Form::text('name',null,['class' => 'form-control ']) !!}
-                            @else
-                                {!! Form::hidden('name',null) !!}
-                                <div class="form-control" readonly="true" disabled="true"> {!! $field->name !!} </div>
-                            @endif
-                        </div>
-                    </div>
-
                     <div class="form-group col-md-6">
                         {!! Form::hidden('table_name',null) !!}
                         {!! Form::hidden('column_name',null) !!}

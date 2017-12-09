@@ -331,7 +331,9 @@ class StructureController extends Controller
             ->where('slug', $unitSlug)
             ->first();
         $rule = $fieldValidationService->getBaseValidationRulse($field->table_name, $field->column_name);
-        return view('console::structure.edit_field', compact(['field', 'unit', 'rule']));
+        $required = $fieldValidationService->isRequired($field->table_name, $field->column_name);
+
+        return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required']));
     }
 
     public function postEditField(

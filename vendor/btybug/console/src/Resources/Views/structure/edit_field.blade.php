@@ -74,7 +74,13 @@
                         <div class="col-md-6">
                             <label class="col-sm-3 p-l-0">Required</label>
                             <div class="col-md-6">
-                                {!! Form::select('required',['No', 'Yes'],null,['class' => 'form-control']) !!}
+                                @if($required)
+                                    {!! Form::hidden('required',1) !!}
+                                    <div class="form-control core-val" readonly="true"
+                                         disabled="true"> YES </div>
+                                @else
+                                    {!! Form::select('required',['No', 'Yes'],null,['class' => 'form-control']) !!}
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">

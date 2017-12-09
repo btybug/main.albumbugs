@@ -332,8 +332,9 @@ class StructureController extends Controller
             ->first();
         $rule = $fieldValidationService->getBaseValidationRulse($field->table_name, $field->column_name);
         $required = $fieldValidationService->isRequired($field->table_name, $field->column_name);
+        $increment = $fieldValidationService->isAutoIncrement($field->table_name, $field->column_name);
 
-        return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required']));
+        return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required','increment']));
     }
 
     public function postEditField(

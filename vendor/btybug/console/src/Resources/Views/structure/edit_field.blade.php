@@ -102,7 +102,13 @@
                         <div class="col-md-6">
                             <label class="col-sm-3 p-l-0">Visibility</label>
                             <div class="col-md-6">
-                                {!! Form::select('visibility',['Hidden', 'Visible'],null,['class' => 'form-control']) !!}
+                                @if($increment)
+                                    <div class="form-control core-val" readonly="true"
+                                         disabled="true"> Hidden </div>
+                                    {!! Form::hidden('visibility',0) !!}
+                                @else
+                                    {!! Form::select('visibility',['Hidden', 'Visible'],null,['class' => 'form-control visibility-control']) !!}
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -115,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row visibility-box {!! ($field->visibiltiy) ? "show" : "hide" !!}">
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Input Data</div>
                 <div class="panel-body">
@@ -224,7 +230,7 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row  visibility-box  {!! ($field->visibiltiy) ? "show" : "hide" !!}">
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Input Setting</div>
                 <div class="panel-body">
@@ -346,6 +352,16 @@
         var htmlsdata = {default: '', custom: '', field: ''}
 
         $(document).ready(function () {
+            $("body").on("change",".visibility-control", function () {
+                var value = $(this).val();
+                if(value == 1){
+                    $(".visibility-box").removeClass("hide");
+                    $(".visibility-box").addClass("show");
+                }else{
+                    $(".visibility-box").removeClass("show");
+                    $(".visibility-box").addClass("hide");
+                }
+            })
 
             $("body").on("click", '.item-unit', function () {
                 var data = $("#edit-field").serialize();

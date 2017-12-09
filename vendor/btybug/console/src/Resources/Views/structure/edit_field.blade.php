@@ -78,31 +78,33 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="col-sm-3 p-l-0">Visibility</label>
-                            <div class="col-md-6">
-                                {!! Form::select('visibility',['Hidden', 'Visible'],null,['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-6">
-                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Available for users</label>
-                            <div class="col-md-6">
-                                {!! Form::select('available_for_users',['0' => "No","1" => 'YES','2' => 'Hidden','3' => 'Get Auto'],null,['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="col-md-6">
                             <label class="col-sm-3 p-l-0" for="default_value_field">Before Save</label>
                             <div class="col-md-6">
                                 {!! Form::text('before_save', null, ['class' => 'form-control','placeholder' => 'Enter function name', 'id' => 'before_save']) !!}
                             </div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default p-0">
+                <div class="panel-heading">visibility & permissions</div>
+                <div class="panel-body">
+                    <div class="form-group col-md-12 m-b-10">
+                        <div class="col-md-6">
+                            <label class="col-sm-3 p-l-0">Visibility</label>
+                            <div class="col-md-6">
+                                {!! Form::select('visibility',['Hidden', 'Visible'],null,['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Available for users</label>
+                            <div class="col-md-6">
+                                {!! Form::select('available_for_users',['0' => "No","1" => 'YES','2' => 'Hidden','3' => 'Get Auto'],null,['class' => 'form-control']) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

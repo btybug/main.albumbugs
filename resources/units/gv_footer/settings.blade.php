@@ -28,6 +28,13 @@
             {!! BBbutton2('unit',"area4","footer_units","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
         </div>
     </div>
+
+    <div class="form-group my_rows1">
+        <label for="newcontainer" class="col-sm-4 labelTitle">Area 5</label>
+        <div class="col-sm-8">
+            {!! BBbutton2('unit',"area5","sub_footer","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
+        </div>
+    </div>
 </div>
 
 

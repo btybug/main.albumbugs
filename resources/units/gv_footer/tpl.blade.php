@@ -41,25 +41,6 @@
         </div>
     </div>
 
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="footer-bottom-content">
-                    <div class="col-md-6 reserverd">
-                        <p>© 2017 All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 social">
-                        <ul>
-                            <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href=""><i class="fa fa-google" aria-hidden="true"></i></a></li>
-                            <li><a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li><a href=""><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {!!isset($settings['area5'])? BBRenderUnits($settings['area5']):'' !!}
 </footer>
 {!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}

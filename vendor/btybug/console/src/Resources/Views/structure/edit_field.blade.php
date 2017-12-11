@@ -111,10 +111,17 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Available for users</label>
+
+                        <div class="col-md-6  permissions-box {!! ($field->visibiltiy) ? "hide" : "show" !!}">
+                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Default value</label>
                             <div class="col-md-6">
-                                {!! Form::select('available_for_users',['0' => "No","1" => 'YES','2' => 'Hidden','3' => 'Get Auto'],null,['class' => 'form-control']) !!}
+                                {!! Form::text('default_value',null,['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6 visibility-box {!! ($field->visibiltiy) ? "show" : "hide" !!}">
+                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Permission for roles</label>
+                            <div class="col-md-6">
+                               permissions
                             </div>
                         </div>
                     </div>
@@ -355,11 +362,17 @@
             $("body").on("change",".visibility-control", function () {
                 var value = $(this).val();
                 if(value == 1){
+                    $(".permissions-box").removeClass("show");
+                    $(".permissions-box").addClass("hide");
+
                     $(".visibility-box").removeClass("hide");
                     $(".visibility-box").addClass("show");
                 }else{
                     $(".visibility-box").removeClass("show");
                     $(".visibility-box").addClass("hide");
+
+                    $(".permissions-box").removeClass("hide");
+                    $(".permissions-box").addClass("show");
                 }
             })
 

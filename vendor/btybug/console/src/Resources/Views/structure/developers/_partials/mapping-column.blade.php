@@ -24,33 +24,52 @@
                 </div>
             </div>
             <div class="select_op_box">
+                {{--{!! dd($field->json_data) !!}--}}
                 @if($field->data_source == 'manual')
                     <div class="form-group data_source_manual">
-                        {!! Form::textarea('settings[manual]',null,['class' => 'form-control','id' => 'data_source_manual']) !!}
+                        {!! Form::textarea('json_data[manual]',null,['class' => 'form-control','id' => 'data_source_manual']) !!}
                     </div>
                 @endif
                 @if($field->data_source == 'related')
                     <div class="form-group data-source-box">
                         <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
                         <div class="col-md-4">
-                            {!! Form::select('settings[data_source_table_name]',['' => 'Select Table'], null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
+                            {!! Form::select('json_data[data_source_table_name]',['' => 'Select Table'] + BBGetTables(), null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
                         </div>
                     </div>
-                    <div class="form-group columns_list hide">
-                        <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
+                    @if(isset($field->json_data['data_source_table_name']) && count(BBGetTableColumn($field->json_data['data_source_table_name'])))
+                        <div class="form-group columns_list">
+                            <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
+                            <div class="col-md-4">
+                                {!! Form::select('json_data[data_source_columns]',['' => 'Select Column'] + BBGetTableColumn($field->json_data['data_source_table_name']) , null,['class' => 'form-control','id' => 'table_column']) !!}
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
+                @if($field->data_source == 'api')
+                    <div class="form-group data_source_api">
+                        {!! Form::text('json_data[api]',null,['class' => 'btn btn-warning btn-md input-md','id' => 'data_source_api','placeholder' => 'Put Api Url ...']) !!}
+                    </div>
+                @endif
+
+                @if($field->data_source == 'bb')
+                    <div class="form-group data-source-box">
+                        <label class="col-md-4 control-label" for="bbfunction">Insert BB</label>
                         <div class="col-md-4">
-                            {!! Form::select('settings[data_source_columns]',['' => 'Select Column'] , null,['class' => 'form-control','id' => 'table_column']) !!}
+                            {!! Form::text('json_data[bb]',null,['class' => 'btn btn-warning btn-md input-md']) !!}
                         </div>
                     </div>
                 @endif
 
-
-                <div class="form-group hide">
-                    <label class="col-xs-4 col-md-4 control-label" for="selectbasic">Files</label>
-                    <div class="col-xs-8 col-md-8">
-                        {!! BBbutton('files','file-unit','Select File',['class' => 'btn btn-warning btn-md input-md','data-type' => 'files','model' => null]) !!}
+                @if($field->data_source == 'file')
+                    <div class="form-group">
+                        <label class="col-xs-4 col-md-4 control-label" for="selectbasic">Files</label>
+                        <div class="col-xs-8 col-md-8">
+                            {!! BBbutton('json_data[file]','file-unit','Select File',['class' => 'form-control input-md','data-type' => 'files','model' => $field->json_data]) !!}
+                        </div>
                     </div>
-                </div>
+                @endif
                 {{--<div class="data-source-box">--}}
                 {{--@if(isset($settings['data_source_type_val']))--}}
                 {{--<div class="form-group file-box">--}}

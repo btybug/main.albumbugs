@@ -460,6 +460,7 @@ class StructureService extends GeneralService
             'second_column' => isset($data['second_column']) && $data['second_column'] != '' ? $data['second_column'] : NULL,
             'data_source' => isset($data['data_source']) && $data['data_source'] != '' ? $data['data_source'] : NULL,
             'type' => isset($data['type']) && $data['type'] != '' ? $data['type'] : NULL,
+            'json_data' => isset($data['json_data']) && $data['json_data'] != '' ? $data['json_data'] : NULL,
             'required' => $data['required'],
             'visibility' => $data['visibility'],
             'default_value' => $data['default_value'] != '' ? $data['default_value'] : NULL,

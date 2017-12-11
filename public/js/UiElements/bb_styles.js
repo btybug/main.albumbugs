@@ -170,7 +170,7 @@ $(document).ready(function () {
         $.ajax({
             type: "post",
             datatype: "json",
-            url: '/admin/modules/bburl/get-bb-button-data',
+            url: '/admin/console/bburl/get-bb-button-data',
             data: data,
             headers: {
                 'X-CSRF-TOKEN': $("input[name='_token']").val()

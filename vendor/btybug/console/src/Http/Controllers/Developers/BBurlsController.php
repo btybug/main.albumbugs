@@ -10,15 +10,15 @@ namespace Btybug\Console\Http\Controllers\Developers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Sahakavatar\Cms\Models\ContentLayouts\ContentLayouts;
-use Sahakavatar\Cms\Models\Templates\Units;
-use Sahakavatar\Cms\Repositories\HookRepository;
-use Sahakavatar\Cms\Services\CmsItemReader;
-use Sahakavatar\Cms\Services\HookService;
-use Sahakavatar\Console\Models\Forms;
-use Sahakavatar\Manage\Models\FrontendPage;
-use Sahakavatar\Modules\Models\Fields;
-use Sahakavatar\Resources\Models\Files\FilesBB;
+use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
+use Btybug\btybug\Models\Templates\Units;
+use Btybug\btybug\Repositories\HookRepository;
+use Btybug\btybug\Services\CmsItemReader;
+use Btybug\btybug\Services\HookService;
+use Btybug\Console\Models\Forms;
+use Btybug\FrontSite\Models\FrontendPage;
+use Btybug\Console\Models\Fields;
+use Btybug\Resources\Models\Files\FilesBB;
 
 class BBurlsController extends Controller
 {
@@ -30,7 +30,7 @@ class BBurlsController extends Controller
             $widget_id = $unitData[0];
             $variationID = $unitData[1];
 
-            $widget = \Sahakavatar\Cms\Models\Templates\Units::find($widget_id);
+            $widget = Units::find($widget_id);
             if (!is_null($widget)) {
                 $variation = $widget->findVariation($slug);
 

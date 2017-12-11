@@ -1,4 +1,3 @@
-{!! $field->type !!}
 @if($field->type)
     @if($field->type == "text" or $field->type == "textarea")
         <div class="col-md-8">
@@ -27,21 +26,24 @@
             <div class="select_op_box">
                 @if($field->data_source == 'manual')
                     <div class="form-group data_source_manual">
-                        {!! Form::textarea('settings["manual"]',null,['class' => 'form-control','id' => 'data_source_manual']) !!}
+                        {!! Form::textarea('settings[manual]',null,['class' => 'form-control','id' => 'data_source_manual']) !!}
                     </div>
                 @endif
-                <div class="form-group data-source-box hide">
-                    <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
-                    <div class="col-md-4">
-                        {!! Form::select('data_source_table_name',['' => 'Select Table'], null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
+                @if($field->data_source == 'related')
+                    <div class="form-group data-source-box">
+                        <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
+                        <div class="col-md-4">
+                            {!! Form::select('settings[data_source_table_name]',['' => 'Select Table'], null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group columns_list hide">
-                    <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
-                    <div class="col-md-4">
-                        {!! Form::select('data_source_columns',['' => 'Select Column'] , null,['class' => 'form-control','id' => 'table_column']) !!}
+                    <div class="form-group columns_list hide">
+                        <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
+                        <div class="col-md-4">
+                            {!! Form::select('settings[data_source_columns]',['' => 'Select Column'] , null,['class' => 'form-control','id' => 'table_column']) !!}
+                        </div>
                     </div>
-                </div>
+                @endif
+
 
                 <div class="form-group hide">
                     <label class="col-xs-4 col-md-4 control-label" for="selectbasic">Files</label>

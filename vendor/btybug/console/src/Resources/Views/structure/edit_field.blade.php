@@ -112,13 +112,13 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6  permissions-box {!! ($field->visibiltiy) ? "hide" : "show" !!}">
+                        <div class="col-md-6 default-value-box {!! ($field->visibility) ? "hide" : "show" !!}">
                             <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Default value</label>
                             <div class="col-md-6">
                                 {!! Form::text('default_value',null,['class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-md-6 visibility-box {!! ($field->visibiltiy) ? "show" : "hide" !!}">
+                        <div class="col-md-6 visibility-box {!! ($field->visibility) ? "show" : "hide" !!}">
                             <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Permission for roles</label>
                             <div class="col-md-6">
                                permissions
@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <div class="row visibility-box {!! ($field->visibiltiy) ? "show" : "hide" !!}">
+        <div class="row visibility-box {!! ($field->visibility) ? "show" : "hide" !!}">
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Input Data</div>
                 <div class="panel-body">
@@ -156,7 +156,7 @@
             </div>
 
         </div>
-        <div class="row  visibility-box  {!! ($field->visibiltiy) ? "show" : "hide" !!}">
+        <div class="row  visibility-box  {!! ($field->visibility) ? "show" : "hide" !!}">
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Input Setting</div>
                 <div class="panel-body">
@@ -291,8 +291,8 @@
             $("body").on("change",".visibility-control", function () {
                 var value = $(this).val();
                 if(value == 1){
-                    $(".permissions-box").removeClass("show");
-                    $(".permissions-box").addClass("hide");
+                    $(".default-value-box").removeClass("show");
+                    $(".default-value-box").addClass("hide");
 
                     $(".visibility-box").removeClass("hide");
                     $(".visibility-box").addClass("show");
@@ -300,8 +300,8 @@
                     $(".visibility-box").removeClass("show");
                     $(".visibility-box").addClass("hide");
 
-                    $(".permissions-box").removeClass("hide");
-                    $(".permissions-box").addClass("show");
+                    $(".default-value-box").removeClass("hide");
+                    $(".default-value-box").addClass("show");
                 }
             })
 

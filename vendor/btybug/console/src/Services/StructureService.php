@@ -459,6 +459,7 @@ class StructureService extends GeneralService
             'tooltip' => $data['tooltip'] != '' ? $data['tooltip'] : NULL,
             'second_table' => isset($data['second_table']) && $data['second_table'] != '' ? $data['second_table'] : NULL,
             'second_column' => isset($data['second_column']) && $data['second_column'] != '' ? $data['second_column'] : NULL,
+            'second_column' => isset($data['second_column']) && $data['second_column'] != '' ? $data['second_column'] : NULL,
             'required' => $data['required'],
             'visibility' => $data['visibility'],
             'default_value' => $data['default_value'] != '' ? $data['default_value'] : NULL,

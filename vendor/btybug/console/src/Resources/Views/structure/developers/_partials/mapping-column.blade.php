@@ -1,3 +1,4 @@
+{!! $field->type !!}
 @if($field->type)
     @if($field->type == "text" or $field->type == "textarea")
         <div class="col-md-8">

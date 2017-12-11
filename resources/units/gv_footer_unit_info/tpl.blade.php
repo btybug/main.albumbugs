@@ -1,6 +1,6 @@
 <img src="{{url(BBgetSiteLogo())}}" alt="" class="logoImg" >
 <h5>{{BBgetSiteName()}}</h5>
-<p class="desc">
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-    been the industry's standard dummy.
-</p>
+
+@if(isset($settings["footer_unit_info_description"]))
+    <p class="desc">{{ $settings["footer_unit_info_description"] }}</p>
+@endif

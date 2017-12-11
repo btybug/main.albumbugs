@@ -144,94 +144,13 @@
                             'select' => 'Select',
                             'radio' => 'Radio',
                             'checkbox' => 'Checkbox',
-                        ],null,['class' => 'form-control']) !!}
+                        ],null,['class' => 'form-control select-type']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
-                        {{--TODO: make when selecte text and textarea--}}
-                        {{----}}
-                        {{--<label class="col-sm-3 p-l-0" for="default_value_field">Default value</label>--}}
-                        {{--<div class="col-md-6">--}}
-                            {{--{!! Form::text('default_value', null, ['class' => 'form-control','placeholder' => 'Enter default value', 'id' => 'default_value_field']) !!}--}}
-                        {{--</div>--}}
-                            <!-- Form Name -->
-                            <div class="row legend">
-                                <div class="col-xs-6">
-                                    <legend>Create Mapping</legend>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    {!! Form::button('Save',['class' => 'btn btn-success']) !!}
-                                </div>
-                            </div>
-                            <div class="row m-b-10">
-                                <label class="col-md-12 control-label" for="engine"></label>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label class="col-xs-4 col-md-4 control-label" for="name">Mapping Name</label>
-                                        <div class="col-xs-8 col-md-8">
-                                            {!! Form::text('name',null,['class' => 'form-control']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-4 col-md-4 control-label" for="name">Data Source</label>
-                                        <div class="col-xs-8 col-md-8">
-                                            <!-- check if Data source is data-source -->
-                                            {!! Form::select('data_source',[
-                                             ''=>'-- Select Data source --',
-                                             'api'=>'From api',
-                                             'related'=>'Related',
-                                             'bb'=>'BB Functions',
-                                             'file'=>'File'], null,['class'=>'form-control','id'=>'data_source']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="select_op_box">
-                                        when selected Related
-                                        <div class="form-group data-source-box">
-                                            <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
-                                            <div class="col-md-4">
-                                                {!! Form::select('data_source_table_name',['' => 'Select Table'], null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="form-group columns_list">
-                                            <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
-                                            <div class="col-md-4">
-                                                {!! Form::select('data_source_columns',['' => 'Select Column'] , null,['class' => 'form-control','id' => 'table_column']) !!}
-                                            </div>
-                                        </div>
-
-                                        when selected file
-                                        <div class="form-group">
-                                            <label class="col-xs-4 col-md-4 control-label" for="selectbasic">Files</label>
-                                            <div class="col-xs-8 col-md-8">
-                                                {!! BBbutton('files','file-unit','Select File',['class' => 'btn btn-warning btn-md input-md','data-type' => 'files','model' => null]) !!}
-                                            </div>
-                                        </div>
-                                        {{--<div class="data-source-box">--}}
-                                            {{--@if(isset($settings['data_source_type_val']))--}}
-                                                {{--<div class="form-group file-box">--}}
-                                                    {{--<div class="col-xs-8 col-md-offset-4">--}}
-                                                        {{--{!! Form::select('data_source_type_val',['' => 'Select Data Value'] + (array)\App\helpers\FieldHelper::getHeading($settings['file-unit']),$settings['data_source_type_val'],['class' => 'form-control','id' =>'data_source_type_val']) !!}--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--@endif--}}
-                                            {{--@if(isset($settings['data_source_type_key']))--}}
-                                                {{--<div class="form-group file-box">--}}
-                                                    {{--<div class="col-xs-8 col-md-offset-4">--}}
-                                                        {{--{!! Form::select('data_source_type_key',['' => 'Select Data Key'] + (array)\App\helpers\FieldHelper::getHeading($settings['file-unit']),$settings['data_source_type_key'],['class' => 'form-control','id' =>'data_source_type_key']) !!}--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--@if(isset($settings['data_source_type_default']))--}}
-                                                    {{--<div class="form-group file-box">--}}
-                                                        {{--<div class="col-xs-8 col-md-offset-4">--}}
-                                                            {{--{!! Form::select('data_source_type_default', ['' => 'Select Default'] + (array)\App\helpers\FieldHelper::getPluck($settings['file-unit'],$settings['data_source_type_key']),$settings['data_source_type_default'],['class' => 'form-control','id' =>'data_source_type_default']) !!}--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--@endif--}}
-                                            {{--@endif--}}
-                                        {{--</div>--}}
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row m-b-10 mapping-column">
+                            @include("console::structure.developers._partials.mapping-column")
+                        </div>
                     </div>
                 </div>
             </div>
@@ -359,6 +278,16 @@
         var htmlsdata = {default: '', custom: '', field: ''}
 
         $(document).ready(function () {
+            $("body").on("change",".select-type", function () {
+                var type = $(this).val();
+                var id = "{!! $field->id !!}";
+                sendajaxvar('/admin/console/structure/fields/mapping', {type:type,id:id}, function (d) {
+                    if (d) {
+                        $(".mapping-column").html(d.data);
+                    }
+                })
+            });
+
             $("body").on("change",".visibility-control", function () {
                 var value = $(this).val();
                 if(value == 1){

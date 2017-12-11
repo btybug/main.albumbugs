@@ -359,6 +359,19 @@ class StructureController extends Controller
         return \Response::json(['data' => BBRenderUnits($request->unit,$request->all())]);
     }
 
+    public function postMapping(
+        Request $request,
+        FieldsRepository $fieldsRepository
+    )
+    {
+        $field = $fieldsRepository->findOrFail($request->id);
+        $field->type = $request->type;
+
+        $html = view("console::structure.developers._partials.mapping-column",compact('field'))->render();
+
+        return \Response::json(['data' => $html]);
+    }
+
 
     public function getCreateAdvanced()
     {

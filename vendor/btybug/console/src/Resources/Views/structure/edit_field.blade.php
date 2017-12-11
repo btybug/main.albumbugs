@@ -793,7 +793,19 @@
                         break;
                     case 'api':
                         $("[data-key=some-unit]").attr('data-item', 'data_source');
-                        //api functional
+                        data_group = $('<div/>', {
+                            class: 'form-group data_source_api'
+                        });
+                        var textarea = $('<input />', {
+                            "class": 'form-control',
+                            "type": 'text',
+                            "id": 'data_source_api',
+                            "placeholder": 'Put Api Url ...',
+                            "name": 'settings["api"]'
+                        });
+
+                        data_group.append(textarea);
+                        $('.select_op_box').append(data_group);
                         break;
                     case 'related':
                         $("[data-key=some-unit]").attr('data-item', 'data_source');

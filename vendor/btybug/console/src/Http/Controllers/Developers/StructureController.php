@@ -12,6 +12,7 @@
 namespace Btybug\Console\Http\Controllers\Developers;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Helpers\dbhelper;
 use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Services\FieldService;
 use Illuminate\Http\Request;
@@ -504,9 +505,12 @@ class StructureController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postTableNames(Request $request)
+    public function postTableNames(
+        Request $request,
+        dbhelper $dbhelper
+    )
     {
-        $table_names = $this->dbhelper->getTableNames();
+        $table_names = $dbhelper->getTableNames();
 
         return \Response::json(['data' => $table_names, 'error' => false]);
     }
@@ -515,10 +519,13 @@ class StructureController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postTableColumns(Request $request)
+    public function postTableColumns(
+        Request $request,
+        dbhelper $dbhelper
+    )
     {
         $table = $request->get('val');
-        $cols = $this->dbhelper->getTableColsByName($table);
+        $cols = $dbhelper->getTableColsByName($table);
 
         return \Response::json(['data' => $cols, 'error' => false]);
     }

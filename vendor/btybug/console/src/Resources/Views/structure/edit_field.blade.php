@@ -711,18 +711,27 @@
     <script>
         $(document).ready(function () {
             function dataSource() {
-                $('.data-source-box').remove();
-                $('.columns_list').remove();
                 $('.select_op_box').html('');
-//            $('#data_source_type_val').remove();
-//            $('#data_source_type_key').remove();
-//            $('#data_source_type_default').remove();
                 var val = $('#data_source').val();
-
                 var data_group = $('<div/>', {
                     "class": 'form-group data-source-box'
                 });
                 switch (val) {
+                    case 'manual':
+                        data_group = $('<div/>', {
+                            class: 'form-group data_source_manual'
+                        });
+                        var textarea = $('<textarea/>', {
+                            "class": 'form-control',
+                            "type": 'textarea',
+                            "id": 'data_source_manual',
+                            "placeholder": 'Type options separated with ,',
+                            "name": 'settings["manual"]'
+                        });
+
+                        data_group.append(textarea);
+                        $('.select_op_box').append(data_group);
+                        break;
                     case 'file':
                         $('.file-box').remove();
 //                        $("[data-key=some-unit]").attr('data-item', 'data_source');
@@ -790,7 +799,7 @@
                         $("[data-key=some-unit]").attr('data-item', 'data_source');
                         $.ajax({
                             type: 'GET',
-                            url: "{!! url('/admin/modules/tables/table-names') !!}",
+                            url: "{!! url('/admin/console/structure/tables/table-names') !!}",
                             datatype: 'json',
                             cache: false,
                             success: function (data) {
@@ -924,7 +933,7 @@
                 var val = $(this).val();
                 $.ajax({
                     type: 'POST',
-                    url: "{!! url('/admin/tools/mapping/get-table-columns') !!}",
+                    url: "{!! url('/admin/console/structure/tables/get-table-columns') !!}",
                     datatype: 'json',
                     data: {val: val},
                     headers: {

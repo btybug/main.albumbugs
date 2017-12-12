@@ -313,7 +313,7 @@ class Migrations
                                 'slug' => uniqid(),
                                 'table_name' => $table_name,
                                 'column_name' => $column['name'],
-                                'visibility' => count($column_info) ? 0: 1,
+                                'visibility' => (count($column_info)) ? 0: 1,
                             ]);
                         }
                     }else if(isset($column['field']) && $column['field'] == 'no'){

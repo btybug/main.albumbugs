@@ -3,6 +3,8 @@ namespace Btybug\btybug\Models;
 use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;
+use Psy\Exception\FatalErrorException;
+
 /**
  * Created by PhpStorm.
  * User: Sahak
@@ -320,12 +322,13 @@ class Migrations
                     }
                 }
                 if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
-                dd(5);
             });
 
         } catch (QueryException $e) {
+            dd(5);
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);
-        } catch (\Psy\Exception\FatalErrorException $e) {
+        } catch (FatalErrorException $e) {
+            dd(6);
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);
         }
         return \Response::json(['error' => false, 'redirect' => url("/admin/modules/tables/edit-column/$table", $data['column'][0]['name'])]);

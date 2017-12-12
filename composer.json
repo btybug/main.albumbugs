@@ -14,7 +14,7 @@
         "btybug/btybug": "dev-master",
         "caffeinated/shinobi": "^3.0@dev",
         "chumper/zipper": "1.0.x",
-        "doctrine/dbal": "^2.7@dev",
+        "doctrine/dbal": "2.5.x",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0"

@@ -322,7 +322,7 @@ class Migrations
                     }
                 }
 
-//                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
+                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
             });
         } catch (QueryException $e) {
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);

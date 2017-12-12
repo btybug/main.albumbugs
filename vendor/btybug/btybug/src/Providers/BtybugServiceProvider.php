@@ -2,6 +2,7 @@
 
 namespace Btybug\btybug\Providers;
 
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Routes;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,8 @@ class BtybugServiceProvider extends ServiceProvider
         $this->app->register('Btybug\Framework\Providers\ModuleServiceProvider');
         $this->app->register('Btybug\Resources\Providers\ModuleServiceProvider');
 
+        $obj = new Painter();
+        dd($obj->scopeRegistration('gv_content_unit'));
     }
 
     /**

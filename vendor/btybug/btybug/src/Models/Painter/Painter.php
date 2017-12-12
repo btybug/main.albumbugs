@@ -24,7 +24,7 @@ class Painter implements PainterInterface,Arrayable
     public function __construct()
     {
         $this->config_path = storage_path(config('painter.CONFIG'));
-        $this->base_path = storage_path(config('painter.PAINTERSPATH'));
+        $this->base_path = resource_path(config('painter.PAINTERSPATH'));
     }
     public function toArray()
     {
@@ -71,15 +71,43 @@ class Painter implements PainterInterface,Arrayable
             \File::put($this->config_path,'{}');
         }
     }
-    public function scopeRegistration($unit_path, Exception $exception){
-        $full_path = $this->base_path.DS.$unit_path.DS.'config.json';
 
-        if(!\File::exists($full_path)){
-            return new ErrorException('File does not found',404,null,$unit_path);
+    // make a path
+    public function makePath($path){
+        return $this->base_path.$path.DS.'config.json';
+    }
+    // validate if file exist
+    public function validate($path){
+        if(!\File::exists($path)){
+            throw new \Error('File does not found',404);
         }
+        return true;
+    }
+    // if slug or path is invalid
+    public function validateSlugWithPath($content){
+        if(!isset($content["slug"])){
+            throw new \Error('Slug does not found',404);
+        }
+        if(!isset($content["path"])){
+            throw new \Error('Path does not found',404);
+        }
+        return true;
+    }
 
-        $get_content = \File::get($full_path);
-        dd($get_content);
+    public function scopeRegistration($unit_path){
+        $full_path = $this->makePath($unit_path);
+        $this->validate($full_path);
 
+        $get_content = json_decode(\File::get($full_path),true);
+        $this->validateSlugWithPath($get_content);
+
+        $slug = $get_content["slug"];
+        $path = $get_content["path"];
+
+        $object = [$slug => $path];
+
+        $this->makeConfigJson();
+
+        \File::put($this->config_path,json_encode($object));
     }
 }

@@ -297,9 +297,7 @@ class Migrations
                         }
                     }
                     $at->change();
-                }
 
-                foreach ($columns as $column) {
                     if (isset($column['field']) && $column['field'] == 'yes') {
                         $field = new FieldsRepository();
                         if($field->findByTableAndCol($table_name,$column_old)){
@@ -321,8 +319,7 @@ class Migrations
                         $field->findByTableAndColAndDelete($table_name,$column_old);
                     }
                 }
-
-//                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
+                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
             });
         } catch (QueryException $e) {
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);

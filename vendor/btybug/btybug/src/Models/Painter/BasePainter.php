@@ -12,13 +12,14 @@ namespace Btybug\btybug\Models\Painter;
 use Illuminate\Contracts\Support\Arrayable;
 use Mockery\Exception;
 
-abstract class BasePainter implements PainterInterface, Arrayable
+abstract class BasePainter  implements PainterInterface
 {
 
 
     protected $config_path;
     protected $base_path;
     protected $attributes = [];
+    protected $original=[];
 
     public function __construct()
     {
@@ -58,6 +59,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
         $this->validate($path);
         $config = json_decode(\File::get($path), true);
         $this->attributes = $config;
+        $this->original = $config;
         return $this;
     }
 
@@ -204,7 +206,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
     protected function validate($path)
     {
         if (!\File::exists($path)) {
-            throw new \Error('File does not found', 404);
+            throw new Exception('File does not found', 404);
         }
         return true;
     }
@@ -213,10 +215,10 @@ abstract class BasePainter implements PainterInterface, Arrayable
     public function validateSlugWithPath($content)
     {
         if (!isset($content["slug"])) {
-            throw new \Error('Slug does not found', 404);
+            throw new Exception('Slug does not found', 404);
         }
         if (!isset($content["path"])) {
-            throw new \Error('Path does not found', 404);
+            throw new Exception('Path does not found', 404);
         }
         return true;
     }

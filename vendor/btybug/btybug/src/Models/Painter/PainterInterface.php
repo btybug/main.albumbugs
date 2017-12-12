@@ -9,7 +9,9 @@
 namespace Btybug\btybug\Models\Painter;
 
 
-interface PainterInterface
+use Illuminate\Contracts\Support\Arrayable;
+
+interface PainterInterface extends Arrayable
 {
     /**
      * @return mixed
@@ -67,4 +69,5 @@ interface PainterInterface
     public function scopeRender($settings);
 
     public function scopeRenderSettings($settings);
+
 }

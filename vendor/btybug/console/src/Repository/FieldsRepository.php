@@ -52,7 +52,8 @@ class FieldsRepository extends GeneralRepository
     {
         return $this->model()->where('table_name', $table)
             ->where('column_name', $column_old)
-            ->update(['column_name' => $column,'name' => ucwords(str_replace("_"," ",$column))]);
+//            ->update(['column_name' => $column,'name' => ucwords(str_replace("_"," ",$column))]);
+            ->update(['column_name' => $column,'name' => $column]);
     }
 
     public function findByTableAndColAndDelete($table,$column)

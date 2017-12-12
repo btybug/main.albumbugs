@@ -22,7 +22,7 @@ class Painter extends BasePainter
      */
     public function getStoragePath()
     {
-       //TODO: return path to units root directory
+       return resource_path(config('painter.PAINTERSPATH'));
     }
 
     /**
@@ -30,7 +30,7 @@ class Painter extends BasePainter
      */
     public function getConfigPath()
     {
-        //TODO: return path to units registration file
+        return storage_path(config('painter.CONFIG'));
     }
 
 

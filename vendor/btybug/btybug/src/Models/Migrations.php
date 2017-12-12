@@ -296,14 +296,14 @@ class Migrations
                             $at->$k($v);
                         }
                     }
-                    $at->change();
+//                    $at->change();
                 }
 
                 foreach ($columns as $column) {
                     if (isset($column['field']) && $column['field'] == 'yes') {
                         $field = new FieldsRepository();
                         if($field->findByTableAndCol($table_name,$column_old)){
-//                            $field->updateField($table_name,$column_old,$column['name']);
+                            $field->updateField($table_name,$column_old,$column['name']);
                         }else{
                             $col = $column["name"];
                             $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name ='$table_name'  AND column_name ='$col' AND EXTRA like '%auto_increment%'"));

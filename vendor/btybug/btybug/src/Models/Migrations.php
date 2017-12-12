@@ -296,7 +296,7 @@ class Migrations
                             $at->$k($v);
                         }
                     }
-//                    $at->change();
+                    $at->change();
                 }
 
                 foreach ($columns as $column) {
@@ -322,7 +322,7 @@ class Migrations
                     }
                 }
 
-                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
+//                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
             });
         } catch (QueryException $e) {
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);

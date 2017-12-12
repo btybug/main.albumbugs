@@ -320,7 +320,9 @@ class Migrations
                     }
                 }
                 if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
+                dd(5);
             });
+
         } catch (QueryException $e) {
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);
         } catch (\Psy\Exception\FatalErrorException $e) {

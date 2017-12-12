@@ -304,7 +304,7 @@ class ContentLayouts
         if (method_exists($this, $method)
             && is_callable(array($this, $method))
         ) {
-            return call_user_func_array([$this, 'scope' . ucfirst($name)], $arguments);
+            return call_user_func_array([$this,$method], $arguments);
         }
     }
 

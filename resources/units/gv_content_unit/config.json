@@ -7,7 +7,7 @@
   "type": "units",
   "description": "content",
   "have_setting": 1,
-  "image": "screenshot.png",
+  "image": "images\/screenshot.png",
   "slug": "gv_content_unit",
   "folder": "gv_content_unit",
   "created_at": 1490088665,

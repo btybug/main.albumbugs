@@ -1,5 +1,7 @@
 <?php
+
 namespace Btybug\btybug\Models;
+
 use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,6 +30,7 @@ class Migrations
             'Default' => null,
             'Extra' => 'auto_increment'
         ]];
+
     /**
      * @param $data
      * @return \Illuminate\Http\JsonResponse
@@ -69,6 +72,7 @@ class Migrations
         }
         return \Response::json(['error' => false]);
     }
+
     /**
      * @return array
      */
@@ -76,6 +80,7 @@ class Migrations
     {
         return array('MyISAM', 'InnoDB');
     }
+
     /**
      * @return array
      */
@@ -120,6 +125,7 @@ class Migrations
             'uuid',
         ];
     }
+
     /**
      * @param $type
      * @param $length
@@ -138,6 +144,7 @@ class Migrations
                 return $length;
         }
     }
+
     /**
      * @param $column
      * @return mixed
@@ -157,6 +164,7 @@ class Migrations
         }
         return $column;
     }
+
     /**
      * @param $key
      * @return mixed
@@ -203,9 +211,10 @@ class Migrations
         ];
         return $array[$key];
     }
+
     public static function addcolumn($table, $data)
     {
-        if(! isset($data['column']) && ! count($data['column'])) return \Response::json(['error' => true, "Column not found !!!"]);
+        if (!isset($data['column']) && !count($data['column'])) return \Response::json(['error' => true, "Column not found !!!"]);
         try {
             \Schema::table($table, function (Blueprint $table) use ($data) {
                 $columns = $data['column'];
@@ -236,7 +245,7 @@ class Migrations
                 if (isset($column['field']) && $column['field'] == 'yes') {
                     $field = new FieldsRepository();
                     $field->create([
-                        'name' => ucwords(str_replace("_"," ",$column['name'])),
+                        'name' => ucwords(str_replace("_", " ", $column['name'])),
                         'slug' => uniqid(),
                         'table_name' => $table,
                         'column_name' => $column['name'],
@@ -309,30 +318,28 @@ class Migrations
 
                     if (isset($column['field']) && $column['field'] == 'yes') {
                         $field = new FieldsRepository();
-                        if($field->findByTableAndCol($table_name,$column_old)){
-                            $field->updateField($table_name,$column_old,$column['name']);
-                        }else{
+                        if ($field->findByTableAndCol($table_name, $column_old)) {
+                            $field->updateField($table_name, $column_old, $column['name']);
+                        } else {
                             $col = $column["name"];
-                            $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name ='$table_name'  AND column_name ='$col' AND EXTRA like '%auto_increment%'"));
+                            $column_info = \DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name ='" . $table_name . "'  AND column_name ='" . $col . "' AND EXTRA like '%auto_increment%'");
 
                             $field->create([
-                                'name' => ucwords(str_replace("_"," ",$column['name'])),
+                                'name' => ucwords(str_replace("_", " ", $column['name'])),
                                 'slug' => uniqid(),
                                 'table_name' => $table_name,
                                 'column_name' => $column['name'],
                                 'visibility' => (count($column_info)) ? 0 : 1,
                             ]);
                         }
-                    }else if(isset($column['field']) && $column['field'] == 'no'){
+                    } else if (isset($column['field']) && $column['field'] == 'no') {
                         $field = new FieldsRepository();
-                        $field->findByTableAndColAndDelete($table_name,$column_old);
+                        $field->findByTableAndColAndDelete($table_name, $column_old);
                     }
                 }
-
-                if (isset($data['timestamps']) && $data['timestamps']){
+                if (isset($data['timestamps']) && $data['timestamps']) {
                     $table->timestamps();
                 }
-                
             });
 
         } catch (QueryException $e) {
@@ -343,6 +350,7 @@ class Migrations
 
         return \Response::json(['error' => false]);
     }
+
     public static function getLendth($column_info)
     {
         $detects = self::detect($column_info->DATA_TYPE);
@@ -355,6 +363,7 @@ class Migrations
             return trim($rez, ",");
         }
     }
+
     private static function detect($key)
     {
         $array = [
@@ -395,19 +404,23 @@ class Migrations
         ];
         return isset($array[$key]) ? $array[$key] : false;
     }
+
     public static function enumer($column_info)
     {
         return (self::before(')', self::after('enum(', $column_info->COLUMN_TYPE)));
     }
+
     protected static function before($key, $inthat)
     {
         return substr($inthat, 0, strpos($inthat, $key));
     }
+
     protected static function after($key, $inthat)
     {
         if (!is_bool(strpos($inthat, $key)))
             return substr($inthat, strpos($inthat, $key) + strlen($key));
     }
+
     public static function getDataType($column_info)
     {
         if ($column_info->EXTRA == "auto_increment") {
@@ -432,6 +445,7 @@ class Migrations
             return array_search('tinyint', self::types());
         }
     }
+
     public static function increments($type, $lendt)
     {
         switch ($lendt > 11) {
@@ -443,6 +457,7 @@ class Migrations
                 break;
         }
     }
+
     public static function ints($length)
     {
         if ($length <= 11) {
@@ -451,20 +466,23 @@ class Migrations
             return array_search('bigInteger', self::types());
         }
     }
+
     public static function deleteColumn($table, $column)
     {
-        if(\Schema::hasColumn($table,$column)){
+        if (\Schema::hasColumn($table, $column)) {
             \Schema::table($table, function ($table) use ($column) {
                 $table->dropColumn($column);
             });
         }
     }
+
     public function seperator($obj)
     {
         if ($obj->Extra == 'auto_increment') {
             $type = $this->editData();
         }
     }
+
     public function editData()
     {
         $array = [

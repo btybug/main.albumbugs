@@ -285,62 +285,7 @@ class Migrations
                     $table->renameColumn($column_old, $name)->change();
                 });
             }
-            \Schema::table($table, function (Blueprint $table) use ($data, $column_old, $table_name) {
-                $columns = $data['column'];
-                $types = self::types();
-                foreach ($columns as $column) {
-                    $type = $types[$column['type']];
-                    $name = $column['name'];
-                    if ($name != $column_old) {
-                    }
-                    $lenght = self::formate($type, $column['lenght']);
-                    if ($type == 'decimal' || $type == 'double') {
-                        $at = $table->$type($name, isset($lenght[0]) ? $lenght[0] : null, isset($lenght[1]) ? $lenght[1] : 0);
-                    } else {
-                        $at = $table->$type($name, $lenght);
-                    }
-                    $attributes = self::unsets($column);
-                    if (!isset($attributes['nullable'])) {
-                        $attributes['nullable'] = false;
-                    };
-                    foreach ($attributes as $k => $v) {
-                        if ($k == 'unique') $v = null;
-                        if ($k == 'nullable') {
-                            $at->$k($v);
-                        }
-                        if ($k != 'default' and !empty($v)) {
-                            $at->$k($v);
-                        } elseif ($k == 'default' and !empty($v)) {
-                            $at->$k($v);
-                        }
-                    }
-                    $at->change();
-
-                    if (isset($column['field']) && $column['field'] == 'yes') {
-                        $field = new FieldsRepository();
-                        if ($field->findByTableAndCol($table_name, $column_old)) {
-                            $field->updateField($table_name, $column_old, $column['name']);
-                        } else {
-                            $col = $column["name"];
-                            $column_info = \DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name ='" . $table_name . "'  AND column_name ='" . $col . "' AND EXTRA like '%auto_increment%'");
-
-                            $field->create([
-                                'name' => ucwords(str_replace("_", " ", $column['name'])),
-                                'slug' => uniqid(),
-                                'table_name' => $table_name,
-                                'column_name' => $column['name'],
-                                'visibility' => (count($column_info)) ? 0 : 1,
-                            ]);
-                        }
-                    } else if (isset($column['field']) && $column['field'] == 'no') {
-                        $field = new FieldsRepository();
-                        $field->findByTableAndColAndDelete($table_name, $column_old);
-                    }
-                }
-                if (isset($data['timestamps']) && $data['timestamps']) {
-                    $table->timestamps();
-                }
-            });
+            
 
         } catch (QueryException $e) {
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);

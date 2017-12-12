@@ -250,6 +250,13 @@ class Migrations
         }
         return \Response::json(['error' => false]);
     }
+
+    /**
+     * @param $table
+     * @param $column_old
+     * @param $data
+     * @return \Illuminate\Http\JsonResponse
+     */
     public static function editMigrated($table, $column_old, $data)
     {
         $columns = $data['column'];
@@ -313,7 +320,7 @@ class Migrations
                                 'slug' => uniqid(),
                                 'table_name' => $table_name,
                                 'column_name' => $column['name'],
-                                'visibility' => (count($column_info)) ? 0: 1,
+                                'visibility' => (count($column_info)) ? 0 : 1,
                             ]);
                         }
                     }else if(isset($column['field']) && $column['field'] == 'no'){
@@ -321,17 +328,20 @@ class Migrations
                         $field->findByTableAndColAndDelete($table_name,$column_old);
                     }
                 }
-                if (isset($data['timestamps']) and $data['timestamps']) $table->timestamps();
+
+                if (isset($data['timestamps']) && $data['timestamps']){
+                    $table->timestamps();
+                }
+                
             });
 
         } catch (QueryException $e) {
-            dd(5);
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);
         } catch (FatalErrorException $e) {
-            dd(6);
             return \Response::json(['error' => true, 'message' => $e->getMessage()]);
         }
-        return \Response::json(['error' => false, 'redirect' => url("/admin/modules/tables/edit-column/$table", $data['column'][0]['name'])]);
+
+        return \Response::json(['error' => false]);
     }
     public static function getLendth($column_info)
     {

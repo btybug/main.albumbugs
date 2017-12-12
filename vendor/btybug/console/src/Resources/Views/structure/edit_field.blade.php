@@ -832,7 +832,7 @@
                                     var data_source_related = $('<select/>', {
                                         "class": 'form-control',
                                         "id": 'data_source_table_name',
-                                        "name": "data_source_table_name"
+                                        "name": "json_data[data_source_table_name]"
                                     });
 
                                     data_source_related.append($('<option>', {value: '', text: 'Select Table Name'}));
@@ -900,7 +900,7 @@
                             var data_source_type_key = $('<select/>', {
                                 "class": 'form-control',
                                 "id": 'data_source_type_key',
-                                "name": "data_source_type_key"
+                                "name": "json_data[data_source_type_key]"
                             });
 
                             form_group_col.append(data_source_type_key);
@@ -920,7 +920,7 @@
                             var data_source_type_val = $('<select/>', {
                                 "class": 'form-control',
                                 "id": 'data_source_type_val',
-                                "name": "data_source_type_val",
+                                "name": "json_data[data_source_type_val]",
                                 "option": {'': "select"}
                             });
 
@@ -973,7 +973,7 @@
                         var data_source_related = $('<select/>', {
                             "class": 'form-control',
                             "id": 'table_column',
-                            "name": "data_source_columns"
+                            "name": "json_data[data_source_columns]"
                         });
 
                         data_source_related.append($('<option>', {value: '', text: 'Select Column'}));
@@ -1013,7 +1013,7 @@
                         var data_source_type_default = $('<select/>', {
                             "class": 'form-control',
                             "id": 'data_source_type_default',
-                            "name": "data_source_type_default"
+                            "name": "json_data[data_source_type_default]"
                         });
 
                         form_group_col.append(data_source_type_default);

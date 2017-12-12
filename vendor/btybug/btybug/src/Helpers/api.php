@@ -1813,3 +1813,26 @@ function get_classifiers($array = false){
     $classifiers = $classifyRepo->pluck('title','id');
     return ($array) ? $classifiers->toArray() : $classifiers;
 }
+
+function get_field_data(int $id){
+    $fieldRepository = new \Btybug\Console\Repository\FieldsRepository();
+    $field = $fieldRepository->find($id);
+
+    if($field && count($field->json_data)){
+        switch ($field->data_source){
+            case "related" :
+                if(isset($field->json_data['data_source_table_name']) && isset($field->json_data['data_source_columns'])){
+                    $table = $field->json_data['data_source_table_name'];
+                    $column = $field->json_data['data_source_columns'];
+                    if (\Schema::hasColumn($table, $column)) {
+                        $result = \DB::table($table)->pluck($column,'id');
+                        return (count($result)) ? $result->toArray() : [];
+                    }
+                }
+                break;
+            case "manual" :
+                break;
+        }
+    }
+    dd($id);
+}

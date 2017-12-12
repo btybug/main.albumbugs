@@ -61,64 +61,54 @@ abstract class BasePainter implements PainterInterface, Arrayable
         return $this;
     }
 
-    public
-    function scopeGet()
+    public function scopeGet()
     {
         // TODO: Implement scopeGet() method.
     }
 
-    public
-    function scopeGetAllByTagName(...$args)
+    public function scopeGetAllByTagName(...$args)
     {
         // TODO: Implement scopeGetAllByTagName() method.
     }
 
-    public
-    function scopeMakeVariation(array $array)
+    public function scopeMakeVariation(array $array)
     {
         // TODO: Implement scopeMakeVariation() method.
     }
 
-    public
-    function scopeSave(array $array)
+    public function scopeSave(array $array)
     {
         // TODO: Implement scopeSave() method.
     }
 
-    public
-    function scopeSaveVariation()
+    public function scopeSaveVariation()
     {
         // TODO: Implement scopeSaveVariation() method.
     }
 
-    public
-    function scopeWhere(string $arg1, string $condition, string $arg3)
+    public function scopeWhere(string $arg1, string $condition, string $arg3)
     {
         // TODO: Implement scopeWhere() method.
     }
 
-    public
-    function scopeRender($settings)
+    public function scopeRender($settings)
     {
         // TODO: Implement scopeRender() method.
     }
 
-    public
-    function scopeRenderSettings($settings)
+    public function scopeRenderSettings($settings)
     {
         // TODO: Implement scopeRenderSettings() method.
     }
 
-    public
-    function makeConfigJson()
+    public function makeConfigJson()
     {
         if (!\File::exists($this->config_path)) {
             \File::put($this->config_path, '{}');
         }
     }
 
-    private
-    function getRegisters()
+    private function getRegisters()
     {
         //TODO: return array of all registered items
         $get_content = @json_decode(\File::get($this->config_path), true);
@@ -128,8 +118,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
         return [];
     }
 
-    private
-    function scopeRegistration($unit_path)
+    private function scopeRegistration($unit_path)
     {
         $this->scopeFind('gv_content_unit_slider');
         $full_path = $this->makePath($unit_path);
@@ -147,8 +136,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
         return \File::put($this->config_path, json_encode($push_into_config));
     }
 
-    public
-    function __get($name)
+    public function __get($name)
     {
         $result = isset($this->toArray()[$name]) ? $this->toArray()[$name] : false;
         return $result;
@@ -159,8 +147,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
      * @param $arguments
      * @return mixed
      */
-    public
-    function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
         $method = 'scope' . ucfirst($name);
         if (method_exists($this, $method)
@@ -175,11 +162,9 @@ abstract class BasePainter implements PainterInterface, Arrayable
      * @param $name
      * @return bool
      */
-    public
-    function __isset($name)
+    public function __isset($name)
     {
-        $result = isset($this->toArray()[$name]) ? true : false;
-        return $result;
+        return isset($this->toArray()[$name]);
     }
 
     /**
@@ -187,8 +172,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
      * @param $arguments
      * @return mixed
      */
-    public
-    static function __callStatic($name, $arguments)
+    public static function __callStatic($name, $arguments)
     {
         $method = 'scope' . ucfirst($name);
         $_this = new static;
@@ -202,14 +186,12 @@ abstract class BasePainter implements PainterInterface, Arrayable
 
 
 // make a path
-    protected
-    function makePath($path)
+    protected function makePath($path)
     {
         return $this->base_path . $path . DS . 'config.json';
     }
 
-    protected
-    function getItemConfigJsonPath($slug)
+    protected function getItemConfigJsonPath($slug)
     {
 
         $config = $this->getRegisters();
@@ -219,7 +201,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
 
 // validate if file exist
 
-     protected function validate($path)
+    protected function validate($path)
     {
         if (!\File::exists($path)) {
             throw new \Error('File does not found', 404);
@@ -228,8 +210,7 @@ abstract class BasePainter implements PainterInterface, Arrayable
     }
 
 // if slug or path is invalid
-    public
-    function validateSlugWithPath($content)
+    public function validateSlugWithPath($content)
     {
         if (!isset($content["slug"])) {
             throw new \Error('Slug does not found', 404);

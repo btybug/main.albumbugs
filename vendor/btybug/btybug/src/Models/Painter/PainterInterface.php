@@ -63,4 +63,8 @@ interface PainterInterface
      * @return mixed
      */
     public function scopeGet();
+
+    public function scopeRender($settings);
+
+    public function scopeRenderSettings($settings);
 }

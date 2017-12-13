@@ -40,7 +40,23 @@ abstract class BasePainter  implements PainterInterface
 
     public function scopeAll()
     {
-        // TODO: Implement scopeAll() method.
+        $all = [];
+        $path = $this->base_path;
+        $units = \File::directories($path);
+
+        if(count($units) > 0){
+            foreach ($units as $key => $unit){
+                $full_path = $unit.DS.'config.json';
+                $obj = new Painter();
+                $is_true = $obj->validateWithReturn($full_path);
+                if($is_true){
+                    $all[$key] = $obj->makeItem($full_path);
+                }
+            }
+        }else{
+            $this->throwError("There is no unit found");
+        }
+        return $all;
     }
 
     public function scopeCreateVariation(array $array)
@@ -70,7 +86,18 @@ abstract class BasePainter  implements PainterInterface
 
     public function scopeGetAllByTagName(...$args)
     {
-        // TODO: Implement scopeGetAllByTagName() method.
+        $all_by_tag_name = [];
+        if(count($args)){
+            $units = $this->scopeAll();
+            dd($units);
+            foreach($args as $key => $tagname){
+
+                echo "";
+            }
+        }else{
+            $this->throwError("Empty arguments");
+        }
+        return $all_by_tag_name;
     }
 
     public function scopeMakeVariation(array $array)
@@ -88,9 +115,20 @@ abstract class BasePainter  implements PainterInterface
         // TODO: Implement scopeSaveVariation() method.
     }
 
-    public function scopeWhere(string $arg1, string $condition, string $arg3)
+    public function scopeWhere(string $arg1, string $arg3)
     {
-        // TODO: Implement scopeWhere() method.
+        $result = [];
+        $all = $this->scopeAll();
+
+        foreach ($all as $key => $unit) {
+            $config = $unit->attributes;
+
+            if (isset($config[$arg1]) && $config[$arg1] == $arg3) {
+                $result[] = $config;
+            }
+        }
+        dd($result);
+        return $result;
     }
 
     public function scopeRender($settings)
@@ -112,7 +150,6 @@ abstract class BasePainter  implements PainterInterface
 
     private function getRegisters()
     {
-        //TODO: return array of all registered items
         $get_content = @json_decode(\File::get($this->config_path), true);
         if ($get_content) {
             return $get_content;
@@ -178,12 +215,11 @@ abstract class BasePainter  implements PainterInterface
     {
         $method = 'scope' . ucfirst($name);
         $_this = new static;
-        if (method_exists($_this, $method)
-            && is_callable(array($_this, $method))
-        ) {
+        if (method_exists($_this, $method) && is_callable(array($_this, $method))) {
             return call_user_func_array([$_this, $method], $arguments);
+        }else{
+            throw new \Error("Method $name does not exist");
         }
-        throw new Exception("Method $name does not exist");
     }
 
 
@@ -197,16 +233,28 @@ abstract class BasePainter  implements PainterInterface
     {
 
         $config = $this->getRegisters();
-        if (!isset($config[$slug])) throw new Exception("Not Registered Item $slug !!!");
+        if (!isset($config[$slug])){
+            $this->throwError("Not Registered Item $slug !!!",404);
+        }
         return base_path($config[$slug]) . DS . 'config.json';
     }
 
 // validate if file exist
 
-    protected function validate($path)
+     protected function validate($path)
     {
         if (!\File::exists($path)) {
-            throw new Exception('File does not found', 404);
+            $this->throwError('File does not found', 404);
+        }
+        return true;
+    }
+
+    // validate if file exist and return true or false
+
+    protected function validateWithReturn($path)
+    {
+        if (!\File::exists($path)) {
+            return false;
         }
         return true;
     }
@@ -215,11 +263,15 @@ abstract class BasePainter  implements PainterInterface
     public function validateSlugWithPath($content)
     {
         if (!isset($content["slug"])) {
-            throw new Exception('Slug does not found', 404);
+            $this->throwError('Slug does not found', 404);
         }
         if (!isset($content["path"])) {
-            throw new Exception('Path does not found', 404);
+            $this->throwError('Path does not found', 404);
         }
         return true;
+    }
+    // function for error
+    public function throwError($msg,$code=404){
+        throw new \Error($msg, $code);
     }
 }

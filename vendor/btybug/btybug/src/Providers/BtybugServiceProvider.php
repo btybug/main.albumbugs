@@ -26,8 +26,8 @@ class BtybugServiceProvider extends ServiceProvider
         $this->app->register('Btybug\Framework\Providers\ModuleServiceProvider');
         $this->app->register('Btybug\Resources\Providers\ModuleServiceProvider');
 
-        //$obj = new Painter();
-       //dd($obj->find('gv_content_unit_slider')->toArray());
+       // $obj = new Painter();
+      // dd($obj->scopeWhere('title','Content side'));
     }
 
     /**

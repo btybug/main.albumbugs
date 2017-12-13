@@ -12,6 +12,7 @@ namespace Btybug\btybug\Models\Painter;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
+use View;
 
 abstract class BasePainter implements PainterInterface
 {
@@ -155,7 +156,19 @@ abstract class BasePainter implements PainterInterface
 
     public function scopeRender($settings)
     {
-        // TODO: Implement scopeRender() method.
+        $tpl = '';
+        if(isset($settings['view_name'])){
+            $tpl = $settings['view_name'];
+        }else{
+            $tpl = "tpl";
+        }
+
+        $slug = $settings['slug'];
+        $path = $settings['path'];
+        View::addLocation(($path));
+        View::addNamespace("$slug", $path);
+
+        return View::make("$slug::$tpl")->with($settings)->with(['tplPath' => $path, '_this' => $this])->render();
     }
 
     public function scopeRenderSettings($settings)
@@ -181,7 +194,6 @@ abstract class BasePainter implements PainterInterface
 
     private function scopeRegistration($unit_path)
     {
-        $this->scopeFind('gv_content_unit_slider');
         $full_path = $this->makePath($unit_path);
         $this->validate($full_path);
 

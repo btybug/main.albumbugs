@@ -237,3 +237,6 @@ section.bty-slider .slider-carousel .owl-dots .owl-dot.active span, section.bty-
     color: #ccc;
     font-size: 100px;
 }
+.custom_text_break{
+    word-wrap: break-word;
+}

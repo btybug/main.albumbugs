@@ -10,7 +10,7 @@
                             <div>
                                 <img src="{!! $settings['testamonial'][$key]['image'] !!}" alt="">
                                 <h4>{!! $settings['testamonial'][$key]['name'] !!}</h4>
-                                <p>{!! $settings['testamonial'][$key]['description'] !!}</p>
+                                <p class="custom_text_break">{!! $settings['testamonial'][$key]['description'] !!}</p>
                             </div>
                         </div>
                     @endforeach

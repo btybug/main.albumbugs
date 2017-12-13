@@ -123,22 +123,24 @@ abstract class BasePainter implements PainterInterface
         dd($this);
     }
 
-    public function scopeWhere(string $arg1, string $condition, string $arg3=null)
+    public function scopeWhere(string $arg1, string $condition, string $arg3 = null)
     {
         if (is_null($this->storage)) {
             $all = $this->scopeAll();
         } else {
             $all = $this->storage;
         }
-        if(is_null($arg3)){
-            $arg3= $condition;
-            $condition='=';
+        if (is_null($arg3)) {
+            $arg3 = $condition;
+            $condition = '=';
         }
         foreach ($all as $key => $unit) {
             $config = $unit->attributes;
-            $is_condition_true = $this->defineCondition($condition, $config[$arg1], $arg3);
-
-            if (isset($config[$arg1]) && $is_condition_true) {
+            $is_condition_true=false;
+            if (isset($config[$arg1])){
+                $is_condition_true = $this->defineCondition($condition, $config[$arg1], $arg3);
+            }
+            if ($is_condition_true) {
                 $result[] = $unit;
             }
         }

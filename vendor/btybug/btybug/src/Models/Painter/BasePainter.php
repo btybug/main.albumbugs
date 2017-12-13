@@ -13,15 +13,15 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
 
-abstract class BasePainter  implements PainterInterface
+abstract class BasePainter implements PainterInterface
 {
 
 
     protected $config_path;
     protected $base_path;
     protected $attributes = [];
-    protected $original=[];
-    protected $where_result = [];
+    protected $original = [];
+    protected $storage = null;
 
     public $name_of_json = 'config.json';
 
@@ -48,16 +48,16 @@ abstract class BasePainter  implements PainterInterface
         $path = $this->base_path;
         $units = \File::directories($path);
 
-        if(count($units) > 0){
-            foreach ($units as $key => $unit){
-                $full_path = $unit.DS.$this->name_of_json;
+        if (count($units) > 0) {
+            foreach ($units as $key => $unit) {
+                $full_path = $unit . DS . $this->name_of_json;
                 $obj = new Painter();
                 $is_true = $obj->validateWithReturn($full_path);
-                if($is_true){
+                if ($is_true) {
                     $all[$key] = $obj->makeItem($full_path);
                 }
             }
-        }else{
+        } else {
             $this->throwError("There is no unit found");
         }
         return collect($all);
@@ -67,6 +67,7 @@ abstract class BasePainter  implements PainterInterface
     {
 
     }
+
     public function scopeMakeVariation(array $array)
     {
         $variations = $this->variations;
@@ -91,24 +92,20 @@ abstract class BasePainter  implements PainterInterface
         return $this;
     }
 
-    public function scopeGet()
-    {
-        // TODO: Implement scopeGet() method.
-    }
 
     public function scopeGetAllByTagName(...$args)
     {
         $all_by_tag_name = [];
-        if(count($args)){
+        if (count($args)) {
             $units = $this->scopeAll();
-            foreach ($units as $key => $unit){
-                foreach($args as $keyy => $tagname){
-                    if(isset($unit->attributes['tags']) && $unit->attributes['tags'][0] == $tagname){
+            foreach ($units as $key => $unit) {
+                foreach ($args as $keyy => $tagname) {
+                    if (isset($unit->attributes['tags']) && $unit->attributes['tags'][0] == $tagname) {
                         $all_by_tag_name[$key] = $unit;
                     }
                 }
             }
-        }else{
+        } else {
             $this->throwError("Empty arguments");
         }
         return collect($all_by_tag_name);
@@ -117,7 +114,7 @@ abstract class BasePainter  implements PainterInterface
     public function scopeSave(array $array)
     {
         $config = $this->config_path;
-        \File::put($this->config_path, json_encode($array,true));
+        \File::put($this->config_path, json_encode($array, true));
         return $this;
     }
 
@@ -128,19 +125,26 @@ abstract class BasePainter  implements PainterInterface
 
     public function scopeWhere(string $arg1, string $condition, string $arg3)
     {
-        $result = [];
-        $all = $this->scopeAll();
-
+        if (is_null($this->storage)) {
+            $all = $this->scopeAll();
+        } else {
+            $all = $this->storage;
+        }
         foreach ($all as $key => $unit) {
             $config = $unit->attributes;
-            $is_condition_true = $this->defineCondition($condition,$config[$arg1],$arg3);
+            $is_condition_true = $this->defineCondition($condition, $config[$arg1], $arg3);
 
             if (isset($config[$arg1]) && $is_condition_true) {
-                $result[] = $config;
+                $result[] = $unit;
             }
         }
+        $this->storage = collect($result);
+        return $this;
+    }
 
-        return new Collection($result);
+    public function scopeGet()
+    {
+        return $this->storage;
     }
 
     public function scopeRender($settings)
@@ -230,7 +234,7 @@ abstract class BasePainter  implements PainterInterface
         $_this = new static;
         if (method_exists($_this, $method) && is_callable(array($_this, $method))) {
             return call_user_func_array([$_this, $method], $arguments);
-        }else{
+        } else {
             throw new \Error("Method $name does not exist");
         }
     }
@@ -246,15 +250,15 @@ abstract class BasePainter  implements PainterInterface
     {
 
         $config = $this->getRegisters();
-        if (!isset($config[$slug])){
-            $this->throwError("Not Registered Item $slug !!!",404);
+        if (!isset($config[$slug])) {
+            $this->throwError("Not Registered Item $slug !!!", 404);
         }
         return base_path($config[$slug]) . DS . $this->name_of_json;
     }
 
 // validate if file exist
 
-     protected function validate($path)
+    protected function validate($path)
     {
         if (!\File::exists($path)) {
             $this->throwError('File does not found', 404);
@@ -283,15 +287,18 @@ abstract class BasePainter  implements PainterInterface
         }
         return true;
     }
+
     // function for error
-    public function throwError($msg,$code=404){
+    public function throwError($msg, $code = 404)
+    {
         throw new \Error($msg, $code);
     }
 
     // choose which condtion is was setted
-    protected function defineCondition($condition,$arg1,$arg2){
+    protected function defineCondition($condition, $arg1, $arg2)
+    {
         $bool = false;
-        switch ($condition){
+        switch ($condition) {
             case ">":
                 $bool = $arg1 > $arg2;
                 break;
@@ -306,6 +313,7 @@ abstract class BasePainter  implements PainterInterface
         }
         return $bool;
     }
+
     //
     protected function setAttributes($key, $value)
     {

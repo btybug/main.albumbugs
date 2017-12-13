@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\ViewTestMiddleware;
+//use App\Http\Middleware\ViewTestMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Btybug\User\Http\Middleware\UserHasPermission;
 
@@ -20,7 +20,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        ViewTestMiddleware::class
+//        ViewTestMiddleware::class
     ];
 
     /**
@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Btybug\btybug\Middleware\HomeShortcodeMiddleware::class,
             \Btybug\btybug\Middleware\CustomSCMiddleware::class,
-            ViewTestMiddleware::class
+//            ViewTestMiddleware::class
         ],
 
         'api' => [

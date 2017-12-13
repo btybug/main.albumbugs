@@ -123,12 +123,16 @@ abstract class BasePainter implements PainterInterface
         dd($this);
     }
 
-    public function scopeWhere(string $arg1, string $condition, string $arg3)
+    public function scopeWhere(string $arg1, string $condition, string $arg3=null)
     {
         if (is_null($this->storage)) {
             $all = $this->scopeAll();
         } else {
             $all = $this->storage;
+        }
+        if(is_null($arg3)){
+            $arg3= $condition;
+            $condition='=';
         }
         foreach ($all as $key => $unit) {
             $config = $unit->attributes;

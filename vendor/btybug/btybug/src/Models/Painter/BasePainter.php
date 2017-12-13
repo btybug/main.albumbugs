@@ -10,6 +10,7 @@ namespace Btybug\btybug\Models\Painter;
 
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 use Mockery\Exception;
 
 abstract class BasePainter  implements PainterInterface
@@ -20,6 +21,9 @@ abstract class BasePainter  implements PainterInterface
     protected $base_path;
     protected $attributes = [];
     protected $original=[];
+    protected $where_result = [];
+
+    public $name_of_json = 'config.json';
 
     public function __construct()
     {
@@ -46,7 +50,7 @@ abstract class BasePainter  implements PainterInterface
 
         if(count($units) > 0){
             foreach ($units as $key => $unit){
-                $full_path = $unit.DS.'config.json';
+                $full_path = $unit.DS.$this->name_of_json;
                 $obj = new Painter();
                 $is_true = $obj->validateWithReturn($full_path);
                 if($is_true){
@@ -56,12 +60,20 @@ abstract class BasePainter  implements PainterInterface
         }else{
             $this->throwError("There is no unit found");
         }
-        return $all;
+        return collect($all);
     }
 
     public function scopeCreateVariation(array $array)
     {
-        // TODO: Implement scopeCreateVariation() method.
+
+    }
+    public function scopeMakeVariation(array $array)
+    {
+        $variations = $this->variations;
+        $variations[uniqid() . '.' . $this->slug] = $array;
+        $this->setAttributes('variations', $variations);
+
+        return collect($this);
     }
 
     public function scopeFind(string $slug)
@@ -89,46 +101,46 @@ abstract class BasePainter  implements PainterInterface
         $all_by_tag_name = [];
         if(count($args)){
             $units = $this->scopeAll();
-            dd($units);
-            foreach($args as $key => $tagname){
-
-                echo "";
+            foreach ($units as $key => $unit){
+                foreach($args as $keyy => $tagname){
+                    if(isset($unit->attributes['tags']) && $unit->attributes['tags'][0] == $tagname){
+                        $all_by_tag_name[$key] = $unit;
+                    }
+                }
             }
         }else{
             $this->throwError("Empty arguments");
         }
-        return $all_by_tag_name;
-    }
-
-    public function scopeMakeVariation(array $array)
-    {
-        // TODO: Implement scopeMakeVariation() method.
+        return collect($all_by_tag_name);
     }
 
     public function scopeSave(array $array)
     {
-        // TODO: Implement scopeSave() method.
+        $config = $this->config_path;
+        \File::put($this->config_path, json_encode($array,true));
+        return $this;
     }
 
     public function scopeSaveVariation()
     {
-        // TODO: Implement scopeSaveVariation() method.
+        dd($this);
     }
 
-    public function scopeWhere(string $arg1, string $arg3)
+    public function scopeWhere(string $arg1, string $condition, string $arg3)
     {
         $result = [];
         $all = $this->scopeAll();
 
         foreach ($all as $key => $unit) {
             $config = $unit->attributes;
+            $is_condition_true = $this->defineCondition($condition,$config[$arg1],$arg3);
 
-            if (isset($config[$arg1]) && $config[$arg1] == $arg3) {
+            if (isset($config[$arg1]) && $is_condition_true) {
                 $result[] = $config;
             }
         }
-        dd($result);
-        return $result;
+
+        return new Collection($result);
     }
 
     public function scopeRender($settings)
@@ -173,6 +185,7 @@ abstract class BasePainter  implements PainterInterface
         $push_into_config[$slug] = $path;
 
         return \File::put($this->config_path, json_encode($push_into_config));
+
     }
 
     public function __get($name)
@@ -226,7 +239,7 @@ abstract class BasePainter  implements PainterInterface
 // make a path
     protected function makePath($path)
     {
-        return $this->base_path . $path . DS . 'config.json';
+        return $this->base_path . $path . DS . $this->name_of_json;
     }
 
     protected function getItemConfigJsonPath($slug)
@@ -236,7 +249,7 @@ abstract class BasePainter  implements PainterInterface
         if (!isset($config[$slug])){
             $this->throwError("Not Registered Item $slug !!!",404);
         }
-        return base_path($config[$slug]) . DS . 'config.json';
+        return base_path($config[$slug]) . DS . $this->name_of_json;
     }
 
 // validate if file exist
@@ -273,5 +286,32 @@ abstract class BasePainter  implements PainterInterface
     // function for error
     public function throwError($msg,$code=404){
         throw new \Error($msg, $code);
+    }
+
+    // choose which condtion is was setted
+    protected function defineCondition($condition,$arg1,$arg2){
+        $bool = false;
+        switch ($condition){
+            case ">":
+                $bool = $arg1 > $arg2;
+                break;
+            case "<":
+                $bool = $arg1 < $arg2;
+                break;
+            case "=":
+                $bool = $arg1 == $arg2;
+                break;
+            default:
+                $this->throwError("Condition is not exist");
+        }
+        return $bool;
+    }
+    //
+    protected function setAttributes($key, $value)
+    {
+        $attributes = $this->attributes;
+        $attributes[$key] = $value;
+        $this->attributes = $attributes;
+        return $this;
     }
 }

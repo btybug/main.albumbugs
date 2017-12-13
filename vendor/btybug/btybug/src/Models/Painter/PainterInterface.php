@@ -59,7 +59,7 @@ interface PainterInterface extends Arrayable
      * @param string $arg3
      * @return mixed
      */
-    public function scopeWhere(string $arg1, string $arg3);
+    public function scopeWhere(string $arg1, string $condition, string $arg3);
 
     /**
      * @return mixed

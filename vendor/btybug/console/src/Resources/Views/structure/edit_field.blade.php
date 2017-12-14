@@ -726,7 +726,7 @@
                             "type": 'textarea',
                             "id": 'data_source_manual',
                             "placeholder": 'Type options separated with ,',
-                            "name": 'settings["manual"]'
+                            "name": 'json_data[manual]'
                         });
 
                         data_group.append(textarea);
@@ -762,7 +762,7 @@
                         var data_group_hidden = $('<input/>', {
                             "type": 'hidden',
                             "data-name": 'file-unit',
-                            "name": 'file-unit'
+                            "name": 'json_data[file-unit]'
                         });
 
                         data_group_col.append(data_group_hidden);
@@ -783,8 +783,9 @@
                         });
                         data_group.append(data_group_col);
                         var data_group_BB_input = $('<input/>', {
-                            "class": 'btn btn-warning btn-md input-md',
+                            "class": 'form-control input-md',
                             "type": 'text',
+                            "name": 'json_data[bb]'
                         });
 
                         data_group_col.append(data_group_BB_input);
@@ -801,7 +802,7 @@
                             "type": 'text',
                             "id": 'data_source_api',
                             "placeholder": 'Put Api Url ...',
-                            "name": 'settings["api"]'
+                            "name": 'json_data["api"]'
                         });
 
                         data_group.append(textarea);

@@ -1831,6 +1831,9 @@ function get_field_data(int $id){
                 }
                 break;
             case "manual" :
+                if(isset($field->json_data['manual']) && $field->json_data['manual']){
+                    return (count(explode(',',$field->json_data['manual']))) ? explode(',',$field->json_data['manual']) : [];
+                }
                 break;
         }
     }

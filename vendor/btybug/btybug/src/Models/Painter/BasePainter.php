@@ -8,7 +8,7 @@
 
 namespace Btybug\btybug\Models\Painter;
 
-
+use Btybug\btybug\Models\Pagination\Paginator;
 use Btybug\btybug\Models\Templates\UnitsVariations;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
@@ -139,18 +139,17 @@ abstract class BasePainter implements PainterInterface
     public function scopeWhere(string $arg1, string $condition, string $arg3 = null)
     {
         if (is_null($this->storage)) {
-            $all = $this->scopeAll();
-        } else {
-            $all = $this->storage;
+            $this->scopeAll();
         }
+        $all = $this->storage;
         if (is_null($arg3)) {
             $arg3 = $condition;
             $condition = '=';
         }
         foreach ($all as $key => $unit) {
             $config = $unit->attributes;
-            $is_condition_true=false;
-            if (isset($config[$arg1])){
+            $is_condition_true = false;
+            if (isset($config[$arg1])) {
                 $is_condition_true = $this->defineCondition($condition, $config[$arg1], $arg3);
             }
             if ($is_condition_true) {
@@ -163,15 +162,15 @@ abstract class BasePainter implements PainterInterface
 
     public function scopeGet()
     {
-        return $this->storage;
+        return collect($this->storage);
     }
 
     public function scopeRender($settings)
     {
         $tpl = '';
-        if(isset($settings['view_name'])){
+        if (isset($settings['view_name'])) {
             $tpl = $settings['view_name'];
-        }else{
+        } else {
             $tpl = "tpl";
         }
 
@@ -317,6 +316,15 @@ abstract class BasePainter implements PainterInterface
         }
         return true;
     }
+
+
+    protected function scopePaginate($limit = 5, $links_count = 5, $list_class = 'bty-pagination-2')
+    {
+        $paginate=new Paginator($limit, $links_count,$list_class,$this->storage);
+        return $paginate;
+    }
+
+
 
     // function for error
     public function throwError($msg, $code = 404)

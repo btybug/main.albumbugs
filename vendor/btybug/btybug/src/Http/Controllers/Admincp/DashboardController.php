@@ -3,7 +3,10 @@
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Layouts;
+use Btybug\btybug\Models\Painter\Painter;
+use Btybug\Console\Models\AdminPages;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Notifynder;
 use RegEmails;
 
@@ -40,7 +43,11 @@ class DashboardController extends Controller
      */
     public function getIndex()
     {
-        return view('btybug::admin.dashboard');
+        $painter=new Painter();
+        $units=$painter->where('author','Sahak')->paginate(4,4,'bty-pagination-3');
+        $test=AdminPages::where('id','>',0)->paginate(10);
+        dd($units);
+        return view('btybug::admin.dashboard',compact('units'));
     }
 
     /**

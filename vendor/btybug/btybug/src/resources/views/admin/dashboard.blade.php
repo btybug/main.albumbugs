@@ -103,6 +103,7 @@
 
 
     </div>
+    {!! $units->links() !!}
 @stop
 @section('CSS')
     {{--{!! HTML::style('public/css/dashboard-css.css?v=0.1') !!}--}}

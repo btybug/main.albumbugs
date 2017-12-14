@@ -2,6 +2,7 @@
 
 namespace Btybug\btybug\Providers;
 
+use Btybug\btybug\Models\Painter\Painter;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 

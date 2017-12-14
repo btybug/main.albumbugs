@@ -61,4 +61,10 @@ class FieldsRepository extends GeneralRepository
         if($field) $field->delete();
     }
 
+    public function getWhereNotExists($table,$existings)
+    {
+        $data = ($existings) ? json_decode($existings,true) : [];
+        return $this->model()->where('table_name', $table)
+            ->whereNotIn('id', $data)->get();
+    }
 }

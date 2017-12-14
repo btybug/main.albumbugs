@@ -64,7 +64,7 @@ class FieldsRepository extends GeneralRepository
     public function getWhereNotExists($table,$existings)
     {
         $data = ($existings) ? json_decode($existings,true) : [];
-        return $this->model()->where('table_name', $table)
+        return $this->model()->where('table_name', $table)->where('column_name','!=','id')
             ->whereNotIn('id', $data)->get();
     }
 }

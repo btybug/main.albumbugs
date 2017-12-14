@@ -323,6 +323,7 @@ abstract class BasePainter implements PainterInterface
             case "<":
                 $bool = $arg1 < $arg2;
                 break;
+            case "==":
             case "=":
                 $bool = $arg1 == $arg2;
                 break;

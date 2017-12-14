@@ -35,53 +35,49 @@ class UnitsNewController extends Controller
         //$this->unitTypes = $this->types = @json_decode(File::get(config('paths.unit_path') . 'configTypes.json'), 1)['types'];
     }
 
+    // working
     public function getIndex(Request $request)
-    {
-        $units = Units::all()->run();
-        return view("uploads::gears-new.units.index", compact(['units']));
-    }
-
-    public function getFrontend(Request $request)
-    {
-        $units = Units::all()->run();
-        return view("uploads::gears-new.units.index", compact(['units']));
-    }
-
-    public function getFrontendNew(Request $request)
     {
         $units = Painter::all()->get();
         return view("uploads::gears-new.units.index", compact(['units']));
     }
 
+    // working
+    public function getFrontend(Request $request)
+    {
+        $units = Painter::all()->get();
+        return view("uploads::gears-new.units.index", compact(['units']));
+    }
+    // working
     public function getUnitVariations($slug)
     {
-        $unit = Units::find($slug);
+        $unit = Painter::find($slug);
         if (!count($unit)) return redirect()->back();
         $variation = [];
         $variations = $unit->variations();
         return view('uploads::gears-new.units.variations', compact(['unit', 'variations', 'variation']));
     }
 
-
+    // TODO: seems this function is not used with any functionality
     public function postUnitWithType(Request $request)
     {
         $main_type = $request->get('main_type');
         $general_type = $request->get('type', null);
 
         if ($general_type) {
-            $ui_units = Units::getAllUnits()->where('main_type', $main_type)->where('type', $general_type)->run();
+            $ui_units = Units::all()->where('main_type', $main_type)->where('type', $general_type)->get();
         } else {
-            $ui_units = Units::getAllUnits()->where('type', $main_type)->run();
+            $ui_units = Units::all()->where('type', $main_type)->get();
         }
 
         $html = View::make('resources::units._partials.list_cube', compact(['ui_units']))->render();
 
         return \Response::json(['html' => $html, 'error' => false]);
     }
-
+    // TODO: we have no makeVariation function
     public function postUnitVariations(Request $request, $slug)
     {
-        $ui = Units::find($slug);
+        $ui = Painter::find($slug);
         if (!$ui) return redirect()->back();
         $ui->makeVariation($request->except('_token', 'ui_slug'))->save();
 
@@ -97,6 +93,7 @@ class UnitsNewController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+    // TODO: we have no deleteVariation function
     public function postDeleteVariation(Request $request)
     {
         $result = false;
@@ -105,33 +102,34 @@ class UnitsNewController extends Controller
         }
         return redirect()->back()->with("message","Variation was deleted");
     }
-
+    // TODO: we have no delete function
     public function postDelete(Request $request)
     {
         $slug = $request->get('slug');
-        $unit =  Units::find($slug);
+        $unit =  Painter::find($slug);
         if ($unit) {
             $deleted = $unit->delete();
             return \Response::json(['success' => $deleted, 'url' => url('/admin/uploads/gears/units')]);
         }
     }
 
+    // TODO: we have no renderLivePreview function
     public function getSettings(Request $request)
     {
         if ($request->slug) {
-            $view = Units::renderLivePreview($request->slug, 'frontend');
+            $view = Painter::renderLivePreview($request->slug, 'frontend');
             return $view ? $view : abort('404');
         } else {
             abort('404');
         }
     }
 
+    // TODO: we have no findVariation function
     public function unitPreview($id)
     {
         $slug = explode('.', $id);
-        $ui = Units::find($slug[0]);
-        $variation = Units::findVariation($id);
-
+        $ui = Painter::find($slug[0]);
+        $variation = Painter::findVariation($id);
         if (!$variation) return redirect()->back();
 
         $ifrem = [];
@@ -143,13 +141,13 @@ class UnitsNewController extends Controller
         return view('uploads::gears-new.preview', compact(['ui', 'id', 'ifrem', 'settings']));
 
     }
-
+    // TODO: we have no renderSettings and renderLive functions
     public function unitPreviewIframe($id, $type = null)
     {
         $slug = explode('.', $id);
-        $ui = Units::find($slug[0]);
+        $ui = Painter::find($slug[0]);
         $_this = $ui;
-        $variation = Units::findVariation($id);
+        $variation = Painter::findVariation($id);
 //        if (!$variation) return redirect()->back();
         $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
         $extra_data = 'some string';
@@ -161,10 +159,10 @@ class UnitsNewController extends Controller
         $settings_json = json_encode($settings, true);
         return view('uploads::gears-new.units._partials.unit_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
-
+    // TODO: we have no saveSettings function
     public function postSettings(Request $request)
     {
-        $output = Units::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
+        $output = Painter::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
 
         return response()->json([
             'error' => $output ? false : true,
@@ -176,7 +174,7 @@ class UnitsNewController extends Controller
     public function getDefaultVariation($id)
     {
         $data = explode('.', $id);
-        $unit = Units::find($data[0]);
+        $unit = Painter::find($data[0]);
 
         if (!empty($data) && $unit) {
             foreach ($unit->variations() as $variation) {
@@ -184,7 +182,7 @@ class UnitsNewController extends Controller
                 $variation->save();
             }
 
-            $variation = Units::findVariation($id);
+            $variation = Painter::findVariation($id);
             $variation->setAttributes('default', 1);
             $variation->save();
 
@@ -196,7 +194,7 @@ class UnitsNewController extends Controller
 
     public function getMakeDefault($slug)
     {
-        $units = Units::getAllUnits()->where('type', 'fields')->run();
+        $units = Painter::all()->where('type', 'fields')->get();
         if (count($units)) {
             foreach ($units as $unit) {
                 if ($unit->slug == $slug) {

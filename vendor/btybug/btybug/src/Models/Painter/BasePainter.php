@@ -9,6 +9,7 @@
 namespace Btybug\btybug\Models\Painter;
 
 
+use Btybug\btybug\Models\Templates\UnitsVariations;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
@@ -68,6 +69,16 @@ abstract class BasePainter implements PainterInterface
     public function scopeCreateVariation(array $array)
     {
 
+    }
+
+    public function variations()
+    {
+        return $this->allVars(UnitsVariations::class);
+    }
+    public function allVars($namspace)
+    {
+        $v = new $namspace();
+        return $v->findV($this->path);
     }
 
     public function scopeMakeVariation(array $array)
@@ -272,7 +283,7 @@ abstract class BasePainter implements PainterInterface
         if (!isset($config[$slug])) {
             $this->throwError("Not Registered Item $slug !!!", 404);
         }
-        return base_path($config[$slug]) . DS . $this->name_of_json;
+        return $this->base_path.DS.$config[$slug]['folder'].DS.$this->name_of_json;
     }
 
 // validate if file exist

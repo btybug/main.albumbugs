@@ -61,7 +61,8 @@ abstract class BasePainter implements PainterInterface
         } else {
             $this->throwError("There is no unit found");
         }
-        return collect($all);
+        $this->storage = $all;
+        return $this;
     }
 
     public function scopeCreateVariation(array $array)

@@ -59,6 +59,24 @@ Route::group(['prefix' => 'gears'], function () {
     Route::post('/delete', 'UnitsController@postDelete');
 });
 
+Route::group(['prefix' => 'gears-new'], function () {
+    Route::get('/', function () {
+        return view("uploads::gears-new.units.list");
+    },true)->name('uploads_gears_index');
+    Route::get('/back-end', 'UnitsNewController@getIndex',true)->name('uploads_back_end');
+    Route::get('/front-end', 'UnitsNewController@getFrontend',true)->name('uploads_front_end');
+    Route::post('/upload', 'UnitsNewController@postUploadUnit');
+    Route::get('/delete-variation/{slug}', 'UnitsNewController@postDeleteVariation');
+    Route::get('/units-variations/{slug}', 'UnitsNewController@getUnitVariations',true)->name('uploads_units_variations');
+    Route::post('/units-variations/{slug}', 'UnitsNewController@postUnitVariations');
+    Route::get('/live-settings/{slug}', 'UnitsNewController@unitPreview',true)->name('uploads_live_settings');
+    Route::get('/settings/{slug?}', 'UnitsNewController@getSettings',true)->name('uploads_settings');
+    Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsNewController@unitPreviewIframe',true)->name('uploads_settings_iframe');
+    Route::post('/settings/{id}/{save?}', 'UnitsNewController@postSettings');
+    Route::post('/delete', 'UnitsNewController@postDelete');
+});
+
+
 Route::group(['prefix' => 'layouts'], function () {
     Route::get('/', function () {
         return view("uploads::gears.page_sections.list");

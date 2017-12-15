@@ -35,6 +35,7 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
         foreach ($items as $item) {
             $array[] = $item;
         }
+
         $needles = $this->itemsCleaner($array);
         $this->items = $needles instanceof Collection ? $needles : Collection::make($needles);
     }
@@ -82,7 +83,7 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
         $this->limit = $limit;
         $this->links_count = $links_count;
         $this->list_class = $list_class;
-        $this->total = count($this->storage) ? range(1, 13) : [];
+        $this->total = count($this->storage) ? range(1, count($this->storage)) : [];
         // $this->items = $this->storage instanceof Collection ? $this->storage : Collection::make($this->storage);
         $page = \Request::get('page');
         return $this;
@@ -97,7 +98,7 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
     public function itemsCleaner($items)
     {
         $groups = array_chunk($items, $this->limit);
-        return isset($groups[$this->page]) ? $groups[$this->page] : [];
+        return isset($groups[$this->page-1]) ? $groups[$this->page-1] : [];
     }
 
     public function offsetExists($key)

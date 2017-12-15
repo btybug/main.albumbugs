@@ -10,7 +10,6 @@ namespace Btybug\btybug\Models\Painter;
 
 use Btybug\btybug\Models\Pagination\Paginator;
 use Btybug\btybug\Models\Templates\UnitsVariations;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
 use View;

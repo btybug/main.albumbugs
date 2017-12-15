@@ -1,16 +1,37 @@
 <?php
-$page=$paginator->getPage();
-$last       = ceil( $paginator->getTotal() / $paginator->getLimit() );
-$start      = ( ( $page - $paginator->getLinksCount() ) > 0 ) ? $page - $links : 1;
-$end        = ( ( $page + $paginator->getLinksCount() ) < $last ) ? $page + $paginator->getLinksCount() : $last;
+
+$page = $paginator->getPage();
+function index($paginator, $page)
+{
+    $links = $paginator->getLinksCount();
+    $total = $paginator->getTotal();
+    $last = (int)ceil($total / $links);
+    $paginations = array_chunk(range(1, $last - 1), $links);
+    $pos = (int)($page / $links) - 1;
+    $index = $page % $links == 0 ? $pos : $pos + 1;
+    if (!isset($paginations[$index]) || array_search($page, $paginations[$index]) === false) return false;
+    return ['index' => $index, 'paginations' => $paginations];
+}
+
+$result = index($paginator, $page);
+
 ?>
-<div class="{!!$paginator->getListClass()!!}">
-    <ul>
-            <li><a class="first" @if(1==1) href="?page={!!'#'!!}"
-                   @else href="#" disabled="true" @endif>Previous</a></li>
-            @for ( $i = $start ; $i < $end; $i++ )
-                <li @if($page==$i)class="active"@endif><a href="?page={!! $i !!}">{!! $i !!}</a></li>
-            @endfor
-            <li><a @if(1==1)href="?page={!! "#" !!} "@else disabled="true" @endif>Next</a></li>
-    </ul>
-</div>
+@if($result)
+    @php
+        $index=$result['index'];
+        $paginations=$result['paginations'];
+        $next=index($paginator,$page+1);
+        $Previous=index($paginator,$page-1);
+    @endphp
+    <div class="{!!$paginator->getListClass()!!}">
+        <ul>
+            <li class="first @if(!$Previous) hidden @endif"><a href="?page={!!$page-1!!}" disabled="true">Previous</a>
+            </li>
+            @foreach($paginations[$index] as $key=>$pagination)
+                <li @if($page==$pagination)class="active"@endif><a
+                            href="?page={!! $pagination !!}">{!! $pagination !!}</a></li>
+            @endforeach
+            <li @if(!$next) class="hidden" @endif><a href="?page={!!$page+1!!}" disabled="true">Next</a></li>
+        </ul>
+    </div>
+@endif

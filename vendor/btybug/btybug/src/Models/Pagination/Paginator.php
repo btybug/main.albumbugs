@@ -10,36 +10,65 @@ namespace Btybug\btybug\Models\Pagination;
  */
 use ArrayAccess;
 use Countable;
-use IteratorAggregate;
 use Illuminate\Support\Collection;
+use IteratorAggregate;
 
-class Paginator implements ArrayAccess,Countable,IteratorAggregate
+class Paginator implements ArrayAccess, Countable, IteratorAggregate
 {
+    /**
+     * @var array|Collection|static
+     */
     protected $items = [];
+    /**
+     * @var array
+     */
     protected $paginator = [];
+    /**
+     * @var int|mixed
+     */
     protected $page = 1;
+    /**
+     * @var
+     */
     protected $limit;
+    /**
+     * @var
+     */
     protected $links_count;
+    /**
+     * @var
+     */
     protected $list_class;
+    /**
+     * @var int
+     */
     protected $total;
 
+    /**
+     * Paginator constructor.
+     * @param $limit
+     * @param $links_count
+     * @param $list_class
+     * @param $items
+     */
     public function __construct($limit, $links_count, $list_class, $items)
     {
         $this->limit = $limit;
         $this->links_count = $links_count;
         $this->list_class = $list_class;
-        $this->list_class = $list_class;
         $this->page = \Request::get('page', 1);
-        $this->total=count($items);
+        $this->total = count($items);
         $array = [];
         foreach ($items as $item) {
             $array[] = $item;
         }
-
         $needles = $this->itemsCleaner($array);
         $this->items = $needles instanceof Collection ? $needles : Collection::make($needles);
     }
 
+    /**
+     * @return int|mixed
+     */
     public function getPage()
     {
         return $this->page;
@@ -77,6 +106,12 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
         return $this->total;
     }
 
+    /**
+     * @param int $limit
+     * @param int $links_count
+     * @param string $list_class
+     * @return $this
+     */
     public function paginate($limit = 5, $links_count = 5, $list_class = 'bty-pagination-2')
     {
 
@@ -89,18 +124,29 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function links()
     {
         $paginator = $this;
         return \View::make('btybug::_partials.paginator', compact('paginator'))->render();
     }
 
+    /**
+     * @param $items
+     * @return array
+     */
     public function itemsCleaner($items)
     {
         $groups = array_chunk($items, $this->limit);
-        return isset($groups[$this->page-1]) ? $groups[$this->page-1] : [];
+        return isset($groups[$this->page - 1]) ? $groups[$this->page - 1] : [];
     }
 
+    /**
+     * @param mixed $key
+     * @return bool
+     */
     public function offsetExists($key)
     {
         return $this->items->has($key);
@@ -139,6 +185,7 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
     {
         $this->items->forget($key);
     }
+
     /**
      * Get the number of items for the current page.
      *
@@ -148,6 +195,7 @@ class Paginator implements ArrayAccess,Countable,IteratorAggregate
     {
         return $this->items->count();
     }
+
     /**
      * Get an iterator for the items.
      *

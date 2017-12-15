@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'sessionTimout' =>\Btybug\btybug\Middleware\SessionTimeout::class,
         'system' =>\Btybug\btybug\Middleware\SystemSettings::class,
         'frontPermissions'=> \Btybug\btybug\Middleware\FrontendPermissions::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 }

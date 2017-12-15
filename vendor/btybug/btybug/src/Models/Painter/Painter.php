@@ -8,7 +8,6 @@
 
 namespace Btybug\btybug\Models\Painter;
 
-
 use Btybug\btybug\Models\ExtraModules\config;
 use Btybug\btybug\Models\Painter\PainterInterface;
 use Illuminate\Contracts\Support\Arrayable;

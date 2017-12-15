@@ -45,7 +45,7 @@ class UnitsNewController extends Controller
     // working
     public function getFrontend(Request $request)
     {
-        $units = Painter::all()->paginate(6,5);
+        $units = Painter::all()->paginate(6,5,'bty-pagination-4');
         return view("uploads::gears-new.units.index", compact(['units']));
     }
     // working

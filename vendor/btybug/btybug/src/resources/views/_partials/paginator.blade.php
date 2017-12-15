@@ -25,13 +25,17 @@ $result = index($paginator, $page);
     @endphp
     <div class="{!!$paginator->getListClass()!!}">
         <ul>
-            <li class="first @if(!$Previous) hidden @endif"><a href="?page={!!$page-1!!}" disabled="true">Previous</a>
+            @if($Previous)
+            <li class=" first"><a href="?page={!!$page-1!!}" disabled="true">Previous</a>
+                @endif
             </li>
             @foreach($paginations[$index] as $key=>$pagination)
                 <li @if($page==$pagination)class="active"@endif><a
                             href="?page={!! $pagination !!}">{!! $pagination !!}</a></li>
             @endforeach
-            <li @if(!$next) class="hidden" @endif><a href="?page={!!$page+1!!}" disabled="true">Next</a></li>
+            @if($next)
+            <li  ><a href="?page={!!$page+1!!}" disabled="true">Next</a></li>
+            @endif
         </ul>
     </div>
 @endif

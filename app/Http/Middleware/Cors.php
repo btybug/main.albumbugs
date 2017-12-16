@@ -15,7 +15,7 @@ class Cors
     public function handle($request, Closure $next)
     {
         if ($request->getMethod() === "OPTIONS") {
-            $response = Response::make('');
+            $response = \Response::make('');
             if (!empty($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], ['http://localhost:8090'])) {
                 $response->header('Access-Control-Allow-Origin', $_SERVER['HTTP_ORIGIN']);
             } else {

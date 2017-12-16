@@ -39,14 +39,16 @@ class UnitsNewController extends Controller
     public function getIndex(Request $request)
     {
         $units = Painter::all()->get();
-        return view("uploads::gears-new.units.index", compact(['units']));
+
+
+        return view("uploads::gears-new.units.index", compact(['units','test']));
     }
 
     // working
     public function getFrontend(Request $request)
     {
         $units = Painter::all()->paginate(6,5,'bty-pagination-2');
-        return view("uploads::gears-new.units.index", compact(['units']));
+        return view("uploads::gears-new.units.index", compact(['units','test']));
     }
     // working
     public function getUnitVariations($slug)

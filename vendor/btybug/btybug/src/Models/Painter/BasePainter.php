@@ -10,11 +10,13 @@ namespace Btybug\btybug\Models\Painter;
 
 use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Models\Templates\UnitsVariations;
+use Btybug\btybug\Models\Universal\VariationAccess;
+use Btybug\btybug\Models\Universal\Variations;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
 use View;
 
-abstract class BasePainter implements PainterInterface
+abstract class BasePainter implements PainterInterface,VariationAccess
 {
 
 
@@ -72,7 +74,7 @@ abstract class BasePainter implements PainterInterface
 
     public function variations()
     {
-        return $this->allVars(UnitsVariations::class);
+        return new Variations($this->path);
     }
     public function allVars($namspace)
     {
@@ -189,8 +191,10 @@ abstract class BasePainter implements PainterInterface
     public function makeConfigJson()
     {
         if (!\File::exists($this->config_path)) {
+            \File::put($this->config_path, '{}');
             $this->scopeOptimize();
         }
+        return true;
     }
 
     private function getRegisters()
@@ -368,4 +372,5 @@ abstract class BasePainter implements PainterInterface
         }
         return  \File::put($this->config_path, json_encode($confid));
     }
+
 }

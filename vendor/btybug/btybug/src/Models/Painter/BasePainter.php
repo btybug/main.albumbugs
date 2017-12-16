@@ -8,7 +8,7 @@
 
 namespace Btybug\btybug\Models\Painter;
 
-use Btybug\btybug\Models\Pagination\Paginator;
+use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Models\Templates\UnitsVariations;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
@@ -189,7 +189,7 @@ abstract class BasePainter implements PainterInterface
     public function makeConfigJson()
     {
         if (!\File::exists($this->config_path)) {
-            \File::put($this->config_path, '{}');
+            $this->scopeOptimize();
         }
     }
 
@@ -281,7 +281,7 @@ abstract class BasePainter implements PainterInterface
         if (!isset($config[$slug])) {
             $this->throwError("Not Registered Item $slug !!!", 404);
         }
-        return $this->base_path.DS.$config[$slug]['folder'].DS.$this->name_of_json;
+        return $config[$slug].DS.$this->name_of_json;
     }
 
 // validate if file exist
@@ -289,7 +289,7 @@ abstract class BasePainter implements PainterInterface
     protected function validate($path)
     {
         if (!\File::exists($path)) {
-            $this->throwError('File does not found', 404);
+            $this->throwError('File does not found '.$path, 404);
         }
         return true;
     }
@@ -355,9 +355,17 @@ abstract class BasePainter implements PainterInterface
     //
     protected function setAttributes($key, $value)
     {
-        $attributes = $this->attributes;
-        $attributes[$key] = $value;
-        $this->attributes = $attributes;
+        $this->attributes[$key] = $value;
         return $this;
+    }
+
+    protected function scopeOptimize()
+    {
+        $painters=$this->scopeAll()->get();
+        $confid=[];
+        foreach ($painters as $painter){
+            $confid[$painter->slug]=$painter->path;
+        }
+        return  \File::put($this->config_path, json_encode($confid));
     }
 }

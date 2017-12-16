@@ -1,6 +1,6 @@
 <?php
 
-namespace Btybug\btybug\Models\Pagination;
+namespace Btybug\btybug\Models\Universal;
 
 /**
  * Created by PhpStorm.

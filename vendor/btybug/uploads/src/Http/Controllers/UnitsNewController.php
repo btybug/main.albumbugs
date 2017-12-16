@@ -2,14 +2,11 @@
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
-use File;
-use Illuminate\Http\Request;
-use Resources;
-use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Templates\Units;
-use Btybug\btybug\Services\CmsItemReader;
 use Btybug\btybug\Services\CmsItemUploader;
 use Btybug\Resources\Models\Validation as validateUpl;
+use Illuminate\Http\Request;
+use Resources;
 use View;
 
 
@@ -39,17 +36,16 @@ class UnitsNewController extends Controller
     public function getIndex(Request $request)
     {
         $units = Painter::all()->get();
-
-
-        return view("uploads::gears-new.units.index", compact(['units','test']));
+        return view("uploads::gears-new.units.index", compact(['units', 'test']));
     }
 
     // working
     public function getFrontend(Request $request)
     {
-        $units = Painter::all()->paginate(6,5,'bty-pagination-2');
-        return view("uploads::gears-new.units.index", compact(['units','test']));
+        $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
+        return view("uploads::gears-new.units.index", compact(['units', 'test']));
     }
+
     // working
     public function getUnitVariations($slug)
     {
@@ -76,6 +72,7 @@ class UnitsNewController extends Controller
 
         return \Response::json(['html' => $html, 'error' => false]);
     }
+
     // TODO: we have no makeVariation function
     public function postUnitVariations(Request $request, $slug)
     {
@@ -102,13 +99,14 @@ class UnitsNewController extends Controller
         if ($request->slug) {
             $result = Units::deleteVariation($request->slug);
         }
-        return redirect()->back()->with("message","Variation was deleted");
+        return redirect()->back()->with("message", "Variation was deleted");
     }
+
     // TODO: we have no delete function
     public function postDelete(Request $request)
     {
         $slug = $request->get('slug');
-        $unit =  Painter::find($slug);
+        $unit = Painter::find($slug);
         if ($unit) {
             $deleted = $unit->delete();
             return \Response::json(['success' => $deleted, 'url' => url('/admin/uploads/gears/units')]);
@@ -143,6 +141,7 @@ class UnitsNewController extends Controller
         return view('uploads::gears-new.preview', compact(['ui', 'id', 'ifrem', 'settings']));
 
     }
+
     // TODO: we have no renderSettings and renderLive functions
     public function unitPreviewIframe($id, $type = null)
     {
@@ -161,6 +160,7 @@ class UnitsNewController extends Controller
         $settings_json = json_encode($settings, true);
         return view('uploads::gears-new.units._partials.unit_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
+
     // TODO: we have no saveSettings function
     public function postSettings(Request $request)
     {

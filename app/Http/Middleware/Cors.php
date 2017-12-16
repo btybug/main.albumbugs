@@ -19,7 +19,7 @@ class Cors
             if (!empty($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], ['http://localhost:8090'])) {
                 $response->header('Access-Control-Allow-Origin', $_SERVER['HTTP_ORIGIN']);
             } else {
-                $response->header('Access-Control-Allow-Origin', url()->current());
+                $response->header('Access-Control-Allow-Origin','*');
             }
             $response->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
             $response->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');

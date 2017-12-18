@@ -21,9 +21,9 @@ class FormsRepository extends GeneralRepository
     /**
      * @param $slug
      */
-    public function getNewCoreFormsBySlug($slug)
+    public function getNewCoreFormsBySlug($slug, string $created_by = 'core')
     {
-        return $this->model()->where('type', 'new')->where('created_by', 'core')->where('id', $slug)->first();
+        return $this->model()->where('type', 'new')->where('created_by', $created_by)->where('id', $slug)->first();
     }
 
     /**

@@ -46,9 +46,6 @@ class Forms extends Model
     protected $dates = ['created_at', 'updated_at'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
     public function fields()
     {
         return $this->belongsToMany('\Btybug\Console\Models\Fields', 'form_fields', 'form_id', 'field_slug');

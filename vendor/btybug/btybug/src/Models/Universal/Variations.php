@@ -37,7 +37,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $path = $this->model->getPath();
         \View::addLocation($this->model->getPath());
         \View::addNamespace($slug, $this->model->getPath());
-        $variables = $this->attributes;
+        $variables = $this->attributes->toArray();
         return \View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
 
@@ -52,7 +52,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
                 $all->path = $this->path . '/' . File::name($var) . '.json';
                 $all->file = $var;
                 $data = json_decode(File::get($var), true);
-                $all->attributes =  $data instanceof Collection ? $data : Collection::make($data);
+                $all->attributes = $data instanceof Collection ? $data : Collection::make($data);
                 $all->original = $all->attributes;
                 $all->updated_at = File::lastModified($var);
                 $array[$data['id']] = $all;
@@ -65,7 +65,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     public function find($id)
     {
         $variations = $this->all();
-        return $variations[$id];
+        return $variations->items[$id];
 
     }
 
@@ -142,16 +142,14 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this->render();
     }
 
-    public function __toString()
-    {
-        return $this->render();
-    }
+
 
     /**
      * @param $name
      * @param $value
      * @return $this
      */
+
     public function __set($name, $value)
     {
         if (isset($this->attributes[$name])) {
@@ -159,6 +157,15 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
             return $this;
             // TODO: Implement __set() method.
         }
+    }
+
+    public function setSettinds($name, $value)
+    {
+        $attr = $this->attributes->toArray();
+        $attr['settings'][$name] = $value;
+        $this->attributes = collect($attr);
+        return $this;
+        // TODO: Implement __set() method.
     }
 
     public function __get($name)

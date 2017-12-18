@@ -1,3 +1,5 @@
+
+{!! $settings['title'] !!}
 <div class="sahak-header-banner">{!! BBgetSiteName() !!}</div>
 <nav class="sahak-header">
     <div class="header-logo"><a class="brand" title="{!! BBgetSiteName() !!}" href="/"><img alt="site logo"
@@ -29,5 +31,3 @@
 
 
 <!-- Nav Menu Section End -->
-{!! $_this->script('js/main.js') !!}
-{!! $_this->style('css/main.css') !!}

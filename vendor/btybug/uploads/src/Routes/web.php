@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'ModulesController@getChilds',true);
+Route::get('/test/{id?}', 'UnitsNewController@test');
 
 //Route::get('/optimisation', function () {
 //    Artisan::call('plugin:optimaze');

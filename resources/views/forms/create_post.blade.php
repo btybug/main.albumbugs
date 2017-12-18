@@ -11,12 +11,6 @@
     </div>
 </div>
 <div class="form-group col-md-12">
-    <label class="col-md-2 control-label" for="post-desc">Post Image</label>
-    <div class="col-md-6">
-        {!! Form::file('image',['class' => 'form-control input-md']) !!}
-    </div>
-</div>
-<div class="form-group col-md-12">
     <label class="col-md-2 control-label" for="post-desc">Post Status</label>
     <div class="col-md-6">
         {!! Form::select('status',['draft' => 'Draft','pending' => 'Pending','published' => 'Published'],null,['class' => 'form-control input-md']) !!}

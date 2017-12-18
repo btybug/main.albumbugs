@@ -1,5 +1,6 @@
-<form action="" class="bty-form-5">
+{!! Form::open(['class' => 'bty-form-5']) !!}
     <h2>Create Post</h2>
+    {!! Form::hidden('form_id',$form->id) !!}
     <fieldset>
         <div>
             {!! Form::text('title',null,['class' => 'bty-input-label-5','placeholder' => 'Enter Post title']) !!}
@@ -16,4 +17,4 @@
     </fieldset>
 
     <button type="submit" class="bty-btn bty-btn-save"><span>Save</span></button>
-</form>
+{!! Form::close() !!}

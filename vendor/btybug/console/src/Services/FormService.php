@@ -188,11 +188,11 @@ class FormService extends GeneralService
         return null;
     }
 
-    public static function renderFormBlade($slug = null)
+    public static function renderFormBlade($slug = null,$form = null)
     {
         if ($slug){
             if (\View::exists("forms.".$slug)) {
-                return view("forms.".$slug)->render();
+                return view("forms.".$slug,compact('form'))->render();
             }
         }
 

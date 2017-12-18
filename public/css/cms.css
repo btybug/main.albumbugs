@@ -139,6 +139,15 @@ VAHAG
 .bty-table-th-cl-lightcyan > thead > tr {
     background: LightCyan !important;
 }
+.bty-table-th-cl-blue > thead > tr {
+    background: #499bc7 !important;
+}
+.bty-table-th-cl-darkblue > thead > tr {
+    background: #00008B !important;
+}
+.bty-table-th-cl-darkcyan > thead > tr {
+    background: #008B8B !important;
+}
 
 .bty-table-td-cl-peachpuff > tbody {
     background: PeachPuff !important;
@@ -154,6 +163,15 @@ VAHAG
 
 .bty-table-td-cl-lightcyan > tbody {
     background: LightCyan !important;
+}
+.bty-table-td-cl-lightblue > tbody {
+    background: rgba(73, 155, 199, 0.15) !important;
+}
+.bty-table-td-cl-lightdarkblue > tbody {
+    background: #00008b8a !important;
+}
+.bty-table-td-cl-lightcyan > thead > tr {
+    background: #008b8b6e !important;
 }
 
 /*Panel*/
@@ -186,6 +204,11 @@ VAHAG
 
 .bty-panel > div:last-child, .bty-panel-collapse .content {
     padding: 20px;
+}
+.bty-panel-collapse .content:after{
+    content: '';
+    clear: both;
+    display: table;
 }
 
 .bty-panel-icon > div .icon, .bty-panel-collapse .icon {
@@ -284,12 +307,15 @@ VAHAG
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
+    text-decoration: none !important;
 }
 
 .bty-btn:active {
     background: rgba(204, 204, 204, 0.74);
 }
-
+.bty-btn:hover{
+    color: white;
+}
 .bty-btn-view {
     background-color: #337ab7;
 }
@@ -7680,6 +7706,175 @@ VAHAG
     color: white;
 }
 
+/*Form 4*/
+
+.bty-form-4 {
+    box-shadow: inset 0 0 9px 0 #2d2d2da6;
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: 550px;
+    border: 2px solid #236f98;
+    background-color: #226f98;
+}
+.bty-form-4 fieldset{
+    margin: 25px 0;
+    border: 1px solid #fff;
+    padding: 15px;
+    box-shadow: 2px 2px 2px #3e3e3e;
+    background-color: #0c405db5;
+    transition: .5s ease;
+}
+.bty-form-4 > h2 {
+    text-align: center;
+    color: white;
+}
+
+.bty-form-4 .bty-input-label-5 {
+    width: 100%;
+}
+
+.bty-form-4 fieldset:first-of-type > div {
+    position: relative;
+}
+.bty-form-4 fieldset:first-of-type > div input{
+    width: 100%;
+}
+.bty-form-4 fieldset:first-of-type > div input+label:after{
+    background: #499bc7;
+}
+.bty-form-4 fieldset:first-of-type > div input+label:before{
+    background: #0c405d;
+}
+.bty-form-4 fieldset:nth-of-type(2)>div{
+    display: flex;
+    justify-content: space-evenly;
+}
+.bty-form-4 fieldset:nth-of-type(5)>div{
+    display: flex;
+    justify-content: space-around;
+}
+.bty-form-4>img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: flex;
+    margin: 0 auto;
+}
+.bty-form-4 fieldset:nth-of-type(2) label, .bty-form-4 fieldset:nth-of-type(5) label{
+    font-size: 14px;
+    color: white;
+}
+.bty-form-4 fieldset:hover{
+    background-color: #0c405d;
+}
+.bty-form-4 fieldset:nth-of-type(4) .bty-input-file-2 + label {
+    width: 100%;
+}
+
+.bty-form-4 legend {
+    display: inline-block;
+    width: auto;
+    padding: 0 10px;
+    background-color: #0c405d;
+    color: white;
+    border-radius: 7px;
+}
+
+.bty-form-4 legend > span {
+    display: inline-block;
+    font-size: 19px;
+    margin-right: 4px;
+}
+
+.bty-form-4 .bty-input-select-4 .select {
+    width: 100%;
+}
+
+.bty-form-4 .bty-input-select-4 .select-styled {
+    background-color: #499bc7;
+}
+
+.bty-form-4 .bty-btn-save {
+    background-color: #499bc7;
+    width: 100%;
+}
+
+.bty-form-4 .bty-btn-save:active {
+    background: #387193;
+}
+
+.bty-form-4 .bty-btn-save:active:before {
+    color: white;
+}
+/*Form 5*/
+
+.bty-form-5 {
+    box-shadow: inset 0 0 9px 0 #2d2d2da6;
+    margin: 10px auto;
+    border-radius: 8px;
+    width: 550px;
+    background-color: #ffffff;
+}
+.bty-form-5 fieldset{
+    margin: 20px 0;
+    padding: 0 20px;
+    transition: .5s ease;
+}
+.bty-form-5 > h2 {
+    text-align: center;
+    background-color: #00000030;
+    border-radius: 8px 8px 0 0;
+    padding: 15px 0;
+    color: #666;
+    font-weight: bold;
+    border-bottom: 2px solid #9a9a9a;
+}
+.bty-form-5 fieldset:first-of-type .bty-input-label-5{
+    width: 100%;
+    border: 1px solid;
+}
+.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1{
+    width: 100%;
+}
+.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1 select{
+    color: #666;
+    border: 1px solid #499bc7 !important;
+    background: #efeff0;
+    border-radius: 3px;
+}
+.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1:after{
+    background: none;
+}
+.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1:hover:after{
+    color: #499bc7;
+}
+.bty-form-5 .bty-textarea-1{
+    border: 1px solid #499bc7;
+    width: 100%;
+    border-radius: 4px;
+}
+.bty-form-5 button{
+    width: 100%;
+    background-color: #499bc7;
+    border-radius: 0px 0px 8px 8px;
+    padding: 15px 0;
+}
+.bty-form-5 .bty-btn-save:active{
+    background-color: #499bc7;
+}
+.bty-form-5 .bty-btn-save:active:before{
+    color: white;
+}
+.bty-form-5 fieldset:first-of-type>div{
+    position: relative;
+}
+.bty-form-5 fieldset:first-of-type>div .bty-input-label-5 + label{
+    position: absolute;
+    top: 0;
+}
+
+
 /*Input*/
 .bty-input-text-1 {
     font-size: 14px;
@@ -7943,7 +8138,7 @@ VAHAG
 /* Question */
 
 .bty-input-label-1 {
-    font-size: 44px;
+    font-size: 18px;
     font-weight: 300;
     border-radius: 2px;
     margin: 0;
@@ -7969,16 +8164,13 @@ VAHAG
     height: 0px;
 }
 
-.bty-input-label-1 + label > span {
-
-}
 
 .bty-input-label-1:focus + label {
     width: 80%;
 }
 
 .bty-input-label-1:focus {
-    padding-top: 35px;
+    /*padding-top: 35px;*/
 }
 
 .bty-input-label-1:focus + label > span {
@@ -8042,18 +8234,15 @@ VAHAG
     z-index: 1;
 
 }
-
+/*.bty-input-label-2:active + label{*/
+/*display: none;*/
+/*}*/
 .bty-input-label-2:focus {
     outline: none;
     background: #499bc7;
     color: white;
-    margin-top: 30px;
     -webkit-transition: 0.2s ease;
     transition: 0.2s ease;
-}
-
-.bty-input-label-2:valid {
-    margin-top: 30px;
 }
 
 .bty-input-label-2:focus + label {
@@ -8063,6 +8252,17 @@ VAHAG
     transform: translate(0, -35px);
     -webkit-transition: 0.2s ease;
     transition: 0.2s ease;
+}
+.bty-input-label-2:active + label{
+    -moz-transform: translate(0, -35px);
+    -ms-transform: translate(0, -35px);
+    -webkit-transform: translate(0, -35px);
+    transform: translate(0, -35px);
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+}
+.bty-input-label-2:valid ~ label {
+
 }
 
 .bty-input-label-3 {
@@ -8147,7 +8347,7 @@ VAHAG
 
 .bty-input-label-4:focus + label,
 .bty-input-label-4:active + label {
-    transform: translateX(-78%);
+    transform: translateX(200%);
 }
 
 .bty-input-label-5 {

@@ -1839,3 +1839,8 @@ function get_field_data(int $id){
     }
     dd($id);
 }
+
+//TODO: make this for plugins
+function register_form(){
+
+}

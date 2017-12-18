@@ -43,4 +43,15 @@ class FormsRepository extends GeneralRepository
     {
         return $this->model()->where('id', $data)->orWhere('slug', $data)->first();
     }
+
+    public function getFormsByFieldType($fields_type,array $created_by = ['*'])
+    {
+        return $this->model()->where('fields_type',$fields_type)->where(function ($query) use ($created_by) {
+            if(count($created_by) && count(array_diff($created_by,['*'])) == 0 ){
+                return $query;
+            }else{
+                return $query->whereIn('created_by',$created_by);
+            }
+        })->get();
+    }
 }

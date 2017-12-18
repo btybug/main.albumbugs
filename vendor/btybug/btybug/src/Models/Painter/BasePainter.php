@@ -291,7 +291,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 // make a path
     protected function makePath($path)
     {
-        return $this->base_path . $path . DS . $this->name_of_json;
+        return $this->base_path . DS . $path . DS . $this->name_of_json;
     }
 
     protected function getItemConfigJsonPath($slug)
@@ -301,7 +301,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         if (!isset($config[$slug])) {
             $this->throwError("Not Registered Item $slug !!!", 404);
         }
-        return $config[$slug] . DS . $this->name_of_json;
+        return $this->makePath($config[$slug]['folder']);
     }
 
 // validate if file exist

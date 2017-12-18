@@ -75,11 +75,10 @@ class UnitsNewController extends Controller
     // working
     public function getUnitVariations($slug)
     {
-        $unit = Painter::find($slug);
-        if (!count($unit)) return redirect()->back();
-        $variation = [];
-        $variations = $unit->variations();
-        return view('uploads::gears-new.units.variations', compact(['unit', 'variations', 'variation']));
+        $variations = Painter::find($slug)->variations()->all();
+        $unit = $variations->getModel();
+        if (!count($variations)) return redirect()->back();
+        return view('uploads::gears-new.units.variations', compact(['variations','unit']));
     }
 
     // TODO: seems this function is not used with any functionality

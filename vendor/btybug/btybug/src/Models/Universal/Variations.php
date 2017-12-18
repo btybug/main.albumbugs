@@ -14,7 +14,7 @@ use Illuminate\Contracts\Support\Renderable;
 use File;
 use Illuminate\Support\Collection;
 
-class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlable, Renderable
+class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlable
 {
     protected $path;
     protected $view;
@@ -37,7 +37,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $path = $this->model->getPath();
         \View::addLocation($this->model->getPath());
         \View::addNamespace($slug, $this->model->getPath());
-        $variables = $this->attributes->toArray();
+        $variables = $this->attributes;
         return \View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
 
@@ -178,6 +178,9 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     {
         File::put($this->path, json_encode($this->attributes->toArray(), true));
         return $this;
+    }
+    public function getModel(){
+        return $this->model;
     }
 
 }

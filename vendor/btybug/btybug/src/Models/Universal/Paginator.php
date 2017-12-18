@@ -10,14 +10,15 @@ namespace Btybug\btybug\Models\Universal;
  */
 use ArrayAccess;
 use Countable;
+use Illuminate\Contracts\Support\Arrayable;
+use IteratorAggregate;
 use Illuminate\Support\Collection;
 use IteratorAggregate;
 
-class Paginator implements ArrayAccess, Countable, IteratorAggregate
+
+
+class Paginator implements ArrayAccess, Countable, IteratorAggregate, Arrayable
 {
-    /**
-     * @var array|Collection|static
-     */
     protected $items = [];
     /**
      * @var array
@@ -204,6 +205,14 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->items->all());
+    }
+
+    /**
+     * @return array|Collection|static
+     */
+    public function toArray()
+    {
+        return $this->items;
     }
 
 

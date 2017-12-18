@@ -139,6 +139,7 @@ abstract class BasePainter implements PainterInterface,VariationAccess
 
     public function scopeWhere(string $arg1, string $condition, string $arg3 = null)
     {
+        $result = [];
         if (is_null($this->storage)) {
             $this->scopeAll();
         }
@@ -158,6 +159,35 @@ abstract class BasePainter implements PainterInterface,VariationAccess
             }
         }
         $this->storage = collect($result);
+        return $this;
+    }
+
+    public function scopeFilterByDate(string $from = null, string $to = null)
+    {
+        if(!$from && !$to){
+            return $this;
+        }
+        if (is_null($this->storage)) {
+            $this->scopeAll();
+        }
+        $arr = $this->storage;
+
+        $carbon = new \Carbon\Carbon();
+        $format = 'Y-m-d';
+
+        $dateFrom = $carbon::createFromFormat($format,$from);
+        $dateTo = $carbon::createFromFormat($format,$to);
+
+        $filtered = array_filter($arr,function($value) use ($dateFrom, $dateTo, $carbon,$format) {
+
+            if(array_key_exists('created_at', $value->toArray())) {
+                $dateInArray = BBgetDateFormat($value->created_at,"Y-m-d");
+                return $carbon::createFromFormat($format,$dateInArray)->between($dateFrom, $dateTo);
+            }
+            return false;
+        });
+
+        $this->storage = collect($filtered);
         return $this;
     }
 

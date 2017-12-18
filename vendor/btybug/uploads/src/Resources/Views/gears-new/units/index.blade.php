@@ -10,7 +10,8 @@
         </div>
     </div>
     <div class="col-md-4 ">
-        <form class="form-inline" name="input" method="get" action="#" id="filter-tables">
+        <form class="form-inline custom_filter-tables" method="post" id="filter-tables">
+            {!! csrf_field() !!}
             <div class="bty-filter-tab bty-filter-blue">
                 <h1>Filters</h1>
                 <ul>
@@ -31,9 +32,9 @@
                             </div>
                             <div class="calendar">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input type="date">
+                                <input type="date" name="date_from">
                                 <span> - </span>
-                                <input type="date">
+                                <input type="date" name="date_to">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
 
@@ -56,11 +57,11 @@
                                 </div>
                             </div>
                             <div class="bty-new-select">
-                                <select>
-                                    <option>Choose Option</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
+                                <select name="author">
+                                    <option value="">Choose Option</option>
+                                    <option value="Sahak">Sahak</option>
+                                    <option value="Edo">Edo</option>
+                                    <option value="gv">gv</option>
                                     <option>Option 4</option>
                                 </select>
                             </div>
@@ -82,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="bty-new-select">
-                                <select>
+                                <select name="type">
                                     <option>Choose Option</option>
                                     <option>Option 1</option>
                                     <option>Option 2</option>
@@ -93,29 +94,16 @@
                         </div>
                     </li>
                 </ul>
-                <button type="submit">Search</button>
+                <button type="submit" class="custom_filter">Search</button>
             </div>
         </form>
     </div>
-    <div class="col-md-8 ">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 unit-box">
-                {{--@include('uploads::gears.units._partials.unit_box')--}}
-            </div>
-        </div>
-
-
-        <div class="templates-list">
-            <div class="row">
-                <div class="raw tpl-list">
-                    @include('uploads::gears.units._partials.unit_variations')
-                </div>
-            </div>
-        </div>
-
-        <div class="loadding"><em class="loadImg"></em></div>
-        {!! $units->links() !!}
+    <div class="col-md-8 custom_html_for_filter">
+        @include('uploads::gears.units._partials.unit_variations')
     </div>
+
+    {{--<div class="loadding"><em class="loadImg"></em></div>
+    {!! $units->links() !!}--}}
 
     <div class="modal fade" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -141,6 +129,7 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
+    {!! BBscript('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
     <script>
         Dropzone.options.myAwesomeDropzone = {
             init: function () {
@@ -171,7 +160,6 @@
         }
 
         $(document).ready(function () {
-
             $('body').on("change", ".select-type", function () {
                 var val = $(this).val();
                 var url = window.location.pathname + "?type=" + val;
@@ -202,8 +190,31 @@
             if (p.length) {
                 $("a[main-type=" + p + "]").click();
             }
-
         });
 
+
+        $("body").delegate('.custom_filter-tables','submit',function(e){
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                type : 'POST',
+                url : "{{ route('filter-units') }}",
+                data : that.serialize(),
+                success: function(data){
+                    $('.custom_html_for_filter').html(data.html);
+                }
+            });
+        });
+        // get index page data form ajax
+        $(document).ready(function(){
+            $.ajax({
+                type : 'POST',
+                url : "{{ route('get-units-for-index') }}",
+                data:{_token:'{{csrf_token()}}'},
+                success: function(data){
+                    $('.custom_html_for_filter').html(data.html);
+                }
+            });
+        });
     </script>
 @stop

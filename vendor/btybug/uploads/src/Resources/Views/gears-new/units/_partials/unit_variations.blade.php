@@ -8,14 +8,14 @@
                     <span>{!! BBgetDateFormat($ui->created_at,"Y") !!}</span>
                 </div>
                 <span><img src="http://blog.mcafeeinstitute.com/wp-content/uploads/2015/10/rain_wallpaper_good_2023_high_definition.jpg" alt=""></span>
-                <div>
+                <div class="{{ isset($ui->tags)?'custom_div_for_tags':'custom_div_for_tags_when_not' }}">
                     <ul>
                         <li><a href=" {{route('uploads_units_variations',$ui->slug)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
                         <li><a data-href="{!! url('/admin/uploads/gears/delete') !!}" data-key="{!! $ui->slug !!}" data-type="Unit"><i class="fa fa-trash"></i></a></li>
                     </ul>
                     <div>
                         <span><i class="fa fa-user" aria-hidden="true"></i> {!! $ui->author !!}</span>
-                        <h5><a href="#">{!! $ui->title !!}</a></h5>
+                        <h5><a href="#">{!! str_limit($ui->title,15) !!}</a></h5>
 
                         {{--<p>{!! $ui->descripiton !!}</p>--}}
                         @if(isset($ui->tags) && count($ui->tags) > 0)
@@ -30,6 +30,8 @@
             </div>
         </div>
     @endforeach
+    <div class="loadding"><em class="loadImg"></em></div>
+    {!! $units->links() !!}
 @else
     <div class="col-xs-12 addon-item">
         NO Results

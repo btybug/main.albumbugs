@@ -74,6 +74,8 @@ Route::group(['prefix' => 'gears-new'], function () {
     Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsNewController@unitPreviewIframe',true)->name('uploads_settings_iframe_new');
     Route::post('/settings/{id}/{save?}', 'UnitsNewController@postSettings');
     Route::post('/delete', 'UnitsNewController@postDelete');
+    Route::post('/filter', 'UnitsNewController@filterUnits')->name('filter-units');
+    Route::post('/getunitsforindex', 'UnitsNewController@getFrontendFromAjax')->name('get-units-for-index');
 });
 
 

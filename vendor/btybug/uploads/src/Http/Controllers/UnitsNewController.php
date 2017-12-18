@@ -43,9 +43,35 @@ class UnitsNewController extends Controller
     public function getFrontend(Request $request)
     {
         $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
+
         return view("uploads::gears-new.units.index", compact(['units', 'test']));
     }
+    // from ajax get index content
+    public function getFrontendFromAjax(){
+        $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
+        $html =  View::make("uploads::gears-new.units._partials.unit_variations", compact(['units']))->render();
 
+        return \Response::json(['html' => $html, 'error' => false]);
+    }
+
+    public function filterUnits(Request $request){
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        $author = $request->author;
+        $units = new Painter();
+        if($date_from || $date_to){
+            $units = $units->filterByDate($date_from,$date_to);
+        }
+        if($author){
+            $units = $units->where("author","=",$author);
+        }
+
+        $units = $units->paginate(4,4,'bty-pagination-2');
+
+        $html= View::make('uploads::gears-new.units._partials.unit_variations',compact(['units']))->render();
+
+        return \Response::json(['html' => $html, 'error' => false]);
+    }
     // working
     public function getUnitVariations($slug)
     {

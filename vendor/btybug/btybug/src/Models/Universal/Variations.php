@@ -11,27 +11,61 @@ namespace Btybug\btybug\Models\Universal;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
+use File;
+use Illuminate\Support\Collection;
 
-class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlable,Renderable
+class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlable, Renderable
 {
     protected $path;
     protected $view;
     protected $attributes;
+    protected $model;
+    protected $items;
 
     public function __construct($obj)
     {
-        $this->path = base_path($obj->getPath() . DS . 'variations');
-        $this->view=$obj->getView();
+        $this->view = $obj->getViewFile();
+        $this->model = $obj;
+        $this->path = $obj->getVariationsPath();
 
     }
 
-    private function render()
+    public function render()
     {
-        return 'hello';
+        $slug = $this->model->getSlug();
+        $tpl = $this->view;
+        $path = $this->model->getPath();
+        \View::addLocation($this->model->getPath());
+        \View::addNamespace($slug, $this->model->getPath());
+        $variables = $this->attributes;
+        return \View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
 
     public function all()
     {
+        $vars = File::allFiles($this->path);
+        $array = array();
+        foreach ($vars as $var) {
+            if (File::extension($var) == 'json') {
+                $all = new $this($this->model);
+                $all->id = File::name($var);
+                $all->path = $this->path . '/' . File::name($var) . '.json';
+                $all->file = $var;
+                $data = json_decode(File::get($var), true);
+                $all->attributes =  $data instanceof Collection ? $data : Collection::make($data);
+                $all->original = $all->attributes;
+                $all->updated_at = File::lastModified($var);
+                $array[$data['id']] = $all;
+            }
+        }
+        $this->items = collect($array);
+        return $this;
+    }
+
+    public function find($id)
+    {
+        $variations = $this->all();
+        return $variations[$id];
 
     }
 
@@ -41,7 +75,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
      */
     public function offsetExists($key)
     {
-        return $this->items->has($key);
+        return $this->attributes->has($key);
     }
 
     /**
@@ -52,7 +86,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
      */
     public function offsetGet($key)
     {
-        return $this->items->get($key);
+        return $this->attributes->get($key);
     }
 
     /**
@@ -64,7 +98,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
      */
     public function offsetSet($key, $value)
     {
-        $this->items->put($key, $value);
+        $this->attributes->put($key, $value);
     }
 
     /**
@@ -75,7 +109,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
      */
     public function offsetUnset($key)
     {
-        $this->items->forget($key);
+        $this->attributes->forget($key);
     }
 
     /**
@@ -111,6 +145,32 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
+    public function __set($name, $value)
+    {
+        if (isset($this->attributes[$name])) {
+            $this->attributes[$name] = $value;
+            return $this;
+            // TODO: Implement __set() method.
+        }
+    }
+
+    public function __get($name)
+    {
+        $result = isset($this->attributes[$name]) ? $this->attributes[$name] : false;
+        return $result;
+    }
+
+    public function save()
+    {
+        File::put($this->path, json_encode($this->attributes->toArray(), true));
+        return $this;
     }
 
 }

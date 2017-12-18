@@ -12,4 +12,12 @@ namespace Btybug\btybug\Models\Universal;
 interface VariationAccess
 {
     public function variations();
+
+    public function getVariationsPath();
+
+    public function getViewFile();
+
+    public function getSlug();
+
+    public function getPath();
 }

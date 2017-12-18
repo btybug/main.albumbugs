@@ -16,7 +16,7 @@ use Illuminate\Support\Collection;
 use Mockery\Exception;
 use View;
 
-abstract class BasePainter implements PainterInterface,VariationAccess
+abstract class BasePainter implements PainterInterface, VariationAccess
 {
 
 
@@ -74,21 +74,7 @@ abstract class BasePainter implements PainterInterface,VariationAccess
 
     public function variations()
     {
-        return new Variations($this->path);
-    }
-    public function allVars($namspace)
-    {
-        $v = new $namspace();
-        return $v->findV($this->path);
-    }
-
-    public function scopeMakeVariation(array $array)
-    {
-        $variations = $this->variations;
-        $variations[uniqid() . '.' . $this->slug] = $array;
-        $this->setAttributes('variations', $variations);
-
-        return collect($this);
+        return new Variations($this);
     }
 
     public function scopeFind(string $slug)
@@ -315,7 +301,7 @@ abstract class BasePainter implements PainterInterface,VariationAccess
         if (!isset($config[$slug])) {
             $this->throwError("Not Registered Item $slug !!!", 404);
         }
-        return $config[$slug].DS.$this->name_of_json;
+        return $config[$slug] . DS . $this->name_of_json;
     }
 
 // validate if file exist
@@ -323,7 +309,7 @@ abstract class BasePainter implements PainterInterface,VariationAccess
     protected function validate($path)
     {
         if (!\File::exists($path)) {
-            $this->throwError('File does not found '.$path, 404);
+            $this->throwError('File does not found ' . $path, 404);
         }
         return true;
     }
@@ -353,10 +339,9 @@ abstract class BasePainter implements PainterInterface,VariationAccess
 
     protected function scopePaginate($limit = 5, $links_count = 5, $list_class = 'bty-pagination-2')
     {
-        $paginate=new Paginator($limit, $links_count,$list_class,$this->storage);
+        $paginate = new Paginator($limit, $links_count, $list_class, $this->storage);
         return $paginate;
     }
-
 
 
     // function for error
@@ -395,12 +380,31 @@ abstract class BasePainter implements PainterInterface,VariationAccess
 
     protected function scopeOptimize()
     {
-        $painters=$this->scopeAll()->get();
-        $confid=[];
-        foreach ($painters as $painter){
-            $confid[$painter->slug]=$painter->path;
+        $painters = $this->scopeAll()->get();
+        $confid = [];
+        foreach ($painters as $painter) {
+            $confid[$painter->slug] = $painter->path;
         }
-        return  \File::put($this->config_path, json_encode($confid));
+        return \File::put($this->config_path, json_encode($confid));
     }
 
+    public function getVariationsPath()
+    {
+        return base_path($this->path . DS . 'variations');
+    }
+
+    public function getViewFile()
+    {
+        return $this->view_name ? $this->view_name : 'tpl';
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function getPath()
+    {
+        return base_path($this->path);
+    }
 }

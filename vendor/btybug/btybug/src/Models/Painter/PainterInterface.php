@@ -37,28 +37,9 @@ interface PainterInterface extends Arrayable
     public function scopeSave(array $array);
 
     /**
-     * @param array $array
      * @return mixed
      */
-    public function scopeCreateVariation(array $array);
 
-    /**
-     * @param array $array
-     * @return mixed
-     */
-    public function scopeMakeVariation(array $array);
-
-    /**
-     * @return mixed
-     */
-    public function scopeSaveVariation();
-
-    /**
-     * @param string $arg1
-     * @param string $condition
-     * @param string $arg3
-     * @return mixed
-     */
     public function scopeWhere(string $arg1, string $condition, string $arg3);
 
     /**

@@ -40,26 +40,40 @@
                             </td>
                             <td>{!!"[field slug=$field->slug]"!!}</td>
                             <td>
-                                @if(\Btybug\Console\Services\ColumnService::columnExists($field->table_name,$field->column_name))
-                                    <input type="checkbox" @if($field->status){!! 'checked' !!} @endif data-toggle="toggle"
-                                           data-slug="{!! $field->slug !!}" class="field-status"
-                                           data-url="{!! url('/admin/console/structure/fields/change-status') !!}">
+                                <input type="checkbox" @if($field->status){!! 'checked' !!} @endif data-toggle="toggle"
+                                       data-slug="{!! $field->slug !!}" class="field-status"
+                                       data-url="{!! url('/admin/console/structure/fields/change-status') !!}">
 
-                                    <a href="{!! url('/admin/console/structure/fields/edit',[$field->id]) !!}"
-                                       class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a href="{!! url('/admin/console/structure/fields/edit',[$field->id]) !!}"
+                                   class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                                    @if($field->structured_by == 'custom')
-                                        <a data-href="{!! url('/admin/modules/tables/field/delete') !!}"
-                                           data-key="{!! isset($field) && isset($field->id) ? $field->id : '' !!}"
-                                           data-type="Field"
-                                           class="{!! isset($field) && isset($field->id) ? 'delete-button' : 'delete-new-field' !!} btn btn-danger"><i
-                                                    class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @endif
-                                @else
-
-                                    <a href="{!! url('/admin/console/structure/fields/view',[$field->id]) !!}"
-                                       class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                @if($field->structured_by == 'custom')
+                                    <a data-href="{!! url('/admin/modules/tables/field/delete') !!}"
+                                       data-key="{!! isset($field) && isset($field->id) ? $field->id : '' !!}"
+                                       data-type="Field"
+                                       class="{!! isset($field) && isset($field->id) ? 'delete-button' : 'delete-new-field' !!} btn btn-danger"><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 @endif
+                                {{--@if(\Btybug\Console\Services\ColumnService::columnExists($field->table_name,$field->column_name))--}}
+                                    {{--<input type="checkbox" @if($field->status){!! 'checked' !!} @endif data-toggle="toggle"--}}
+                                           {{--data-slug="{!! $field->slug !!}" class="field-status"--}}
+                                           {{--data-url="{!! url('/admin/console/structure/fields/change-status') !!}">--}}
+
+                                    {{--<a href="{!! url('/admin/console/structure/fields/edit',[$field->id]) !!}"--}}
+                                       {{--class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>--}}
+
+                                    {{--@if($field->structured_by == 'custom')--}}
+                                        {{--<a data-href="{!! url('/admin/modules/tables/field/delete') !!}"--}}
+                                           {{--data-key="{!! isset($field) && isset($field->id) ? $field->id : '' !!}"--}}
+                                           {{--data-type="Field"--}}
+                                           {{--class="{!! isset($field) && isset($field->id) ? 'delete-button' : 'delete-new-field' !!} btn btn-danger"><i--}}
+                                                    {{--class="fa fa-trash-o" aria-hidden="true"></i></a>--}}
+                                    {{--@endif--}}
+                                {{--@else--}}
+
+                                    {{--<a href="{!! url('/admin/console/structure/fields/view',[$field->id]) !!}"--}}
+                                       {{--class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
+                                {{--@endif--}}
 
                             </td>
                         </tr>

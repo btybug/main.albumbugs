@@ -2,6 +2,7 @@
 
 namespace Btybug\btybug\Models;
 
+use Btybug\Console\Repository\ColumnsRepository;
 use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;
@@ -242,6 +243,13 @@ class Migrations
             });
 
             foreach ($data['column'] as $column) {
+                $columnRepository = new ColumnsRepository();
+                $columnRepository->create([
+                   'db_table' => $table,
+                   'table_column' => $column['name'],
+                   'user_id' => \Auth::id()
+                ]);
+
                 if (isset($column['field']) && $column['field'] == 'yes') {
                     $field = new FieldsRepository();
                     $field->create([

@@ -438,13 +438,13 @@ class FormService extends GeneralService
             $form = $this->form->find($data['id']);
             if($form){
                 $this->form->update($data['id'], [
-                    'name' => $data['form_name'],
+                    'name' => $data['name'],
                     'fields_json' => $data['fields_json']
                 ]);
             }
         }else{
             $form = $this->form->create([
-                'name' => $data['form_name'],
+                'name' => $data['name'],
                 'slug' => uniqid(),
                 'created_by' => 'custom',
                 'fields_json' => $data['fields_json'],

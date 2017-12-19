@@ -48,7 +48,7 @@ class Forms extends Model
 
     public function fields()
     {
-        return $this->belongsToMany('\Btybug\Console\Models\Fields', 'form_fields', 'form_id', 'field_slug');
+        return $this->belongsToMany('\Btybug\Console\Models\Fields', 'form_fields', 'form_id', 'field_slug','id');
     }
 
     public function entries()

@@ -62,4 +62,8 @@ class FormsRepository extends GeneralRepository
             (count($query->pluck('name','slug')) ? $query->pluck('name','slug')->toArray() : $query->pluck('name','slug'))
             : $query->get();
     }
+
+    public function getFieldIDs($id){
+        return $this->model()->find($id)->fields;
+    }
 }

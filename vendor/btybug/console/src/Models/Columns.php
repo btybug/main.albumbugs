@@ -9,7 +9,29 @@
 namespace Btybug\Console\Models;
 
 
-class Columns
-{
+use Btybug\User\User;
+use Illuminate\Database\Eloquent\Model;
 
+class Columns extends Model
+{
+    /**
+     * @var string
+     */
+    protected $table = 'columns';
+    /**
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at'];
+    /**
+     * @var array
+     */
+    protected $guarded = array('id');
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

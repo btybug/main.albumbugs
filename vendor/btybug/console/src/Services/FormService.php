@@ -104,11 +104,14 @@ class FormService extends GeneralService
         if (!empty($fields)) {
             $fields = json_decode($fields, true);
             if (count($fields)) {
-                foreach ($fields as $field_slug) {
-                    $this->formFields->create([
-                        'form_id' => $form_id,
-                        'field_slug' => $field_slug
-                    ]);
+                foreach ($fields as $field_id) {
+                    $field = $this->fieldRepo->find($field_id);
+                    if($field){
+                        $this->formFields->create([
+                            'form_id' => $form_id,
+                            'field_slug' => $field->slug
+                        ]);
+                    }
                 }
             }
         }
@@ -427,5 +430,31 @@ class FormService extends GeneralService
             'ip' => $request->getClientIp(),
             'created_at' => date('Y-m-d h:i:s'),
         ]);
+    }
+
+    public function createOrUpdate ($data)
+    {
+        if($data['id']){
+            $form = $this->form->find($data['id']);
+            if($form){
+                $this->form->update($data['id'], [
+                    'name' => $data['form_name'],
+                    'fields_json' => $data['fields_json']
+                ]);
+            }
+        }else{
+            $form = $this->form->create([
+                'name' => $data['form_name'],
+                'slug' => uniqid(),
+                'created_by' => 'custom',
+                'fields_json' => $data['fields_json'],
+                'fields_type' => $data['fields_type']
+            ]);
+        }
+
+        if($form){
+            $this->generateBlade($form->id, $data['fields_html']);
+            $this->syncFields($form->id, $data['fields']);
+        }
     }
 }

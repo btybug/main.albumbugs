@@ -14,6 +14,7 @@ namespace Btybug\Console\Http\Controllers\Developers;
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\dbhelper;
 use Btybug\Console\Repository\FieldsRepository;
+use Btybug\Console\Services\ColumnService;
 use Btybug\Console\Services\FieldService;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\Templates\Units;
@@ -557,7 +558,12 @@ class StructureController extends Controller
                 $type = Migrations::getDataType($column_info);
                 $column = \DB::select('SHOW COLUMNS FROM ' . $table .' WHERE FIELD="'.$table_column.'"');
                 $field = FieldService::fieldExists($table, $table_column);
-                $column_edit = \View("console::structure.developers._partials.columns_edit", compact('column', 'length', 'type', 'field','table','table_column'))->with($this->data)->render();
+
+                if(ColumnService::columnExists($table,$table_column)){
+                    $column_edit = \View("console::structure.developers._partials.columns_edit", compact('column', 'length', 'type', 'field','table','table_column'))->with($this->data)->render();
+                }else{
+                    $column_edit = \View("console::structure.developers._partials.columns_view", compact('column', 'length', 'type', 'field','table','table_column'))->with($this->data)->render();
+                }
 
                 return \Response::json(['html' => $column_edit, 'error' => false]);
             }

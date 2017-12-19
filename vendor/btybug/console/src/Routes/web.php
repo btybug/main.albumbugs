@@ -39,6 +39,7 @@ Route::group(['prefix' => 'structure'], function () {
         Route::get('/create', 'StructureController@getCreateField',true);
         Route::get('/create-new', 'StructureController@getCreateFieldNew',true);
         Route::get('/edit/{id}', 'StructureController@getEditField',true)->name("edit_field");
+        Route::get('/view/{id}', 'StructureController@getViewField',true)->name("view_field");
         Route::post('/edit/{id}', 'StructureController@postEditField');
         Route::post('/render-html', 'StructureController@postRenderFieldHtml');
         Route::post('/mapping', 'StructureController@postMapping');

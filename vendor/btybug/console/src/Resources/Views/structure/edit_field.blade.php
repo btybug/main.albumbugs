@@ -180,13 +180,13 @@
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Field Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('icon','{icon}',['class' => 'form-control icp','readonly'])  !!}
+                                {!!Form::text('icon',null,['class' => 'form-control icp','readonly'])  !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">Tooltip Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('tooltip_icon','{icon}',['class' => 'form-control icp','readonly'])  !!}
+                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','readonly'])  !!}
 
                             </div>
                         </div>

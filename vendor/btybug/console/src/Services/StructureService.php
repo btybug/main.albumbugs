@@ -447,6 +447,7 @@ class StructureService extends GeneralService
 
     public function fieldUpdate($data, $field)
     {
+        // TODO:: tooltip ????
         $field->update([
             'name' => $data['name'],
             'table_name' => $data['table_name'],
@@ -455,7 +456,10 @@ class StructureService extends GeneralService
             'label' => $data['label'] != '' ? $data['label'] : NULL,
             'placeholder' => $data['placeholder'] != '' ? $data['placeholder'] : NULL,
             'icon' => $data['icon'] != '' ? $data['icon'] : NULL,
-            'tooltip' => $data['tooltip'] != '' ? $data['tooltip'] : NULL,
+
+            'tooltip' =>  NULL,
+            'tooltip_icon' => $data['tooltip_icon'] != '' ? $data['tooltip_icon'] : NULL,
+            'help' => $data['help'],
             'second_table' => isset($data['second_table']) && $data['second_table'] != '' ? $data['second_table'] : NULL,
             'second_column' => isset($data['second_column']) && $data['second_column'] != '' ? $data['second_column'] : NULL,
             'data_source' => isset($data['data_source']) && $data['data_source'] != '' ? $data['data_source'] : NULL,

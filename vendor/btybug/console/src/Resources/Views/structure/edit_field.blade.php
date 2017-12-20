@@ -180,8 +180,7 @@
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Field Icon</label>
                             <div class="col-sm-8">
-                                {!! BBbutton('icons','icon','Select Field icon',['class'=>'form-control input-md','data-type'=>'icon']) !!}
-
+                                {!!Form::text('icon','{icon}',['class' => 'form-control icp','readonly'])  !!}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -191,9 +190,16 @@
 
                             </div>
                         </div>
+
                     </div>
-
-
+                    <div class="form-group col-md-12 m-b-10">
+                        <div class="col-md-6">
+                            <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">help</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control"  name="help"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -267,12 +273,16 @@
             margin: 0 auto;
         }
     </style>
+    {!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}
+    {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 @stop
 @section('JS')
     {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
+    {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+
     <script>
 
-
+        $('.icp').iconpicker();
         var dd = console.log;
         var activefieldtype = ''
         var htmlsdata = {default: '', custom: '', field: ''}

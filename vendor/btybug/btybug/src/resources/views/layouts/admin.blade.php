@@ -65,14 +65,6 @@
 @yield('JS')
 {!! BBscriptsHook() !!}
 @stack('javascript')
-@if(Session::has('message_code') && Session::pull('message_code') == 200)
-    <script>
-        $(function () {
-            $('#message-modal .modal-body').html("{!! Session::pull('success_mes') !!}");
-            $('#message-modal').modal();
-        });
-    </script>
-@endif
 </body>
 </html>
 

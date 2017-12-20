@@ -17,11 +17,11 @@ class FormFields extends Model
 
     public function form()
     {
-        return $this->belongsTo(\Btybug\Console\Models\Forms::class, 'form_id');
+        return $this->belongsTo(\Btybug\Console\Models\Forms::class, 'form_id','id');
     }
 
     public function field()
     {
-        return $this->belongsTo(\Btybug\Console\Models\Fields::class, 'field_slug');
+        return $this->belongsTo(\Btybug\Console\Models\Fields::class,'field_slug','slug','id');
     }
 }

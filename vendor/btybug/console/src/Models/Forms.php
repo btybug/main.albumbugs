@@ -19,7 +19,7 @@ class Forms extends Model
     /**
      * @var string
      */
-    public static $form_path = 'resources' . DS . 'views' . DS . 'forms' . DS;
+    public static $form_path = 'views' . DS . 'forms' . DS;
     /**
      * @var string
      */
@@ -46,9 +46,16 @@ class Forms extends Model
     protected $dates = ['created_at', 'updated_at'];
 
 
+    public function form_fields()
+    {
+        return $this->hasMany('\Btybug\Console\Models\FormFields', 'form_id', 'id');
+    }
+
+
     public function fields()
     {
-        return $this->belongsToMany('\Btybug\Console\Models\Fields', 'form_fields', 'form_id', 'field_slug','id');
+//        return $this->belongsToMany('\Btybug\Console\Models\Fields','form_fields','field_slug','form_id','id');
+        return $this->hasManyThrough('\Btybug\Console\Models\Fields', '\Btybug\Console\Models\FormFields', 'form_id', 'slug','field_slug');
     }
 
     public function entries()

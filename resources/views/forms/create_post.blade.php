@@ -1,20 +1,21 @@
-{!! Form::open(['class' => 'bty-form-5']) !!}
-    <h2>Create Post</h2>
-    {!! Form::hidden('form_id',$form->id) !!}
-    <fieldset>
-        <div>
-            {!! Form::text('title',null,['class' => 'bty-input-label-5','placeholder' => 'Enter Post title']) !!}
-            <label>What's your post title?</label>
-        </div>
-    </fieldset>
-    <fieldset>
-        <div class="bty-input-select-1">
-            {!! Form::select('status',['draft' => 'Draft','pending' => 'Pending','published' => 'Published'],null,['class' => 'form-control input-md']) !!}
-        </div>
-    </fieldset>
-    <fieldset>
-        {!! Form::textarea('description',null,['id' => 'post-desc','class' => 'bty-textarea-1','placeholder' => 'More About Post']) !!}
-    </fieldset>
+{{--Form 13 --}}
+<h2 class="form-title">Create Post</h2>
+<div class="field-box">
+<fieldset id="bty-input-id-10">
+    {!! Form::textarea(get_field_attr(10,'column_name'),null,['class' => 'bty-textarea-1','placeholder' => get_field_attr(10,'placeholder')]) !!}
+</fieldset>
+<fieldset id="bty-input-id-11">
+    <div>
+        {!! Form::text(get_field_attr(11,'column_name'),null,['class' => 'bty-input-label-5','placeholder' => get_field_attr(11,'placeholder')]) !!}
+        <label>{!! get_field_attr(11,'label') !!}</label>
+    </div>
+</fieldset>
 
-    <button type="submit" class="bty-btn bty-btn-save"><span>Save</span></button>
-{!! Form::close() !!}
+<fieldset id="bty-input-id-12">
+    <div class="bty-input-select-1">
+        {!! Form::select(get_field_attr(12,'column_name'),get_field_data(12),null,['placeholder' => get_field_attr(12,'placeholder'),'class' => 'form-control input-md']) !!}
+    </div>
+</fieldset>
+</div>
+<button type="submit" class="bty-btn bty-btn-save"><span>Save</span></button>
+

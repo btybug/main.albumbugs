@@ -1518,7 +1518,7 @@ function form_render($attr)
     $form = $formRepo->findByIdOrSlug($attr);
 
     if ($form) {
-        return \Btybug\Console\Services\FormService::renderFormBlade($form->slug,$form);
+        return \Btybug\Console\Services\FormService::renderFormBlade($form);
     }
 }
 

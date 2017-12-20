@@ -191,11 +191,11 @@ class FormService extends GeneralService
         return null;
     }
 
-    public static function renderFormBlade($slug = null,$form = null)
+    public static function renderFormBlade($form)
     {
-        if ($slug){
-            if (\View::exists("forms.".$slug)) {
-                return view("forms.".$slug,compact('form'))->render();
+        if ($form){
+            if (\View::exists("forms.".$form->slug)) {
+                return view("console::structure.developers.forms.form_layout",compact('form'))->render();
             }
         }
 
@@ -439,7 +439,7 @@ class FormService extends GeneralService
             if($form){
                 $this->form->update($data['id'], [
                     'name' => $data['name'],
-                    'fields_json' => $data['fields_json']
+                    'fields_json' => issetReturn($data,'fields_json',null)
                 ]);
             }
         }else{
@@ -447,7 +447,7 @@ class FormService extends GeneralService
                 'name' => $data['name'],
                 'slug' => uniqid(),
                 'created_by' => 'custom',
-                'fields_json' => $data['fields_json'],
+                'fields_json' => issetReturn($data,'fields_json',null),
                 'fields_type' => $data['fields_type']
             ]);
         }

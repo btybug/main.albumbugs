@@ -63,7 +63,7 @@ class FormsRepository extends GeneralRepository
             : $query->get();
     }
 
-    public function getFieldIDs($id){
-        return $this->model()->find($id)->fields;
+    public function formFields($id){
+        return $this->model()->find($id)->form_fields;
     }
 }

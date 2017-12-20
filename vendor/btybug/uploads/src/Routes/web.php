@@ -78,7 +78,6 @@ Route::group(['prefix' => 'gears-new'], function () {
     Route::post('/delete', 'UnitsNewController@postDelete');
     Route::post('/filter', 'UnitsNewController@filterUnits')->name('filter-units');
     Route::post('/getunitsforindex', 'UnitsNewController@getFrontendFromAjax')->name('get-units-for-index');
-    Route::get('/functionalityforvariation', 'UnitsNewController@MakeVar');
 });
 
 

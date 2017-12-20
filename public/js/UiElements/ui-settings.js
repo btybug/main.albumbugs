@@ -25,8 +25,6 @@ $('form button').attr('type','button');
 				});
 		}
     }
-
-
 function savesettingevent(){
 	 setTimeout(function(){
           var data=$('form').serialize();
@@ -41,7 +39,14 @@ function savesettingevent(){
               },
               success: function (data) {
                   if (! data.error) {
-                      $('#widget_container').html(data.html)
+                      $('#widget_container').html(data.html);
+
+                      var linkElem = document.createElement('link');
+                      document.getElementsByTagName('head')[0].appendChild(linkElem);
+                      linkElem.rel = 'stylesheet';
+                      linkElem.type = 'text/css';
+                      linkElem.href = '/public-x/custom/css/'+data.slug+'.css';
+                      $.getScript('/public-x/custom/js/'+data.slug+'.js');
                   }
               }
           });
@@ -121,5 +126,5 @@ function savesettingevent(){
             }
         });
     });
-	
+
 });

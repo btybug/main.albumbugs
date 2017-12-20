@@ -32,20 +32,19 @@ class UnitsNewController extends Controller
         //$this->unitTypes = $this->types = @json_decode(File::get(config('paths.unit_path') . 'configTypes.json'), 1)['types'];
     }
 
-    // working
     public function getIndex(Request $request)
     {
         $units = Painter::all()->get();
         return view("uploads::gears-new.units.index", compact(['units', 'test']));
     }
 
-    // working
     public function getFrontend(Request $request)
     {
         $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
 
         return view("uploads::gears-new.units.index", compact(['units', 'test']));
     }
+
     // from ajax get index content
     public function getFrontendFromAjax(){
         $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
@@ -72,7 +71,7 @@ class UnitsNewController extends Controller
 
         return \Response::json(['html' => $html, 'error' => false]);
     }
-    // working
+
     public function getUnitVariations($slug)
     {
         $variations = Painter::find($slug)->variations()->all();
@@ -80,6 +79,7 @@ class UnitsNewController extends Controller
         if (!count($variations)) return redirect()->back();
         return view('uploads::gears-new.units.variations', compact(['variations','unit']));
     }
+
     public function postUnitWithType(Request $request)
     {
         $main_type = $request->get('main_type');
@@ -95,6 +95,7 @@ class UnitsNewController extends Controller
 
         return \Response::json(['html' => $html, 'error' => false]);
     }
+
     public function postUnitVariations(Request $request, $slug)
     {
         $ui = Painter::find($slug);
@@ -184,15 +185,14 @@ class UnitsNewController extends Controller
         return view('uploads::gears-new.units._partials.unit_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
 
-    // TODO: we have no saveSettings function
     public function postSettings(Request $request)
     {
         $output = Painter::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
-
         return response()->json([
             'error' => $output ? false : true,
             'url' => $output ? url('/admin/uploads/gears/settings/' . $output['slug']) : false,
-            'html' => $output ? $output['html'] : false
+            'html' => $output ? $output['html'] : false,
+            'slug' => $output['slug']
         ]);
     }
 
@@ -234,42 +234,6 @@ class UnitsNewController extends Controller
         }
 
         return redirect()->back();
-    }
-
-
-
-    public function MakeVar(){
-
-        $x = [
-          "title"=> "Amazing Header",
-          "author" => "Sahak",
-          "site" => "http:\/\/bootydev.co.uk",
-          "version" => "1.0",
-          "type" => "unit",
-          "description" => "Super header unit",
-          "have_setting" => 1,
-          "image" => "screenshot.png",
-          "slug" => "77777777",
-          "folder" => "amazing_header_77777777",
-          "created_at" => 1490088665,
-          "is_core" => 1,
-          "place" => "frontend",
-          "tags" => ["frontend_header","frontend"],
-          "path" => "resources\/units\/amazing_header_77777777"
-        ];
-
-
-      //  $variation = Painter::find('77777777b')->variations()->find('77777777b.55555551');
-       // $variation = Painter::find('77777777b')->variations()->makeVariation(["title"=> "Amazing Header"])->save();
-        //$variation = Painter::find('77777777b')->variations()->createVariation();
-       // $variation = Painter::find('77777777b')->variations()->deleteVariation('77777777b.5a38d302bd40b');
-
-        /* $x = new Painter();
-           $variation = $x->findByVariation('77777777b.55555551');*/
-
-        $x = Painter::find('77777777b')->renderLive(['77777777b.55555551']);
-        dd($x);
-
     }
 }
 

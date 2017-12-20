@@ -10,7 +10,7 @@
                 <span><img src="http://blog.mcafeeinstitute.com/wp-content/uploads/2015/10/rain_wallpaper_good_2023_high_definition.jpg" alt=""></span>
                 <div class="{{ isset($ui->tags)?'custom_div_for_tags':'custom_div_for_tags_when_not' }}">
                     <ul>
-                        <li><a href=" {{route('uploads_units_variations',$ui->slug)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
+                        <li><a href=" {{route('uploads_units_variations_new',$ui->slug)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
                         <li><a data-href="{!! url('/admin/uploads/gears/delete') !!}" data-key="{!! $ui->slug !!}" data-type="Unit"><i class="fa fa-trash"></i></a></li>
                     </ul>
                     <div>

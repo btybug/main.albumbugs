@@ -57,7 +57,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     public function scopeAll()
     {
         $all = [];
-      //  $path = $this->base_path;
+      //  $path = $this->base_path; TODO: this is right way
         $path = resource_path(config('painter.PAINTERSPATH')); // TODO: this should be removed
 
         $units = \File::directories($path);
@@ -120,7 +120,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     public function scopeSave(array $array)
     {
         $config = $this->config_path;
-        \File::put($this->config_path, json_encode($array, true));
+        \File::put($config, json_encode($array, true));
         return $this;
     }
 
@@ -185,11 +185,9 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
     public function scopeRender(array $settings)
     {
-        $tpl = '';
+        $tpl = 'tpl';
         if (isset($settings['view_name'])) {
             $tpl = $settings['view_name'];
-        } else {
-            $tpl = "tpl";
         }
 
         $slug = $settings['slug'];
@@ -375,7 +373,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     }
 
     // check if settings blade is undefined
-    public function validateSettings($part){
+    protected function validateSettings($part){
         $path = $this->base_path.DS.$this->path.DS.$part;
         if (!\File::exists($path)){
             return "Undefined Settings Blade!";
@@ -384,7 +382,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     }
 
 // if slug or path is invalid
-    public function validateSlugWithPath($content)
+    protected function validateSlugWithPath($content)
     {
         if (!isset($content["slug"])) {
             $this->throwError('Slug does not found', 404);
@@ -413,7 +411,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
 
     // function for error
-    public function throwError($msg, $code = 404)
+    protected function throwError($msg, $code = 404)
     {
         throw new \Error($msg, $code);
     }

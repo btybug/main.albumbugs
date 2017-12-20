@@ -102,7 +102,7 @@ class FormService extends GeneralService
         $this->formFields->deleteByCondition('form_id', $form_id);
 
         if (!empty($fields)) {
-            $fields = json_decode($fields, true);
+            if(! is_array($fields)) $fields = json_decode($fields, true);
             if (count($fields)) {
                 foreach ($fields as $field_id) {
                     $field = $this->fieldRepo->find($field_id);

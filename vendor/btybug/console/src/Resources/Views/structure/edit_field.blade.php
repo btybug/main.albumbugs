@@ -196,7 +196,7 @@
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">help</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control"  name="help"></textarea>
+                                {!! Form::textarea('help',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>

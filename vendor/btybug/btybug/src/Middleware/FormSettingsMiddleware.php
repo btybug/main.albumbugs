@@ -67,16 +67,16 @@ class FormSettingsMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->isMethod('post')) {
-            $formID = $request->get('form_id');
-            if ($this->form = $this->formRepo->find($formID)) {
+            $formID = $request->get('form_id',null);
+            if ($formID && $this->form = $this->formRepo->find($formID)) {
                 if ($this->form->blocked) return false;
 
                 $result = $this->formService->validate($formID, $request->except('_token', 'form_id'));
                 if ($result['errors']) return redirect()->back()->withErrors($result['errors'])->withInput();
 
                 $collected = $this->formService->collectTables();
-                $this->response = $collected->saveForm($request->except('_token', 'form_id'));
 
+                $this->response = $collected->saveForm($request->except('_token', 'form_id'));
                 $this->formService->newEntry($request, $this->response, $this->form);
 
                 if ($this->response) {
@@ -106,7 +106,7 @@ class FormSettingsMiddleware
     private function options($request)
     {
         $formID = $request->get('form_id');
-        $settings = json_decode($this->form->settings, true);
+        $settings = $this->form->settings;
 
         if (!$settings) return redirect()->back();
 

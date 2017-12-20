@@ -3,6 +3,7 @@
 namespace App\Http;
 
 //use App\Http\Middleware\ViewTestMiddleware;
+use Btybug\btybug\Middleware\FormSettingsMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Btybug\User\Http\Middleware\UserHasPermission;
 
@@ -40,6 +41,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Btybug\btybug\Middleware\HomeShortcodeMiddleware::class,
             \Btybug\btybug\Middleware\CustomSCMiddleware::class,
+            FormSettingsMiddleware::class
 //            ViewTestMiddleware::class
         ],
 

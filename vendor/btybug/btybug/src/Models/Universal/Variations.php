@@ -69,6 +69,45 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
 
     }
 
+    public function deleteVariation($id){
+        $var = $this->find($id);
+        $this->unsetVar($var->path);
+
+        return $this;
+    }
+
+    public function makeVariation(array $array)
+    {
+        $rand_id=uniqid();
+        $id = $this->model->getSlug() . '.' . $rand_id;
+        $path = $this->path . DS . $id . '.json';
+
+        $this->path = $path;
+
+        $variation_title = 'New variation_'.$rand_id;
+        $settings = [];
+        $arr = [];
+        if(!isset($array['title'])){
+            $array['title'] = $variation_title;
+        }
+        if(isset($array["settings"])){
+            $settings = $array["settings"];
+        }
+        $arr['id'] = $id;
+        $arr['title'] = $array['title'];
+        $arr['settings'] = $settings;
+
+        $this->attributes = collect($arr);
+
+        return $this;
+    }
+
+    public function createVariation(array $array)
+    {
+     return $this->makeVariation($array)->save();
+    }
+
+
     /**
      * @param mixed $key
      * @return bool
@@ -155,7 +194,6 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         if (isset($this->attributes[$name])) {
             $this->attributes[$name] = $value;
             return $this;
-            // TODO: Implement __set() method.
         }
     }
 
@@ -165,13 +203,23 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $attr['settings'][$name] = $value;
         $this->attributes = collect($attr);
         return $this;
-        // TODO: Implement __set() method.
     }
 
     public function __get($name)
     {
         $result = isset($this->attributes[$name]) ? $this->attributes[$name] : false;
         return $result;
+    }
+    public function unsetVar($path){
+        if (File::exists($path)){
+            return File::delete($path);
+        }
+        $this->throwError('File Does not found');
+    }
+
+    public function throwError($msg, $code = 404)
+    {
+        throw new \Error($msg, $code);
     }
 
     public function save()

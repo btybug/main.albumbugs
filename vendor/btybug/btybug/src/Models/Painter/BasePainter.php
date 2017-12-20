@@ -14,6 +14,7 @@ use Btybug\btybug\Models\Universal\VariationAccess;
 use Btybug\btybug\Models\Universal\Variations;
 use Illuminate\Support\Collection;
 use Mockery\Exception;
+use phpDocumentor\Reflection\File;
 use View;
 
 abstract class BasePainter implements PainterInterface, VariationAccess
@@ -37,7 +38,15 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
     abstract function getConfigPath();
 
+    abstract function findByVariation($id);
+
     abstract function getStoragePath();
+
+    abstract function scopeRenderLivePreview(string $slug);
+
+    abstract function scopeRenderSettings($variables);
+
+    abstract function scopeRenderLive(array $variables = []);
 
     public function toArray()
     {
@@ -48,7 +57,9 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     public function scopeAll()
     {
         $all = [];
-        $path = $this->base_path;
+      //  $path = $this->base_path;
+        $path = resource_path(config('painter.PAINTERSPATH')); // TODO: this should be removed
+
         $units = \File::directories($path);
 
         if (count($units) > 0) {
@@ -66,12 +77,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         $this->storage = $all;
         return $this;
     }
-
-    public function scopeCreateVariation(array $array)
-    {
-
-    }
-
     public function variations()
     {
         return new Variations($this);
@@ -80,6 +85,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     public function scopeFind(string $slug)
     {
         $path = $this->getItemConfigJsonPath($slug);
+
         return $this->makeItem($path);
     }
 
@@ -116,11 +122,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         $config = $this->config_path;
         \File::put($this->config_path, json_encode($array, true));
         return $this;
-    }
-
-    public function scopeSaveVariation()
-    {
-        dd($this);
     }
 
     public function scopeWhere(string $arg1, string $condition, string $arg3 = null)
@@ -182,7 +183,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         return collect($this->storage);
     }
 
-    public function scopeRender($settings)
+    public function scopeRender(array $settings)
     {
         $tpl = '';
         if (isset($settings['view_name'])) {
@@ -199,11 +200,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         return View::make("$slug::$tpl")->with($settings)->with(['tplPath' => $path, '_this' => $this])->render();
     }
 
-    public function scopeRenderSettings($settings)
-    {
-        // TODO: Implement scopeRenderSettings() method.
-    }
-
     public function makeConfigJson()
     {
         if (!\File::exists($this->config_path)) {
@@ -211,6 +207,45 @@ abstract class BasePainter implements PainterInterface, VariationAccess
             $this->scopeOptimize();
         }
         return true;
+    }
+
+    public function scopeSaveSettings(string $slug, string $title = NULL, array $data, $isSave = NULL)
+    {
+        if ($isSave && $isSave == 'save') {
+            $unit = $this->find($slug);
+            $existingVariation = $this->variations()->find($slug);
+            $dataToInsert = [
+                'title' => $title,
+                'settings' => $data
+            ];
+            if (!$existingVariation) {
+                $unit->variations()->createVariation($dataToInsert);
+            } else {
+                $existingVariation->title = $title;
+                $existingVariation->settings = $dataToInsert['settings'];
+                $variation = $existingVariation;
+            }
+            if (!$variation->settings) {
+                $variation->setAttributes('settings', []);
+            }
+            $settings = [];
+            if(count($variation->settings) > 0){
+                $settings = $variation->settings;
+            }
+
+            if ($variation->save()) {
+                return [
+                    'html' => $unit->renderLive(['settings' => $settings, 'source' => BBGiveMe('array', 5), 'cheked' => 1]),
+                    'slug' => $variation->id
+                ];
+            }
+        } else {
+            return [
+                'html' => $this->findByVariation($slug)->renderLive(['settings' => $data]),
+                'slug' => $slug
+            ];
+        }
+        return false;
     }
 
     private function getRegisters()
@@ -238,6 +273,19 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
         return \File::put($this->config_path, json_encode($push_into_config));
 
+    }
+    public function scopeDelete(){
+        $path = $this->makePathForRemove($this->attributes["path"]);
+
+        if (\File::exists($path)){
+            $arr = json_decode(\File::get($this->config_path), true);
+            unset($arr[$this->slug]);
+
+            \File::put($this->config_path, json_encode($arr));
+
+            return \File::deleteDirectory($path);
+        }
+        $this->throwError('Unit Does not found');
     }
 
     public function __get($name)
@@ -287,25 +335,28 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         }
     }
 
-
-// make a path
+    // make a path
     protected function makePath($path)
     {
         return $this->base_path . DS . $path . DS . $this->name_of_json;
     }
+    // make a path for remove unit
+    protected function makePathForRemove($path)
+    {
+        return $this->base_path . DS . $path;
+    }
 
     protected function getItemConfigJsonPath($slug)
     {
-
         $config = $this->getRegisters();
         if (!isset($config[$slug])) {
             $this->throwError("Not Registered Item $slug !!!", 404);
         }
-        return $this->makePath($config[$slug]['folder']);
+
+        return $this->makePath($config[$slug]);
     }
 
 // validate if file exist
-
     protected function validate($path)
     {
         if (!\File::exists($path)) {
@@ -315,13 +366,21 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     }
 
     // validate if file exist and return true or false
-
     protected function validateWithReturn($path)
     {
         if (!\File::exists($path)) {
             return false;
         }
         return true;
+    }
+
+    // check if settings blade is undefined
+    public function validateSettings($part){
+        $path = $this->base_path.DS.$this->path.DS.$part;
+        if (!\File::exists($path)){
+            return "Undefined Settings Blade!";
+        }
+        return false;
     }
 
 // if slug or path is invalid
@@ -334,6 +393,15 @@ abstract class BasePainter implements PainterInterface, VariationAccess
             $this->throwError('Path does not found', 404);
         }
         return true;
+    }
+
+    protected function getAutoInclude()
+    {
+        if (\File::exists($this->path . DS . 'auto_include.json')) {
+            $this->setAttributes('partials', json_decode(\File::get($this->path . DS . 'auto_include.json'), true));
+            return $this;
+        }
+        $this->throwError('Missing auto_include.json file in ' . $this->path . '!!!', 404);
     }
 
 
@@ -365,13 +433,18 @@ abstract class BasePainter implements PainterInterface, VariationAccess
             case "=":
                 $bool = $arg1 == $arg2;
                 break;
+            case "<=":
+                $bool = $arg1 <= $arg2;
+                break;
+            case ">=":
+                $bool = $arg1 >= $arg2;
+                break;
             default:
                 $this->throwError("Condition is not exist");
         }
         return $bool;
     }
 
-    //
     protected function setAttributes($key, $value)
     {
         $this->attributes[$key] = $value;
@@ -405,6 +478,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
     public function getPath()
     {
-        return base_path($this->path);
+        return base_path($this->base_path);
     }
 }

@@ -13,6 +13,7 @@ use Btybug\btybug\Models\Painter\PainterInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use League\Flysystem\Exception;
 use Psy\Exception\ErrorException;
+use View;
 
 class Painter extends BasePainter
 {
@@ -21,7 +22,8 @@ class Painter extends BasePainter
      */
     public function getStoragePath()
     {
-       return resource_path(config('painter.PAINTERSPATH'));
+       return base_path();
+       //return resource_path(config('painter.PAINTERSPATH'));
     }
 
     /**
@@ -32,5 +34,77 @@ class Painter extends BasePainter
         return storage_path(config('painter.CONFIG'));
     }
 
+    public function findByVariation($id){
+        $slug = explode('.', $id);
+        $tpl = Painter::find($slug[0]);
+
+        return $tpl;
+    }
+
+    public function scopeRenderLivePreview(string $slug)
+    {
+        $ui = $model = $this->findByVariation($slug);
+
+        if (!$ui) {
+            return false;
+        }
+        $variation = $ui->variations()->find($slug);
+
+        $settings = [];
+        if(count($variation->settings) > 0){
+            $settings = $variation->settings;
+        }
+
+        $body = url('/admin/uploads/gears-new/settings-iframe', $slug);
+        $dataSettings = url('/admin/uploads/gears-new/settings-iframe', $slug) . '/settings';
+        $data['body'] = $body;
+        $data['settings'] = $dataSettings;
+
+        return view('uploads::gears-new.units.preview', compact(['model',"ui", 'data', 'settings', 'variation']));
+    }
+
+    public function scopeRenderSettings($variables)
+    {
+        $path = $this->path;
+        $variables['tplPath'] = $path;
+        $variables['_this'] = $this;
+        $slug = $this->slug;
+
+        $is_wrong = $this->validateSettings('settings.blade.php');
+
+        if ($is_wrong){
+            return $is_wrong;
+        }
+
+        View::addLocation($path);
+        View::addNamespace("$slug", $path);
+
+        return View::make("$slug::settings")->with($variables)->render();
+    }
+
+    public function scopeRenderLive(array $variables = [])
+    {
+        $slug = $this->slug;
+        $path = $this->path;
+
+        View::addLocation($path);
+        View::addNamespace("$slug", $path);
+
+        if ($this->autoinclude){
+            return $this->getAutoInclude()->render($variables['variation']->toArray(), "$slug::");
+        }
+        if ($this->example) {
+            $tpl = $this->example;
+        } elseif ($this->main_file) {
+            $tpl = str_replace(".blade.php", "", $this->main_file);
+            if (isset($variables['view_name'])) {
+                $tpl = $variables['view_name'];
+            }
+        } else {
+            $tpl = "tpl";
+        }
+
+        return View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this])->render();
+    }
 
 }

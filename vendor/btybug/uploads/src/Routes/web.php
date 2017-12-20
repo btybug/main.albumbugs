@@ -72,11 +72,13 @@ Route::group(['prefix' => 'gears-new'], function () {
     Route::post('/units-variations/{slug}', 'UnitsNewController@postUnitVariations');
     Route::get('/live-settings/{slug}', 'UnitsNewController@unitPreview',true)->name('uploads_live_settings_new');
     Route::get('/settings/{slug?}', 'UnitsNewController@getSettings',true)->name('uploads_settings_new');
+    Route::get('/settings/create/{slug?}', 'UnitsNewController@createVariationForUnit',true)->name('create_variation_for_unit');
     Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsNewController@unitPreviewIframe',true)->name('uploads_settings_iframe_new');
     Route::post('/settings/{id}/{save?}', 'UnitsNewController@postSettings');
     Route::post('/delete', 'UnitsNewController@postDelete');
     Route::post('/filter', 'UnitsNewController@filterUnits')->name('filter-units');
     Route::post('/getunitsforindex', 'UnitsNewController@getFrontendFromAjax')->name('get-units-for-index');
+    Route::get('/functionalityforvariation', 'UnitsNewController@MakeVar');
 });
 
 

@@ -7854,11 +7854,12 @@ VAHAG
     width: 100%;
     border-radius: 4px;
 }
-.bty-form-5 button{
+.bty-form-5 .bty-btn-save{
     width: 100%;
     background-color: #499bc7;
     border-radius: 0px 0px 8px 8px;
     padding: 15px 0;
+    text-align: center;
 }
 .bty-form-5 .bty-btn-save:active{
     background-color: #499bc7;
@@ -7873,6 +7874,459 @@ VAHAG
     position: absolute;
     top: 0;
 }
+.bty-form-5 fieldset:nth-of-type(4)>div, .bty-form-5 fieldset:nth-of-type(5)>div{
+    border: 1px solid #499bc7;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0;
+    background-color: #eeeeee;
+}
+.bty-form-5 fieldset:nth-of-type(4)>div>div:nth-of-type(1),.bty-form-5 fieldset:nth-of-type(5)>div>div:nth-of-type(1){
+    flex: 0.2;
+    align-self: baseline;
+    background-color: #499bc7;
+    text-align: center;
+    color: white;
+}
+.bty-form-5 fieldset:nth-of-type(4)>div>div:nth-of-type(2), .bty-form-5 fieldset:nth-of-type(5)>div>div:nth-of-type(2){
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #499bc7;
+    background-color: #499bc71f;
+}
+.bty-form-5 .bty-input-checkbox-2 + label{
+    color: #666;
+}
+.bty-form-5 .bty-input-checkbox-2 + label:before, .bty-form-5 .bty-input-radio-1 + label:before{
+    border: 1px solid #499bc7
+}
+.bty-form-5 fieldset .bty-input-file-2 + label{
+    width: 100%;
+    text-align: center;
+    background-color: #eeeeee;
+    color: #888;
+    border: 1px solid #499bc7;
+    border-radius: 4px;
+}
+.bty-form-5 .bty-tooltip {
+    position: relative;
+    width: 20px;
+    padding: 0 6px;
+    align-self: flex-start;
+    flex: 0;
+    background-color: #499bc7;
+    color: white;
+}
+
+.bty-form-5 .bty-tooltip >span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.bty-form-5 .bty-tooltip >span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.bty-form-5 .bty-tooltip:hover >span {
+    visibility: visible;
+    opacity: 1;
+}
+/*Form-6*/
+.bty-form-6{
+    margin: 10px auto;
+    border-radius: 8px;
+    width: 550px;
+    background-color: #ffffff;
+
+}
+.bty-form-6 fieldset{
+    margin: 20px 0;
+    padding: 0 20px;
+    transition: .5s ease;
+}
+.bty-form-6 > h2 {
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+    padding: 15px 0;
+    color: #2b2b2b;
+    font-weight: bold;
+    box-shadow: inset 0px -1px 0px 0px #717171;
+    background: #ADA996;
+    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+    background: linear-gradient(to right, #c6c6c6, #DBDBDB, #F2F2F2, #c3c3c3);
+}
+.bty-form-6 fieldset:first-of-type>div{
+    display: flex;
+    margin-bottom: 10px;
+}
+.bty-form-6 fieldset:first-of-type>div label{
+    margin: 0;
+    align-self: center;
+    padding: 0px 15px;
+    border: 2px solid #dcdcdc;
+    line-height: 48px;
+    border-right: 0;
+    background-color: #eeeeee;
+}
+.bty-form-6 fieldset:first-of-type>div input{
+    width: 100%;
+}
+.bty-form-6 .bty-input-select-1 {
+    border: 2px solid rgba(220, 220, 220, 1);
+    width: 100%;
+    background-color: white;
+    border-radius: 0;
+}
+.bty-form-6 .bty-input-select-1 select{
+    background: #eeeeee;
+    color: #555;
+}
+.bty-form-6 .bty-input-select-1:hover::after{
+    color: #333333;
+}
+.bty-form-6 .bty-input-select-1::after{
+    background-color: #eeeeee;
+}
+.bty-form-6 .bty-textarea-1{
+    border-radius: 0;
+    width: 100%;
+}
+.bty-form-6 .bty-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.bty-form-6 .bty-tooltip >span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.bty-form-6 .bty-tooltip >span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.bty-form-6 .bty-tooltip:hover >span {
+    visibility: visible;
+    opacity: 1;
+}
+.bty-form-6 .bty-input-checkbox-2 + label:before, .bty-form-6 .bty-input-radio-1 + label:before{
+    background-color: #eeeeee;
+}
+.bty-form-6 fieldset:nth-of-type(4)>div:nth-of-type(2), .bty-form-6 fieldset:nth-of-type(5)>div:nth-of-type(2){
+    padding-left: 15px;
+    border-bottom: 2px solid #dcdcdc;
+}
+.bty-form-6 fieldset:nth-of-type(4)>div:first-of-type, .bty-form-6 fieldset:nth-of-type(5)>div:first-of-type{
+    border-bottom: 2px solid #dcdcdc;
+    margin-bottom: 10px;
+}
+.bty-form-6 .bty-input-radio-1 + label{
+    display: block;
+}
+.bty-form-6 fieldset:last-of-type>div{
+    display: flex;
+    justify-content: space-between;
+}
+.bty-form-6 .bty-input-file-2:focus + label, .bty-form-6 .bty-input-file-2 + label:hover{
+    background-color: #676767;
+}
+.bty-form-6 .bty-input-file-2 + label{
+    background-color: #8c8c8c;
+}
+.bty-form-6 .bty-btn-save{
+    background-color: #8c8c8c;
+}
+.bty-form-6 .bty-btn-save:active, .bty-form-6 .bty-btn-save:hover {
+    background-color: #676767;
+}
+/*Form-7*/
+.bty-form-7{
+    margin: 0 auto;
+    width: 550px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+
+}
+.bty-form-7 fieldset{
+    margin: 20px;
+    border-left: 2px solid #499bc7;
+    border-bottom: 1px solid #ccc;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+.bty-form-7 > h2 {
+    text-align: center;
+    padding: 15px 0;
+    color: #2b2b2b;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+}
+.bty-form-7 fieldset>div:first-of-type{
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+.bty-form-7 fieldset>div:first-of-type i{
+    color: #333;
+}
+.bty-form-7 fieldset:first-of-type>div label{
+    margin: 0;
+}
+.bty-form-7 fieldset:first-of-type>div input{
+    width: 100%;
+}
+.bty-form-7 .bty-input-select-1 {
+    border: 2px solid rgba(220, 220, 220, 1);
+    width: 100%;
+    background-color: white;
+    border-radius: 0;
+}
+.bty-form-7 .bty-input-select-1 select{
+    background: #eeeeee;
+    color: #555;
+}
+.bty-form-7 .bty-input-select-1:hover::after{
+    color: #333333;
+}
+.bty-form-7 .bty-input-select-1::after{
+    background-color: #eeeeee;
+}
+.bty-form-7 .bty-textarea-1{
+    border-radius: 0;
+    width: 100%;
+}
+.bty-form-7 .bty-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.bty-form-7 .bty-tooltip >span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.bty-form-7 .bty-tooltip >span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.bty-form-7 .bty-tooltip:hover >span {
+    visibility: visible;
+    opacity: 1;
+}
+.bty-form-7 .bty-input-checkbox-2 + label:before, .bty-form-7 .bty-input-radio-1 + label:before{
+    background-color: #eeeeee;
+}
+.bty-form-7 fieldset:nth-of-type(4)>div:nth-of-type(2)>div, .bty-form-7 fieldset:nth-of-type(5)>div:nth-of-type(2)>div{
+    border-top: 1px solid #e2e2e2;
+    padding-top: 5px;
+}
+.bty-form-7 .bty-input-radio-1 + label{
+    display: block;
+}
+.bty-form-7>div{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.bty-form-7 .bty-btn-save{
+    background-color: #8c8c8c;
+}
+.bty-form-7 .bty-btn-save:active, .bty-form-7 .bty-btn-save:hover {
+    background-color: #676767;
+}
+/*Form 8*/
+.bty-form-8{
+    margin: 0 auto;
+    width: 850px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+
+}
+.bty-form-8 fieldset{
+    padding: 20px 35px;
+}
+.bty-form-8 > h2 {
+    text-align: center;
+    padding: 15px 0;
+    color: #555;
+    font-weight: bold;
+    margin: 0;
+    background-color: #EBEDF2;
+}
+.bty-form-8 fieldset>div>div:first-of-type{
+    width: 30%;
+    display: inline-block;
+    align-self: center;
+}
+.bty-form-8 fieldset>div>div:last-of-type{
+    width: 50%;
+    display: inline-block;
+}
+.bty-form-8 fieldset>div>div:first-of-type label{
+    font-size: 16px;
+    color: #222;
+    font-weight: bold !important;
+}
+.bty-form-8 .bty-input-text-6{
+    width: 100%;
+}
+.bty-form-8 fieldset>div{
+    margin-top: 10px;
+    display: flex;
+}
+.bty-form-8 .bty-input-select-1 {
+    border: 2px solid rgba(220, 220, 220, 1);
+    width: 100%;
+    background-color: white;
+    border-radius: 0;
+}
+.bty-form-8 .bty-input-select-1 select{
+    background: #eeeeee;
+    color: #555;
+    padding-left: 13px;
+}
+.bty-form-8 .bty-input-select-1:hover::after{
+    color: #333333;
+}
+.bty-form-8 .bty-input-select-1::after{
+    background-color: #d4d4d4;
+}
+.bty-form-8 fieldset:nth-of-type(2){
+    background-color: #EBEDF2;
+}
+.bty-form-8 .bty-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.bty-form-8 .bty-tooltip >span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.bty-form-8 .bty-tooltip >span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.bty-form-8 .bty-tooltip:hover >span {
+    visibility: visible;
+    opacity: 1;
+}
+.bty-form-8 .bty-tooltip i{
+    font-size: 16px;
+}
+.bty-form-8 .bty-checkbox-yes-no{
+    display: flex;
+}
+.bty-form-8 .bty-checkbox-yes-no>span{
+    align-self: center;
+}
+.bty-form-8 .bty-checkbox-yes-no>span:first-child{
+    padding-right: 8px;
+}
+.bty-form-8 .bty-checkbox-yes-no>span:last-child{
+    padding-left: 8px;
+}
+.bty-form-8 .bty-input-checkbox-3:checked + span{
+    color: #158EC6;
+}
+.bty-form-8 .bty-textarea-1{
+    border-radius: 0;
+}
+.bty-form-8 .bty-btn-save{
+    width: 100%;
+    background-color: #158dc6;
+}
+.bty-form-8 .bty-btn-save:active{
+    background-color: #16a2de;
+}
+.bty-form-8 .bty-btn-save:active:before{
+    color: white;
+}
+
+
+
+
+
 
 
 /*Input*/

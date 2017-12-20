@@ -80,30 +80,26 @@ class UnitsNewController extends Controller
         if (!count($variations)) return redirect()->back();
         return view('uploads::gears-new.units.variations', compact(['variations','unit']));
     }
-
-    // TODO: seems this function is not used with any functionality
     public function postUnitWithType(Request $request)
     {
         $main_type = $request->get('main_type');
         $general_type = $request->get('type', null);
 
         if ($general_type) {
-            $ui_units = Units::all()->where('main_type', $main_type)->where('type', $general_type)->get();
+            $ui_units = Painter::all()->where('main_type', $main_type)->where('type', $general_type)->get();
         } else {
-            $ui_units = Units::all()->where('type', $main_type)->get();
+            $ui_units = Painter::all()->where('type', $main_type)->get();
         }
 
         $html = View::make('resources::units._partials.list_cube', compact(['ui_units']))->render();
 
         return \Response::json(['html' => $html, 'error' => false]);
     }
-
-    // TODO: we have no makeVariation function
     public function postUnitVariations(Request $request, $slug)
     {
         $ui = Painter::find($slug);
         if (!$ui) return redirect()->back();
-        $ui->makeVariation($request->except('_token', 'ui_slug'))->save();
+        $ui->variations()->makeVariation($request->except('_token', 'ui_slug'))->save();
 
         return redirect()->back();
     }
@@ -117,17 +113,14 @@ class UnitsNewController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    // TODO: we have no deleteVariation function
     public function postDeleteVariation(Request $request)
     {
         $result = false;
         if ($request->slug) {
-            $result = Units::deleteVariation($request->slug);
+            $result = Painter::find($request->slug)->variations()->deleteVariation($request->slug);
         }
         return redirect()->back()->with("message", "Variation was deleted");
     }
-
-    // TODO: we have no delete function
     public function postDelete(Request $request)
     {
         $slug = $request->get('slug');
@@ -137,24 +130,28 @@ class UnitsNewController extends Controller
             return \Response::json(['success' => $deleted, 'url' => url('/admin/uploads/gears/units')]);
         }
     }
+    public function createVariationForUnit($slug){
+        $unit = Painter::find($slug);
+        $variation = $unit->variations()->createVariation([]);
 
-    // TODO: we have no renderLivePreview function
+        return redirect()->route('uploads_settings_new',$variation->id);
+    }
     public function getSettings(Request $request)
     {
+
         if ($request->slug) {
             $view = Painter::renderLivePreview($request->slug, 'frontend');
+
             return $view ? $view : abort('404');
         } else {
             abort('404');
         }
     }
-
-    // TODO: we have no findVariation function
     public function unitPreview($id)
     {
         $slug = explode('.', $id);
         $ui = Painter::find($slug[0]);
-        $variation = Painter::findVariation($id);
+        $variation = $ui->variations()->findVariation($id);
         if (!$variation) return redirect()->back();
 
         $ifrem = [];
@@ -167,22 +164,23 @@ class UnitsNewController extends Controller
 
     }
 
-    // TODO: we have no renderSettings and renderLive functions
     public function unitPreviewIframe($id, $type = null)
     {
         $slug = explode('.', $id);
         $ui = Painter::find($slug[0]);
-        $_this = $ui;
-        $variation = Painter::findVariation($id);
-//        if (!$variation) return redirect()->back();
-        $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
+        $variation = $ui->variations()->find($id);
+        $settings = [];
         $extra_data = 'some string';
+        if(count($variation->settings) > 0){
+            $settings = $variation->settings;
+        }
         if ($ui->main_type == 'data_source') {
             $extra_data = BBGiveMe('array', 3);
         }
         $htmlBody = $ui->renderLive(['settings' => $settings, 'source' => $extra_data, 'cheked' => 1, 'field' => null]);
         $htmlSettings = $ui->renderSettings(compact('settings'));
         $settings_json = json_encode($settings, true);
+
         return view('uploads::gears-new.units._partials.unit_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
 
@@ -236,6 +234,42 @@ class UnitsNewController extends Controller
         }
 
         return redirect()->back();
+    }
+
+
+
+    public function MakeVar(){
+
+        $x = [
+          "title"=> "Amazing Header",
+          "author" => "Sahak",
+          "site" => "http:\/\/bootydev.co.uk",
+          "version" => "1.0",
+          "type" => "unit",
+          "description" => "Super header unit",
+          "have_setting" => 1,
+          "image" => "screenshot.png",
+          "slug" => "77777777",
+          "folder" => "amazing_header_77777777",
+          "created_at" => 1490088665,
+          "is_core" => 1,
+          "place" => "frontend",
+          "tags" => ["frontend_header","frontend"],
+          "path" => "resources\/units\/amazing_header_77777777"
+        ];
+
+
+      //  $variation = Painter::find('77777777b')->variations()->find('77777777b.55555551');
+       // $variation = Painter::find('77777777b')->variations()->makeVariation(["title"=> "Amazing Header"])->save();
+        //$variation = Painter::find('77777777b')->variations()->createVariation();
+       // $variation = Painter::find('77777777b')->variations()->deleteVariation('77777777b.5a38d302bd40b');
+
+        /* $x = new Painter();
+           $variation = $x->findByVariation('77777777b.55555551');*/
+
+        $x = Painter::find('77777777b')->renderLive(['77777777b.55555551']);
+        dd($x);
+
     }
 }
 

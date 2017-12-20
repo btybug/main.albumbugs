@@ -289,13 +289,6 @@
         var htmlsdata = {default: '', custom: '', field: ''}
 
         $(document).ready(function () {
-            $('body').on('change','select[name=type]',function () {
-                if($(this).find(":selected").val() =='special'){
-                    $('#input-options').show();
-                }else {
-                    $('#input-options').hide();
-                }
-            });
             $("body").on("change",".select-type", function () {
                 var type = $(this).val();
                 var id = "{!! $field->id !!}";

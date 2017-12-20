@@ -186,7 +186,7 @@
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">Tooltip Icon</label>
                             <div class="col-sm-8">
-                                {!! BBbutton('icons','tooltip','Select tooltip icon',['class'=>'form-control input-md','data-type'=>'icon']) !!}
+                                {!!Form::text('tooltip_icon','{icon}',['class' => 'form-control icp','readonly'])  !!}
 
                             </div>
                         </div>

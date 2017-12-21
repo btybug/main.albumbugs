@@ -13,4 +13,4 @@ vendor/sahak.avatar
 vendor/sebastian
 vendor/symfony
 vendor/webmozart
-vendor/btybug.hook
+vendor/*

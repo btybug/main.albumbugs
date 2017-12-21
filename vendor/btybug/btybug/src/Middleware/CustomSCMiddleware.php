@@ -31,7 +31,7 @@ class CustomSCMiddleware
         '/admin/console/structure/forms/get-available-fields',
         '/admin/console/structure/forms',
         '/admin/console/structure/edit-forms',
-        '/admin/manage/frontend/pages/settings/*',
+        '/admin/front-site/structure/front-pages/settings/*',
         '/admin/manage/emails/get-forms-shortcodes',
         '/admin/manage/emails/data/*',
         '/admin/manage/emails/update/*'

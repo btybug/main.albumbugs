@@ -1837,7 +1837,7 @@ function get_field_data(int $id){
                 break;
         }
     }
-    dd($id);
+    return null;
 }
 
 //TODO: make this for plugins

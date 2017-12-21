@@ -44,7 +44,7 @@ Route::get('register', '\App\Modules\Users\Http\Controllers\Auth\AuthController@
 Route::post('register', '\App\Modules\Users\Http\Controllers\Auth\AuthController@postRegister')->middleware('guest');
 Route::get('activate/{username}/{token}', '\App\Modules\Users\Http\Controllers\Auth\AuthController@activate')->middleware('guest');
 Route::group(
-    ['domain' => env('DOMAIN')],
+    ['domain' => env('DOMAIN'),'middleware' => 'form'],
     function () {
 
         Route::get('form-test', function () {

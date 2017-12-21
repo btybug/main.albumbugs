@@ -44,7 +44,6 @@ class Kernel extends HttpKernel
             FormSettingsMiddleware::class
 //            ViewTestMiddleware::class
         ],
-
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -71,5 +70,6 @@ class Kernel extends HttpKernel
         'system' =>\Btybug\btybug\Middleware\SystemSettings::class,
         'frontPermissions'=> \Btybug\btybug\Middleware\FrontendPermissions::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'form' =>   FormSettingsMiddleware::class
     ];
 }

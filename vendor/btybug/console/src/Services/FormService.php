@@ -24,15 +24,17 @@ class FormService extends GeneralService
     const GET_AUTO = 3;
     public static $form_path = 'resources' . DS . 'views' . DS . 'forms' . DS;
     public static $form_file_ext = '.blade.php';
-    public $slug, $conf, $formData, $fields, $form_type, $id, $collected, $fields_type, $required_fields, $formObject;
-    private $form, $formFields, $fieldValidation, $fieldRepo, $entries;
+    public $slug, $conf, $fields, $form_type, $id, $collected, $fields_type, $required_fields, $formObject;
+    private $form, $formFields, $fieldValidation, $fieldRepo, $entries,$fieldService;
+    public $formData = [];
 
     public function __construct(
         FormsRepository $formsRepository,
         FormFieldsRepository $formFieldsRepository,
         FieldValidationService $fieldValidationService,
         FieldsRepository $fieldsRepository,
-        FormEntriesRepository $entriesRepository
+        FormEntriesRepository $entriesRepository,
+        FieldService $fieldService
     )
     {
         $this->form = $formsRepository;
@@ -40,6 +42,7 @@ class FormService extends GeneralService
         $this->fieldValidation = $fieldValidationService;
         $this->fieldRepo = $fieldsRepository;
         $this->entries = $entriesRepository;
+        $this->fieldService = $fieldService;
     }
 
     public static function checkFields($json)
@@ -456,5 +459,39 @@ class FormService extends GeneralService
             $this->generateBlade($form->id, $data['fields_html']);
             $this->syncFields($form->id, $data['fields']);
         }
+    }
+
+    public function fieldsJson($id, $json = false)
+    {
+        $this->formObject = $this->form->find($id);
+        if($this->formObject) {
+            $fields = $this->getExistingFields();
+            if(count($fields)){
+                foreach ($fields as $field){
+                    $existing = [];
+                    $existing['object'] = $field;
+                    $existing['html'] = $this->fieldService->returnHtml($field);
+                    $existing['field_data'] = get_field_data($field->id);
+
+                    $this->formData[] = $existing;
+                }
+            }
+        }
+
+        return ($json) ? json_encode($this->formData,true) : $this->formData;
+    }
+
+    public function getExistingFields()
+    {
+        $form_fields = $this->formObject->form_fields;
+        $fields = [];
+        if(count($form_fields)){
+            foreach ($form_fields as $ff){
+                $field = $this->fieldRepo->findby('slug',$ff->field_slug);
+                if($field) $fields[] = $field;
+            }
+        }
+
+        return collect($fields);
     }
 }

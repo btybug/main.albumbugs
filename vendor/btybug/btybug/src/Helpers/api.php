@@ -1515,7 +1515,7 @@ function get_settings($settings, $setting, $default = '')
 function form_render($attr)
 {
     $formRepo = new \Btybug\Console\Repository\FormsRepository();
-    $form = $formRepo->findByIdOrSlug($attr);
+    $form = $formRepo->findByIdOrSlug(issetReturn($attr, 'id',issetReturn($attr, 'slug',null)));
 
     if ($form) {
         return \Btybug\Console\Services\FormService::renderFormBlade($form);

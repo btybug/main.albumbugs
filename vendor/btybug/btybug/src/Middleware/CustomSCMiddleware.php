@@ -56,6 +56,7 @@ class CustomSCMiddleware
         endif;
         $content = $response->getContent();
         //replace loop
+        $content = $this->CoreShortcdeHandler($content);
         $content = $this->htmlContentHandler($content);
         $response->setContent($content);
         return $response;
@@ -110,6 +111,19 @@ class CustomSCMiddleware
         return $content;
     }
 
+    public function CoreShortcdeHandler($content)
+    {
+        $this->conf = \config::get('shortcode.code', []);
+        foreach ($this->conf as $fn) {
+            $content = $this->sortCoder($fn,$fn, $content);
+            $posCode = "[$fn";
+            if (strpos($content, $posCode)) {
+                $content = $this->CoreShortcdeHandler($content);
+            }
+        }
+        return $content;
+    }
+
     /**
      * @param $fn
      * @param $content
@@ -141,7 +155,13 @@ class CustomSCMiddleware
             if (isset($arg[0]) && isset($arg[1]))
                 $final_arg[$arg[0]] = $arg[1];
         }
-        $code = $fn($final_arg);
+
+        if(! function_exists($fn)) {
+            $code = null;
+        }else{
+            $code = $fn($final_arg);
+        }
+
         $newContent = str_replace('[' . $endLen . ']', $code, $content);
         return $newContent;
     }

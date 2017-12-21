@@ -11,11 +11,11 @@ class HomeShortcodeMiddleware
      */
     public $conf = [];
     protected $except = [
-        '/admin/create/get-sortcodes',
-        '/admin/create/test',
-        '/admin/uploads/gears/component',
-        '/admin',
-        '/admin/manage/emails/update/1'
+//        '/admin/create/get-sortcodes',
+//        '/admin/create/test',
+//        '/admin/uploads/gears/component',
+//        '/admin',
+//        '/admin/manage/emails/update/1'
     ];
 
     /**
@@ -27,7 +27,6 @@ class HomeShortcodeMiddleware
      */
     public function handle($request, Closure $next)
     {
-
         $response = $next($request);
         $links = explode('/', $request->getRequestUri());
         unset($links[0]);
@@ -64,6 +63,7 @@ class HomeShortcodeMiddleware
     protected function searcer($content)
     {
         $this->conf = \config::get('shortcode.code', []);
+        dd($this);
         foreach ($this->conf as $fn) {
             $content = $this->sortCoder($fn, $content);
             $posCode = "[$fn";

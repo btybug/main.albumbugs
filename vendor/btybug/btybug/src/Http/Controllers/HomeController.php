@@ -68,7 +68,7 @@ class HomeController extends Controller
         foreach ($contentArray as $style) {
             $content .= "\r\n" . $style;
         }
-//        session()->forget('custom.styles');
+        session()->forget('custom.styles');
         $response = \Response::make($content);
         $response->header('Content-Type', 'text/css');
 

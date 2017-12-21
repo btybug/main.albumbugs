@@ -7706,8 +7706,8 @@ VAHAG
     color: white;
 }
 
-/*Form 4*/
 
+/*Form 4*/
 .bty-form-4 {
     box-shadow: inset 0 0 9px 0 #2d2d2da6;
     margin: 10px auto;
@@ -7730,27 +7730,27 @@ VAHAG
     color: white;
 }
 
-.bty-form-4 .bty-input-label-5 {
+.bty-form-4 .bty-form-text .bty-input-label-5 {
     width: 100%;
 }
 
-.bty-form-4 fieldset:first-of-type > div {
+.bty-form-4 .bty-form-text > div {
     position: relative;
 }
-.bty-form-4 fieldset:first-of-type > div input{
+.bty-form-4 .bty-form-text > div input{
     width: 100%;
 }
-.bty-form-4 fieldset:first-of-type > div input+label:after{
+.bty-form-4 .bty-form-text > div input+label:after{
     background: #499bc7;
 }
-.bty-form-4 fieldset:first-of-type > div input+label:before{
+.bty-form-4 .bty-form-text > div input+label:before{
     background: #0c405d;
 }
-.bty-form-4 fieldset:nth-of-type(2)>div{
+.bty-form-4 .bty-form-radio>div{
     display: flex;
     justify-content: space-evenly;
 }
-.bty-form-4 fieldset:nth-of-type(5)>div{
+.bty-form-4 .bty-form-checkbox >div{
     display: flex;
     justify-content: space-around;
 }
@@ -7761,17 +7761,16 @@ VAHAG
     display: flex;
     margin: 0 auto;
 }
-.bty-form-4 fieldset:nth-of-type(2) label, .bty-form-4 fieldset:nth-of-type(5) label{
+.bty-form-4 .bty-form-radio label, .bty-form-4 .bty-form-checkbox label{
     font-size: 14px;
     color: white;
 }
 .bty-form-4 fieldset:hover{
     background-color: #0c405d;
 }
-.bty-form-4 fieldset:nth-of-type(4) .bty-input-file-2 + label {
-    width: 100%;
+.bty-form-4 .bty-form-upload>div{
+    text-align: center;
 }
-
 .bty-form-4 legend {
     display: inline-block;
     width: auto;
@@ -7787,11 +7786,11 @@ VAHAG
     margin-right: 4px;
 }
 
-.bty-form-4 .bty-input-select-4 .select {
+.bty-form-4 .bty-form-select .bty-input-select-4 .select {
     width: 100%;
 }
 
-.bty-form-4 .bty-input-select-4 .select-styled {
+.bty-form-4 .bty-form-select .bty-input-select-4 .select-styled {
     background-color: #499bc7;
 }
 
@@ -7808,7 +7807,6 @@ VAHAG
     color: white;
 }
 /*Form 5*/
-
 .bty-form-5 {
     box-shadow: inset 0 0 9px 0 #2d2d2da6;
     margin: 10px auto;
@@ -7830,26 +7828,26 @@ VAHAG
     font-weight: bold;
     border-bottom: 2px solid #9a9a9a;
 }
-.bty-form-5 fieldset:first-of-type .bty-input-label-5{
+.bty-form-5 .bty-form-text .bty-input-label-5{
     width: 100%;
     border: 1px solid;
 }
-.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1{
+.bty-form-5 .bty-form-select .bty-input-select-1{
     width: 100%;
 }
-.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1 select{
+.bty-form-5 .bty-form-select .bty-input-select-1 select{
     color: #666;
     border: 1px solid #499bc7 !important;
     background: #efeff0;
     border-radius: 3px;
 }
-.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1:after{
+.bty-form-5 .bty-form-select .bty-input-select-1:after{
     background: none;
 }
-.bty-form-5 fieldset:nth-of-type(2) .bty-input-select-1:hover:after{
+.bty-form-5 .bty-form-select .bty-input-select-1:hover:after{
     color: #499bc7;
 }
-.bty-form-5 .bty-textarea-1{
+.bty-form-5 .bty-form-textarea .bty-textarea-1{
     border: 1px solid #499bc7;
     width: 100%;
     border-radius: 4px;
@@ -7867,14 +7865,15 @@ VAHAG
 .bty-form-5 .bty-btn-save:active:before{
     color: white;
 }
-.bty-form-5 fieldset:first-of-type>div{
+.bty-form-5 .bty-form-text>div{
     position: relative;
+    margin-bottom: 10px;
 }
-.bty-form-5 fieldset:first-of-type>div .bty-input-label-5 + label{
+.bty-form-5 .bty-form-text>div .bty-input-label-5 + label{
     position: absolute;
     top: 0;
 }
-.bty-form-5 fieldset:nth-of-type(4)>div, .bty-form-5 fieldset:nth-of-type(5)>div{
+.bty-form-5 .bty-form-checkbox>div, .bty-form-5 .bty-form-radio>div{
     border: 1px solid #499bc7;
     border-radius: 4px;
     display: flex;
@@ -7882,14 +7881,14 @@ VAHAG
     padding: 20px 0;
     background-color: #eeeeee;
 }
-.bty-form-5 fieldset:nth-of-type(4)>div>div:nth-of-type(1),.bty-form-5 fieldset:nth-of-type(5)>div>div:nth-of-type(1){
+.bty-form-5 .bty-form-checkbox>div>div:nth-of-type(1),.bty-form-5 .bty-form-radio>div>div:nth-of-type(1){
     flex: 0.2;
     align-self: baseline;
     background-color: #499bc7;
     text-align: center;
     color: white;
 }
-.bty-form-5 fieldset:nth-of-type(4)>div>div:nth-of-type(2), .bty-form-5 fieldset:nth-of-type(5)>div>div:nth-of-type(2){
+.bty-form-5 .bty-form-checkbox>div>div:nth-of-type(2), .bty-form-5 .bty-form-radio>div>div:nth-of-type(2){
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -7897,13 +7896,13 @@ VAHAG
     border: 1px solid #499bc7;
     background-color: #499bc71f;
 }
-.bty-form-5 .bty-input-checkbox-2 + label{
+.bty-form-5 .bty-form-checkbox .bty-input-checkbox-2 + label{
     color: #666;
 }
-.bty-form-5 .bty-input-checkbox-2 + label:before, .bty-form-5 .bty-input-radio-1 + label:before{
+.bty-form-5 .bty-form-checkbox .bty-input-checkbox-2 + label:before, .bty-form-5 .bty-form-radio .bty-input-radio-1 + label:before{
     border: 1px solid #499bc7
 }
-.bty-form-5 fieldset .bty-input-file-2 + label{
+.bty-form-5 .bty-form-upload .bty-input-file-2 + label{
     width: 100%;
     text-align: center;
     background-color: #eeeeee;
@@ -7911,7 +7910,7 @@ VAHAG
     border: 1px solid #499bc7;
     border-radius: 4px;
 }
-.bty-form-5 .bty-tooltip {
+.bty-form-5 .bty-form-checkbox>div>div:nth-of-type(3), .bty-form-5 .bty-form-radio>div>div:nth-of-type(3){
     position: relative;
     width: 20px;
     padding: 0 6px;
@@ -7921,7 +7920,7 @@ VAHAG
     color: white;
 }
 
-.bty-form-5 .bty-tooltip >span {
+.bty-form-5 .bty-form-checkbox>div>div:nth-of-type(3) >span, .bty-form-5 .bty-form-radio>div>div:nth-of-type(3) >span {
     visibility: hidden;
     width: 120px;
     background-color: #555;
@@ -7938,7 +7937,7 @@ VAHAG
     transition: opacity 1s;
 }
 
-.bty-form-5 .bty-tooltip >span::after {
+.bty-form-5 .bty-form-checkbox>div>div:nth-of-type(3) >span::after, .bty-form-5 .bty-form-radio>div>div:nth-of-type(3) >span::after{
     content: "";
     position: absolute;
     top: 100%;
@@ -7949,9 +7948,297 @@ VAHAG
     border-color: #555 transparent transparent transparent;
 }
 
-.bty-form-5 .bty-tooltip:hover >span {
+.bty-form-5 .bty-form-checkbox>div>div:nth-of-type(3):hover >span, .bty-form-5 .bty-form-radio>div>div:nth-of-type(3):hover >span {
     visibility: visible;
     opacity: 1;
+}
+/*bty-form5-checkbox-1*/
+.bty-form-5 .bty-form5-checkbox-1>div, .bty-form-5 .bty-form5-radio-1>div{
+    position: relative;
+    border: 1px solid #499bc7;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #eeeeee;
+}
+.bty-form-5 .bty-form5-checkbox-1>div>div:nth-of-type(3), .bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(3){
+    position: absolute;
+    top: 15px;
+    left: 18%;
+}
+.bty-form-5 .bty-form5-checkbox-1>div>div:nth-of-type(2), .bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(2){
+    padding-left: 15px;
+    display: inline-block;
+}
+.bty-form-5 .bty-form5-checkbox-1 .bty-input-checkbox-2 + label:before, .bty-form-5 .bty-form5-radio-1 .bty-input-radio-1 + label:before{
+    border: 1px solid #499bc7;
+}
+.bty-form-5 .bty-form5-checkbox-1>div>div:nth-of-type(3) >span, .bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(3) >span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #499bc7;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.bty-form-5 .bty-form5-checkbox-1>div>div:nth-of-type(3) >span::after, .bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(3) >span::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #499bc7 transparent transparent transparent;
+}
+
+.bty-form-5 .bty-form5-checkbox-1>div>div:nth-of-type(3):hover >span, .bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(3):hover >span {
+    visibility: visible;
+    opacity: 1;
+}
+.bty-form-5 .bty-form5-checkbox-1>div>div:nth-of-type(1), .bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(1){
+    border-bottom: 1px solid #499bc7;
+    margin-bottom: 8px;
+}
+.bty-form-5 .bty-form5-radio-1>div>div:nth-of-type(2) .bty-input-radio-1 + label{
+    display: block;
+}
+/*Form 5 Color*/
+/*bty-form5-cl-blue*/
+.bty-form5-cl-blue{
+    background-color: #499bc76e;
+    box-shadow: inset 0 0 9px 0 #499bc7;
+}
+.bty-form5-cl-blue > h2{
+    background-color: #499bc7;
+    color: white;
+    border-bottom: 2px solid #236f98;
+    text-shadow: 2px 1px 3px #000;
+}
+.bty-form5-cl-blue .bty-input-label-5:focus + label,
+.bty-form5-cl-blue .bty-input-label-5:active + label{
+    background: #246f98;
+}
+.bty-form5-cl-blue .bty-input-label-5:focus + label:after,
+.bty-form5-cl-blue .bty-input-label-5:active + label:after{
+    border-top: 4px solid #246f98;
+}
+.bty-form5-cl-blue .bty-input-label-5{
+    color: #246f98;
+    background: #a1c3d6;
+}
+.bty-form5-cl-blue .bty-input-label-5::-webkit-input-placeholder{
+    color: #444;
+}
+.bty-form5-cl-blue .bty-form-select .bty-input-select-1 select{
+    color: #444;
+    border: 1px solid #246f98 !important;
+    background: #a1c3d6;
+}
+.bty-form5-cl-blue .bty-form-select select:focus {
+    background-color: white;
+}
+.bty-form5-cl-blue .bty-form-textarea .bty-textarea-1{
+    border: 1px solid #246f98;
+    background: none repeat scroll 0 0 rgb(161, 195, 214);
+}
+.bty-form5-cl-blue .bty-form-textarea .bty-textarea-1::-webkit-input-placeholder {
+    color: #444;
+}
+.bty-form5-cl-blue .bty-form-textarea .bty-textarea-1:focus{
+    background: none repeat scroll 0 0 white;
+}
+.bty-form5-cl-blue .bty-form-checkbox>div,
+.bty-form5-cl-blue .bty-form-radio>div{
+    border: 1px solid #246f98;
+    background-color: #a1c3d6;
+}
+.bty-form5-cl-blue .bty-form-checkbox>div>div:nth-of-type(2),
+.bty-form5-cl-blue .bty-form-radio>div>div:nth-of-type(2){
+    border: 1px solid #246f98;
+}
+.bty-form5-cl-blue .bty-form-checkbox .bty-input-checkbox-2 + label,
+.bty-form5-cl-blue .bty-form-radio .bty-input-radio-1 + label,
+.bty-form5-cl-blue .bty-form5-checkbox-1 .bty-input-checkbox-2 + label,
+.bty-form5-cl-blue .bty-form5-radio-1 .bty-input-radio-1 + label{
+    color: #444;
+}
+.bty-form5-cl-blue .bty-form-checkbox .bty-input-checkbox-2 + label:before,
+.bty-form5-cl-blue .bty-form-radio .bty-input-radio-1 + label:before{
+    border: 1px solid #246f98;
+}
+.bty-form5-cl-blue .bty-form-checkbox>div>div:nth-of-type(1),
+.bty-form5-cl-blue .bty-form-radio>div>div:nth-of-type(1),
+.bty-form5-cl-blue .bty-form-checkbox>div>div:nth-of-type(3),
+.bty-form5-cl-blue .bty-form-radio>div>div:nth-of-type(3),
+.bty-form5-cl-blue .bty-form-checkbox>div>div:nth-of-type(3):hover >span,
+.bty-form5-cl-blue .bty-form-radio>div>div:nth-of-type(3):hover >span{
+    background-color: #246f98;
+}
+.bty-form5-cl-blue .bty-form-checkbox>div>div:nth-of-type(3) >span::after,
+.bty-form5-cl-blue .bty-form-radio>div>div:nth-of-type(3) >span::after,
+.bty-form5-cl-blue .bty-form5-checkbox-1>div>div:nth-of-type(3) >span::after,
+.bty-form5-cl-blue .bty-form5-radio-1>div>div:nth-of-type(3) >span::after{
+    border-color: #246f98 transparent transparent transparent;
+}
+.bty-form5-cl-blue .bty-form-upload .bty-input-file-2 + label{
+    border: 1px solid #246f98;
+    color: #444;
+    background: #a1c3d6;
+    transition: 0.5s ease;
+}
+.bty-form5-cl-blue .bty-form-upload .bty-input-file-2:hover + label{
+    background-color: white;
+}
+.bty-form5-cl-blue .bty-form5-checkbox-1>div,
+.bty-form5-cl-blue .bty-form5-radio-1>div{
+    border: 1px solid #246f98;
+    background-color: #a1c3d6;
+}
+.bty-form5-cl-blue .bty-form5-checkbox-1>div>div:nth-of-type(1),
+.bty-form5-cl-blue .bty-form5-radio-1>div>div:nth-of-type(1){
+    border-bottom: 1px solid #246f98;
+}
+.bty-form5-cl-blue .bty-form5-checkbox-1 .bty-input-checkbox-2 + label:before,
+.bty-form5-cl-blue .bty-form5-radio-1 .bty-input-radio-1 + label:before{
+    border: 1px solid #246f98;
+}
+.bty-form5-cl-blue .bty-form5-checkbox-1>div>div:nth-of-type(3) >span,
+.bty-form5-cl-blue .bty-form5-radio-1>div>div:nth-of-type(3) >span{
+    background-color: #246f98;
+}
+
+/*bty-form5-cl-black*/
+.bty-form5-cl-black{
+    background-color: #292929c7;
+    box-shadow: inset 0 0 9px 0 #ffffff;
+}
+.bty-form5-cl-black > h2{
+    background-color: #212121e0;
+    color: white;
+    border-bottom: 2px solid #ffffff;
+}
+.bty-form5-cl-black .bty-input-label-5:focus + label,
+.bty-form5-cl-black .bty-input-label-5:active + label{
+    background: #fff;
+    color: #444;
+}
+.bty-form5-cl-black .bty-input-label-5:focus + label:after,
+.bty-form5-cl-black .bty-input-label-5:active + label:after{
+    border-top: 4px solid #fff;
+}
+.bty-form5-cl-black .bty-input-label-5{
+    color: #ffffff;
+    background: #272727;
+}
+.bty-form5-cl-black .bty-input-label-5::-webkit-input-placeholder{
+    color: white;
+}
+.bty-form5-cl-black .bty-form-select .bty-input-select-1 select{
+    color: #fff;
+    border: 1px solid #fff !important;
+    background: #272727;
+}
+.bty-form5-cl-black .bty-form-select select:focus {
+    background-color: white;
+    color: #444;
+}
+.bty-form5-cl-black .bty-form-textarea .bty-textarea-1{
+    border: 1px solid #fff;
+    background: none repeat scroll 0 0 rgb(39, 39, 39);
+}
+.bty-form5-cl-black .bty-form-textarea .bty-textarea-1::-webkit-input-placeholder {
+    color: #fff;
+}
+.bty-form5-cl-black .bty-form-textarea .bty-textarea-1:focus{
+    background: none repeat scroll 0 0 white;
+}
+.bty-form5-cl-black .bty-form-checkbox>div,
+.bty-form5-cl-black .bty-form-radio>div{
+    border: 1px solid #fff;
+    background-color: #272727;
+}
+.bty-form5-cl-black .bty-form-checkbox>div>div:nth-of-type(2),
+.bty-form5-cl-black .bty-form-radio>div>div:nth-of-type(2){
+    border: 1px solid #fff;
+}
+.bty-form5-cl-black .bty-form-checkbox .bty-input-checkbox-2 + label,
+.bty-form5-cl-black .bty-form-radio .bty-input-radio-1 + label,
+.bty-form5-cl-black .bty-form5-checkbox-1 .bty-input-checkbox-2 + label,
+.bty-form5-cl-black .bty-form5-radio-1 .bty-input-radio-1 + label{
+    color: #fff;
+}
+.bty-form5-cl-black .bty-form-checkbox .bty-input-checkbox-2 + label:before,
+.bty-form5-cl-black .bty-form-radio .bty-input-radio-1 + label:before{
+    border: 1px solid #fff;
+}
+.bty-form5-cl-black .bty-form-checkbox>div>div:nth-of-type(1),
+.bty-form5-cl-black .bty-form-radio>div>div:nth-of-type(1),
+.bty-form5-cl-black .bty-form-checkbox>div>div:nth-of-type(3),
+.bty-form5-cl-black .bty-form-radio>div>div:nth-of-type(3),
+.bty-form5-cl-black .bty-form-checkbox>div>div:nth-of-type(3):hover >span,
+.bty-form5-cl-black .bty-form-radio>div>div:nth-of-type(3):hover >span{
+    background-color: #ffffff;
+    color: #444;
+}
+.bty-form5-cl-black .bty-form-checkbox>div>div:nth-of-type(3) >span::after,
+.bty-form5-cl-black .bty-form-radio>div>div:nth-of-type(3) >span::after,
+.bty-form5-cl-black .bty-form5-checkbox-1>div>div:nth-of-type(3) >span::after,
+.bty-form5-cl-black .bty-form5-radio-1>div>div:nth-of-type(3) >span::after{
+    border-color: #fff transparent transparent transparent;
+}
+.bty-form5-cl-black .bty-form-upload .bty-input-file-2 + label{
+    border: 1px solid #fff;
+    color: #fff;
+    background: #272727;
+    transition: 0.5s ease;
+}
+.bty-form5-cl-black .bty-form-upload .bty-input-file-2:hover + label{
+    background-color: white;
+    color: #444;
+}
+.bty-form5-cl-black .bty-form5-checkbox-1>div,
+.bty-form5-cl-black .bty-form5-radio-1>div{
+    border: 1px solid #fff;
+    background-color: #272727;
+}
+.bty-form5-cl-black .bty-form5-checkbox-1>div>div:nth-of-type(1),
+.bty-form5-cl-black .bty-form5-radio-1>div>div:nth-of-type(1){
+    border-bottom: 1px solid #fff;
+    color: white;
+}
+.bty-form5-cl-black .bty-form5-checkbox-1 .bty-input-checkbox-2 + label:before,
+.bty-form5-cl-black .bty-form5-radio-1 .bty-input-radio-1 + label:before{
+    border: 1px solid #fff;
+}
+.bty-form5-cl-black .bty-form5-checkbox-1>div>div:nth-of-type(3) >span,
+.bty-form5-cl-black .bty-form5-radio-1>div>div:nth-of-type(3) >span{
+    background-color: #fff;
+}
+.bty-form5-cl-black .bty-form-select .bty-input-select-1:after, .bty-form5-cl-black .bty-form-select .bty-input-select-1:hover:after{
+    color: white;
+}
+.bty-form5-cl-black .bty-form5-checkbox-1>div>div:nth-of-type(3):hover >span, .bty-form5-cl-black .bty-form5-radio-1>div>div:nth-of-type(3):hover >span{
+    color: #444;
+}
+.bty-form5-cl-black .bty-form5-checkbox-1>div>div:nth-of-type(3), .bty-form5-cl-black .bty-form5-radio-1>div>div:nth-of-type(3){
+    color: white;
+}
+.bty-form5-cl-black .bty-btn-save{
+    background-color: #272727;
+}
+.bty-form5-cl-black .bty-input-checkbox-2:checked + label:before, .bty-form5-cl-black .bty-input-radio-1:checked + label:before{
+    -moz-box-shadow: inset 0 0 0 10px #272727;
+    -webkit-box-shadow: inset 0 0 0 10px #272727;
+    box-shadow: inset 0 0 0 10px #272727;
 }
 /*Form-6*/
 .bty-form-6{
@@ -7977,11 +8264,11 @@ VAHAG
     background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
     background: linear-gradient(to right, #c6c6c6, #DBDBDB, #F2F2F2, #c3c3c3);
 }
-.bty-form-6 fieldset:first-of-type>div{
+.bty-form-6 fieldset.bty-form-text>div{
     display: flex;
     margin-bottom: 10px;
 }
-.bty-form-6 fieldset:first-of-type>div label{
+.bty-form-6 fieldset.bty-form-text>div label{
     margin: 0;
     align-self: center;
     padding: 0px 15px;
@@ -7990,35 +8277,35 @@ VAHAG
     border-right: 0;
     background-color: #eeeeee;
 }
-.bty-form-6 fieldset:first-of-type>div input{
+.bty-form-6 fieldset.bty-form-text>div input{
     width: 100%;
 }
-.bty-form-6 .bty-input-select-1 {
+.bty-form-6 .bty-form-select .bty-input-select-1 {
     border: 2px solid rgba(220, 220, 220, 1);
     width: 100%;
     background-color: white;
     border-radius: 0;
 }
-.bty-form-6 .bty-input-select-1 select{
+.bty-form-6 .bty-form-select .bty-input-select-1 select{
     background: #eeeeee;
     color: #555;
 }
-.bty-form-6 .bty-input-select-1:hover::after{
+.bty-form-6 .bty-form-select .bty-input-select-1:hover::after{
     color: #333333;
 }
-.bty-form-6 .bty-input-select-1::after{
+.bty-form-6 .bty-form-select .bty-input-select-1::after{
     background-color: #eeeeee;
 }
-.bty-form-6 .bty-textarea-1{
+.bty-form-6 .bty-form-textarea .bty-textarea-1{
     border-radius: 0;
     width: 100%;
 }
-.bty-form-6 .bty-tooltip {
+.bty-form-6 .bty-form-checkbox>div:first-of-type>div, .bty-form-6 .bty-form-radio>div:first-of-type>div {
     position: relative;
     display: inline-block;
 }
 
-.bty-form-6 .bty-tooltip >span {
+.bty-form-6 .bty-form-checkbox>div:first-of-type>div >span, .bty-form-6 .bty-form-radio>div:first-of-type>div >span{
     visibility: hidden;
     width: 120px;
     background-color: #555;
@@ -8035,7 +8322,7 @@ VAHAG
     transition: opacity 1s;
 }
 
-.bty-form-6 .bty-tooltip >span::after {
+.bty-form-6 .bty-form-checkbox>div:first-of-type>div >span::after, .bty-form-6 .bty-form-radio>div:first-of-type>div >span::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -8046,38 +8333,38 @@ VAHAG
     border-color: #555 transparent transparent transparent;
 }
 
-.bty-form-6 .bty-tooltip:hover >span {
+.bty-form-6 .bty-form-checkbox>div:first-of-type>div:hover >span, .bty-form-6 .bty-form-radio>div:first-of-type>div:hover >span {
     visibility: visible;
     opacity: 1;
 }
-.bty-form-6 .bty-input-checkbox-2 + label:before, .bty-form-6 .bty-input-radio-1 + label:before{
+.bty-form-6 .bty-form-checkbox .bty-input-checkbox-2 + label:before, .bty-form-6 .bty-form-radio .bty-input-radio-1 + label:before{
     background-color: #eeeeee;
 }
-.bty-form-6 fieldset:nth-of-type(4)>div:nth-of-type(2), .bty-form-6 fieldset:nth-of-type(5)>div:nth-of-type(2){
+.bty-form-6 .bty-form-checkbox>div:nth-of-type(2), .bty-form-6 .bty-form-radio>div:nth-of-type(2){
     padding-left: 15px;
     border-bottom: 2px solid #dcdcdc;
 }
-.bty-form-6 fieldset:nth-of-type(4)>div:first-of-type, .bty-form-6 fieldset:nth-of-type(5)>div:first-of-type{
+.bty-form-6 .bty-form-checkbox>div:first-of-type, .bty-form-6 .bty-form-radio>div:first-of-type{
     border-bottom: 2px solid #dcdcdc;
     margin-bottom: 10px;
 }
-.bty-form-6 .bty-input-radio-1 + label{
+.bty-form-6 .bty-form-radio .bty-input-radio-1 + label{
     display: block;
 }
-.bty-form-6 fieldset:last-of-type>div{
+.bty-form-6 .bty-form-upload-button>div{
     display: flex;
     justify-content: space-between;
 }
-.bty-form-6 .bty-input-file-2:focus + label, .bty-form-6 .bty-input-file-2 + label:hover{
+.bty-form-6 .bty-form-upload-button .bty-input-file-2:focus + label, .bty-form-6 .bty-form-upload-button .bty-input-file-2 + label:hover{
     background-color: #676767;
 }
-.bty-form-6 .bty-input-file-2 + label{
+.bty-form-6 .bty-form-upload-button .bty-input-file-2 + label{
     background-color: #8c8c8c;
 }
-.bty-form-6 .bty-btn-save{
+.bty-form-6 .bty-form-upload-button .bty-btn-save{
     background-color: #8c8c8c;
 }
-.bty-form-6 .bty-btn-save:active, .bty-form-6 .bty-btn-save:hover {
+.bty-form-6 .bty-form-upload-button .bty-btn-save:active, .bty-form-6 .bty-form-upload-button .bty-btn-save:hover {
     background-color: #676767;
 }
 /*Form-7*/
@@ -8114,7 +8401,7 @@ VAHAG
 .bty-form-7 fieldset:first-of-type>div label{
     margin: 0;
 }
-.bty-form-7 fieldset:first-of-type>div input{
+.bty-form-7 .bty-form-text input{
     width: 100%;
 }
 .bty-form-7 .bty-input-select-1 {
@@ -8123,26 +8410,26 @@ VAHAG
     background-color: white;
     border-radius: 0;
 }
-.bty-form-7 .bty-input-select-1 select{
+.bty-form-7 .bty-form-select .bty-input-select-1 select{
     background: #eeeeee;
     color: #555;
 }
-.bty-form-7 .bty-input-select-1:hover::after{
+.bty-form-7 .bty-form-select .bty-input-select-1:hover::after{
     color: #333333;
 }
-.bty-form-7 .bty-input-select-1::after{
+.bty-form-7 .bty-form-select .bty-input-select-1::after{
     background-color: #eeeeee;
 }
-.bty-form-7 .bty-textarea-1{
+.bty-form-7 .bty-form-textarea .bty-textarea-1{
     border-radius: 0;
     width: 100%;
 }
-.bty-form-7 .bty-tooltip {
+.bty-form-7 fieldset>div:first-of-type>div {
     position: relative;
     display: inline-block;
 }
 
-.bty-form-7 .bty-tooltip >span {
+.bty-form-7 fieldset>div:first-of-type>div >span {
     visibility: hidden;
     width: 120px;
     background-color: #555;
@@ -8159,7 +8446,7 @@ VAHAG
     transition: opacity 1s;
 }
 
-.bty-form-7 .bty-tooltip >span::after {
+.bty-form-7 fieldset>div:first-of-type>div >span::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -8170,18 +8457,18 @@ VAHAG
     border-color: #555 transparent transparent transparent;
 }
 
-.bty-form-7 .bty-tooltip:hover >span {
+.bty-form-7 fieldset>div:first-of-type>div:hover >span {
     visibility: visible;
     opacity: 1;
 }
-.bty-form-7 .bty-input-checkbox-2 + label:before, .bty-form-7 .bty-input-radio-1 + label:before{
+.bty-form-7 .bty-form-checkbox .bty-input-checkbox-2 + label:before, .bty-form-7 .bty-form-radio .bty-input-radio-1 + label:before{
     background-color: #eeeeee;
 }
-.bty-form-7 fieldset:nth-of-type(4)>div:nth-of-type(2)>div, .bty-form-7 fieldset:nth-of-type(5)>div:nth-of-type(2)>div{
+.bty-form-7 .bty-form-checkbox>div:nth-of-type(2)>div, .bty-form-7 .bty-form-radio>div:nth-of-type(2)>div{
     border-top: 1px solid #e2e2e2;
     padding-top: 5px;
 }
-.bty-form-7 .bty-input-radio-1 + label{
+.bty-form-7 .bty-form-radio .bty-input-radio-1 + label{
     display: block;
 }
 .bty-form-7>div{
@@ -8322,7 +8609,6 @@ VAHAG
 .bty-form-8 .bty-btn-save:active:before{
     color: white;
 }
-
 
 
 
@@ -13462,7 +13748,6 @@ form.bty-form-3{
 .bty-filter-blue ul li>i:before, .bty-filter-blue ul li>i:after {
     background-color: white;
 }
-
 /*bty vahag css end*/
 
 

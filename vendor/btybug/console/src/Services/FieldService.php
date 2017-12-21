@@ -61,4 +61,13 @@ class FieldService extends GeneralService
     {
 
     }
+
+    public function returnHtml($field)
+    {
+        if($field->type && $field->type == 'special' && $field->default_value){
+            return BBRenderUnits($field->default_value,['field_id' => $field->id]);
+        }else{
+            return  \view("blog::_partials.fields.".$field->type)->with('field',$field->toArray())->render();
+        }
+    }
 }

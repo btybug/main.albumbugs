@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <div class="form-group">
                 <div class="">
-                    {!! BBbutton2('unit','default_value','specialFields','select input',['class'=>'form-control']) !!}
+                    {!! BBbutton2('unit','default_value','specialFields','select input',['class'=>'form-control','model'=>$field->toArray()]) !!}
                 </div>
             </div>
         </div>

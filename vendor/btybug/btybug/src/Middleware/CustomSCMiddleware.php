@@ -68,7 +68,7 @@ class CustomSCMiddleware
             $url = substr($url, 0, strpos($url, '?'));
         }
         $explodeUrl = explode('/', $url);
-        $extraExcepts = \Config::get('shortcode.except.url');
+        $extraExcepts = \Config::get('shortcode.except.url',[]);
         $this->except = array_merge($this->except,$extraExcepts);
         foreach ($this->except as $except) {
             $flag = 1;

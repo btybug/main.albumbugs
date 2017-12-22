@@ -42,7 +42,7 @@ class RoleRepository extends GeneralRepository
     {
         $items = $this->getAll();
         $items->push([
-            'id' => 0,
+            'id' => ZERO,
            'name' => 'Guests',
            'slug' => 'guests',
            'special' => 'no-access'

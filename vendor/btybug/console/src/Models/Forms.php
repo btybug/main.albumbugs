@@ -51,6 +51,11 @@ class Forms extends Model
         return $this->hasMany('\Btybug\Console\Models\FormFields', 'form_id', 'id');
     }
 
+    public function form_roles()
+    {
+        return $this->hasMany('\Btybug\Console\Models\FormRoles', 'form_id', 'id');
+    }
+
 
     public function fields()
     {

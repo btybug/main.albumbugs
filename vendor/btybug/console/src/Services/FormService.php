@@ -13,6 +13,7 @@ use Btybug\btybug\Services\GeneralService;
 use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Repository\FormEntriesRepository;
 use Btybug\Console\Repository\FormFieldsRepository;
+use Btybug\Console\Repository\FormRolesRepository;
 use Btybug\Console\Repository\FormsRepository;
 
 /**
@@ -25,7 +26,7 @@ class FormService extends GeneralService
     public static $form_path = 'resources' . DS . 'views' . DS . 'forms' . DS;
     public static $form_file_ext = '.blade.php';
     public $slug, $conf, $fields, $form_type, $id, $collected, $fields_type, $required_fields, $formObject;
-    private $form, $formFields, $fieldValidation, $fieldRepo, $entries,$fieldService;
+    private $form, $formFields, $fieldValidation, $fieldRepo, $entries,$fieldService,$formRolesRepository;
     public $formData = [];
 
     public function __construct(
@@ -34,7 +35,8 @@ class FormService extends GeneralService
         FieldValidationService $fieldValidationService,
         FieldsRepository $fieldsRepository,
         FormEntriesRepository $entriesRepository,
-        FieldService $fieldService
+        FieldService $fieldService,
+        FormRolesRepository $formRolesRepository
     )
     {
         $this->form = $formsRepository;
@@ -43,6 +45,7 @@ class FormService extends GeneralService
         $this->fieldRepo = $fieldsRepository;
         $this->entries = $entriesRepository;
         $this->fieldService = $fieldService;
+        $this->formRolesRepository = $formRolesRepository;
     }
 
     public static function checkFields($json)
@@ -197,12 +200,29 @@ class FormService extends GeneralService
     public static function renderFormBlade($form)
     {
         if ($form){
-            if (\View::exists("forms.".$form->slug)) {
+            $access = false;
+            if ($form->form_access == 0) $access = true;
+
+            if ($form->form_access == 2 && \Auth::check()) $access = true;
+
+            if ($form->form_access == 1 && \Auth::check() && \Auth::user()->role && self::checkAccess($form, \Auth::user()->role->id)) $access = true;
+
+            if ($access && \View::exists("forms.".$form->slug)) {
                 return view("console::structure.developers.forms.form_layout",compact('form'))->render();
             }
         }
 
         return null;
+    }
+
+    public static function checkAccess ($form, $role_id)
+    {
+        if ($form && $role_id) {
+            $access = $form->form_roles->where('role_id', $role_id)->first();
+            if ($access) return true;
+        }
+
+        return false;
     }
 
 
@@ -493,5 +513,14 @@ class FormService extends GeneralService
         }
 
         return collect($fields);
+    }
+
+    public function saveSettings($id,$request)
+    {
+        $this->formObject = $this->form->findOrFail($id);
+        $this->form->update($id,['settings' => $request->except('_token','roles','form_access'),'form_access' => $request->get('form_access')]);
+
+        if ($request->get('form_access') && count($request->roles))
+            $this->formRolesRepository->optimizeFormRoles($this->formObject,$request->roles);
     }
 }

@@ -470,6 +470,8 @@ class StructureService extends GeneralService
             'default_value' => $data['default_value'] != '' ? $data['default_value'] : NULL,
 //            'available_for_users' => $data['available_for_users'],
             'before_save' => $data['before_save'],
+            'extravalidation' => $data['extravalidation'],
+            'validation_message' => $data['validation_message'],
         ]);
     }
 

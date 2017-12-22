@@ -20,6 +20,15 @@ class EventyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Eventy::addAction('shortcode.except.url', function ($what) {
+            $excepts = \Config::get('shortcode.except.url', []);
+            foreach ($what as $key => $value) {
+                $excepts[] = (starts_with('/',$value)) ? $value : "/".$value;
+            }
+            \Config::set('shortcode.except.url', $excepts);
+            return (\Config::get('shortcode.except.url'));
+        });
+
         \Eventy::addAction('emil.user', function ($what) {
             \Config::set('email_user', $what);
             return (\Config::get('email_user'));

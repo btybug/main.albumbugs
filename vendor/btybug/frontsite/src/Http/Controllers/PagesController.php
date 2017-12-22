@@ -62,7 +62,6 @@ class PagesController extends Controller
     {
         $this->helpers = new helpers;
         $this->settings = $settings;
-        $this->home = '/admin/manage/structure/front-pages';
     }
 
     /**
@@ -140,6 +139,16 @@ class PagesController extends Controller
                 . $frontendPageService->getPlaceholdersInUrl($updatedPage->page_layout_settings)
                 . '&content_type=' . $request->get('content_type') . '&template=' . $request->get('template'));
         }
+        return redirect()->back()->with('message', 'Page settings has been saved successfully.');
+    }
+
+    public function postGeneral(
+        Request $request,
+        FrontendPageService $frontendPageService
+    )
+    {
+        $frontendPageService->saveGeneralSettings($request);
+
         return redirect()->back()->with('message', 'Page settings has been saved successfully.');
     }
 

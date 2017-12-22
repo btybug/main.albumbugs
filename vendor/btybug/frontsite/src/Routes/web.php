@@ -35,6 +35,7 @@ Route::group(['prefix'=>'structure'], function () {
         Route::get('/settings/{param}', 'PagesController@getSettings',true)->name('frontsite_settings');
         Route::post('/settings/{id}', 'PagesController@postSettings');
         Route::get('/general/{id}', 'PagesController@getGeneral',true)->name('frontsite_general');
+        Route::post('/general/{id}', 'PagesController@postGeneral',true)->name('frontsite_save_general');
         Route::post('/user-avatar', 'PagesController@postUserAvatar');
         Route::post('/sorting', 'PagesController@postSortPages');
         Route::post('/classify', 'PagesController@postClassify');

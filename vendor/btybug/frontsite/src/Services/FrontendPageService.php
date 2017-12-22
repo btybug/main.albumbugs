@@ -125,6 +125,21 @@ class FrontendPageService extends GeneralService
         return $page;
     }
 
+    public function saveGeneralSettings (
+        Request $request
+    )
+    {
+        $page = $this->frontPagesRepository->findOrFail($request->id);
+        $this->frontPagesRepository->update($page->id, [
+            'page_access' => $request->get('page_access')
+        ]);
+
+        if ($request->get('page_access') && $request->roles)
+            $this->permissionRoleRepository->optimizePageRoles($page, explode(',', $request->roles), 'front');
+
+        return $page;
+    }
+
     public function addNewPage (int $parentID = null)
     {
         $parent = null;

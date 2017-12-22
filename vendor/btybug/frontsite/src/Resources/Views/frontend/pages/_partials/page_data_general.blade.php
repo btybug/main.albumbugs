@@ -1,5 +1,5 @@
 @if($page)
-    {!! Form::model($page,['url' => url("/admin/manage/frontend/pages/settings", [$id]), 'id' => 'page_settings_form']) !!}
+    {!! Form::model($page,['route' => ["frontsite_save_general",$id], 'id' => 'page_settings_form']) !!}
 
     <div class="row">
         <div class="col-xs-12 col-sm-9 connected" data-bbsortable="target">

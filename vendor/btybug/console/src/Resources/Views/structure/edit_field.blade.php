@@ -154,12 +154,7 @@
                             {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
                         </div>
                     </div>
-                    <div class="form-group col-md-6 m-b-10">
-                        <label class="col-sm-3 p-l-0 control-label m-0  text-left">Validation Message</label>
-                        <div class="col-sm-8">
-                            {!! Form::textarea('validation_message',null,['class' => 'form-control']) !!}
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
@@ -192,9 +187,9 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">Tooltip Icon</label>
+                            <label for="tooltip-icon" class="col-sm-3 m-0 control-label text-left">Tooltip Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','readonly'])  !!}
+                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','readonly','id'=>'tooltip-icon'])  !!}
 
                             </div>
                         </div>
@@ -202,9 +197,17 @@
                     </div>
                     <div class="form-group col-md-12 m-b-10">
                         <div class="col-md-6">
-                            <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">help</label>
+                            <label for="help" class="col-sm-3 m-0 control-label text-left">help</label>
                             <div class="col-sm-8">
-                                {!! Form::textarea('help',null,['class'=>'form-control']) !!}
+                                {!! Form::textarea('help',null,['class'=>'form-control','id'=>'help']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 m-b-10">
+                        <div class="form-group col-md-6 m-b-10">
+                            <label  for='validation_message' class="col-sm-3 m-0 control-label text-left">Error Message</label>
+                            <div class="col-sm-8">
+                                {!! Form::textarea('validation_message',null,['class' => 'form-control','id'=>'validation_message']) !!}
                             </div>
                         </div>
                     </div>

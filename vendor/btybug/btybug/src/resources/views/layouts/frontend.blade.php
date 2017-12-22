@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ url("public/css/font-awesome/css/font-awesome.min.css") }}"/>
     <link rel="stylesheet" href="{{ url("public/js/jquery-ui/jquery-ui.min.css") }}"/>
     <link rel="apple-touch-icon" href="{{ asset('assets/apple-touch-icon.png') }}"/>
+    {!! HTML::style("public/css/cms.css?v=".rand(1111,99999)) !!}
     {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$page->title).'.css') !!}
-    {{--<link rel="stylesheet" href="{{ asset("resources/assets/css/bootstrap.css?v=1.1") }}" />--}}
     @yield('css')
     @stack('CSS')
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

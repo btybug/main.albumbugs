@@ -63,12 +63,7 @@
                                      disabled="true"> {!! $rule or null !!} </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="col-md-3 p-l-0">Extra Validation</label>
-                            <div class="col-md-9">
-                                {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
-                            </div>
-                        </div>
+
                     </div>
                     <div class="form-group col-md-12">
                         <div class="col-md-6">
@@ -151,6 +146,18 @@
                     <div class="col-md-6">
                         <div class="row m-b-10 mapping-column">
                             @include("console::structure.developers._partials.mapping-column")
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 m-b-10">
+                        <label class="col-sm-3 p-l-0 control-label m-0  text-left">Extra Validation</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 m-b-10">
+                        <label class="col-sm-3 p-l-0 control-label m-0  text-left">Validation Message</label>
+                        <div class="col-sm-8">
+                            {!! Form::textarea('validation_message',null,['class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>

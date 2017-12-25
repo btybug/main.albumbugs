@@ -110,13 +110,25 @@ class FormService extends GeneralService
         if (!empty($fields)) {
             if(! is_array($fields)) $fields = json_decode($fields, true);
             if (count($fields)) {
-                foreach ($fields as $field_id) {
-                    $field = $this->fieldRepo->find($field_id);
-                    if($field){
-                        $this->formFields->create([
-                            'form_id' => $form_id,
-                            'field_slug' => $field->slug
-                        ]);
+                foreach ($fields as $key => $value) {
+                    if(is_array($value) && count($value)){
+                        foreach ($value as $k => $v){
+                            $field = $this->fieldRepo->find($v);
+                            if($field){
+                                $this->formFields->create([
+                                    'form_id' => $form_id,
+                                    'field_slug' => $field->slug
+                                ]);
+                            }
+                        }
+                    }else{
+                        $field = $this->fieldRepo->find($value);
+                        if($field){
+                            $this->formFields->create([
+                                'form_id' => $form_id,
+                                'field_slug' => $field->slug
+                            ]);
+                        }
                     }
                 }
             }
@@ -476,8 +488,11 @@ class FormService extends GeneralService
         }
 
         if($form){
-            $this->generateBlade($form->id, $data['fields_html']);
-            $this->syncFields($form->id, $data['fields']);
+            if(isset($data['fields_html'])){
+                $this->generateBlade($form->id, $data['fields_html']);
+            }
+
+            $this->syncFields($form->id, $data['fields_json']);
         }
     }
 

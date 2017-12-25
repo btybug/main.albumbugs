@@ -549,7 +549,6 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
                     });
                     $settings = array_merge($settings,$liveSettings);
                 }
-                dd($settings,$variation);
                 return $unit->render(compact(['variation', 'settings', 'source', 'field', 'cheked', 'data']));
             }
         }

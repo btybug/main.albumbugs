@@ -207,14 +207,14 @@
         });
         // get index page data form ajax
         $(document).ready(function(){
-            $.ajax({
-                type : 'POST',
-                url : "{{ route('get-units-for-index') }}",
-                data:{_token:'{{csrf_token()}}'},
-                success: function(data){
-                    $('.custom_html_for_filter').html(data.html);
-                }
-            });
-        });
+            {{--$.ajax({--}}
+                {{--type : 'POST',--}}
+                {{--url : "{{ route('get-units-for-index') }}",--}}
+                {{--data:{_token:'{{csrf_token()}}'},--}}
+                {{--success: function(data){--}}
+                    {{--$('.custom_html_for_filter').html(data.html);--}}
+                {{--}--}}
+            {{--});--}}
+        {{--});--}}
     </script>
 @stop

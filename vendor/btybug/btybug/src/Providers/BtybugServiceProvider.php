@@ -4,6 +4,7 @@ namespace Btybug\btybug\Providers;
 
 use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Routes;
+use Btybug\Uploads\Repository\Plugins;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -16,6 +17,7 @@ class BtybugServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         $this->loadTranslationsFrom(__DIR__ . '/../resources/Lang', 'btybug');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'btybug');
         $this->app->register('Btybug\Uploads\Providers\ModuleServiceProvider');

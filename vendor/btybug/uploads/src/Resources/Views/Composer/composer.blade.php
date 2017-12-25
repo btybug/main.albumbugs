@@ -322,7 +322,7 @@
 
         function call(func) {
             $(".bookshelf_wrapper").removeClass("hidden");
-            $("#output").append("\nplease wait...\n");
+            $("#output").append("\n please wait...\n");
             $("#output").append("\n===================================================================\n");
             $("#output").append("Executing Started");
             $("#output").append("\n===================================================================\n");
@@ -334,6 +334,24 @@
                     "function": "command",
                     "_token": "<?php echo csrf_token()?>"
 
+                },
+                function (data) {
+                    $("#output").append(data);
+                    $("#output").append("\n===================================================================\n");
+                    $("#output").append("Execution Ended");
+                    $("#output").append("\n===================================================================\n");
+                    $(".bookshelf_wrapper").addClass("hidden");
+                    autoloadUp();
+
+                }
+            );
+        }
+        function autoloadUp() {
+            $.post('{!! route('composer_main') !!}',
+                {
+                    "package": $("#package").val(),
+                    "function": "autoloadUp",
+                    "_token": "<?php echo csrf_token()?>"
                 },
                 function (data) {
                     $("#output").append(data);

@@ -77,24 +77,25 @@ class ComposerController extends Controller
 
     public function command($path, $package, $command)
     {
+        $responce = [];
         $path = str_replace('\\', '\\\\', $path);
         command:
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
         putenv('COMPOSER_HOME=' . __DIR__ . '/../../composer/extracted/bin/composer');
         if (!file_exists($_POST['path'])) {
-
             echo $_POST['path'];
             die();
         }
-        //
+//       echo '0';die;
         if (file_exists(__DIR__ . '/../../composer/extracted')) {
             require_once(__DIR__ . '/../../composer/extracted/extracted/vendor/autoload.php');
             $input = new \Symfony\Component\Console\Input\StringInput($command . ' ' . $package . ' -vvv -d ' . $path);
             $output = new \Symfony\Component\Console\Output\StreamOutput(fopen('php://output', 'w'));
             $app = new \Composer\Console\Application();
             $app->run($input, $output);
-            dd($input, $output);
+            echo 'kakashka';
+
         } else {
             echo 'Composer not extracted.';
             $this->extractComposer();
@@ -118,5 +119,14 @@ class ComposerController extends Controller
     {
         $plugin = new Plugins();
         return \Response::json(['error' => !$plugin->onOff($request->all())]);
+    }
+
+    public function autoloadUp($data)
+    {
+        $data = explode(':', $data);
+        $plugins = new Plugins();
+        $plugin=$plugins->find($data[0]);
+        return $plugin;
+
     }
 }

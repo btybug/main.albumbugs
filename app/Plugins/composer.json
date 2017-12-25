@@ -1,6 +1,7 @@
 {
   "require": {
     "btybug.hook/blog": "dev-master",
-    "gevorg/usermanagment": "dev-master"
+    "sahak.avatar/provaldation": "dev-master"
+
   }
 }

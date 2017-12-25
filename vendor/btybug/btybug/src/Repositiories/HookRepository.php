@@ -3,7 +3,7 @@
 namespace Btybug\btybug\Repositories;
 
 use Btybug\btybug\Models\Hook;
-use Btybug\btybug\Models\Templates\Units;
+use Btybug\btybug\Models\Painter\Painter;
 
 
 /**
@@ -39,9 +39,9 @@ class HookRepository extends GeneralRepository
         $html='';
         if(is_array($data)){
             foreach ($data as $unit){
-               $variation= Units::findVariation($unit);
+               $variation= Painter::findVariation($unit);
                if($variation){
-                   $html.=$variation->renderVariation();
+                   $html.=$variation->variations()->render();
                }else{
                    $html.='<p>Wrong Unit</p>';
                }

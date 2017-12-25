@@ -14,5 +14,5 @@
   "is_core": 0,
   "place": "backend",
   "tags": ["fields"],
-  "path": "resources\/units\/core_fields"
+  "path": "core_fields"
 }

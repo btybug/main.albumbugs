@@ -1,6 +1,7 @@
 <?php namespace Btybug\Resources\Models;
 
 use App\Models\MenuData;
+use Btybug\btybug\Models\Painter\Painter;
 use File;
 use Illuminate\Http\Request;
 use Sahakavatar\Cms\Helpers\helpers;
@@ -161,7 +162,7 @@ class UnitUpload
             }
         }
         File::makeDirectory($variation_path);
-        Units::find($data['slug'])->makeVariation(['title' => 'main variation'])->save();
+        Painter::find($data['slug'])->variations()->makeVariation(['title' => 'main variation'])->save();
     }
 
 

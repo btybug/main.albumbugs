@@ -4,10 +4,10 @@ use App\Http\Controllers\Controller;
 use App\Modules\Console\Models\UnitUpload;
 use App\Modules\Resources\Models\Files\FileUpload;
 use App\Modules\Resources\Models\Validation as validateUpl;
+use Btybug\btybug\Models\Painter\Painter;
 use File;
 use Illuminate\Http\Request;
 use Resources;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\btybug\Services\CmsItemReader;
 use Btybug\btybug\Services\CmsItemUploader;
 use View;
@@ -74,7 +74,7 @@ class FieldUnitsController extends Controller
 
     public function getUnit($type)
     {
-        $ui_units = Units::getAllUnits()->run();
+        $ui_units = Painter::all();
 
         return view('resources::units', compact(['ui_units']));
     }
@@ -121,10 +121,10 @@ class FieldUnitsController extends Controller
 
     public function getUnitVariations($slug)
     {
-        $unit = Units::find($slug);
+        $unit = Painter::find($slug);
         if (!count($unit)) return redirect()->back();
         $variation = [];
-        $variations = $unit->variations();
+        $variations = $unit->variations()->all();
 
         return view('resources::units.variations', compact(['unit', 'variations', 'variation'])
         );
@@ -137,9 +137,9 @@ class FieldUnitsController extends Controller
         $general_type = $request->get('type', null);
 
         if ($general_type) {
-            $ui_units = Units::getAllUnits()->where('main_type', $main_type)->where('type', $general_type)->run();
+            $ui_units = Painter::all()->where('main_type', $main_type)->where('type', $general_type)->get();
         } else {
-            $ui_units = Units::getAllUnits()->where('type', $main_type)->run();
+            $ui_units = Painter::all()->where('type', $main_type)->get();
         }
 
         $html = View::make('resources::units._partials.list_cube', compact(['ui_units']))->render();
@@ -149,9 +149,9 @@ class FieldUnitsController extends Controller
 
     public function postUnitVariations(Request $request, $slug)
     {
-        $ui = Units::find($slug);
+        $ui = Painter::find($slug);
         if (!$ui) return redirect()->back();
-        $ui->makeVariation($request->except('_token', 'ui_slug'))->save();
+        $ui->variations()->makeVariation($request->except('_token', 'ui_slug'))->save();
 
         return redirect()->back();
     }
@@ -164,7 +164,7 @@ class FieldUnitsController extends Controller
     {
         $result = false;
         if ($request->slug) {
-            $result = Units::deleteVariation($request->slug);
+            $result = Painter::variations()->deleteVariation($request->slug);
         }
         return \Response::json(['success' => $result]);
     }
@@ -176,7 +176,7 @@ class FieldUnitsController extends Controller
 
     public function getDeleteUnit($id)
     {
-        $variation = Units::deleteVariation($id);
+        $variation = Painter::variations()->deleteVariation($id);
 
         return redirect()->back();
     }
@@ -197,7 +197,7 @@ class FieldUnitsController extends Controller
     public function getSettings(Request $request)
     {
         if ($request->slug) {
-            $view = Units::renderLivePreview($request->slug, 'backend');
+            $view = Painter::renderLivePreview($request->slug, 'backend');
             return $view ? $view : abort('404');
         } else {
             abort('404');
@@ -207,8 +207,8 @@ class FieldUnitsController extends Controller
     public function unitPreview($id)
     {
         $slug = explode('.', $id);
-        $ui = Units::find($slug[0]);
-        $variation = Units::findVariation($id);
+        $ui = Painter::find($slug[0]);
+        $variation = $ui->variations()->findVariation($id);
 
         if (!$variation) return redirect()->back();
 
@@ -225,8 +225,8 @@ class FieldUnitsController extends Controller
     public function unitPreviewIframe($id, $type = null)
     {
         $slug = explode('.', $id);
-        $ui = Units::find($slug[0]);
-        $variation = Units::findVariation($id);
+        $ui = Painter::find($slug[0]);
+        $variation = $ui->variations()->find($id);
 //        if (!$variation) return redirect()->back();
         $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
         $extra_data = 'some string';
@@ -242,7 +242,7 @@ class FieldUnitsController extends Controller
 
     public function postSettings(Request $request)
     {
-        $output = Units::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
+        $output = Painter::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
         $result = $output ? ['html' => $output['html'], 'error' => false, 'url' => url('/admin/console/backend/general-fields/settings', ['slug' => $output['slug']])] : ['error' => true];
         return \Response::json($result);
     }
@@ -250,15 +250,15 @@ class FieldUnitsController extends Controller
     public function getDefaultVariation($id)
     {
         $data = explode('.', $id);
-        $unit = Units::find($data[0]);
+        $unit = Painter::find($data[0]);
 
         if (!empty($data) && $unit) {
-            foreach ($unit->variations() as $variation) {
+            foreach ($unit->variations()->all() as $variation) {
                 $variation->setAttributes('default', 0);
                 $variation->save();
             }
 
-            $variation = Units::findVariation($id);
+            $variation = Painter::variations()->find($id);
             $variation->setAttributes('default', 1);
             $variation->save();
 
@@ -270,7 +270,7 @@ class FieldUnitsController extends Controller
 
     public function getMakeDefault($slug)
     {
-        $units = Units::getAllUnits()->where('type', 'fields')->run();
+        $units = Painter::all()->where('type', 'fields')->get();
         if (count($units)) {
             foreach ($units as $unit) {
                 if ($unit->slug == $slug) {

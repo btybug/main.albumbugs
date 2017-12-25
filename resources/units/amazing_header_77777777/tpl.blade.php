@@ -1,5 +1,5 @@
 
-{!! $settings['title'] !!}
+{!! isset($settings['title'])?$settings['title']:'' !!}
 <div class="sahak-header-banner">{!! BBgetSiteName() !!}</div>
 <nav class="sahak-header">
     <div class="header-logo"><a class="brand" title="{!! BBgetSiteName() !!}" href="/"><img alt="site logo"

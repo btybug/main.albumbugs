@@ -49,5 +49,7 @@ interface PainterInterface extends Arrayable
 
     public function scopeRender(array $settings);
 
-    public function scopeSaveSettings(string $slug, string $title, array $data, $isSave);
+    public function scopeFirst();
+
+    public function scopeSortByTag(string $tag);
 }

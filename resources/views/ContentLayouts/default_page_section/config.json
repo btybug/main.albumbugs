@@ -26,5 +26,5 @@
   "active": true,
   "example": "demo",
   "tags" : ["backend","back_pages_layout"],
-  "path": "resources\/views\/ContentLayouts\/default_page_section"
+  "path": "default_page_section"
 }

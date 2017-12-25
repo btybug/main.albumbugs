@@ -11,10 +11,10 @@
 
 namespace Btybug\Console\Models;
 
+use Btybug\btybug\Models\Painter\Painter;
 use File;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
-use Btybug\btybug\Models\Templates\Units;
 use Zipper;
 
 class UnitUpload
@@ -181,7 +181,7 @@ class UnitUpload
             }
         }
         File::makeDirectory($variation_path);
-        Units::find($data['slug'])->makeVariation(['title' => 'main variation'])->save();
+        Painter::find($data['slug'])->variations()->makeVariation(['title' => 'main variation'])->save();
     }
 
 

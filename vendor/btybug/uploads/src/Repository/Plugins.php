@@ -9,7 +9,7 @@
 namespace Btybug\Uploads\Repository;
 
 //TODO replace base_path() with plugins_path()
-use Btybug\btybug\Models\Templates\Units;
+use Btybug\btybug\Models\Painter\Painter;
 
 /**
  * Class Plugins
@@ -262,7 +262,7 @@ class Plugins
         if ($config && isset($config['units']) && is_array($config['units'])) {
             $units = [];
             foreach ($config['units'] as $slug) {
-                $units[] = Units::find($slug);
+                $units[] = Painter::find($slug);
             }
             return collect($units);
         }

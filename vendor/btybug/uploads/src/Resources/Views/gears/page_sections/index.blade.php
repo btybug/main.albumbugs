@@ -10,124 +10,96 @@
         </div>
     </div>
     <div class="col-md-4 ">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form class="form-inline" name="input" method="get" action="#" id="filter-tables">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="muted">Date</h4>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> All Dates</label>
-                                    </div>
-                                    <p/>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> Especific Date</label>
-                                    </div>
-                                    <p></p>
-                                    <div class="input-daterange input-group" id="datepicker">
-                                        <span class="input-group-addon"><i
-                                                    class="glyphicon glyphicon-calendar"></i></span>
-                                        <input type="text" class="input-sm form-control" name="start_date"/>
-                                        <span class="input-group-addon"> - </span>
-                                        <input type="text" class="input-sm form-control" name="end_date"/>
-                                        <span class="input-group-addon"><i
-                                                    class="glyphicon glyphicon-calendar"></i></span>
-                                    </div>
+        <form class="form-inline custom_filter-tables" method="post" id="filter-tables">
+            {!! csrf_field() !!}
+            <div class="bty-filter-tab bty-filter-blue">
+                <h1>Filters</h1>
+                <ul>
+                    <li>
+                        <input type="checkbox">
+                        <i></i>
+                        <h2>Date</h2>
+                        <div>
+                            <div>
+                                <div class="bty-new-input-radio">
+                                    <input name="bty-date" type="radio" id="bty-date-1">
+                                    <label for="bty-date-1">All 1</label>
+                                </div>
+                                <div class="bty-new-input-radio">
+                                    <input name="bty-date" type="radio" id="bty-date-2">
+                                    <label for="bty-date-2">All 2</label>
                                 </div>
                             </div>
-                        </div>
+                            <div class="calendar">
+                                <span><i class="glyphicon glyphicon-calendar"></i></span>
+                                <input type="date" name="date_from">
+                                <span> - </span>
+                                <input type="date" name="date_to">
+                                <span><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
 
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="muted">Persons</h4>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> All Persons</label>
-                                    </div>
-                                    <p/>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> Especific Persons</label>
-                                    </div>
-                                    <p></p>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <select class="input-sm form-control">
-                                                <option>Person Name 1</option>
-                                                <option>Person Name 2</option>
-                                                <option>Person Name 3</option>
-                                                <option>Person Name 4</option>
-                                                <option>Person Name 5</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        {{--<input type="checkbox" checked>--}}
+                        <i></i>
+                        <h2>Persons</h2>
+                        <div>
+                            <div>
+                                <div class="bty-new-input-radio">
+                                    <input name="bty-persons" type="radio" id="bty-persons-1">
+                                    <label for="bty-persons-1">All 1</label>
+                                </div>
+                                <div class="bty-new-input-radio">
+                                    <input name="bty-persons" type="radio" id="bty-persons-2">
+                                    <label for="bty-persons-2">All 2</label>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="muted">Files Types</h4>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> All Files</label>
-                                    </div>
-                                    <p/>
-                                    <div class="radio">
-                                        <label><input type="radio" name="optradio"> Especific Files</label>
-                                    </div>
-                                    <p></p>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <select class="input-sm form-control">
-                                                <option>File Name 1</option>
-                                                <option>File Name 2</option>
-                                                <option>File Name 3</option>
-                                                <option>File Name 4</option>
-                                                <option>File Name 5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="bty-new-select">
+                                <select name="author">
+                                    <option value="">Choose Option</option>
+                                    <option value="Sahak">Sahak</option>
+                                    <option value="Edo">Edo</option>
+                                    <option value="gv">gv</option>
+                                    <option>Option 4</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
-                </form>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <i></i>
+                        <h2>Files Types</h2>
+                        <div>
+                            <div>
+                                <div class="bty-new-input-radio">
+                                    <input name="bty-type" type="radio" id="bty-type-1">
+                                    <label for="bty-type-1">All 1</label>
+                                </div>
+                                <div class="bty-new-input-radio">
+                                    <input name="bty-type" type="radio" id="bty-type-2">
+                                    <label for="bty-type-2">All 2</label>
+                                </div>
+                            </div>
+                            <div class="bty-new-select">
+                                <select name="type">
+                                    <option>Choose Option</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button type="submit" class="custom_filter">Search</button>
             </div>
-        </div>
+        </form>
     </div>
-    <div class="col-md-8 ">
-        <div class="templates-list">
-            <div class="row">
-                <div class="raw tpl-list">
-                    @include('uploads::gears.page_sections._partials.page_section_variations')
-                </div>
-            </div>
-        </div>
-
-        <div class="loadding"><em class="loadImg"></em></div>
-        <nav aria-label="" class="text-center">
-            <ul class="pagination paginationStyle">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="text-center">
-            <button type="button" class="btn btn-lg btn-primary btnLoadmore"><em class="loadImg"></em> Load more
-            </button>
-        </div>
-
+    <div class="col-md-8 custom_html_for_filter">
+        @include('uploads::gears.page_sections._partials.page_section_variations')
     </div>
 
     <div class="modal fade" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -230,6 +202,30 @@
             if (p.length) {
                 $("a[main-type=" + p + "]").click();
             }
+
+            $("body").delegate('.custom_filter-tables','submit',function(e){
+                e.preventDefault();
+                var that = $(this);
+                $.ajax({
+                    type : 'POST',
+                    url : "{{ route('filter-layouts') }}",
+                    data : that.serialize(),
+                    success: function(data){
+                        $('.custom_html_for_filter').html(data.html);
+                    }
+                });
+            });
+            // get index page data form ajax
+            $(document).ready(function(){
+                $.ajax({
+                    type : 'POST',
+                    url : "{{ route('get-layouts-for-index') }}",
+                    data:{_token:'{{csrf_token()}}'},
+                    success: function(data){
+                        $('.custom_html_for_filter').html(data.html);
+                    }
+                });
+            });
 
         });
 

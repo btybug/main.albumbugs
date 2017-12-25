@@ -12,12 +12,12 @@
 namespace Btybug\btybug\Http\Controllers\Admincp;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Templates\Sections;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\btybug\Models\Widgets;
 use Btybug\btybug\Repositories\MenuRepository;
 use Btybug\btybug\Services\CmsItemReader;
@@ -73,7 +73,6 @@ class ModalityController extends Controller
             'main_body' => 'getMainBody',
             'layouts' => 'getLayouts'//working with tags
         ];
-
         $data = $request->all();
         if (isset($actions[$data['action']])) {
             $function = $actions[$data['action']];
@@ -153,7 +152,7 @@ class ModalityController extends Controller
     public function getUnit($data)
     {
         $key = $data['type'];
-        $units = Units::all()->sortByTag($key);
+        $units = Painter::all()->sortByTag($key);
 
         if (!count($units)) return \Response::json(['error' => true]);
         if(isset($data['multiple']) && $data['multiple'] == true){
@@ -171,30 +170,31 @@ class ModalityController extends Controller
         isset($data['type']) ? $type = $data['type'] : $type = 'frontend';
 
         if (isset($data['sub'])) {
-            $units = CmsItemReader::getAllGearsByType('units')
-                ->where('place', $type)
-                ->where('type', $data['sub']);
+            $units = Painter::all()
+                ->where('place', '=', $type)
+                ->where('type', '=', $data['action']);
         } else {
-            $units = CmsItemReader::getAllGearsByType('units')
-                ->where('place', $type);
+            $units = Painter::all()
+                ->where('place', '=', $type);
         }
 
         if (isset($data['item'])) {
-            $units->where('slug', $data['item']);
+            $units->where('slug', '=', $data['item']);
         }
 
         if (isset($data['module'])) {
-            $units->where('module_slug', $data['module']);
+            $units->where('module_slug', '=', $data['module']);
         }
 
         if (isset($data['mt'])) {
-            $units->where('main_type', $data['mt']);
+            $units->where('main_type', '=', $data['mt']);
         }
 
         if (isset($data['group'])) {
-            $units->where('group', $data['group']);
+            $units->where('group', '=', $data['group']);
         }
-        $units = $units->run();
+        $units = $units->get();
+
         if (isset($data['except'])) {
             $except = json_decode($data['except'], true);
             if ($units && count($units) && $except && !empty($except)) {
@@ -359,8 +359,10 @@ class ModalityController extends Controller
     {
         $id = $request->get('id');
         $layout = ContentLayouts::find($id);
-        if (!$layout) return \Response::json(['error' => true]);
-        $items = $layout->variations();
+        if (!$layout){
+            return \Response::json(['error' => true]);
+        }
+        $items = $layout->variations()->all();
         $ajax = true;
         $html = View::make('btybug::styles.page_sections', compact(['items', 'ajax']))->render();
 
@@ -445,10 +447,10 @@ class ModalityController extends Controller
     public function postUnitOptions(Request $request)
     {
         $id = $request->get('id');
-        $unit = Units::find($id);
+        $unit = Painter::find($id);
         $key = $request->key;
         if (!$unit) return \Response::json(['error' => true]);
-        $items = $unit->variations();
+        $items = $unit->variations()->all();
         $ajax = true;
         $html = View::make('btybug::styles.units', compact(['items', 'ajax', 'key']))->render();
 
@@ -491,9 +493,13 @@ class ModalityController extends Controller
     public function getLayouts($data)
     {
         $tag = $data['type'];
-        $layouts = ContentLayouts::sortByTag($tag);
-        if (!count($layouts)) return \Response::json(['error' => true]);
+        $layouts = ContentLayouts::all()->get();
+
+        if (!count($layouts)){
+            return \Response::json(['error' => true]);
+        }
         $html = View::make('btybug::styles.page_sections', compact('layouts'))->render();
+
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

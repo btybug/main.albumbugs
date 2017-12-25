@@ -18,13 +18,13 @@
     {!! BBCss() !!}
     {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
     {!! HTML::style('public/js/jquery-ui/jquery-ui.min.css') !!}
+    {!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
     {!! HTML::style('public/css/cms.css') !!}
     @if(isset($model)) {!! HTML::style('custom/css/'.str_replace(' ','-',$model->slug).'.css') !!} @endif
     @yield('CSS')
     @stack('css')
 </head>
 <body>
-
 
 <div class="container-fluid coreheadersetting m-b-10">
     <div class="row">
@@ -59,7 +59,7 @@
     @include('btybug::header')
 </header>
 
-<div class="modal fade" id="magic-settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade bigfullModal" id="magic-settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     {{--{!! Form::open(['url'=>'/admin/backend/theme-edit/live-save', 'id'=>'magic-form']) !!}--}}
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

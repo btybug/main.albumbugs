@@ -13,11 +13,11 @@ namespace Btybug\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\ExtraModules\Structures;
+use Btybug\btybug\Models\Painter\Painter;
 use File;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\Modules\Models\AdminPages;
 use Btybug\Modules\Models\Routes;
 use Btybug\User\Models\Roles;
@@ -82,7 +82,7 @@ class ModulesSettingsController extends Controller
 
         $types = $this->types;
         $type = 'frontend';
-        $ui_units = Units::getAllUnits()->where('section', $type)->run();
+        $ui_units = Painter::all()->where('section', $type)->get();
 
         return view('uploads::modules.settings.gears', compact(['slug', 'ui_units', 'type', 'types']));
     }

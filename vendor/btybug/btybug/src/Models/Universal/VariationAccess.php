@@ -11,7 +11,7 @@ namespace Btybug\btybug\Models\Universal;
 
 interface VariationAccess
 {
-    public function variations();
+    public function scopeVariations();
 
     public function getVariationsPath();
 

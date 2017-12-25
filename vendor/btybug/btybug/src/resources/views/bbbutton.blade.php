@@ -1,17 +1,17 @@
 @php
-    $indentificator=uniqid();
-        if($value){
-            switch ($type){
-                case 'layouts':
-                $obj=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
-                $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
-                break;
-                case 'unit':
-                $obj=\Btybug\btybug\Models\Templates\Units::findByVariation($value);
-                $variation=\Btybug\btybug\Models\Templates\Units::findVariation($value);
-                break;
+        $indentificator=uniqid();
+            if($value){
+                switch ($type){
+                    case 'layouts':
+                    $obj=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
+                    $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
+                    break;
+                    case 'unit':
+                    $obj=\Btybug\btybug\Models\Painter\Painter::findByVariation($value);
+                    $variation = $obj->variations()->find($value);
+                    break;
+                }
             }
-        }
 
 @endphp
 <div class="col-md-12">

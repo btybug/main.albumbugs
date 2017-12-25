@@ -59,4 +59,4 @@
         </div>
     </div>
 </div>
-{!! $_this->style('css/main.css') !!}
+{!! BBstyle($_this->path.DS.'css/main.css') !!}

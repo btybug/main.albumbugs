@@ -1,4 +1,4 @@
-{!! $_this->style('css/main.css') !!}
+{!! BBstyle($_this->path.DS.'css/main.css') !!}
 <div class="logo-menu">
     <nav class="navbar navbar-default" role="navigation" data-spy="affix" data-offset-top="50">
         <div class="row">

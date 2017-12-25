@@ -14,5 +14,5 @@
   "is_core": 0,
   "place": "frontend",
   "tags": ["footer_units","frontend"],
-  "path": "resources\/units\/gv_footer_unit_subscribe"
+  "path": "gv_footer_unit_subscribe"
 }

@@ -9,12 +9,12 @@
 namespace Btybug\btybug\Services;
 
 use Btybug\btybug\Models\ContentLayouts\ContentLayoutVariations;
+use Btybug\btybug\Models\Painter\Painter;
 use File;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Templates\TplVariations;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\btybug\Models\Templates\UnitsVariations;
 use Btybug\Modules\Models\Fields;
 use Zipper;
@@ -124,7 +124,7 @@ class CmsItemUploader
         $gearsArray = [
             'units' => [
                 'path' => config('paths.units_uplaod'),
-                'model' => Units::class,
+                'model' => Painter::class,
                 'variation' => UnitsVariations::class,
                 'self_type' => 'units',
                 'required_keys' => [

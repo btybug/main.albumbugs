@@ -59,12 +59,13 @@ function BBheader()
 function BBRenderTpl($variation_id, $on_empty = null)
 {
     $slug = explode('.', $variation_id);
+
     if (isset($slug[0]) && isset($slug[1])) {
         $widget_id = $slug[0];
         $variationID = $slug[1];
-        $widget = \Btybug\btybug\Models\Templates\Units::find($widget_id);
+        $widget = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
         if (!is_null($widget)) {
-            $variation = $widget->findVariation($variation_id);
+            $variation = $widget->variations()->find($variation_id);
             if (!is_null($variation)) {
                 $section = '';//$widget->section();
                 $settings = $variation->settings;
@@ -101,9 +102,9 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
                     });
                     $settings = array_merge($settings['settings'],$liveSettings);
                 }
-
                 $settings['main_view'] = $main_view;
-                return $section->render($settings);
+
+                return $section->render($settings->toArray());
             }
         }
         return false;
@@ -229,9 +230,9 @@ function BBRenderBackTpl($variation_id, $on_empty = null)
         $widget_id = $slug[0];
         $variationID = $slug[1];
 
-        $widget = \Btybug\btybug\Models\Templates\Units::find($widget_id);
+        $widget = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
         if (!is_null($widget)) {
-            $variation = $widget->findVariation($variation_id);
+            $variation = $widget->variations()->find($variation_id);
             if (!is_null($variation)) {
                 $section = '';//$widget->section();
                 $settings = $variation->settings;
@@ -264,8 +265,8 @@ function BBheaderBack()
     if ($page) {
         $settingsRepo = new \Btybug\btybug\Repositories\AdminsettingRepository();
         $settings = $settingsRepo->findBy('section', 'backend_site_settings');
-        if ($settings && $settings->val) $data = json_decode($settings->val, true);
 
+        if ($settings && $settings->val) $data = json_decode($settings->val, true);
         if (isset($data['header_unit']))
             return BBRenderUnits($data['header_unit']);
     }
@@ -299,6 +300,7 @@ function main_content()
 
 function BBgetPageLayout()
 {
+
     $route = \Request::route();
     if ($route) {
         if (isset($_GET['pl_live_settings']) && $_GET['pl_live_settings'] == 'page_live') {
@@ -307,9 +309,11 @@ function BBgetPageLayout()
             if (!$layout) return \Btybug\btybug\Models\ContentLayouts\ContentLayouts::defaultPageSection();
             $data = explode('.', $layoutID);
             $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($data[0]);
+            dd(1);
             return 'ContentLayouts.' . $layout->folder . '.' . $layout->layout;
         }
     }
+
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
     $data = [];
     if ($page->layout_id) {
@@ -323,6 +327,7 @@ function BBgetPageLayout()
 
         if (isset($data['backend_page_section']) && $data['backend_page_section']) {
             $slug = explode('.', $data['backend_page_section']);
+
             $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($slug[0]);
             if ($layout) return 'ContentLayouts.' . $layout->folder . '.' . $layout->layout;
         }
@@ -387,6 +392,7 @@ function BBscriptsHook()
 {
     $codes = \Config::get('scripts', []);
     $scripts = '';
+
     foreach ($codes as $key => $value) {
         $scripts .= HTML::script($value);
     }
@@ -517,16 +523,18 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
     $field = null;
     $cheked = null;
     $slug = explode('.', $variation_id);
+
     if (isset($slug[0]) && isset($slug[1])) {
         $widget_id = $slug[0];
         $variationID = $slug[1];
 
-        $unit = \Btybug\btybug\Models\Templates\Units::find($widget_id);
-        if (!is_null($unit)) {
-            $variation = $unit->findVariation($variation_id);
+        $unit = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
 
+        if (!is_null($unit)) {
+            $variation = $unit->variations()->find($variation_id);
             if (!is_null($variation)) {
                 $settings = $variation->settings;
+
                 if ($unit->have_settings && !$settings) {
                     $settings = [];
                 }
@@ -542,7 +550,6 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
                     });
                     $settings = array_merge($settings,$liveSettings);
                 }
-
                 return $unit->render(compact(['variation', 'settings', 'source', 'field', 'cheked', 'data']));
             }
         }
@@ -793,10 +800,10 @@ function BBField($data)
                     $defaultFieldHtml = \DB::table('settings')->where('section', 'setting_system')
                         ->where('settingkey', 'default_field_html')->first();
                     $variationId = $defaultFieldHtml->val;
-                    $field_html = \Btybug\btybug\Models\Templates\Units::findByVariation($variationId);
+                    $field_html = \Btybug\btybug\Models\Painter\Painter::findByVariation($variationId);
                     break;
                 case 'custom':
-                    $field_html = \Btybug\btybug\Models\Templates\Units::findByVariation($field->custom_html);
+                    $field_html = \Btybug\btybug\Models\Painter\Painter::findByVariation($field->custom_html);
                     break;
             }
 
@@ -1166,7 +1173,7 @@ function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $
 //TODO:find the right direction for this function
 function BBgetUnitAttr($id, $key)
 {
-    $section = \Btybug\btybug\Models\Templates\Units::findByVariation($id);
+    $section = \Btybug\btybug\Models\Painter\Painter::findByVariation($id);
     if ($section) return $section->{$key};
     return false;
 
@@ -1264,6 +1271,7 @@ function BBstyle($path)
         $styles = \Session::get('custom.styles', []);
     }
     $styles[md5($path)] = $path;
+
     \Session::put('custom.styles', $styles);
 }
 

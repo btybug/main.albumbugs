@@ -9,9 +9,9 @@
 namespace Btybug\Console\Http\Controllers\Developers;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Models\Painter\Painter;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\btybug\Repositories\HookRepository;
 use Btybug\btybug\Services\CmsItemReader;
 use Btybug\btybug\Services\HookService;
@@ -30,9 +30,9 @@ class BBurlsController extends Controller
             $widget_id = $unitData[0];
             $variationID = $unitData[1];
 
-            $widget = Units::find($widget_id);
+            $widget = Painter::find($widget_id);
             if (!is_null($widget)) {
-                $variation = $widget->findVariation($slug);
+                $variation = $widget->variations()->find($slug);
 
                 if (!is_null($variation)) {
                     $settings = $variation->settings;
@@ -84,9 +84,9 @@ class BBurlsController extends Controller
         $type = $request->get('type');
         $widget = Widgets::where('default', 1)->where('main_type', 'fields')->first();
         if ($type == 'user_input') {
-            $unit = Units::where('default', 1)->where('main_type', 'user_input')->first();
+            $unit = Painter::where('default', '=', 1)->where('main_type', '=', 'user_input')->first();
         } else {
-            $unit = Units::where('default', 1)->where('main_type', 'data_source')->first();
+            $unit = Painter::where('default', '=', 1)->where('main_type', '=', 'data_source')->first();
 
         }
         if ($widget and $unit) {
@@ -264,7 +264,7 @@ class BBurlsController extends Controller
         if ($value) {
             switch ($request->get('data_action')) {
                 case 'unit':
-                    $data = Units::findByVariation($value)->render();
+                    $data = Painter::findByVariation($value)->render();
                     break;
                 //TODO : need remove page_sections
                 case 'page_sections':
@@ -295,8 +295,8 @@ class BBurlsController extends Controller
                 $variation = ContentLayouts::findVariation($value);
                 break;
             case 'unit':
-                $obj = Units::findByVariation($value);
-                $variation = Units::findVariation($value);
+                $obj = Painter::findByVariation($value);
+                $variation = Painter::variations()->find($value);
                 break;
             default:
                 $data = ['error' => true, 'message' => 'variation_id is mandatory!!!'];
@@ -313,7 +313,7 @@ class BBurlsController extends Controller
     {
         $value = $request->get('variation_id');
         if ($value) {
-            $data = Units::findByVariation($value);
+            $data = Painter::findByVariation($value);
             if (!$data) return \Response::json(['error' => true, 'message' => 'Undefined unit!!!']);
         } else {
             return \Response::json(['error' => true, 'message' => 'variation_id is mandatory!!!']);

@@ -13,11 +13,11 @@ namespace Btybug\Console\Http\Controllers\Developers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\dbhelper;
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Services\ColumnService;
 use Btybug\Console\Services\FieldService;
 use Illuminate\Http\Request;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\Console\Repository\AdminPagesRepository;
 use App\Models\Forms\Fields;
 use Btybug\btybug\Models\Migrations;
@@ -133,7 +133,7 @@ class StructureController extends Controller
         }
         if (isset($json_data['unit'])) {
             $vid = explode('.', $json_data['unit']);
-            $unit = Units::find($vid[0]);
+            $unit = Painter::find($vid[0]);
             $json_data['unit_input_type'] = $unit->input_type;
         }
         if ($variations) {
@@ -161,9 +161,9 @@ class StructureController extends Controller
         if ($field) {
             $json_data = json_decode($field->json_data, true);
         }
-        $unit = Units::where('default', 1)->where('main_type', 'data_source')->first();
+        $unit = Painter::where('default','=', 1)->where('main_type', '=', 'data_source')->first();
 
-        $unit_variations = $unit->variations();
+        $unit_variations = $unit->variations()->all();
         foreach ($unit_variations as $unit_variation) {
             if ($unit_variation->default) {
                 $def_unit_id = $unit_variation->id;
@@ -319,11 +319,11 @@ class StructureController extends Controller
         $field = Fields::where('table_name', $table)->where('column_name', $column)->first();
         $data = ($request->all());
         if (isset($data['input_area']) and $data['input_area'] == 'user_input') {
-            $unit = Units::where('default', 1)->where('main_type', 'user_input')->first();
-            $unit_variations = $unit->variations();
+            $unit = Painter::where('default', '=', 1)->where('main_type', '=', 'user_input')->first();
+            $unit_variations = $unit->variations()->all();
         } else {
-            $unit = Units::where('default', 1)->where('main_type', 'data_source')->first();
-            $unit_variations = $unit->variations();
+            $unit = Painter::where('default', '=', 1)->where('main_type', '=', 'data_source')->first();
+            $unit_variations = $unit->variations()->all();
         }
         foreach ($unit_variations as $unit_variation) {
             if ($unit_variation->default) {
@@ -409,17 +409,17 @@ class StructureController extends Controller
         $trigger = $request->get('trigger');
         if ($trigger and $trigger == 'input_area') {
             if (isset($data['data_source'])) {
-                $unit = Units::where('default', 1)->where('main_type', 'data_source')->first();
+                $unit = Painter::where('default', '=', 1)->where('main_type', '=', 'data_source')->first();
             } else {
-                $unit = Units::where('default', 1)->where('main_type', 'user_input')->first();
+                $unit = Painter::where('default', '=', 1)->where('main_type', '=', 'user_input')->first();
 
             }
         } else {
             $unit_v = $data['some-unit'];
             $unit_exp = explode('.', $data['some-unit']);
-            $unit = Units::find($unit_exp[0]);
+            $unit = Painter::find($unit_exp[0]);
         }
-        $unit_variations = $unit->variations();
+        $unit_variations = $unit->variations()->all();
         foreach ($unit_variations as $unit_variation) {
             if ($unit_variation->default) {
                 $data['some-unit'] = $unit_variation->id;
@@ -450,9 +450,9 @@ class StructureController extends Controller
         $data = $request->all();
         $unit_v = $data['some-unit'];
         $unit_exp = explode('.', $data['some-unit']);
-        $unit = Units::find($unit_exp[0]);
+        $unit = Painter::find($unit_exp[0]);
 
-        $unit_variations = $unit->variations();
+        $unit_variations = $unit->variations()->all();
         foreach ($unit_variations as $unit_variation) {
             if ($unit_variation->default) {
                 $data['some-unit'] = $unit_variation->id;
@@ -473,7 +473,7 @@ class StructureController extends Controller
     {
         $data = $request->except(['_token']);
         $unit_exp = explode('.', $data['some-unit']);
-        $unit = Units::find($unit_exp[0]);
+        $unit = Painter::find($unit_exp[0]);
         $fields = Fields::where('table_name', $table)->where('column_name', $column)->update([
             'type' => $unit->input_type,
             'widget' => $data['widget'],

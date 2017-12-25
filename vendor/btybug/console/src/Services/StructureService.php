@@ -4,8 +4,8 @@ namespace Btybug\Console\Services;
 
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\ExtraModules\Structures;
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Routes;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\btybug\Repositories\MenuRepository;
 use Btybug\btybug\Services\CmsItemReader;
 use Btybug\btybug\Services\GeneralService;
@@ -497,9 +497,9 @@ class StructureService extends GeneralService
     {
         $defaultFieldHtml = $this->settingRepo->getSettings('setting_system', 'default_field_html');
         $variationId = $defaultFieldHtml->val;
-        $settings = Units::findByVariation($variationId)->renderSettings();
-        $variation = Units::findVariation($variationId)->toArray();
-        $unit = Units::findByVariation($variationId)->render($variation);
+        $settings = Painter::findByVariation($variationId)->renderSettings();
+        $variation = Painter::findVariation($variationId)->toArray();
+        $unit = Painter::findByVariation($variationId)->render($variation);
 
         return ['html' => $unit, 'settings' => htmlentities($settings)];
     }
@@ -507,9 +507,9 @@ class StructureService extends GeneralService
     public function getCustomHtml($request)
     {
         $variationId = $request->slug;
-        $settings = Units::findByVariation($variationId)->renderSettings();
-        $variation = Units::findVariation($variationId)->toArray();
-        $unit = Units::findByVariation($variationId)->render($variation);
+        $settings = Painter::findByVariation($variationId)->renderSettings();
+        $variation = Painter::findVariation($variationId)->toArray();
+        $unit = Painter::findByVariation($variationId)->render($variation);
 
         return ['html' => $unit, 'settings' => htmlentities($settings)];
     }

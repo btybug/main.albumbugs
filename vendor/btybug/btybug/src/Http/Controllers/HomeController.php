@@ -2,11 +2,11 @@
 
 namespace Btybug\btybug\Http\Controllers;
 
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Routes;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Home;
-use Btybug\btybug\Models\Templates\Units;
 
 /**
  * Class HomeController
@@ -108,7 +108,7 @@ class HomeController extends Controller
     {
 
         $unit = ContentLayouts::find($slug);
-        if (! $unit) $unit = Units::find($slug);
+        if (! $unit) $unit = Painter::find($slug);
         if (! \File::exists($unit->getPath() . DS . $path)) abort(500);
         $file = \File::get($unit->getPath() . DS . $path);
         $response = \Response::make($file);

@@ -2,10 +2,10 @@
 
 namespace Btybug\btybug\Http;
 
+use Btybug\btybug\Models\Painter\Painter;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Home;
-use Btybug\btybug\Models\Templates\Units;
 
 /**
  * Class HomeController
@@ -53,7 +53,7 @@ class HomeController extends Controller
     public function unitStyles($model, $slug, $path)
     {
         $unit = ContentLayouts::find($slug);
-        if (!$unit) $unit = Units::find($slug);
+        if (!$unit) $unit = Painter::find($slug);
         $file = \File::get($unit->getPath() . DS . $path);
         $response = \Response::make($file);
         $response->header('Content-Type', 'text/css');
@@ -63,7 +63,7 @@ class HomeController extends Controller
     public function unitScripts($model, $slug, $path)
     {
         $unit = ContentLayouts::find($slug);
-        if (!$unit) $unit = Units::find($slug);
+        if (!$unit) $unit = Painter::find($slug);
         $file = \File::get($unit->getPath() . DS . $path);
         $response = \Response::make($file);
 

@@ -11,8 +11,8 @@
 
 namespace Btybug\Console\Models;
 
+use Btybug\btybug\Models\Painter\Painter;
 use Illuminate\Database\Eloquent\Model;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\User\User;
 
 class Fields extends Model
@@ -50,7 +50,7 @@ class Fields extends Model
                 unset($data['field_id']);
             }
             $unitID = explode('.', $data['some-unit']);
-            $unit = Units::find($unitID[0]);
+            $unit = Painter::find($unitID[0]);
         } else {
             return false;
         }
@@ -71,7 +71,7 @@ class Fields extends Model
 
                 if (isset($data['some-unit'])) {
                     $slug = explode('.', $data['some-unit']);
-                    $unit = Units::find($slug[0]);
+                    $unit = Painter::find($slug[0]);
 
                     if ($unit) {
                         $data['unit_input_type'] = $unit->input_type;
@@ -94,7 +94,7 @@ class Fields extends Model
             if (!isset($config[$table][$column])) {
                 if (isset($data['some-unit'])) {
                     $slug = explode('.', $data['some-unit']);
-                    $unit = Units::find($slug[0]);
+                    $unit = Painter::find($slug[0]);
 
                     if ($unit) {
                         $data['unit_input_type'] = $unit->input_type;
@@ -214,7 +214,7 @@ class Fields extends Model
     public function getFieldSelectedUnitName()
     {
         if ($this->unit) {
-            $unit = Units::findByVariation($this->unit);
+            $unit = Painter::findByVariation($this->unit);
             return $unit ? $unit->title : 'no';
         }
         return 'no';
@@ -223,7 +223,7 @@ class Fields extends Model
     public function getFieldSelectedHTMLUnitName()
     {
         if ($this->custom_html) {
-            $unit = Units::findByVariation($this->custom_html);
+            $unit = Painter::findByVariation($this->custom_html);
             return $unit ? $unit->title : 'no';
         }
         return 'no';

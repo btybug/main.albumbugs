@@ -42,7 +42,7 @@ class PageSectionsController extends Controller
     {
         $slug = $request->get('p', 0);
         $currentPageSection = null;
-        $pageSections = ContentLayouts::all();
+        $pageSections = ContentLayouts::all()->paginate(3, 4, 'bty-pagination-2');
         if ($slug) {
             $currentPageSection = ContentLayouts::find($slug);
 
@@ -51,7 +51,7 @@ class PageSectionsController extends Controller
                 $currentPageSection = $pageSections[0];
             }
         }
-        $variations = $currentPageSection ? $currentPageSection->variations() : [];
+        $variations = $currentPageSection ? $currentPageSection->variations()->all() : [];
 
         return view('uploads::gears.page_sections.index', compact(['pageSections', 'currentPageSection', 'variations', 'type']));
     }
@@ -60,7 +60,7 @@ class PageSectionsController extends Controller
     {
         $slug = $request->get('p', 0);
         $currentPageSection = null;
-        $pageSections = ContentLayouts::all();
+        $pageSections = ContentLayouts::all()->paginate(3, 4, 'bty-pagination-2');
         if ($slug) {
             $currentPageSection = ContentLayouts::find($slug);
 
@@ -69,16 +69,45 @@ class PageSectionsController extends Controller
                 $currentPageSection = $pageSections[0];
             }
         }
-        $variations = $currentPageSection ? $currentPageSection->variations() : [];
+
+        $variations = $currentPageSection ? $currentPageSection->variations()->all() : [];
 
         return view('uploads::gears.page_sections.index', compact(['pageSections', 'currentPageSection', 'variations', 'type']));
     }
+
+    // from ajax get index content
+    public function getFrontendFromAjax(){
+        $pageSections = ContentLayouts::all()->paginate(6, 5, 'bty-pagination-2');
+        $html =  View::make("uploads::gears.page_sections._partials.page_section_variations", compact(['pageSections']))->render();
+
+        return \Response::json(['html' => $html, 'error' => false]);
+    }
+
+    public function filterLayouts(Request $request){
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        $author = $request->author;
+        $pageSections = new ContentLayouts();
+        if($date_from || $date_to){
+            $pageSections = $pageSections->filterByDate($date_from,$date_to);
+        }
+        if($author){
+            $pageSections = $pageSections->where("author","=",$author);
+        }
+
+        $pageSections = $pageSections->paginate(4,4,'bty-pagination-2');
+
+        $html= View::make('uploads::gears.page_sections._partials.page_section_variations',compact(['pageSections']))->render();
+
+        return \Response::json(['html' => $html, 'error' => false]);
+    }
+
 
     public function getVariations ($slug)
     {
         $pageSection = ContentLayouts::find($slug);
         if (! $pageSection) abort(404);
-        $variations = $pageSection->variations();
+        $variations = $pageSection->variations()->all();
 
         return view('uploads::gears.page_sections.variations', compact(['pageSection', 'variations']));
     }
@@ -100,6 +129,13 @@ class PageSectionsController extends Controller
 
     }
 
+    public function createVariationForlayout($slug){
+        $unit = ContentLayouts::find($slug);
+        $variation = $unit->variations()->createVariation([]);
+
+        return redirect()->route('uploads_layouts_settings',$variation->id);
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -107,9 +143,8 @@ class PageSectionsController extends Controller
     public function postSettings (Request $request)
     {
         $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
-
         return response()->json([
-            'url'  => isset($output['id']) ? url('/admin/uploads/gears/page-sections/settings/' . $output['id']) : false,
+            'url'  => isset($output['id']) ? url('/admin/uploads/layouts/settings/' . $output['id']) : false,
             'html' => isset($output['data']) ? $output['data'] : false
         ]);
     }

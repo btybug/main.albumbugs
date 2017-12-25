@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Variations for [{{ $unit->title }}] unit
-                        <a href="{{route('uploads_settings', $unit->slug)}}"
+                        <a href="{{route('create_variation_for_unit', $unit->slug)}}"
                            class="btn btn-xs btn-success pull-right" id="new-variation"
                            style="color:#fff;">New Variation</a>
                     </h4>

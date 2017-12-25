@@ -30,6 +30,8 @@
             </div>
         </div>
     @endforeach
+    <div class="loadding"><em class="loadImg"></em></div>
+    {!! $units->links() !!}
 @else
     <div class="col-xs-12 addon-item">
         NO Results

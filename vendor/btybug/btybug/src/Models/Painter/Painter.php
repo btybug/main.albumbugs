@@ -22,8 +22,7 @@ class Painter extends BasePainter
      */
     public function getStoragePath()
     {
-       return base_path();
-       //return resource_path(config('painter.PAINTERSPATH'));
+       return base_path(config('painter.PAINTERSPATH'));
     }
 
     /**
@@ -34,7 +33,7 @@ class Painter extends BasePainter
         return storage_path(config('painter.CONFIG'));
     }
 
-    public function findByVariation($id){
+    public function scopeFindByVariation($id){
         $slug = explode('.', $id);
         $tpl = Painter::find($slug[0]);
 
@@ -55,20 +54,20 @@ class Painter extends BasePainter
             $settings = $variation->settings;
         }
 
-        $body = url('/admin/uploads/gears-new/settings-iframe', $slug);
-        $dataSettings = url('/admin/uploads/gears-new/settings-iframe', $slug) . '/settings';
+        $body = url('/admin/uploads/gears/settings-iframe', $slug);
+        $dataSettings = url('/admin/uploads/gears/settings-iframe', $slug) . '/settings';
         $data['body'] = $body;
         $data['settings'] = $dataSettings;
 
-        return view('uploads::gears-new.units.preview', compact(['model',"ui", 'data', 'settings', 'variation']));
+        return view('uploads::gears.units.preview', compact(['model',"ui", 'data', 'settings', 'variation']));
     }
 
-    public function scopeRenderSettings($variables)
+    public function scopeRenderSettings($variables=null)
     {
-        $path = $this->path;
+        $path = $this->getPath();
         $variables['tplPath'] = $path;
         $variables['_this'] = $this;
-        $slug = $this->slug;
+        $slug = $this->getSlug();
 
         $is_wrong = $this->validateSettings('settings.blade.php');
 
@@ -84,9 +83,9 @@ class Painter extends BasePainter
 
     public function scopeRenderLive(array $variables = [])
     {
-        $slug = $this->slug;
-        $path = $this->path;
 
+        $slug = $this->getSlug();
+        $path = $this->getPath();
         View::addLocation($path);
         View::addNamespace("$slug", $path);
 
@@ -103,8 +102,12 @@ class Painter extends BasePainter
         } else {
             $tpl = "tpl";
         }
-
+        $this->path  = $path;
         return View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this])->render();
+    }
+    public function getPath()
+    {
+        return $this->getStoragePath().DS.$this->path;
     }
 
 }

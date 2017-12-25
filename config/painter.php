@@ -1,5 +1,7 @@
 <?php
 return [
   'CONFIG' => 'app'.DS.'painter.json',
-  'PAINTERSPATH' => 'units'
+  'PAINTERSPATH' => 'resources'.DS.'units',
+  'ContentLayouts' => 'resources'.DS.'views'.DS.'ContentLayouts',
+  'LAYOUT' => 'app'.DS.'layout.json'
 ];

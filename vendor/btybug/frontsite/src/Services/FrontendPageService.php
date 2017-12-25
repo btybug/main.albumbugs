@@ -133,9 +133,9 @@ class FrontendPageService extends GeneralService
         $this->frontPagesRepository->update($page->id, [
             'page_access' => $request->get('page_access')
         ]);
-
+//dd(implode(',', $request->roles));
         if ($request->get('page_access') && $request->roles)
-            $this->permissionRoleRepository->optimizePageRoles($page, explode(',', $request->roles), 'front');
+            $this->permissionRoleRepository->optimizePageRoles($page, $request->roles, 'front');
 
         return $page;
     }

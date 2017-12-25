@@ -37,5 +37,5 @@
   "created_at": 1493719963,
   "is_core": 0,
   "place": "frontend",
-  "path": "resources\\views\\ContentLayouts\\front_layout_with_2_col"
+  "path": "front_layout_with_2_col"
 }

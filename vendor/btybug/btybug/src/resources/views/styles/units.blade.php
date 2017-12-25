@@ -11,7 +11,7 @@
                             </div>
                             <a href="javascript:void(0)" type="button" data-id="{!! $tpl->slug !!}"
                                data-action="units" data-key="{!! $data['key'] !!}" class="styles">
-                                <img src="{!! url('images/form-list.jpg') !!}">
+                                {{--<img src="{!! url('images/form-list.jpg') !!}">--}}
                                 <span>{!! $tpl->title !!}</span></a>
                         </div>
                     </li>
@@ -23,14 +23,14 @@
             <h5>Select Variation</h5>
             @if(!isset($items))
                 <ul class="formlisting">
-                    @foreach($tpl->variations() as $item)
+                    @foreach($tpl->variations()->all() as $item)
                         <li class="col-md-3 col-sm-3 col-xs-12">
                             <figure>
                                 <a href="javascript:void(0)" data-key="{!! $data['key'] !!}"
                                    class="btn text-center item item-unit zzzzz" data-value="{!! $item->id !!}">
                                     <input type="hidden" data-action="units" data-input-type="{!! $tpl->input_type !!}"
                                            data-value="{!! $item->id !!}"/>
-                                    <img src="{!! url('images/form-list2.jpg') !!}">
+                                    <img src="{!! asset('public/images/default.jpg') !!}">
                                 </a>
                                 <p>
                                     <a href="javascript:void(0)"
@@ -75,7 +75,7 @@
                                 <a class="btn text-center item item-unit oooo" data-key="{!! $key !!}"
                                    data-value="{!! $item->id !!}">
                                     <input type="hidden" data-action="units" data-value="{!! $item->id !!}"/>
-                                    <img src="{!! url('images/form-list2.jpg') !!}">
+                                    <img src="{!! url('public/images/default.jpg') !!}">
                                 </a>
                                 <p>
                                     <a data-key="{!! $key !!}"

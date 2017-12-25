@@ -40,6 +40,11 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $variables = $this->attributes;
         return \View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
+    public function toArray()
+    {
+        if (isset($this->attributes)) return $this->attributes;
+        return false;
+    }
 
     public function all()
     {
@@ -107,6 +112,11 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
      return $this->makeVariation($array)->save();
     }
 
+    public function setAttributes($key, $value)
+    {
+        $this->attributes[$key] = $value;
+        return $this;
+    }
 
     /**
      * @param mixed $key
@@ -197,7 +207,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         }
     }
 
-    public function setSettinds($name, $value)
+    public function setSettings($name, $value)
     {
         $attr = $this->attributes->toArray();
         $attr['settings'][$name] = $value;

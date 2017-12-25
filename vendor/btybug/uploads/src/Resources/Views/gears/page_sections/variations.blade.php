@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Variations for [{{ $pageSection->title }}] unit
-                        <a href="{{ route('uploads_layouts_settings', $pageSection->slug) }}" class="btn btn-xs btn-success pull-right" id="new-variation"
+                        <a href="{{ route('create_variation_for_layout', $pageSection->slug) }}" class="btn btn-xs btn-success pull-right" id="new-variation"
                            style="color:#fff;">New Variation</a>
                         <a href="#" class="btn btn-xs btn-primary pull-right">Primary hooks settings</a>
                     </h4>

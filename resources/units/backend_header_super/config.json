@@ -14,5 +14,5 @@
   "is_core": 0,
   "place": "backend",
   "tags": ["backend_header","backend"],
-  "path": "resources\\units\\backend_header_super"
+  "path": "backend_header_super"
 }

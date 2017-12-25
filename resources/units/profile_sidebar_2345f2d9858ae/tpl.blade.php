@@ -61,4 +61,4 @@ Licensed under MIT
 </div>
 <br>
 <br>
-{!! $_this->style('css/styles.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}

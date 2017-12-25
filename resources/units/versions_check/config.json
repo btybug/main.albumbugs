@@ -12,5 +12,5 @@
   "is_core": 1,
   "tags":["front_page_content"],
   "place": "frontend",
-  "path": "resources\/units\/versions_check"
+  "path": "versions_check"
 }

@@ -90,7 +90,6 @@ class PagesController extends Controller
         FrontendPageService $frontendPageService
     )
     {
-        $units = CmsItemReader::getAllGearsByType('units')->sortByTag('test');
         $id = $request->param;
         $page = $frontPagesRepository->find($id);
         $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();

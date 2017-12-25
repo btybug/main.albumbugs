@@ -54,6 +54,7 @@
 {!! BBMainJS() !!}
 {!! BBJs("backend") !!}
 {!! HTML::script("public/js/admin.js?v=6.0") !!}
+{!! HTML::script("public/js/BB.js") !!}
 {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->slug).'.js') !!}
 <script>
     $(function () {

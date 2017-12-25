@@ -31,7 +31,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function getStoragePath()
     {
-        return base_path(config('painter.ContentLayouts'));
+        return config('painter.ContentLayouts');
     }
 
     /**
@@ -652,7 +652,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function getPath()
     {
-        return $this->getStoragePath() . DS . $this->path;
+        return base_path($this->path);
     }
 
 

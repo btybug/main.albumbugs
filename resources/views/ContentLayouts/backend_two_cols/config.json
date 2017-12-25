@@ -26,7 +26,7 @@
   "active": true,
   "example": "demo",
   "tags" : ["backend","back_pages_layout"],
-  "path": "backend_two_cols",
+  "path": "resources\/views\/ContentLayouts\/backend_two_cols",
   "placeholders" : {
     "left_bar" : {
       "type" : "unit",

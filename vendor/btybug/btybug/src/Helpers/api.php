@@ -552,7 +552,7 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
                 return $unit->render(compact(['variation', 'settings', 'source', 'field', 'cheked', 'data']));
             }
         }
-        var_dump($unit,$widget_id);die;
+
         return 'Wrong Unit';
     }
 }

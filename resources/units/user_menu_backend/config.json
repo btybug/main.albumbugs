@@ -13,5 +13,5 @@
   "is_core": 1,
   "place": "backend",
   "tags": ["backend","user-unit"],
-  "path": "user_menu_backend"
+  "path": "resources\/units\/user_menu_backend"
 }

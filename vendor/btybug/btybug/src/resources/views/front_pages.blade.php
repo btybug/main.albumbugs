@@ -8,6 +8,7 @@
         @if(isset($settings['mw']) && $settings['mw'])
             {!! BBRenderPageSections($settings['pl'],$settings,$settings['mw']) !!}
         @else
+
             {!! BBRenderPageSections($settings['pl'],$settings,$page->main_view) !!}
         @endif
         @if(isset($settings['footer']) && $settings['footer'])

@@ -22,7 +22,7 @@ class Painter extends BasePainter
      */
     public function getStoragePath()
     {
-       return base_path(config('painter.PAINTERSPATH'));
+       return config('painter.PAINTERSPATHS');
     }
 
     /**
@@ -107,7 +107,7 @@ class Painter extends BasePainter
     }
     public function getPath()
     {
-        return $this->getStoragePath().DS.$this->path;
+        return base_path($this->path);
     }
 
 }

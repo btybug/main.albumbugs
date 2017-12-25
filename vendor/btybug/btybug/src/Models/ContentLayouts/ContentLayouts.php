@@ -642,7 +642,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function getViewFile()
     {
-        return $this->view_name ? $this->view_name : 'tpl';
+        return $this->layout ? $this->layout : 'tpl';
     }
 
     public function getSlug()
@@ -654,7 +654,4 @@ class ContentLayouts extends BasePainter implements VariationAccess
     {
         return base_path($this->path);
     }
-
-
-
 }

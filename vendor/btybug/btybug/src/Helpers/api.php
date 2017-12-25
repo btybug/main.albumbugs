@@ -88,23 +88,9 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
         $content_layout = $slug[0];
         $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($content_layout);
         if (!is_null($section)) {
-            $variation = $section->findVariation($variation_id);
+            $variation = $section->variations()->find($variation_id);
             if (!is_null($variation)) {
-                $settings = $variation->toArray();
-                $liveSettings = $source;
-                if (count($liveSettings) && is_array($liveSettings) && is_array($settings)) {
-                    array_filter($settings, function ($value) {
-                        return $value !== '';
-                    });
-
-                    array_filter($liveSettings, function ($value) {
-                        return $value !== '';
-                    });
-                    $settings = array_merge($settings['settings'],$liveSettings);
-                }
-                $settings['main_view'] = $main_view;
-
-                return $section->render($settings->toArray());
+               return $variation->render($source);
             }
         }
         return false;
@@ -519,7 +505,6 @@ function BBgetSiteName()
 
 function BBRenderUnits($variation_id, $source = [], $data = NULL)
 {
-
     $field = null;
     $cheked = null;
     $slug = explode('.', $variation_id);

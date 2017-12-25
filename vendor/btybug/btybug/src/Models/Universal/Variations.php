@@ -30,16 +30,33 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
 
     }
 
-    public function render()
+    public function render(array $additionalSettings = [])
     {
         $slug = $this->model->getSlug();
         $tpl = $this->view;
         $path = $this->model->getPath();
         \View::addLocation($this->model->getPath());
         \View::addNamespace($slug, $this->model->getPath());
-        $variables = $this->attributes;
-        return \View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
+        $variables = $this->mixer($additionalSettings);
+        return \View::make("$slug::$tpl")->with('settings',$variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
+
+    private function mixer($liveSettings){
+        $settings = $this->attributes['settings'];
+        if (count($liveSettings) && is_array($liveSettings) && is_array($settings)) {
+            array_filter($settings, function ($value) {
+                return $value !== '';
+            });
+
+            array_filter($liveSettings, function ($value) {
+                return $value !== '';
+            });
+            $settings = array_merge($settings,$liveSettings);
+        }
+
+        return $settings;
+    }
+
     public function toArray()
     {
         if (isset($this->attributes)) return $this->attributes;

@@ -254,7 +254,7 @@ class AdminsettingRepository extends GeneralRepository
     {
         $result = $this->findBy('settingkey', $settingkey);
         if ($result) {
-            $this->update($result->id, $data);
+            $this->update($result->id, ['val' => $data]);
         } else {
             $this->create(['section' => $section, 'settingkey' => $settingkey,
                 'val' => $data]);

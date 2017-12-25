@@ -126,7 +126,6 @@ class ComposerController extends Controller
         $data = explode(':', $data);
         $plugins = new Plugins();
         $plugin=$plugins->find($data[0]);
-        return $plugin;
-
+        return $plugin->up();
     }
 }

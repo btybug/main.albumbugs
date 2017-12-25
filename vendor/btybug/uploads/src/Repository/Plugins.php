@@ -51,6 +51,7 @@ class Plugins
         $this->separator();
         return $this;
     }
+
     public function appPlugins()
     {
         $this->path = base_path(config('avatar.plugins.path') . DS . 'composer.json');
@@ -142,8 +143,8 @@ class Plugins
      */
     public function getInstaleds()
     {
-        if (\File::exists(base_path($this->dir .DS.'vendor'. DS . 'composer' . DS . 'installed.json'))) {
-            return json_decode(\File::get(base_path($this->dir .DS.'vendor'. DS . 'composer' . DS . 'installed.json')), true);
+        if (\File::exists(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json'))) {
+            return json_decode(\File::get(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json')), true);
         }
 
     }
@@ -172,8 +173,8 @@ class Plugins
      */
     public function setInstaleds($data)
     {
-        if (\File::exists(base_path($this->dir.DS.'vendor' . DS . 'composer' . DS . 'installed.json'))) {
-            return \File::put(base_path($this->dir.DS.'vendor' . DS . 'composer' . DS . 'installed.json'), json_encode($data, true));
+        if (\File::exists(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json'))) {
+            return \File::put(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json'), json_encode($data, true));
         }
 
     }
@@ -208,7 +209,7 @@ class Plugins
     public function disable($pluginPath)
     {
         $plugins = $this->getInstaleds();
-        if($plugins && count($plugins)){
+        if ($plugins && count($plugins)) {
             foreach ($plugins as $key => $plugin) {
                 if ($plugin['name'] == $pluginPath) {
 //                $plugin=$plugins[$pluginPath];
@@ -351,5 +352,39 @@ class Plugins
     public function parent()
     {
         return $this->find($this->parent);
+    }
+
+    public function up()
+    {
+        $namespace = $this->getNamespace();
+        $class = $namespace . 'Autoload';
+        if (class_exists($class)) {
+            $authoload = new $class();
+            if (method_exists($authoload, 'up')) {
+                return $authoload->up($this);
+            }
+        }
+    }
+
+    public function down()
+    {
+        $namespace = $this->getNamespace();
+        $class = $namespace . 'Autoload';
+        if (class_exists($class)) {
+            $authoload = new $class();
+            if (method_exists($authoload, 'up')) {
+                return $authoload->up($this);
+            }
+        }
+    }
+
+
+    public function getNamespace()
+    {
+        $psr = $this->autoload;
+        if (isset($psr['psr-4'])) {
+            $array = array_keys($psr['psr-4']);
+            return $array[0];
+        }
     }
 }

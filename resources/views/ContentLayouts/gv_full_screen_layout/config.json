@@ -26,5 +26,5 @@
   "active": true,
   "example": "demo",
   "tags" : ["front_pages_layout"],
-  "path": "gv_full_screen_layout"
+  "path": "resources\/views\/ContentLayouts\/gv_full_screen_layout"
 }

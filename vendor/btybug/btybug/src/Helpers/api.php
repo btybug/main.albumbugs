@@ -529,7 +529,7 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
         $variationID = $slug[1];
 
         $unit = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
-
+        dd($unit);
         if (!is_null($unit)) {
             $variation = $unit->variations()->find($variation_id);
             if (!is_null($variation)) {

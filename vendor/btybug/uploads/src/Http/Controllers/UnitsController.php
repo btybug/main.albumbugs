@@ -3,9 +3,11 @@
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Templates\Units;
+use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Services\CmsItemUploader;
 use Btybug\Resources\Models\Validation as validateUpl;
 use Illuminate\Http\Request;
+use function PHPSTORM_META\type;
 use Resources;
 use View;
 
@@ -34,39 +36,75 @@ class UnitsController extends Controller
 
     public function getIndex(Request $request)
     {
-        $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
-        return view("uploads::gears.units.index", compact(['units', 'test']));
+
+        if (\Request::ajax()) {
+            $sub_pagination = $request->sub_pagination;
+            if($sub_pagination){
+                $units = json_decode($request->units,true);
+                if(!count($units)){
+                    $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+                }else{
+                    $units = new Painter($units);
+                    $all_unit = $units->get();
+                    $units = $units->paginate(4, 4, 'bty-pagination-2');
+                }
+            }else{
+                $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+                $all_unit = Painter::all()->get();
+            }
+            return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
+        }
+
+        $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+        $all_unit = Painter::all()->get();
+        return view("uploads::gears.units.index", compact(['units', 'test','all_unit']));
     }
 
     public function getFrontend(Request $request)
     {
-        $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
-        return view("uploads::gears.units.index", compact(['units', 'test']));
-    }
+        if (\Request::ajax()) {
+            $sub_pagination = $request->sub_pagination;
+            if($sub_pagination){
+                $units = json_decode($request->units,true);
+                if(!count($units)){
+                    $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+                }else{
+                    $units = new Painter($units);
+                    $all_unit = $units->get();
+                    $units = $units->paginate(4, 4, 'bty-pagination-2');
+                }
+            }else{
+                $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+                $all_unit = Painter::all()->get();
+            }
+            return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
+        }
 
-    // from ajax get index content
-    public function getFrontendFromAjax(){
-        $units = Painter::all()->paginate(6, 5, 'bty-pagination-2');
-        $html =  View::make("uploads::gears.units._partials.unit_variations", compact(['units']))->render();
-
-        return \Response::json(['html' => $html, 'error' => false]);
+        $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+        $all_unit = Painter::all()->get();
+        return view("uploads::gears.units.index", compact(['units', 'test','all_unit']));
     }
 
     public function filterUnits(Request $request){
         $date_from = $request->date_from;
         $date_to = $request->date_to;
+
         $author = $request->author;
-        $units = new Painter();
+        $tag = $request->tag;
+
+        $units = Painter::all();
         if($date_from || $date_to){
-            $units = $units->filterByDate($date_from,$date_to);
+            $units = $units->whereDate($date_from,$date_to);
         }
         if($author){
-            $units = $units->where("author","=",$author);
+            $units = $units->where("author","like",$author);
         }
-
+        if($tag){
+            $units = $units->whereTag($tag);
+        }
+        $all_unit = $units->get();
         $units = $units->paginate(4,4,'bty-pagination-2');
-
-        $html= View::make('uploads::gears.units._partials.unit_variations',compact(['units']))->render();
+        $html= View::make('uploads::gears.units._partials.unit_variations',compact(['units','all_unit']))->render();
 
         return \Response::json(['html' => $html, 'error' => false]);
     }

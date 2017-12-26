@@ -20,21 +20,11 @@
                         <i></i>
                         <h2>Date</h2>
                         <div>
-                            <div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-date" type="radio" id="bty-date-1">
-                                    <label for="bty-date-1">All 1</label>
-                                </div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-date" type="radio" id="bty-date-2">
-                                    <label for="bty-date-2">All 2</label>
-                                </div>
-                            </div>
                             <div class="calendar">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input type="date" name="date_from">
+                                <input type="text" placeholder="From" class="date date_from custom_input_for_datepicker" name="date_from">
                                 <span> - </span>
-                                <input type="date" name="date_to">
+                                <input type="text" placeholder="To" class="date date_to custom_input_for_datepicker" name="date_to">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
 
@@ -42,66 +32,27 @@
                     </li>
                     <li>
                         <input type="checkbox">
-                        {{--<input type="checkbox" checked>--}}
                         <i></i>
                         <h2>Persons</h2>
-                        <div>
-                            <div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-persons" type="radio" id="bty-persons-1">
-                                    <label for="bty-persons-1">All 1</label>
-                                </div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-persons" type="radio" id="bty-persons-2">
-                                    <label for="bty-persons-2">All 2</label>
-                                </div>
-                            </div>
-                            <div class="bty-new-select">
-                                <select name="author">
-                                    <option value="">Choose Option</option>
-                                    <option value="Sahak">Sahak</option>
-                                    <option value="Edo">Edo</option>
-                                    <option value="gv">gv</option>
-                                    <option>Option 4</option>
-                                </select>
-                            </div>
+                        <div class="custom_text_align_center">
+                            <input type="text" placeholder="Author" class="custom_input_text author" name="author">
                         </div>
                     </li>
                     <li>
                         <input type="checkbox">
                         <i></i>
-                        <h2>Files Types</h2>
-                        <div>
-                            <div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-type" type="radio" id="bty-type-1">
-                                    <label for="bty-type-1">All 1</label>
-                                </div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-type" type="radio" id="bty-type-2">
-                                    <label for="bty-type-2">All 2</label>
-                                </div>
-                            </div>
-                            <div class="bty-new-select">
-                                <select name="type">
-                                    <option>Choose Option</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                </select>
-                            </div>
+                        <h2>Files Tags</h2>
+                        <div class="custom_text_align_center">
+                            <input type="text" class="custom_input_text tag" placeholder="Tag" name="tag">
                         </div>
                     </li>
                 </ul>
-                <button type="submit" class="custom_filter">Search</button>
             </div>
         </form>
     </div>
     <div class="col-md-8 custom_html_for_filter">
         @include('uploads::gears.units._partials.unit_variations')
     </div>
-
     {{--<div class="loadding"><em class="loadImg"></em></div>
     {!! $units->links() !!}--}}
 
@@ -190,31 +141,100 @@
             if (p.length) {
                 $("a[main-type=" + p + "]").click();
             }
+            $(".date").datepicker();
         });
+        var sub_pagination = 0;
 
-
-        $("body").delegate('.custom_filter-tables','submit',function(e){
+        $("body").delegate('.custom_filter-tables :input','keyup',function(e){
             e.preventDefault();
-            var that = $(this);
+            sub_pagination = 0;
+            var that = $('.custom_filter-tables');
+            var date_from = $('.date_from').val();
+            var date_to = $('.date_to').val();
+            var author = $('.author').val();
+            var tag = $('.tag').val();
+
+            if($(this).attr('type') == 'checkbox'){
+                return false;
+            }
+
+            $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
             $.ajax({
                 type : 'POST',
                 url : "{{ route('filter-units') }}",
                 data : that.serialize(),
                 success: function(data){
-                    $('.custom_html_for_filter').html(data.html);
+                    $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
+                    $('.custom_pagination').addClass('sub_pagination');
+                    sub_pagination = 1;
                 }
             });
         });
-        // get index page data form ajax
-        $(document).ready(function(){
-            {{--$.ajax({--}}
-                {{--type : 'POST',--}}
-                {{--url : "{{ route('get-units-for-index') }}",--}}
-                {{--data:{_token:'{{csrf_token()}}'},--}}
-                {{--success: function(data){--}}
-                    {{--$('.custom_html_for_filter').html(data.html);--}}
-                {{--}--}}
-            {{--});--}}
-        {{--});--}}
+
+        $("body").delegate('.custom_filter-tables div.calendar :input','change',function(e){
+            e.preventDefault();
+            sub_pagination = 0;
+            var that = $('.custom_filter-tables');
+            var date_from = $('.date_from').val();
+            var date_to = $('.date_to').val();
+            var author = $('.author').val();
+            var tag = $('.tag').val();
+
+            if($(this).attr('type') == 'checkbox'){
+                return false;
+            }
+
+            $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
+            $.ajax({
+                type : 'POST',
+                url : "{{ route('filter-units') }}",
+                data : that.serialize(),
+                success: function(data){
+                    $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
+                    $('.custom_pagination').addClass('sub_pagination');
+                    sub_pagination = 1;
+                }
+            });
+        });
+
+
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    getPosts(page);
+                }
+            }
+        });
+        $(document).ready(function() {
+            $(document).on('click', '.custom_pagination div ul li a', function (e) {
+                getPosts($(this).attr('href').split('page=')[1]);
+                e.preventDefault();
+            });
+        });
+        function getPosts(page) {
+            var token = $('input[name=_token]').val();
+
+            if($(".custom_pagination").hasClass("sub_pagination")){
+                sub_pagination = 1;
+            }
+
+
+            var units = $('.units').val();
+            $.ajax({
+                url : '?page=' + page,
+                data:{ units:units, _token:token,sub_pagination:sub_pagination },
+                method:'post',
+                dataType: 'json',
+            }).done(function (data) {
+                $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data);
+                location.hash = page;
+            }).fail(function () {
+                alert('Units could not be loaded.');
+            });
+        }
+
     </script>
 @stop

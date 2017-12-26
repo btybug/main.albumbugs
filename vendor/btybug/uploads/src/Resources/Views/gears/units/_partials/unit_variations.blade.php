@@ -1,4 +1,5 @@
 @if($units)
+
     @foreach($units as $ui)
         <div class="bty-unit-2">
             <div class="custom_margin_5">
@@ -31,7 +32,12 @@
         </div>
     @endforeach
     <div class="loadding"><em class="loadImg"></em></div>
-    {!! $units->links() !!}
+    <div class="custom_pagination">
+        {!! count($units)?$units->links():'' !!}
+    </div>
+    <textarea  class="units custom_hidden">
+        {{json_encode($all_unit->toArray())}}
+    </textarea>
 @else
     <div class="col-xs-12 addon-item">
         NO Results

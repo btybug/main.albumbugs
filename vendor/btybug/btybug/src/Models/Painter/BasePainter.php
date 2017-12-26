@@ -28,11 +28,26 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
     public $name_of_json = 'config.json';
 
-    public function __construct()
+    public function __construct($data=null)
     {
         $this->config_path = $this->getConfigPath();
         $this->base_path = $this->getStoragePath();
         $this->makeConfigJson();
+
+        if(count($data)){
+            $all = [];
+            $kk = 0;
+            foreach ($data as $key => $unit) {
+                $full_path = $this->getPath() . DS .$unit['path'] .DS.  $this->name_of_json;
+                $obj = new static();
+                $is_true = $obj->validateWithReturn($full_path);
+                if ($is_true) {
+                    $all[$kk] = $obj->makeItem($full_path);
+                    $kk++;
+                }
+            }
+            $this->storage = $all;
+        }
     }
 
     abstract function getConfigPath();
@@ -76,7 +91,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
                 }
             }
         }
-
         $this->storage = $all;
         return $this;
     }
@@ -156,7 +170,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         return $this;
     }
 
-    public function scopeFilterByDate(string $from = null, string $to = null)
+    public function scopeWhereDate(string $from = null, string $to = null)
     {
         if (!$from && !$to) {
             return $this;
@@ -168,19 +182,54 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
         $carbon = new \Carbon\Carbon();
         $format = 'Y-m-d';
+        $filtered = [];
 
-        $dateFrom = $carbon::createFromFormat($format, $from);
-        $dateTo = $carbon::createFromFormat($format, $to);
-
-        $filtered = array_filter($arr, function ($value) use ($dateFrom, $dateTo, $carbon, $format) {
-
-            if (array_key_exists('created_at', $value->toArray())) {
-                $dateInArray = BBgetDateFormat($value->created_at, "Y-m-d");
-                return $carbon::createFromFormat($format, $dateInArray)->between($dateFrom, $dateTo);
+        if(!$from || !$to){
+            foreach ($arr as $unit){
+                if(!$from){
+                    $dateTo = strtotime($to);
+                    $filtered = $this->where('created_at', '<', $dateTo)->get();
+                }else{
+                    $dateFrom = strtotime($from);
+                    $filtered = $this->where('created_at', '>', $dateFrom)->get();
+                }
             }
-            return false;
-        });
+        }else{
+            $dateFrom = $carbon::parse($from)->format($format); // at first change datepicker format
+            $dateTo = $carbon::parse($to)->format($format);
 
+            $dateFrom = $carbon::createFromFormat($format, $dateFrom); // and parse string to date object
+            $dateTo = $carbon::createFromFormat($format, $dateTo);
+
+            $filtered = array_filter($arr, function ($value) use ($dateFrom, $dateTo, $carbon, $format) {
+
+                if (array_key_exists('created_at', $value->toArray())) {
+                    $dateInArray = BBgetDateFormat($value->created_at, "Y-m-d");
+                    return $carbon::createFromFormat($format, $dateInArray)->between($dateFrom, $dateTo);
+                }
+                return false;
+            });
+        }
+
+        $this->storage = collect($filtered);
+        return $this;
+    }
+    public function scopeWhereTag(string $tagg){
+        if (is_null($this->storage)) {
+            $this->scopeAll();
+        }
+        $arr = $this->storage;
+        $filtered = [];
+        foreach ($arr as $unit){
+            $tags = $unit->tags;
+            if($tags){
+                foreach ($tags as $tag){
+                    if(str_contains(strtolower($tag),strtolower($tagg))){
+                        $filtered[] = $unit;
+                    }
+                }
+            }
+        }
         $this->storage = collect($filtered);
         return $this;
     }
@@ -477,6 +526,9 @@ abstract class BasePainter implements PainterInterface, VariationAccess
                 break;
             case ">=":
                 $bool = $arg1 >= $arg2;
+                break;
+            case "like":
+                $bool = str_contains(strtolower($arg1),strtolower($arg2));
                 break;
             default:
                 $this->throwError("Condition is not exist");

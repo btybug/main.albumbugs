@@ -515,7 +515,7 @@ class FormService extends GeneralService
                                     $inside_array['object'] = $field;
                                     $inside_array['html'] = $this->fieldService->returnHtml($field);
                                     $inside_array['field_data'] = get_field_data($field->id);
-                                    $existing[$key][] = $inside_array;
+                                    $existing[] = $inside_array;
                                 }
                             }
                         }

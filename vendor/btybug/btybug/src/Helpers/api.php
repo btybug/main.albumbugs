@@ -684,7 +684,7 @@ function BBbutton2($type, $key, $tag, $text, $array = [])
 {
     $atributes = ' ';
     $value = '';
-    $array['class'] = $array['class'] . " BBbuttons";
+    $array['class'] = "BBbuttons";
     $array['data-type'] = $tag;
     if (count($array)) {
         foreach ($array as $k => $v) {

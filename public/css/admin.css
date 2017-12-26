@@ -241,3 +241,9 @@ body{ background:#FFF;overflow-x: hidden;}
 .left-column{
 
 }
+
+button.BBbuttons {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+}

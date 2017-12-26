@@ -51,4 +51,5 @@ composer.lock
 /vendor/laravelcollective
 /vendor/caffeinated
 /vendor/chumper
+/vendor/yajra
 /public/app

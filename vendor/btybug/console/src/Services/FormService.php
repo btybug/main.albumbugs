@@ -502,14 +502,36 @@ class FormService extends GeneralService
         if($this->formObject) {
             $fields = $this->getExistingFields();
             if(count($fields)){
-                foreach ($fields as $field){
-                    $existing = [];
-                    $existing['object'] = $field;
-                    $existing['html'] = $this->fieldService->returnHtml($field);
-                    $existing['field_data'] = get_field_data($field->id);
+                $combo = $this->formObject->fields_json;
+                if($combo && count(json_decode($combo,true))){
+                    $combo = json_decode($combo,true);
+                    foreach ($combo as $key => $items){
+                        $existing = [];
+                        if(count($items)){
+                            foreach ($items as $field_id){
+                                $field = $this->fieldRepo->find($field_id);
+                                if($field) {
+                                    $inside_array = [];
+                                    $inside_array['object'] = $field;
+                                    $inside_array['html'] = $this->fieldService->returnHtml($field);
+                                    $inside_array['field_data'] = get_field_data($field->id);
+                                    $existing[$key][] = $inside_array;
+                                }
+                            }
+                        }
+                        $this->formData[] = $existing;
+                    }
+                }else{
+                    foreach ($fields as $field){
+                        $existing = [];
+                        $existing['object'] = $field;
+                        $existing['html'] = $this->fieldService->returnHtml($field);
+                        $existing['field_data'] = get_field_data($field->id);
 
-                    $this->formData[] = $existing;
+                        $this->formData[] = $existing;
+                    }
                 }
+
             }
         }
 

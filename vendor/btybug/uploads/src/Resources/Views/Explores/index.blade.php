@@ -90,7 +90,24 @@
                 No Menus
             </div>
             <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
-                No Tables
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Table Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>user</td>
+                        <td><a href="#" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
+                    </tr>
+                    <tr>
+                        <td>permissions</td>
+                        <td><a href="#" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

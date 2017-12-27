@@ -24,7 +24,8 @@ class UserController extends Controller
         UserService $userService
     )
     {
-        $users = $userService->getSiteUsers()->paginate();
+        $users=[];
+//        $users = $userService->getSiteUsers()->paginate();
         return view('users::users.list', compact(['users', 'userService']));
     }
 

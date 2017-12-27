@@ -2,7 +2,7 @@
 @section('tab')
     <div class="row">
         <div class="col-md-12">
-            <a href="{!! route("admin.users.getCreate") !!}" class="btn btn-info pull-right"><i class="fa fa-plus"></i>
+            <a href="{!! route("user_create") !!}" class="btn btn-info pull-right"><i class="fa fa-plus"></i>
                 Add New User</a>
         </div>
         <div class="col-md-12 table-responsive p-0">

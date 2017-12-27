@@ -46,8 +46,10 @@ Route::group(['prefix' => 'gears'], function () {
     Route::get('/', function () {
         return view("uploads::gears.units.list");
     },true)->name('uploads_gears_index');
-    Route::any('/back-end', 'UnitsController@getIndex',true)->name('uploads_back_end');
-    Route::any('/front-end', 'UnitsController@getFrontend',true)->name('uploads_front_end');
+    Route::get('/back-end', 'UnitsController@getIndex',true)->name('uploads_back_end');
+    Route::post('/back-end', 'UnitsController@getIndexFromPost',true)->name('uploads_back_end_from_post');
+    Route::get('/front-end', 'UnitsController@getFrontend',true)->name('uploads_front_end');
+    Route::post('/front-end', 'UnitsController@getFrontendFromPost')->name('uploads_front_end_from_post');
     Route::post('/upload', 'UnitsController@postUploadUnit');
     Route::get('/delete-variation/{slug}', 'UnitsController@postDeleteVariation');
     Route::get('/units-variations/{slug}', 'UnitsController@getUnitVariations',true)->name('uploads_units_variations');

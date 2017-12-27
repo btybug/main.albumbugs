@@ -36,53 +36,42 @@ class UnitsController extends Controller
 
     public function getIndex(Request $request)
     {
-
-        if (\Request::ajax()) {
-            $sub_pagination = $request->sub_pagination;
-            if($sub_pagination){
-                $units = json_decode($request->units,true);
-                if(!count($units)){
-                    $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
-                }else{
-                    $units = new Painter($units);
-                    $all_unit = $units->get();
-                    $units = $units->paginate(4, 4, 'bty-pagination-2');
-                }
-            }else{
-                $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
-                $all_unit = Painter::all()->get();
-            }
-            return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
-        }
-
         $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
         $all_unit = Painter::all()->get();
         return view("uploads::gears.units.index", compact(['units', 'test','all_unit']));
     }
 
+    public function getIndexFromPost(Request $request){
+        $units = json_decode($request->units,true);
+        if(!count($units)){
+            $all_unit = Painter::all()->get();
+            $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+        }else{
+            $units = Painter::makeUnits($units);
+            $all_unit = $units->get();
+            $units = $units->paginate(4, 4, 'bty-pagination-2');
+        }
+        return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
+    }
+
     public function getFrontend(Request $request)
     {
-        if (\Request::ajax()) {
-            $sub_pagination = $request->sub_pagination;
-            if($sub_pagination){
-                $units = json_decode($request->units,true);
-                if(!count($units)){
-                    $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
-                }else{
-                    $units = new Painter($units);
-                    $all_unit = $units->get();
-                    $units = $units->paginate(4, 4, 'bty-pagination-2');
-                }
-            }else{
-                $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
-                $all_unit = Painter::all()->get();
-            }
-            return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
-        }
-
         $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
         $all_unit = Painter::all()->get();
         return view("uploads::gears.units.index", compact(['units', 'test','all_unit']));
+    }
+
+    public function getFrontendFromPost(Request $request){
+        $units = json_decode($request->units,true);
+        if(!count($units)){
+            $all_unit = Painter::all()->get();
+            $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
+        }else{
+            $units = Painter::makeUnits($units);
+            $all_unit = $units->get();
+            $units = $units->paginate(4, 4, 'bty-pagination-2');
+        }
+        return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
     }
 
     public function filterUnits(Request $request){

@@ -28,26 +28,11 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
     public $name_of_json = 'config.json';
 
-    public function __construct($data=null)
+    public function __construct()
     {
         $this->config_path = $this->getConfigPath();
         $this->base_path = $this->getStoragePath();
         $this->makeConfigJson();
-
-        if(count($data)){
-            $all = [];
-            $kk = 0;
-            foreach ($data as $key => $unit) {
-                $full_path = $this->getPath() . DS .$unit['path'] .DS.  $this->name_of_json;
-                $obj = new static();
-                $is_true = $obj->validateWithReturn($full_path);
-                if ($is_true) {
-                    $all[$kk] = $obj->makeItem($full_path);
-                    $kk++;
-                }
-            }
-            $this->storage = $all;
-        }
     }
 
     abstract function getConfigPath();
@@ -114,6 +99,23 @@ abstract class BasePainter implements PainterInterface, VariationAccess
             $config = json_decode(\File::get($path), true);
             $this->attributes = $config;
             $this->original = $config;
+            return $this;
+        }
+        return null;
+    }
+
+    public function scopeMakeUnits($data){
+        if(count($data)){
+            $all = [];
+            foreach ($data as $key => $unit) {
+                $full_path = $this->getPath() . DS .$unit['path'] .DS.  $this->name_of_json;
+                $obj = new static();
+                $is_true = $obj->validateWithReturn($full_path);
+                if ($is_true) {
+                    $all[$key] = $obj->makeItem($full_path);
+                }
+            }
+            $this->storage = $all;
             return $this;
         }
         return null;

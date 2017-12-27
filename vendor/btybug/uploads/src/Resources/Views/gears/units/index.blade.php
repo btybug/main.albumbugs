@@ -143,11 +143,10 @@
             }
             $(".date").datepicker();
         });
-        var sub_pagination = 0;
 
         $("body").delegate('.custom_filter-tables :input','keyup',function(e){
             e.preventDefault();
-            sub_pagination = 0;
+
             var that = $('.custom_filter-tables');
             var date_from = $('.date_from').val();
             var date_to = $('.date_to').val();
@@ -165,15 +164,13 @@
                 data : that.serialize(),
                 success: function(data){
                     $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
-                    $('.custom_pagination').addClass('sub_pagination');
-                    sub_pagination = 1;
                 }
             });
         });
 
         $("body").delegate('.custom_filter-tables div.calendar :input','change',function(e){
             e.preventDefault();
-            sub_pagination = 0;
+
             var that = $('.custom_filter-tables');
             var date_from = $('.date_from').val();
             var date_to = $('.date_to').val();
@@ -183,7 +180,6 @@
             if($(this).attr('type') == 'checkbox'){
                 return false;
             }
-
             $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
             $.ajax({
                 type : 'POST',
@@ -191,12 +187,9 @@
                 data : that.serialize(),
                 success: function(data){
                     $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
-                    $('.custom_pagination').addClass('sub_pagination');
-                    sub_pagination = 1;
                 }
             });
         });
-
 
         $(window).on('hashchange', function() {
             if (window.location.hash) {
@@ -210,22 +203,16 @@
         });
         $(document).ready(function() {
             $(document).on('click', '.custom_pagination div ul li a', function (e) {
-                getPosts($(this).attr('href').split('page=')[1]);
                 e.preventDefault();
+                getPosts($(this).attr('href').split('page=')[1]);
             });
         });
         function getPosts(page) {
             var token = $('input[name=_token]').val();
-
-            if($(".custom_pagination").hasClass("sub_pagination")){
-                sub_pagination = 1;
-            }
-
-
             var units = $('.units').val();
             $.ajax({
                 url : '?page=' + page,
-                data:{ units:units, _token:token,sub_pagination:sub_pagination },
+                data:{ units:units, _token:token},
                 method:'post',
                 dataType: 'json',
             }).done(function (data) {

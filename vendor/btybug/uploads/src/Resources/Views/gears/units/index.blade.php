@@ -147,10 +147,6 @@
         // function for filters
         $('.custom_filter-tables :input').doFilter(function(){
             var that = $('.custom_filter-tables');
-            var date_from = $('.date_from').val();
-            var date_to = $('.date_to').val();
-            var author = $('.author').val();
-            var tag = $('.tag').val();
 
             if($(this).attr('type') == 'checkbox'){
                 return false;

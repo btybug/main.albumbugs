@@ -159,15 +159,10 @@
             // function for filters
             $('.custom_filter-tables :input').doFilter(function(){
                 var that = $('.custom_filter-tables');
-                var date_from = $('.date_from').val();
-                var date_to = $('.date_to').val();
-                var author = $('.author').val();
-                var tag = $('.tag').val();
 
                 if($(this).attr('type') == 'checkbox'){
                     return false;
                 }
-
                 $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
                 $.ajax({
                     type : 'POST',

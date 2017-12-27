@@ -49,7 +49,7 @@ function getPosts(page) {
         method:'post',
         dataType: 'json',
     }).done(function (data) {
-        $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data);
+        $('.custom_html_for_filter').html(data);
         location.hash = page;
     }).fail(function () {
         alert('Something went wrong.');

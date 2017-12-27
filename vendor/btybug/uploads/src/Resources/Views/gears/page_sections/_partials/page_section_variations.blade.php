@@ -14,9 +14,10 @@
                         <li><a data-href="{!! url('/admin/uploads/layouts/delete') !!}" data-key="{!! $ui->slug !!}" data-type="{!! $ui->title !!} Layout"><i class="fa fa-trash"></i></a></li>
                     </ul>
                     <div>
-                        <span><i class="fa fa-user" aria-hidden="true"></i> {!! $ui->author !!}</span>
-                        <h5><a href="#">{!! str_limit($ui->title,15) !!}</a></h5>
-
+                        <div class="bty-unit-2-title">
+                            <span><i class="fa fa-user" aria-hidden="true"></i> {!! $ui->author !!}</span>
+                            <h5><a href="#">{!! str_limit($ui->title,15) !!}</a></h5>
+                        </div>
                         {{--<p>{!! $ui->descripiton !!}</p>--}}
                         @if(isset($ui->tags) && count($ui->tags) > 0)
                             <ul>

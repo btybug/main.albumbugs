@@ -32,7 +32,7 @@ Route::group(['prefix' => 'modules'], function () {
     });
 //    Route::group(['prefix' => 'datatable'], function () {
         Route::get('datatable/{table}', 'DatatablesController@getIndex',true)->name('modules_datatable_index');
-//});
+//});5
 });
 
 

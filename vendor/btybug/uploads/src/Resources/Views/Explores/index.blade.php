@@ -93,19 +93,19 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th>Table Name</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($tables as $key=>$table)
                     <tr>
-                        <td>user</td>
-                        <td><a href="{!! url('admin/uploads/modules/datatable/user') !!}" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
+                        <td>{!! $key !!}</td>
+                        <td>{!! $table !!}</td>
+                        <td><a href="{!! url('admin/uploads/modules/datatable',$table) !!}" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
                     </tr>
-                    <tr>
-                        <td>permissions</td>
-                        <td><a href="{!! url('admin/uploads/modules/datatable/permissions') !!}" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

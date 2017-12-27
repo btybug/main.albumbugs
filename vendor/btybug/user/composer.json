@@ -14,5 +14,6 @@
         "psr-4": {
             "Btybug\\User\\": "src/"
         }
-    }
+    },
+    "tables":["user","roles","profiles","users_profile","users_meta","permissions","permission_role"]
 }

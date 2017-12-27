@@ -10,11 +10,20 @@ namespace Btybug\Uploads\Http\Controllers;
 
 
 use Btybug\btybug\Http\Controller;
+use DataTables;
+use DB;
 
 class DatatablesController extends Controller
 {
-    public function getIndex()
+    public function getIndex($table)
     {
-        return view('uploads::Datatables.index');
-}
+        $columns = \Schema::getColumnListing($table);
+        return view('uploads::Datatables.index',compact('table','columns'));
+    }
+
+    public function getData($table)
+    {
+        $query = DB::table($table);
+        return DataTables::of($query)->toJson();
+    }
 }

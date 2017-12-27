@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'ModulesController@getChilds',true);
+Route::get('/', 'ModulesController@getChilds', true);
 Route::get('/test/{id?}', 'UnitsNewController@test');
 
 //Route::get('/optimisation', function () {
@@ -21,47 +21,49 @@ Route::get('/test/{id?}', 'UnitsNewController@test');
 
 Route::group(['prefix' => 'modules'], function () {
 
-    Route::get('/', 'ModulesController@getIndex',true)->name('modules_index');
-    Route::get('/core-packages', 'ModulesController@getCoreModules',true)->name('core_packages');
-    Route::get('/update-cms', 'ModulesController@getUpdateCms',true)->name('update_cms');
-    Route::get('/{repository}/{package}/explore', 'ModulesController@getExplore',true);
+    Route::get('/', 'ModulesController@getIndex', true)->name('modules_index');
+    Route::get('/core-packages', 'ModulesController@getCoreModules', true)->name('core_packages');
+    Route::get('/update-cms', 'ModulesController@getUpdateCms', true)->name('update_cms');
+    Route::get('/{repository}/{package}/explore', 'ModulesController@getExplore', true);
 
     Route::group(['prefix' => 'extra-packages'], function () {
-        Route::get('/', 'PluginsController@getIndex',true)->name('plugins_index');
-        Route::get('/{repository}/{package}/explore', 'PluginsController@getExplore',true);
+        Route::get('/', 'PluginsController@getIndex', true)->name('plugins_index');
+        Route::get('/{repository}/{package}/explore', 'PluginsController@getExplore', true);
     });
 //    Route::group(['prefix' => 'datatable'], function () {
-        Route::get('datatable/{table}', 'DatatablesController@getIndex',true)->name('modules_datatable_index');
+    Route::get('datatable/{table}', 'DatatablesController@getIndex', true)->name('modules_datatable_index');
+    Route::get('/datatables/{table}', 'DatatablesController@getData')->name('dynamic_datatable');
+
 //});5
 });
 
 
 Route::group(['prefix' => 'apps'], function ($router) {
-    Route::get('/', 'AppsController@getIndex',true)->name('app_plugins');
-    Route::get('/core-apps', 'AppsController@getCoreApps',true)->name('core_apps');
-    Route::get('/{repository}/{package}/explore', 'AppsController@getExplore',true);
+    Route::get('/', 'AppsController@getIndex', true)->name('app_plugins');
+    Route::get('/core-apps', 'AppsController@getCoreApps', true)->name('core_apps');
+    Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
 
     Route::group(['prefix' => 'extra-apps'], function () {
-        Route::get('/', 'AppsController@getExtra',true)->name('app_extra');
-        Route::get('/{repository}/{package}/explore', 'AppsController@getExplore',true);
+        Route::get('/', 'AppsController@getExtra', true)->name('app_extra');
+        Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
     });
 });
 Route::group(['prefix' => 'gears'], function () {
     Route::get('/', function () {
         return view("uploads::gears.units.list");
-    },true)->name('uploads_gears_index');
-    Route::get('/back-end', 'UnitsController@getIndex',true)->name('uploads_back_end');
+    }, true)->name('uploads_gears_index');
+    Route::get('/back-end', 'UnitsController@getIndex', true)->name('uploads_back_end');
     Route::post('/back-end', 'UnitsController@getIndexFromPost')->name('uploads_back_end_from_post');
-    Route::get('/front-end', 'UnitsController@getFrontend',true)->name('uploads_front_end');
+    Route::get('/front-end', 'UnitsController@getFrontend', true)->name('uploads_front_end');
     Route::post('/front-end', 'UnitsController@getFrontendFromPost')->name('uploads_front_end_from_post');
     Route::post('/upload', 'UnitsController@postUploadUnit');
     Route::get('/delete-variation/{slug}', 'UnitsController@postDeleteVariation');
-    Route::get('/units-variations/{slug}', 'UnitsController@getUnitVariations',true)->name('uploads_units_variations');
+    Route::get('/units-variations/{slug}', 'UnitsController@getUnitVariations', true)->name('uploads_units_variations');
     Route::post('/units-variations/{slug}', 'UnitsController@postUnitVariations');
-    Route::get('/live-settings/{slug}', 'UnitsController@unitPreview',true)->name('uploads_live_settings');
-    Route::get('/settings/{slug?}', 'UnitsController@getSettings',true)->name('uploads_settings');
-    Route::get('/settings/create/{slug?}', 'UnitsController@createVariationForUnit',true)->name('create_variation_for_unit');
-    Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsController@unitPreviewIframe',true)->name('uploads_settings_iframe');
+    Route::get('/live-settings/{slug}', 'UnitsController@unitPreview', true)->name('uploads_live_settings');
+    Route::get('/settings/{slug?}', 'UnitsController@getSettings', true)->name('uploads_settings');
+    Route::get('/settings/create/{slug?}', 'UnitsController@createVariationForUnit', true)->name('create_variation_for_unit');
+    Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsController@unitPreviewIframe', true)->name('uploads_settings_iframe');
     Route::post('/settings/{id}/{save?}', 'UnitsController@postSettings');
     Route::post('/delete', 'UnitsController@postDelete');
     Route::post('/filter', 'UnitsController@filterUnits')->name('filter-units');
@@ -71,14 +73,14 @@ Route::group(['prefix' => 'gears'], function () {
 Route::group(['prefix' => 'layouts'], function () {
     Route::get('/', function () {
         return view("uploads::gears.page_sections.list");
-    },true)->name('uploads_layout_index');
-    Route::get('/back-end', 'PageSectionsController@getIndex',true)->name('uploads_layouts_back_end');
+    }, true)->name('uploads_layout_index');
+    Route::get('/back-end', 'PageSectionsController@getIndex', true)->name('uploads_layouts_back_end');
     Route::post('/back-end', 'PageSectionsController@getIndexFromPost')->name('uploads_layouts_back_end_from_post');
-    Route::get('/front-end', 'PageSectionsController@getFrontend',true)->name('uploads_layouts_front_end');
+    Route::get('/front-end', 'PageSectionsController@getFrontend', true)->name('uploads_layouts_front_end');
     Route::post('/front-end', 'PageSectionsController@getFrontendFromPost')->name('uploads_layouts_front_end_from_post');
-    Route::get('/settings/{slug}', 'PageSectionsController@getSettings',true)->name('uploads_layouts_settings');
-    Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout',true)->name('create_variation_for_layout');
-    Route::get('/variations/{slug}', 'PageSectionsController@getVariations',true)->name('uploads_layouts_variations');
+    Route::get('/settings/{slug}', 'PageSectionsController@getSettings', true)->name('uploads_layouts_settings');
+    Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout', true)->name('create_variation_for_layout');
+    Route::get('/variations/{slug}', 'PageSectionsController@getVariations', true)->name('uploads_layouts_variations');
     Route::post('/settings/{slug}/{save?}', 'PageSectionsController@postSettings');
     Route::post('/console', 'PageSectionsController@getConsole');
     Route::post('/make-active', 'PageSectionsController@postMakeActive');
@@ -89,10 +91,10 @@ Route::group(['prefix' => 'layouts'], function () {
 });
 
 Route::group(['prefix' => 'assets'], function () {
-    Route::get('/', 'AssetsController@getIndex',true)->name('uploads_assets_index');
-    Route::get('/js', 'AssetsController@getJs',true)->name('uploads_assets_js');
-    Route::get('/css', 'AssetsController@getCss',true)->name('uploads_assets_css');
-    Route::get('/fonts', 'AssetsController@getFonts',true)->name('uploads_assets_fonts');
+    Route::get('/', 'AssetsController@getIndex', true)->name('uploads_assets_index');
+    Route::get('/js', 'AssetsController@getJs', true)->name('uploads_assets_js');
+    Route::get('/css', 'AssetsController@getCss', true)->name('uploads_assets_css');
+    Route::get('/fonts', 'AssetsController@getFonts', true)->name('uploads_assets_fonts');
 
     Route::post('/', 'AssetsController@postUploadJs');
     Route::post('/change-version', 'AssetsController@postChangeVersion');
@@ -107,10 +109,10 @@ Route::group(['prefix' => 'assets'], function () {
 });
 
 Route::group(['prefix' => 'market'], function ($router) {
-    Route::get('/', 'MarketController@getIndex',true)->name('market_index');
-    Route::get('/packages', 'MarketController@getPackages',true)->name('composer_market');
+    Route::get('/', 'MarketController@getIndex', true)->name('market_index');
+    Route::get('/packages', 'MarketController@getPackages', true)->name('composer_market');
     Route::group(['prefix' => 'composer'], function ($router) {
-        Route::get('/', 'ComposerController@getIndex',true)->name('composer_index');
+        Route::get('/', 'ComposerController@getIndex', true)->name('composer_index');
         Route::post('/main', 'ComposerController@getMain')->name('composer_main');
         Route::post('plugin-on-off', 'ComposerController@getOnOff')->name('on_off');
     });

@@ -15,5 +15,5 @@
             "Btybug\\User\\": "src/"
         }
     },
-    "tables":["user","roles","profiles","users_profile","users_meta","permissions","permission_role"]
+    "tables":["users","roles","profiles","users_profile","users_meta","permissions","permission_role"]
 }

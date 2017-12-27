@@ -23,7 +23,8 @@ class DatatablesController extends Controller
 
     public function getShowColumns($table)
     {
-        $columns = \Schema::getColumnListing($table);
+//        $columns = \Schema::getColumnListing($table);
+        $columns = \DB::select('SHOW COLUMNS FROM ' . $table);
         return view('uploads::Datatables.show_columns',compact('table','columns'));
     }
 

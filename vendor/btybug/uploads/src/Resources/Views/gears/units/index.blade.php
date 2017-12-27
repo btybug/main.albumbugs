@@ -80,6 +80,7 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
+    {!! BBscript('public/js/custom_plugin.js') !!}
     {!! BBscript('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
     <script>
         Dropzone.options.myAwesomeDropzone = {
@@ -141,36 +142,10 @@
             if (p.length) {
                 $("a[main-type=" + p + "]").click();
             }
-            $(".date").datepicker();
         });
 
-        $("body").delegate('.custom_filter-tables :input','keyup',function(e){
-            e.preventDefault();
-
-            var that = $('.custom_filter-tables');
-            var date_from = $('.date_from').val();
-            var date_to = $('.date_to').val();
-            var author = $('.author').val();
-            var tag = $('.tag').val();
-
-            if($(this).attr('type') == 'checkbox'){
-                return false;
-            }
-
-            $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
-            $.ajax({
-                type : 'POST',
-                url : "{{ route('filter-units') }}",
-                data : that.serialize(),
-                success: function(data){
-                    $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
-                }
-            });
-        });
-
-        $("body").delegate('.custom_filter-tables div.calendar :input','change',function(e){
-            e.preventDefault();
-
+        // function for filters
+        $('.custom_filter-tables :input').doFilter(function(){
             var that = $('.custom_filter-tables');
             var date_from = $('.date_from').val();
             var date_to = $('.date_to').val();
@@ -189,39 +164,6 @@
                     $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
                 }
             });
-        });
-
-        $(window).on('hashchange', function() {
-            if (window.location.hash) {
-                var page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
-                    return false;
-                } else {
-                    getPosts(page);
-                }
-            }
-        });
-        $(document).ready(function() {
-            $(document).on('click', '.custom_pagination div ul li a', function (e) {
-                e.preventDefault();
-                getPosts($(this).attr('href').split('page=')[1]);
-            });
-        });
-        function getPosts(page) {
-            var token = $('input[name=_token]').val();
-            var units = $('.units').val();
-            $.ajax({
-                url : '?page=' + page,
-                data:{ units:units, _token:token},
-                method:'post',
-                dataType: 'json',
-            }).done(function (data) {
-                $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data);
-                location.hash = page;
-            }).fail(function () {
-                alert('Units could not be loaded.');
-            });
-        }
-
+        },500);
     </script>
 @stop

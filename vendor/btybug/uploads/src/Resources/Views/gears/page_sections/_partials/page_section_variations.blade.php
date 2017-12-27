@@ -31,7 +31,13 @@
         </div>
     @endforeach
     <div class="loadding"><em class="loadImg"></em></div>
-    {!! $pageSections->links() !!}
+    <div class="custom_pagination">
+        {!! count($pageSections)?$pageSections->links():'' !!}
+    </div>
+
+    <textarea  class="arr custom_hidden">
+        {{json_encode($all_layouts->toArray())}}
+    </textarea>
 @else
     <div class="col-xs-12 addon-item">
         NO Results

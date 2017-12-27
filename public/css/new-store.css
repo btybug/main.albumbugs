@@ -378,16 +378,16 @@ ul.field_tabs li.current{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	-webkit-transform: translateY(calc(70px + 1em));
-	transform: translateY(calc(70px + 1em));
+	-webkit-transform: translateY(calc(30px + 1em));
+	transform: translateY(calc(30px + 1em));
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
 	transition: transform 0.3s, -webkit-transform 0.3s;
 }
 .bty-unit-2 div.custom_div_for_tags_when_not{
-	-webkit-transform: translateY(calc(41px + 1em));
-	transform: translateY(calc(41px + 1em));
+	-webkit-transform: translateY(calc(0px + 1em));
+	transform: translateY(calc(0px + 1em));
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -1007,4 +1007,17 @@ ul.field_tabs li.current{
 }
 .custom_hidden{
 	display:none;
+}
+.bty-unit-2-title{
+	display:flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+.bty-unit-2-title span{
+	flex-shrink: 0;
+	padding:0 10px 0 0;
+	font-size: 30px;
+}
+.bty-unit-2-title h5{
+	margin: 0;
 }

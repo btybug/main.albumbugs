@@ -42,7 +42,7 @@ class UnitsController extends Controller
     }
 
     public function getIndexFromPost(Request $request){
-        $units = json_decode($request->units,true);
+        $units = json_decode($request->arr,true);
         if(!count($units)){
             $all_unit = Painter::all()->get();
             $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
@@ -62,7 +62,7 @@ class UnitsController extends Controller
     }
 
     public function getFrontendFromPost(Request $request){
-        $units = json_decode($request->units,true);
+        $units = json_decode($request->arr,true);
         if(!count($units)){
             $all_unit = Painter::all()->get();
             $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');

@@ -47,7 +47,7 @@ Route::group(['prefix' => 'gears'], function () {
         return view("uploads::gears.units.list");
     },true)->name('uploads_gears_index');
     Route::get('/back-end', 'UnitsController@getIndex',true)->name('uploads_back_end');
-    Route::post('/back-end', 'UnitsController@getIndexFromPost',true)->name('uploads_back_end_from_post');
+    Route::post('/back-end', 'UnitsController@getIndexFromPost')->name('uploads_back_end_from_post');
     Route::get('/front-end', 'UnitsController@getFrontend',true)->name('uploads_front_end');
     Route::post('/front-end', 'UnitsController@getFrontendFromPost')->name('uploads_front_end_from_post');
     Route::post('/upload', 'UnitsController@postUploadUnit');
@@ -69,7 +69,9 @@ Route::group(['prefix' => 'layouts'], function () {
         return view("uploads::gears.page_sections.list");
     },true)->name('uploads_layout_index');
     Route::get('/back-end', 'PageSectionsController@getIndex',true)->name('uploads_layouts_back_end');
+    Route::post('/back-end', 'PageSectionsController@getIndexFromPost')->name('uploads_layouts_back_end_from_post');
     Route::get('/front-end', 'PageSectionsController@getFrontend',true)->name('uploads_layouts_front_end');
+    Route::post('/front-end', 'PageSectionsController@getFrontendFromPost')->name('uploads_layouts_front_end_from_post');
     Route::get('/settings/{slug}', 'PageSectionsController@getSettings',true)->name('uploads_layouts_settings');
     Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout',true)->name('create_variation_for_layout');
     Route::get('/variations/{slug}', 'PageSectionsController@getVariations',true)->name('uploads_layouts_variations');
@@ -80,7 +82,6 @@ Route::group(['prefix' => 'layouts'], function () {
     Route::get('/delete-variation/{slug}', 'PageSectionsController@postDeleteVariation');
     Route::post('/delete', 'PageSectionsController@postDelete');
     Route::post('/filter', 'PageSectionsController@filterLayouts')->name('filter-layouts');
-    Route::post('/getlayoutsforindex', 'PageSectionsController@getFrontendFromAjax')->name('get-layouts-for-index');
 });
 
 Route::group(['prefix' => 'assets'], function () {

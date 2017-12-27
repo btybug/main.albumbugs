@@ -1,5 +1,4 @@
 @if($units)
-
     @foreach($units as $ui)
         <div class="bty-unit-2">
             <div class="custom_margin_5">
@@ -15,10 +14,10 @@
                         <li><a data-href="{!! url('/admin/uploads/gears/delete') !!}" data-key="{!! $ui->slug !!}" data-type="Unit"><i class="fa fa-trash"></i></a></li>
                     </ul>
                     <div>
-                        <span><i class="fa fa-user" aria-hidden="true"></i> {!! $ui->author !!}</span>
-                        <h5><a href="#">{!! str_limit($ui->title,15) !!}</a></h5>
-
-                        {{--<p>{!! $ui->descripiton !!}</p>--}}
+                        <div class="bty-unit-2-title">
+                            <span><i class="fa fa-user" aria-hidden="true"></i> {!! $ui->author !!}</span>
+                            <h5><a href="#">{!! str_limit($ui->title,15) !!}</a></h5>
+                        </div>
                         @if(isset($ui->tags) && count($ui->tags) > 0)
                             <ul>
                                 @foreach($ui->tags as $tag)
@@ -35,7 +34,7 @@
     <div class="custom_pagination">
         {!! count($units)?$units->links():'' !!}
     </div>
-    <textarea  class="units custom_hidden">
+    <textarea  class="arr custom_hidden">
         {{json_encode($all_unit->toArray())}}
     </textarea>
 @else

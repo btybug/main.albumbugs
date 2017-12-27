@@ -30,7 +30,11 @@ Route::group(['prefix' => 'modules'], function () {
         Route::get('/', 'PluginsController@getIndex',true)->name('plugins_index');
         Route::get('/{repository}/{package}/explore', 'PluginsController@getExplore',true);
     });
+//    Route::group(['prefix' => 'datatable'], function () {
+        Route::get('datatable/{table}', 'DatatablesController@getIndex',true)->name('modules_datatable_index');
+//});
 });
+
 
 Route::group(['prefix' => 'apps'], function ($router) {
     Route::get('/', 'AppsController@getIndex',true)->name('app_plugins');

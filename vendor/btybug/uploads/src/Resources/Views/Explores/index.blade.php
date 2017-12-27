@@ -100,11 +100,11 @@
                     <tbody>
                     <tr>
                         <td>user</td>
-                        <td><a href="#" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
+                        <td><a href="{!! url('admin/uploads/modules/datatable/user') !!}" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
                     </tr>
                     <tr>
                         <td>permissions</td>
-                        <td><a href="#" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
+                        <td><a href="{!! url('admin/uploads/modules/datatable/permissions') !!}" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
                     </tr>
                     </tbody>
                 </table>

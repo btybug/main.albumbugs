@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 @if(Auth::user()->can('users.admins.edit'))
-                                    <a href="{!! route('admin.users.getEdit',$user->id)!!}"
+                                    <a href="{!! route('user_edit',$user->id)!!}"
                                        class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a>
                                 @endif
                                 <span class="m-r-5">

@@ -103,7 +103,11 @@
                     <tr>
                         <td>{!! $key !!}</td>
                         <td>{!! $table !!}</td>
-                        <td><a href="{!! url('admin/uploads/modules/datatable',$table) !!}" class="btn btn-info"><span class="fa fa-cog"></span></a></td>
+                        <td>
+                            <a href="{!! route('modules_datatable_index',$table) !!}" class="btn btn-info"><span class="fa fa-cog"></span></a>
+                            <a href="{!! route('modules_datatable_show_columns',$table) !!}" class="btn btn-success">Show Columns</a>
+                            <a href="{!! route('modules_datatable_settinds_for_frontend',$table) !!}" class="btn btn-info">Settings For Frontend</a>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>

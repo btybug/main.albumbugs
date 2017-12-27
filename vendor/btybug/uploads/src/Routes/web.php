@@ -32,6 +32,8 @@ Route::group(['prefix' => 'modules'], function () {
     });
 //    Route::group(['prefix' => 'datatable'], function () {
     Route::get('datatable/{table}', 'DatatablesController@getIndex', true)->name('modules_datatable_index');
+    Route::get('datatable/show-columns/{table}', 'DatatablesController@getShowColumns', true)->name('modules_datatable_show_columns');
+    Route::get('datatable/settings-for-frontend/{table}', 'DatatablesController@getFrontendSettings', true)->name('modules_datatable_settinds_for_frontend');
     Route::get('/datatables/{table}', 'DatatablesController@getData')->name('dynamic_datatable');
 
 //});5

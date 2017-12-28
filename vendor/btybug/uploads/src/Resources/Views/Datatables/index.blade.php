@@ -2,36 +2,36 @@
 @section('content')
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
         <div class="checkbox">
-            <label><input type="checkbox" value="AutoFill-2.2.2">AutoFill</label>
+            <label><input type="checkbox" value="autoFill">AutoFill</label>
         </div>
         <div class="checkbox">
             <label><input type="checkbox" value="">Buttons</label>
         </div>
-        <div class="checkbox disabled">
-            <label><input type="checkbox" value="ColReorder-1.4.1" >ColReorder</label>
+        <div class="checkbox ">
+            <label><input type="checkbox" value="colReorder" >ColReorder</label>
         </div>
-        <div class="checkbox disabled">
-            <label><input type="checkbox" value="FixedColumns-3.2.4" >FixedColumns</label>
+        <div class="checkbox ">
+            <label><input type="checkbox" value="fixedColumns" >FixedColumns</label>
         </div>
-        <div class="checkbox disabled">
-            <label><input type="checkbox" value="FixedHeader-3.1.3" >FixedHeader</label>
+        <div class="checkbox ">
+            <label><input type="checkbox" value="fixedHeader" >FixedHeader</label>
         </div>
-        <div class="checkbox disabled">
-            <label><input type="checkbox" value="KeyTable-2.3.2" >KeyTable</label>
+        <div class="checkbox ">
+            <label><input type="checkbox" value="keys" >KeyTable</label>
         </div>
-        <div class="checkbox disabled">
+        <div class="checkbox ">
             <label><input type="checkbox" value="Responsive-2.2.1" >Responsive</label>
         </div>
-        <div class="checkbox disabled">
+        <div class="checkbox ">
             <label><input type="checkbox" value="RowGroup-1.0.2" >RowGroup</label>
         </div>
-        <div class="checkbox disabled">
+        <div class="checkbox ">
             <label><input type="checkbox" value="RowReorder" >RowReorder-1.2.3</label>
         </div>
-        <div class="checkbox disabled">
+        <div class="checkbox ">
             <label><input type="checkbox" value="Scroller-1.4.3" >Scroller</label>
         </div>
-        <div class="checkbox disabled">
+        <div class="checkbox ">
             <label><input type="checkbox" value="Select-1.2.4" >Select</label>
         </div>
     </div>
@@ -52,6 +52,8 @@
             $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
+                autoFill: true,
+                colReorder:true,
                 ajax: '{!! route('dynamic_datatable',$table) !!}',
                 dom: 'Bfrtip',
                 columnDefs: [

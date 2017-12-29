@@ -1,31 +1,34 @@
 @extends('btybug::layouts.admin')
 @section('content')
+    {!! Form::model($settings) !!}
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
         <div class="left-check-table row">
+
             <div>
-                <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-1" value="AutoFill-2.2.2">
+                {!! Form::checkbox('settings[autoFill]',1,isset($settings['autoFill']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-1']) !!}
                 <label for="bty-checklefttab-1">AutoFill</label>
             </div>
             <div>
-                <input type="checkbox" class="bty-input-radio-7 sub-left-more" id="bty-checklefttab-2" value="">
+                {!! Form::checkbox('settings[button]',1,isset($settings['button']),['class'=>'bty-input-radio-7 sub-left-more','id'=>'bty-checklefttab-2']) !!}
                 <label for="bty-checklefttab-2">Buttons</label>
                 <div class="sub-checkbox-left">
                     <div>
-                        <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-2-1" value="">
+                        {!! Form::checkbox('settings[buttons][copy]',1,isset($settings['buttons']['copy']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-1']) !!}
                         <label for="bty-checklefttab-2-1">Copy</label>
                     </div>
                     <div>
-                        <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-2-2" value="">
+                        {!! Form::checkbox('settings[buttons][excel]',1,isset($settings['buttons']['excel']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-2']) !!}
                         <label for="bty-checklefttab-2-2">Excel</label>
                     </div>
                     <div>
-                        <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-2-3" value="">
+                        {!! Form::checkbox('settings[buttons][pdf]',1,isset($settings['buttons']['pdf']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-3']) !!}
                         <label for="bty-checklefttab-2-3">PDF</label>
                     </div>
                 </div>
             </div>
             <div>
-                <input type="checkbox" class="bty-input-radio-7 sub-left-more" id="bty-checklefttab-3" value="ColReorder-1.4.1">
+                <input type="checkbox" class="bty-input-radio-7 sub-left-more" id="bty-checklefttab-3"
+                       value="ColReorder-1.4.1">
                 <label for="bty-checklefttab-3">ColReorder</label>
             </div>
             <div>
@@ -57,12 +60,12 @@
                 <label for="bty-checklefttab-10">Scroller</label>
             </div>
             <div>
-                <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-11"  value="Select-1.2.4">
+                <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-11" value="Select-1.2.4">
                 <label for="bty-checklefttab-11">Select</label>
             </div>
-
         </div>
     </div>
+    {!! Form::close() !!}
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
         <table id="users-table" class="table table-striped table-bordered" cellspacing="0" width="500px">
             <thead>
@@ -76,30 +79,19 @@
 @stop
 
 @section('JS')
+    @foreach($extensions['js'] as $script)
+        {!! Html::script($script) !!}
+    @endforeach
     <script>
         $(function () {
+            $('form').on('change','input[type=checkbox]',function () {
+               $('form').submit();
+            });
             $('#users-table').DataTable({
-                processing: true,
-                serverSide: true,
-                autoFill: true,
-                colReorder:true,
+
+                {!! $extensions['json'] !!}
                 ajax: '{!! route('dynamic_datatable',$table) !!}',
-                dom: 'Bfrtip',
-                columnDefs: [
-                    {
-                        targets: 1,
-                        className: 'noVis'
-                    }
-                ],
-                buttons: [
-                    {
-                        extend: 'colvis',
-                        columns: ':not(.noVis)'
-                    }
-                ]
-                , colReorder: {
-                    realtime: false
-                },
+
                 columns: [
                         @foreach($columns as $column)
                     {
@@ -111,43 +103,56 @@
         });
     </script>
 @stop
+@section('CSS')
+    @foreach($extensions['css'] as $style)
+        {!! Html::style($style) !!}
+    @endforeach
 <style>
-.left-check-table{
-    margin-top: 75px !important;
-    background-color: #28282c;
-    color: #d4d4d4;
-}
-.left-check-table>div{
-    border-bottom: 1px solid #8a8a8a;
-    padding: 14px 10px;
-    transition: 0.4s ease;
-}
-.left-check-table>div:hover{
-    background-color: #499bc761;
-    border-bottom: 1px solid #fff;
-}
-.left-check-table .bty-input-radio-7 + label:before{
-    top: 1px;
-    border: 1px solid #fff;
-    background: none;
-    box-shadow: none;
-}
-.left-check-table .bty-input-radio-7:checked + label:before{
-    background-color:#499bc7;
-}
-.left-check-table .sub-checkbox-left{
-    margin-left: 26px;
-    display: none;
-}
-.left-check-table .sub-checkbox-left>div{
-    border-bottom: 1px solid #8a8a8a;
-    padding: 5px;
-}
-.left-check-table .sub-checkbox-left>div:last-child{
-    border: none;
-}
-.left-check-table .sub-left-more:checked +label +.sub-checkbox-left{
-    display: block;
-}
+    .left-check-table {
+        margin-top: 75px !important;
+        background-color: #28282c;
+        color: #d4d4d4;
+    }
+
+    .left-check-table > div {
+        border-bottom: 1px solid #8a8a8a;
+        padding: 14px 10px;
+        transition: 0.4s ease;
+    }
+
+    .left-check-table > div:hover {
+        background-color: #499bc761;
+        border-bottom: 1px solid #fff;
+    }
+
+    .left-check-table .bty-input-radio-7 + label:before {
+        top: 1px;
+        border: 1px solid #fff;
+        background: none;
+        box-shadow: none;
+    }
+
+    .left-check-table .bty-input-radio-7:checked + label:before {
+        background-color: #499bc7;
+    }
+
+    .left-check-table .sub-checkbox-left {
+        margin-left: 26px;
+        display: none;
+    }
+
+    .left-check-table .sub-checkbox-left > div {
+        border-bottom: 1px solid #8a8a8a;
+        padding: 5px;
+    }
+
+    .left-check-table .sub-checkbox-left > div:last-child {
+        border: none;
+    }
+
+    .left-check-table .sub-left-more:checked + label + .sub-checkbox-left {
+        display: block;
+    }
 
 </style>
+    @stop

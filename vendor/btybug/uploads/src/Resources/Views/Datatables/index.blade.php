@@ -43,8 +43,18 @@
                 <label for="bty-checklefttab-4">FixedColumns</label>
             </div>
             <div>
-                <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-5" value="FixedHeader-3.1.3">
+                <input type="checkbox" class="bty-input-radio-7 sub-left-more" id="bty-checklefttab-5" value="FixedHeader-3.1.3">
                 <label for="bty-checklefttab-5">FixedHeader</label>
+                <div class="sub-checkbox-left">
+                    <div class="bty-numberleft-sub">
+                        <input type="number" class="" value="5">
+                        <label>Count</label>
+                    </div>
+                    <div class="bty-numberleft-sub">
+                        <input type="number" class="" value="5">
+                        <label>Count</label>
+                    </div>
+                </div>
             </div>
             <div>
                 <input type="checkbox" class="bty-input-radio-7" id="bty-checklefttab-6" value="KeyTable-2.3.2">
@@ -160,6 +170,43 @@
     .left-check-table .sub-left-more:checked + label + .sub-checkbox-left {
         display: block;
     }
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub{
+        display: flex;
+    }
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input{
+        width: 40%;
+        margin-right: 8px;
+        background-color: #28282d;
+        color: #ccc;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        position: relative;
+        height: 24px;
+        padding: 0 0 0 5px;
+    }
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input:focus{
+        outline: none;
+    }
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>label{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input::-webkit-inner-spin-button,
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input:focus::-webkit-inner-spin-button,
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input:focus::-webkit-outer-spin-button,
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input:hover::-webkit-inner-spin-button,
+    .left-check-table .sub-checkbox-left .bty-numberleft-sub>input:hover::-webkit-outer-spin-button {
+           -webkit-appearance: inner-spin-button;
+           height: 100%;
+        position: absolute;
+        right: 0;
+       }
 
 </style>
     @stop

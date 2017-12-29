@@ -16,19 +16,26 @@ class Extensions
             'public/js/DataTables/pdfmake-0.1.32/pdfmake.js',
             'public/js/DataTables/pdfmake-0.1.32/vfs_fonts.js',
             'public/js/DataTables/Buttons-1.5.1/js/buttons.html5.js',
-            'public/js/DataTables/Buttons-1.5.1/js/buttons.print.js'
-        ]
+            'public/js/DataTables/Buttons-1.5.1/js/buttons.print.js',
+            'public/js/DataTables/Buttons-1.5.1/js/buttons.colVis.js'
+        ],
+        'colReorder'=>['public/js/DataTables/ColReorder-1.4.1/js/dataTables.colReorder.min.js']
     ];
     public static $css = [
         'buttons' => [
             'public/js/DataTables/Buttons-1.5.1/css/buttons.dataTables.css'
-        ]
+        ],
+        'colReorder'=>['public/js/DataTables/ColReorder-1.4.1/css/colReorder.bootstrap.css']
     ];
     public $autoFill = ['autoFill' => true];
 
     public  function autoFill($params = null)
     {
         return 'autoFill:true';
+    }
+    public  function colReorder($params = null)
+    {
+        return 'colReorder:true';
     }
 
     public  function buttons($params)

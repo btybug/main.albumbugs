@@ -13,6 +13,10 @@
                 <label for="bty-checklefttab-2">Buttons</label>
                 <div class="sub-checkbox-left">
                     <div>
+                        {!! Form::checkbox('settings[buttons][colvis]',1,isset($settings['buttons']['colvis']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-0']) !!}
+                        <label for="bty-checklefttab-2-0">Column visibility</label>
+                    </div>
+                    <div>
                         {!! Form::checkbox('settings[buttons][copy]',1,isset($settings['buttons']['copy']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-1']) !!}
                         <label for="bty-checklefttab-2-1">Copy</label>
                     </div>
@@ -24,11 +28,14 @@
                         {!! Form::checkbox('settings[buttons][pdf]',1,isset($settings['buttons']['pdf']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-3']) !!}
                         <label for="bty-checklefttab-2-3">PDF</label>
                     </div>
+                    <div>
+                        {!! Form::checkbox('settings[buttons][print]',1,isset($settings['buttons']['print']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-2-4']) !!}
+                        <label for="bty-checklefttab-2-4">Print</label>
+                    </div>
                 </div>
             </div>
             <div>
-                <input type="checkbox" class="bty-input-radio-7 sub-left-more" id="bty-checklefttab-3"
-                       value="ColReorder-1.4.1">
+                {!! Form::checkbox('settings[colReorder]',1,isset($settings['colReorder']),['class'=>'bty-input-radio-7','id'=>'bty-checklefttab-3']) !!}
                 <label for="bty-checklefttab-3">ColReorder</label>
             </div>
             <div>

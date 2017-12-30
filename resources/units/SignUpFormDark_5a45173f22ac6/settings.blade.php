@@ -24,29 +24,45 @@
 <div class="panel panel-default" style="margin-top: 15px;">
     <div class="panel-heading">General Settings</div>
     <div class="panel-body">
+        <!-- Content -->
+        <p class="bg-primary">Content</p>
         <div class="form-group">
-            <label for="">Signup Tab Title</label>
-            <input name="signup_tab_title" class="form-control" />
+            <label for="">Main Title</label>
+            <input type="text" name="main_title" class="form-control">
         </div>
         <div class="form-group">
-            <label for="">Signup Title</label>
-            <input name="signup_title" class="form-control" />
+            <label for="">Sub Title</label>
+            <input type="text" name="sub_title" class="form-control">
         </div>
         <div class="form-group">
-            <label for="">Signup Button Title</label>
-            <input name="signup_button_title" class="form-control" />
+            <label for="">Button Text</label>
+            <input type="text" name="button_text" class="form-control">
+        </div>
+
+        <!-- Style -->
+        <p class="bg-primary">Style</p>
+        <div class="form-group">
+            <label for="">Main form background</label>
+            <select name="main_background" class="form-control">
+                <option value="gray">Gray Background</option>
+                <option value="dark">Dark Background</option>
+                <option value="colorful">Colorful Background</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="">Login Tab Title</label>
-            <input name="login_tab_title" class="form-control" />
+            <label for="">Button background</label>
+            <select name="button_background" class="form-control">
+                <option value="blue">Blue Background</option>
+                <option value="yellow">Yellow Background</option>
+                <option value="red">Red Background</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="">Login Title</label>
-            <input name="login_title" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label for="">Login Button Title</label>
-            <input name="login_button_title" class="form-control" />
+            <label for="">Button Style</label>
+            <select name="button_style" class="form-control">
+                <option value="rounded">Rounded Button</option>
+                <option value="square">Square Button</option>
+            </select>
         </div>
     </div>
 </div>

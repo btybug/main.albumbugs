@@ -1,40 +1,28 @@
 {!! BBstyle($_this->path.DS.'css/main.css') !!}
-{!! BBscript($_this->path.DS.'js/main.js') !!}
 
-<div class="form">
+<div class="login-form {!! get_settings($settings, "main_background") !!}">
 
-    <ul class="tab-group">
-        <li class="tab active"><a href="#signup">{!! get_settings($settings, "signup_tab_title", "Sign Up") !!}</a></li>
-        <li class="tab"><a href="#login">{!! get_settings($settings, "login_tab_title", "Log In") !!}</a></li>
-    </ul>
+    <div class="header">
+        <h1>{!! get_settings($settings, "main_title", "Create Post") !!}</h1>
+        <span>{!! get_settings($settings, "sub_title", "Fill out the form below to create new post") !!}</span>
+    </div>
 
-    <div class="tab-content">
-        <div id="signup">
-            <h1>{!! get_settings($settings, "signup_title", "Sign Up for Free") !!}</h1>
-
-            <form action="/" method="post">
-
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
                 <div class="bb-form-area connectedSortable"></div>
-
-                <button type="submit" class="button button-block">{!! get_settings($settings, "signup_button_title", "Get Started") !!}</button>
-
-            </form>
-
-        </div>
-
-        <div id="login">
-            <h1>{!! get_settings($settings, "login_title", "Welcome Back!") !!}</h1>
-
-            <form action="/" method="post">
-
+            </div>
+            <div class="col-md-6">
                 <div class="bb-form-area connectedSortable"></div>
-
-                <button class="button button-block">{!! get_settings($settings, "login_button_title", "Log In") !!}</button>
-
-            </form>
-
+            </div>
+            <div class="col-md-12" style="margin-top: 20px;">
+                <div class="bb-form-area connectedSortable"></div>
+            </div>
         </div>
+    </div>
 
-    </div><!-- tab-content -->
+    <div class="footer">
+        <input type="submit" name="submit" value="{!! get_settings($settings, "button_text", "Save") !!}" class="button {!! get_settings($settings, "button_background") !!} {!! get_settings($settings, "button_style") !!}" />
+    </div>
 
-</div> <!-- /form -->
+</div>

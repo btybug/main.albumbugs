@@ -1,10 +1,10 @@
 {!! BBstyle($_this->path.DS.'css/main.css') !!}
 
-<div class="login-form">
+<div class="login-form {!! get_settings($settings, "main_background") !!}">
 
     <div class="header">
-        <h1>Create Post</h1>
-        <span>Fill out the form below to create new post</span>
+        <h1>{!! get_settings($settings, "main_title", "Create Post") !!}</h1>
+        <span>{!! get_settings($settings, "sub_title", "Fill out the form below to create new post") !!}</span>
     </div>
 
     <div class="content">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="footer">
-        <input type="submit" name="submit" value="Save" class="button" />
+        <input type="submit" name="submit" value="{!! get_settings($settings, "button_text", "Save") !!}" class="button {!! get_settings($settings, "button_background") !!} {!! get_settings($settings, "button_style") !!}" />
     </div>
 
 </div>

@@ -24,14 +24,44 @@
 <div class="panel panel-default" style="margin-top: 15px;">
     <div class="panel-heading">General Settings</div>
     <div class="panel-body">
+        <!-- Content -->
+        <p class="bg-primary">Content</p>
+        <div class="form-group">
+            <label for="">Main Title</label>
+            <input type="text" name="main_title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Sub Title</label>
+            <input type="text" name="sub_title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Button Text</label>
+            <input type="text" name="button_text" class="form-control">
+        </div>
+
         <!-- Style -->
         <p class="bg-primary">Style</p>
         <div class="form-group">
-            <label for="">Select Theme</label>
-            <select name="general_theme" class="form-control">
-                <option value="">Light Theme</option>
-                <option value="dark-theme">Dark Theme</option>
-                <option value="colorfull">Colorful Theme</option>
+            <label for="">Main form background</label>
+            <select name="main_background" class="form-control">
+                <option value="gray">Gray Background</option>
+                <option value="dark">Dark Background</option>
+                <option value="colorful">Colorful Background</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Button background</label>
+            <select name="button_background" class="form-control">
+                <option value="blue">Blue Background</option>
+                <option value="yellow">Yellow Background</option>
+                <option value="red">Red Background</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Button Style</label>
+            <select name="button_style" class="form-control">
+                <option value="rounded">Rounded Button</option>
+                <option value="square">Square Button</option>
             </select>
         </div>
     </div>

@@ -133,3 +133,74 @@ SELECTION STYLING
     position: relative;
     bottom: -1px;
 }
+
+/* Dark Form */
+.login-form{
+
+    &.dark{
+        background: #3c3c3c;
+        border: 1px solid #6d6d6d;
+
+        .header h1 {
+            color: #fff;
+            text-shadow: 1px 1px 0 rgb(0, 0, 0);
+        }
+
+        .header span {
+            color: #b9b9b9;
+            text-shadow: 1px 1px 0 rgb(0, 0, 0);
+        }
+
+        .footer {
+            background: #2d2d2d;
+            border-top: 1px solid #5f5f5f;
+        }
+    }
+
+    &.colorful {
+        background: #b72804;
+        border: 1px solid #ccc;
+
+        .header h1 {
+            color: #ffffff;
+            text-shadow: 1px 1px 0 #3c3c3c;
+        }
+
+        .header span {
+            color: #e0e0e0;
+            text-shadow: 1px 1px 0 #5a1503;
+        }
+
+        .footer {
+            background: #771a02;
+            border-top: 1px solid #e83709;
+        }
+    }
+
+    .footer{
+
+        .button{
+            &.yellow {
+                color: #5f5f5f;
+                text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.25);
+                background: #bdc300;
+                border: 1px solid #898e03;
+            }
+
+            &.red {
+                color: #fff;
+                text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.25);
+                background: #c30017;
+                border: 1px solid #8e0516;
+            }
+
+            &.square{
+                border-radius: 0!important;
+            }
+
+        }
+
+    }
+
+}
+

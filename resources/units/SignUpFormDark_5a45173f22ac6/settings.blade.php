@@ -25,12 +25,20 @@
     <div class="panel-heading">General Settings</div>
     <div class="panel-body">
         <div class="form-group">
+            <label for="">Signup Tab Title</label>
+            <input name="signup_tab_title" class="form-control" />
+        </div>
+        <div class="form-group">
             <label for="">Signup Title</label>
             <input name="signup_title" class="form-control" />
         </div>
         <div class="form-group">
             <label for="">Signup Button Title</label>
             <input name="signup_button_title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="">Login Tab Title</label>
+            <input name="login_tab_title" class="form-control" />
         </div>
         <div class="form-group">
             <label for="">Login Title</label>

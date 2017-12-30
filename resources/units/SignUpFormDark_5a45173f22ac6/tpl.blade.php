@@ -4,8 +4,8 @@
 <div class="form">
 
     <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#signup">{!! get_settings($settings, "signup_tab_title", "Sign Up") !!}</a></li>
+        <li class="tab"><a href="#login">{!! get_settings($settings, "login_tab_title", "Log In") !!}</a></li>
     </ul>
 
     <div class="tab-content">
@@ -23,7 +23,7 @@
         </div>
 
         <div id="login">
-            <h1>{!! get_settings($settings, "signup_title", "Welcome Back!") !!}</h1>
+            <h1>{!! get_settings($settings, "login_title", "Welcome Back!") !!}</h1>
 
             <form action="/" method="post">
 

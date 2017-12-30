@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-@section('page_heading','Dashboard')
 @section('content')
     All Users
     <div class="row">

@@ -19,7 +19,8 @@
         </div>
     </div>
 </div>
-</div>
+{!! BBscript("/public/js/UiElements/bb_styles.js?v.5") !!}
+
 
 
 

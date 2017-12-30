@@ -64,10 +64,11 @@ class ModulesController extends Controller
         $plugins = new Plugins();
         $plugins->modules();
         $plugin = $plugins->find($repository . '/' . $package);
+        $tables=$plugin->tablse();
         $units = $plugin->units();
         $pages = $adminPagesRepository->PagesByModulesParent($plugin);
 
-        return view('uploads::Explores.index', compact('plugin', 'units','pages'));
+        return view('uploads::Explores.index', compact('plugin', 'units','pages','tables'));
     }
 
     public function getUpdateCms()

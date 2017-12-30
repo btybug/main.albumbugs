@@ -13,9 +13,9 @@
 
 //site users
 Route::get('/', array('as' => 'admin.users.list', 'uses' => 'UserController@getIndex'),true)->name('user_index');
-Route::get('/create', array('as' => 'admin.users.getCreate', 'uses' => 'UserController@getCreate'),true)->name('user_create');
+Route::get('/create',  'UserController@getCreate',true)->name('user_create');
 Route::post('/create', array('as' => 'admin.users.postCreate', 'uses' => 'UserController@postCreate'));
-Route::get('/edit/{id}', array('as' => 'admin.users.getEdit', 'uses' => 'UserController@getEdit'),true)->name('user_edit');
+Route::get('/edit/{id}', 'UserController@getEdit',true)->name('user_edit');
 Route::post('/edit/{id}', array('as' => 'admin.users.postEdit', 'uses' => 'UserController@postEdit'));
 Route::post('/delete', array('as' => 'admin.users.delete', 'uses' => 'UserController@postDelete'));
 Route::get('/show/{id}', array('as' => 'admin.users.show', 'uses' => 'UserController@getShow'),true)->name('user_show');

@@ -378,16 +378,16 @@ ul.field_tabs li.current{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	-webkit-transform: translateY(calc(70px + 1em));
-	transform: translateY(calc(70px + 1em));
+	-webkit-transform: translateY(calc(30px + 1em));
+	transform: translateY(calc(30px + 1em));
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
 	transition: transform 0.3s, -webkit-transform 0.3s;
 }
 .bty-unit-2 div.custom_div_for_tags_when_not{
-	-webkit-transform: translateY(calc(41px + 1em));
-	transform: translateY(calc(41px + 1em));
+	-webkit-transform: translateY(calc(0px + 1em));
+	transform: translateY(calc(0px + 1em));
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -960,4 +960,64 @@ ul.field_tabs li.current{
 	-webkit-transition: .25s all ease;
 	-o-transition: .25s all ease;
 	transition: .25s all ease;
+}
+.custom_style_for_loading{
+	display: flex;
+	justify-content: center;
+	height: calc(100vh - 256px);
+}
+.custom_hidden_loading{
+	align-self: center;
+}
+.custom_input_text{
+	padding: 5px;
+	border-radius: 5px;
+	width: 80%;
+	margin: 15px 0px;
+	outline: none;
+    color: #000000;
+}
+.custom_input_text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color:#ccc;
+}
+.custom_input_text::-moz-placeholder { /* Firefox 19+ */
+	color:#ccc;
+}
+.custom_input_text:-ms-input-placeholder { /* IE 10+ */
+	color:#ccc;
+}
+.custom_input_text:-moz-placeholder { /* Firefox 18- */
+	color:#ccc;
+}
+
+.custom_input_for_datepicker::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color:#ccc;
+}
+.custom_input_for_datepicker::-moz-placeholder { /* Firefox 19+ */
+	color:#ccc;
+}
+.custom_input_for_datepicker:-ms-input-placeholder { /* IE 10+ */
+	color:#ccc;
+}
+.custom_input_for_datepicker:-moz-placeholder { /* Firefox 18- */
+	color:#ccc;
+}
+.custom_text_align_center{
+	text-align: center;
+}
+.custom_hidden{
+	display:none;
+}
+.bty-unit-2-title{
+	display:flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+.bty-unit-2-title span{
+	flex-shrink: 0;
+	padding:0 10px 0 0;
+	font-size: 30px;
+}
+.bty-unit-2-title h5{
+	margin: 0;
 }

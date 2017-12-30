@@ -387,4 +387,9 @@ class Plugins
             return $array[0];
         }
     }
+
+    public function tablse()
+    {
+        return $this->tables??[];
+    }
 }

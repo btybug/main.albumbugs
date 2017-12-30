@@ -90,7 +90,28 @@
                 No Menus
             </div>
             <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
-                No Tables
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Table Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($tables as $key=>$table)
+                    <tr>
+                        <td>{!! $key !!}</td>
+                        <td>{!! $table !!}</td>
+                        <td>
+                            <a href="{!! route('modules_datatable_index',$table) !!}" class="btn btn-info"><span class="fa fa-cog"></span></a>
+                            <a href="{!! route('modules_datatable_show_columns',$table) !!}" class="btn btn-success">Show Columns</a>
+                            <a href="{!! route('modules_datatable_settinds_for_frontend',$table) !!}" class="btn btn-info">Settings For Frontend</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

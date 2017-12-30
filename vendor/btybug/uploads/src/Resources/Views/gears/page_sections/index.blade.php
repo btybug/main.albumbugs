@@ -20,21 +20,11 @@
                         <i></i>
                         <h2>Date</h2>
                         <div>
-                            <div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-date" type="radio" id="bty-date-1">
-                                    <label for="bty-date-1">All 1</label>
-                                </div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-date" type="radio" id="bty-date-2">
-                                    <label for="bty-date-2">All 2</label>
-                                </div>
-                            </div>
                             <div class="calendar">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input type="date" name="date_from">
+                                <input type="text" placeholder="From" class="date date_from custom_input_for_datepicker" name="date_from">
                                 <span> - </span>
-                                <input type="date" name="date_to">
+                                <input type="text" placeholder="To" class="date date_to custom_input_for_datepicker" name="date_to">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
 
@@ -42,59 +32,21 @@
                     </li>
                     <li>
                         <input type="checkbox">
-                        {{--<input type="checkbox" checked>--}}
                         <i></i>
                         <h2>Persons</h2>
-                        <div>
-                            <div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-persons" type="radio" id="bty-persons-1">
-                                    <label for="bty-persons-1">All 1</label>
-                                </div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-persons" type="radio" id="bty-persons-2">
-                                    <label for="bty-persons-2">All 2</label>
-                                </div>
-                            </div>
-                            <div class="bty-new-select">
-                                <select name="author">
-                                    <option value="">Choose Option</option>
-                                    <option value="Sahak">Sahak</option>
-                                    <option value="Edo">Edo</option>
-                                    <option value="gv">gv</option>
-                                    <option>Option 4</option>
-                                </select>
-                            </div>
+                        <div class="custom_text_align_center">
+                            <input type="text" placeholder="Author" class="custom_input_text author" name="author">
                         </div>
                     </li>
                     <li>
                         <input type="checkbox">
                         <i></i>
-                        <h2>Files Types</h2>
-                        <div>
-                            <div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-type" type="radio" id="bty-type-1">
-                                    <label for="bty-type-1">All 1</label>
-                                </div>
-                                <div class="bty-new-input-radio">
-                                    <input name="bty-type" type="radio" id="bty-type-2">
-                                    <label for="bty-type-2">All 2</label>
-                                </div>
-                            </div>
-                            <div class="bty-new-select">
-                                <select name="type">
-                                    <option>Choose Option</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                </select>
-                            </div>
+                        <h2>Files Tags</h2>
+                        <div class="custom_text_align_center">
+                            <input type="text" class="custom_input_text tag" placeholder="Tag" name="tag">
                         </div>
                     </li>
                 </ul>
-                <button type="submit" class="custom_filter">Search</button>
             </div>
         </form>
     </div>
@@ -140,6 +92,7 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
+    {!! BBscript('public/js/custom_plugin.js') !!}
     {!! HTML::script('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
     <script>
         Dropzone.options.myAwesomeDropzone = {
@@ -203,31 +156,23 @@
                 $("a[main-type=" + p + "]").click();
             }
 
-            $("body").delegate('.custom_filter-tables','submit',function(e){
-                e.preventDefault();
-                var that = $(this);
+            // function for filters
+            $('.custom_filter-tables :input').doFilter(function(){
+                var that = $('.custom_filter-tables');
+
+                if($(this).attr('type') == 'checkbox'){
+                    return false;
+                }
+                $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
                 $.ajax({
                     type : 'POST',
                     url : "{{ route('filter-layouts') }}",
                     data : that.serialize(),
                     success: function(data){
-                        $('.custom_html_for_filter').html(data.html);
+                        $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
                     }
                 });
-            });
-            // get index page data form ajax
-            $(document).ready(function(){
-                $.ajax({
-                    type : 'POST',
-                    url : "{{ route('get-layouts-for-index') }}",
-                    data:{_token:'{{csrf_token()}}'},
-                    success: function(data){
-                        $('.custom_html_for_filter').html(data.html);
-                    }
-                });
-            });
-
+            },500);
         });
-
     </script>
 @stop

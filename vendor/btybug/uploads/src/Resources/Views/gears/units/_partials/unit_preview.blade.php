@@ -1,11 +1,14 @@
-{!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
-{!! HTML::script("public/js/bootstrap.js?v=".rand('1111','9999')) !!}
-{!! BBCss()  !!}
-{!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
-{!! HTML::style("public/js/jquery-ui/jquery-ui.min.css") !!}
-{!! HTML::style("public/css/preview-template.css") !!}
-{!! HTML::style('public/css/cms.css') !!}
-{!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$ui->slug).'.css') !!}
+<head>
+    {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
+    {!! HTML::script("public/js/bootstrap.js?v=".rand('1111','9999')) !!}
+    {!! BBCss()  !!}
+    {!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
+    {!! HTML::style("public/js/jquery-ui/jquery-ui.min.css") !!}
+    {!! HTML::style("public/css/preview-template.css") !!}
+    {!! HTML::style('public/css/cms.css') !!}
+    {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$ui->slug).'.css') !!}
+</head>
+
 <body>
 {!! csrf_field() !!}
 @include('resources::assests.magicModal')
@@ -28,7 +31,6 @@
 
 <button data-settingaction="save" class="hide" id="settings_savebtn"></button>
 <input type="hidden" id="hidden_data" value='{!!$settings_json!!}'>
-<body>
 {!! BBMainFrontJS() !!}
 {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
 {!! HTML::script("public/js/UiElements/ui-preview-setting.js?v=999") !!}
@@ -36,3 +38,4 @@
 @if(isset($ui))
     {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$ui->slug).'.js') !!}
 @endif
+</body>

@@ -33,7 +33,7 @@
 <input type="hidden" id="hidden_data" value='{!!$settings_json!!}'>
 {!! BBMainFrontJS() !!}
 {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
-{!! HTML::script("public/js/UiElements/ui-preview-setting.js?v=999") !!}
+{!! HTML::script("public/js/UiElements/ui-preview-setting.js?v=".rand('1111','9999')) !!}
 {!! HTML::script("public/js/UiElements/ui-settings.js") !!}
 @if(isset($ui))
     {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$ui->slug).'.js') !!}

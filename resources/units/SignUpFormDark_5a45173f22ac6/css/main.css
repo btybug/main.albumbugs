@@ -2,22 +2,6 @@
 /*******************
 SELECTION STYLING
 *******************/
-.bb-form-area:empty {
-    border: 1px dashed #c0c0c0; }
-
-.bb-form-area:empty:after {
-    content: "Drop Form Fields Here";
-    color: #bdbdbd;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 50px; }
-
-.bb-form-area {
-    min-height: 50px;
-    position: relative; }
-
 ::selection {
     color: #fff;
     background: #f676b2;

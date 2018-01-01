@@ -476,6 +476,7 @@ class FormService extends GeneralService
                 $this->form->update($data['id'], [
                     'name' => $data['name'],
                     'fields_json' => issetReturn($data,'fields_json',null),
+                    'unit_json' => issetReturn($data,'unit_json',null),
                     'form_layout' => issetReturn($data,'form_layout',null)
                 ]);
             }
@@ -485,6 +486,7 @@ class FormService extends GeneralService
                 'slug' => uniqid(),
                 'created_by' => 'custom',
                 'fields_json' => issetReturn($data,'fields_json',null),
+                'unit_json' => issetReturn($data,'unit_json',null),
                 'fields_type' => $data['fields_type'],
                 'form_layout' => issetReturn($data,'form_layout',null)
             ]);

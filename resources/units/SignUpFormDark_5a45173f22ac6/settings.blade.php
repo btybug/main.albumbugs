@@ -25,8 +25,8 @@
     <div class="panel-heading">General Settings</div>
     <div class="panel-body">
         <div class="form-group" data-key="main_background">
-            <label for="">Form Style</label>
-            <select name="form_style" class="form-control">
+            <label for="">Field Style</label>
+            <select name="field_style" class="form-control">
                 <option value="gray">Gray Background</option>
                 <option value="dark">Dark Background</option>
                 <option value="colorful">Colorful Background</option>

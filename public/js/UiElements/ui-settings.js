@@ -133,4 +133,43 @@ $(document).ready(function () {
         });
     });
 
+    /* Live edit */
+
+    $('body')
+        // Target click
+        .on('click', '[data-target]', function (e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                key = $this.data("target");
+
+            // Mark as active
+            $('[data-target]').removeClass("active");
+            $this.addClass("active");
+
+            // Show relative key fields
+            $('[data-key]').addClass("hide");
+            $('[data-key="'+key+'"]').removeClass("hide");
+
+            // Show options menu
+            $('.coresetting').removeClass("hide");
+            $('.corepreviewSetting').removeClass("activeprevew");
+        })
+
+        // Close settings panel
+        .on('click', '.close-settings-panel', function (e){
+            e.preventDefault();
+
+            // Show options menu
+            $('.coresetting').addClass("hide");
+            $('.corepreviewSetting').addClass("activeprevew");
+
+            // Show all fields
+            $('[data-key]').removeClass("hide");
+
+            // In activate active targets
+            $('[data-target]').removeClass("active");
+        });
+
+
 });

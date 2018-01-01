@@ -24,6 +24,12 @@
 <div class="panel panel-default" style="margin-top: 15px;">
     <div class="panel-heading">General Settings</div>
     <div class="panel-body">
+        <div class="form-group">
+            <a class="btn btn-danger form-style" data-toggle="modal">
+                <span>Form Style</span>
+            </a>
+        </div>
+
         <!-- Content -->
         <div class="form-group" data-key="main_title">
             <label for="">Main Title</label>

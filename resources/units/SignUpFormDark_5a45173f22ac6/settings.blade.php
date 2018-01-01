@@ -24,10 +24,14 @@
 <div class="panel panel-default" style="margin-top: 15px;">
     <div class="panel-heading">General Settings</div>
     <div class="panel-body">
-        <div class="form-group">
-            <a class="btn btn-danger form-style" data-toggle="modal">
-                <span>Form Style</span>
-            </a>
+        <div class="form-group" data-key="main_background">
+            <label for="">Form Style</label>
+            <select name="form_style" class="form-control">
+                <option value="gray">Gray Background</option>
+                <option value="dark">Dark Background</option>
+                <option value="colorful">Colorful Background</option>
+                <option value="colorful">Custom Style</option>
+            </select>
         </div>
 
         <!-- Content -->

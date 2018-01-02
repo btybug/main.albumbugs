@@ -27,10 +27,9 @@
         <div class="form-group" data-key="main_background">
             <label for="">Field Style</label>
             <select name="field_style" class="form-control">
-                <option value="gray">Gray Background</option>
-                <option value="dark">Dark Background</option>
-                <option value="colorful">Colorful Background</option>
-                <option value="colorful">Custom Style</option>
+                <option value="default">Default</option>
+                <option value="rich">Rich</option>
+                <option value="inline">Inline</option>
             </select>
         </div>
 

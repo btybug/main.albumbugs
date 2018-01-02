@@ -7,7 +7,7 @@
         <span data-item="sub_title">{!! get_settings($settings, "sub_title", "Fill out the form below to create new post") !!}</span>
     </div>
 
-    <div class="content">
+    <div class="content {!! get_settings($settings, "field_style", "default") !!}">
         <div class="row">
             <div class="col-md-6">
                 <div class="bb-form-area connectedSortable"></div>

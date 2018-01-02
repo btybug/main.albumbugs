@@ -1,3 +1,4 @@
+var savesettingevent;
 $(document).ready(function () {
     var data = $('#add_custome_page').serialize();
     var url = $('#add_custome_page').attr('action');
@@ -25,7 +26,7 @@ $(document).ready(function () {
         }
     }
 
-    function savesettingevent() {
+    savesettingevent = function () {
         setTimeout(function () {
             var $data = $('form').serialize();
             var url = $('#add_custome_page').attr('action');
@@ -49,7 +50,6 @@ $(document).ready(function () {
                         $.getScript('/public-x/custom/js/' + data.slug + '.js');
                     }
 
-                    console.log("Loaded");
                     window.parent.postMessage({
                         'TODO': 'POST_SETTINGS_CALLBACK',
                         'json': $('form').serializeArray()

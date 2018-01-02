@@ -1836,3 +1836,13 @@ function get_field_data(int $id){
 function register_form(){
 
 }
+
+// Extract ajax data
+function ajaxExtract($data){
+	$return = [];
+	foreach($data as $datum){
+		$return[$datum['name']] = $datum['value'];
+	}
+
+	return $return;
+}

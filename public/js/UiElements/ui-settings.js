@@ -137,14 +137,14 @@ $(document).ready(function () {
 
     $('body')
         // Target click
-        .on('click', '[data-target]', function (e) {
+        .on('click', '[data-item]', function (e) {
             e.stopPropagation();
 
             var $this = $(this),
-                key = $this.data("target");
+                key = $this.data("item");
 
             // Mark as active
-            $('[data-target]').removeClass("active");
+            $('[data-item]').removeClass("active");
             $this.addClass("active");
 
             // Show relative key fields
@@ -168,7 +168,7 @@ $(document).ready(function () {
             $('[data-key]').removeClass("hide");
 
             // In activate active targets
-            $('[data-target]').removeClass("active");
+            $('[data-item]').removeClass("active");
         });
 
 

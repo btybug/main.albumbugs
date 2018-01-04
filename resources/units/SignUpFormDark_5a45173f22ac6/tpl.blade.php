@@ -10,14 +10,16 @@
     <div class="content {!! get_settings($settings, "field_style", "default") !!}">
         <div class="row">
             <div class="col-md-8">
-                <div class="col-md-6">
-                    <div class="bb-form-area connectedSortable"></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="bb-form-area connectedSortable"></div>
-                </div>
-                <div class="col-md-12" style="margin-top: 20px;">
-                    <div class="bb-form-area connectedSortable"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="bb-form-area connectedSortable"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bb-form-area connectedSortable"></div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="bb-form-area connectedSortable"></div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">

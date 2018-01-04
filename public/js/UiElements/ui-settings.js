@@ -137,19 +137,19 @@ $(document).ready(function () {
 
     $('body')
         // Target click
-        .on('click', '[data-item]', function (e) {
+        .on('click', '[data-bb-item]', function (e) {
             e.stopPropagation();
 
             var $this = $(this),
-                key = $this.data("item");
+                key = $this.data("bb-item");
 
             // Mark as active
-            $('[data-item]').removeClass("active");
+            $('[data-bb-item]').removeClass("active");
             $this.addClass("active");
 
             // Show relative key fields
-            $('[data-key]').addClass("hide");
-            $('[data-key="'+key+'"]').removeClass("hide");
+            $('[data-bb-key]').addClass("hide");
+            $('[data-bb-key="'+key+'"]').removeClass("hide");
 
             // Show options menu
             $('.coresetting').removeClass("hide");
@@ -165,10 +165,10 @@ $(document).ready(function () {
             $('.corepreviewSetting').addClass("activeprevew");
 
             // Show all fields
-            $('[data-key]').removeClass("hide");
+            $('[data-bb-key]').removeClass("hide");
 
             // In activate active targets
-            $('[data-item]').removeClass("active");
+            $('[data-bb-item]').removeClass("active");
         });
 
 

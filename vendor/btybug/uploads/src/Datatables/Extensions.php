@@ -29,6 +29,11 @@ class Extensions
     ];
     public $autoFill = ['autoFill' => true];
 
+    public function scroller()
+    {
+        return ' deferRender:true,scrollY:200,scrollCollapse: true,scroller:true';
+
+}
     public  function autoFill($params = null)
     {
         return 'autoFill:true';

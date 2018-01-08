@@ -37,7 +37,8 @@ class DatatablesController extends Controller
     public function getFrontendSettings($table)
     {
         $columns = \Schema::getColumnListing($table);
-        return view('uploads::Datatables.frontend_settings', compact('table', 'columns'));
+        $settings=[];
+        return view('uploads::Datatables.frontend_settings', compact('table', 'columns','settings'));
     }
 
     public function getData($table)

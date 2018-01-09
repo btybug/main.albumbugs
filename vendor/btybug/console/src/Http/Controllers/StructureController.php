@@ -12,6 +12,7 @@
 namespace Btybug\Console\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Models\Painter\Painter;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\ExtraModules\Structures;
@@ -322,14 +323,13 @@ class StructureController extends Controller
     public function getEditField(
         Request $request,
         FieldsRepository $fieldsRepository,
-        FieldValidationService $fieldValidationService
+        FieldValidationService $fieldValidationService,
+        Painter $painter
     )
     {
         $field = $fieldsRepository->findOrFail($request->id);
         $unitSlug = explode('.', $field->unit)[0];
-        $unit = CmsItemReader::getAllGearsByType('units')
-            ->where('slug', $unitSlug)
-            ->first();
+        $unit = $painter->find($unitSlug);
         $rule = $fieldValidationService->getBaseValidationRulse($field->table_name, $field->column_name);
         $required = $fieldValidationService->isRequired($field->table_name, $field->column_name);
         $increment = $fieldValidationService->isAutoIncrement($field->table_name, $field->column_name);

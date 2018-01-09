@@ -115,9 +115,9 @@ class StructureController extends Controller
         StructureService $service
     )
     {
-        $method = $request->get('method','all');
+        $method = $request->get('method', 'all');
         $data = $service->getUrls($method);
-        return view('console::structure.urls',compact('data','method'));
+        return view('console::structure.urls', compact('data', 'method'));
     }
 
     public function getSettings()
@@ -334,7 +334,7 @@ class StructureController extends Controller
         $required = $fieldValidationService->isRequired($field->table_name, $field->column_name);
         $increment = $fieldValidationService->isAutoIncrement($field->table_name, $field->column_name);
 
-        return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required','increment']));
+        return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required', 'increment']));
     }
 
     public function postEditField(
@@ -356,7 +356,7 @@ class StructureController extends Controller
         StructureService $structureService
     )
     {
-        return \Response::json(['data' => BBRenderUnits($request->unit,$request->all())]);
+        return \Response::json(['data' => BBRenderUnits($request->unit, $request->all())]);
     }
 
     public function postMapping(
@@ -367,7 +367,7 @@ class StructureController extends Controller
         $field = $fieldsRepository->findOrFail($request->id);
         $field->type = $request->type;
 
-        $html = view("console::structure.developers._partials.mapping-column",compact('field'))->render();
+        $html = view("console::structure.developers._partials.mapping-column", compact('field'))->render();
 
         return \Response::json(['data' => $html]);
     }

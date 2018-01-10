@@ -11,7 +11,7 @@
     @include($path)
 @else
     @php
-         $params = \Request::route()->parameters();
-          echo  \App::call($path,$params);
+        $params = \Request::route()->parameters();
+         echo  \App::call($path,$params);
     @endphp
 @endif

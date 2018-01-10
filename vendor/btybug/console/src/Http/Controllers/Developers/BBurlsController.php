@@ -247,15 +247,13 @@ class BBurlsController extends Controller
     {
         $value = $request->get('value');
         $options = $request->get('options', []);
-        $unit = CmsItemReader::getAllGearsByType('units')
-            ->where('slug', $value)
-            ->first();
+        $unit = Painter::find($value);
         if ($unit && count($unit->variations())) {
             $variation = array_first($unit->variations());
             return \Response::json(['error' => false, 'html' => $unit->render(['settings' => $options]), 'options' => $unit->renderSettings()]);
         }
 
-        return \Response::json(['error' => true]);
+        return \Response::json(['error' => true,'message' => 'unit not found']);
     }
 
     public function getPageLayoutConfigToArray(Request $request)

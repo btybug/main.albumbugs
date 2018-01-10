@@ -32,9 +32,7 @@ class UserService extends GeneralService
 
     public function getSiteUsers()
     {
-        return $this->userRepository->model()->whereHas('role', function ($query) {
-            $query->where('access', Roles::ACCESS_TO_FRONTEND);
-        });
+        return $this->userRepository->model()->where('role_id', ZERO);
     }
 
     public function getAdmins()

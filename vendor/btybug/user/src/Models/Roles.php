@@ -11,14 +11,7 @@ class Roles extends Model
     use ShinobiTrait;
 
     const SUPERADMIN = 'superadmin';
-    const ACCESS_TO_BOTH = 0;
-    const ACCESS_TO_BACKEND = 1;
-    const ACCESS_TO_FRONTEND = 2;
-    public static $accessList = [
-        self::ACCESS_TO_BACKEND => 'Back End',
-        self::ACCESS_TO_FRONTEND => 'Front End',
-        self::ACCESS_TO_BOTH => 'Back and Front End',
-    ];
+
     protected static $menus = [
         'Left Navbar Core' => 1,
         'User Menu Core' => 2,
@@ -67,10 +60,5 @@ class Roles extends Model
     public function menus()
     {
         return $this->hasMany('App\Modules\Backend\MenuVariation', 'user_role', 'id');
-    }
-
-    public function getAccessName()
-    {
-        return self::$accessList[$this->access];
     }
 }

@@ -44,8 +44,7 @@ class RolesController extends Controller
         RoleRepository $roleRepository
     )
     {
-        $accessList = $roleRepository->getAccessList();
-        return view('users::roles.create', compact(['accessList']));
+        return view('users::roles.create');
     }
 
     public function postCreate(
@@ -63,11 +62,10 @@ class RolesController extends Controller
         RoleRepository $roleRepository
     )
     {
-        $accessList = $roleRepository->getAccessList();
         $role = $roleRepository->find($request->id);
         if (!$role) return redirect()->back();
 
-        return view('users::roles.edit', compact(['role', 'accessList']));
+        return view('users::roles.edit', compact(['role']));
     }
 
     public function postEdit(

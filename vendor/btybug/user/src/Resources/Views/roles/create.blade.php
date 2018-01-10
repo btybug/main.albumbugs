@@ -19,10 +19,6 @@
                 {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Enter Role description'])!!}
             </div>
             <div class="form-group">
-                {!! Form::label('access','Access to',[])!!}
-                {!! Form::select('access', $accessList, null, ['class'=>'form-control'])!!}
-            </div>
-            <div class="form-group">
                 {!! Form::submit('Add Role',['class' => 'btn btn-primary']) !!}
             </div>
 

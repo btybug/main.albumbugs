@@ -75,8 +75,6 @@ class PagesController extends Controller
         UserService $userService
     )
     {
-        CommonService::registerFrontendPages();
-        dd('done !!!!');
         $type = $request->get('type', 'core');
         $pages = $frontPagesRepository->getGroupedWithModule();
 

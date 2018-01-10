@@ -2,6 +2,7 @@
   "require": {
     "btybug.hook/blog": "dev-master",
     "sahak.avatar/provaldation": "dev-master",
-    "sahak.avatar/forms": "dev-master"
+    "sahak.avatar/forms": "dev-master",
+    "sahak.avatar/membership": "dev-master"
   }
 }

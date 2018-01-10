@@ -55,13 +55,11 @@ class FrontendPageService extends GeneralService
 
     }
 
-    public static function generateSpecialPage (array $data)
+    public static function register (array $data)
     {
         if (
             isset($data['module_id'])
             && isset($data['url'])
-            && isset($data['file_path'])
-            && isset($data['edit_url'])
         ) {
             $pageRepo = new FrontPagesRepository();
             if (isset($data['slug'])) {
@@ -84,10 +82,11 @@ class FrontendPageService extends GeneralService
 
             return $frontPageRepo->create([
                 'user_id'              => \Auth::id(),
+                'module_id'              =>(isset($data['module_id'])) ? $data['module_id'] : null,
                 'title'                => (isset($data['title'])) ? $data['title'] : "New Page",
                 'slug'                 => (isset($data['slug'])) ? $data['slug'] : uniqid(),
-                'header'               => 0,
-                'footer'               => 0,
+                'header'               => (isset($data['header'])) ? $data['header'] : 0,
+                'footer'               => (isset($data['footer'])) ? $data['footer'] : 0,
                 'status'               => (isset($data['status'])) ? $data['status'] : "published",
                 'page_access'          => (isset($data['page_access'])) ? $data['page_access'] : 1,
                 'page_layout'          => null,
@@ -95,8 +94,8 @@ class FrontendPageService extends GeneralService
                 'url'                  => (isset($data['prefix'])) ? $data['prefix'] . '/' . $data['url'] : $data['url'],
                 'parent_id'            => (isset($data['parent_id'])) ? $data['parent_id'] : null,
                 'type'                 => 'plugin',
-                'content_type'         => 'special',
-                'settings'             => json_encode(['file_path' => $data['file_path'], 'edit_url' => $data['edit_url']], true)
+                'content_type'         => (isset($data['content_type'])) ? $data['content_type'] : 'editor',
+                'settings'             => (isset($data['settings'])) ? json_encode($data['settings'], true) : null
             ]);
         }
     }

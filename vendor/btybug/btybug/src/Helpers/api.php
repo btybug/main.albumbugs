@@ -1514,9 +1514,9 @@ function form_render($attr)
     }
 }
 
-function generate_special_page(array $data)
+function register_frontend_page(array $data)
 {
-    return \Btybug\FrontSite\Services\FrontendPageService::generateSpecialPage(
+    return \Btybug\FrontSite\Services\FrontendPageService::register(
         $data
     );
 }

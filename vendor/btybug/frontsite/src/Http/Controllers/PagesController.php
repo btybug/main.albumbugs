@@ -13,6 +13,7 @@ namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Events\PageCreateEvent;
 use App\Http\Controllers\Controller;
+use BtyBugHook\Forms\Services\CommonService;
 use Illuminate\Http\Request;
 use Response;
 use Btybug\btybug\Helpers\helpers;
@@ -74,6 +75,8 @@ class PagesController extends Controller
         UserService $userService
     )
     {
+        CommonService::registerFrontendPages();
+        dd('done !!!!');
         $type = $request->get('type', 'core');
         $pages = $frontPagesRepository->getGroupedWithModule();
 

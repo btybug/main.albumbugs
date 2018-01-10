@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
-use Btybug\btybug\Models\Templates\Units;
 use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Services\CmsItemUploader;
 use Btybug\Resources\Models\Validation as validateUpl;
+use BtyBugHook\Blog\Repository\PostsRepository;
 use Illuminate\Http\Request;
 use function PHPSTORM_META\type;
 use Resources;

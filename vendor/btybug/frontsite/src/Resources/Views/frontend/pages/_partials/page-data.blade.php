@@ -92,17 +92,17 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="checkboxes">Area access</label>
                         <div class="col-md-4">
-                            @php
-                                $frontendRoles=new \Btybug\User\Repository\RoleRepository();
-                            @endphp
-                            @foreach($frontendRoles->getFrontRoles() as $role)
-                                <div class="checkbox">
-                                    <label for="checkboxes-1">
-                                        {!! Form::checkbox('page_layout_settings[sidebar_left_roles][]',$role->slug,(isset($page->page_layout_settings['sidebar_left_roles']) && in_array($role->slug,$page->page_layout_settings['sidebar_left_roles']))?1:0) !!}
-                                        {!! $role->name !!}
-                                    </label>
-                                </div>
-                            @endforeach
+                            {{--@php--}}
+                                {{--$frontendRoles=new \Btybug\User\Repository\RoleRepository();--}}
+                            {{--@endphp--}}
+                            {{--@foreach($frontendRoles->getFrontRoles() as $role)--}}
+                                {{--<div class="checkbox">--}}
+                                    {{--<label for="checkboxes-1">--}}
+                                        {{--{!! Form::checkbox('page_layout_settings[sidebar_left_roles][]',$role->slug,(isset($page->page_layout_settings['sidebar_left_roles']) && in_array($role->slug,$page->page_layout_settings['sidebar_left_roles']))?1:0) !!}--}}
+                                        {{--{!! $role->name !!}--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                            {{--@endforeach--}}
                         </div>
                     </div>
                 </div>

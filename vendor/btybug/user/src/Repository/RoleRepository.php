@@ -33,11 +33,6 @@ class RoleRepository extends GeneralRepository
         return $this->model()->where('slug', '!=', 'superadmin')->pluck('slug', 'slug')->toArray();
     }
 
-    public function getFrontRoles()
-    {
-        return $this->model()->where('access', '!=', 1)->get();
-    }
-
     public function getAllWithGuest()
     {
         $items = $this->getAll();

@@ -3,7 +3,7 @@
     <div class="header-limiter">
 
         <h1>
-            <a href="#">
+            <a href="{{route("go_to_home")}}">
                 <img src="{!! BBgetSiteLogo() !!}" alt="">
                 <span>{!! BBgetSiteName() !!}</span>
             </a>
@@ -42,9 +42,6 @@
                 <li>
                     <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt="">{{Auth::user()->username}} <i class="fa fa-caret-down"></i></a>
                     <ul>
-
-                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
-                        </li>
                         @if(isset($settings['user_menu']))
                             @php
                                 $items = BBGetMenu($settings['user_menu'])
@@ -57,7 +54,7 @@
                                 @endforeach
                             @endif
                         @endif
-
+                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a></li>
                     </ul>
                 </li>
                 <li class="head-mob-reg">

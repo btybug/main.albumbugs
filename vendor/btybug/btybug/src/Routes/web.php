@@ -73,7 +73,7 @@ Route::group(
             ['prefix' => '/admin', 'middleware' => ['admin:Users', 'sessionTimout', 'system']],
             function () {
 
-                Route::get('/', 'Admincp\DashboardController@getIndex');
+                Route::get('/', 'Admincp\DashboardController@getIndex')->name('go_to_home');
 
                 Route::get('/menus', 'Admincp\DashboardController@getAdminMenus');
 //                Route::controller('/dashboard', 'Admincp\DashboardController');

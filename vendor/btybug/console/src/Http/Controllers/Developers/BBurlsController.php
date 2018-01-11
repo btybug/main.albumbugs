@@ -293,8 +293,9 @@ class BBurlsController extends Controller
                 $variation = ContentLayouts::findVariation($value);
                 break;
             case 'unit':
+
                 $obj = Painter::findByVariation($value);
-                $variation = Painter::variations()->find($value);
+                $variation = $obj->variations()->find($value);
                 break;
             default:
                 $data = ['error' => true, 'message' => 'variation_id is mandatory!!!'];

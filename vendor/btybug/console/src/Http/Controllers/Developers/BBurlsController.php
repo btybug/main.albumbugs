@@ -297,13 +297,20 @@ class BBurlsController extends Controller
                 $obj = Painter::findByVariation($value);
                 $variation = $obj->variations()->find($value);
                 break;
+            case 'menus':
+                $data = ['error' => true, 'message' => 'no menu type!!!'];
+                break;
             default:
                 $data = ['error' => true, 'message' => 'variation_id is mandatory!!!'];
                 break;
         }
+        if($type == "menus"){
+            return \Response::json($data);
+        }
         $data['error'] = false;
         $data['value'] = $obj->title;
         $data['content'] = 'Type:' . $type . ' Name:' . $obj->title . ' Author:' . $obj->author . ' Uploaded:' . BBgetDateFormat($obj->created_at) . ' Variation:' . $variation->title . ' Last Modification:' . BBgetDateFormat($variation->updated_at);
+
         return \Response::json($data);
 
     }

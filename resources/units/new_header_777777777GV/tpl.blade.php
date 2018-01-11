@@ -17,7 +17,7 @@
                 <nav>
                     @foreach($items as $item)
                         <a href="{!! url($item->url) !!}"><i
-                                        class="{!! $item->icon !!}"></i> {!! $item->title !!}</a>
+                                        class="fa {!! $item->icon !!}"></i> {!! $item->title !!}</a>
                     @endforeach
                 </nav>
             @endif
@@ -45,17 +45,13 @@
 
                         <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
                         </li>
-                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
-                        </li>
-                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
-                        </li>
                         @if(isset($settings['user_menu']))
                             @php
                                 $items = BBGetMenu($settings['user_menu'])
                             @endphp
                             @if(count($items))
                                 @foreach($items as $item)
-                                    <li class="custom_li_style"><a href="{!! url($item->url) !!}" class="custom_link_style"><i class="fa fa-sign-out"
+                                    <li class="custom_li_style"><a href="{!! url($item->url) !!}" class="custom_link_style"><i class="fa {!! $item->icon !!}"
                                                                              aria-hidden="true"></i><span>{!! $item->title !!}</span></a>
                                     </li>
                                 @endforeach

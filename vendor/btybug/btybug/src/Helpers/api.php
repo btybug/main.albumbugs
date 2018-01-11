@@ -1295,8 +1295,7 @@ function BBGetMenu(
     $menuRepo = new \Btybug\btybug\Repositories\MenuRepository();
 
     $menu = $menuRepo->find($id);
-
-    if ($menu) return $menu->items;
+    if ($menu) return json_decode($menu->json_data);
 }
 
 

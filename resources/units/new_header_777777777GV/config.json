@@ -4,7 +4,6 @@
   "site": "http:\/\/bootydev.co.uk",
   "version": "1.0",
   "type": "unit",
-  "example": "demo",
   "description": "Super header unit",
   "have_setting": 1,
   "image": "screenshot.png",

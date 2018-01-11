@@ -8,6 +8,7 @@
                 <span>{!! BBgetSiteName() !!}</span>
             </a>
         </h1>
+
         @if(isset($settings['menu_area']))
             @php
                 $items = BBGetMenu($settings['menu_area'])
@@ -24,9 +25,17 @@
 
         @if(!Auth::check())
             <ul class="custom_ul_login_register">
-                <li><a href="#"><i class="fa fa-user-plus"></i> Sign Up</a>
+                <li><a href="#"><i class="fa fa-user-plus"></i><span class="sign-log-span">Sign Up</span></a>
                 </li>
-                <li><a href="#" data-toggle="modal" data-target="#login"><i class="fa fa-sign-in"></i> Login</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#login"><i class="fa fa-sign-in"></i><span class="sign-log-span"> Login</span></a></li>
+                <li class="head-mob-reg">
+                    <div>
+                        <a href="#" id="burger-mob-head">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </li>
+
             </ul>
         @else
             <ul class="nav navbar-nav navbar-right header-user">
@@ -34,6 +43,10 @@
                     <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt="">{{Auth::user()->username}} <i class="fa fa-caret-down"></i></a>
                     <ul>
 
+                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
+                        </li>
+                        <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
+                        </li>
                         <li class="custom_li_style"><a href="{!! url('logout') !!}" class="custom_link_style"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
                         </li>
                         @if(isset($settings['user_menu']))
@@ -51,8 +64,17 @@
 
                     </ul>
                 </li>
+                <li class="head-mob-reg">
+                    <div>
+                        <a href="#" id="burger-mob-head">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </li>
+
             </ul>
         @endif
+
     </div>
 
 </header>
@@ -125,6 +147,12 @@
             });
 
         }
+        var headburg = $('#burger-mob-head');
+        var headnav = $('.header-login-signup .header-limiter nav');
+        headburg.on( "click", function() {
+            headnav.toggle();
+            $(this).children('i').toggleClass('fa-bars fa-times');
+        });
 
     });
 

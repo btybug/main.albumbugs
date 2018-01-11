@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Header</title>
-
-    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
-
-</head>
-
-<body>
 
 <header class="header-login-signup">
 
@@ -32,7 +17,7 @@
                 <nav>
                     @foreach($items as $item)
                         <a href="{!! url($item->url) !!}"><i
-                                        class="{!! $item->icon !!}"></i> {!! $item->title !!} ddddddddddddddd</a>
+                                        class="{!! $item->icon !!}"></i> {!! $item->title !!}</a>
                     @endforeach
                 </nav>
             @endif
@@ -209,6 +194,3 @@
 </div>--}}
 {!! BBstyle($_this->path.DS.'css'.DS.'main.css') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'main.js') !!}
-</body>
-
-</html>

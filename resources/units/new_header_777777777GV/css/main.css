@@ -335,7 +335,7 @@ body{
 }
 
 .header-login-signup .header-limiter h1 span {
-    color: #5383d3;
+    color: #fff;
 }
 
 /* The navigation links */
@@ -394,44 +394,12 @@ body{
 
 /* The sign up button */
 
-.header-login-signup .header-limiter ul li:last-child a {
-    font-weight: bold;
-    background-color: #3a3c3e;
-    padding: 10px 15px;
-    border-radius: 3px;
-}
 
 /* Making the header responsive */
-
-@media all and (max-width: 600px) {
-
-    .header-login-signup {
-        padding: 25px;
-        height: 85px;
-    }
-
-    .header-login-signup .header-limiter h1 {
-        float: none;
-        margin: -8px 0 2px;
-        text-align: center;
-        font-size: 24px;
-        line-height: 1;
-    }
-
-    .header-login-signup .header-limiter nav {
-        margin: 0;
-        float: none;
-    }
-
-    .header-login-signup .header-limiter nav li a {
-        font-size: 13px;
-    }
-
-    .header-login-signup .header-limiter ul {
-        display: none;
-    }
-
+.head-mob-reg{
+    display: none !important;
 }
+
 
 /* For the headers to look good, be sure to reset the margin and padding of the body */
 
@@ -459,173 +427,109 @@ body {
 .bty-head-mob {
     display: none;
 }
+.header-limiter .header-user a:hover{
+    background: none;
+}
+.header-limiter .header-user>li >ul{
 
-@media screen and (max-width: 800px) {
-    .header-limiter {
-        display: none;
-    }
-
-    .bty-head-mob {
-        display: block;
-    }
-
-    .bty-head-mob h1 img {
-        width: 20px;
-        height: 20px;
-        object-fit: cover;
-    }
-
-    .bty-head-mob h1 a {
-        color: white;
-        text-decoration: none;
-    }
-
-    .bty-head-mob h1 {
-        margin: 0;
+}
+.header-limiter .header-user .user-link+ul{
+    background-color: white;
+    transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    box-shadow: 0px 0px 1px #ccc;
+    width: 130%;
+    border-radius: 0 0 4px 4px;
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+.header-limiter .header-user .user-link+ul .custom_link_style{
+    line-height: 20px;
+    text-align: left;
+    font-weight: bold;
+    color: #444;
+    padding: 12px 20px;
+}
+.header-limiter .header-user .user-link+ul .custom_link_style:hover{
+    background-color: #000;
+    color: #fff;
+}
+@media screen and (max-width: 790px) {
+    .head-mob-reg>div{
+        font-size: 30px;
         line-height: 0;
     }
-
-    .bty-head-mob h1 span {
-        font-size: 14px;
-        color: rgb(83, 131, 211);
+    .head-mob-reg{
+        display: inline-block !important;
+        vertical-align: middle;
     }
-
-    .bty-head-mob .top-mob {
-        background-color: black;
-        padding: 12px;
-    }
-
-    .bty-head-mob .top-mob .log-reg ul {
-        list-style: none;
-        display: inline;
-        vertical-align: super;
-    }
-
-    .bty-head-mob .top-mob .log-reg > span {
-        margin-left: 15px;
-    }
-
-    .bty-head-mob .top-mob .log-reg > span i {
-        font-size: 25px;
-        color: white;
-    }
-
-    .bty-head-mob .top-mob .log-reg ul li {
-        display: inline-block;
-        padding-left: 7px;
-    }
-
-    .bty-head-mob .top-mob .log-reg ul li a {
-        color: white;
-        text-decoration: none;
-    }
-    .bty-head-mob .top-mob .log-reg{
-        text-align: right;
-    }
-
-    .bty-head-mob .top-mob .log-reg ul li a span {
-        display: none;
-    }
-
-    .bty-head-mob .bottom-mob .menu-mob {
-        list-style: none;
-        padding-left: 0;
-        margin: 0;
-    }
-
-    .bty-head-mob .bottom-mob .menu-mob i {
-        display: none;
-    }
-
-    .bty-head-mob .bottom-mob {
-        background-color: rgba(0, 0, 0, 0.24);
+    .head-mob-reg>div a{
         padding: 0;
-        position: absolute;
-        top: 50px;
-        display: none;
-    }
-
-    .bty-head-mob .bottom-mob .menu-mob li {
-        padding: 5px 20px;
-        background-color: #4ebadb;
-        border-bottom: 1px solid #e2e2e2;
-        transition: 0.5s ease;
-    }
-
-    .bty-head-mob .bottom-mob .menu-mob a {
-        text-decoration: none;
-        color: white;
-    }
-
-    .bty-head-mob .bottom-mob .menu-mob li:hover {
-        background-color: #4786a5;
-    }
-
-    .bty-head-mob .bottom-mob {
-
-    }
-
-    .user-head-mob .user-log img {
-        width: 20px;
-        height: 20px;
-        object-fit: cover;
-    }
-
-    .user-head-mob .top-mob .logo {
-        text-align: center;
-    }
-    .user-head-mob .top-mob .log-reg >ul{
-        display: none;
-    }
-    .user-head-mob .bottom-mob{
-        background: none;
-        /*position: unset; */
-        /*float: none !important;*/
-    }
-
-    .user-head-mob .bottom-mob .menu-mob{
-        text-align: right;
-    }
-
-    .user-head-mob  .user-menu-mob ul {
-        list-style: none;
-        padding-left: 0;
-        margin: 0;
-    }
-
-    .user-head-mob .bottom-mob .user-menu-mob i {
-        display: none;
-    }
-    .user-head-mob .user-menu-mob{
         background: none !important;
+        border-radius: 0;
     }
 
-    .user-head-mob .user-menu-mob {
-        background-color: rgba(0, 0, 0, 0.24);
-        padding: 0;
+    .header-login-signup .header-limiter ul li:hover{
+        opacity: 1;
+    }
+    .header-user li> ul{
+        width: 100%;
+    }
+    .header-login-signup .header-limiter nav{
+        display: none;
         position: absolute;
-        top: 50px;
+        top: 80px;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        background-color: #000000c9;
+        padding: 0;
+        margin: 0;
+    }
+    .header-login-signup .header-limiter nav>a{
+        display: block;
+        border-top: 1px solid #fff;
+        padding: 10px 0;
+    }
+    .header-login-signup .header-limiter nav>a:hover{
+        background-color: #000;
+    }
+
+}
+@media all and (max-width: 600px) {
+
+    .header-login-signup .header-limiter h1{
+        font-size: 20px;
+    }
+    .header-login-signup .header-limiter .sign-log-span{
         display: none;
     }
 
-    .user-head-mob .user-menu-mob ul li {
-        padding: 5px 20px;
-        background-color: #4ebadb;
-        border-bottom: 1px solid #e2e2e2;
-        transition: 0.5s ease;
+}
+@media all and (max-width: 380px) {
+
+    .header-login-signup .header-limiter h1{
+        font-size: 18px;
     }
-
-    .user-head-mob .user-menu-mob ul li a {
-        text-decoration: none;
-        color: white;
+    .header-login-signup .header-limiter .header-user li img{
+        display: none;
     }
-
-    .bty-head-mob .bottom-mob .menu-mob li:hover {
-        background-color: #4786a5;
+    .header-login-signup .header-limiter .head-mob-reg{
+        margin: 0 !important;
     }
-
-    .bty-head-mob .bottom-mob {
-
+    .header-login-signup .header-limiter .head-mob-reg>div a{
+        font-size:20px;
     }
-
+    .header-login-signup .header-limiter .header-user .custom_li_style>a{
+        line-height: 30px !important;
+    }
+    .header-login-signup .header-limiter .header-user .custom_li_style>a span{
+        display: none;
+    }
+    .header-login-signup .header-limiter .custom_ul_login_register{
+        padding: 0;
+    }
 }

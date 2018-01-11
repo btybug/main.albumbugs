@@ -52,4 +52,11 @@ composer.lock
 /vendor/caffeinated
 /vendor/chumper
 /vendor/yajra
+/vendor/egulias
+/vendor/barryvdh
+/vendor/phar-io
+/vendor/theseer
+/vendor/filp
+/vendor/fildeloper
+/vendor/fideloper
 /public/app

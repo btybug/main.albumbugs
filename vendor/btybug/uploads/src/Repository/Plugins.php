@@ -310,7 +310,7 @@ class Plugins
         foreach ($this->plugins as $pluginPath => $version) {
             if (\File::exists($this->pluginPath($pluginPath))) {
                 $plugin = json_decode(\File::get($this->pluginPath($pluginPath)), true);
-                if ($plugin['type'] == $this->type || $all) {
+                if (isset($plugin['type'])&& $plugin['type'] == $this->type || $all) {
                     $plugins[$pluginPath] = $plugin;
                     $plugins[$pluginPath]['path'] = $this->path;
                     $plugins[$pluginPath]['version'] = $version;

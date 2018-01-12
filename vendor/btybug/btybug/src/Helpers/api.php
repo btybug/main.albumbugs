@@ -1845,3 +1845,9 @@ function ajaxExtract($data){
 
 	return $return;
 }
+
+function get_frontend_pages_pluck($is_array = false){
+    $pageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+    $page = $pageRepository->pluck('title','id');
+    return ($is_array) ? $page->toArray() : $page;
+}

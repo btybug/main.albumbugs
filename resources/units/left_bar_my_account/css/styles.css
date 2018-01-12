@@ -4,7 +4,7 @@
 }
 
 .bty-vertical-menu-2 ul,
-.bty-vertical-menu-2li,
+.bty-vertical-menu-2 li,
 .bty-vertical-menu-2 a {
     padding: 0;
     margin: 0;
@@ -20,7 +20,8 @@
 
 .bty-vertical-menu-2 ul li ul {
     background-color: #4a5b78;
-    list-style: none
+    list-style: none;
+    display: none;
 }
 
 .bty-vertical-menu-2 > ul > li > a {

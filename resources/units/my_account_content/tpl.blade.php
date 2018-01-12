@@ -49,15 +49,19 @@
 <section class="myaccount-posts">
     <div class="container">
         <div class="row">
+            <h2>My posts</h2>
             <article>
                 <div class="col-md-4 col-sm-4">
-                    <div>
+                    <div class="img">
+                        <div class="day">
+                            <span>17.10.2018</span>
+                        </div>
                         <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg"
                              alt="">
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-8">
-                    <div>
+                    <div class="content">
                         <p>
                             Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
@@ -66,10 +70,111 @@
                             1500s, when an unknown printer took a galley of type and scrambled it to make a type
                             specimen book. It has survived not only five centuries, but also.
                         </p>
-                        <button class="more"><a href="#">See more</a></button>
+                        <button class="more">See more</button>
                     </div>
                 </div>
+                <div class="clearfix"></div>
             </article>
+            <article>
+                <div class="col-md-4 col-sm-4">
+                    <div class="img">
+                        <div class="day">
+                            <span>17.10.2018</span>
+                        </div>
+                        <img src="http://kb4images.com/images/nice-wallpaper-hd/38102801-nice-wallpaper-hd.jpg"
+                             alt="">
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="content">
+                        <p>
+                            Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                            of type and scrambled it to make a type specimen book. It has survived not only five
+                            centuries, but also. Lorem Ipsum has been the industry's standard dummy text ever since the
+                            1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                            specimen book. It has survived not only five centuries, but also.
+                        </p>
+                        <button class="more">See more</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </article>
+            <article>
+                <div class="col-md-4 col-sm-4">
+                    <div class="img">
+                        <div class="day">
+                            <span>17.10.2018</span>
+                        </div>
+                        <img src="https://78.media.tumblr.com/avatar_0d3fe4da5e02_128.png"
+                             alt="">
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="content">
+                        <p>
+                            Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                            of type and scrambled it to make a type specimen book. It has survived not only five
+                            centuries, but also. Lorem Ipsum has been the industry's standard dummy text ever since the
+                            1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                            specimen book. It has survived not only five centuries, but also.
+                        </p>
+                        <button class="more">See more</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="myphotos">
+    <div class="container">
+        <div class="row">
+            <h2>My photos</h2>
+            <ul>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <li class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="photo">
+                        <img src="http://finedininglovers.cdn.crosscast-system.com/BlogPost/xl_13272_Nice-Tasting-Tour-FDL-TP.jpg" alt="">
+                    </div>
+                </li>
+                <div class="clearfix"></div>
+            </ul>
         </div>
     </div>
 </section>

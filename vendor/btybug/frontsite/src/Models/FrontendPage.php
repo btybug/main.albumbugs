@@ -246,4 +246,28 @@ class FrontendPage extends Model
     {
         return $this->hasOne(Urlmanager::class, 'front_page_id');
     }
+    public static function getMenus(){
+        $front_pages = self::where('content_type','template')->with('childs')->get();
+        return $front_pages;
+    }
+    public static function renderMenu($data){
+
+        if(!count($data)){
+            return '<li><a href="#">No menu items</a></li>';
+        }
+        $html = '';
+        foreach ($data as $key => $settings){
+            $children = $settings->childs;
+            if(count($children)){
+                $sub_menu = '';
+                foreach ($children as $ch){
+                    $sub_menu .= '<li><a href="'.$ch->url.'">'.$ch->title.'</a></li>';
+                }
+                $html .= '<li><a href="'.$settings->url.'">'.$settings->title.'</a><ul>'.$sub_menu.'</ul></li>';
+            }else{
+                $html .= '<li><a href="'.$settings->url.'">'.$settings->title.'</a></li>';
+            }
+        }
+        return $html;
+    }
 }

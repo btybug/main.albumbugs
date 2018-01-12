@@ -574,7 +574,7 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             }
             $output .= '<span class="listingtitle">' . $item->title . ' - ' . $title . '</span>';
             $settings = json_decode($item->settings, true);
-            if ($item->content_type == "special" && isset($settings['edit_url'])) {
+            if (isset($settings['edit_url'])) {
                 $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin pull-right"></i></a>';
             } else {
                 $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';

@@ -25,6 +25,11 @@
 
         @if(!Auth::check())
             <ul class="custom_ul_login_register">
+                @if(isset($settings['widget']))
+                <li>
+                    {!! BBRenderUnits($settings['widget']) !!}
+                </li>
+                @endif
                 <li><a href="#"><i class="fa fa-user-plus"></i><span class="sign-log-span">Sign Up</span></a>
                 </li>
                 <li><a href="#" data-toggle="modal" data-target="#login"><i class="fa fa-sign-in"></i><span class="sign-log-span"> Login</span></a></li>
@@ -39,6 +44,11 @@
             </ul>
         @else
             <ul class="nav navbar-nav navbar-right header-user">
+                @if(isset($settings['widget']))
+                    <li>
+                        {!! BBRenderUnits($settings['widget']) !!}
+                    </li>
+                @endif
                 <li>
                     <a href="" class="user-link"><img src="{!! BBGetUserAvatar() !!}" alt="">{{Auth::user()->username}} <i class="fa fa-caret-down"></i></a>
                     <ul>

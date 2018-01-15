@@ -19,8 +19,8 @@
                                 {!! BBRenderUnits($settings['widget']) !!}
                             </li>
                         @endif
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#login">register</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+                            <li><a href="#">register</a></li>
                     @else
                         @if(isset($settings['widget']))
                             <li>

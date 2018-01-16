@@ -44,26 +44,27 @@ class FormsRepository extends GeneralRepository
         return $this->model()->where('id', $data)->orWhere('slug', $data)->first();
     }
 
-    public function getFormsByFieldType($fields_type,array $created_by = ['*'],$pluck = false,$type = null)
+    public function getFormsByFieldType($fields_type, array $created_by = ['*'], $pluck = false, $type = null)
     {
-        $query = $this->model()->where('fields_type',$fields_type)->where(function ($query) use ($created_by) {
-            if(count($created_by) && count(array_diff($created_by,['*'])) == 0 ){
+        $query = $this->model()->where('fields_type', $fields_type)->where(function ($query) use ($created_by) {
+            if (count($created_by) && count(array_diff($created_by, ['*'])) == 0) {
                 return $query;
-            }else{
-                return $query->whereIn('created_by',$created_by);
+            } else {
+                return $query->whereIn('created_by', $created_by);
             }
         });
 
-        if($type){
-            $query = $query->where('type',$type);
+        if ($type) {
+            $query = $query->where('type', $type);
         }
 
         return ($pluck) ?
-            (count($query->pluck('name','slug')) ? $query->pluck('name','slug')->toArray() : $query->pluck('name','slug'))
+            (count($query->pluck('name', 'slug')) ? $query->pluck('name', 'slug')->toArray() : $query->pluck('name', 'slug')->toArray())
             : $query->get();
     }
 
-    public function formFields($id){
+    public function formFields($id)
+    {
         return $this->model()->find($id)->form_fields;
     }
 }

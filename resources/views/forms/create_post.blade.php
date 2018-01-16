@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="tab-pane fade" id="pills-price" role="tabpanel" aria-labelledby="pills-price-tab">
-            Prices form
+            @include('payments::settings.price._partials.forms.quantity_price')
         </div>
     </div>
 </div>

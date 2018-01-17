@@ -421,7 +421,7 @@ if (!function_exists('BBGetUserName')) {
     }
 }
 
-function BBAdminMenu()
+function BBAdminMenu($html = true)
 {
 
     // Get json file
@@ -430,17 +430,8 @@ function BBAdminMenu()
         $menu_json_file = file_get_contents(base_path('resources/menus/admin/1.json'));
         $menu_array = json_decode($menu_json_file, true);
     }
-    $menu = BBAdminMenuWalker($menu_array);
 
-//    // Optional Menu 1
-//    if (BBGetAdminSetting('active-menu-1')) {
-//        $file = 'resources/menus/admin/' . BBGetAdminSetting('active-menu-1') . '.json';
-//        if (is_file($file)) {
-//            $menu .= BBAdminMenuWalker(json_decode(file_get_contents($file), true));
-//        }
-//    }
-
-    return $menu;
+    return ($html) ? BBAdminMenuWalker($menu_array) : $menu_array;
 }
 
 function BBAdminMenuWalker($menu_array)

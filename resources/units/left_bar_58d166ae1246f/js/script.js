@@ -1,3 +1,5 @@
-/**
- * Created by Comp on 11/21/2016.
- */
+
+$(".aside-left ul.main-menu li a").click(function(){
+    $(this).parent().toggleClass('active');
+    $(this).next('ul.collapse').toggleClass('in');
+});

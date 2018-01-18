@@ -99,7 +99,6 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     {
         $var = $this->find($id);
         $this->unsetVar($var->path);
-
         return $this;
     }
 

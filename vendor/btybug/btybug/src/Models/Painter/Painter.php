@@ -47,7 +47,7 @@ class Painter extends BasePainter
         if (!$ui) {
             return false;
         }
-        $variation = $ui->variations()->find($slug);
+        $variation = $ui->variations(false)->find($slug);
 
         $settings = [];
         if(count($variation->settings) > 0){

@@ -21,12 +21,14 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     protected $attributes;
     protected $model;
     protected $items;
+    protected $hidden;
 
-    public function __construct($obj)
+    public function __construct($obj, $hidden = true)
     {
         $this->view = $obj->getViewFile();
         $this->model = $obj;
         $this->path = $obj->getVariationsPath();
+        $this->hidden = $hidden;
 
     }
 
@@ -38,10 +40,11 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         \View::addLocation($this->model->getPath());
         \View::addNamespace($slug, $this->model->getPath());
         $variables = $this->mixer($additionalSettings);
-        return \View::make("$slug::$tpl")->with('settings',$variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
+        return \View::make("$slug::$tpl")->with('settings', $variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
 
-    private function mixer($liveSettings){
+    private function mixer($liveSettings)
+    {
         $settings = $this->attributes['settings'];
         if (count($liveSettings) && is_array($liveSettings) && is_array($settings)) {
             array_filter($settings, function ($value) {
@@ -51,7 +54,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
             array_filter($liveSettings, function ($value) {
                 return $value !== '';
             });
-            $settings = array_merge($settings,$liveSettings);
+            $settings = array_merge($settings, $liveSettings);
         }
 
         return $settings;
@@ -69,11 +72,12 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $array = array();
         foreach ($vars as $var) {
             if (File::extension($var) == 'json') {
+                $data = json_decode(File::get($var), true);
+                if (isset($data['hidden']) && $this->hidden) continue;
                 $all = new $this($this->model);
                 $all->id = File::name($var);
                 $all->path = $this->path . '/' . File::name($var) . '.json';
                 $all->file = $var;
-                $data = json_decode(File::get($var), true);
                 $all->attributes = $data instanceof Collection ? $data : Collection::make($data);
                 $all->original = $all->attributes;
                 $all->updated_at = File::lastModified($var);
@@ -91,31 +95,33 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
 
     }
 
-    public function deleteVariation($id){
+    public function deleteVariation($id)
+    {
         $var = $this->find($id);
         $this->unsetVar($var->path);
 
         return $this;
     }
 
-    public function makeVariation(array $array)
+    public function makeVariation(array $array,$slug=null, bool $hidden=false)
     {
-        $rand_id=uniqid();
+        $rand_id =($slug)?$slug: uniqid();
         $id = $this->model->getSlug() . '.' . $rand_id;
         $path = $this->path . DS . $id . '.json';
 
         $this->path = $path;
 
-        $variation_title = 'New variation_'.$rand_id;
+        $variation_title = 'New variation_' . $rand_id;
         $settings = [];
         $arr = [];
-        if(!isset($array['title'])){
+        if (!isset($array['title'])) {
             $array['title'] = $variation_title;
         }
-        if(isset($array["settings"])){
+        if (isset($array["settings"])) {
             $settings = $array["settings"];
         }
         $arr['id'] = $id;
+        if ($hidden) $arr['hidden'] = 1;
         $arr['title'] = $array['title'];
         $arr['settings'] = $settings;
 
@@ -124,9 +130,9 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this;
     }
 
-    public function createVariation(array $array)
+    public function createVariation(array $array,$slug=null, bool $hidden=false)
     {
-     return $this->makeVariation($array)->save();
+        return $this->makeVariation($array,$slug,$hidden)->save();
     }
 
     public function setAttributes($key, $value)
@@ -209,7 +215,6 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     }
 
 
-
     /**
      * @param $name
      * @param $value
@@ -237,8 +242,10 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $result = isset($this->attributes[$name]) ? $this->attributes[$name] : false;
         return $result;
     }
-    public function unsetVar($path){
-        if (File::exists($path)){
+
+    public function unsetVar($path)
+    {
+        if (File::exists($path)) {
             return File::delete($path);
         }
         $this->throwError('File Does not found');
@@ -254,7 +261,9 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         File::put($this->path, json_encode($this->attributes->toArray(), true));
         return $this;
     }
-    public function getModel(){
+
+    public function getModel()
+    {
         return $this->model;
     }
 

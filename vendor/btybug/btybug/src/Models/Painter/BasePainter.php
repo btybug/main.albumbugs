@@ -80,10 +80,10 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         return $this;
     }
 
-    public function scopeVariations()
+    public function scopeVariations(bool $hidden=true)
     {
 
-        return new Variations($this);
+        return new Variations($this,$hidden);
     }
 
     public function scopeFind(string $slug)

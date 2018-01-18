@@ -75,7 +75,7 @@ class CustomSCMiddleware
             $exceptExp = explode('/', $except);
             foreach ($explodeUrl as $key => $url) {
                 if (isset($exceptExp[$key])) {
-                    if ($exceptExp[$key] == $url || $exceptExp[$key] == '*') {
+                    if ($exceptExp[$key] == $url || $exceptExp[$key] == '*' || $exceptExp[$key] == '{param}') {
                         $flag *= 1;
                     } else {
 

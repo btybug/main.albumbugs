@@ -193,7 +193,7 @@ class UnitsController extends Controller
     {
         $slug = explode('.', $id);
         $ui = Painter::find($slug[0]);
-        $variation = $ui->variations()->find($id);
+        $variation = $ui->variations(false)->find($id);
         $settings = [];
         $extra_data = 'some string';
         if(count($variation->settings) > 0){

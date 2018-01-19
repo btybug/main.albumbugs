@@ -73,6 +73,7 @@ class Home
                 }
                 $settings = array_merge($settings, $page_settings);
             }
+            $settings['_page'] = $page;
             $settings['main_content'] = $page->main_content;
             $settings['content_type'] = $page->content_type;
             $settings['template'] = $page->template;

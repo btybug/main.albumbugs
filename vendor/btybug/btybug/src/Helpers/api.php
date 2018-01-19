@@ -279,7 +279,7 @@ function main_content()
         if ($page->content_type == "editor") {
             echo $page->main_content;
         } else {
-            return BBRenderUnits($page->template);
+            return BBRenderUnits($page->template,['_page'=>$page]);
         }
     }
 }
@@ -506,7 +506,7 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
 
         $unit = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
         if (!is_null($unit)) {
-            $variation = $unit->variations()->find($variation_id);
+            $variation = $unit->variations(false)->find($variation_id);
             if (!is_null($variation)) {
                 $settings = $variation->settings;
 

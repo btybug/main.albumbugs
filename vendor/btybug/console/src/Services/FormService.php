@@ -475,7 +475,9 @@ class FormService extends GeneralService
             if($form){
                 $this->form->update($data['id'], [
                     'name' => $data['name'],
-                    'fields_json' => issetReturn($data,'fields_json',null),
+                    'fields_json' => (is_array(issetReturn($data,'fields_json',[])))
+                        ? json_encode(issetReturn($data,'fields_json',[]),true)
+                        : issetReturn($data,'fields_json',[]),
                     'unit_json' => issetReturn($data,'unit_json',null),
                     'form_layout' => issetReturn($data,'form_layout',null)
                 ]);

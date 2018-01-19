@@ -17,20 +17,24 @@ class PhpJsonParser
       // preg_match_all('/([a-z0-9]\.?.*?)\s?\{/', $file, $matches);
        preg_match_all('/(?<=\.)((?!:hover).)*(?=.{)/', $file, $matches);
 
-     //  preg_match_all('/(?<=\/\*).+(?=\*\/)/', $file, $match);
-      // dd($match);
+       preg_match_all('/(?<=\/\*).+(?=\*\/)/', $file, $match);
+
        $html = '';
 
        if(count($matches[0])){
-           $html = self::renderHtml($matches[0]);
+           $html = self::renderHtml($matches[0],$match[0]);
        }
 
        return $html;
    }
-   public static function renderHtml($data){
+   public static function renderHtml($data,$desc=[]){
        $str = '';
-       foreach ($data as $item){
-           $str .= "<option value='".$item."'>".$item."</option>";
+       foreach ($data as $key => $item){
+           if(isset($desc[$key])){
+               $str .= "<option value='".$item."'>".$desc[$key]."</option>";
+           }else{
+               $str .= "<option value='".$item."'>".$item."</option>";
+           }
        }
        return $str;
    }

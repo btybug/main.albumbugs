@@ -14,12 +14,15 @@ class PhpJsonParser
    public static function getClasses($path){
        $file = \File::get($path);
 
-       preg_match_all('/([a-z0-9]\.?.*?)\s?\{/', $file, $matches);
-       //preg_match_all('/([^\/\*]).+(?=\*\/)/', $file, $match);
+      // preg_match_all('/([a-z0-9]\.?.*?)\s?\{/', $file, $matches);
+       preg_match_all('/(?<=\.)((?!:hover).)*(?=.{)/', $file, $matches);
+
+     //  preg_match_all('/(?<=\/\*).+(?=\*\/)/', $file, $match);
+      // dd($match);
        $html = '';
 
-       if(count($matches[1])){
-           $html = self::renderHtml($matches[1]);
+       if(count($matches[0])){
+           $html = self::renderHtml($matches[0]);
        }
 
        return $html;

@@ -1,0 +1,776 @@
+.bty-btn-p-2-border-none {
+    padding: 2px 4px;
+    border: none; }
+
+.bty-btn-p-4-border-none {
+    padding: 4px 8px;
+    border: none; }
+
+.bty-btn-p-6-border-none {
+    padding: 6px 12px;
+    border: none; }
+
+.bty-btn-p-8-border-none {
+    padding: 8px 16px;
+    border: none; }
+
+.bty-btn-p-10-border-none {
+    padding: 10px 20px;
+    border: none; }
+
+.bty-btn-p-12-border-none {
+    padding: 12px 24px;
+    border: none; }
+
+.bty-btn-p-14-border-none {
+    padding: 14px 28px;
+    border: none; }
+
+.bty-btn-p-16-border-none {
+    padding: 16px 32px;
+    border: none; }
+
+.bty-btn-p-2-border-bg-black {
+    padding: 2px 4px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-4-border-bg-black {
+    padding: 4px 8px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-6-border-bg-black {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-8-border-bg-black {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-10-border-bg-black {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-12-border-bg-black {
+    padding: 12px 24px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-14-border-bg-black {
+    padding: 14px 28px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-16-border-bg-black {
+    padding: 16px 32px;
+    border: 1px solid black;
+    background-color: black; }
+
+.bty-btn-p-2-border-bg-white {
+    padding: 2px 4px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-4-border-bg-white {
+    padding: 4px 8px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-6-border-bg-white {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-8-border-bg-white {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-10-border-bg-white {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-12-border-bg-white {
+    padding: 12px 24px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-14-border-bg-white {
+    padding: 14px 28px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-16-border-bg-white {
+    padding: 16px 32px;
+    border: 1px solid black;
+    background-color: white; }
+
+.bty-btn-p-2-border-bg-lightblue {
+    padding: 2px 4px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-4-border-bg-lightblue {
+    padding: 4px 8px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-6-border-bg-lightblue {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-8-border-bg-lightblue {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-10-border-bg-lightblue {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-12-border-bg-lightblue {
+    padding: 12px 24px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-14-border-bg-lightblue {
+    padding: 14px 28px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-16-border-bg-lightblue {
+    padding: 16px 32px;
+    border: 1px solid black;
+    background-color: #0000ff2e; }
+
+.bty-btn-p-2-border-bg-violet {
+    padding: 2px 4px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-4-border-bg-violet {
+    padding: 4px 8px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-6-border-bg-violet {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-8-border-bg-violet {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-10-border-bg-violet {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-12-border-bg-violet {
+    padding: 12px 24px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-14-border-bg-violet {
+    padding: 14px 28px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-16-border-bg-violet {
+    padding: 16px 32px;
+    border: 1px solid black;
+    background-color: violet; }
+
+.bty-btn-p-2-border-bg-red {
+    padding: 2px 4px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-4-border-bg-red {
+    padding: 4px 8px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-6-border-bg-red {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-8-border-bg-red {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-10-border-bg-red {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-12-border-bg-red {
+    padding: 12px 24px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-14-border-bg-red {
+    padding: 14px 28px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-16-border-bg-red {
+    padding: 16px 32px;
+    border: 1px solid black;
+    background-color: red; }
+
+.bty-btn-p-2-border-bg-pink {
+    padding: 2px 4px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-4-border-bg-pink {
+    padding: 4px 8px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-6-border-bg-pink {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-8-border-bg-pink {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-10-border-bg-pink {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-12-border-bg-pink {
+    padding: 12px 24px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-14-border-bg-pink {
+    padding: 14px 28px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-p-16-border-bg-pink {
+    padding: 16px 32px;
+    border: 1px solid black;
+    background-color: pink; }
+
+.bty-btn-radius-2-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: white; }
+
+.bty-btn-radius-4-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white; }
+
+.bty-btn-radius-6-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    background-color: white; }
+
+.bty-btn-radius-8-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background-color: white; }
+
+.bty-btn-radius-10-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-color: white; }
+
+.bty-btn-radius-12-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: white; }
+
+.bty-btn-radius-14-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    border-radius: 14px;
+    background-color: white; }
+
+.bty-btn-radius-16-bg-white {
+    border: 1px solid black;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    background-color: white; }
+
+.bty-btn-p-4-radius-2-bg-white {
+    padding: 3px 6px;
+    border: 1px solid black;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: white; }
+
+.bty-btn-p-8-radius-4-bg-white {
+    padding: 6px 12px;
+    border: 1px solid black;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white; }
+
+.bty-btn-p-12-radius-6-bg-white {
+    padding: 9px 18px;
+    border: 1px solid black;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    background-color: white; }
+
+.bty-btn-p-16-radius-8-bg-white {
+    padding: 12px 24px;
+    border: 1px solid black;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background-color: white; }
+
+.bty-btn-p-20-radius-10-bg-white {
+    padding: 15px 30px;
+    border: 1px solid black;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-color: white; }
+
+.bty-btn-p-24-radius-12-bg-white {
+    padding: 18px 36px;
+    border: 1px solid black;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: white; }
+
+.bty-btn-p-28-radius-14-bg-white {
+    padding: 21px 42px;
+    border: 1px solid black;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    border-radius: 14px;
+    background-color: white; }
+
+.bty-btn-p-32-radius-16-bg-white {
+    padding: 24px 48px;
+    border: 1px solid black;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    background-color: white; }
+
+.bty-btn-p-2-bg-pink-hover-dark-10 {
+    padding: 2px 4px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-2-bg-pink-hover-dark-10:hover {
+    background-color: #ff8da1; }
+
+.bty-btn-p-4-bg-pink-hover-dark-20 {
+    padding: 4px 8px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-4-bg-pink-hover-dark-20:hover {
+    background-color: #ff5a77; }
+
+.bty-btn-p-6-bg-pink-hover-dark-30 {
+    padding: 6px 12px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-6-bg-pink-hover-dark-30:hover {
+    background-color: #ff274d; }
+
+.bty-btn-p-8-bg-pink-hover-dark-40 {
+    padding: 8px 16px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-8-bg-pink-hover-dark-40:hover {
+    background-color: #f3002a; }
+
+.bty-btn-p-10-bg-pink-hover-dark-50 {
+    padding: 10px 20px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-10-bg-pink-hover-dark-50:hover {
+    background-color: #c00022; }
+
+.bty-btn-p-12-bg-pink-hover-dark-60 {
+    padding: 12px 24px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-12-bg-pink-hover-dark-60:hover {
+    background-color: #8d0019; }
+
+.bty-btn-p-14-bg-pink-hover-dark-70 {
+    padding: 14px 28px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-14-bg-pink-hover-dark-70:hover {
+    background-color: #5a0010; }
+
+.bty-btn-p-16-bg-pink-hover-dark-80 {
+    padding: 16px 32px;
+    background-color: pink;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-16-bg-pink-hover-dark-80:hover {
+    background-color: #270007; }
+
+.bty-btn-p-2-bg-red-hover-dark-10 {
+    padding: 2px 4px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-2-bg-red-hover-dark-10:hover {
+    background-color: #cc0000; }
+
+.bty-btn-p-4-bg-red-hover-dark-20 {
+    padding: 4px 8px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-4-bg-red-hover-dark-20:hover {
+    background-color: #990000; }
+
+.bty-btn-p-6-bg-red-hover-dark-30 {
+    padding: 6px 12px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-6-bg-red-hover-dark-30:hover {
+    background-color: #660000; }
+
+.bty-btn-p-8-bg-red-hover-dark-40 {
+    padding: 8px 16px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-8-bg-red-hover-dark-40:hover {
+    background-color: #330000; }
+
+.bty-btn-p-10-bg-red-hover-dark-50 {
+    padding: 10px 20px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-10-bg-red-hover-dark-50:hover {
+    background-color: black; }
+
+.bty-btn-p-12-bg-red-hover-dark-60 {
+    padding: 12px 24px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-12-bg-red-hover-dark-60:hover {
+    background-color: black; }
+
+.bty-btn-p-14-bg-red-hover-dark-70 {
+    padding: 14px 28px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-14-bg-red-hover-dark-70:hover {
+    background-color: black; }
+
+.bty-btn-p-16-bg-red-hover-dark-80 {
+    padding: 16px 32px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-16-bg-red-hover-dark-80:hover {
+    background-color: black; }
+
+.bty-btn-p-2-bg-green-hover-dark-10 {
+    padding: 2px 4px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-2-bg-green-hover-dark-10:hover {
+    background-color: #004d00; }
+
+.bty-btn-p-4-bg-green-hover-dark-20 {
+    padding: 4px 8px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-4-bg-green-hover-dark-20:hover {
+    background-color: #001a00; }
+
+.bty-btn-p-6-bg-green-hover-dark-30 {
+    padding: 6px 12px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-6-bg-green-hover-dark-30:hover {
+    background-color: black; }
+
+.bty-btn-p-8-bg-green-hover-dark-40 {
+    padding: 8px 16px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-8-bg-green-hover-dark-40:hover {
+    background-color: black; }
+
+.bty-btn-p-10-bg-green-hover-dark-50 {
+    padding: 10px 20px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-10-bg-green-hover-dark-50:hover {
+    background-color: black; }
+
+.bty-btn-p-12-bg-green-hover-dark-60 {
+    padding: 12px 24px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-12-bg-green-hover-dark-60:hover {
+    background-color: black; }
+
+.bty-btn-p-14-bg-green-hover-dark-70 {
+    padding: 14px 28px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-14-bg-green-hover-dark-70:hover {
+    background-color: black; }
+
+.bty-btn-p-16-bg-green-hover-dark-80 {
+    padding: 16px 32px;
+    background-color: green;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-16-bg-green-hover-dark-80:hover {
+    background-color: black; }
+
+.bty-btn-p-2-bg-ivory-hover-dark-10 {
+    padding: 2px 4px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-2-bg-ivory-hover-dark-10:hover {
+    background-color: #ffffbd; }
+
+.bty-btn-p-4-bg-ivory-hover-dark-20 {
+    padding: 4px 8px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-4-bg-ivory-hover-dark-20:hover {
+    background-color: #ffff8a; }
+
+.bty-btn-p-6-bg-ivory-hover-dark-30 {
+    padding: 6px 12px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-6-bg-ivory-hover-dark-30:hover {
+    background-color: #ffff57; }
+
+.bty-btn-p-8-bg-ivory-hover-dark-40 {
+    padding: 8px 16px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-8-bg-ivory-hover-dark-40:hover {
+    background-color: #ffff24; }
+
+.bty-btn-p-10-bg-ivory-hover-dark-50 {
+    padding: 10px 20px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-10-bg-ivory-hover-dark-50:hover {
+    background-color: #f0f000; }
+
+.bty-btn-p-12-bg-ivory-hover-dark-60 {
+    padding: 12px 24px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-12-bg-ivory-hover-dark-60:hover {
+    background-color: #bdbd00; }
+
+.bty-btn-p-14-bg-ivory-hover-dark-70 {
+    padding: 14px 28px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-14-bg-ivory-hover-dark-70:hover {
+    background-color: #8a8a00; }
+
+.bty-btn-p-16-bg-ivory-hover-dark-80 {
+    padding: 16px 32px;
+    background-color: ivory;
+    cursor: pointer;
+    border: 1px solid black;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease; }
+.bty-btn-p-16-bg-ivory-hover-dark-80:hover {
+    background-color: #575700; }
+

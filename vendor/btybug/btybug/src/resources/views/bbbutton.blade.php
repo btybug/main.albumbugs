@@ -9,7 +9,7 @@
                     case 'unit':
                     $obj=\Btybug\btybug\Models\Painter\Painter::findByVariation($value);
                     if($obj){
-                    $variation = $obj->variations()->find($value);
+                    $variation = $obj->variations(false)->find($value);
                     }
                     break;
                 }

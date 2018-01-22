@@ -195,7 +195,10 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
 
     public function copy(){
         $dublicate = $this->attributes->toArray();
-        return $this->model->variations(false)->makeVariation($dublicate,null,true)->save();
+        return $this->model
+            ->variations(false)
+            ->makeVariation($dublicate,null,true)
+            ->save();
     }
 
     /**

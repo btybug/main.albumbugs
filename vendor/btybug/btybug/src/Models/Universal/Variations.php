@@ -193,6 +193,16 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this->items->count();
     }
 
+    public function copy(){
+        $dublicate = $this->attributes->toArray();
+        $uniq_id = str_random(10).rand(1,999999);
+
+        $dublicate["id"] = $this->model->getSlug() . '.' . $uniq_id;
+
+        $this->attributes = collect($dublicate);
+        return $this;
+    }
+
     /**
      * Get an iterator for the items.
      *

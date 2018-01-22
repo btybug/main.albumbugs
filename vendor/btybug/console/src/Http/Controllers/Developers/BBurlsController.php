@@ -287,6 +287,7 @@ class BBurlsController extends Controller
     {
         $value = $request->get('variation_id');
         $type = $request->get('data_action');
+        $copy = $request->get('copy',false);
         switch ($type) {
             case 'layouts':
                 $obj = ContentLayouts::findByVariation($value);
@@ -295,7 +296,10 @@ class BBurlsController extends Controller
             case 'unit':
 
                 $obj = Painter::findByVariation($value);
-                $variation = $obj->variations()->find($value);
+                $variation = $obj->variations($copy)->find($value);
+                if($copy){
+                    $variation=$variation->copy()->save();
+                }
                 break;
             case 'menus':
                 $data = ['error' => true, 'message' => 'no menu type!!!'];
@@ -309,6 +313,8 @@ class BBurlsController extends Controller
         }
         $data['error'] = false;
         $data['value'] = $obj->title;
+        $data['copy'] = $copy;
+        $data['slug'] = $variation->id;
         $data['content'] = 'Type:' . $type . ' Name:' . $obj->title . ' Author:' . $obj->author . ' Uploaded:' . BBgetDateFormat($obj->created_at) . ' Variation:' . $variation->title . ' Last Modification:' . BBgetDateFormat($variation->updated_at);
 
         return \Response::json($data);

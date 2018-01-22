@@ -156,6 +156,7 @@ $(document).ready(function () {
             });
         })
     }
+
     $('body').on('click', '.BBbuttons', function () {
         var $button = $(this);
         $('body').on('change', 'input[data-name=' + $button.data('key') + ']', function () {
@@ -166,7 +167,12 @@ $(document).ready(function () {
 
     function getBBbuttonData(variation, data_action, dataKey) {
         var data;
-        data = {'variation_id': variation, 'data_action': data_action};
+        var BBbutton = $('button[data-key=' + dataKey + ']');
+        var copy = BBbutton.attr('copy');
+        if (!copy) {
+            copy = 0
+        }
+        data = {'variation_id': variation, 'data_action': data_action,'copy':copy};
         $.ajax({
             type: "post",
             datatype: "json",
@@ -177,10 +183,13 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (!data.error) {
-                    var input=$('input[data-id="' + dataKey + '"]');
+                    var input = $('input[data-id="' + dataKey + '"]');
                     $(input).val(data.value);
-                    $(input).attr('data-content',data.content);
+                    $(input).attr('data-content', data.content);
                     $('[data-toggle="popover"]').popover();
+                    if(data.copy){
+                        $('input[data-name='+dataKey+']').val(data.slug);
+                    }
                 }
             }
         });

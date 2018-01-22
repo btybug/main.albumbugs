@@ -294,13 +294,13 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     {
         if ($isSave && $isSave == 'save') {
             $unit = $this->find($slug);
-            $existingVariation = $this->variations()->find($slug);
+            $existingVariation = $this->variations(false)->find($slug);
             $dataToInsert = [
                 'title' => $title,
                 'settings' => $data
             ];
             if (!$existingVariation) {
-                $unit->variations()->createVariation($dataToInsert);
+                $unit->variations(false)->createVariation($dataToInsert);
             } else {
                 $existingVariation->title = $title;
                 $existingVariation->settings = $dataToInsert['settings'];

@@ -74,8 +74,8 @@ class FormSettingsMiddleware
                 $result = $this->formService->validate($formID, $request->except('_token', 'form_id'));
                 if ($result['errors']) return redirect()->back()->withErrors($result['errors'])->withInput();
 
+                $this->formService->fields_type = $this->form->fields_type;
                 $collected = $this->formService->collectTables();
-
                 $this->response = $collected->saveForm($request->except('_token', 'form_id'));
                 $this->formService->newEntry($request, $this->response, $this->form);
 

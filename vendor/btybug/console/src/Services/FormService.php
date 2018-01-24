@@ -209,9 +209,10 @@ class FormService extends GeneralService
         return null;
     }
 
-    public static function renderFormBlade($form)
+    public static function renderFormBlade($form,array $attributes = [])
     {
         if ($form){
+            $model = null;
             $access = false;
             if ($form->form_access == 0) $access = true;
 
@@ -220,7 +221,20 @@ class FormService extends GeneralService
             if ($form->form_access == 1 && \Auth::check() && \Auth::user()->role && self::checkAccess($form, \Auth::user()->role->id)) $access = true;
 
             if ($access && \View::exists("forms.".$form->slug)) {
-                return view("console::structure.developers.forms.form_layout",compact('form'))->render();
+                if(isset($attributes['data-id'])) {
+                    $model = \DB::table($form->fields_type)->where('id',$attributes['data-id'])->first();
+                    $data = [];
+                    foreach ($model as $key => $value) {
+                        if($key == 'edit'){
+                            $data[$key] = $value;
+                        }else{
+                            $data[$form->fields_type . "_" . $key] = $value;
+                        }
+                    }
+                    $model = $data;
+                }
+
+                return view("console::structure.developers.forms.form_layout",compact('form','model','attributes'))->render();
             }
         }
 
@@ -500,7 +514,11 @@ class FormService extends GeneralService
             }
 
             $this->syncFields($form->id, $data['fields_json']);
+
+            return $form;
         }
+
+        return null;
     }
 
     public function fieldsJson($id, $json = false)

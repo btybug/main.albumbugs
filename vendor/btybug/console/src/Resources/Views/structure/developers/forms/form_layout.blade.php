@@ -1,6 +1,11 @@
-{!! Form::open(['class' => 'bty-form-5','style' => 'width:auto;', 'id' => 'form_id_'.$form->id]) !!}
-{!! Form::hidden('form_id',$form->id) !!}
-    @include('forms.'.$form->slug,['form' => $form])
+{!! Form::model($model,['class' => 'bty-form-5','style' => 'width:auto;', 'id' => 'form_id_'.$form->id]) !!}
+    {!! Form::hidden('form_id',$form->id) !!}
+    @if(isset($attributes['edit']))
+        {!! Form::hidden('edit',$attributes['edit']) !!}
+        {!! Form::hidden($form->fields_type.'_id',$model[$form->fields_type.'_id']) !!}
+    @endif
+
+        @include('forms.'.$form->slug,['form' => $form])
 {!! Form::close() !!}
 
 @if(isset($form->settings['is_ajax']) && $form->settings['is_ajax'] == 'yes')

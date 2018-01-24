@@ -1500,7 +1500,7 @@ function form_render($attr)
     $form = $formRepo->findByIdOrSlug(issetReturn($attr, 'id',issetReturn($attr, 'slug',null)));
 
     if ($form) {
-        return \Btybug\Console\Services\FormService::renderFormBlade($form);
+        return \Btybug\Console\Services\FormService::renderFormBlade($form,$attr);
     }
 }
 

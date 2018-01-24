@@ -293,39 +293,6 @@ class EventyServiceProvider extends ServiceProvider
             'layouts.master', 'App\helpers\creators\ScriptCreator'
         );
 
-        // Custom blade directives
-        \Blade::directive('set', function ($expression) {
-            list($name, $val) = explode(',', $expression);
-            return "<?php {$name} = {$val}; ?>";
-        });
-
-        // BBGetPostField
-        \Blade::directive('BBGetPostField', function ($expression) {
-            return "<?php echo BBGetPostField($expression) ?>";
-        });
-
-        // BBPreparePost
-        \Blade::directive('BBPreparePost', function ($expression) {
-            return "<?php BBPreparePost($expression) ?>";
-        });
-
-        // BBPostLink
-        \Blade::directive('BBPostLink', function ($expression) {
-            if ($expression) {
-                return "<?php echo BBPostLink() ?>";
-            }
-            return "<?php echo BBPostLink($expression) ?>";
-        });
-
-        // BBWidgetArea
-        \Blade::directive('BBWidgetArea', function ($expression) {
-            return "<?php BBWidgetArea($expression) ?>";
-        });
-
-        // BBImage
-        \Blade::directive('BBImage', function ($expression) {
-            return "<?php BBImage($expression) ?>";
-        });
     }
 
 

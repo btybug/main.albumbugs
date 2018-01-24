@@ -2,14 +2,14 @@
 
 <div class="login-form" bb-main-wrapper>
 
-    <div class="row header">
+    <div class="row bb-section header">
         <div class="col-md-12">
             <h1>Create Post</h1>
             <span>Fill out the form below to create new post</span>
         </div>
     </div>
 
-    <div class="row content">
+    <div class="row bb-section content">
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="row footer">
+    <div class="row bb-section footer">
         <div class="col-md-12">
             <input type="submit" name="submit" value="Save" class="button" />
         </div>

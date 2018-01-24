@@ -71,6 +71,9 @@ $(document).ready(function () {
     $('#add_custome_page').on('click', 'input[type="radio"]', function () {
         savesettingevent();
     });
+    $('#add_custome_page').on('click', 'input[type="checkbox"]', function () {
+        savesettingevent();
+    });
     $('#add_custome_page').submit(function (e) {
         e.preventDefault();
         savesettingevent();

@@ -10,21 +10,15 @@
     </div>
 
     <div class="row bb-section content">
-        <div class="col-md-8">
+        <div class="col-md-8 parent-column">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="bb-form-area connectedSortable"></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="bb-form-area connectedSortable"></div>
-                </div>
-                <div class="col-md-12" style="margin-top: 20px;">
-                    <div class="bb-form-area connectedSortable"></div>
-                </div>
+                <div class="col-md-6 item-column"></div>
+                <div class="col-md-6 item-column"></div>
+                <div class="col-md-12 item-column" style="margin-top: 20px;"></div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="unit-area"></div>
+            Contact area
         </div>
     </div>
 

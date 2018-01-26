@@ -1,0 +1,39 @@
+{
+  "title": "Basic Shop",
+  "author": "Vahag",
+  "version": 1,
+  "description": "Basic Shop Layout",
+  "layout": "main",
+  "panel": "panel",
+  "css": [
+    "style.css",
+    "setting-body.css"
+  ],
+  "js": [
+    "js.js"
+  ],
+  "settings": {
+    "file": "settings",
+    "css": [
+      "style.css"
+    ],
+    "js": [
+      "js.js"
+    ]
+  },
+  "placeholders": {
+    "left_bar": {
+      "type": "unit",
+      "tag": "frontend_sidebar",
+      "title": "Left Sidebar"
+    }
+  },
+  "folder": "basic_shop_layout",
+  "active": false,
+  "tags":["shop","frontend"],
+  "slug": "basic_shop_layout",
+  "created_at": 1493719963,
+  "is_core": 0,
+  "place": "frontend",
+  "path": "resources\/views\/ContentLayouts\/basic_shop_layout"
+}

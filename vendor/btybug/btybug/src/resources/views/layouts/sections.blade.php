@@ -20,7 +20,10 @@
     {!! HTML::style('public/js/jquery-ui/jquery-ui.min.css') !!}
     {!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
     {!! HTML::style('public/css/cms.css') !!}
-    @if(isset($model)) {!! HTML::style('custom/css/'.str_replace(' ','-',$model->slug).'.css') !!} @endif
+
+
+    {!! HTML::style('public-x/custom/css/'.uniqid().'.css') !!}
+
     @yield('CSS')
     @stack('css')
 </head>
@@ -98,9 +101,8 @@
 {!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
 {!! HTML::script("public/css/bootstrap/js/bootstrap.min.js") !!}
 {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
-@if(isset($model))
-    {!! HTML::script('custom/js/'.str_replace(' ','-',$model->slug).'.js') !!}
-@endif
+{!! HTML::script('public-x/custom/js/'.uniqid().'.js') !!}
+
 @yield('JS')
 @stack('javascript')
 </html>

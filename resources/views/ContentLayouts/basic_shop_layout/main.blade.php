@@ -1127,7 +1127,7 @@
             <!-- banner -->
             <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="banner banner-2">
-                    <img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/common/support/list-image/phones/u8666/u8666-listimage-black.png" alt="">
+                    <img class="new-collect" src="http://payload363.cargocollective.com/1/1/33817/9566988/prt_300x600_1463603635.jpg" alt="">
                     <div class="banner-caption">
                         <h2 class="white-color">NEW<br>COLLECTION</h2>
                         <button class="primary-btn">Shop Now</button>

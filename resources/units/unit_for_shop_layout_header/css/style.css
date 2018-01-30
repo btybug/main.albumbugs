@@ -1,0 +1,9 @@
+.header-logo {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.header-logo .logo>img {
+    width: 100%;
+    max-height: 70px;
+}

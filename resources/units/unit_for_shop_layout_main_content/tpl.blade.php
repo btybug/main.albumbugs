@@ -21,7 +21,7 @@
                                                 <div class="col-md-12">
                                                     <ul class="list-links">
                                                         @foreach($item->children as $child)
-                                                            <li><a href="{!! url($child->url) !!}"><i class="{!! $child->icon !!}"></i> {!! $child->title !!}</a></li>
+                                                            <li><a href="{!! url($child->url) !!}"><i class="fa {!! $child->icon !!}"></i> {!! $child->title !!}</a></li>
                                                         @endforeach
                                                     </ul>
                                                     <hr class="hidden-md hidden-lg">
@@ -56,7 +56,7 @@
                                                 <div class="col-md-12">
                                                     <ul class="list-links">
                                                         @foreach($item->children as $child)
-                                                            <li><a href="{!! url($child->url) !!}"><i class="{!! $child->icon !!}"></i> {!! $child->title !!}</a></li>
+                                                            <li><a href="{!! url($child->url) !!}"><i class="fa {!! $child->icon !!}"></i> {!! $child->title !!}</a></li>
                                                         @endforeach
                                                     </ul>
                                                     <hr class="hidden-md hidden-lg">

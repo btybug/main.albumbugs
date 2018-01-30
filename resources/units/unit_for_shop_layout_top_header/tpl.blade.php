@@ -1,10 +1,26 @@
 <div id="top-header">
     <div class="container">
         <div class="pull-left">
-            <span>Welcome to ....</span>
+            @if(isset($settings["left_text"]))
+                <span>{{$settings["left_text"]}}</span>
+            @endif
         </div>
         <div class="pull-right">
-            <ul class="header-top-links">
+
+            @if(isset($settings['top_menu']))
+                <ul class="header-top-links">
+                    @php
+                        $items = BBGetMenu($settings['top_menu'])
+                    @endphp
+                    @if(count($items))
+                        @foreach($items as $item)
+                            <li><a href="{!! url($item->url) !!}"><i class="{!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
+                        @endforeach
+                    @endif
+                </ul>
+            @endif
+
+            {{--<ul class="header-top-links">
                 <li><a href="#">Store</a></li>
                 <li><a href="#">Newsletter</a></li>
                 <li><a href="#">FAQ</a></li>
@@ -24,7 +40,7 @@
                         <li><a href="#">EUR (€)</a></li>
                     </ul>
                 </li>
-            </ul>
+            </ul>--}}
         </div>
     </div>
 </div>

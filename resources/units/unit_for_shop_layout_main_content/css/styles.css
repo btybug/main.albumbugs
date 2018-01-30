@@ -1711,3 +1711,9 @@ textarea.input {
 .custom_margin_0{
     margin-left:0px !important;
 }
+.custom_width_auto{
+    width:auto !important;
+}
+.custom_min_width{
+    min-width: 200px !important;
+}

@@ -7,3 +7,23 @@
     width: 100%;
     max-height: 70px;
 }
+.head-right{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.head-right .header-btns:last-of-type{
+    margin-right: 15px;
+}
+.head-right .header-btns .header-btns-icon{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

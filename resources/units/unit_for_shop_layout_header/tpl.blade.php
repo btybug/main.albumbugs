@@ -15,7 +15,7 @@
                 @endif
             <!-- /Search -->
         </div>
-        <div class="pull-right">
+        <div class="pull-right head-right">
             @if(isset($settings["area2"]))
                 {!! BBRenderUnits($settings["area2"]) !!}
             @endif

@@ -2,7 +2,13 @@
 
 <div class="bb-main-wrapper">
 
-    <div class="container"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="jumbotron"> <h1>Hello, world!</h1> <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p> <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more</a></p> </div>
+            </div>
+        </div>
+    </div>
 
     {{--<div class="row bb-section header">--}}
         {{--<div class="col-md-12">--}}

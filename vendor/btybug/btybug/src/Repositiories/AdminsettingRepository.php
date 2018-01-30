@@ -129,9 +129,16 @@ class AdminsettingRepository extends GeneralRepository
         return $system;
     }
 
-    public function getSettings($section, $settingkey)
+    public function getSettings($section, $settingkey,$value = false)
     {
+        $data = [];
         $system = $this->model->where('section', $section)->where('settingkey', $settingkey)->first();
+        if($value){
+            if ($system) {
+                $data = (json_decode($system->val, true));
+            }
+            return $data;
+        }
 
         return $system;
     }

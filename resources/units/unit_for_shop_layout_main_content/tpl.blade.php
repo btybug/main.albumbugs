@@ -30,7 +30,7 @@
                                         </ul>
                                     </li>
                                 @else
-                                    <li><a href="{!! url($item->url) !!}"><i class="{!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
+                                    <li><a href="{!! url($item->url) !!}"><i class="fa {!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
                                 @endif
                             @endforeach
                         @endif
@@ -65,7 +65,7 @@
                                         </div>
                                     </li>
                                 @else
-                                    <li><a href="{!! url($item->url) !!}"><i class="{!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
+                                    <li><a href="{!! url($item->url) !!}"><i class="fa {!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
                                 @endif
                             @endforeach
                         @endif

@@ -1,0 +1,17 @@
+{
+  "title": "Shop slider pro",
+  "author": "Sahak",
+  "site": "http:\/\/bootydev.co.uk",
+  "version": "1.0",
+  "type": "unit",
+  "description": "Super  unit",
+  "have_setting": 1,
+  "image": "screenshot.png",
+  "slug": "shop_slider",
+  "folder": "shop_slider",
+  "created_at": 1490088665,
+  "is_core": 1,
+  "place": "frontend",
+  "tags": ["shop_slider","frontend"],
+  "path": "resources\/units\/shop_slider"
+}

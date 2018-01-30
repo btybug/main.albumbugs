@@ -1,3 +1,16 @@
+<div class="form-group my_rows1">
+    <label for="newcontainer" class="col-sm-4 labelTitle">Left bar menu</label>
+    <div class="col-sm-8">
+        {!! BBbutton2('menus','left_bar_menu','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
+    </div>
+</div>
+
+<div class="form-group my_rows1">
+    <label for="newcontainer" class="col-sm-4 labelTitle">Nav bar menu</label>
+    <div class="col-sm-8">
+        {!! BBbutton2('menus','nav_bar_menu','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
+    </div>
+</div>
 
 <button type="button" class="btn btn-info" id="addinput">Add</button>
 <div class="add_custome_page">

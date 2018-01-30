@@ -20,17 +20,9 @@
     @if(isset($settings['area6']))
         {!! BBRenderUnits($settings['area6']) !!}
     @endif
-
-    @if(isset($settings['area7']))
-        {!! BBRenderUnits($settings['area7']) !!}
-    @endif
-
-    @if(isset($settings['area8']))
-        {!! BBRenderUnits($settings['area8']) !!}
-    @endif
 </div>
-@if(isset($settings['area9']))
-    {!! BBRenderUnits($settings['area9']) !!}
+@if(isset($settings['area7']))
+    {!! BBRenderUnits($settings['area7']) !!}
 @endif
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
 

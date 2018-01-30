@@ -752,6 +752,7 @@ textarea.input {
 
 #home-slick .banner {
     margin: 0;
+    height: auto;
 }
 
 /*=========================================================
@@ -998,6 +999,7 @@ textarea.input {
 .product-slick .slick-slide {
     margin-right: 15px;
     margin-left: 15px;
+    height: auto;
 }
 
 /*=========================================================
@@ -1705,4 +1707,7 @@ textarea.input {
 .category-nav .custom-menu .banner-2 img{
     height: 329px;
     object-fit: cover;
+}
+.custom_margin_0{
+    margin-left:0px !important;
 }

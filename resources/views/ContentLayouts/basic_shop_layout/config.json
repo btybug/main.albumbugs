@@ -24,7 +24,7 @@
   "placeholders": {
     "left_bar": {
       "type": "unit",
-      "tag": "frontend_sidebar",
+      "tag": "layouts_for_shop",
       "title": "Left Sidebar"
     }
   },

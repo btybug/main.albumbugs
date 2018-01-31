@@ -13,6 +13,6 @@
   "created_at": 1490088665,
   "is_core": 0,
   "place": "frontend",
-  "tags": ["shop_layout_footer","shop_layout","frontend"],
+  "tags": ["frontend_footer","shop_layout","frontend"],
   "path": "resources\/units\/unit_for_shop_layout_footer"
 }

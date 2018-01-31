@@ -1,6 +1,6 @@
 {
-  "title": "Content side",
-  "author": "gv",
+  "title": "Content of shop layout",
+  "author": "Gevorg",
   "site": "http:\/\/bootydev.co.uk",
   "version": "1.0",
   "self_type": "units",
@@ -13,6 +13,6 @@
   "created_at": 1490088665,
   "is_core": 0,
   "place": "frontend",
-  "tags": ["layout_shop_content","frontend"],
+  "tags": ["front_page_content","frontend"],
   "path": "resources\/units\/unit_for_shop_layout_content"
 }

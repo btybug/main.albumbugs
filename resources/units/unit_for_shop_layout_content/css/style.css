@@ -1708,3 +1708,6 @@ textarea.input {
     height: 329px;
     object-fit: cover;
 }
+.custom_border_for_show{
+    border: 3px solid red;
+}

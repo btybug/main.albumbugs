@@ -1,6 +1,6 @@
 <div class="section head-collection">
     <!-- container -->
-    <div>
+    <div class="container">
         <!-- row -->
         <div class="row">
             <!-- banner -->

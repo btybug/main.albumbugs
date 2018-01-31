@@ -1,7 +1,7 @@
 <!-- NAVIGATION -->
 <div id="navigation">
     <!-- container -->
-    <div>
+    <div class="container">
         <div id="responsive-nav">
             <!-- category nav -->
             <div class="category-nav">
@@ -82,7 +82,7 @@
 <!-- HOME -->
 <div id="home">
     <!-- container -->
-    <div>
+    <div class="container">
         <!-- home wrap -->
         <div class="home-wrap {{!isset($settings['left_bar_menu']) ? 'custom_margin_0' : ''}}">
             <!-- home slick -->

@@ -1,6 +1,6 @@
 <div class="section">
     <!-- container -->
-    <div>
+    <div class="container">
         <!-- row -->
         <div class="row">
             <!-- section title -->

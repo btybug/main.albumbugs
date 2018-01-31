@@ -1,5 +1,5 @@
 <div class="section">
-    <div>
+    <div class="container">
         <!-- row -->
         <div class="row">
             <!-- section-title -->

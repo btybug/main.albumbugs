@@ -1,7 +1,7 @@
 @if(isset($settings['area1']))
     {!! BBRenderUnits($settings['area1']) !!}
 @endif
-<div id="cont">
+<div class="container" id="cont">
     @if(isset($settings['area2']))
         {!! BBRenderUnits($settings['area2']) !!}
     @endif

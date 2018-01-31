@@ -3,6 +3,7 @@
   "author": "Gevorg",
   "site": "http:\/\/bootydev.co.uk",
   "version": "1.0",
+  "example":"demo",
   "self_type": "units",
   "type": "units",
   "description": "content for layout shop",

@@ -3,6 +3,7 @@
   "author": "Sahak",
   "site": "http:\/\/bootydev.co.uk",
   "version": "1.0",
+  "example": "demo",
   "type": "unit",
   "description": "Super  unit",
   "have_setting": 1,

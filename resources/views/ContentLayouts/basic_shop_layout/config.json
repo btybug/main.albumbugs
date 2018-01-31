@@ -2,6 +2,7 @@
   "title": "Full Screen Front Layout",
   "author": "Vahag",
   "version": 1,
+  "example":"demo",
   "description": "Basic Shop Layout",
   "layout": "main",
   "panel": "panel",

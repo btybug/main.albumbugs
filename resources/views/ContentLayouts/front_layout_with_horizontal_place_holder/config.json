@@ -4,6 +4,7 @@
   "self_type": "page_sections",
   "type": "general",
   "version": 1,
+  "example":"demo",
   "descrition": "Frontend layout 2 areas",
   "layout": "main",
   "panel": "panel",

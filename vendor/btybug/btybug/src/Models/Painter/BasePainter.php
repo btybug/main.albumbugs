@@ -62,6 +62,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         if(count($paths)){
             foreach ($paths as $path){
                 $units = \File::directories($path);
+                dd($units);
                 if (count($units) > 0) {
                     foreach ($units as $key => $unit) {
                         $full_path = $unit . DS . $this->name_of_json;
@@ -547,7 +548,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     protected function scopeOptimize()
     {
         $painters = $this->scopeAll()->get();
-        dd($painters);
         $config = [];
         foreach ($painters as $painter) {
             $config[$painter->getSlug()] = $painter->getPath();

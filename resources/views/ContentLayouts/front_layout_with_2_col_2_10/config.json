@@ -1,8 +1,10 @@
 {
-  "title": "Full Screen Front Layout",
-  "author": "Vahag",
+  "title": "Frontend layout 2 areas (2,10)",
+  "author": "Gevorg",
+  "self_type": "page_sections",
+  "type": "general",
   "version": 1,
-  "description": "Basic Shop Layout",
+  "descrition": "Frontend layout 2 areas",
   "layout": "main",
   "panel": "panel",
   "css": [
@@ -28,12 +30,12 @@
       "title": "Left Sidebar"
     }
   },
-  "folder": "basic_shop_layout",
+  "folder": "front_layout_with_2_col_2_10",
   "active": false,
-  "tags":["shop","frontend"],
-  "slug": "basic_shop_layout",
+  "tags":["front_pages_layout"],
+  "slug": "front_layout_with_2_col_2_10",
   "created_at": 1493719963,
   "is_core": 0,
   "place": "frontend",
-  "path": "resources\/views\/ContentLayouts\/basic_shop_layout"
+  "path": "resources\/views\/ContentLayouts\/front_layout_with_2_col_2_10"
 }

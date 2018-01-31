@@ -1,8 +1,10 @@
 {
-  "title": "Full Screen Front Layout",
-  "author": "Vahag",
+  "title": "Frontend layout 3 areas (3,6,3)",
+  "author": "Gevorg",
+  "self_type": "page_sections",
+  "type": "general",
   "version": 1,
-  "description": "Basic Shop Layout",
+  "descrition": "Frontend layout 3 areas",
   "layout": "main",
   "panel": "panel",
   "css": [
@@ -26,14 +28,19 @@
       "type": "unit",
       "tag": "frontend_sidebar",
       "title": "Left Sidebar"
+    },
+    "right_bar": {
+      "type": "unit",
+      "tag": "frontend_sidebar",
+      "title": "Right Sidebar"
     }
   },
-  "folder": "basic_shop_layout",
+  "folder": "front_layout_with_3_col_3_6_3",
   "active": false,
-  "tags":["shop","frontend"],
-  "slug": "basic_shop_layout",
+  "tags":["front_pages_layout"],
+  "slug": "front_layout_with_3_col_3_6_3",
   "created_at": 1493719963,
   "is_core": 0,
   "place": "frontend",
-  "path": "resources\/views\/ContentLayouts\/basic_shop_layout"
+  "path": "resources\/views\/ContentLayouts\/front_layout_with_3_col_3_6_3"
 }

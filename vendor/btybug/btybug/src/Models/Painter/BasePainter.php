@@ -62,7 +62,6 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         if(count($paths)){
             foreach ($paths as $path){
                 $units = \File::directories($path);
-                dd($units);
                 if (count($units) > 0) {
                     foreach ($units as $key => $unit) {
                         $full_path = $unit . DS . $this->name_of_json;
@@ -457,6 +456,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     // validate if file exist and return true or false
     protected function validateWithReturn($path)
     {
+        dd($path);
         if (!\File::exists($path)) {
             return false;
         }

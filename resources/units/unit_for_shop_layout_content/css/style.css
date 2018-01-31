@@ -1,4 +1,12 @@
+@font-face
+{
+    font-family: 'slick';
+    font-weight: normal;
+    font-style: normal;
 
+    src: url('/public/css/fonts/slick.eot');
+    src: url('/public/css/fonts/slick.eot?#iefix') format('embedded-opentype'), url('/public/css/fonts/slick.woff') format('woff'), url('/public/css/fonts/slick.ttf') format('truetype'), url('/public/css/fonts/slick.svg#slick') format('svg');
+}
 h1, h2, h3, h4, h5, h6 {
     color: #30323A;
     margin: 0 0 10px;

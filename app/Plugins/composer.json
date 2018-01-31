@@ -5,6 +5,7 @@
     "sahak.avatar/forms": "dev-master",
     "sahak.avatar/membership": "dev-master",
     "sahak.avatar/payments": "dev-master",
-    "gloudemans/shoppingcart": "2.4.0"
+    "gloudemans/shoppingcart": "2.4.0",
+    "cartalyst/stripe-laravel": "7.0.*"
   }
 }

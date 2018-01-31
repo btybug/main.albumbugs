@@ -58,22 +58,20 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         $all = [];
         // $path = $this->base_path; // TODO: this is right way
         $paths = $this->base_path; // TODO: this should be removed
-
         if(count($paths)){
             foreach ($paths as $path){
-                $units = \File::directories($path);
-                if (count($units) > 0) {
+                $units = \File::directories(base_path($path));
+
+                if (!count($units)) $this->throwError("There is no unit found");
                     foreach ($units as $key => $unit) {
-                        $full_path = base_path($unit . DS . $this->name_of_json);
+                        $full_path = $unit . DS . $this->name_of_json;
                         $obj = new static();
                         $is_true = $obj->validateWithReturn($full_path);
+                        $test[$full_path]=$is_true;
                         if ($is_true) {
-                            $all[$key] = $obj->makeItem($full_path);
+                            $all[] = $obj->makeItem($full_path);
                         }
                     }
-                } else {
-                    $this->throwError("There is no unit found");
-                }
             }
         }
         $this->storage = $all;

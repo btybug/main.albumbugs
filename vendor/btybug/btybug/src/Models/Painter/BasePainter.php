@@ -547,6 +547,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     protected function scopeOptimize()
     {
         $painters = $this->scopeAll()->get();
+        dd($painters);
         $config = [];
         foreach ($painters as $painter) {
             $config[$painter->getSlug()] = $painter->getPath();

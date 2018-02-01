@@ -297,3 +297,6 @@ textarea.input {
     height: 329px;
     object-fit: cover;
 }
+footer.section-grey{
+    margin-top: auto;
+}

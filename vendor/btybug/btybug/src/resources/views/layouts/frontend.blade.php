@@ -35,7 +35,8 @@
     {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
     {!! HTML::script("public/js/UiElements/bb_iframejs.js") !!}
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<body>
+<div class="full_page">
 @if (isset($errors) && count($errors) > 0)
     <div class="alert alert-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert"
@@ -74,5 +75,6 @@
 {!! BBJs() !!}
 {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->title).'.js') !!}
 @yield('js')
+</div>
 </body>
 </html>

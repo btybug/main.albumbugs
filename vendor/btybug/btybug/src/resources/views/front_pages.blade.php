@@ -5,12 +5,14 @@
         @if(isset($settings['header']) && $settings['header'])
             {!! BBheader() !!}
         @endif
-        @if(isset($settings['mw']) && $settings['mw'])
-            {!! BBRenderPageSections($settings['pl'],$settings,$settings['mw']) !!}
-        @else
+        <div class="main_content">
+            @if(isset($settings['mw']) && $settings['mw'])
+                {!! BBRenderPageSections($settings['pl'],$settings,$settings['mw']) !!}
+            @else
 
-            {!! BBRenderPageSections($settings['pl'],$settings,$page->main_view) !!}
-        @endif
+                {!! BBRenderPageSections($settings['pl'],$settings,$page->main_view) !!}
+            @endif
+        </div>
         @if(isset($settings['footer']) && $settings['footer'])
             {!! BBfooter() !!}
         @endif
@@ -18,7 +20,9 @@
         @if($page->header)
             {!! BBheader() !!}
         @endif
-        {!! BBRenderPageSections($page->page_layout,$settings) !!}
+        <div class="main_content">
+            {!! BBRenderPageSections($page->page_layout,$settings) !!}
+        </div>
         @if($page->footer)
             {!! BBfooter() !!}
         @endif

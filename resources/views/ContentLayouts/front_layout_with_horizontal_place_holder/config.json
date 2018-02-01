@@ -32,7 +32,7 @@
     },
     "top_content": {
       "type": "unit",
-      "tag": "frontend_sidebar",
+      "tag": "slider",
       "title": "Top content"
     }
   },

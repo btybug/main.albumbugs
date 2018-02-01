@@ -9,7 +9,7 @@
         <label for="navstyle" class="col-xs-3">Top content</label>
         <div class="col-xs-9">
             <div class="input-group">
-                {!! BBbutton2('unit',"top_content","frontend_sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>null]) !!}
+                {!! BBbutton2('unit',"top_content","slider","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
             </div>
         </div>
     </div>

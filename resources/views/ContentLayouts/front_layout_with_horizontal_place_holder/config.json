@@ -27,7 +27,7 @@
   "placeholders": {
     "left_bar": {
       "type": "unit",
-      "tag": "frontend_sidebar",
+      "tag": "left_bar",
       "title": "Left Sidebar"
     },
     "top_content": {

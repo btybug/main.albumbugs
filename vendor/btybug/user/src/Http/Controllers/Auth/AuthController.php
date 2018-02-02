@@ -409,6 +409,7 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+        $redirectUrl=$request->get('redirect_to','/');
         $field = filter_var($request->input('usernameOremail'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $request->merge([$field => $request->input('usernameOremail')]);
 
@@ -420,13 +421,11 @@ class AuthController extends Controller
 //                    'extra' => ['class' => 'success']
 //                ]
 //            );
-
-            if ($this->auth->user()->membership) {
-                return redirect('/');
-            } else {
+            if (!$this->auth->user()->membership) {
                 $user = \Auth::getProvider()->retrieveByCredentials($request->only($field, 'password'));
-                return redirect('/admin');
+                $redirectUrl='/admin';
             }
+            return redirect($redirectUrl);
         }
 
         $error = trans('These credentials do not match our records.');

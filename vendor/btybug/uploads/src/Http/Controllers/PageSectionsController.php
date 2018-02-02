@@ -243,6 +243,10 @@ class PageSectionsController extends Controller
         return \Response::json(['error' => $result]);
 
     }
+    public function removeLayout(){
+        ContentLayouts::removeLayoutJson();
+        return redirect()->back()->with("success", "Layouts was optimized successfully");
+    }
 }
 
 

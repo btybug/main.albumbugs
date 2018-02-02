@@ -1021,3 +1021,7 @@ ul.field_tabs li.current{
 .bty-unit-2-title h5{
 	margin: 0;
 }
+.custom_button_styles{
+	margin-right: 8px;
+	padding: 9.8px;
+}

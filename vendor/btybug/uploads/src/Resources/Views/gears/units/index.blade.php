@@ -1,12 +1,19 @@
 @extends('btybug::layouts.mTabs',['index'=>'upload_gears'])
 @section('tab')
     <div class="row">
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                {{ Session::get('success') }}
+            </div>
+        @endif
         <div class="col-md-12">
             <button class="btn btn-info btn-sm pull-right btnUploadWidgets m-r-15 m-b-15" type="button"
                     data-toggle="modal"
                     data-target="#uploadfile">
                 <i class="fa fa-cloud-upload module_upload_icon"></i> <span class="upload_module_text">Upload</span>
             </button>
+            <a href="{{route('remove-painter')}}" class="btn btn-warning pull-right custom_button_styles">Optimize units</a>
         </div>
     </div>
     <div class="col-md-4 ">

@@ -258,6 +258,11 @@ class UnitsController extends Controller
 
         return redirect()->back();
     }
+
+    public function removePainter(){
+        Painter::removePainterJson();
+        return redirect()->back()->with("success", "Units was optimized successfully");
+    }
 }
 
 

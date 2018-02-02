@@ -654,4 +654,8 @@ class ContentLayouts extends BasePainter implements VariationAccess
     {
         return base_path($this->path);
     }
+    public function scopeRemoveLayoutJson(){
+        $path = $this->getConfigPath();
+        return \File::delete($path);
+    }
 }

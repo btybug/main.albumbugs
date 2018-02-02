@@ -57,6 +57,7 @@ Route::group(['prefix' => 'gears'], function () {
     Route::get('/back-end', 'UnitsController@getIndex', true)->name('uploads_back_end');
     Route::post('/back-end', 'UnitsController@getIndexFromPost')->name('uploads_back_end_from_post');
     Route::get('/front-end', 'UnitsController@getFrontend', true)->name('uploads_front_end');
+    Route::get('/remove-painter', 'UnitsController@removePainter', true)->name('remove-painter');
     Route::post('/front-end', 'UnitsController@getFrontendFromPost')->name('uploads_front_end_from_post');
     Route::post('/upload', 'UnitsController@postUploadUnit');
     Route::get('/delete-variation/{slug}', 'UnitsController@postDeleteVariation');
@@ -79,6 +80,7 @@ Route::group(['prefix' => 'layouts'], function () {
     Route::get('/back-end', 'PageSectionsController@getIndex', true)->name('uploads_layouts_back_end');
     Route::post('/back-end', 'PageSectionsController@getIndexFromPost')->name('uploads_layouts_back_end_from_post');
     Route::get('/front-end', 'PageSectionsController@getFrontend', true)->name('uploads_layouts_front_end');
+    Route::get('/remove-layout', 'PageSectionsController@removeLayout', true)->name('remove-layout');
     Route::post('/front-end', 'PageSectionsController@getFrontendFromPost')->name('uploads_layouts_front_end_from_post');
     Route::get('/settings/{slug}', 'PageSectionsController@getSettings', true)->name('uploads_layouts_settings');
     Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout', true)->name('create_variation_for_layout');

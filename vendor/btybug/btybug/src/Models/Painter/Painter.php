@@ -110,4 +110,9 @@ class Painter extends BasePainter
         return base_path($this->path);
     }
 
+    public function scopeRemovePainterJson(){
+        $path = $this->getConfigPath();
+        return \File::delete($path);
+    }
+
 }

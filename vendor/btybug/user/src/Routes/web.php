@@ -22,7 +22,7 @@ Route::get('/show/{id}', array('as' => 'admin.users.show', 'uses' => 'UserContro
 Route::get('/settings', array('as' => 'admin.users.settings', 'uses' => 'UserController@getSettings'),true)->name('user_settings');
 Route::post('/settings', array('as' => 'admin.users.postSettings', 'uses' => 'UserController@postSettings'));
 Route::get('/profile', 'UserController@getProfile');
-Route::get('/registration', 'UserController@getRegistration');
+Route::get('/registration', 'UserController@getRegistration',true);
 
 Route::group(['prefix' => '/admins'], function () {
     Route::get('/', 'UserController@getAdmins',true)->name('user_admin_index');

@@ -75,3 +75,15 @@ body{
 #header .navbar{
     margin-bottom:0;
 }
+#header .navbar-header .navbar-toggle{
+    margin-top: 17px;
+    margin-bottom: 17px;
+}
+#header .navbar-header .navbar-toggle .icon-bar{
+    background-color: #fff;
+}
+@media (max-width: 784px) {
+    #header .prof-pic{
+        display: none;
+    }
+}

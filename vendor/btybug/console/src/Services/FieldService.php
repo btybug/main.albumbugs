@@ -73,6 +73,12 @@ class FieldService extends GeneralService
 
     public static function getFieldHtml($field)
     {
-       return \View::make("console::structure._partials.field_types.$field->type",compact('field'))->render();
+        $fieldHtml = null;
+        $path = "console::structure._partials.field_types.$field->type";
+        if (\View::exists($path)) {
+            $fieldHtml = \View($path)->with('field',$field->toArray())->render();
+        }
+
+        return $fieldHtml;
     }
 }

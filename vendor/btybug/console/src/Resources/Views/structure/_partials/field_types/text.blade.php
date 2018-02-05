@@ -1,9 +1,7 @@
-<!-- Text input-->
-<div class="form-group @if(!$field->visibility) hidden @endif">
-    <label class="col-md-4 control-label" for="textinput">{!! $field->label !!}</label>
-    <div class="col-md-4">
-        <input id="textinput" name="{!! $field->column_name !!}" @if($field->required) required @endif type="text"
-               placeholder="{!! $field->placeholder !!}" class="form-control input-md" value="{!! $field->default_value !!}">
-        <span class="help-block">{!! $field->help !!}</span>
+<fieldset class="bty-form-text" id="bty-input-id-{!! $field['id'] !!}">
+    <div>
+        {!! Form::text($field['table_name']."_".$field['column_name'],null,['class' => 'bty-input-label-5','placeholder' => $field['placeholder']]) !!}
+        <label>{!! $field['label'] !!}</label>
     </div>
-</div>
+</fieldset>
+

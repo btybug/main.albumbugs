@@ -225,7 +225,15 @@
 
         {!! Form::close() !!}
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+        <div class="panel panel-default p-0">
+            <div class="panel-heading">Result</div>
+            <div class="panel-body">
+             {!! \Btybug\Console\Services\FieldService::getFieldHtml($field) !!}
+            </div>
+        </div>
+    </div>
+
     @include('resources::assests.magicModal')
 @endsection
 @section('CSS')

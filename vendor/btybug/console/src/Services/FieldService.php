@@ -70,4 +70,9 @@ class FieldService extends GeneralService
             return  \view("blog::_partials.fields.".$field->type)->with('field',$field->toArray())->render();
         }
     }
+
+    public static function getFieldHtml($field)
+    {
+       return \View::make("console::structure._partials.field_types.$field->type",compact('field'))->render();
+    }
 }

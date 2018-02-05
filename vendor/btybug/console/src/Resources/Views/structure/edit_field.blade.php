@@ -1,6 +1,6 @@
 @extends('btybug::layouts.admin')
 @section('content')
-    <div class="col-md-12  m-t-20" id="add-new-fields">
+    <div class="col-md-9  m-t-20" id="add-new-fields">
         {!! Form::model($field,['url'=>['/admin/console/structure/fields/edit',$field->id],'class' => 'form-horizontal','id' => 'edit-field']) !!}
         <div class="row">
             <div class="col-md-6">
@@ -225,6 +225,7 @@
 
         {!! Form::close() !!}
     </div>
+    <div class="col-md-3"></div>
     @include('resources::assests.magicModal')
 @endsection
 @section('CSS')

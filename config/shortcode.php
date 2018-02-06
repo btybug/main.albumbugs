@@ -3,7 +3,9 @@
 return [
     'code' => [
         [
-          'form' => 'form_render'
+          'form' => 'form_render',
+        ],[
+          'field' => 'field_render'
         ],
 //        'logic',
 //        'getCoreForm',

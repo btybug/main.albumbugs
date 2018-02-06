@@ -1506,12 +1506,15 @@ function form_render($attr)
 
 function field_render($attr)
 {
-    $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
-    $field = $fieldRepo->find(issetReturn($attr, 'id'));
+    if(count($attr)){
+        $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
+        $field = $fieldRepo->find(issetReturn($attr, 'id'));
 
-    if ($field) {
-        return \Btybug\Console\Services\FieldService::getFieldHtml($field);
+        if ($field) {
+            return \Btybug\Console\Services\FieldService::getFieldHtml($field);
+        }
     }
+
 }
 
 function register_frontend_page(array $data)

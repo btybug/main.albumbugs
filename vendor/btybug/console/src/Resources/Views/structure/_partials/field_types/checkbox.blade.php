@@ -1,22 +1,19 @@
 <fieldset class="bty-form-checkbox" id="bty-input-id-{!! $field['id'] !!}">
-    <div>
-        <div>
-            <label>{!! $field['label'] !!}</label>
-        </div>
-        <div>
-            <div>
-                @if(count(get_field_data($field['id'])))
-                    @foreach(get_field_data($field['id']) as $key => $item)
-                        <p>
-                            <input name="{!! $field['table_name']."_".$field['column_name'] !!}" value="{{ $key }}" type="checkbox" class="bty-input-checkbox-2" id="bty-cbox-{{ $key }}">
-                            <label for="bty-cbox-{{ $key }}">{{ $item }}</label>
-                        </p>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-        <div class="bty-tooltip"><i class="fa fa-question" aria-hidden="true"></i>
-            <span>Tooltip text</span>
+    <div class="form-group">
+        <label class="col-sm-12 control-label">
+            {!! $field['label'] !!}
+        </label>
+        <div class="col-sm-12">
+            @if(count(get_field_data($field)))
+                @foreach(get_field_data($field) as $key => $item)
+                    <div class="checkbox-inline1">
+                        <label>
+                            <input name="{!! $field['table_name']."_".$field['column_name'] !!}" value="{{ $key }}" type="checkbox" id="bty-cbox-{{ $key }}">
+                            {{ $item }}
+                        </label>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </fieldset>

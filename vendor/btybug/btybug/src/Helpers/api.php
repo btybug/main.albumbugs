@@ -1809,16 +1809,13 @@ function get_classifiers($array = false){
     return ($array) ? $classifiers->toArray() : $classifiers;
 }
 
-function get_field_data(int $id){
-    $fieldRepository = new \Btybug\Console\Repository\FieldsRepository();
-    $field = $fieldRepository->find($id);
-
-    if($field && count($field->json_data)){
-        switch ($field->data_source){
+function get_field_data($field){
+    if($field && count($field['json_data'])){
+        switch ($field['data_source']){
             case "related" :
-                if(isset($field->json_data['data_source_table_name']) && isset($field->json_data['data_source_columns'])){
-                    $table = $field->json_data['data_source_table_name'];
-                    $column = $field->json_data['data_source_columns'];
+                if(isset($field['json_data']['data_source_table_name']) && isset($field['json_data']['data_source_columns'])){
+                    $table = $field['json_data']['data_source_table_name'];
+                    $column = $field['json_data']['data_source_columns'];
                     if (\Schema::hasColumn($table, $column)) {
                         $result = \DB::table($table)->pluck($column,'id');
                         return (count($result)) ? $result->toArray() : [];
@@ -1826,8 +1823,8 @@ function get_field_data(int $id){
                 }
                 break;
             case "manual" :
-                if(isset($field->json_data['manual']) && $field->json_data['manual']){
-                    return (count(explode(',',$field->json_data['manual']))) ? explode(',',$field->json_data['manual']) : [];
+                if(isset($field['json_data']['manual']) && $field['json_data']['manual']){
+                    return (count(explode(',',$field['json_data']['manual']))) ? explode(',',$field['json_data']['manual']) : [];
                 }
                 break;
         }

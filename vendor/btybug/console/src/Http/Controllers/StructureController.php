@@ -13,6 +13,7 @@ namespace Btybug\Console\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
+use Btybug\Console\Services\FieldService;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\ExtraModules\Structures;
@@ -605,5 +606,17 @@ class StructureController extends Controller
         }
 
         return view('console::structure.create-form', compact(['form', 'blade', 'fields', 'bladeRendered', 'fieldJson']))->with($data);
+    }
+
+    public function postRenderFieldHtmlForResult($id,FieldsRepository $fieldsRepository,Request $request){
+        $field = $fieldsRepository->findOrFail($id);
+        $data = $request->except('_token');
+
+        foreach ($data as $key => $val){
+            $field[$key] = $val;
+        }
+        $html = FieldService::getFieldHtml($field);
+
+        return \Response::json(['html' => $html]);
     }
 }

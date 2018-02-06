@@ -15427,9 +15427,11 @@ div.d4{
     min-height: 100vh;
 }
 
+
+
+
 .formgeneral{
-    overflow-x: hidden;
-    background: #FFFFFF;
+     background: #FFFFFF;
 }
 .formgeneral h3.inner-tittle {
     font-size: 2em;
@@ -15460,6 +15462,7 @@ div.d4{
 
 .formgeneral .input-group {
     padding-bottom: 1em;
+    width: 100%;
 }
 
 .formgeneral .grid-1 {
@@ -15480,10 +15483,6 @@ div.d4{
     font-weight: 400;
     font-size: 1em;
     color: #777;
-}
-
-.formgeneral {
-    width: 100%;
 }
 
 .formgeneral .forms-main {
@@ -15545,6 +15544,8 @@ div.d4{
     min-width: 33px;
 }
 .formgeneral .tooltip1 .tooltiptext {
+    white-space: normal;
+    line-height: 18px;
     visibility: hidden;
     width: 120px;
     background-color: #555;
@@ -15577,7 +15578,7 @@ div.d4{
     opacity: 1;
 }
 .formgeneral textarea{
-    height:200px!important;
+    height:200px !important;
 }
 /*---responsive-----*/
 @media (max-width: 1024px) {
@@ -15617,3 +15618,5 @@ div.d4{
     }
 
 }
+
+/***responsive***/

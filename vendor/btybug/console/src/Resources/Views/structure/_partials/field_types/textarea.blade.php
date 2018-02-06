@@ -1,4 +1,4 @@
-<fieldset class="bty-form-textarea" id="bty-input-id-{!! $field['id'] !!}">
+<fieldset class="bty-form-textarea formgeneral" id="bty-input-id-{!! $field['id'] !!}">
     <div class="form-group">
         <label class="col-sm-12 control-label">{{$field['label']}}</label>
         <div class="col-sm-12">

@@ -1,4 +1,4 @@
-<fieldset class="bty-form-checkbox" id="bty-input-id-{!! $field['id'] !!}">
+<fieldset class="bty-form-checkbox formgeneral" id="bty-input-id-{!! $field['id'] !!}">
     <div class="form-group">
         <label class="col-sm-12 control-label">
             {!! $field['label'] !!}

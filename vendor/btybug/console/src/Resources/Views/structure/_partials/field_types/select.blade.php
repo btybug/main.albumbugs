@@ -1,4 +1,4 @@
-<fieldset class="bty-form-select" id="bty-input-id-{!! $field['id'] !!}">
+<fieldset class="bty-form-select formgeneral" id="bty-input-id-{!! $field['id'] !!}">
     @php
         $fieldData = get_field_data($field);
     @endphp

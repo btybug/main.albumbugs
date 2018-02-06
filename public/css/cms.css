@@ -15426,3 +15426,194 @@ div.d4{
     flex-direction: column;
     min-height: 100vh;
 }
+
+.formgeneral{
+    overflow-x: hidden;
+    background: #FFFFFF;
+}
+.formgeneral h3.inner-tittle {
+    font-size: 2em;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 0.7em;
+    text-align: left;
+}
+
+.formgeneral .inner-charts {
+    margin-bottom: 2em;
+}
+
+.formgeneral .form-control1 {
+    border: 1px solid #ddd;
+    padding: 5px 8px;
+    color: #777;
+    background: #fff;
+    box-shadow: none !important;
+    width: 100%;
+    font-size: 0.85em;
+    font-weight: 300;
+    height: 40px;
+    border-radius: 0;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+}
+
+.formgeneral .input-group {
+    padding-bottom: 1em;
+}
+
+.formgeneral .grid-1 {
+    margin: 2em 0 0 0;
+    background: #fff;
+    padding: 2em 2em;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    -o-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    border: 1px solid #E7E7E8;
+    border-radius: 0;
+}
+.formgeneral label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 1em;
+    color: #777;
+}
+
+.formgeneral {
+    width: 100%;
+}
+
+.formgeneral .forms-main {
+    margin-bottom: 2em;
+}
+
+.formgeneral button, .formgeneral input, .formgeneral select, .formgeneral textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.formgeneral .form-group.button {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.formgeneral .form-group.button > button {
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 0;
+    text-decoration: none;
+    padding: 10px 40px;
+    font-size: 17px;
+    color: #777;
+    border: 2px #ccc solid;
+    background: none;
+    transition: 0.5s ease;
+}
+
+.formgeneral .form-group.button > button:hover {
+    background-color: #00000082;
+    color: white;
+}
+
+.formgeneral label.check {
+    padding: 10px 0 0 0;
+}
+
+.formgeneral input.form-control1.icon {
+    padding: 7px 5px;
+    margin: 0;
+}
+
+.formgeneral .input-group-addon:first-child {
+    border-right: 0;
+    border-radius: 0;
+}
+
+.formgeneral .input-group-addon:last-child {
+    border-left: 0;
+    border-radius: 0;
+}
+.formgeneral .tooltip1 {
+    position: relative;
+
+}
+.formgeneral .input-group-addon{
+    min-width: 33px;
+}
+.formgeneral .tooltip1 .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.formgeneral .tooltip1 .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.formgeneral .tooltip1:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+.formgeneral textarea{
+    height:200px!important;
+}
+/*---responsive-----*/
+@media (max-width: 1024px) {
+
+    .formgeneral {
+        padding: 0;
+        margin-right: 0;
+        width: 100%;
+        margin-bottom: 1%;
+    }
+
+    .formgeneral .inner-grid-button {
+        padding: 0;
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .formgeneral .grid-1{
+        padding: 1em 1em;
+    }
+}
+
+@media (max-width: 384px) {
+
+}
+
+@media (max-width: 375px) {
+
+    .formgeneral h3.inner-tittle {
+        font-size: 1.3em;
+    }
+
+    .formgeneral input[type="submit"] {
+        font-size: 0.8em;
+    }
+
+}

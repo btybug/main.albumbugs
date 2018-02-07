@@ -493,7 +493,8 @@ class FormService extends GeneralService
                         ? json_encode(issetReturn($data,'fields_json',[]),true)
                         : issetReturn($data,'fields_json',[]),
                     'original_html' => issetReturn($data,'original_html',null),
-                    'form_layout' => issetReturn($data,'form_layout',null)
+                    'form_layout' => issetReturn($data,'form_layout',null),
+                    'fields_html' => issetReturn($data,'fields_html',null)
                 ]);
             }
         }else{
@@ -504,7 +505,8 @@ class FormService extends GeneralService
                 'fields_json' => issetReturn($data,'fields_json',null),
                 'original_html' => issetReturn($data,'original_html',null),
                 'fields_type' => $data['fields_type'],
-                'form_layout' => issetReturn($data,'form_layout',null)
+                'form_layout' => issetReturn($data,'form_layout',null),
+                'fields_html' => issetReturn($data,'fields_html',null)
             ]);
         }
 

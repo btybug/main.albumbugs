@@ -492,7 +492,7 @@ class FormService extends GeneralService
                     'fields_json' => (is_array(issetReturn($data,'fields_json',[])))
                         ? json_encode(issetReturn($data,'fields_json',[]),true)
                         : issetReturn($data,'fields_json',[]),
-                    'unit_json' => issetReturn($data,'unit_json',null),
+                    'original_html' => issetReturn($data,'original_html',null),
                     'form_layout' => issetReturn($data,'form_layout',null)
                 ]);
             }
@@ -502,7 +502,7 @@ class FormService extends GeneralService
                 'slug' => uniqid(),
                 'created_by' => 'custom',
                 'fields_json' => issetReturn($data,'fields_json',null),
-                'unit_json' => issetReturn($data,'unit_json',null),
+                'original_html' => issetReturn($data,'original_html',null),
                 'fields_type' => $data['fields_type'],
                 'form_layout' => issetReturn($data,'form_layout',null)
             ]);

@@ -1517,6 +1517,12 @@ function field_render($attr)
 
 }
 
+function get_field_by_slug($slug){
+    $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
+    $field = $fieldRepo->findBy('slug',$slug);
+    return ($field)?$field->id:null;
+}
+
 function register_frontend_page(array $data)
 {
     return \Btybug\FrontSite\Services\FrontendPageService::register(

@@ -228,12 +228,17 @@ class FormService extends GeneralService
                         if($key == 'edit'){
                             $data[$key] = $value;
                         }else{
-                            $data[$form->fields_type . "_" . $key] = $value;
+                            $is_json = @json_decode($value,true);
+                            if(is_array($is_json)){
+                                $data[$form->fields_type . "_" . $key] = $is_json;
+                            }else{
+                                $data[$form->fields_type . "_" . $key] = $value;
+                            }
                         }
                     }
                     $model = $data;
                 }
-
+                
                 return view("console::structure.developers.forms.form_layout",compact('form','model','attributes'))->render();
             }
         }

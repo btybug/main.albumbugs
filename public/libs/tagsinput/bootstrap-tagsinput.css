@@ -10,6 +10,7 @@
   max-width: 100%;
   line-height: 22px;
   cursor: text;
+  width: 100%;
 }
 .bootstrap-tagsinput input {
   border: none;
@@ -38,6 +39,7 @@
 .bootstrap-tagsinput .tag {
   margin-right: 2px;
   color: white;
+  font-size: 12px;
 }
 .bootstrap-tagsinput .tag [data-role="remove"] {
   margin-left: 8px;

@@ -288,8 +288,13 @@ class FormService extends GeneralService
                                 $data[$field->table_name . '_' . $data['edit']]);
 
                     } else {
-                        $rules[$field->table_name . "_" . $field->column_name] =
-                            $this->fieldValidation->getBaseValidationRulse($field->table_name, $field->column_name);
+                        //TODO: need to write in log all errors
+                        try{
+                            $rules[$field->table_name . "_" . $field->column_name] =
+                                $this->fieldValidation->getBaseValidationRulse($field->table_name, $field->column_name);
+                        }catch (\Exception $exception){
+                            dd($exception,$field);
+                        }
                     }
                 }
             }

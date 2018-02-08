@@ -4,7 +4,6 @@
         {!! Form::hidden('edit',$attributes['edit']) !!}
         {!! Form::hidden($form->fields_type.'_id',$model[$form->fields_type.'_id']) !!}
     @endif
-
         @include('forms.'.$form->slug,['form' => $form])
 {!! Form::close() !!}
 

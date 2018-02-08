@@ -11,7 +11,9 @@
                     <i class="fa {{$field['icon']}}"></i>
                 </span>
                 @endif
-                {!! Form::select($field['table_name']."_".$field['column_name'],($fieldData && count($fieldData))? $fieldData :[],null,['placeholder' => $field['placeholder'],'class' => 'form-control1 input-md']) !!}
+                {!! Form::select($field['table_name']."_".$field['column_name'],($fieldData && count($fieldData))? $fieldData :[],
+                    (isset($form_model[$field["table_name"].'_'.$field["column_name"]]) ? $form_model[$field["table_name"].'_'.$field["column_name"]] : null),
+                ['placeholder' => $field['placeholder'],'class' => 'form-control1 input-md']) !!}
                 @if($field['help'])
                     <span class="input-group-addon tooltip1">
                     <i class="fa {{isset($field['tooltip_icon']) ? $field['tooltip_icon'] : 'fa-question'}}"></i>

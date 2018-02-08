@@ -8,7 +8,9 @@
                     <i class="fa {{$field['icon']}}"></i>
                 </span>
                 @endif
-                    {!! Form::text($field['table_name']."_".$field['column_name'],$field['default_value'],['class' => 'form-control1 icon','placeholder' => $field['placeholder']]) !!}
+                    {!! Form::text($field['table_name']."_".$field['column_name'],
+                        (isset($form_model[$field["table_name"].'_'.$field["column_name"]]) ? $form_model[$field["table_name"].'_'.$field["column_name"]] : $field['default_value']),
+                        ['class' => 'form-control1 icon','placeholder' => $field['placeholder']]) !!}
                 @if($field['help'])
                     <span class="input-group-addon tooltip1">
                         <i class="fa {{isset($field['tooltip_icon']) ? $field['tooltip_icon'] : 'fa-question'}}"></i>

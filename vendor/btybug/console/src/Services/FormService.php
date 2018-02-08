@@ -238,7 +238,7 @@ class FormService extends GeneralService
                     }
                     $model = $data;
                 }
-                
+                \View::share('form_model',$model);
                 return view("console::structure.developers.forms.form_layout",compact('form','model','attributes'))->render();
             }
         }

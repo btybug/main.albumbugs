@@ -72,7 +72,7 @@ class HomeController extends Controller
         $response = \Response::make($content);
         $response->header('Content-Type', 'text/css');
 
-        //   $response->header('Cache-Control', 'max-age=31104000');
+           $response->header('Cache-Control', 'max-age=31104000');
         return $response;
     }
 
@@ -99,7 +99,7 @@ class HomeController extends Controller
         $response = \Response::make($content);
         $response->header('Content-Type', 'application/javascript', false);
 
-        //    $response->header('Cache-Control', 'max-age=31536000');
+            $response->header('Cache-Control', 'max-age=31536000');
 
         return $response;
     }

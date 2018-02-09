@@ -218,4 +218,13 @@ abstract class GeneralRepository implements RepositoryInterface
         return $this->model->pluck($key, $value);
     }
 
+    public function plunckByCondition(array $conditions, string $key, string $value)
+    {
+        $model = $this->model;
+        foreach ($conditions as $column => $condition) {
+            $model = $model->where($column, $condition);
+        }
+        return $model->pluck($key, $value);
+    }
+
 }

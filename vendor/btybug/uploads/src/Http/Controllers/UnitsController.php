@@ -208,6 +208,25 @@ class UnitsController extends Controller
         return view('uploads::gears.units._partials.unit_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
 
+    public function htmlPreviewIframe($id, $type = null)
+    {
+        $slug = explode('.', $id);
+        $ui = Painter::find($slug[0]);
+        $variation = $ui->variations(false)->find($id);
+        $settings = [];
+        $extra_data = 'some string';
+        if(count($variation->settings) > 0){
+            $settings = $variation->settings;
+        }
+        if ($ui->main_type == 'data_source') {
+            $extra_data = BBGiveMe('array', 3);
+        }
+        $htmlBody = $ui->renderLive(['settings' => $settings, 'source' => $extra_data, 'cheked' => 1, 'field' => null]);
+        $htmlSettings = $ui->renderSettings(compact('settings'));
+        $settings_json = json_encode($settings, true);
+        return view('uploads::gears.units._partials.html_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
+    }
+
     public function postSettings(Request $request)
     {
         $output = Painter::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);

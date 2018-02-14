@@ -15,8 +15,8 @@
         <div class="content_attr">
             <h2>Attribute name here</h2>
             <div class="form-group">
-                <label class="col-sm-12 control-label">Display result as</label>
-                <div class="col-sm-12">
+                <label class="control-label">Display result as</label>
+                <div class="">
                     <div class="input-group">
                                     <span class="input-group-addon">
                     <i class="fa fa-address-book"></i>
@@ -40,36 +40,59 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-12 control-label">Quantity :</label>
-                <div class="col-sm-12">
-                    <div class="input-group">
-                                    <span class="input-group-addon">
-                    <i class="fa fa-square"></i>
-                </span>
-                        <input type="text" class="form-controll">
-                        <span class="input-group-addon quant_add_span">
-                    <a href="javascript:void(0)" class="add-new-qty"
-                       data-parent="qty-parent"><i class="fa fa-plus"></i></a>
-                </span>
-                    </div>
+            {{--<div class="form-group">--}}
+                {{--<label class="col-sm-12 control-label">Quantity :</label>--}}
+                {{--<div class="col-sm-12">--}}
+                    {{--<div class="input-group">--}}
+                                    {{--<span class="input-group-addon">--}}
+                    {{--<i class="fa fa-square"></i>--}}
+                {{--</span>--}}
+                        {{--<input type="text" class="form-controll">--}}
+                        {{--<span class="input-group-addon quant_add_span">--}}
+                    {{--<a href="javascript:void(0)" class="add-new-qty"--}}
+                       {{--data-parent="qty-parent"><i class="fa fa-plus"></i></a>--}}
+                {{--</span>--}}
+                    {{--</div>--}}
 
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-12 control-label">Price :</label>
-                <div class="col-sm-12">
-                    <div class="input-group">
-                                    <span class="input-group-addon">
-                    <i class="fa fa-credit-card"></i>
-                </span>
-                        <input type="text" class="form-controll">
-                    </div>
+                {{--</div>--}}
+                {{--<div class="clearfix"></div>--}}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+                {{--<label class="col-sm-12 control-label">Price :</label>--}}
+                {{--<div class="col-sm-12">--}}
+                    {{--<div class="input-group">--}}
+                                    {{--<span class="input-group-addon">--}}
+                    {{--<i class="fa fa-credit-card"></i>--}}
+                {{--</span>--}}
+                        {{--<input type="text" class="form-controll">--}}
+                    {{--</div>--}}
 
-                </div>
-                <div class="clearfix"></div>
-            </div>
+                {{--</div>--}}
+                {{--<div class="clearfix"></div>--}}
+            {{--</div>--}}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input type="text" class="form-controll" placeholder="Quantity">
+                    </td>
+
+                    <td>
+                        <input type="text" class="form-controll" placeholder="Price">
+                    </td>
+                    <td>
+                        <button class="btn bnt-lg btn-primary render_tr"><i class="fa fa-plus-circle"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="col-md-3">
@@ -77,7 +100,10 @@
     </div>
 </div>
 <style>
-
+    .content_attr table tbody td:last-of-type{
+        text-align: center;
+        width: 65px;
+    }
     .content_attr .form-group {
         margin: 20px 0;
     }

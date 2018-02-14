@@ -11,74 +11,78 @@
 </head>
 <body>
 <div class="col-md-12">
-
-    <div class="content_attr">
-        <h2>Attribute name here</h2>
-        <div class="form-group">
-            <label class="col-sm-12 control-label">Display result as</label>
-            <div class="col-sm-12">
-                <div class="input-group">
+    <div class="col-md-9">
+        <div class="content_attr">
+            <h2>Attribute name here</h2>
+            <div class="form-group">
+                <label class="col-sm-12 control-label">Display result as</label>
+                <div class="col-sm-12">
+                    <div class="input-group">
                                     <span class="input-group-addon">
                     <i class="fa fa-address-book"></i>
                 </span>
-                    <select class="form-controll">
-                        <option selected="selected" value="">Select</option>
-                        <option>radio1</option>
-                        <option>radio1</option>
-                    </select>
-                </div>
-                <div class="section">
-                    <div>
-                        <input name="attrradio" type="radio" class="bty-input-radio-7" id="attrradio1">
-                        <label for="attrradio1">radio</label>
+                        <select class="form-controll">
+                            <option selected="selected" value="">Select</option>
+                            <option>radio1</option>
+                            <option>radio1</option>
+                        </select>
                     </div>
-                    <div>
-                        <input name="attrradio" type="radio" class="bty-input-radio-7" id="attrradio2">
-                        <label for="attrradio2">radio</label>
+                    <div class="section">
+                        <div>
+                            <input name="attrradio" type="radio" class="bty-input-radio-7" id="attrradio1">
+                            <label for="attrradio1">radio</label>
+                        </div>
+                        <div>
+                            <input name="attrradio" type="radio" class="bty-input-radio-7" id="attrradio2">
+                            <label for="attrradio2">radio</label>
+                        </div>
                     </div>
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-12 control-label">Quantity :</label>
-            <div class="col-sm-12">
-                <div class="input-group">
+            <div class="form-group">
+                <label class="col-sm-12 control-label">Quantity :</label>
+                <div class="col-sm-12">
+                    <div class="input-group">
                                     <span class="input-group-addon">
                     <i class="fa fa-square"></i>
                 </span>
-                    <input type="text" class="form-controll">
-                    <span class="input-group-addon quant_add_span">
+                        <input type="text" class="form-controll">
+                        <span class="input-group-addon quant_add_span">
                     <a href="javascript:void(0)" class="add-new-qty"
                        data-parent="qty-parent"><i class="fa fa-plus"></i></a>
                 </span>
-                </div>
+                    </div>
 
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-12 control-label">Price :</label>
-            <div class="col-sm-12">
-                <div class="input-group">
+            <div class="form-group">
+                <label class="col-sm-12 control-label">Price :</label>
+                <div class="col-sm-12">
+                    <div class="input-group">
                                     <span class="input-group-addon">
                     <i class="fa fa-credit-card"></i>
                 </span>
-                    <input type="text" class="form-controll">
-                </div>
+                        <input type="text" class="form-controll">
+                    </div>
 
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
+    <div class="col-md-3">
 
+    </div>
 </div>
 <style>
 
-    .content_attr .form-group{
+    .content_attr .form-group {
         margin: 20px 0;
     }
-    .content_attr .form-controll{
+
+    .content_attr .form-controll {
         border: 1px solid #ddd;
         padding: 5px 8px;
         color: #777;
@@ -90,30 +94,38 @@
         border-radius: 0;
         outline: none;
     }
-    .content_attr .input-group-addon{
+
+    .content_attr .input-group-addon {
         border-radius: 0;
     }
-    .content_attr .quant_add_span{
+
+    .content_attr .quant_add_span {
         background-color: #337ab7;
     }
-    .content_attr .quant_add_span a{
+
+    .content_attr .quant_add_span a {
         color: white;
     }
-    .content_attr h2{
+
+    .content_attr h2 {
         border-bottom: 1px solid #ccc;
     }
-    .content_attr .section{
+
+    .content_attr .section {
         border: 1px solid #eee;
         padding: 20px;
     }
+
     .bty-input-radio-7 {
         display: none;
     }
+
     .bty-input-radio-7 + label {
         position: relative;
         cursor: pointer;
         padding-left: 28px;
     }
+
     .bty-input-radio-7 + label:before {
         top: 0;
         left: 0;
@@ -124,6 +136,7 @@
         -webkit-box-shadow: inset 0 0 0 18px #E0E0E0;
         box-shadow: inset 0 0 0 18px #E0E0E0;
     }
+
     .bty-input-radio-7 + label:after {
         top: 49%;
         left: 9px;
@@ -136,6 +149,7 @@
         -webkit-transform: translate(-50%, -50%) scale(0);
         transform: translate(-50%, -50%) scale(0);
     }
+
     .bty-input-radio-7 + label:before, .bty-input-radio-7 + label:after {
         content: "";
         position: absolute;
@@ -145,11 +159,13 @@
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
+
     .bty-input-radio-7:checked + label:before {
         -moz-box-shadow: inset 0 0 0 4px #E0E0E0;
         -webkit-box-shadow: inset 0 0 0 4px #E0E0E0;
         box-shadow: inset 0 0 0 4px #E0E0E0;
     }
+
     .bty-input-radio-7:checked + label:after {
         -moz-transform: translate(-50%, -50%) scale(1);
         -ms-transform: translate(-50%, -50%) scale(1);

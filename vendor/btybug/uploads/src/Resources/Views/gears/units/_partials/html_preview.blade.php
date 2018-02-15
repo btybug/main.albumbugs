@@ -7,13 +7,14 @@
 
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://yabwe.github.io/medium-editor/bower_components/medium-editor/dist/css/themes/beagle.min.css" type="text/css" media="screen" charset="utf-8">
+
 </head>
 
 <body>
 {!! csrf_field() !!}
 <div class="container-fluid">
-    <div class="body_ui corepreviewSetting previewcontent activeprevew" data-settinglive="content"
-         id="widget_container">
+    <div class="body_ui corepreviewSetting previewcontent activeprevew">
         {!! $htmlBody !!}
     </div>
 </div>
@@ -24,5 +25,17 @@
 @if(isset($ui))
     {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$ui->slug).'.js') !!}
 @endif
+
+<script>
+    var mediumEditorInstance;
+    function initEditor(){
+        mediumEditorInstance= new MediumEditor('body');
+    }
+
+    function destroyEditor(){
+        mediumEditorInstance= new MediumEditor('body');
+        mediumEditorInstance.destroy();
+    }
+</script>
 </body>
 </html>

@@ -97,6 +97,27 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
     }
 }
 
+function BBRenderFrontLayout($page,$settings){
+    if($page->parent_id){
+       $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+       $parent = $forntPageRepository->find($page->parent_id);
+       if($parent && $parent->settings){
+           $page_settings = json_decode($parent->settings,true);
+           if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
+               return BBRenderPageSections($page_settings['children']['page_layout'],
+                   (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
+           }
+       }
+    }
+
+    return  BBRenderPageSections($page->page_layout,$settings);
+}
+
+function BBgetFrontPage($idOrSlug){
+    $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+    return $forntPageRepository->model()->where('id',$idOrSlug)->orWhere('slug',$idOrSlug)->first();
+}
+
 function BBRenderPageBody($slug, $data = [], $main_view = null)
 {
     $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::renderPageBody($slug, $data);

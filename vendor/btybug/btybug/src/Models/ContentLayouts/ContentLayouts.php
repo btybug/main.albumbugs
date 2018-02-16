@@ -628,15 +628,16 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function scopeGetChildrenPageLayout($page)
     {
-        $settings = ($page->settings) ? json_decode($page->settings, true) : null;
-        if ($settings) {
+        if(! $page->parent_id){
+            $settings = ($page->settings) ? json_decode($page->settings, true) : null;
             $layout = null;
-            if (isset($settings['children']['page_layout'])) {
-                $layout = self::findByVariation($page->page_layout);
+            if ($settings) {
+                if (isset($settings['children']['page_layout'])) {
+                    $layout = self::findByVariation($page->page_layout);
+                }
             }
 
-            $html = \View::make('btybug::_partials.children_layout', compact('layout', 'page', 'settings'));
-            return $html;
+            return \View::make('btybug::_partials.children_layout', compact('layout', 'page', 'settings'));
         }
     }
 

@@ -1,3 +1,8 @@
+@php
+    if($page->slug != 'my-account'){
+        $page = BBgetFrontPage('my-account');
+    }
+@endphp
 <div class="profile-user">
     <div class="profile-img">
         <img src="https://dnatesting.com/wp-content/uploads/2010/01/1-21-2009_IDG-Blog-1000x562.jpg"

@@ -1,7 +1,5 @@
 @php
-    if($page->slug != 'my-account'){
-        $page = BBgetFrontPage('my-account');
-    }
+    $page = BBgetFrontPage('my-account');
 @endphp
 <div class="profile-user">
     <div class="profile-img">

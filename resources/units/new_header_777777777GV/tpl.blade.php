@@ -45,6 +45,7 @@
                                     @endforeach
                                 @endif
                             @endif
+                            <li><a href="/my-account"><i class="fa fa-users" aria-hidden="true"></i><span>My Account</span></a></li>
                             <li><a href="{!! url('logout') !!}"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a></li>
 
                         </ul>

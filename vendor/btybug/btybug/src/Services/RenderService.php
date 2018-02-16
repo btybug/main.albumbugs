@@ -76,6 +76,7 @@ class RenderService extends GeneralService
                     });
             })->first();
 
+        \View::share('page',$page);
         return $page;
     }
 

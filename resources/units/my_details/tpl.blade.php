@@ -1,3 +1,7 @@
+<?php
+$user = auth()->user();
+?>
+
 <h3>My Details</h3>
 <div class="my_details">
     {!! Form::open(['url'=>route('user_change_details'),'class'=>'form-horizontal']) !!}
@@ -8,7 +12,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user-secret"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="username" placeholder="username">
+                <input type="text" class="form-control1 icon" name="username" placeholder="username" value="{{$user->username}}">
             </div>
         </div>
     </div>
@@ -19,7 +23,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-at"></i>
                         </span>
-                <input type="email" class="form-control1 icon" name="email" placeholder="email">
+                <input type="email" class="form-control1 icon" name="email" placeholder="email" value="{{$user->email}}">
             </div>
         </div>
     </div>
@@ -30,7 +34,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="first_name" placeholder="first name">
+                <input type="text" class="form-control1 icon" name="first_name" placeholder="first name" value="{{$user->first_name}}">
             </div>
         </div>
     </div>
@@ -41,7 +45,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="last_name" placeholder="last name">
+                <input type="text" class="form-control1 icon" name="last_name" placeholder="last name" value="{{$user->last_name}}">
             </div>
         </div>
     </div>
@@ -52,7 +56,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-address-card"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="address" placeholder="address">
+                <input type="text" class="form-control1 icon" name="address" placeholder="address" value="{{$user->address}}">
             </div>
         </div>
     </div>
@@ -63,7 +67,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </span>
-                <input type="tel" class="form-control1 icon" name="phone" placeholder="phone number">
+                <input type="tel" class="form-control1 icon" name="phone" placeholder="phone number" value="{{$user->phone}}">
             </div>
         </div>
     </div>
@@ -74,14 +78,14 @@
                         <span class="input-group-addon">
                             <i class="fa fa-globe"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="website" placeholder="website">
+                <input type="text" class="form-control1 icon" name="website" placeholder="website" value="{{$user->website}}">
             </div>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">About</label>
         <div class="col-sm-8">
-            <textarea name="about" cols="50" rows="4" class="form-control1" title="Enter your text here..." placeholder="about"></textarea>
+            <textarea name="about" cols="50" rows="4" class="form-control1" title="Enter your text here..." placeholder="about">{{$user->about}}</textarea>
         </div>
     </div>
 

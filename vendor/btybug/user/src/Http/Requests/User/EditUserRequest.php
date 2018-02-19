@@ -29,9 +29,10 @@ class EditUserRequest extends Request
      */
     public function rules()
     {
+        $id = auth()->user()->id;
         return [
-            'username' => 'nullable|max:255|unique:users,username',
-            'email' => 'nullable|email|max:255|unique:users,email'
+            'username' => 'nullable|max:255|unique:users,username,' . $id, ',id',
+            'email' => 'nullable|email|max:255|unique:users,email,' . $id, ',id'
         ];
     }
 

@@ -100,24 +100,25 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
 function BBRenderFrontLayout($page,$settings){
     if($page->parent_id){
        $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
-       $parent = $forntPageRepository->find($page->parent_id);
-       if($parent && $parent->settings){
-           $page_settings = json_decode($parent->settings,true);
-           if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
-               return BBRenderPageSections($page_settings['children']['page_layout'],
-                   (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
-           }
-       }else{
-           $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
-           if(count($p)){
-               $firstParent = array_first($p);
-               $page_settings = json_decode($firstParent->settings,true);
-               if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
-                   return BBRenderPageSections($page_settings['children']['page_layout'],
-                       (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
-               }
-           }
-       }
+
+        $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
+        if(count($p)){
+            $firstParent = array_first($p);
+            $page_settings = json_decode($firstParent->settings,true);
+            if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
+                return BBRenderPageSections($page_settings['children']['page_layout'],
+                    (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
+            }
+        }else{
+            $parent = $forntPageRepository->find($page->parent_id);
+            if($parent && $parent->settings){
+                $page_settings = json_decode($parent->settings,true);
+                if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
+                    return BBRenderPageSections($page_settings['children']['page_layout'],
+                        (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
+                }
+            }
+        }
     }
 
     return  BBRenderPageSections($page->page_layout,$settings);

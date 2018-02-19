@@ -5,12 +5,7 @@
                     About me
                 </h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At beatae facere magni porro!
-                    Explicabo in quaerat reprehenderit similique vero. Asperiores, consequatur consequuntur
-                    dolore doloremque labore nostrum placeat ratione repellat sit! Lorem ipsum dolor sit
-                    amet, consectetur adipisicing elit. Animi deleniti dolor, dolores doloribus eaque eos
-                    est in inventore laudantium mollitia necessitatibus numquam, perspiciatis provident,
-                    quam quod sed similique unde ut.
+                    {{Auth::user()->about}}
                 </p>
             </div>
             <div class="about-bottom col-md-6">
@@ -20,37 +15,37 @@
                     <tr>
                         <td class="td-1">First Name</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">USer name</td>
+                        <td class="td-3">{{Auth::user()->f_name}}</td>
                     </tr>
                     <tr>
                         <td class="td-1">Last Name</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">User last name</td>
+                        <td class="td-3">{{Auth::user()->l_name}}</td>
                     </tr>
                     <tr>
                         <td class="td-1">Address</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">Lorem ipsum dolor sit amet,</td>
+                        <td class="td-3">{{Auth::user()->address}}</td>
                     </tr>
                     <tr>
                         <td class="td-1">Zip Code</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">1111111</td>
+                        <td class="td-3">{{Auth::user()->post_code}}</td>
                     </tr>
                     <tr>
                         <td class="td-1">Phone</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">++11111 000-000</td>
+                        <td class="td-3">{{Auth::user()->phone_number}}</td>
                     </tr>
                     <tr>
                         <td class="td-1">Email</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">mail@example.com</td>
+                        <td class="td-3">{{Auth::user()->email}}</td>
                     </tr>
                     <tr>
                         <td class="td-1">Website</td>
                         <td class="td-2">:</td>
-                        <td class="td-3">http://wwwwwwww.com</td>
+                        <td class="td-3">{{Auth::user()->website}}</td>
                     </tr>
 
                     </tbody>

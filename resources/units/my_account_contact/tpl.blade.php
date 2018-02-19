@@ -19,7 +19,7 @@
                         <h4>phone</h4>
                         <div class="cont-numbers">
                             <p>
-                                <span>Mob.</span>+0 123456789
+                                <span>Mob.</span>{{Auth::user()->phone_number}}
                             </p>
                             <p>
                                 <span>Home</span>+0 123456789
@@ -33,7 +33,7 @@
                     <div class="cont-item email">
                         <h4>email</h4>
                         <div class="cont-numbers">
-                            <p>mail@example.com</p>
+                            <p>{{Auth::user()->email}}</p>
                             <p>mail@example.com</p>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                     <div class="cont-item address">
                         <h4>address</h4>
                         <div class="cont-numbers">
-                            <p>Lorem ipsum Lorem ipsum  52/20</p>
-                            <p><a href="#" class="website">https:wwwww.com</a></p>
+                            <p>{{Auth::user()->address}}</p>
+                            <p><a href="#" class="website">{{Auth::user()->website}}</a></p>
                         </div>
                     </div>
 
@@ -50,13 +50,49 @@
             </div>
             <div class="col-md-6 col-xs-12">
                 <div class="contact-right">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13007070.354009148!2d-104.65387033028972!3d37.25828124582162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2z0KHQvtC10LTQuNC90LXQvdC90YvQtSDQqNGC0LDRgtGLINCQ0LzQtdGA0LjQutC4!5e0!3m2!1sru!2s!4v1518681776752" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <input type="hidden" id="lat" value="{{(float)Auth::user()->lat}}">
+                    <input type="hidden" id="lng" value="{{(float)Auth::user()->lng}}">
+                    <div id="map"></div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+<script>
+    var marker;
+    function initMap() {
+        var lat = parseFloat(document.getElementById("lat").value);
+        var lng = parseFloat(document.getElementById("lng").value);
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: {lat: lat, lng: lng}
+        });
 
+        marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: {lat: lat, lng: lng}
+        });
+        marker.addListener('click', toggleBounce);
+        marker.addListener('dragend', function(event) {
+            var lat = event.latLng.lat();
+            var lng = event.latLng.lng();
+            document.getElementById('lat').value = lat;
+            document.getElementById('lng').value = lng;
+        });
+    }
+
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP5WutMrM_j9ubit8CT9xocuxTvULEXSI&callback=initMap">
+</script>
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}

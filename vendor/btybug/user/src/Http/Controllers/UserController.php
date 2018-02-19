@@ -4,6 +4,7 @@ namespace Btybug\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\User\Http\Requests\User\ChangePassword;
+use Btybug\User\Http\Requests\User\EditUserRequest;
 use Datatables;
 use Illuminate\Http\Request;
 use Btybug\User\Http\Requests\User\CreateAdminRequest;
@@ -515,6 +516,18 @@ class UserController extends Controller
         $new_password = $request->new_pass;
         $userRepository->model()->changePassword($id,$new_password);
 
+        return redirect()->back();
+    }
+    public function userDetailsChange(UserRepository $userRepository,EditUserRequest $request){
+        $data = $request->except("_token");
+        if(!$data["email"]){
+            $data = $request->except("_token","email");
+        }
+        if(!$data["username"]){
+            $data = $request->except("_token","email","username");
+        }
+        $id = auth()->user()->id;
+        $user = $userRepository->update($id, $data);
         return redirect()->back();
     }
 

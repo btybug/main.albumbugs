@@ -51,8 +51,20 @@ h3{
     background: none;
     transition: 0.5s ease;
 }
+.my_details .form-group.button > button {
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 0;
+    text-decoration: none;
+    padding: 10px 40px;
+    font-size: 17px;
+    color: #777;
+    border: 2px #ccc solid;
+    background: none;
+    transition: 0.5s ease;
+}
 
-.my_details .form-group.button > a:hover {
+.my_details .form-group.button > button:hover {
     background-color: #00000082;
     color: white;
 }

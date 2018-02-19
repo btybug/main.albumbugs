@@ -24,6 +24,11 @@ Route::post('/settings', array('as' => 'admin.users.postSettings', 'uses' => 'Us
 Route::get('/profile', 'UserController@getProfile');
 Route::get('/registration', 'UserController@getRegistration',true);
 Route::post('/password/change', 'UserController@passwordChange')->name('user_change_password');
+Route::post('/user/change/details', 'UserController@userDetailsChange')->name('user_change_details');
+
+Route::get('addfieldstousers', function(){
+    \Btybug\User\Http\Database\AddFieldsToUsersTable::up();
+});
 
 Route::group(['prefix' => '/admins'], function () {
     Route::get('/', 'UserController@getAdmins',true)->name('user_admin_index');

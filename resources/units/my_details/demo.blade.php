@@ -1,7 +1,7 @@
 <div class="col-md-6">
     <h3>My Details</h3>
     <div class="my_details">
-        <form class="form-horizontal">
+        {!! Form::open(['url'=>route('user_change_details'),'class'=>'form-horizontal']) !!}
             <div class="form-group">
                 <label class="col-md-2 control-label">Username</label>
                 <div class="col-md-8">
@@ -31,7 +31,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                        <input type="text" class="form-control1 icon" name="f_name" placeholder="first name">
+                        <input type="text" class="form-control1 icon" name="first_name" placeholder="first name">
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                        <input type="text" class="form-control1 icon" name="l_name" placeholder="last name">
+                        <input type="text" class="form-control1 icon" name="last_name" placeholder="last name">
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </span>
-                        <input type="tel" class="form-control1 icon" name="phone_number" placeholder="phone number">
+                        <input type="tel" class="form-control1 icon" name="phone" placeholder="phone number">
                     </div>
                 </div>
             </div>
@@ -88,9 +88,9 @@
 
             <div class="form-group button">
                 <a href="#">Back</a>
-                <a href="#">Save</a>
+                <button type="submit">Save</button>
             </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 </div>
 

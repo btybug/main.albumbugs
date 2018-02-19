@@ -68,6 +68,14 @@ h3{
     background-color: #00000082;
     color: white;
 }
+#map {
+    height: 500px;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 .my_details input.form-control1.icon {
     padding: 7px 5px;
     margin: 0;

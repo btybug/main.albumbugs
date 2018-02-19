@@ -88,12 +88,63 @@ $user = auth()->user();
                 <textarea name="about" cols="50" rows="4" class="form-control1" title="Enter your text here..." placeholder="about">{{$user->about}}</textarea>
             </div>
         </div>
-
+        <div class="form-group">
+            <div class="col-sm-8">
+                <input type="hidden" id="lat" value="{{(float)$user->lat}}" name="lat">
+                <input type="hidden" id="lng" value="{{(float)$user->lng}}" name="lng">
+            </div>
+        </div>
+        <div id="map"></div>
         <div class="form-group button">
             <a href="/my-account">Back</a>
             <button type="submit">Save</button>
         </div>
         {!! Form::close() !!}
+
+        <script>
+            var marker;
+            function initMap() {
+                var lat = parseFloat(document.getElementById('lat').value);
+                var lng = parseFloat(document.getElementById('lng').value);
+
+                if(!lat){
+                    lat = 59.327;
+                }
+                if(!lng){
+                    lng = -18.067;
+                }
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: {lat: lat, lng: lng}
+                });
+
+                marker = new google.maps.Marker({
+                    map: map,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    position: {lat: lat, lng: lng}
+                });
+                marker.addListener('click', toggleBounce);
+                marker.addListener('dragend', function(event) {
+                    var lat = event.latLng.lat();
+                    var lng = event.latLng.lng();
+                    document.getElementById('lat').value = lat;
+                    document.getElementById('lng').value = lng;
+                });
+            }
+
+            function toggleBounce() {
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP5WutMrM_j9ubit8CT9xocuxTvULEXSI&callback=initMap">
+        </script>
+
     </div>
 </div>
 

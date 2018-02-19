@@ -29,6 +29,9 @@ Route::post('/user/change/details', 'UserController@userDetailsChange')->name('u
 Route::get('addfieldstousers', function(){
     \Btybug\User\Http\Database\AddFieldsToUsersTable::up();
 });
+Route::get('addlatlngtousers', function(){
+    \Btybug\User\Http\Database\AddLatLngToUsersTable::up();
+});
 
 Route::group(['prefix' => '/admins'], function () {
     Route::get('/', 'UserController@getAdmins',true)->name('user_admin_index');

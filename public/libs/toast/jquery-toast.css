@@ -30,13 +30,21 @@ div.t-element.bottom-left {
     left: 40px;
 }
 
+div.t-element.top-right {
+    top: 100px;
+    right: 15px;
+    left: auto !important;
+    bottom: auto !important;
+    border-radius: 5px;
+}
+
 
 div.t-element.error {
     background: #B71C1C !important;
 }
 
 div.t-element.log {
-    background: #212121 !important;
+    background: rgba(33, 33, 33, 0.85) !important;
 }
 
 div.t-element.warn {

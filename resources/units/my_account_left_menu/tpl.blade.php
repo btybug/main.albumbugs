@@ -19,7 +19,7 @@
                     <li class="item">
                         <a href="javascript:void(0);" class="sublink">{{ $child->title }}<i class="fa fa-chevron-down"></i></a>
                         <ul class="cute">
-                            @foreach($child as $value)
+                            @foreach($child->childs as $value)
                                 <li class="subitem"><a href="{{ $value->url }}">{{ $value->title }}</a></li>
                             @endforeach
                         </ul>

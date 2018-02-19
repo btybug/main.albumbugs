@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="form-group button">
-            <a href="#">Back</a>
+            <a href="/my-account">Back</a>
             <button type="submit" class="change_password_button">Save</button>
         </div>
         {!! Form::close() !!}

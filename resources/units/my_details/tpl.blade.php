@@ -34,7 +34,7 @@ $user = auth()->user();
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="first_name" placeholder="first name" value="{{$user->first_name}}">
+                <input type="text" class="form-control1 icon" name="f_name" placeholder="first name" value="{{$user->f_name}}">
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@ $user = auth()->user();
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                <input type="text" class="form-control1 icon" name="last_name" placeholder="last name" value="{{$user->last_name}}">
+                <input type="text" class="form-control1 icon" name="l_name" placeholder="last name" value="{{$user->l_name}}">
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@ $user = auth()->user();
                         <span class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </span>
-                <input type="tel" class="form-control1 icon" name="phone" placeholder="phone number" value="{{$user->phone}}">
+                <input type="tel" class="form-control1 icon" name="phone_number" placeholder="phone number" value="{{$user->phone_number}}">
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@ $user = auth()->user();
     </div>
 
     <div class="form-group button">
-        <a href="#">Back</a>
+        <a href="/my-account">Back</a>
         <button type="submit">Save</button>
     </div>
     {!! Form::close() !!}

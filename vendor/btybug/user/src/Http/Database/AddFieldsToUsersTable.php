@@ -14,10 +14,6 @@ class AddFieldsToUsersTable extends Migration
     public static function up ()
     {
         Schema::table('users',function(Blueprint $table){
-            $table->string("first_name")->nullable();
-            $table->string("last_name")->nullable();
-            $table->string("address")->nullable();
-            $table->string("phone")->nullable();
             $table->string("website")->nullable();
             $table->longText("about")->nullable();
         });

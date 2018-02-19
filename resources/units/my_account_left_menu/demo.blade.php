@@ -10,6 +10,14 @@
                 <span class="small-info">lorem/lorem</span> ipsum
             </p>
         </div>
+        <div class="profile-icon">
+            <ul>
+                <li><a href="#"><i class="fa fa-globe"></i></a></li>
+                <li><a href="#"><i class="fa fa-globe"></i></a></li>
+                <li><a href="#"><i class="fa fa-globe"></i></a></li>
+                <li><a href="#"><i class="fa fa-globe"></i></a></li>
+            </ul>
+        </div>
         <ul class="profile-menu">
             <li class="item">
                 <a href="javascript:void(0);" class="sublink">Menu1<i class="fa fa-chevron-down"></i></a>

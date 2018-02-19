@@ -15,4 +15,7 @@ class DemoController extends Controller
     public function demo2(){
         return view("demo2");
     }
+    public function demo3(){
+        return view("demo3");
+    }
 }

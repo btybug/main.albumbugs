@@ -107,6 +107,16 @@ function BBRenderFrontLayout($page,$settings){
                return BBRenderPageSections($page_settings['children']['page_layout'],
                    (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
            }
+       }else{
+           $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
+           if(count($p)){
+               $firstParent = array_first($p);
+               $page_settings = json_decode($firstParent->settings,true);
+               if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
+                   return BBRenderPageSections($page_settings['children']['page_layout'],
+                       (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
+               }
+           }
        }
     }
 

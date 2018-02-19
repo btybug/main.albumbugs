@@ -192,4 +192,12 @@ class FrontendPageService extends GeneralService
 
         return false;
     }
+
+    public static function getFirstParent($page){
+        if ($page) {
+            return \DB::select('SELECT T2.* FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM frontend_pages WHERE id = _id) AS parent_id, @l := @l + 1 AS lvl FROM (SELECT @r := ' . $page->id . ', @l := 0) vars, frontend_pages m WHERE @r <> 0) T1 JOIN frontend_pages T2 ON T1._id = T2.id ORDER BY T1.lvl DESC;');
+        }
+
+        return [];
+    }
 }

@@ -7,10 +7,10 @@
                     <div class="panel-heading">Available Events</div>
                     <div class="panel-body">
                         <div class="list-group">
-                            @foreach($subscriber->getEvents() as $name=>$namespace)
-                                <button type="button" data-value="{!! $namespace !!}"
+                            @foreach($subscriber->getEvents() as $evSlug=>$event)
+                                <button type="button" data-value="{!! $event['namespace'] !!}"
                                         class="list-group-item list-group-item-action"
-                                        data-btnclick="selectevent">{!! $name !!}</button>
+                                        data-btnclick="selectevent">{!! $event['name'] !!}</button>
                             @endforeach
                         </div>
 
@@ -50,10 +50,10 @@
                     <div class="panel-heading">Functions</div>
                     <div class="panel-body">
                         <ul class="list-group listwithlink menuwithbutton">
-                            @foreach($subscriber->getProperties() as $name=>$namespace)
-                                <li class="list-group-item" data-value="{!! $namespace !!}"
+                            @foreach($subscriber->getProperties() as $slug=>$property)
+                                <li class="list-group-item" data-value="{!! $property['namespace'] !!}"
                                     data-btnclick="selectfunction"><span
-                                            class="badge">0</span> {!! $name !!}
+                                            class="badge">0</span> {!! $property['name'] !!}
                                     <div class="listtool">
                                         <button type="button" class="btn btn-default btn-xs" data-btnclick="addtab"
                                                 data-cout='0'><i class="fa fa-plus" aria-hidden="true"></i></button>

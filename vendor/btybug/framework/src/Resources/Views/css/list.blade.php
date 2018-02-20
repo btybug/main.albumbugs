@@ -1,5 +1,11 @@
 @extends('btybug::layouts.admin')
 @section('content')
+    @if(Session::has('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ Session::get('success') }}</strong>
+        </div>
+    @endif
     <div class="main_lay_cont">
         {{--<div class="row for_title_row">--}}
         {{--<h1 class="text-center">Components</h1>--}}
@@ -11,19 +17,19 @@
             <div class=" headar-btn">
                 <div></div>
                 <div>
-                    <a href="#" class="btn btn-info"><i class="fa fa-plus"></i></a>
+                    <button type="button" class="btn btn-info show_form"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
 
-            <div class="form-comp col-md-12">
-                <form action="">
+            <div class="form-comp col-md-12 custom_hidden is_show">
+                {!! Form::open(['url'=>route('save_style'),'method' => 'get']) !!}
                     <div class="col-md-7">
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label for="">Class Name</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control">
+                                <input type="text" name="class_name" class="form-control">
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -32,17 +38,18 @@
                                 <label for="">Class Code</label>
                             </div>
                             <div class="col-md-8">
-                        <textarea name="" id="" cols="30" rows="10" class="form-control">
+                                <textarea name="code" id="" cols="30" rows="10" class="form-control">
 
-                        </textarea>
+                                </textarea>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
+                <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
                     <div class="col-md-5">
                         <button class="btn btn-lg btn-success pull-right">Save</button>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
 
@@ -74,13 +81,19 @@
         }
 
         .form-comp {
-            background-color: #78909c87;
+            background-color: #a0a0a0;
             color: white;
             padding: 20px;
+            position:absolute;
+            z-index: 9999999;
+            width:97%;
         }
 
         .form-comp textarea {
             height: 150px !important;
+        }
+        .custom_hidden{
+            display: none;
         }
     </style>
 @stop

@@ -120,3 +120,14 @@ $(document).ready(function () {
         $(".bty-creative-menu-4>ul").show();
     });
 });
+// Dinamic create css class
+$(document).ready(function () {
+    $("body").delegate(".show_form","click",function(){
+        var is_show = $(".is_show").hasClass("custom_hidden");
+        if(is_show){
+            $(".is_show").removeClass('custom_hidden');
+        }else{
+            $(".is_show").addClass('custom_hidden');
+        }
+    });
+});

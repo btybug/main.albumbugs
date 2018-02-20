@@ -14,5 +14,6 @@ Route::get('/', 'IndexController@getIndex',true);
 
 Route::group(['prefix' => 'css'], function () {
     Route::get('/', 'CssController@getIndex',true)->name('css');
+    Route::get('/savestyle', 'CssController@saveStyle',true)->name('save_style');
 });
 

@@ -131,3 +131,179 @@ text-decoration: none;
 .profile-user .profile-icon a i{
     font-size: 23px;
 }
+
+.fs-14-cl-red{
+    font-size: 14px;
+    color: red;
+}
+.fs-16-cl-red{
+    font-size: 16px;
+    color: red;
+}
+.fs-18-cl-red{
+    font-size: 18px;
+    color: red;
+}
+.fs-20-cl-red{
+    font-size: 20px;
+    color: red;
+}
+.fs-28-cl-red{
+    font-size: 28px;
+    color: red;
+}
+.fs-32-cl-red{
+    font-size: 32px;
+    color: red;
+}
+.fs-14-cl-blue{
+    font-size: 14px;
+    color: rgb(71, 122, 165);
+}
+.fs-16-cl-blue{
+    font-size: 16px;
+    color: rgb(71, 122, 165);
+}
+.fs-18-cl-blue{
+    font-size: 18px;
+    color: rgb(71, 122, 165);
+}
+.fs-20-cl-blue{
+    font-size: 20px;
+    color: rgb(71, 122, 165);
+}
+.fs-28-cl-blue{
+    font-size: 28px;
+    color: rgb(71, 122, 165);
+}
+.fs-32-cl-blue{
+    font-size: 32px;
+    color: rgb(71, 122, 165);
+}
+.icon-fs-18-cl-red i{
+    font-size: 18px;
+    color: red;
+}
+.icon-fs-20-cl-red i{
+    font-size: 20px;
+    color: red;
+}
+.icon-fs-22-cl-red i{
+    font-size: 22px;
+    color: red;
+}
+.icon-fs-24-cl-red i{
+    font-size: 24px;
+    color: red;
+}
+.icon-fs-18-cl-blue i{
+    font-size: 18px;
+    color: rgb(71, 122, 165);
+}
+.icon-fs-20-cl-blue i{
+    font-size: 20px;
+    color: rgb(71, 122, 165);
+}
+.icon-fs-22-cl-blue i{
+    font-size: 22px;
+    color: rgb(71, 122, 165);
+}
+.icon-fs-24-cl-blue i{
+    font-size: 24px;
+    color: rgb(71, 122, 165);
+}
+.icon-fs-18-hover-red i{
+    font-size: 18px;
+    transition: 0.4s ease;
+}
+.icon-fs-18-hover-red i:hover{
+    color: red;
+}
+.icon-fs-20-hover-red i{
+    font-size: 20px;
+    transition: 0.4s ease;
+}
+.icon-fs-20-hover-red i:hover{
+    color: red;
+}
+.icon-fs-22-hover-red i{
+    font-size: 22px;
+    transition: 0.4s ease;
+}
+.icon-fs-22-hover-red i:hover{
+    color: red;
+}
+.icon-fs-18-hover-blue i{
+    font-size: 18px;
+    transition: 0.4s ease;
+}
+.icon-fs-18-hover-blue i:hover{
+    color: rgb(71, 122, 165);
+}
+.icon-fs-20-hover-blue i{
+    font-size: 20px;
+    transition: 0.4s ease;
+}
+.icon-fs-20-hover-blue i:hover{
+    color: rgb(71, 122, 165);
+}
+.icon-fs-22-hover-blue i{
+    font-size: 22px;
+    transition: 0.4s ease;
+}
+.icon-fs-22-hover-blue i:hover{
+    color: rgb(71, 122, 165);
+}
+.menu-bg-lightblue{
+    background: #dce5ed;
+}
+.menu-bg-lightblue li>a{
+    border-bottom: 1px solid #ffffff;
+}
+.menu-bg-lightblue .sublink.active, .menu-bg-lightblue .profile-menu a:hover {
+    background-color: #b0b9c1;
+    color: white;
+}
+.menu-fs-18-cl-blue li>a{
+    font-size: 18px;
+    color: rgb(71, 122, 165);
+}
+.menu-fs-20-cl-blue li>a{
+    font-size: 20px;
+    color: rgb(71, 122, 165);
+}
+.menu-fs-18-cl-tomato li>a{
+    font-size: 18px;
+    color: tomato;
+}
+.menu-fs-20-cl-tomato li>a{
+    font-size: 20px;
+    color: tomato;
+}
+.soc-icon-hover-black:hover{
+    background-color:#000;
+}
+.soc-icon-hover-brown:hover{
+    background-color:brown;
+}
+.soc-icon-hover-tomato:hover{
+    background-color:tomato;
+}
+.soc-icon-cl-brown{
+    background-color:brown;
+}
+.soc-icon-cl-brown:hover{
+    background-color:brown;
+}
+.soc-icon-cl-tomato{
+    background-color:tomato;
+}
+.soc-icon-cl-tomato:hover{
+    background-color:tomato;
+}
+.soc-icon-cl-darkblue{
+    background-color:darkblue;
+}
+.soc-icon-cl-darkblue:hover{
+    background-color:darkblue;
+}

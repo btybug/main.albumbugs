@@ -398,37 +398,20 @@ class StructureController extends Controller
         return redirect()->to('/admin/console/structure/edit-forms')->with('message', 'Form Successfully created');
     }
 
-    public function getFormEdit($id, Request $request)
+    public function getFormEdit(
+        FormsRepository $formsRepository,
+        FormService $formService,
+        $id
+    )
     {
-        //TODO when Modules ready
-        $file = null;
-        $form = Forms::findOrFail($id);
-        $fields = $form->getFields(true);
-        $blade = $form->renderBlade();
-        $bladeRendered = $form->render();
-        $modules = Structures::getBuilderModules()->toArray();
-        $builders = [];
-        if (count($modules)) {
-            foreach ($modules as $builder) {
-                $builders[$builder->slug] = $builder->name;
-            }
-        }
+        $form = $formsRepository->findOrFail($id);
+        $table = "fields_type";
 
-        $form->form_builder = $slug = $request->get('slug', $form->form_builder);
-        $builder = Structures::find($slug);
+        $form->fields_json = $formService->fieldsJson($id, true);
+        $fields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
+        $html = $formService->render($id);
 
-        if ($builder && \File::exists(base_path($builder->path . DS . 'views' . DS . $builder->builder . '.blade.php'))) {
-            $file = view("$builder->namespace::" . $builder->builder, compact(['form']))->render();
-        }
-
-
-        if ($form->form_type == 'user') {
-            $fieldJson = json_encode(Fields::where('table_name', $form->fields_type)->where('status', Fields::ACTIVE)->where('available_for_users', '!=', 0)->get()->toArray());
-        } else {
-            $fieldJson = json_encode(Fields::where('table_name', $form->fields_type)->where('status', Fields::ACTIVE)->get()->toArray());
-        }
-
-        return view('console::structure.edit-form', compact(['form', 'blade', 'fields', 'bladeRendered', 'builders', 'file', 'fieldJson']));
+        return view('console::structure.edit-form', compact('form', 'fields', 'html', 'table'));
     }
 
     public function getDefaultHtml(

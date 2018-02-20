@@ -1,326 +1,389 @@
 @extends( 'btybug::layouts.admin' )
-@section( 'content' )
-    <div class="row">
-        <div class="col-xs-12 ">
-            {!! Form::model($form,['url' => '/admin/console/structure/forms/edit/'.$form->id, 'id'=>'formbuilderfrom']) !!}
-            <div class="row m-b-15 ">
-                <section class="content">
-                    <div class="row toolbarNav  zindex9999">
-                        <div class="col-md-8 p-b-10">
-                            <label>Select HTML For
-                                Form</label> {!! Form::select('form_builder', $builders , null,['class'=>'select-builder', 'data-btnrole'=>'formtype', 'title'=>'Select Builder']) !!}
-                        </div>
-                        <div class="col-md-4 text-right">
-                            <button type="button" class="btn btn-default btn-dblue m-r-5" data-action="setting"><i
-                                        class="fa fa-cog"
-                                        aria-hidden="true"></i>
-                                Setting
-                            </button> {{ Form::button('<i class="fa fa-check" aria-hidden="true"></i> Save', array('type' => 'submit', 'class' => 'btn btn-danger')) }}
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <textarea hidden="hidden" name="blade" class="form-control hide"
-                      data-formslug="slug"></textarea>
-            <textarea hidden="hidden" name="fields" class="form-control hide"
-                      data-formfield="field">{!! $fields !!}</textarea> {!! Form::textarea('settings',null,['class' => 'form-control hide','data-formfield' => 'setting']) !!}
-            <textarea hidden="hidden" name="blade_rendered" class="form-control hide"
-                      data-formslug="bladerendered"></textarea>
-            {!! Form::close() !!}
 
-            <div data-formslug="slug" class="hide">
-                @if(! \Request::exists('slug'))
-                    {!! $blade !!}
-                @endif
-            </div>
-            <div data-formslug="bladerendered" class="hide">
-                @if(! \Request::exists('slug'))
-                    {!! $bladeRendered !!}
-                @endif
-            </div>
-
-            <div data-installbuilder>
-                @if($file)
-                    {!! $file !!}
-                @endif
-            </div>
-
-
-            <input type="hidden" id="current_form_group_value" value="{!!  $form->fields_type !!}"/>
-            <input type="hidden" id="current_form_id" value="{!! $form->id !!}"/>
-        </div>
-        <div id="settingModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Setting Modal</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#" class="form-horizontal " data-setting="builder">
-                            <div class="form-group m-l-0 m-r-0">
-                                <label for="success_message" class="col-sm-4 ">Success Message</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control " placeholder="Custom" name="message"
-                                           id="success_message" type="text">
-                                </div>
-                            </div>
-
-                            <div class="form-group m-l-0 m-r-0">
-                                <label for="" class="col-sm-4">Redirect Page</label>
-                                <div class="col-sm-8">
-                                    <select id="target" class="form-control" name="redirect_Page" title="Select Target">
-                                        <option value="alert">BB get page</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group m-l-0 m-r-0">
-                                <label for="" class="col-sm-4">Is Ajax</label>
-
-                                <div class="col-sm-8">
-                                    <div class="customelement radio-inline"><input name="is_ajax" id="is_ajax_yes"
-                                                                                   value="yes" type="radio"> <label
-                                                for="is_ajax_yes">Yes</label>
-                                    </div>
-                                    <div class="customelement radio-inline"><input name="is_ajax" id="is_ajax_no"
-                                                                                   value="no" type="radio"> <label
-                                                for="is_ajax_no">No</label>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div id="fieldModalcustom" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Fields</h4>
-                    </div>
-                    <div class="modal-body">
-                        <textarea name="fieldjson" class="hide">{!! $fieldJson !!}</textarea>
-                        <div class="panel panel-default custompanel ">
-                            <div class="panel-heading">Available Field</div>
-                            <div class="panel-body  p-10">
-                                <div data-setting="fieldgroupcustom"></div>
-                            </div>
-                        </div>
-
-
-                        <div class="panel panel-default custompanel m-t-10">
-                            <div class="panel-heading">Used Field</div>
-                            <div class="panel-body  p-10">
-                                <div data-setting="fieldgroupcustomused"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-    @include('resources::assests.magicModal')
-@stop
 @section( 'CSS' )
-
-    {!!HTML::style( '/resources/assets/css/create_pages.css' ) !!}
-    {!!HTML::style( '/resources/assets/js/bootstrap-select/css/bootstrap-select.min.css' ) !!}
-    {!!HTML::style( '/resources/assets/css/form-builder.css?v=4.89' ) !!}
-
-    {!! HTML::style("public/js/select2/css/select2.css") !!}
-    <style>
-        .btnCtrls {
-            position: absolute;
-            top: 0px;
-            right: 15px;
-            display: none;
-        }
-
-        .bbfieldpalce:hover .btnCtrls {
-            display: block;
-        }
-
-        .bbfieldpalce {
-            position: relative;
-        }
-
-        .zindex9999 {
-            z-index: 10;
-        }
-
-    </style>
-
+    {!! BBstyle(plugins_path("vendor/sahak.avatar/membership/src/public/css/form-builder.css")) !!}
 @stop
-
 
 @section( 'JS' )
+    {!! BBscript(plugins_path("vendor/sahak.avatar/membership/src/public/js/form-builder.js")) !!}
+@stop
 
-    {!! HTML::script("public/js/UiElements/bb_styles.js") !!}
+@section( 'content' )
+    <!-- Form Builder -->
+    {!! Form::model($form,['id'=>'fields-list','url' => url(route('save_core_forms',$form->id))]) !!}
+    {!! Form::hidden('id',$form->id) !!}
+    <div class="bb-form-header">
+        <div class="row">
+            <div class="col-md-8">
+                <label>Form name</label>
+                {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'Form Name']) !!}
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="btn btn-default btn-sm add-form-tab">
+                    <i class="fa fa-plus"></i> Add Tab
+                </a>
+                <button type="submit" class="form-save pull-right"><span>Save</span></button>
+                <button type="button" class="items-panel-trigger pull-right" data-toggle="modal"
+                        data-target="#myModal0"><span>Fields</span></button>
+            </div>
+        </div>
+    </div>
+    {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
+    {!! Form::textarea('original_html',null,['class' => 'original_html hide']) !!}
+    {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}
+    {!! Form::close() !!}
 
-    {!!HTML::script( '/resources/assets/js/bootstrap-select/js/bootstrap-select.min.js' ) !!}
-    {!!HTML::script( '/resources/assets/js/underscore-min.js' ) !!}
-    {!!HTML::script( '/resources/assets/js/form-setting.js' ) !!}
+    <h3>Preview Area</h3>
 
-    {!! HTML::script("public/js/select2/js/select2.js") !!}
+    <hr/>
+
+    <div class="row ">
+        <div class="col-md-9 original-html-area">
+            @if($form->original_html)
+                {!! $form->original_html !!}
+            @else
+                <div class="form-builder-tabs">
+
+                    <div class="tab-actions">
+
+
+                    </div>
+
+                    <ul class="nav nav-tabs form-builder-tabs-area" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#price" id="price-tab" role="tab" data-toggle="tab">Price</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#discount" id="discount-tab" role="tab" data-toggle="tab">Discount</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#data" id="data-tab" role="tab" data-toggle="tab">Data</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#links" id="links-tab" role="tab" data-toggle="tab">Links</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content form-builder-tabs-content">
+                        <div class="tab-pane in active" role="tabpanel" id="general">
+                            <div class="form-builder-area"></div>
+                        </div>
+                        <div class="tab-pane in" role="tabpanel" id="price">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            @endif
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Fields</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="html-elements-list">
+                        @if(count($fields))
+                            @foreach($fields as $field)
+                                <div class="html-element-item draggable-element {!! (in_array($field->slug,$existingFields)) ? 'hide' : '' !!}"  data-id="{!! $field->id !!}"
+                                     data-shortcode="[field id={{$field->id}}]">
+                                    {{ $field->name }}
+                                    <div class="html-element-item-sample hidden">
+                                        <div class="form-group">
+                                            {!! field_render(['id' => $field->id]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row real-form hidden">
+        <div class="col-md-9">
+
+            <div class="builder-tabs">
+
+                <div class="tab-actions">
+
+
+                </div>
+
+                <ul class="nav nav-tabs builder-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#generalform" role="tab" data-toggle="tab">General</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#priceform" id="price-tab" role="tab" data-toggle="tab">Price</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#discountform" id="discount-tab" role="tab" data-toggle="tab">Discount</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#dataform" id="data-tab" role="tab" data-toggle="tab">Data</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#linksform" id="links-tab" role="tab" data-toggle="tab">Links</a>
+                    </li>
+                </ul>
+                <div class="tab-content builder-tabs-content">
+                    <div class="tab-pane in active" role="tabpanel" id="generalform">
+                        <div class="form-fields-area">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="priceform">
+                        <div class="form-fields-area"></div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="discountform">
+                        <div class="form-fields-area"></div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="dataform">
+                        <div class="form-fields-area"></div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="linksform">
+                    </div>
+                </div>
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Templates -->
+    <script type="template" id="template-tab-nav">
+        <li role="presentation">
+            <i class="fa fa-trash trash-icon" style="color:#9A2720"></i>
+            <a href="#{id}" role="tab" data-toggle="tab">Tab Title</a>
+        </li>
+    </script>
+
+    <script type="template" id="template-tab-content">
+        <div class="tab-pane in" role="tabpanel" id="{id}">
+            <div class="{DROPABLE}"></div>
+        </div>
+    </script>
+
+    <script type="template" id="field-html">
+        <div class="form-group">
+            <fieldset class="bty-form-text" id="bty-input-id-19">
+                <div>
+                    {field}
+                </div>
+            </fieldset>
+        </div>
+    </script>
+@stop
+@section( 'JS' )
+
     <script>
-        $(document).ready(function () {
+        $(function () {
+            function tabsGenerate(json) {
+                var li = $('<li/>', {class: "nav-item"});
+                var deleteI = $('<button/>', {class: "fa fa-trash", "style": "color:#9A2720"});
+                var options = $('.tab-content-settings-to-clone');
+                var a = $('<a/>', {
+                    class: "nav-link",
+                    "data-toggle": "tab",
+                    role: "tab",
+                    "aria-selected": "true"
+                });
+                var div = $('<div/>', {
+                    class: "tab-pane fade",
+                    role: "tabpanel",
+                    "aria-labelledby": "profile-tab"
+                });
 
+                $('#formTabContent').empty();
+                $('.tab-items').empty();
+                $.each(json, function (k, v) {
+                    var tab = a.clone();
+                    var del = deleteI.clone();
+                    var item = li.clone();
+                    item.append(del);
+                    var divContent = div.clone();
+                    var optionsClone = options.clone();
+                    optionsClone.find('select').attr('data-id', k);
+                    divContent.attr('data-id', k);
+                    optionsClone.removeClass('hidden');
+                    optionsClone.removeClass('tab-content-settings-to-clone');
+                    optionsClone.addClass('tab-content-settings');
+                    del.attr('data-id', k);
+                    tab.text(v.name);
+                    tab.attr('href', '#' + v.name);
+                    tab.attr('aria-controls', v.name);
+                    item.append(del);
+                    item.append(tab);
+                    divContent.attr('aria-labelledby', 'tab-' + v.name);
+                    divContent.attr('id', v.name);
+                    divContent.html(optionsClone);
+                    $('#formTabContent').append(divContent);
+                    $('.tab-items').append(item)
 
-            var allowed_memberships = $('.allowed_memberships').select2({tags: true});
-            var allowMeber = $('#allowed_memberships_defaults').val();
-            if (allowMeber) {
-                var allowed_memberships_defaults = JSON.parse(allowMeber);
-                allowed_memberships.val(allowed_memberships_defaults).trigger("change");
+                });
+
             }
 
-            $('.select-builder').selectpicker();
+//get partial options view
+            $('body').on('change', '.partials-change', function () {
 
-
-            $("body").on('click', '.allow_membership', function () {
-                if ($('.allow_membership:checkbox:checked').length > 0) {
-                    $('.memberships').removeClass('hide');
-                } else {
-                    $('.memberships').addClass('hide');
-                }
-            });
-
-
-            var oldstduio = $('.select-builder').val()
-
-            function savedata(newbuilder) {
-                var datafrom = {
-                    'new_builder': newbuilder,
-                    'form_builder': oldstduio,
-                    'blade': $('[data-formslug="slug"]').val(),
-                    'fields': $('[data-formfield="field"]').val(),
-                    'settings': $('[data-formfield="setting"]').val()
-                }
+                var data = {
+                    'type': $(this).val(),
+                    'data_id': $(this).attr('data-id'),
+                    'options_form_id': $('input[name=id]').val()
+                };
                 $.ajax({
-                    url: $('#formbuilderfrom').attr('url'),
                     type: 'POST',
-                    dataType: 'JSON',
+                    url: "",
+                    data: data,
                     headers: {
                         'X-CSRF-TOKEN': $("input[name='_token']").val()
                     },
-                    data: datafrom,
+                    dataType: 'json',
                     success: function (data) {
                         if (!data.error) {
-                            //here is builder
-                            // $('.select-builder').val(newbuilder);
-                            // $('[data-installbuilder]').html(data.builder);
-                            loadbuidler(newbuilder);
-
-
+                            var data_id = data.data_id;
+                            $('body').find('div[data-id=' + data_id + ']').find('.partials-area').html(data.html);
+                        } else {
+                            alert(data.message);
                         }
                     }
                 });
-            }
+            });
+
+            var jsonString = $('#tabs-json-area').text();
+            var jsonData = JSON.parse(jsonString);
+            tabsGenerate(jsonData);
+            var tabJson = {name: null, data: {}}
+            $('#save-tab-changes').on('click', function () {
+                var newTab = (objectifyForm($('#tab-options')));
+                var copyData = tabJson;
+                copyData.name = newTab.name;
+                copyData.data = [{'type': 'unit', 'value': 'price_calculate.default'}];
+                jsonData.push(copyData);
+                updateTabs(jsonData);
+                $('#tab-manage-modal').modal('hide');
+                $('#tabs-json-area').text(JSON.stringify(jsonData));
 
 
-            $("body").on('change', '.select-builder', function () {
-                var nerbuilder = $(this).val();
-                var ifnfield = $('[data-formslug="slug"]').val('')
+            });
 
-                if (oldstduio != '') {
-
-                    if (ifnfield != ' ') {
-
-
-                        bootbox.confirm({
-                            message: "You want to keep last changed",
-                            buttons: {
-                                confirm: {
-                                    label: 'Yes',
-                                    className: 'btn-success'
-                                },
-                                cancel: {
-                                    label: 'No',
-                                    className: 'btn-danger'
-                                }
-                            },
-                            callback: function (result) {
-                                if (result) {
-                                    //$('.select-builder').val(oldstduio);
-                                    savedata(nerbuilder);
-
-
-                                } else {
-
-                                    oldstduio = nerbuilder;
-                                    loadbuidler(oldstduio);
-                                }
-                            }
-                        });
-                    } else {
-                        $('[data-formslug="slug"]').val('')
-
-                        oldstduio = nerbuilder;
-                        loadbuidler(oldstduio);
-                    }
-                } else {
-                    $('[data-formslug="slug"]').val('')
-
-                    oldstduio = nerbuilder;
-                    loadbuidler(oldstduio);
-                }
-
+//data-id
+            $('.tab-items').on('click', 'button[data-id]', function () {
+                var id = $(this).attr('data-id');
+                deleteTab(id);
             })
 
-            function loadbuidler(builder) {
-                var value = builder;
-                var url = '?slug=' + builder
-                var form = "{!! $form->id !!}";
+            function deleteTab(id) {
+                jsonString = $('#tabs-json-area').text();
+                jsonData = JSON.parse(jsonString);
+                jsonData.splice(id)
+                $('#tabs-json-area').text(JSON.stringify(jsonData));
+                updateTabs(jsonData);
+                tabsGenerate(jsonData);
+            }
 
-                window.location.assign(url)
-
-                /* $('[data-installbuilder] script').remove();
-                 $('[data-installbuilder]').empty();
-                 $.ajax({
-                     url: "{!! url('/admin/console/structure/forms/get-builder-render') !!}",
-                    type: 'POST',
-                    dataType: 'JSON',
+            function updateTabs(data) {
+                $.ajax({
+                    url: "form_edit_tab_generate",
+                    data: {data: data},
                     headers: {
                         'X-CSRF-TOKEN': $("input[name='_token']").val()
                     },
-                    data: {
-                        slug: value,
-                        form: form,
-                    },
+                    dataType: 'json',
                     success: function (data) {
                         if (!data.error) {
-                            //here is builder
-                            $('[data-installbuilder]').html(data.builder);
-                          
+                            $('.preview-area').html(data.html);
 
+                            jsonString = $('#tabs-json-area').text();
+                            jsonData = JSON.parse(jsonString);
+                            tabsGenerate(jsonData);
                         }
-                    }
-                });*/
+                    },
+                    type: 'POST'
+                });
             }
 
-//            loadbuidler(oldstduio);
+            function objectifyForm(formArray) {//serialize data function
+                var data = {};
+                formArray.serializeArray().map(function (x) {
+                    data[x.name] = x.value;
+                });
+                data.data = {};
+                return data;
+            }
+        });
+
+    </script>
 
 
-        })
+
+    <script>
+        $("body").on('input', '.form-title-settings', function () {
+            var val = $(this).val();
+
+            $(".form-title").text(val);
+        });
+
+        $("body").on('change', '.select-field', function () {
+            var checkbox = this;
+            var field = $(checkbox).val();
+            if (checkbox.checked) {
+                var table = $(checkbox).data('table');
+                $.ajax({
+                    url: "mbsp_render_fields",
+                    data: {table: table, field: field},
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.error) {
+                            $(".field-box").append(data.html);
+                        }
+                    },
+                    type: 'POST'
+                });
+                // alert($(checkbox).val());
+            } else {
+
+                $("#bty-input-id-" + $(checkbox).data('id')).remove();
+            }
+        });
+
+
+        $('button[data-action=save-form]').on('click', function () {
+            var data = $('#fields-list').serialize();
+            $.ajax({
+                url: "mbsp_save_form",
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $("input[name='_token']").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.error) {
+                        window.location.href = "blog_form_list";
+                    }
+                },
+                type: 'POST'
+            });
+        });
     </script>
 @stop

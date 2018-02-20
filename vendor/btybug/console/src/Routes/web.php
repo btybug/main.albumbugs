@@ -55,14 +55,14 @@ Route::group(['prefix' => 'structure'], function () {
 
     Route::group(['prefix' => 'forms'], function () {
         Route::get('/', 'StructureController@getForms',true);
-        Route::get('/edit/{id}', 'StructureController@getFormEdit');
+        Route::get('/edit/{id}', 'StructureController@getFormEdit',true);
         Route::get('/entries/{id}', 'StructureController@getFormEntries');
         Route::get('/view-entries/{id}', 'StructureController@getViewEntries');
         Route::post('/get-entries-data', 'StructureController@postGetEntryData');
         Route::get('/settings/{id}', 'StructureController@getFormSettings');
         Route::post('/settings/{id}', 'StructureController@postFormSettings');
         Route::post('/get-available-fields-settings', 'StructureController@postAvailableFields');
-        Route::post('/edit/{id}', 'StructureController@postFormEdit');
+        Route::post('/edit/{id}', 'StructureController@postFormEdit')->name('save_core_forms');
         Route::get('/create', 'StructureController@getCreateForm');
         Route::get('/edit-custom/{id}', 'StructureController@getEditForm');
         Route::post('/save', 'StructureController@postSaveForm');

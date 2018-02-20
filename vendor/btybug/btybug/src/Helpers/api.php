@@ -1540,7 +1540,8 @@ function field_render($attr)
 {
     if(count($attr)){
         $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
-        $field = $fieldRepo->find(issetReturn($attr, 'id'));
+        if(isset($attr['id']))
+            $field = $fieldRepo->findBy('id',$attr['id']);
 
         if ($field) {
             return \Btybug\Console\Services\FieldService::getFieldHtml($field);

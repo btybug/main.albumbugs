@@ -144,6 +144,7 @@ Route::group(['prefix' => 'settings'], function () {
 Route::group(['prefix' => 'event'], function () {
     Route::get('/', 'EventsController@getIndex',true)->name('frontsite_event_index');
     Route::get('/new', 'EventsController@getIndexNew',true)->name('frontsite_event_index_new');
+    Route::get('/new-connection', 'EventsController@getIndexNewConnection',true)->name('frontsite_event_index_new_connection');
     Route::post('/get-function-data', 'EventsController@postGetFunctionData');
     Route::post('/get-event-function-relations', 'EventsController@postGetEventFunctionRelation');
     Route::post('/save-event-function-relations', 'EventsController@postSaveEventFunctionRelation');

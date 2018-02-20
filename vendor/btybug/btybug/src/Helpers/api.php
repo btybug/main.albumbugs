@@ -700,7 +700,46 @@ function BBbutton($action, $key, $text, array $array = [])
         $array = 'data-array="true"';
     }
     $data_key = str_replace('[]', '', $key);
-    return '<button type="button" data-action=' . $action . ' data-key="' . $data_key . '" ' . $atributes . ' >' . $text . '</button><input class="bb-button-realted-hidden-input" type="hidden" ' . $array . ' value="' . $value . '" data-name="' . $data_key . '" name="' . $hiddenName . '">';
+    return '<button type="button" data-action=' . $action . ' data-key="' . $data_key . '" ' . $atributes . ' >'
+        . $text . '</button><input class="bb-button-realted-hidden-input" type="hidden" '
+        . $array . ' value="' . $value . '" data-name="' . $data_key . '" name="' . $hiddenName . '">';
+}
+
+function BBcustomize($type, $key, $tag, $text, $array = [])
+{
+    $atributes = ' ';
+    $value = '';
+    $array['class'] = "BBcustomize";
+    $array['data-type'] = $tag;
+    if (count($array)) {
+        foreach ($array as $k => $v) {
+            if ($k != 'model') {
+                $atributes .= "$k=\"$v\"";
+            }
+        }
+    }
+    if (isset($array['model'])) {
+        $model = $array['model'];
+        if (is_string($model)) {
+            $value = $model;
+        } else {
+            if (is_object($model)) {
+                $model = $model->toArray();
+            }
+
+            if (isset($model[$key])) {
+                $value = $model[$key];
+            }
+        }
+    }
+    $hiddenName = isset($array['data-name-prefix']) ? $array['data-name-prefix'] . '[' . $key . ']' : $key;
+    $array = '';
+    if (strpos($key, '[]')) {
+        $array = 'data-array="true"';
+    }
+    $data_key = str_replace('[]', '', $key);
+    $html = View::make('btybug::bbcustomize', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName'))->render();
+    return $html;
 }
 
 function BBbutton2($type, $key, $tag, $text, $array = [])

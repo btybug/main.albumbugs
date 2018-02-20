@@ -24,6 +24,11 @@ class EventsController extends Controller
         $subscriber = \Subscriber::getSubscriptions();
         return view('manage::events.index_new', compact('subscriber'));
     }
+    public function postNewConnection(Request $request)
+    {
+        dd($request->all());
+
+    }
     public function getIndexNewConnection()
     {
         $subscriber = \Subscriber::getSubscriptions();

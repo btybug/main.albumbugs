@@ -110,7 +110,7 @@ final class EventSubscriber
     private function scopeGetForm($namespace)
     {
         $namespaceExploade = explode('@', $namespace);
-        $class = str_replace('-','\\',$namespaceExploade[0]);
+        $class = $namespaceExploade[0];
         $method = $namespaceExploade[1] . 'Form';
         $obj = new $class;
         if (method_exists($obj, $method) && is_callable(array($obj, $method))) {

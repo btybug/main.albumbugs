@@ -44,15 +44,13 @@ class Subscriber
 
     public function addEvent($name, $namespace)
     {
-        $slug=str_replace('\\','-',$namespace);
-        $this->events[$slug] = ['namespace'=>$namespace,'name'=>$name];
+        $this->events[$name] = $namespace;
         return $this;
     }
 
     public function addProperty($name, $namespace)
     {
-        $slug=str_replace('\\','-',$namespace);
-        $this->properties[$slug] = ['namespace'=>$namespace,'name'=>$name];
+        $this->properties[$name] = $namespace;
     }
 
     public function getStore()

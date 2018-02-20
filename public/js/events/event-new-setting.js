@@ -314,14 +314,18 @@ $(function () {
 
     $('body').on('click', '[data-btnclick]', function (e) {
         var targets = $(this).data('btnclick');
+
+        if($(this).data('btnclick')=='selectevent'){
+            $('.new-page-url').attr('href',$(this).attr('data-value'));
+        }
         if (eventbuilder.clickevent[targets]) {
             eventbuilder.clickevent[targets]($(this), e);
         }
-    })
+    });
 
     $('[data-role="eventtabcont"]').on('change', 'select, input[type="radio"], input[type="checkbox"]', function () {
         eventbuilder.updatedtabfrom()
     }).on('keyup', 'textarea, input[type="text"]', function () {
         eventbuilder.updatedtabfrom()
-    })
-})
+    });
+});

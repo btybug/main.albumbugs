@@ -53,6 +53,10 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     'title' => 'Fields',
                     'url' => '/admin/console/structure/fields',
+                ],
+                [
+                    'title' => 'Field types',
+                    'url' => '/admin/console/structure/field-types',
                 ]
             ],
             'backend_gears' => [

@@ -22,6 +22,10 @@ Route::get('/optimisation', function () {
 
 Route::group(['prefix' => 'structure'], function () {
     Route::get('/', 'StructureController@getIndex',true)->name('index');
+    Route::group(['prefix' => 'field-types'], function () {
+        Route::get('/', 'FieldTypesController@getIndex',true)->name('field_types_index');
+    });
+
     Route::group(['prefix' => 'pages'], function () {
         Route::get('/', 'StructureController@getPages',true)->name('pages_index');
         Route::get('/settings/{id}', 'StructureController@getPageSettings',true)->name('pages_settings');

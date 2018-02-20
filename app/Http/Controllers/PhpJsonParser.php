@@ -58,7 +58,7 @@ class PhpJsonParser
     public static function renderHtmlForDemo($data,$codes){
         $str = '';
         foreach ($data as $key => $item){
-            $str .= "<div class='col-md-12'><div class='col-md-4'><img src='".asset("public/images/default.jpg")."' class='".$item." custom_div_width'></div><div class='col-md-8'><h5>".$item."</h5><textarea class='code_textarea form-control'>".$item."{".$codes[$key]."}</textarea></div></div>";
+            $str .= "<div class='col-md-12'><div class='col-md-4'><img src='".asset("public/images/default.jpg")."' class='".$item." custom_div_width'></div><div class='col-md-8'><h5>".$item."</h5><textarea class='code_textarea form-control' readonly>".$item."{".$codes[$key]."}</textarea></div></div>";
         }
         return $str;
     }

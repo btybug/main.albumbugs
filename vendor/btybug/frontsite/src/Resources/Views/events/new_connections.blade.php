@@ -1,5 +1,18 @@
 @extends( 'btybug::layouts.admin' )
 @section( 'content' )
+    <div class="bb-form-header">
+        <div class="row">
+            <div class="col-md-8">
+                <label>Connectiom name</label>
+                {!! Form::text('name',null,['class' => 'form-name']) !!}
+            </div>
+            <div class="col-md-4">
+
+                <button type="submit" class="form-save pull-right"><span>Save</span></button>
+
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row row-eq-height ">
             <div class="col-md-3">
@@ -42,7 +55,9 @@
 
 
 @stop
-
+@section( 'CSS' )
+    {!! BBstyle(plugins_path("vendor/sahak.avatar/membership/src/public/css/form-builder.css")) !!}
+@stop
 @section('CSS')
     {!! HTML::style('public/js/bootstrap-select/css/bootstrap-select.min.css') !!}
     {!! HTML::style('public/css/themes-settings.css') !!}

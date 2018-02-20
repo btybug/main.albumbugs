@@ -30,7 +30,7 @@ class CssController extends Controller
         $class_name = $request->class_name;
         $code = $request->code;
        // \File::append(base_path('public/dinamiccss/'.$type.'.css'), '.'.$class_name.'{'.$code.'}'); // :TODO this is original
-        \File::append(base_path('public/dinamiccss/image.css'), '.'.$class_name.'{'.$code.'}'); // :TODO this should be removed
+        \File::append(base_path('public/dinamiccss/image.css'), '.'.$class_name.' {'.$code.'}'); // :TODO this should be removed
         return redirect()->back()->with("success","Style was saved successfuly");
     }
 }

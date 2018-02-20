@@ -15,7 +15,14 @@
 Route::get('/', array('as' => 'admin.users.list', 'uses' => 'UserController@getIndex'),true)->name('user_index');
 Route::get('/create',  'UserController@getCreate',true)->name('user_create');
 Route::post('/create', array('as' => 'admin.users.postCreate', 'uses' => 'UserController@postCreate'));
-Route::get('/edit/{id}', 'UserController@getEdit',true)->name('user_edit');
+Route::group(['prefix' => '/edit'], function () {
+    Route::get('/', 'UserController@getEdit',true);
+    Route::group(['prefix' => '{id}'], function () {
+        Route::get('/', 'UserController@getEdit',true)->name('user_edit');
+        Route::get('/password', 'UserController@getChangePassword',true)->name('user_edit_password');
+    });
+});
+
 Route::post('/edit/{id}', array('as' => 'admin.users.postEdit', 'uses' => 'UserController@postEdit'));
 Route::post('/delete', array('as' => 'admin.users.delete', 'uses' => 'UserController@postDelete'));
 Route::get('/show/{id}', array('as' => 'admin.users.show', 'uses' => 'UserController@getShow'),true)->name('user_show');

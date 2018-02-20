@@ -63,6 +63,16 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'Conditions',
                     'url' => '/admin/users/roles/conditions',
                 ]
+            ],
+            'edit_users' => [
+                [
+                    'title' => 'My Details',
+                    'url' => '/admin/users/edit/{id}',
+                ],
+                [
+                    'title' => 'Change Password',
+                    'url' => '/admin/users/edit/{id}/password',
+                ]
             ]
         ];
         $toggleTabs = ['profile' => [
@@ -141,7 +151,7 @@ class ModuleServiceProvider extends ServiceProvider
                 ]
             ]
         ]);
-
+        \Btybug\btybug\Models\Routes::registerPages('btybug/user');
     }
 
     /**

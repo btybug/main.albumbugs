@@ -250,106 +250,25 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function getEdit($id)
+    public function getEdit(
+        UserRepository $userRepository,
+        $id
+    )
     {
-        //TODO change functionality, move with cms forms
-        $user = User::find($id);
-        $formSettings = FormSettings::where('form_id', '58e21be5a8bd8')->first();
-        if ($formSettings) {
-            $formSettings = $formSettings->additional_settings;
-        }
-        if (!$user)
-            abort(404);
+        $user = $userRepository->findOrFail($id);
 
-        return view('users::users.edit')->with(['user' => $user, 'formSettings' => $formSettings, 'user_id' => $id]);
+        return view('users::users.edit', compact(['user', 'id']));
     }
 
-    public function postEdit(Request $request)
+    public function getChangePassword(
+        UserRepository $userRepository,
+        $id
+    )
     {
-        //TODO change functionality, move with cms forms
-        $user = User::find($request->id);
-        //dd($validator->fails());
-        if (!$user) abort(404);
+        $user = $userRepository->findOrFail($id);
 
-        $vdata = $request->except('_token');
-        $data = $request->except('_token', 'password_confirmation', 'custom', 'plugin', 'form_setting_id', 'customs');
-        $customData = $request->custom;
-        $pluginData = $request->plugin;
-
-        $rules = array_merge([
-            'username' => 'required|max:255|unique:users,username,' . $user->id, ',id',
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id, ',id',
-            'membership_id' => 'required|exists:memberships,id',
-            'status' => 'required',
-            'password' => 'sometimes|min:6|max:255',
-            'password_confirmation' => 'sometimes|min:6|max:255|same:password',
-        ]);
-        $validator = \Validator::make($vdata, $rules);
-
-        if ($validator->fails()) return redirect()->back()->with('errors', $validator->errors())->withInput();
-
-        if ($data['role_id'] == '') {
-            $data['role_id'] = 0;
-        }
-
-        if (empty($data['password'])) unset($data['password']);
-
-        $user->update($data);
-
-        UserMeta::where('user_id', $request->id)->delete();
-        if ($pluginData) {
-            foreach ($pluginData as $pluginName => $plugin) {
-                if (is_array($plugin)) {
-                    foreach ($plugin as $value) {
-                        if ($value != '') {
-                            $userMeta = new UserMeta;
-                            $userMeta->user_id = $user->id;
-                            $userMeta->key = $pluginName;
-                            $userMeta->value = $value;
-                            $userMeta->save();
-                        }
-                    }
-                } else {
-                    if ($plugin != '') {
-                        $userMeta = new UserMeta;
-                        $userMeta->user_id = $user->id;
-                        $userMeta->key = $pluginName;
-                        $userMeta->value = $plugin;
-                        $userMeta->save();
-                    }
-                }
-//                    BBAddMeta($pluginName, $user->id, $customData, 'post');
-            }
-        }
-
-        if ($customData) {
-            foreach ($customData as $key => $custom) {
-                if (is_array($custom)) {
-                    foreach ($custom as $value) {
-                        $userMeta = new UserMeta;
-                        $userMeta->user_id = $user->id;
-                        $userMeta->key = $key;
-                        $userMeta->value = $value;
-                        $userMeta->save();
-                    }
-                } else {
-                    $userMeta = new UserMeta;
-                    $userMeta->user_id = $user->id;
-                    $userMeta->key = $key;
-                    $userMeta->value = $custom;
-                    $userMeta->save();
-                }
-//                    BBAddMeta($pluginName, $user->id, $customData, 'post');
-            }
-        }
-
-        if ($user) {
-            return redirect()->route('admin.users.list')->with('message', "New User has been updated Successfully !!!");
-        }
-
-        return redirect()->back()->with('error', 'New User not updated,Please try again');
+        return view('users::users.password', compact(['user', 'id']));
     }
-
 
     public function postDelete(
         DeleteAdminRequest $request,
@@ -511,23 +430,23 @@ class UserController extends Controller
 
         abort(404);
     }
-    public function passwordChange(UserRepository $userRepository,ChangePassword $request){
-        $id = auth()->user()->id;
+
+    public function passwordChange(UserRepository $userRepository, ChangePassword $request)
+    {
+        $id = $request->id;
         $new_password = $request->new_pass;
-        $userRepository->model()->changePassword($id,$new_password);
+        $userRepository->model()->changePassword($id, $new_password);
 
         return redirect()->back();
     }
-    public function userDetailsChange(UserRepository $userRepository,EditUserRequest $request){
-        $data = $request->except("_token");
-        if(!$data["email"]){
-            $data = $request->except("_token","email");
-        }
-        if(!$data["username"]){
-            $data = $request->except("_token","email","username");
-        }
-        $id = auth()->user()->id;
-        $user = $userRepository->update($id, $data);
+
+    public function userDetailsChange(
+        UserRepository $userRepository,
+        EditUserRequest $request
+    )
+    {
+        $data = $request->except("_token", 'id');
+        $userRepository->update($request->get('id'), $data);
         return redirect()->back();
     }
 

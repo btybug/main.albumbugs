@@ -4,7 +4,8 @@ $user = auth()->user();
 
 <h3>My Details</h3>
 <div class="my_details">
-    {!! Form::open(['url'=>route('user_change_details'),'class'=>'form-horizontal']) !!}
+    {!! Form::model($user,['url'=>route('user_change_details'),'class'=>'form-horizontal']) !!}
+    {!! Form::hidden('id',null) !!}
     <div class="form-group">
         <label class="col-md-2 control-label">Username</label>
         <div class="col-md-8">

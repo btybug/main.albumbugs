@@ -1,6 +1,10 @@
+@php
+    $user = Auth::user();
+@endphp
 <h3>Change Password</h3>
 <div class="chang_password">
-    {!! Form::open(['url'=>route('user_change_password'),'class'=>'form-horizontal change_password_form']) !!}
+    {!! Form::model($user,['url'=>route('user_change_password'),'class'=>'form-horizontal change_password_form']) !!}
+    {!! Form::hidden('id',null) !!}
     <div class="form-group">
         <label class="col-md-2 control-label">Old</label>
         <div class="col-md-8">

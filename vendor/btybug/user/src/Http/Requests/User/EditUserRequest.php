@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ara Arakelyan
- * Date: 7/20/2017
- * Time: 4:28 PM
- */
 
 namespace Btybug\User\Http\Requests\User;
 
@@ -29,7 +23,7 @@ class EditUserRequest extends Request
      */
     public function rules()
     {
-        $id = auth()->user()->id;
+        $id = $this->id;
         return [
             'username' => 'nullable|max:255|unique:users,username,' . $id, ',id',
             'email' => 'nullable|email|max:255|unique:users,email,' . $id, ',id'

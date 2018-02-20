@@ -42,10 +42,7 @@ class UserService extends GeneralService
 
     public function getAdmin(int $id)
     {
-        return $this->userRepository->model()->whereHas('role', function ($relationQuery) {
-            $relationQuery->where('access', Roles::ACCESS_TO_BACKEND)
-                ->orWhere('access', Roles::ACCESS_TO_BOTH);
-        })->where('id', $id)->first();
+        return $this->userRepository->model()->where('role_id', '!=', ZERO)->where('id', $id)->first();
     }
 
     /**

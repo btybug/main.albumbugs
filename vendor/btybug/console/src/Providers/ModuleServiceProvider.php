@@ -149,7 +149,7 @@ class ModuleServiceProvider extends ServiceProvider
             ]]);
 
         //TODO; remove when finish all
-//        \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/console');
+        \Btybug\btybug\Models\Routes::registerPages('btybug/console');
     }
 
     /**

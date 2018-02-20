@@ -48,13 +48,13 @@ Route::group(['prefix' => 'structure'], function () {
         Route::post('/change-status', 'StructureController@postChangeFieldStatus');
     });
 
-    Route::get('/edit-forms', 'StructureController@getEditForms');
+    Route::get('/edit-forms', 'StructureController@getEditForms',true);
     Route::get('/get-default-html', 'StructureController@getDefaultHtml');
     Route::post('/get-custom-html', 'StructureController@getCustomHtml');
     Route::post('/get-saved-html-type', 'StructureController@getSavedHtmlType');
 
     Route::group(['prefix' => 'forms'], function () {
-        Route::get('/', 'StructureController@getForms');
+        Route::get('/', 'StructureController@getForms',true);
         Route::get('/edit/{id}', 'StructureController@getFormEdit');
         Route::get('/entries/{id}', 'StructureController@getFormEntries');
         Route::get('/view-entries/{id}', 'StructureController@getViewEntries');

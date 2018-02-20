@@ -1820,11 +1820,11 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
-        $output .= '</li>';
 
-        if (count($item->childs)) {
-            $output .= renderFrontPagesInMenu($item->childs, false, $i + 1, $children);
-        }
+	    if (count($item->childs)) {
+		    $output .= '<ul class="menu-item-children">' . renderFrontPagesInMenu($item->childs, false, $i + 1, $children) . '</ul>';
+	    }
+        $output .= '</li>';
 
     }
     // Return data tree

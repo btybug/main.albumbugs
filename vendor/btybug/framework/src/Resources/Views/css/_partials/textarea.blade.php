@@ -6,7 +6,8 @@
         </div>
         <div class="col-md-6">
             <h5>bty-textarea-1</h5>
-            <textarea name="" id="" cols="35" rows="2" readonly="" style="margin-top: 0px; margin-bottom: 0px; height: 100px; width: 100%">
+            <textarea name="" id="" cols="35" rows="2" readonly=""
+                      style="margin-top: 0; margin-bottom: 0; height: 100px; width: 100%">
               .bty-textarea-1 {
     width: 100%;
     height: 100px;
@@ -38,9 +39,49 @@
 
     </div>
     <div class="col-md-12">
-        <h4>Textarea 2</h4>
-        <h5>bty-textarea-2</h5>
-        <textarea placeholder="This is an placeholder box" class="bty-textarea-2"></textarea>
+        <div class="col-md-6 p-t-34">
+            <textarea placeholder="This is an placeholder box" class="bty-textarea-2"></textarea>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-textarea-2</h5>
+            <textarea name="" id="" cols="35" rows="2" readonly=""
+                      style="height: 100px; width: 100%">
+.bty-textarea-2 {
+    width: 100%;
+    line-height: 1.308em;
+    padding: 10px;
+    min-height: 120px;
+    resize: vertical;
+    outline: none;
+    background: #499bc7;
+    border: none;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .5) inset;
+    -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, .5) inset;
+    color: #fff;
+    font-size: 0.813em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+}
+
+.bty-textarea-2:focus {
+    background-color: #4879a5;
+}
+
+.bty-textarea-2::-webkit-input-placeholder {
+    color: #fff;
+    font-style: italic;
+}
+
+.bty-textarea-2:-moz-placeholder {
+    color: #fff;
+    font-style: italic;
+}
+            </textarea>
+        </div>
     </div>
     <div class="col-md-12">
         <h4>Textarea 3</h4>

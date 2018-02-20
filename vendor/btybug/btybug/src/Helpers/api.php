@@ -1540,14 +1540,14 @@ function field_render($attr)
 {
     if(count($attr)){
         $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
-        if(isset($attr['id']))
+        if(isset($attr['id'])){
             $field = $fieldRepo->findBy('id',$attr['id']);
+        }
 
         if ($field) {
             return \Btybug\Console\Services\FieldService::getFieldHtml($field);
         }
     }
-
 }
 
 function get_field_by_slug($slug){

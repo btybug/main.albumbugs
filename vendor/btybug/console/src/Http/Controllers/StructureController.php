@@ -401,17 +401,15 @@ class StructureController extends Controller
     public function getFormEdit(
         FormsRepository $formsRepository,
         FormService $formService,
+        FieldsRepository $fieldsRepository,
         $id
     )
     {
         $form = $formsRepository->findOrFail($id);
-        $table = "fields_type";
+        $fields = $fieldsRepository->getBy('table_name', $form->fields_type);
+        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        $form->fields_json = $formService->fieldsJson($id, true);
-        $fields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
-        $html = $formService->render($id);
-
-        return view('console::structure.edit-form', compact('form', 'fields', 'html', 'table'));
+        return view('console::structure.edit-form', compact('form', 'fields', 'existingFields'));
     }
 
     public function getDefaultHtml(

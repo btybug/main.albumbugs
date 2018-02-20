@@ -20,6 +20,26 @@
 
 
             </div>
+            <div class="col-md-3">
+                <div class="panel panel-default p-0 boxpanelminheight" data-panelevent="functions">
+                    <div class="panel-heading">Functions</div>
+                    <div class="panel-body">
+                        <ul class="list-group listwithlink menuwithbutton">
+                            @foreach($subscriber->getProperties() as $slug=>$property)
+                                <li class="list-group-item" data-value="{!! $property['namespace'] !!}"
+                                    data-btnclick="selectfunction"><span
+                                            class="badge">0</span> {!! $property['name'] !!}
+                                    <div class="listtool">
+                                        <button type="button" class="btn btn-default btn-xs" data-btnclick="addtab"
+                                                data-cout='0'><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="panel panel-default p-0 boxpanelminheight hide" data-panelevent="connections">
                     <div class="panel-heading">Connections</div>
@@ -45,26 +65,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="panel panel-default p-0 boxpanelminheight" data-panelevent="functions">
-                    <div class="panel-heading">Functions</div>
-                    <div class="panel-body">
-                        <ul class="list-group listwithlink menuwithbutton">
-                            @foreach($subscriber->getProperties() as $slug=>$property)
-                                <li class="list-group-item" data-value="{!! $property['namespace'] !!}"
-                                    data-btnclick="selectfunction"><span
-                                            class="badge">0</span> {!! $property['name'] !!}
-                                    <div class="listtool">
-                                        <button type="button" class="btn btn-default btn-xs" data-btnclick="addtab"
-                                                data-cout='0'><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
 
-                    </div>
-                </div>
-            </div>
 
         </div>
 

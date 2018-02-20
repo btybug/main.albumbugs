@@ -120,8 +120,8 @@ ul.source.overflownone li:hover a{ color:#FFF; text-decoration:none;}
   display:         flex;
 }
 
-.menuwithbutton .listtool{ display: none;}
-.menuwithbutton .listtool, .menuwithbutton li:hover .listtool{ top: 8px;  display: none; }
+.menuwithbutton .listtool{ }
+.menuwithbutton .listtool, .menuwithbutton li:hover .listtool{ top: 8px;  }
 .menuwithbutton .active .listtool, .menuwithbutton .active:hover .listtool{ display: block;}
 ul.menuwithbutton li { padding: 8px 15px;}
 .boxpanelminheight > .panel-body { min-height: 300px;}

@@ -117,6 +117,35 @@ $(function () {
                     eventbuilder.appnedtabs(datas, createid, tabsize, data);
 
                 });
+
+                var id = Math.floor(Math.random() * 100);
+                var buttondata = {type: 'buttons', ids: id};
+                var htmls = $('<form data-tabform="' + id + '" />');
+                var select2 = {};
+                $.each(datas.data, function (key, val) {
+                    htmls.append(eventbuilder.field.formgroup(val, key));
+                    if (val.type === 'select2') {
+                        select2[key] = val;
+                    }
+                });
+
+                htmls.append(eventbuilder.field.formgroup(buttondata, 'button'));
+
+                $('[data-role="event-connections"]').append('<div class="panel panel-default">\n' +
+                    '                                <div class="panel-heading" role="tab" id="heading'+id+'">\n' +
+                    '                                    <h4 class="panel-title">\n' +
+                    '                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+id+'">\n' +
+                    '                                            Function\n' +
+                    '                                        </a>\n' +
+                    '                                    </h4>\n' +
+                    '                                </div>\n' +
+                    '                                <div id="collapse'+id+'" class="panel-collapse collapse" role="tabpanel">\n' +
+                    '                                    <div class="panel-body">\n' +
+                    '                                        ' + htmls.html() +
+                    '                                    </div>\n' +
+                    '                                </div>\n' +
+                    '                            </div>');
+
                 activefunction.find('.badge').text(tabsize);
                 activefunction.find('[data-cout]').data('cout', tabsize)
                 $('[data-role="eventtab"] li:last > a').click();
@@ -130,6 +159,7 @@ $(function () {
                 if (eventbuilder.json['event_namespace']) {
                     var getname = $(event.target).data('value');
                     if (getname) {
+                        console.log(getname);
                         activefunction = target
                         target.closest('ul').find('li').removeClass('active')
                         target.addClass('active');

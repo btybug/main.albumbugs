@@ -133,177 +133,177 @@ text-decoration: none;
 }
 
 .fs-14-cl-red{
-    font-size: 14px;
-    color: red;
+    font-size: 14px!important;
+    color: red!important;
 }
 .fs-16-cl-red{
-    font-size: 16px;
-    color: red;
+    font-size: 16px!important;
+    color: red!important;
 }
 .fs-18-cl-red{
-    font-size: 18px;
-    color: red;
+    font-size: 18px!important;
+    color: red!important;
 }
 .fs-20-cl-red{
-    font-size: 20px;
-    color: red;
+    font-size: 20px!important;
+    color: red!important;
 }
 .fs-28-cl-red{
-    font-size: 28px;
-    color: red;
+    font-size: 28px!important;
+    color: red!important;
 }
 .fs-32-cl-red{
-    font-size: 32px;
-    color: red;
+    font-size: 32px!important;
+    color: red!important;
 }
 .fs-14-cl-blue{
-    font-size: 14px;
-    color: rgb(71, 122, 165);
+    font-size: 14px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .fs-16-cl-blue{
-    font-size: 16px;
-    color: rgb(71, 122, 165);
+    font-size: 16px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .fs-18-cl-blue{
-    font-size: 18px;
-    color: rgb(71, 122, 165);
+    font-size: 18px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .fs-20-cl-blue{
-    font-size: 20px;
-    color: rgb(71, 122, 165);
+    font-size: 20px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .fs-28-cl-blue{
-    font-size: 28px;
-    color: rgb(71, 122, 165);
+    font-size: 28px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .fs-32-cl-blue{
-    font-size: 32px;
-    color: rgb(71, 122, 165);
+    font-size: 32px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-18-cl-red i{
-    font-size: 18px;
-    color: red;
+    font-size: 18px!important;
+    color: red!important;
 }
 .icon-fs-20-cl-red i{
-    font-size: 20px;
-    color: red;
+    font-size: 20px!important;
+    color: red!important;
 }
 .icon-fs-22-cl-red i{
-    font-size: 22px;
-    color: red;
+    font-size: 22px!important;
+    color: red!important;
 }
 .icon-fs-24-cl-red i{
-    font-size: 24px;
-    color: red;
+    font-size: 24px!important;
+    color: red!important;
 }
 .icon-fs-18-cl-blue i{
-    font-size: 18px;
-    color: rgb(71, 122, 165);
+    font-size: 18px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-20-cl-blue i{
-    font-size: 20px;
-    color: rgb(71, 122, 165);
+    font-size: 20px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-22-cl-blue i{
-    font-size: 22px;
-    color: rgb(71, 122, 165);
+    font-size: 22px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-24-cl-blue i{
-    font-size: 24px;
-    color: rgb(71, 122, 165);
+    font-size: 24px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-18-hover-red i{
-    font-size: 18px;
-    transition: 0.4s ease;
+    font-size: 18px!important;
+    transition: 0.4s ease!important;
 }
 .icon-fs-18-hover-red i:hover{
-    color: red;
+    color: red!important;
 }
 .icon-fs-20-hover-red i{
-    font-size: 20px;
-    transition: 0.4s ease;
+    font-size: 20px!important;
+    transition: 0.4s ease!important;
 }
 .icon-fs-20-hover-red i:hover{
-    color: red;
+    color: red!important;
 }
 .icon-fs-22-hover-red i{
-    font-size: 22px;
-    transition: 0.4s ease;
+    font-size: 22px!important;
+    transition: 0.4s ease!important;
 }
 .icon-fs-22-hover-red i:hover{
-    color: red;
+    color: red!important;
 }
 .icon-fs-18-hover-blue i{
-    font-size: 18px;
-    transition: 0.4s ease;
+    font-size: 18px!important;
+    transition: 0.4s ease!important;
 }
 .icon-fs-18-hover-blue i:hover{
-    color: rgb(71, 122, 165);
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-20-hover-blue i{
-    font-size: 20px;
-    transition: 0.4s ease;
+    font-size: 20px!important;
+    transition: 0.4s ease!important;
 }
 .icon-fs-20-hover-blue i:hover{
-    color: rgb(71, 122, 165);
+    color: rgb(71, 122, 165)!important;
 }
 .icon-fs-22-hover-blue i{
-    font-size: 22px;
-    transition: 0.4s ease;
+    font-size: 22px!important;
+    transition: 0.4s ease!important;
 }
 .icon-fs-22-hover-blue i:hover{
-    color: rgb(71, 122, 165);
+    color: rgb(71, 122, 165)!important;
 }
 .menu-bg-lightblue{
-    background: #dce5ed;
+    background: #dce5ed!important;
 }
 .menu-bg-lightblue li>a{
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff!important;
 }
 .menu-bg-lightblue .sublink.active, .menu-bg-lightblue .profile-menu a:hover {
-    background-color: #b0b9c1;
-    color: white;
+    background-color: #b0b9c1!important;
+    color: white!important;
 }
 .menu-fs-18-cl-blue li>a{
-    font-size: 18px;
-    color: rgb(71, 122, 165);
+    font-size: 18px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .menu-fs-20-cl-blue li>a{
-    font-size: 20px;
-    color: rgb(71, 122, 165);
+    font-size: 20px!important;
+    color: rgb(71, 122, 165)!important;
 }
 .menu-fs-18-cl-tomato li>a{
-    font-size: 18px;
-    color: tomato;
+    font-size: 18px!important;
+    color: tomato!important;
 }
 .menu-fs-20-cl-tomato li>a{
-    font-size: 20px;
-    color: tomato;
+    font-size: 20px!important;
+    color: tomato!important;
 }
 .soc-icon-hover-black:hover{
-    background-color:#000;
+    background-color:#000!important;
 }
 .soc-icon-hover-brown:hover{
-    background-color:brown;
+    background-color:brown!important;
 }
 .soc-icon-hover-tomato:hover{
-    background-color:tomato;
+    background-color:tomato!important;
 }
 .soc-icon-cl-brown{
-    background-color:brown;
+    background-color:brown!important;
 }
 .soc-icon-cl-brown:hover{
-    background-color:brown;
+    background-color:brown!important;
 }
 .soc-icon-cl-tomato{
-    background-color:tomato;
+    background-color:tomato!important;
 }
 .soc-icon-cl-tomato:hover{
-    background-color:tomato;
+    background-color:tomato!important;
 }
 .soc-icon-cl-darkblue{
-    background-color:darkblue;
+    background-color:darkblue!important;
 }
 .soc-icon-cl-darkblue:hover{
-    background-color:darkblue;
+    background-color:darkblue!important;
 }

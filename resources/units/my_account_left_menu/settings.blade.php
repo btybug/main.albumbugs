@@ -1,9 +1,39 @@
 <?php
 $user = Auth::user()->toArray();
+$image_styles = getDinamicStyle('image');
 ?>
 
 
 <div class="col-md-12">
+
+    <div class="bty-panel-collapse">
+        <div>
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menu"
+               aria-expanded="true">
+                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <span class="title">Image style</span>
+            </a>
+        </div>
+        <div id="menu" class="collapse in" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select style</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="image_style" id="" class="form-control">
+                                {!! $image_styles !!}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <div class="bty-panel-collapse">
         <div>
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menutitle"
@@ -112,7 +142,7 @@ $user = Auth::user()->toArray();
                                 <label for="">Menu</label>
                             </div>
                             <div class="col-md-8">
-                                {!! BBbutton2('unit',"pym_shipping","pym_shipping","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
+                                {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
                             </div>
                         </div>
                 </div>
@@ -122,7 +152,7 @@ $user = Auth::user()->toArray();
                             <label for="">Style</label>
                         </div>
                         <div class="col-md-8">
-                            <select name="pym_shipping_style" id="" class="form-control">
+                            <select name="menu_area_style" id="" class="form-control">
                                 <option value="">style1</option>
                                 <option value="">style2</option>
                                 <option value="">style3</option>

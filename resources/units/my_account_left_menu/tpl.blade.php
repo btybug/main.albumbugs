@@ -4,7 +4,7 @@
 <div class="profile-user">
     <div class="profile-img">
         <img src="https://dnatesting.com/wp-content/uploads/2010/01/1-21-2009_IDG-Blog-1000x562.jpg"
-             alt="">
+             alt="" class="{{isset($settings['image_style']) ? $settings['image_style'] : ''}}">
     </div>
     <div class="profile-name">
         <h2 class="{{isset($settings['top_style']) ? $settings['top_style'] : ''}}">
@@ -23,8 +23,26 @@
             @endif
         </ul>
     </div>
-    <ul class="profile-menu {{isset($settings['pym_shipping_style']) ? $settings['pym_shipping_style'] : ''}}">
-        {!! isset($settings['pym_shipping']) ? BBRenderUnits($settings['pym_shipping']) : ''!!}
+    <ul class="profile-menu {{isset($settings['menu_area_style']) ? $settings['menu_area_style'] : ''}}">
+        @php
+            $items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];
+        @endphp
+        @if(count($items))
+            @foreach($items as $item)
+                @if(isset($item->children))
+                    <li class="item">
+                        <a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item->title !!}<i class="fa fa-caret-down"></i></a>
+                        <ul class="cute">
+                            @foreach($item->children as $child)
+                                <li><a href="{!! url($child->url) !!}"><i class="fa {!! $child->icon !!}"></i> {!! $child->title !!}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @else
+                    <li class="item"><a href="{!! url($item->url) !!}"><i class="fa {!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
+                @endif
+            @endforeach
+        @endif
     </ul>
     <ul class="social-btn">
         @if(isset($settings['socials']))
@@ -34,7 +52,7 @@
         @endif
     </ul>
 
-
 </div>
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! useDinamicStyle('image') !!}

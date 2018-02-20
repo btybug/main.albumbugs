@@ -34,7 +34,8 @@ class CustomSCMiddleware
         '/admin/front-site/structure/front-pages/settings/*',
         '/admin/manage/emails/get-forms-shortcodes',
         '/admin/manage/emails/data/*',
-        '/admin/manage/emails/update/*'
+        '/admin/manage/emails/update/*',
+        '/admin/console/structure/forms/edit/*'
     ];
 
     /**

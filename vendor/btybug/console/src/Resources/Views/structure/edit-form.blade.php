@@ -43,37 +43,7 @@
                 {!! $form->original_html !!}
             @else
                 <div class="form-builder-tabs">
-
-                    <div class="tab-actions">
-
-
-                    </div>
-
-                    <ul class="nav nav-tabs form-builder-tabs-area" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
-                        </li>
-                        <li role="presentation" >
-                            <a href="#price" id="price-tab" role="tab" data-toggle="tab">Price</a>
-                        </li>
-                        <li role="presentation" >
-                            <a href="#discount" id="discount-tab" role="tab" data-toggle="tab">Discount</a>
-                        </li>
-                        <li role="presentation" >
-                            <a href="#data" id="data-tab" role="tab" data-toggle="tab">Data</a>
-                        </li>
-                        <li role="presentation" >
-                            <a href="#links" id="links-tab" role="tab" data-toggle="tab">Links</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content form-builder-tabs-content">
-                        <div class="tab-pane in active" role="tabpanel" id="general">
-                            <div class="form-builder-area"></div>
-                        </div>
-                        <div class="tab-pane in" role="tabpanel" id="price">
-
-                        </div>
-                    </div>
+                    <div class="form-builder-area"></div>
                 </div>
                 <!-- Button -->
                 <div class="form-group">

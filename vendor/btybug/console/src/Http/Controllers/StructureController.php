@@ -412,6 +412,7 @@ class StructureController extends Controller
         return view('console::structure.edit-form', compact('form', 'fields', 'existingFields'));
     }
 
+
     public function getDefaultHtml(
         StructureService $structureService
     )
@@ -452,28 +453,13 @@ class StructureController extends Controller
     public function postFormEdit(
         $id,
         Request $request,
-        FormsRepository $formsRepository,
         FormService $formService
     )
     {
-        $data = $request->all();
-        $form = $formsRepository->findOrFail($id);
-        $response = $formService->validateColumns($form->id, $data['fields']);
+        $data = $request->except('_token');
+        $form = $formService->createOrUpdate($data);
 
-        if ($response['error']) {
-            return redirect()->back()->with('message', $response['message']);
-        }
-
-        $form->update($request->except('fields', 'blade', 'token', 'blade_rendered', 'new_builder'));
-        $formService->syncFields($form->id, $data['fields']);
-        $formService->generateBlade($form->id, $data['blade']);
-
-
-        if ($form->type == 'new') {
-            return redirect()->to('/admin/console/structure/forms')->with('message', 'Form successfully edited');
-        } else {
-            return redirect()->to('/admin/console/structure/edit-forms')->with('message', 'Form successfully edited');
-        }
+        return redirect()->to('/admin/console/structure/forms');
     }
 
     public function postNewBuilder(

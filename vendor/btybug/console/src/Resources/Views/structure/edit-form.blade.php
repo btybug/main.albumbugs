@@ -1,11 +1,11 @@
 @extends( 'btybug::layouts.admin' )
 
 @section( 'CSS' )
-    {!! BBstyle(plugins_path("vendor/sahak.avatar/membership/src/public/css/form-builder.css")) !!}
+    {!! Html::style("public/css/form-builder/form-builder.css") !!}
 @stop
 
 @section( 'JS' )
-    {!! BBscript(plugins_path("vendor/sahak.avatar/membership/src/public/js/form-builder.js")) !!}
+    {!! Html::script("public/css/form-builder/form-builder.js") !!}
 @stop
 
 @section( 'content' )

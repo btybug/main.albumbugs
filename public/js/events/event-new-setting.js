@@ -216,7 +216,7 @@ $(function () {
         field: {
             formgroup: function (d, name) {
                 var formgroup = $('<div class="form-group" />');
-                var field = $('<div class="col-xs-9">')
+                var field = $('<div class="col-xs-9">');
                 var label = $('<label class="col-xs-3 control-label text-left">');
                 if (d.label) {
                     label.append(d.label);
@@ -228,14 +228,14 @@ $(function () {
 
                     }
                 }
-                formgroup.append(label)
-                formgroup.append(field)
+                formgroup.append(label);
+                formgroup.append(field);
                 return formgroup;
             },
             select2: function (d, name) {
                 var htmls = $('<select name="' + name + '"  class="form-control selectpicker " data-select2="select2' + name + '" multiple></select>');
                 var values = d.value;
-                values = values.split(',')
+                values = values.split(',');
                 if (d.data) {
                     $.each(d.data, function (key, val) {
                         var options = $('<option value="' + key + '">' + val + '</option>');
@@ -251,7 +251,7 @@ $(function () {
             select: function (d, name) {
                 var htmls = $('<select name="' + name + '" class="form-control selectpicker" data-value=""></select>');
                 var values = d.value;
-                values = values.split(',')
+                values = values.split(',');
                 if (d.data) {
                     $.each(d.data, function (key, val) {
                         var options = $('<option value="' + key + '">' + val + '</option>');

@@ -121,7 +121,7 @@ $(document).ready(function () {
 
         });
 
-        $('.generated_html').val($('.real-form').html());
+        $('.generated_html').val('');
         $('.original_html').val($('.original-html-area').html());
         rebulderJson();
     }

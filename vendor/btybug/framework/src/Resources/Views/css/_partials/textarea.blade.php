@@ -84,9 +84,50 @@
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Textarea 3</h4>
-        <h5>bty-textarea-3</h5>
+        <div class="col-md-6 p-t-34">
         <textarea placeholder="This is an placeholder box" class="bty-textarea-3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-textarea-3</h5>
+            <textarea name="" id="" cols="35" rows="2" readonly="" style="height: 100px; width: 100%">
+.bty-textarea-3 {
+    height: 100px;
+    box-shadow: 5px 7px 5px rgba(0, 0, 0, 0.5);
+    background-color: #499bc72e;;
+    border-radius: 0 10px 100px 10px;
+    border-style: hidden;
+    padding: 5px;
+    resize: none;
+    overflow: hidden;
+    -moz-transition: all ease-out 0.5s;
+    -o-transition: all ease-out 0.5s;
+    -webkit-transition: all ease-out 0.5s;
+    transition: all ease-out 0.5s;
+    text-overflow: ellipsis;
+}
+
+.bty-textarea-3:focus {
+    padding: 5px 80px 5px 5px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.5);
+    border-style: hidden;
+    border-radius: 0 10px 70px 10px;
+    -moz-transition: all ease-out 0.5s;
+    -o-transition: all ease-out 0.5s;
+    -webkit-transition: all ease-out 0.5s;
+    transition: all ease-out 0.5s;
+    outline: none;
+    background-color: aliceblue;
+}
+
+.bty-textarea-3:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+
+.bty-textarea-3:focus:-moz-placeholder {
+    opacity: 0;
+}
+            </textarea>
+        </div>
     </div>
 
 </div>

@@ -1,14 +1,100 @@
 <div class="d1">
     <h2>Tabs</h2>
     <div class="col-md-12">
-        <h4>Default</h4>
-        <h5>bty-tab</h5>
-        <div class="bty-tab">
-            <ul>
-                <li class="active"><a href="#">Tab 1</a></li>
-                <li><a href="#">Tab 2</a></li>
-                <li><a href="#">Tab 3</a></li>
-            </ul>
+        <div class="col-md-6 p-t-34">
+            <div class="bty-tab">
+                <ul>
+                    <li class="active"><a href="#">Tab 1</a></li>
+                    <li><a href="#">Tab 2</a></li>
+                    <li><a href="#">Tab 3</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-tab</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-tab {
+    width: auto !important;
+    border-bottom: 3px solid #499bc7;
+    line-height: 1;
+}
+
+.bty-tab > ul > li {
+    float: left;
+}
+
+.bty-tab > ul > li a {
+    z-index: 2;
+    padding: 18px 25px 12px 25px !important;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #444444;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-right: -4px;
+}
+
+.bty-tab > ul > li.active > a:after, .bty-tab > ul > li:hover > a:after, .bty-tab > ul > li > a:hover:after {
+    background: #499bc7;
+}
+
+.bty-tab > ul > li > a:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    width: 100%;
+    height: 120%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    content: "";
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    -webkit-transform: perspective(5px) rotateX(2deg);
+    -webkit-transform-origin: bottom;
+    -moz-transform: perspective(5px) rotateX(2deg);
+    -moz-transform-origin: bottom;
+    transform: perspective(5px) rotateX(2deg);
+    transform-origin: bottom;
+}
+
+.bty-tab:after, .bty-tab > ul:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.bty-tab ul, .bty-tab ul li a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.bty-tab > ul > li.active > a:after, .bty-tab > ul > li:hover > a:after, .bty-tab > ul > li > a:hover:after {
+    background: #499bc7;
+}
+
+.bty-tab > ul > li.active > a, .bty-tab > ul > li:hover > a, .bty-tab > ul > li > a:hover {
+    color: rgb(255, 255, 255);
+}
+            </textarea>
+
         </div>
     </div>
     <div class="col-md-12">

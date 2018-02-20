@@ -1,19 +1,49 @@
 <div class="d1">
     <h2>Panels</h2>
     <div class="col-md-12">
-        <h4>Default</h4>
-        <h5>bty-panel</h5>
-        <div class="bty-panel">
-            <div>
-                <span>Panel Title</span>
-            </div>
-            <div>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it look like
-                    readable English.</p>
+        <div class="col-md-6 p-t-34">
+            <div class="bty-panel">
+                <div>
+                    <span>Panel Title</span>
+                </div>
+                <div>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                        looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                        distribution of letters, as opposed to using 'Content here, content here', making it look like
+                        readable English.</p>
+                </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <h5>bty-panel</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .bty-panel {
+    display: block;
+    position: relative;
+    background-color: #afbbc126;
+}
+                .bty-panel > div:first-child{
+    padding: .625rem 0;
+    color: #ffffff;
+    background-color: #afbbc1;
+    cursor: default;
+    vertical-align: middle;
+    z-index: 2;
+    height: 40px;
+    box-shadow: -1px 6px 6px -6px rgba(0, 0, 0, 0.35);
+}
+
+.bty-panel > div:first-child span:last-child {
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.bty-panel > div:last-child {
+    padding: 20px;
+}
+            </textarea>
+        </div>
+
     </div>
     <div class="col-md-12">
         <h4>With Icon</h4>

@@ -1,7 +1,38 @@
 <div class="d1">
     <h2>Sizes</h2>
     <div class="col-md-12">
-        {{--<div class="bty-btn"><span>Default</span></div>--}}
+        <div class="col-md-6 p-t-34">
+            <button class="bty-btn"><span>Default</span></button>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-btn</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .bty-btn {
+    color: #fff;
+    background-color: #cccccc;
+    font-size: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: none;
+    padding: 10px 40px;
+    display: inline-flex;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+
         <div class="col-md-4">
             <h4>Default</h4>
             <h5>bty-btn</h5>

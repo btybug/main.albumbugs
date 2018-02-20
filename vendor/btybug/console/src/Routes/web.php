@@ -119,7 +119,8 @@ Route::group(['prefix' => 'structure'], function () {
         });
         Route::get('/create', 'Developers\StructureController@getCreate');
         Route::post('/create', 'Developers\StructureController@postCreate');
-        Route::get('/fields/{table}/{column}', 'Developers\FormsController@getFields');
+//        Route::get('/fields/{table}/{column}', 'Developers\FormsController@getFields');
+        Route::get('/fields/{table}/{column}', 'Developers\StructureController@getMakeFields')->name('create_field');
 //    Route::post('/fields/{table}/{column}', 'Developers\FormsController@postFields');
         Route::group(['prefix' => 'field'], function () {
             Route::get('/add-new-field/{count}', 'Developers\FormsController@addNewField');

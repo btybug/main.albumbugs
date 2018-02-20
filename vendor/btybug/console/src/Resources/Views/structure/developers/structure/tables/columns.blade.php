@@ -32,8 +32,15 @@
                     <th>
                         <a href="{!! url('admin/console/structure/tables/edit-column',[$table,$colum->Field]) !!}"
                            class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                        <a href="{!! url('admin/console/structure/tables/fields',[$table,$colum->Field]) !!}"
-                           class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
+                        @if(\Btybug\Console\Services\FieldService::checkField($table,$colum->Field))
+                            <a href="{!! route("edit_field",['id' => \Btybug\Console\Services\FieldService::getFieldID($table,$colum->Field)]) !!}"
+                               class="btn btn-warning"><i class="fa fa-pencil"
+                                                          aria-hidden="true"></i> Field</a>
+                        @else
+                            <a href="{!! route("create_field",['table' =>$table,'column' => $colum->Field]) !!}"
+                               class="btn btn-primary"><i class="fa fa-pencil"
+                                                          aria-hidden="true"></i> Make Field</a>
+                        @endif
                         @if(!isset($core[$colum->Field]))
                             <button data-href="{!! url('admin/console/structure/tables/delete-column',[$table,$colum->Field]) !!}"
                                     class="btn  btn-warning delete_table_column"><i class="fa fa-trash"

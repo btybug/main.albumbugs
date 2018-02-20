@@ -571,4 +571,20 @@ class StructureController extends Controller
 
         return \Response::json(['message' => "Column Not Found", 'error' => true]);
     }
+
+    public function getMakeFields(
+        FieldsRepository $fieldsRepository,
+        $table,
+        $column
+    )
+    {
+        $fieldsRepository->create([
+            'name' => ucwords(str_replace("_", " ", $column)),
+            'slug' => uniqid(),
+            'table_name' => $table,
+            'column_name' => $column,
+        ]);
+
+        return redirect()->back();
+    }
 }

@@ -7,67 +7,33 @@
              alt="">
     </div>
     <div class="profile-name">
-        <h2>{{ Auth::user()->username }}</h2>
-        <p>
-            <span class="small-info">{{ Auth::user()->email }}</span>
+        <h2 class="{{isset($settings['top_style']) ? $settings['top_style'] : ''}}">
+            {{isset($settings['top_column']) ? Auth::user()[$settings['top_column']] : ''}}
+        </h2>
+        <p class="{{isset($settings['sub_style']) ? $settings['sub_style'] : ''}}">
+            {{isset($settings['sub_column']) ? Auth::user()[$settings['sub_column']] : ''}}
         </p>
     </div>
-    <ul class="profile-menu">
-        @if(isset($page) && count($page->childs))
-            @foreach($page->childs as $child)
-                @if(count($child->childs))
-                    <li class="item">
-                        <a href="javascript:void(0);" class="sublink">{{ $child->title }}<i class="fa fa-chevron-down"></i></a>
-                        <ul class="cute">
-                            @foreach($child->childs as $value)
-                                <li class="subitem"><a href="{{ $value->url }}">{{ $value->title }}</a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-                @else
-                    <li class="item"><a href="{{ $child->url }}">{{ $child->title }}</a></li>
-                @endif
-
+    <div class="profile-icon">
+        <ul>
+            @if(isset($settings['icons']))
+                @foreach($settings['icons'] as $key => $val)
+                    <li class="{{$settings['icons'][$key]['style']}}"><a href="{{$settings['icons'][$key]['url']}}"><i class="fa {{$settings['icons'][$key]['icon']}}"></i></a></li>
+                @endforeach
+            @endif
+        </ul>
+    </div>
+    <ul class="profile-menu {{isset($settings['pym_shipping_style']) ? $settings['pym_shipping_style'] : ''}}">
+        {!! isset($settings['pym_shipping']) ? BBRenderUnits($settings['pym_shipping']) : ''!!}
+    </ul>
+    <ul class="social-btn">
+        @if(isset($settings['socials']))
+            @foreach($settings['socials'] as $key => $val)
+                <li class="{{$settings['socials'][$key]['style']}}"><a href="{{$settings['socials'][$key]['url']}}"><i class="fa {{$settings['socials'][$key]['icon']}}"></i></a></li>
             @endforeach
         @endif
     </ul>
-    <ul class="social-btn">
-        <li>
-            <a href="#">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-        </li>
 
-        <li>
-            <a href="#">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-behance" aria-hidden="true"></i>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-dribbble" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
 
 </div>
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}

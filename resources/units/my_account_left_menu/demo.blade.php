@@ -5,76 +5,31 @@
                  alt="">
         </div>
         <div class="profile-name">
-            <h2>User name</h2>
-            <p>
-                <span class="small-info">lorem/lorem</span> ipsum
+            <h2 class="{{isset($settings['top_style']) ? $settings['top_style'] : ''}}">
+                {{isset($settings['top_column']) ? Auth::user()[$settings['top_column']] : ''}}
+            </h2>
+            <p class="{{isset($settings['sub_style']) ? $settings['sub_style'] : ''}}">
+                {{isset($settings['sub_column']) ? Auth::user()[$settings['sub_column']] : ''}}
             </p>
         </div>
         <div class="profile-icon">
             <ul>
-                <li><a href="#"><i class="fa fa-globe"></i></a></li>
-                <li><a href="#"><i class="fa fa-globe"></i></a></li>
-                <li><a href="#"><i class="fa fa-globe"></i></a></li>
-                <li><a href="#"><i class="fa fa-globe"></i></a></li>
+                @if(isset($settings['icons']))
+                    @foreach($settings['icons'] as $key => $val)
+                        <li class="{{$settings['icons'][$key]['style']}}"><a href="{{$settings['icons'][$key]['url']}}"><i class="fa {{$settings['icons'][$key]['icon']}}"></i></a></li>
+                    @endforeach
+                @endif
             </ul>
         </div>
-        <ul class="profile-menu">
-            <li class="item">
-                <a href="javascript:void(0);" class="sublink">Menu1<i class="fa fa-chevron-down"></i></a>
-                <ul class="cute">
-                    <li class="subitem"><a href="#">sub menu1</a></li>
-                    <li class="subitem"><a href="#">sub menu2</a></li>
-                    <li class="subitem"><a href="#">sub menu3</a></li>
-                </ul>
-            </li>
-            <li class="item">
-                <a href="javascript:void(0)" class="sublink">Menu2<i class="fa fa-chevron-down"></i></a>
-                <ul class="cute">
-                    <li class="subitem"><a href="#">sub menu2.1</a></li>
-                    <li class="subitem"><a href="#">sub menu2.2</a></li>
-                    <li class="subitem"><a href="#">sub menu2.3</a></li>
-                </ul>
-            </li>
-            <li class="item"><a href="#">Menu3</a></li>
-            <li class="item"><a href="#">Menu4</a></li>
-            <li class="item"><a href="#">Menu5</a></li>
+        <ul class="profile-menu {{isset($settings['pym_shipping_style']) ? $settings['pym_shipping_style'] : ''}}">
+            {!! isset($settings['pym_shipping']) ? BBRenderUnits($settings['pym_shipping']) : ''!!}
         </ul>
         <ul class="social-btn">
-            <li>
-                <a href="#">
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-behance" aria-hidden="true"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-dribbble" aria-hidden="true"></i>
-                </a>
-            </li>
+            @if(isset($settings['socials']))
+                @foreach($settings['socials'] as $key => $val)
+                    <li class="{{$settings['socials'][$key]['style']}}"><a href="{{$settings['socials'][$key]['url']}}"><i class="fa {{$settings['socials'][$key]['icon']}}"></i></a></li>
+                @endforeach
+            @endif
         </ul>
 
     </div>

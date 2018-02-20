@@ -55,7 +55,7 @@
     <button type="button" id="add_colum" class="btn btn-info">Add Column</button>
     <button type="button" class="btn btn-success" id="submit_form">Create</button>
 
-    @include('modules::developers._partials.mysql_error')
+    @include('console::structure.developers._partials.mysql_error')
 @stop
 @section('JS')
     <script type="text/javascript">
@@ -102,7 +102,7 @@
                                 $('#mysql').modal('show');
                             }
                         } else {
-                            document.location.href = '/admin/modules/tables/edit/' + '{!! $table !!}';
+                            document.location.href = '/admin/console/structure/tables/edit/' + '{!! $table !!}';
                         }
                     }
                 });

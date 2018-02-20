@@ -46,7 +46,7 @@
             </tbody>
         </table>
     </div>
-    <a href="{!! url('admin/modules/tables/add-column',$table) !!}" class="btn btn-success">Add Column</a>
+    <a href="{!! url('admin/console/structure/tables/add-column',$table) !!}" class="btn btn-success">Add Column</a>
     @include('resources::assests.deleteModal')
 @stop
 @section('JS')

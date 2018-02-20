@@ -98,7 +98,7 @@ Route::group(['prefix' => 'structure'], function () {
         Route::get('/', 'Developers\StructureController@getIndex',true)->name('tables');
         Route::get('/edit/{table}', 'Developers\StructureController@getEditTable',true);
         Route::post('/get-column', 'Developers\StructureController@postGetTableColumn');
-        Route::get('/add-column/{table}', 'Developers\StructureController@getAddColumn');
+        Route::get('/add-column/{table}', 'Developers\StructureController@getAddColumn',true);
         Route::post('/add-column/{table}', 'Developers\StructureController@postAddColumn');
         Route::get('/edit-column/{table}/{column}', 'Developers\StructureController@getEditTableColumn',true);
         Route::post('/edit-column/{table}/{column}', 'Developers\StructureController@postEditTableColumn');

@@ -64,6 +64,7 @@
 @section('CSS')
     {!! HTML::style('public/css/bty.css?v='.rand(1111,9999)) !!}
     {!! HTML::style('public/css/new-store.css') !!}
+    {!! useDinamicStyle('image') !!}
     <style>
         .main_lay_cont {
             min-height: 500px;
@@ -92,6 +93,13 @@
         }
         .custom_hidden{
             display: none;
+        }
+        .custom_div_width{
+            width:200px;
+            margin:10px 0px;
+        }
+        .code_textarea{
+            height:130px!important;
         }
     </style>
 @stop

@@ -1895,6 +1895,12 @@ function getDinamicStyle($filename){
     $styles = \App\Http\Controllers\PhpJsonParser::getClasses(base_path('public/dinamiccss/'.$filename.'.css'));
     return $styles;
 }
+
+function getDinamicStyleDemo($filename){
+    $styles = \App\Http\Controllers\PhpJsonParser::getClassesForDemo(base_path('public/dinamiccss/'.$filename.'.css'));
+    return $styles;
+}
+
 function useDinamicStyle($filename){
     return '<link href="'.asset('public/dinamiccss/'.$filename.'.css').'" rel="stylesheet">';
 }

@@ -38,9 +38,7 @@
                                 <label for="">Class Code</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea name="code" id="" cols="30" rows="10" class="form-control">
-
-                                </textarea>
+                                <textarea name="code" id="" cols="30" rows="10" class="form-control"></textarea>
                             </div>
                             <div class="clearfix"></div>
                         </div>

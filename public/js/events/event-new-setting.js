@@ -127,8 +127,9 @@ $(function () {
         },
         clickevent: {
             selectfunction: function (target, event) {
-                if (eventbuilder.json['event_namespace']) {
-                    var getname = $(event.target).data('value');
+                // if (eventbuilder.json['event_namespace']) {
+                    var getname = $(event.target).attr('data-value');
+                console.log(getname);
                     if (getname) {
                         activefunction = target
                         target.closest('ul').find('li').removeClass('active')
@@ -154,11 +155,11 @@ $(function () {
 
                     }
 
-                }
+                // }
 
             },
             addtab: function (target) {
-                if (eventbuilder.json['event_namespace']) {
+                // if (eventbuilder.json['event_namespace']) {
                     cout = target
                     var data = {namespace: eventbuilder.json['function_namespace']}
                     target.closest('ul').find('li').removeClass('active')
@@ -166,7 +167,7 @@ $(function () {
                     var datas = {data: eventbuilder.defulform}
                     eventbuilder.addtabs(datas)
                     //sendajaxvar('/admin/manage/event/get-function-data', data, eventbuilder.addtabs)
-                }
+                // }
             },
             selectevent: function (target) {
                 if (!target.is('.active')) {

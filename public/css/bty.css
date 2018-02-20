@@ -1910,7 +1910,7 @@
 /*Textarea*/
 /*Textarea 1*/
 .bty-textarea-1 {
-    width: 500px;
+    width: 100%;
     height: 100px;
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -12749,4 +12749,7 @@ form.bty-form-3{
 }
 .bty-filter-blue ul li>i:before, .bty-filter-blue ul li>i:after {
     background-color: white;
+}
+.d1 .p-t-34{
+    padding-top: 34px;
 }

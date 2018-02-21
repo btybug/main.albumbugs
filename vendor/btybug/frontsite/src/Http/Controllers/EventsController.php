@@ -16,7 +16,21 @@ class EventsController extends Controller
 {
     public function getIndex()
     {
+//        $subscripts = \Subscriber::getSubscriptions()->getData();
+//        $tabs=[];
+//        $f_name='Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@Notification';
+//        $e_name='App\Events\AfterLoginEvent';
+//        if (isset($subscripts[$e_name])) {
+//            foreach ($subscripts[$e_name] as $key => $value) {
+//                if (strpos($key, $f_name) === 0) {
+//                    $tabs[] = $value;
+//                }
+//
+//            }
+//        }
+
         $subscriber = \Subscriber::getSubscriptions();
+//        dd($subscriber);
         return view('manage::events.index', compact('subscriber'));
     }
     public function getIndexNew()
@@ -70,12 +84,13 @@ class EventsController extends Controller
 
     public function postSaveEventFunctionRelation(Request $request)
     {
-        $f_name = $request->get('function_namespace');
-        $e_name = $request->get('event_namespace');
-        $settings = $request->get('setting');
-        $subscripts = \Subscriber::clean($e_name, $f_name);
-        foreach ($settings as $setting) {
-            \Subscriber::add($e_name, $f_name, $setting);
+
+        $settings = json_decode($request->get('data'),true);
+        foreach ($settings as $e_name=>$subscriptions) {
+            foreach($subscriptions as $f_name=>$f_settings){
+                 \Subscriber::clean($e_name, $f_name);
+                \Subscriber::add($e_name, $f_name, $f_settings);
+            };
         }
         \Subscriber::save();
         return \Response::json(['error' => false]);

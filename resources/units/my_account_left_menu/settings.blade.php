@@ -1,6 +1,6 @@
 <?php
 $user = Auth::user()->toArray();
-$image_styles = getDinamicStyle('image');
+$image_styles = getDinamicStyle('images');
 ?>
 
 

@@ -192,6 +192,9 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if(! data.error){
+                        $('body').find('a[data-strcuture="'+key+'"]')
+                            .attr('href','/admin/uploads/gears/settings/'+value+'.'+key);
+
                         $('body').find('.modal-data-items .btn-primary')
                             .removeAttr('name')
                             .removeAttr('value');

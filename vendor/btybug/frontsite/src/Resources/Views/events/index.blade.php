@@ -1,6 +1,15 @@
 @extends( 'btybug::layouts.admin' )
 @section( 'content' )
-    <div class="container-fluid">
+    <div class="container-fluid events-container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <a class="btn btn-primary pull-right" href="#" bb-click="saveEvent">
+                    <i class="fa fa-circle-o-notch fa-spin hide"></i>
+                    Save Event
+                </a>
+            </div>
+        </nav>
+
         <div class="row row-eq-height ">
             <div class="col-md-3">
                 <div class="panel panel-default p-0 boxpanelminheight">
@@ -58,7 +67,7 @@
         <div class="panel panel-default" data-namespace="{namespace}">
             <div class="panel-heading" role="tab" id="panel-{id}">
                 <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#action-{id}">
+                    <a role="button" data-toggle="collapse" data-parent="#event-connections" href="#action-{id}">
                         {title}
                     </a>
 
@@ -79,7 +88,13 @@
     {!! HTML::style('public/css/themes-settings.css') !!}
 
     <style>
+        .events-container{
+            margin-top: 20px;
+        }
 
+        [bb-click=saveEvent]{
+            margin-top: 7px;
+        }
     </style>
 @stop
 @section('JS')

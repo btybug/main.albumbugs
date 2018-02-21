@@ -37,16 +37,15 @@ $(function () {
     var fieldsParser = {
         formGroup: function (d, name) {
             var formGroup = $('<div class="form-group" />');
-            var field = $('<div class="col-xs-9">');
-            var label = $('<label class="col-xs-3 control-label text-left">');
+            var field = '';
+            var label = $('<label>');
             if (d.label) {
                 label.append(d.label);
             }
+
             if (d.type) {
                 if (fieldsParser[d.type]) {
-
-                    field.append(fieldsParser[d.type](d, name));
-
+                    field = fieldsParser[d.type](d, name);
                 }
             }
             formGroup.append(label);
@@ -240,6 +239,15 @@ $(function () {
 
             // Update JSON
             eventBuilder.updateFormData();
+        },
+        // Save Event
+        saveEvent: function ($this) {
+            $this.find('i').removeClass("hide");
+            ajax('/admin/front-site/event/save-event-function-relations', {
+                data: JSON.stringify(eventBuilder.json)
+            }, function (){
+                $this.find('i').addClass("hide");
+            });
         }
     };
 

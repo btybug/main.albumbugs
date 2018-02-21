@@ -33,16 +33,19 @@ class EventsController extends Controller
 //        dd($subscriber);
         return view('manage::events.index', compact('subscriber'));
     }
+
     public function getIndexNew()
     {
         $subscriber = \Subscriber::getSubscriptions();
         return view('manage::events.index_new', compact('subscriber'));
     }
+
     public function postNewConnection(Request $request)
     {
         dd($request->all());
 
     }
+
     public function getIndexNewConnection()
     {
         $subscriber = \Subscriber::getSubscriptions();
@@ -85,10 +88,10 @@ class EventsController extends Controller
     public function postSaveEventFunctionRelation(Request $request)
     {
 
-        $settings = json_decode($request->get('data'),true);
-        foreach ($settings as $e_name=>$subscriptions) {
-            foreach($subscriptions as $f_name=>$f_settings){
-                 \Subscriber::clean($e_name, $f_name);
+        $settings = json_decode($request->get('data'), true);
+        foreach ($settings as $e_name => $subscriptions) {
+            foreach ($subscriptions as $f_name => $f_settings) {
+                \Subscriber::clean($e_name, $f_name);
                 \Subscriber::add($e_name, $f_name, $f_settings);
             };
         }

@@ -1,3 +1,3 @@
 <div class="col-md-12">
-    {!! getDinamicStyleDemo('image') !!}
+    {!! getDinamicStyleDemo('images') !!}
 </div>

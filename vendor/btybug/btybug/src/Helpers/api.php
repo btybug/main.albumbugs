@@ -1810,7 +1810,7 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
     // Loop through items
     foreach ($data as $item) {
         $output .= '<li data-id="' . $item->id . '" id="menu-item-' . $item->id . '" class="level-' . $i . '" 
-        data-title="' . $item->title . '" data-icon="fa fa-align-justify" data-url="' . $item->url . '">';
+        data-title="' . $item->title . '" data-icon="fa-align-justify" data-url="' . $item->url . '">';
         $output .= '<div class="bb-menu-item">';
         $output .= '<div class="bb-menu-item-title">';
         $output .= '<i></i><span>' . $item->title . '</span>';

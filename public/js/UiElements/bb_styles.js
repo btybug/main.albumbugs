@@ -75,7 +75,7 @@ $(document).ready(function () {
         $.ajax({
             type: "post",
             datatype: "json",
-            url: '/modality/settings-live',
+            url: '/modality/settings-customize',
             data: {
                 key: key,
                 action: action,

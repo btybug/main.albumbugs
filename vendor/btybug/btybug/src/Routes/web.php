@@ -61,6 +61,7 @@ Route::group(
         //        Route::post(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@postAdminLogin')->middleware('guest');
         Route::get('logout', '\Btybug\User\Http\Controllers\Auth\AuthController@getLogout')->middleware('auth');
         Route::post('/modality/settings-live', 'Admincp\ModalityController@postSettingsLive');
+        Route::post('/modality/settings-customize', 'Admincp\ModalityController@postCustomizeUnit');
         Route::post('/modality/styles/options', 'Admincp\ModalityController@psotStylesOptions');
         Route::post('/modality/widgets/options', 'Admincp\ModalityController@psotWidgetsOptions');
         Route::post('/modality/templates/options', 'Admincp\ModalityController@postTplOptions');

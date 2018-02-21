@@ -164,6 +164,19 @@ class ModalityController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function postCustomizeUnit(Request $request)
+    {
+        $data = $request->all();
+        $key = $data['type'];
+        $units = Painter::all()->sortByTag($key);
+
+        if (!count($units)) return \Response::json(['error' => true]);
+
+        $html = View::make('btybug::styles.c_units', compact('units', 'data'))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function getUnits($data)
     {
         $key = $data['key'];

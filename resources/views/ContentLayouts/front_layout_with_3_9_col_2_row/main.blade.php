@@ -1,13 +1,19 @@
-<div class="col-md-12">
-    @if(has_setting($settings,"top_content",false))
-        {!! BBRenderUnits($settings['top_content'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-    @endif
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="left-bar">
+
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="top-bar">
+
+            </div>
+            <div class="main-cont">
+
+            </div>
+        </div>
+    </div>
 </div>
-<div class="col-md-3">
-    @if(has_setting($settings,"left_bar",false))
-        {!! BBRenderUnits($settings['left_bar'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-    @endif
-</div>
-<div class="col-md-9">
-    {!! main_content() !!}
-</div>
+
+{!! BBstyle($_this->path.DS.'css/style.css') !!}

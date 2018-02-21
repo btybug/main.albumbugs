@@ -138,6 +138,30 @@ $(function () {
         updateJSON: function (key, value) {
             eventBuilder.json[key] = value;
             $('#export-json').val(JSON.stringify(eventBuilder.json));
+        },
+        fixSerializedArray: function (serializedArray) {
+            var outputObject = {};
+            $.each(serializedArray, function (i, item) {
+                var name = item.name
+                outputObject[name] = item.value;
+            });
+
+            return outputObject;
+        },
+        // Update JSON with form data
+        updateFormData: function (){
+            eventBuilder.json[eventBuilder.currentEvent] = {};
+
+            $('#event-connections>.panel').each(function (){
+                var nameSpace = $(this).attr("data-namespace");
+                var form = $(this).find('[data-form]');
+                // noinspection JSAnnotator
+                Object.assign(eventBuilder.json[eventBuilder.currentEvent], {
+                    [nameSpace]: eventBuilder.fixSerializedArray(form.serializeArray())
+                });
+            });
+
+            eventBuilder.updateJSON(eventBuilder.currentEvent, eventBuilder.json[eventBuilder.currentEvent]);
         }
     };
 
@@ -176,7 +200,7 @@ $(function () {
                 var eventConnections = $('#event-connections');
                 var currentID = $('#event-connections>.panel').length + 1;
 
-                var formHTML = $('<form data-tabform="'+currentID+'" />');
+                var formHTML = $('<form data-form="' + currentID + '" />');
                 var select2 = {};
                 $.each(response.form, function (key, val) {
                     formHTML.append(fieldsParser.formGroup(val, key));
@@ -186,9 +210,10 @@ $(function () {
                 });
 
                 var template = parseTemplate('action-template', [
-                    { '{id}'     : currentID },
-                    { '{content}': formHTML.html() },
-                    { '{title}'  : $this.attr('data-title') }
+                    {'{id}'        : currentID},
+                    {'{content}'   : formHTML.get(0).outerHTML},
+                    {'{title}'     : $this.attr('data-title')},
+                    {'{namespace}' : nameSpace}
                 ]);
 
                 eventConnections.append(template);
@@ -200,16 +225,11 @@ $(function () {
                 $('.events-list-group>.list-group-item.active>.badge').text(currentID);
 
                 // Update JSON
-                // noinspection JSAnnotator
-                Object.assign(eventBuilder.json[eventBuilder.currentEvent], {
-                    [nameSpace] : response.form
-                });
-
-                eventBuilder.updateJSON(eventBuilder.currentEvent, eventBuilder.json[eventBuilder.currentEvent]);
+                eventBuilder.updateFormData();
             });
         },
         // Remove Action
-        removeAction: function ($this){
+        removeAction: function ($this) {
             var title = $this.data("title");
             $('[data-title="' + title + '"]').show();
             $this.closest('.panel').remove();
@@ -217,18 +237,28 @@ $(function () {
 
             // Decrease counter badge
             $('.events-list-group>.list-group-item.active>.badge').text(currentID);
+
+            // Update JSON
+            eventBuilder.updateFormData();
         }
     };
 
-    // Catch click events
-    $('body').on('click', '[bb-click]', function (e) {
-        e.preventDefault();
+    // Catch events
+    $('body')
+        // Click events
+        .on('click', '[bb-click]', function (e) {
+            e.preventDefault();
 
-        var targets = $(this).attr('bb-click');
-        if (clickEvents[targets]) {
-            clickEvents[targets]($(this), e);
-        }
-    });
+            var targets = $(this).attr('bb-click');
+            if (clickEvents[targets]) {
+                clickEvents[targets]($(this), e);
+            }
+        })
+        // On form changes
+        .on('change', 'input, select, textarea', function (e) {
+            // Update JSON
+            eventBuilder.updateFormData();
+        });
 
 
 });

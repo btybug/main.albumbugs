@@ -55,7 +55,7 @@
 
     <!-- Templates -->
     <script type="template" id="action-template">
-        <div class="panel panel-default">
+        <div class="panel panel-default" data-namespace="{namespace}">
             <div class="panel-heading" role="tab" id="panel-{id}">
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#action-{id}">

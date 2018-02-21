@@ -29,6 +29,7 @@ class ModulesController extends Controller
     {
         return view('uploads::Modules.index');
     }
+
     public function getCoreModules(Request $request)
     {
 
@@ -64,11 +65,28 @@ class ModulesController extends Controller
         $plugins = new Plugins();
         $plugins->modules();
         $plugin = $plugins->find($repository . '/' . $package);
-        $tables=$plugin->tablse();
+        $tables = $plugin->tablse();
+        $units = $plugin->units();
+
+        $units = $adminPagesRepository->PagesByModulesParent($plugin);
+        return view('uploads::Explores.index', compact('plugin', 'units', 'pages', 'tables'));
+    }
+
+    public function getExplorePlugins(
+        $repository,
+        $package,
+        AdminPagesRepository $adminPagesRepository
+    )
+    {
+        $plugins = new Plugins();
+        $plugins->plugins();
+        $plugin = $plugins->find($repository . '/' . $package);
+        $tables = $plugin->tablse();
         $units = $plugin->units();
         $pages = $adminPagesRepository->PagesByModulesParent($plugin);
+//        dd($plugin, $tables,$pages);
 
-        return view('uploads::Explores.index', compact('plugin', 'units','pages','tables'));
+        return view('uploads::Explores.index', compact('plugin', 'units', 'pages', 'tables'));
     }
 
     public function getUpdateCms()

@@ -69,7 +69,7 @@
                                    class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left settings"><i
                                             class="fa fa-pencil f-s-14 m-r-10"></i> Settings</a>
                                 {{--@endif--}}
-                                <a href="{!! url('admin/avatar/plugins/'.$selected->name.'/explore') !!}"
+                                <a href="{!! url('admin/uploads/modules/'.$selected->name.'/explore/plugins') !!}"
                                    class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left"><i
                                             class="fa fa-cogs f-s-14 m-r-10"></i>Explore</a>
                             </div>

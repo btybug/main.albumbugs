@@ -25,6 +25,7 @@ Route::group(['prefix' => 'modules'], function () {
     Route::get('/core-packages', 'ModulesController@getCoreModules', true)->name('core_packages');
     Route::get('/update-cms', 'ModulesController@getUpdateCms', true)->name('update_cms');
     Route::get('/{repository}/{package}/explore', 'ModulesController@getExplore', true);
+    Route::get('/{repository}/{package}/explore/plugins', 'ModulesController@getExplorePlugins', true);
 
     Route::group(['prefix' => 'extra-packages'], function () {
         Route::get('/', 'PluginsController@getIndex', true)->name('plugins_index');

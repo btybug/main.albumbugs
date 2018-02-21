@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row div-flex">
         <div class="col-md-3 col-sm-3 col-xs-12">
             <div class="left-bar {{isset($settings['left_bar_style']) ? $settings['left_bar_style'] : ''}}">
                 @if(has_setting($settings,"left_bar",false))

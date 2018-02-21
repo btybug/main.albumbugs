@@ -1809,7 +1809,8 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
     $output = '';
     // Loop through items
     foreach ($data as $item) {
-        $output .= '<li data-id="' . $item->id . '" id="menu-item-' . $item->id . '" class="level-' . $i . '">';
+        $output .= '<li data-id="' . $item->id . '" id="menu-item-' . $item->id . '" class="level-' . $i . '" 
+        data-title="' . $item->title . '" data-icon="fa fa-align-justify" data-url="' . $item->url . '">';
         $output .= '<div class="bb-menu-item">';
         $output .= '<div class="bb-menu-item-title">';
         $output .= '<i></i><span>' . $item->title . '</span>';
@@ -1862,6 +1863,7 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '</div>';
 
 	    if (count($item->childs)) {
+//	        dd($item->childs);
 		    $output .= '<ul class="menu-item-children">' . renderFrontPagesInMenu($item->childs, false, $i + 1, $children) . '</ul>';
 	    }
         $output .= '</li>';

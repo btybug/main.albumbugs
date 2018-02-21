@@ -57,6 +57,51 @@ $(document).ready(function () {
         });
     });
 
+    $('body').on('click', '.BBcustomize', function () {
+        var action = $(this).attr('data-action');
+        var key = $(this).attr('data-key');
+        var place = $(this).attr('data-place');
+        var type = $(this).attr('data-type');
+        var sub = $(this).attr('data-sub');
+        var item = $(this).attr('data-item');
+        var module = $(this).attr('data-module');
+        var except = $(this).attr('data-except');
+        var mt = $(this).data('mt');
+        var prefix = $(this).data('name-prefix');
+        var group = $(this).attr('data-group');
+        var multiple = $(this).attr('data-multiple');
+        BBcustomize = $(this);
+        $('#magic-body').empty();
+        $.ajax({
+            type: "post",
+            datatype: "json",
+            url: '/modality/settings-live',
+            data: {
+                key: key,
+                action: action,
+                type: type,
+                sub: sub,
+                item: item,
+                module: module,
+                except: except,
+                place: place,
+                mt: mt,
+                group: group,
+                multiple: multiple
+            },
+            headers: {
+                'X-CSRF-TOKEN': $("input[name='_token']").val()
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $('#magic-settings .modal-title').html("Select " + action);
+                    $('#magic-body').html(data.html);
+                    $('#magic-settings').modal();
+                }
+            }
+        });
+    });
+
     $('body').on('click', '.styles', function () {
         $('body').find('.styles').addClass('btn-info');
         $('body').find('.styles').removeClass('btn-primary');

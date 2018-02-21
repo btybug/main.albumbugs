@@ -147,9 +147,9 @@ jQuery(function ($){
         var $this = $(this);
 
         var title = $this.find('.bb-menu-item-title>span').text();
-        $this.attr("data-title", title);
-        $this.attr("data-icon", '');
-        $this.attr("data-url", $this.find('.item-url').val());
+        $this.attr("data-title",$this.data('title'));
+        $this.attr("data-icon", $this.data('icon'));
+        $this.attr("data-url", $this.data('url'));
 
         $this.find('.menu-item-title').val(title);
     });

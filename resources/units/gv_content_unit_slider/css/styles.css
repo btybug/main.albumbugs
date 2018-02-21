@@ -19,3 +19,9 @@
 .custom_margin_top_8{
     margin-top: 8px;
 }
+.owl-carousel .owl-item img {
+    display: block;
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+}

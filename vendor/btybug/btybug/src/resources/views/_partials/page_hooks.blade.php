@@ -6,7 +6,7 @@
     </tr>
     </thead>
     <tbody>
-    @if(isset($layout->settings['hook']))
+    {{--@if(isset($layout->settings['hook']))
         @foreach($layout->settings['hook'] as $key=>$cms_hook)
             <tr>
                 <td>{!! $key !!}</td>
@@ -18,6 +18,18 @@
                     @endif
                 </td>
             </tr>
+        @endforeach
+    @endif--}}
+    @if(isset($_this->placeholders) && is_array($_this->placeholders))
+        @foreach($_this->placeholders as $key=>$placeholder)
+            @if(isset($placeholder['tag']) && $placeholder['tag'] == "hook")
+                <tr>
+                    <td>{!! $key !!}</td>
+                    <td>
+                        {!! BBbutton2('unit',$key,$placeholder['tag'],(isset($placeholder['title'])?$placeholder['title']:'Sidebar'),['class'=>'btn btn-default change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'page_layout_settings','model'=>($page->page_layout_settings[$key])??null]) !!}
+                    </td>
+                </tr>
+            @endif
         @endforeach
     @endif
     </tbody>

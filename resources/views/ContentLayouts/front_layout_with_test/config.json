@@ -34,6 +34,21 @@
       "type": "unit",
       "tag": "breadcrumb",
       "title": "Top content"
+    },
+    "top_hook": {
+      "type": "unit",
+      "tag": "hook",
+      "title": "Top hook"
+    }
+  },
+  "hook":{
+    "top_hook": {
+      "units":[
+        "my_account_left_menu.default"
+      ],
+      "type": "unit",
+      "tag": "hook",
+      "title": "Top hook"
     }
   },
   "folder": "front_layout_with_test",

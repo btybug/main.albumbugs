@@ -5,9 +5,12 @@ $parentsArray = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($
 <div class="col-md-12">
     <div class="{{isset($settings["style"]) ? $settings["style"] : 'bty-breadcrumb-3'}}">
         <ul>
+            <li><a href="/">Home</a></li>
             @if($parentsArray)
                 @foreach($parentsArray as $parent)
-                    <li><a href="{{$parent->url}}">{{$parent->title}}</a></li>
+                    @if($parent->url != "home")
+                            <li><a href="{{$parent->url}}">{{$parent->title}}</a></li>
+                    @endif
                 @endforeach
             @endif
         </ul>

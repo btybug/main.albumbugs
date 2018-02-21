@@ -502,6 +502,14 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     }
 
+    public function scopeGetPageLayoutHook($page, $hide_top = false){
+        $layout = self::findByVariation($page->page_layout);
+        if ($layout) {
+            return $layout->getPageLayoutWidgetHook($page, $hide_top);
+        }
+        return $this->getPageLayoutWidgetHook($page, $hide_top);
+    }
+
     public function scopeGetAdminPageLayout($page, $hide_top = false)
     {
         $layout = self::findByVariation($page->layout_id);
@@ -543,6 +551,22 @@ class ContentLayouts extends BasePainter implements VariationAccess
         }
 
         return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
+    }
+    protected function getPageLayoutWidgetHook($page,$hide_top = false){
+        $_this = null;
+        if (isset($this->placeholders)) {
+            $_this = $this;
+        }
+
+        $enabledSelectLayout = true;
+        if ($page->parent) {
+            $settings = ($page->parent->settings) ? json_decode($page->parent->settings, true) : null;
+            if ($settings && isset($settings['children']['enable_layout'])) {
+                $enabledSelectLayout = $settings['children']['enable_layout'];
+            }
+        }
+        //return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
+        return \View::make('btybug::_partials.page_hooks', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
     }
 
     protected function getAdminPageLayoutWidget($page, $hide_top = false)

@@ -33,7 +33,8 @@
             <div class="panel-heading">All Hooks</div>
             <div class="panel-body all-hooks-content">
                 @if($page->type != 'classify' && $page->type != 'tags')
-                    {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayoutHooks($page) !!}
+                    {{--{!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayoutHooks($page) !!}--}}
+                    {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayoutHook($page) !!}
                 @endif
             </div>
         </div>

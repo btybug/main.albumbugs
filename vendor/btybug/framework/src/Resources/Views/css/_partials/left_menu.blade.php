@@ -50,9 +50,9 @@
         </li>
 
         <li class="@if($slug=="images") active_class @endif">
-            <a href="?type=social_icons" profile-id="11" main-type="text_size"
+            <a href="?type=icons" profile-id="11" main-type="text_size"
                rel="tab" class="tpl-left-items">
-                <span class="module_icon"></span> Social icons
+                <span class="module_icon"></span> Icons
             </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
         </li>
 
@@ -192,6 +192,126 @@
             <a href="?type=horizontal_menu" profile-id="11" main-type="text_size"
                rel="tab" class="tpl-left-items">
                 <span class="module_icon"></span> Horizontal Menu
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=user_card" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> User Card
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=text" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Text
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=radio" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Radio
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=range" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Range
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=select" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Select
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=checkbox" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Checkbox
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=input_file" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> File
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=for_unit" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Unit
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=our_team" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Our Team
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=recent_posts" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Recent Posts
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=error_page" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> 404 page
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=filters" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Filters
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=ratings" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Ratings
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=datepicker" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Datepicker
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=dashboard_head" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Dashboard head
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=calendar" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Calendar
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=todo_list" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Todo List
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=message" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Message
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=timeline" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Timeline
+            </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
+        </li>
+        <li class="@if($slug=="images") active_class @endif">
+            <a href="?type=notification" profile-id="11" main-type="text_size"
+               rel="tab" class="tpl-left-items">
+                <span class="module_icon"></span> Notification
             </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
         </li>
     </ul>

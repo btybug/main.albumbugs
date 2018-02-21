@@ -26,7 +26,7 @@
                             <th>{{ $hook->help_text }}</th>
                             <th>{{ BBgetDateFormat($hook->created_at) }}</th>
                             <th>
-                                <a href="{!! url("admin/manage/frontend/hooks/edit",$hook->id) !!}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                <a href="{!! route("frontsite_hooks_edit",$hook->id) !!}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                             </th>
                         </tr>
                     @endforeach

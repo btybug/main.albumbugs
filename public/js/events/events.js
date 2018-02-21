@@ -133,6 +133,7 @@ $(function () {
 
     // Builder object
     var eventBuilder = {
+        currentEvent: '',
         json: {},
         updateJSON: function (key, value) {
             eventBuilder.json[key] = value;
@@ -150,11 +151,10 @@ $(function () {
                 $this.addClass('active');
 
                 // Update json
-                eventBuilder.json = {
-                    settings: []
-                };
+                eventBuilder.json = {};
+                eventBuilder.currentEvent = $this.data('value');
 
-                eventBuilder.updateJSON('event_namespace', $this.data('value'));
+                eventBuilder.updateJSON($this.data('value'), {});
 
                 // Show actions panel
                 $('[data-panelevent="functions"]').removeClass("hide");
@@ -200,8 +200,12 @@ $(function () {
                 $('.events-list-group>.list-group-item.active>.badge').text(currentID);
 
                 // Update JSON
-                eventBuilder.json.settings.push(response.form);
-                eventBuilder.updateJSON('settings', eventBuilder.json.settings);
+                // noinspection JSAnnotator
+                Object.assign(eventBuilder.json[eventBuilder.currentEvent], {
+                    [nameSpace] : response.form
+                });
+
+                eventBuilder.updateJSON(eventBuilder.currentEvent, eventBuilder.json[eventBuilder.currentEvent]);
             });
         },
         // Remove Action

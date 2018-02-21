@@ -91,8 +91,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     public function find($id)
     {
         $variations = $this->all();
-        return $variations->items[$id];
-
+        return (isset($variations->items[$id])) ? $variations->items[$id] : null;
     }
 
     public function deleteVariation($id)

@@ -44,7 +44,7 @@ class ModalityController extends Controller
      * ModalityController constructor.
      * @param Widget $widget
      */
-    public function __construct(MenuRepository $menuRepository,FieldsRepository $fieldsRepository)
+    public function __construct(MenuRepository $menuRepository, FieldsRepository $fieldsRepository)
     {
         $this->helpers = new helpers;
         $this->menuRepo = $menuRepository;
@@ -140,7 +140,7 @@ class ModalityController extends Controller
 
         if (!count($fields)) return \Response::json(['error' => true]);
 
-        $html = View::make('btybug::styles.fields', compact('fields','type'))->render();
+        $html = View::make('btybug::styles.fields', compact('fields', 'type'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -155,9 +155,9 @@ class ModalityController extends Controller
         $units = Painter::all()->sortByTag($key);
 
         if (!count($units)) return \Response::json(['error' => true]);
-        if(isset($data['multiple']) && $data['multiple'] == true){
+        if (isset($data['multiple']) && $data['multiple'] == true) {
             $html = View::make('btybug::styles.multiple-units', compact('units', 'data'))->render();
-        }else{
+        } else {
             $html = View::make('btybug::styles.units', compact('units', 'data'))->render();
         }
 
@@ -175,6 +175,24 @@ class ModalityController extends Controller
         $html = View::make('btybug::styles.c_units', compact('units', 'data'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function postCustomizeUnitSave(Request $request)
+    {
+        $slug = $request->get('value');
+        $key = $request->get('key');
+        $variationName = $slug . '.' . str_slug($key);
+
+        $unit = Painter::find($slug);
+
+        $variation = $unit->variations(false)->find($variationName);
+
+        if (!$variation) {
+            $unit->variations()->createVariation(['title' => $key], str_slug($key),true);
+            $variation = $unit->variations(false)->find($variationName);
+        }
+
+        return \Response::json(['error' => false, 'variation' => $variation->toArray()]);
     }
 
     public function getUnits($data)
@@ -372,7 +390,7 @@ class ModalityController extends Controller
     {
         $id = $request->get('id');
         $layout = ContentLayouts::find($id);
-        if (!$layout){
+        if (!$layout) {
             return \Response::json(['error' => true]);
         }
         $items = $layout->variations()->all();
@@ -508,7 +526,7 @@ class ModalityController extends Controller
         $tag = $data['type'];
         $layouts = ContentLayouts::all()->get();
 
-        if (!count($layouts)){
+        if (!count($layouts)) {
             return \Response::json(['error' => true]);
         }
         $html = View::make('btybug::styles.page_sections', compact('layouts'))->render();

@@ -60,6 +60,7 @@ $(document).ready(function () {
     $('body').on('click', '.BBcustomize', function () {
         var action = $(this).attr('data-action');
         var key = $(this).attr('data-key');
+        var structure = $(this).attr('data-strcuture');
         var place = $(this).attr('data-place');
         var type = $(this).attr('data-type');
         var sub = $(this).attr('data-sub');
@@ -87,7 +88,8 @@ $(document).ready(function () {
                 place: place,
                 mt: mt,
                 group: group,
-                multiple: multiple
+                multiple: multiple,
+                structure: structure
             },
             headers: {
                 'X-CSRF-TOKEN': $("input[name='_token']").val()
@@ -145,6 +147,7 @@ $(document).ready(function () {
         });
     });
     $('[data-toggle="popover"]').popover();
+
     $('body').on('click', '.item', function () {
         if (BBbutton) {
             $('body').find('.modal-data-items .btn-primary')
@@ -164,6 +167,52 @@ $(document).ready(function () {
                     .attr('data-style-old'))
                 .attr('data-style-old', $(this).find('input').attr('data-value'))
                 .addClass($(this).find('input').attr('data-value'));
+
+            // var input= $(this).find('input')
+            // input.attr('name',input.attr('data-key')).val(input.attr('data-value'));
+        }
+    });
+
+    $('body').on('click', '.customize-item', function () {
+        if (BBcustomize) {
+            var key = $(this).data('key');
+            var value = $(this).data('value');
+
+            $.ajax({
+                type: "post",
+                datatype: "json",
+                url: '/modality/settings-customize-save',
+                data: {
+                    key: key,
+                    value: value
+
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $("input[name='_token']").val()
+                },
+                success: function (data) {
+                    if(! data.error){
+                        $('body').find('.modal-data-items .btn-primary')
+                            .removeAttr('name')
+                            .removeAttr('value');
+                        $('body').find('.modal-data-items .btn-primary')
+                            .removeClass('btn-primary')
+                            .removeClass('active')
+                            .addClass('btn-info');
+                        $(this).removeClass('btn-info')
+                        $(this).addClass('btn-primary').addClass('active');
+                        $("input[data-name='" + BBcustomize.attr("data-key") + "']").val($(this).find('input').attr('data-value')).trigger('change');
+                        $('#magic-settings span[aria-hidden=true]').click();
+
+                        $('[data-bbplace="' + BBcustomize.attr('data-key') + '"]')
+                            .removeClass($('[data-bbplace="' + BBcustomize.attr('data-key') + '"]')
+                                .attr('data-style-old'))
+                            .attr('data-style-old', $(this).find('input').attr('data-value'))
+                            .addClass($(this).find('input').attr('data-value'));
+                    }
+                }
+            });
+
 
             // var input= $(this).find('input')
             // input.attr('name',input.attr('data-key')).val(input.attr('data-value'));

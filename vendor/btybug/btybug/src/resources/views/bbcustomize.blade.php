@@ -43,7 +43,7 @@
             @endif
     >
     <div class="input-group-addon">
-        <button type="button" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
+        <button type="button" data-strcuture="{!! $structure !!}" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
     <a href="" class="btn btn-info pull-left" style="border-radius: 0px;">Customize

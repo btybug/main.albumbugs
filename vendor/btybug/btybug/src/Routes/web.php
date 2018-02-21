@@ -62,6 +62,7 @@ Route::group(
         Route::get('logout', '\Btybug\User\Http\Controllers\Auth\AuthController@getLogout')->middleware('auth');
         Route::post('/modality/settings-live', 'Admincp\ModalityController@postSettingsLive');
         Route::post('/modality/settings-customize', 'Admincp\ModalityController@postCustomizeUnit');
+        Route::post('/modality/settings-customize-save', 'Admincp\ModalityController@postCustomizeUnitSave');
         Route::post('/modality/styles/options', 'Admincp\ModalityController@psotStylesOptions');
         Route::post('/modality/widgets/options', 'Admincp\ModalityController@psotWidgetsOptions');
         Route::post('/modality/templates/options', 'Admincp\ModalityController@postTplOptions');

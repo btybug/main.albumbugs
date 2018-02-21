@@ -27,8 +27,9 @@
                             </div>
                             <div>
                                 <p>
-                                    <a data-key="{!! $key !!}"
-                                       class="btn text-center item item-unit zzzzz custom_color_white"
+                                    <a
+                                        data-key="{!! $data['structure'] !!}"
+                                       class="btn text-center customize-item zzzzz custom_color_white"
                                        data-value="{!! $item->slug !!}">
                                         <input type="hidden" data-action="units"
                                                data-value="{!! $item->slug !!}"/>

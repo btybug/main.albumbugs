@@ -202,8 +202,8 @@
 {{--@endif--}}
 
 
-{!! $_this->style('/css/styles.css') !!}
+    {!! BBstyle($_this->path.DS.'/css/styles.css') !!}
 @section("js")
-    {!! $_this->script('/js/boostrap.min.js') !!}
-    {!! $_this->script('/js/script.js') !!}
+    {{--{!! BBscript($_this->path.DS.'/js/boostrap.min.js') !!}--}}
+    {!! BBscript($_this->path.DS.'/js/script.js') !!}
 @stop

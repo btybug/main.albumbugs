@@ -12,6 +12,6 @@
   "created_at": 1490088665,
   "is_core": 1,
   "place": "frontend",
-  "tags": ["user-unit"],
+  "tags": ["user-unit","login"],
   "path": "resources\/units\/user_login_55cd5cd4cdca"
 }

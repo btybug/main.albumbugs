@@ -218,11 +218,11 @@
 
 @media only screen and (min-width: 768px) and (max-width: 959px) {
     .sidebar-menu-white-sub .bty-menu4 {
-        width: 200px;
+        width: 100%;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li a {
-        height: 30px;
+        /*height: 30px;*/
     }
 
     .sidebar-menu-white-sub .bty-menu4 li a i {
@@ -281,13 +281,13 @@
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 
     .sidebar-menu-white-sub .bty-menu4 {
-        width: 50px;
+        width: 100%;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li a {
         position: relative;
         padding: 12px 16px;
-        height: 20px;
+        height: 55px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li a small {
@@ -318,22 +318,22 @@
     }
 
     .sidebar-menu-white-sub .bty-menu4 li > ul {
-        min-width: 180px;
+        width: 110px;
         left: 70px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li:hover > ul {
-        min-width: 180px;
+        min-width: 110px;
         left: 50px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li ul li > ul, .sidebar-menu-white-sub .bty-menu4 li ul li ul li > ul {
-        min-width: 150px;
+        width: 150px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li ul li:hover > ul {
-        left: 180px;
-        min-width: 150px;
+        left: 110px;
+        width: 100px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li ul li ul li > ul {
@@ -354,7 +354,7 @@
 
     .sidebar-menu-white-sub .bty-menu4 li ul li ul li:hover > ul {
         left: 30px;
-        min-width: 150px;
+        width: 100px;
         top: 35px;
     }
 
@@ -376,7 +376,7 @@
     .sidebar-menu-white-sub .bty-menu4 li a {
         position: relative;
         padding: 12px 16px;
-        height: 20px;
+        height: 55px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li a small {
@@ -407,22 +407,22 @@
     }
 
     .sidebar-menu-white-sub .bty-menu4 li > ul {
-        min-width: 180px;
+        min-width: 100px;
         left: 70px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li:hover > ul {
-        min-width: 180px;
+        min-width: 100px;
         left: 50px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li ul li > ul, .sidebar-menu-white-sub .bty-menu4 li ul li ul li > ul {
-        min-width: 150px;
+        min-width: 100px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li ul li:hover > ul {
-        left: 180px;
-        min-width: 150px;
+        left: 110px;
+        width: 90px;
     }
 
     .sidebar-menu-white-sub .bty-menu4 li ul li ul li > ul {
@@ -443,7 +443,7 @@
 
     .sidebar-menu-white-sub .bty-menu4 li ul li ul li:hover > ul {
         left: 30px;
-        min-width: 150px;
+        min-width: 100px;
         top: 35px;
     }
 

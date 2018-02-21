@@ -1,4 +1,4 @@
-<div class="col-md-5">
+<div class="col-md-5 col-sm-3 col-xs-12">
     <div class="sidebar-menu-white-sub">
         <nav>
             <ul class="bty-menu4">
@@ -42,13 +42,6 @@
                             <a href="#"><i class="fa fa-group"></i>Menu 5.2</a>
                             <ul>
                                 <li><a href="#"><i class="fa fa-female"></i>Menu 5.2.1</a></li>
-                                <li>
-                                    <a href="#"><i class="fa fa-male"></i>Menu 5.2.2</a>
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-leaf"></i>Menu 5.2.2.1</a></li>
-                                        <li><a href="#"><i class="fa fa-tasks"></i>Menu 5.2.2.2</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="#"><i class="fa fa-female"></i>Menu 5.2.3</a></li>
                             </ul>
                         </li>

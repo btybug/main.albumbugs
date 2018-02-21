@@ -1,6 +1,9 @@
 <?php
 $user = Auth::user()->toArray();
 $image_styles = getDinamicStyle('images');
+$text_styles = getDinamicStyle('texts');
+$icon_styles = getDinamicStyle('icons');
+$menu_styles = getDinamicStyle('menus');
 ?>
 
 
@@ -69,9 +72,7 @@ $image_styles = getDinamicStyle('images');
                         </div>
                         <div class="col-md-8">
                             <select name="top_style" id="" class="form-control">
-                                <option value="">style1</option>
-                                <option value="">style2</option>
-                                <option value="">style3</option>
+                                {!! $text_styles !!}
                             </select>
                         </div>
                     </div>
@@ -115,9 +116,7 @@ $image_styles = getDinamicStyle('images');
                         </div>
                         <div class="col-md-8">
                             <select name="sub_style" id="" class="form-control">
-                                <option value="">style1</option>
-                                <option value="">style2</option>
-                                <option value="">style3</option>
+                                {!! $text_styles !!}
                             </select>
                         </div>
                     </div>
@@ -153,9 +152,7 @@ $image_styles = getDinamicStyle('images');
                         </div>
                         <div class="col-md-8">
                             <select name="menu_area_style" id="" class="form-control">
-                                <option value="">style1</option>
-                                <option value="">style2</option>
-                                <option value="">style3</option>
+                                {!! $menu_styles !!}
                             </select>
                         </div>
                     </div>
@@ -195,7 +192,9 @@ $image_styles = getDinamicStyle('images');
                             <div class="col-md-4">
                                 <label for="" class="col-sm-4">Style</label>
                                 <div class="col-md-8">
-                                    {!!Form::select('icons['.$key.'][style]',[0=>'style1',1=>'style2',2=>'style3'],$key,['class' => 'form-control style'])  !!}
+                                    <select name="icons[{{$key}}][style]" id="" class="form-control style">
+                                        {!! $icon_styles !!}
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -241,7 +240,9 @@ $image_styles = getDinamicStyle('images');
                             <div class="col-md-4">
                                 <label for="" class="col-sm-4">Style</label>
                                 <div class="col-md-8">
-                                    {!!Form::select('socials['.$key.'][style]',[0=>'style1',1=>'style2',2=>'style3'],$key,['class' => 'form-control soc_style'])  !!}
+                                    <select name="socials[{{$key}}][style]" id="" class="form-control soc_style">
+                                        {!! $icon_styles !!}
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -280,7 +281,9 @@ $image_styles = getDinamicStyle('images');
         <div class="col-md-4">
             <label for="" class="col-sm-4">Style</label>
             <div class="col-md-8">
-                {!!Form::select('icons[{repl2}][style]',[0=>'style1',1=>'style2',2=>'style3'],null,['class' => 'form-control style'])  !!}
+                <select name="icons[{repl2}][style]" id="" class="form-control style">
+                    {!! $icon_styles !!}
+                </select>
             </div>
         </div>
         <div class="col-md-1">
@@ -310,7 +313,9 @@ $image_styles = getDinamicStyle('images');
         <div class="col-md-4">
             <label for="" class="col-sm-4">Style</label>
             <div class="col-md-8">
-                {!!Form::select('socials[{repl2}][style]',[0=>'style1',1=>'style2',2=>'style3'],null,['class' => 'form-control soc_style'])  !!}
+                <select name="socials[{repl2}][style]" id="" class="form-control soc_style">
+                    {!! $icon_styles !!}
+                </select>
             </div>
         </div>
         <div class="col-md-1">

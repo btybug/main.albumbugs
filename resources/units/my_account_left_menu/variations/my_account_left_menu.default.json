@@ -1,1 +1,1 @@
-{"title":"default","id":"my_account_left_menu.default","settings":{"image_style":"bty-img-border-1-red-p-2-hover","top_column":"id","top_style":null,"sub_column":"id","sub_style":null,"menu_area":null,"menu_area_style":null}}
+{"title":"default","id":"my_account_left_menu.default","settings":{"image_style":"bty-img-border-1-red-p-2-hover","top_column":"id","sub_column":"username","sub_style":"bty-fs-40-color-blue","menu_area":null,"menu_area_style":null,"icons":[{"icon":null,"url":null,"style":"0"}]}}

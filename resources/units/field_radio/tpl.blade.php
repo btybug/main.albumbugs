@@ -1,17 +1,18 @@
-<div class="form-group">
-    <label class="col-md-4 control-label" for="radios">Multiple Radios</label>
-    <div class="col-md-4">
-        <div class="radio">
-            <label for="radios-0">
-                <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
-                Option one
-            </label>
-        </div>
-        <div class="radio">
-            <label for="radios-1">
-                <input type="radio" name="radios" id="radios-1" value="2">
-                Option two
-            </label>
+<fieldset class="bty-form-radio formgeneral" id="bty-input-id-{!! issetReturn($source,'id',null) !!}">
+    <div class="form-group">
+        <label class="col-sm-12 control-label">{!! issetReturn($settings,'label',null) !!}</label>
+        <div class="col-sm-12">
+            @if(count())
+                @foreach(get_field_data($field) as $key => $item)
+                    <div class="radio block">
+                        <label>
+                            <input name="{!! $field['table_name']."_".$field['column_name'] !!}"  value="{{ $key }}" type="radio" id="bty-gender-form-{{ $key }}">
+                            {{$item}}
+                        </label>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
-</div>
+</fieldset>
+{!! BBRenderUnits() !!}

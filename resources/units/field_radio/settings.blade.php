@@ -57,5 +57,26 @@
             </div>
 
         </div>
+        <div class="row visibility-box {!! (1) ? "show" : "hide" !!}">
+            <div class="panel panel-default p-0">
+                <div class="panel-heading">Input Data</div>
+                <div class="panel-body">
+
+                    <div class="col-md-6">
+                        <div class="row m-b-10 mapping-column">
+                            {{--@include("console::structure.developers._partials.mapping-column")--}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 m-b-10">
+                        <label class="col-sm-3 p-l-0 control-label m-0  text-left">Extra Validation</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

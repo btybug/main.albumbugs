@@ -89,41 +89,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="panel panel-default p-0">
-                <div class="panel-heading">visibility & permissions</div>
-                <div class="panel-body">
-                    <div class="form-group col-md-12 m-b-10">
-                        <div class="col-md-6">
-                            <label class="col-sm-3 p-l-0">Visibility</label>
-                            <div class="col-md-6">
-                                @if($increment)
-                                    <div class="form-control core-val" readonly="true"
-                                         disabled="true"> Hidden </div>
-                                    {!! Form::hidden('visibility',0) !!}
-                                @else
-                                    {!! Form::select('visibility',['Hidden', 'Visible'],null,['class' => 'form-control visibility-control']) !!}
-                                @endif
-                            </div>
-                        </div>
 
-                        <div class="col-md-6 default-value-box {!! ($field->visibility) ? "hide" : "show" !!}">
-                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Default value</label>
-                            <div class="col-md-6">
-                                {!! Form::text('default_value',null,['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-6 visibility-box {!! ($field->visibility) ? "show" : "hide" !!}">
-                            <label class="col-sm-4 p-l-0" for="available_for_users_checkbox">Permission for roles</label>
-                            <div class="col-md-6">
-                               permissions
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row visibility-box {!! ($field->visibility) ? "show" : "hide" !!}">
+        <div class="row visibility-box">
             <div class="panel panel-default p-0">
                 <div class="panel-heading">Field Type</div>
                 <div class="panel-body">

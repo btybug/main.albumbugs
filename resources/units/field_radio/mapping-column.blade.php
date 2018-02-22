@@ -77,7 +77,9 @@
 </div>
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
-
+<script type="temolate" id="manual-field-option">
+    <textarea class="form-control" type="textarea" id='data_source_manual' placeholder='Type options separated with' name='json_data[manual]'></textarea>
+</script>
 <script>
     $('.icp').iconpicker();
     var dd = console.log;
@@ -538,13 +540,7 @@
                     data_group = $('<div/>', {
                         class: 'form-group data_source_manual'
                     });
-                    var textarea = $('<textarea/>', {
-                        "class": 'form-control',
-                        "type": 'textarea',
-                        "id": 'data_source_manual',
-                        "placeholder": 'Type options separated with ,',
-                        "name": 'json_data[manual]'
-                    });
+                    var textarea = $('#manual-field-option').html();
 
                     data_group.append(textarea);
                     $('.select_op_box').append(data_group);

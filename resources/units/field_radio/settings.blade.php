@@ -25,13 +25,13 @@
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Field Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('icon',null,['class' => 'form-control icp','readonly'])  !!}
+                                {!!Form::text('icon',null,['class' => 'form-control icp'])  !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="tooltip-icon" class="col-sm-3 m-0 control-label text-left">Tooltip Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','readonly','id'=>'tooltip-icon'])  !!}
+                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','id'=>'tooltip-icon'])  !!}
 
                             </div>
                         </div>

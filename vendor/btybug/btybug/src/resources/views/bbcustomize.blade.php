@@ -44,10 +44,11 @@
             @endif
     >
     <div class="input-group-addon">
-        <button type="button" data-strcuture="{!! $structure !!}" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
+        <button type="button" data-value="{!! $value !!}" data-strcuture="{!! $structure !!}" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
-    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation)) {{ "/admin/uploads/gears/settings/".$variation->id }} @endif" data-strcuture="{!! $structure !!}" class="btn btn-info customize-button pull-left" style="border-radius: 0px;">Customize
+    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation)) {{ "/admin/uploads/gears/settings/".$variation->id }} @endif" data-strcuture="{!! $structure !!}"
+       class="btn btn-info customize-button pull-left" style="border-radius: 0px;">Customize
     </a>
     <input
             class="bb-button-realted-hidden-input"

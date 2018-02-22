@@ -169,10 +169,11 @@ class ModalityController extends Controller
         $data = $request->all();
         $key = $data['type'];
         $units = Painter::all()->sortByTag($key);
+        $selected = Painter::findByVariation($data['value']);
 
         if (!count($units)) return \Response::json(['error' => true]);
 
-        $html = View::make('btybug::styles.c_units', compact('units', 'data'))->render();
+        $html = View::make('btybug::styles.c_units', compact('units', 'data','selected'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

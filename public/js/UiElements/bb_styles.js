@@ -60,6 +60,7 @@ $(document).ready(function () {
     $('body').on('click', '.BBcustomize', function () {
         var action = $(this).attr('data-action');
         var key = $(this).attr('data-key');
+        var value = $(this).attr('data-value');
         var structure = $(this).attr('data-strcuture');
         var place = $(this).attr('data-place');
         var type = $(this).attr('data-type');
@@ -79,6 +80,7 @@ $(document).ready(function () {
             url: '/modality/settings-customize',
             data: {
                 key: key,
+                value: value,
                 action: action,
                 type: type,
                 sub: sub,

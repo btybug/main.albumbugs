@@ -1,5 +1,5 @@
 <div class="col-md-12  m-t-20">
-    <div class="row">
+    <div class="row" style="color: black">
 
         <div class="row  visibility-box  {!! (1) ? "show" : "hide" !!}" style="color: black">
             <div class="panel panel-default p-0">

@@ -656,7 +656,7 @@
                                 data_group.append(data_group_label);
 
                                 var data_group_col = $('<div/>', {
-                                    class: 'col-md-4'
+                                    class: 'col-md-8'
                                 });
                                 data_group.append(data_group_col);
 

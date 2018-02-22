@@ -6,3 +6,8 @@
     clear: both;
     display: table;
 }
+.data-source-box:after{
+    content: "";
+    clear: both;
+    display: table;
+}

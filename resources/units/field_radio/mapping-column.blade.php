@@ -78,7 +78,24 @@
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script type="temolate" id="manual-field-option">
-    <textarea class="form-control" type="textarea" id='data_source_manual' placeholder='Type options separated with' name='json_data[manual]'></textarea>
+    {{--<textarea class="form-control" type="textarea" id='data_source_manual' placeholder='Type options separated with' name='json_data[manual]'></textarea>--}}
+    <div>
+        <div class="form-group">
+        <div class="col-md-4">
+
+</div>
+<div class="col-md-7">
+<input type="text" class="form-control">
+</div>
+<div class="col-md-1">
+<button class="btn btn-danger pull-right remove_this" type="button"><i class="fa fa-minus"></i></button>
+</div>
+        </div>
+        <div class="col-md-12">
+             <button class="btn btn-primary pull-right render_icons" type="button"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 </script>
 <script>
     $('.icp').iconpicker();
@@ -780,7 +797,7 @@
                     data_group.append(data_group_label);
 
                     var data_group_col = $('<div/>', {
-                        class: 'col-md-4'
+                        class: 'col-md-8'
                     });
                     data_group.append(data_group_col);
 

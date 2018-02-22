@@ -10,6 +10,19 @@
             </div>
             <div id="inputsetting" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
+                    <div class="form-group col-md-12">
+                        <div class="col-md-2">
+                            <label>Field style</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select name="" id="" class="form-control">
+                                <option value="">style1</option>
+                                <option value="">style2</option>
+                                <option value="">style3</option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-6">
                             <label for="lablename" class="col-sm-3 p-l-0 control-label m-0  text-left">Label

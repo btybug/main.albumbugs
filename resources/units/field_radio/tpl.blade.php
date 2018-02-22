@@ -20,7 +20,7 @@ if(isset($settings['json_data']) && count($settings['json_data'])){
     }
 }
 @endphp
-<fieldset class="bty-form-radio formgeneral" id="bty-input-id-{!! issetReturn($source,'id',null) !!}">
+<fieldset class="bty-form-radio formgeneral" id="bty-input-id-0">
     <div class="form-group">
         <label class="col-sm-12 control-label">{!! issetReturn($settings,'label',null) !!}</label>
         <div class="col-sm-12">

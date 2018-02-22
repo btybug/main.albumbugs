@@ -62,7 +62,7 @@
                 <div class="panel-heading">Input Data</div>
                 <div class="panel-body">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="row m-b-10 mapping-column">
                             @include($_this->slug."::mapping-column")
                         </div>

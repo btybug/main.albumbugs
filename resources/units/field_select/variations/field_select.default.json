@@ -1,7 +1,1 @@
-{
-  "title": "default",
-  "id": "field_select.default",
-  "settings": {
-
-  }
-}
+{"title":"default","id":"field_select.default","settings":{"label":null,"placeholder":null,"icon":null,"tooltip_icon":null,"help":null,"validation_message":null,"default_text":null,"default_key":null,"data_source":"related","json_data":{"data_source_table_name":"users","data_source_columns":"username"},"extravalidation":null}}

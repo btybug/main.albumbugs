@@ -99,9 +99,9 @@
                             Select Type
                         </label>
                         <div class="col-md-8">
-                            {!! BBcustomize('unit','type','form_field',
-                                            (isset($field->type) && $field->type)?'Change':'Select',
-                            'field-'.$field->id,['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($field->type) && $field->type) ?$field->type : null]) !!}
+                            {!! BBcustomize('unit','unit','form_field',
+                                            (isset($field->unit) && $field->unit)?'Change':'Select',
+                            'field-'.$field->id,['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($field->unit) && $field->unit) ?$field->unit : null]) !!}
                         </div>
                     </div>
                 </div>

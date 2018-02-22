@@ -447,31 +447,13 @@ class StructureService extends GeneralService
 
     public function fieldUpdate($data, $field)
     {
-        // TODO:: tooltip ????
         $field->update([
             'name' => $data['name'],
             'table_name' => $data['table_name'],
             'column_name' => $data['column_name'],
-            'json_data' => $data['settings'],
-            'label' => $data['label'] != '' ? $data['label'] : NULL,
-            'placeholder' => $data['placeholder'] != '' ? $data['placeholder'] : NULL,
-            'icon' => $data['icon'] != '' ? $data['icon'] : NULL,
-
-            'tooltip' =>  NULL,
-            'tooltip_icon' => $data['tooltip_icon'] != '' ? $data['tooltip_icon'] : NULL,
-            'help' => $data['help'],
-            'second_table' => isset($data['second_table']) && $data['second_table'] != '' ? $data['second_table'] : NULL,
-            'second_column' => isset($data['second_column']) && $data['second_column'] != '' ? $data['second_column'] : NULL,
-            'data_source' => isset($data['data_source']) && $data['data_source'] != '' ? $data['data_source'] : NULL,
-            'type' => isset($data['type']) && $data['type'] != '' ? $data['type'] : NULL,
-            'json_data' => isset($data['json_data']) && $data['json_data'] != '' ? $data['json_data'] : NULL,
+            'unit' => isset($data['unit']) && $data['unit'] != '' ? $data['unit'] : NULL,
             'required' => $data['required'],
-            'visibility' => $data['visibility'],
-            'default_value' => $data['default_value'] != '' ? $data['default_value'] : NULL,
-//            'available_for_users' => $data['available_for_users'],
-            'before_save' => $data['before_save'],
-            'extravalidation' => $data['extravalidation'],
-            'validation_message' => $data['validation_message'],
+            'before_save' => $data['before_save']
         ]);
     }
 

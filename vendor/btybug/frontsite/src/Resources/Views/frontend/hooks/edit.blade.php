@@ -4,66 +4,67 @@
     <div role="tabpanel" class="m-t-10" id="main">
             <div class="head-top">
                 {!! Form::model($hook,['url' => route('frontsite_hooks_edit_save',$hook->id)]) !!}
-                <div class="col-md-3">
-                    {!! Form::text('name',$hook->name,["class" => "form-control"]) !!}
-                </div>
-                <div class="col-md-3">
-                    {!! Form::select('type',["Vertical"=>"Vertical",'Horizontal'=>"Horizontal"],$hook->type,["class"=>"form-control is_horizontal"]) !!}
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-info pull-right">Save</button>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-12 custom_margin">
-                    <div class="bty-panel-collapse">
-                        <div>
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
-                               aria-expanded="true">
-                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                <span class="title">Place holder</span>
-                            </a>
-                        </div>
-                        <div id="placeholder" class="collapse in" aria-expanded="true" style="">
-                            <div class="content bty-settings-panel">
-                                @if(isset($settings['icons']))
-                                    @foreach($settings['icons'] as $key => $value)
-                                        <div class="form-group lets_each">
-                                            <div class="col-md-4">
-                                                <label for="fieldicon" class="col-sm-4 control-label text-left">Icon</label>
-                                                <div class="col-sm-8">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-slack"></i></span>
-                                                        {!!Form::text('icons['.$key.'][icon]',$settings['icons'][$key]['icon'],['class' => 'form-control icp ic','readonly'])  !!}
+                    <div class="col-md-3">
+                        {!! Form::text('name',$hook->name,["class" => "form-control"]) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! Form::select('type',["Vertical"=>"Vertical",'Horizontal'=>"Horizontal"],$hook->type,["class"=>"form-control is_horizontal"]) !!}
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-info pull-right">Save</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 custom_margin">
+                        <div class="bty-panel-collapse">
+                            <div>
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
+                                   aria-expanded="true">
+                                    <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                                    <span class="title">Place holder</span>
+                                </a>
+                            </div>
+                            <div id="placeholder" class="collapse in" aria-expanded="true" style="">
+                                <div class="content bty-settings-panel">
+                                    @if(isset($settings['icons']))
+                                        @foreach($settings['icons'] as $key => $value)
+                                            <div class="form-group lets_each">
+                                                <div class="col-md-4">
+                                                    <label for="fieldicon" class="col-sm-4 control-label text-left">Icon</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-slack"></i></span>
+                                                            {!!Form::text('icons['.$key.'][icon]',$settings['icons'][$key]['icon'],['class' => 'form-control icp ic','readonly'])  !!}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="fieldicon" class="col-sm-4 control-label text-left">Url</label>
-                                                <div class="col-sm-8">
-                                                    {!!Form::text('icons['.$key.'][url]',$settings['icons'][$key]['url'],['class' => 'form-control url'])  !!}
+                                                <div class="col-md-3">
+                                                    <label for="fieldicon" class="col-sm-4 control-label text-left">Url</label>
+                                                    <div class="col-sm-8">
+                                                        {!!Form::text('icons['.$key.'][url]',$settings['icons'][$key]['url'],['class' => 'form-control url'])  !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="" class="col-sm-4">Style</label>
+                                                    <div class="col-md-8">
+                                                        <select name="icons[{{$key}}][style]" id="" class="form-control style">
+                                                            {!! $icon_styles !!}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button class="btn btn-danger pull-right remove_this"><i class="fa fa-minus"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="" class="col-sm-4">Style</label>
-                                                <div class="col-md-8">
-                                                    <select name="icons[{{$key}}][style]" id="" class="form-control style">
-                                                        {!! $icon_styles !!}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button class="btn btn-danger pull-right remove_this"><i class="fa fa-minus"></i></button>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                                <div class="col-md-12 prepend_template">
-                                    <button class="btn btn-primary pull-right render_icons"><i class="fa fa-plus"></i></button>
+                                        @endforeach
+                                    @endif
+                                    <div class="col-md-12 prepend_template">
+                                        <button class="btn btn-primary pull-right render_icons"><i class="fa fa-plus"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {!! Form::close() !!}
             </div>
             <div class="col-md-12 custom_margin is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
 
@@ -105,15 +106,6 @@
 @section('JS')
     <script>
         window.onload = function(){
-            function makeid() {
-                var text = "";
-                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-                for (var i = 0; i < 5; i++)
-                    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-                return text;
-            }
             var icons_index = {{isset($settings['icons']) ? count($settings['icons']) : 0}};
             $("body").delegate(".render_icons","click",function(e){
                 e.preventDefault();
@@ -122,7 +114,6 @@
                     datatype: "json",
                     url: "/admin/front-site/structure/hooks/renderbbbuton",
                     data: {id: icons_index},
-                    async:false,
                     headers: {
                         'X-CSRF-TOKEN': $('[name="_token"]').val()
                     },
@@ -135,12 +126,14 @@
             });
             $("body").delegate(".remove_this","click",function(e){
                 e.preventDefault();
+                var parent = $(this).parents(".lets_each").data("id");
+                $(".lets_change_grid_or_remove_"+parent).remove();
                 $(this).parent().parent().remove();
                 if(icons_index != 0){
                     icons_index -= 1;
                 }
                 $(".lets_each").each(function(index,item){
-                    $(item).find("input.bb-button-realted-hidden-input").attr("name",'menu_area['+index+']');
+                    $(item).find("input.bb-button-realted-hidden-input").attr("name",'menu_area['+index+'][variation]');
                     $(item).find("select.style").attr("name",'menu_area['+index+'][style]');
                 });
                 $("input.url").trigger("keyup");
@@ -158,6 +151,7 @@
                 var html = '';
                 $(".bb-button-realted-hidden-input").each(function(index,item){
                     var val = $(item).val();
+                    var removable = $(item).parents(".lets_each").data("id");
                     $.ajax({
                         type: "post",
                         datatype: "json",
@@ -168,11 +162,12 @@
                             'X-CSRF-TOKEN': $('[name="_token"]').val()
                         },
                         success: function (data) {
-                            var col = $(".get_col").val();
-                            if(!col){
+                          //  var col = $(".get_col").val();
+                            var col = $(item).parents(".lets_each").find("select.custom_change_grid").val();
+                            if(col == 0){
                                 col = 4;
                             }
-                            html += '<div class="col-md-'+col+'">'+data.html+'</div>';
+                            html += '<div class="col-md-'+col+' lets_change_grid_or_remove_'+removable+'">'+data.html+'</div>';
                         }
                     });
                 });
@@ -181,6 +176,14 @@
             $("body").delegate(".input-group-addon button","click",function(){
                 $(".input-group-addon button").parents(".lets_each").find("select.style").removeClass("get_col");
                 $(this).parents(".lets_each").find("select.style").addClass("get_col");
+            });
+            $("body").delegate(".custom_change_grid","change",function(){
+                var parent = $(this).data("parent");
+                var grid = $(this).val();
+                if (grid == 0){
+                    grid = 4;
+                }
+                $(".lets_change_grid_or_remove_"+parent).removeAttr("class").addClass('lets_change_grid_or_remove_'+parent+' col-md-'+grid);
             });
         }
     </script>

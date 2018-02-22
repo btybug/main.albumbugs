@@ -169,7 +169,9 @@ class ModalityController extends Controller
         $data = $request->all();
         $key = $data['type'];
         $units = Painter::all()->sortByTag($key);
-        $selected = Painter::findByVariation($data['value']);
+        $selected = null;
+
+        if(isset($data['value'])) $selected = Painter::findByVariation($data['value']);
 
         if (!count($units)) return \Response::json(['error' => true]);
 

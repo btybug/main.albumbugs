@@ -16,7 +16,9 @@
         @if(isset($settings['data_source']))
             @if($settings['data_source'] == 'manual')
                 <div class="form-group data_source_manual">
-                    {!! Form::textarea('json_data[manual]',null,['class' => 'form-control','id' => 'data_source_manual']) !!}
+                    {!! Form::textarea('json_data[manual]',
+                   (isset($settings['json_data']['manual'])) ? $settings['json_data']['manual'] : null,
+                    ['class' => 'form-control','id' => 'data_source_manual']) !!}
                 </div>
             @endif
             @if($settings['data_source'] == 'related')

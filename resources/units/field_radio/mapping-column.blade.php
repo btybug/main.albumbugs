@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="form-group">
         <label class="col-xs-4 col-md-4 control-label" for="name">Data Source</label>
         <div class="col-xs-8 col-md-8">
@@ -11,6 +11,7 @@
              'bb'=>'BB Functions',
              'file'=>'File'], null,['class'=>'form-control','id'=>'data_source']) !!}
         </div>
+        <div class="clearfix"></div>
     </div>
     <div class="select_op_box">
         @if(isset($settings['data_source']))
@@ -29,6 +30,7 @@
                         (isset($settings['json_data']['data_source_table_name'])) ? $settings['json_data']['data_source_table_name'] : null,
                         ['class' => 'form-control','id' => 'data_source_table_name']) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
                 @if(isset($settings['json_data']['data_source_table_name']) && count(BBGetTableColumn($settings['json_data']['data_source_table_name'])))
                     <div class="form-group columns_list">
@@ -39,6 +41,7 @@
 
                             ['class' => 'form-control','id' => 'table_column']) !!}
                         </div>
+                        <div class="clearfix"></div>
                     </div>
                 @endif
             @endif
@@ -55,6 +58,7 @@
                     <div class="col-md-4">
                         {!! Form::text('json_data[bb]',null,['class' => 'btn btn-warning btn-md input-md']) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             @endif
 
@@ -64,6 +68,7 @@
                     <div class="col-xs-8 col-md-8">
                         {!! BBbutton('json_data[file]','file-unit','Select File',['class' => 'form-control input-md','data-type' => 'files','model' => (isset($settings['data_source'])) ? $settings['json_data'] : ""]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             @endif
         @endif

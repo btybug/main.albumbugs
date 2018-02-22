@@ -20,7 +20,7 @@
         }
     }
 @endphp
-<div class="col-md-6 {!! issetReturn($settings,'vahag_ste_kdnes_selectid_namen',null) !!}">
+<div class="col-md-6 {!! issetReturn($settings,'radio_inp',null) !!}">
 
     <fieldset class="bty-form-radio formgeneral" id="bty-input-id-0">
         <div class="form-group">
@@ -31,12 +31,14 @@
             <div class="col-sm-12">
                 @if(count($arr))
                     @foreach($arr as $key => $item)
-                        <div class="radio block">
-                            <label>
-                                <input name="table_name_column_name" value="{{ $key }}" type="radio"
-                                       id="bty-gender-form-{{ $key }}">
-                                {{$item}}
-                            </label>
+                        <div class="radio block ">
+                            <input name="table_name_column_name" value="{{ $key }}" type="radio" id="bty-gender-form-{{ $key }}">
+                            <label for="bty-gender-form-{{ $key }}">{{$item}}</label>
+                            {{--<label>--}}
+                                {{--<input name="table_name_column_name" value="{{ $key }}" type="radio"--}}
+                                       {{--id="bty-gender-form-{{ $key }}">--}}
+                                {{--{{$item}}--}}
+                            {{--</label>--}}
                         </div>
                     @endforeach
                 @endif

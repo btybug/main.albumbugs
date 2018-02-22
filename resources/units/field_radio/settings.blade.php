@@ -15,10 +15,10 @@
                             <label>Field style</label>
                         </div>
                         <div class="col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">style1</option>
-                                <option value="">style2</option>
-                                <option value="">style3</option>
+                            <select name="radio_inp" id="" class="form-control">
+                                <option value="input-radio-1-bty">radio-1</option>
+                                <option value="input-radio-2-bty">radio-2</option>
+                                <option value="input-radio-3-bty">radio-3</option>
                             </select>
                         </div>
                         <div class="clearfix"></div>

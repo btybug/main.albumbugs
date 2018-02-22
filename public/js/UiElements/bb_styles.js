@@ -195,14 +195,10 @@ $(document).ready(function () {
                         $('body').find('a[data-strcuture="'+key+'"]')
                             .attr('href','/admin/uploads/gears/settings/'+value+'.'+key);
 
-                        $('body').find('.bb-button-realted-hidden-input[data-name="'+BBcustomize.data('key')+'"]')
-                            .attr('value',value+'.'+key);
+                        $('body').find('input[data-name="'+BBcustomize.data('key')+'"]').attr('value',value+'.'+key).trigger('change');
 
                         $('body').find('[data-id="'+BBcustomize.data('key')+'"]')
                             .attr('value',data.unit.title);
-
-                        $("input[data-name='" + BBcustomize.attr("data-key") + "']").val($(this).find('input').attr('data-value')).trigger('change');
-
 
                         $('body').find('.modal-data-items .btn-primary')
                             .removeAttr('name')

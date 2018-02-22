@@ -22,16 +22,20 @@
             @if($settings['data_source'] == 'related')
                 <div class="form-group data-source-box">
                     <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
-                    <div class="col-md-4">
-                        {!! Form::select('json_data[data_source_table_name]',['' => 'Select Table'] + BBGetTables(), null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
+                    <div class="col-md-8">
+                        {!! Form::select('json_data[data_source_table_name]',['' => 'Select Table'] + BBGetTables(),
+                        (isset($settings['json_data']['data_source_table_name'])) ? $settings['json_data']['data_source_table_name'] : null,
+                        ['class' => 'form-control','id' => 'data_source_table_name']) !!}
                     </div>
                 </div>
                 @if(isset($settings['json_data']['data_source_table_name']) && count(BBGetTableColumn($settings['json_data']['data_source_table_name'])))
                     <div class="form-group columns_list">
                         <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             {!! Form::select('json_data[data_source_columns]',['' => 'Select Column'] + BBGetTableColumn($settings['json_data']['data_source_table_name']) ,
-                            null,['class' => 'form-control','id' => 'table_column']) !!}
+                           (isset($settings['json_data']['data_source_columns'])) ? $settings['json_data']['data_source_columns'] : null,
+
+                            ['class' => 'form-control','id' => 'table_column']) !!}
                         </div>
                     </div>
                 @endif

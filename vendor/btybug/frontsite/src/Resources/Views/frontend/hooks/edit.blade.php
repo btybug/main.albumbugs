@@ -8,13 +8,13 @@
                     {!! Form::text('name',$hook->name,["class" => "form-control"]) !!}
                 </div>
                 <div class="col-md-3">
-                    {!! Form::select('type',['Horizontal'=>"Horizontal","Vertical"=>"Vertical"],$hook->type,["class"=>"form-control"]) !!}
+                    {!! Form::select('type',["Vertical"=>"Vertical",'Horizontal'=>"Horizontal"],$hook->type,["class"=>"form-control is_horizontal"]) !!}
                 </div>
                 <div class="col-md-6">
                     <button class="btn btn-info pull-right">Save</button>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-12 custom_margin">
+                <div class="col-md-12 custom_margin is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
                     <div class="bty-panel-collapse">
                         <div>
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
@@ -126,6 +126,9 @@
         .custom_margin{
             margin-top:30px;
         }
+        .custom_hide{
+            display:none;
+        }
     </style>
     {!! HTML::style('public/css/menu.css?v=0.16') !!}
     {!! HTML::style('public/css/admin_pages.css') !!}
@@ -178,6 +181,14 @@
                 });
                 $("input.url").trigger("keyup");
                 return icons_index;
+            });
+            $("body").delegate(".is_horizontal","change",function(){
+                var value = $(this).val();
+                if(value == "Horizontal"){
+                    $(".is_show").removeClass("custom_hide");
+                }else{
+                    $(".is_show").addClass("custom_hide");
+                }
             });
         }
     </script>

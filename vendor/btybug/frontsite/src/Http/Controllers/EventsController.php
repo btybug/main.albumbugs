@@ -16,21 +16,9 @@ class EventsController extends Controller
 {
     public function getIndex()
     {
-//        $subscripts = \Subscriber::getSubscriptions()->getData();
-//        $tabs=[];
-//        $f_name='Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@Notification';
-//        $e_name='App\Events\AfterLoginEvent';
-//        if (isset($subscripts[$e_name])) {
-//            foreach ($subscripts[$e_name] as $key => $value) {
-//                if (strpos($key, $f_name) === 0) {
-//                    $tabs[] = $value;
-//                }
-//
-//            }
-//        }
 
+//        dd($tabs);
         $subscriber = \Subscriber::getSubscriptions();
-//        dd($subscriber);
         return view('manage::events.index', compact('subscriber'));
     }
 
@@ -69,20 +57,17 @@ class EventsController extends Controller
 
     public function postGetEventFunctionRelation(Request $request)
     {
-        $f_name = $request->get('function_namespace');
         $e_name = $request->get('event_namespace');
-        $form = \Subscriber::getForm($f_name);
         $subscripts = \Subscriber::getSubscriptions()->getData();
         $tabs = [];
         if (isset($subscripts[$e_name])) {
             foreach ($subscripts[$e_name] as $key => $value) {
-                if (strpos($key, $f_name) === 0) {
-                    $tabs[] = $value;
-                }
-
+                $functionNamespace = explode('$', $key);
+                $tabs[] = ['namespace' => $functionNamespace[0], 'data' => $value, 'form' => \Subscriber::getForm($functionNamespace[0])];
             }
         }
-        return \Response::json(['form' => $form, 'tabs' => $tabs]);
+
+        return \Response::json(['tabs' => $tabs]);
     }
 
     public function postSaveEventFunctionRelation(Request $request)

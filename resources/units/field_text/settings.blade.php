@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div  class="row visibility-box {!! (1) ? "show" : "hide" !!}">
+    <div class="row visibility-box {!! (1) ? "show" : "hide" !!}">
         <div class="bty-panel-collapse">
             <div>
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#inputdata"
@@ -81,15 +81,10 @@
             </div>
             <div id="inputdata" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
-                    <div class="col-md-12">
-                        <div class="row m-b-10 mapping-column">
-                            @include($_this->slug."::mapping-column")
-                        </div>
-                    </div>
                     <div class="form-group col-md-12 m-b-10">
-                        <label class="col-sm-4 p-l-0 control-label m-0  text-left">Extra Validation</label>
+                        <label class="col-sm-4 p-l-0 control-label m-0  text-left">Default Value</label>
                         <div class="col-sm-8">
-                            {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
+                            {!! Form::text('default_val',null,['class' => 'form-control']) !!}
                         </div>
                     </div>
 
@@ -100,3 +95,8 @@
 
 </div>
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
+{!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+<script>
+    $('.icp').iconpicker();
+</script>

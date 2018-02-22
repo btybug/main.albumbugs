@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-8">
     <div class="form-group">
         <label class="col-xs-4 col-md-4 control-label" for="name">Data Source</label>
         <div class="col-xs-8 col-md-8">
@@ -11,7 +11,6 @@
              'bb'=>'BB Functions',
              'file'=>'File'], null,['class'=>'form-control','id'=>'data_source']) !!}
         </div>
-        <div class="clearfix"></div>
     </div>
     <div class="select_op_box">
         @if(isset($settings['data_source']))
@@ -30,7 +29,6 @@
                         (isset($settings['json_data']['data_source_table_name'])) ? $settings['json_data']['data_source_table_name'] : null,
                         ['class' => 'form-control','id' => 'data_source_table_name']) !!}
                     </div>
-                    <div class="clearfix"></div>
                 </div>
                 @if(isset($settings['json_data']['data_source_table_name']) && count(BBGetTableColumn($settings['json_data']['data_source_table_name'])))
                     <div class="form-group columns_list">
@@ -41,7 +39,6 @@
 
                             ['class' => 'form-control','id' => 'table_column']) !!}
                         </div>
-                        <div class="clearfix"></div>
                     </div>
                 @endif
             @endif
@@ -58,7 +55,6 @@
                     <div class="col-md-4">
                         {!! Form::text('json_data[bb]',null,['class' => 'btn btn-warning btn-md input-md']) !!}
                     </div>
-                    <div class="clearfix"></div>
                 </div>
             @endif
 
@@ -68,7 +64,6 @@
                     <div class="col-xs-8 col-md-8">
                         {!! BBbutton('json_data[file]','file-unit','Select File',['class' => 'form-control input-md','data-type' => 'files','model' => (isset($settings['data_source'])) ? $settings['json_data'] : ""]) !!}
                     </div>
-                    <div class="clearfix"></div>
                 </div>
             @endif
         @endif
@@ -77,26 +72,7 @@
 </div>
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
-<script type="temolate" id="manual-field-option">
-    {{--<textarea class="form-control" type="textarea" id='data_source_manual' placeholder='Type options separated with' name='json_data[manual]'></textarea>--}}
-    <div>
-        <div class="form-group">
-        <div class="col-md-4">
 
-</div>
-<div class="col-md-7">
-<input type="text" class="form-control">
-</div>
-<div class="col-md-1">
-<button class="btn btn-danger pull-right remove_this" type="button"><i class="fa fa-minus"></i></button>
-</div>
-        </div>
-        <div class="col-md-12">
-             <button class="btn btn-primary pull-right render_icons" type="button"><i class="fa fa-plus"></i></button>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-</script>
 <script>
     $('.icp').iconpicker();
     var dd = console.log;
@@ -557,7 +533,13 @@
                     data_group = $('<div/>', {
                         class: 'form-group data_source_manual'
                     });
-                    var textarea = $('#manual-field-option').html();
+                    var textarea = $('<textarea/>', {
+                        "class": 'form-control',
+                        "type": 'textarea',
+                        "id": 'data_source_manual',
+                        "placeholder": 'Type options separated with ,',
+                        "name": 'json_data[manual]'
+                    });
 
                     data_group.append(textarea);
                     $('.select_op_box').append(data_group);
@@ -656,7 +638,7 @@
                                 data_group.append(data_group_label);
 
                                 var data_group_col = $('<div/>', {
-                                    class: 'col-md-8'
+                                    class: 'col-md-4'
                                 });
                                 data_group.append(data_group_col);
 
@@ -797,7 +779,7 @@
                     data_group.append(data_group_label);
 
                     var data_group_col = $('<div/>', {
-                        class: 'col-md-8'
+                        class: 'col-md-4'
                     });
                     data_group.append(data_group_col);
 

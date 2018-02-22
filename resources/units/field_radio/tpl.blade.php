@@ -2,7 +2,7 @@
     <div class="form-group">
         <label class="col-sm-12 control-label">{!! issetReturn($settings,'label',null) !!}</label>
         <div class="col-sm-12">
-            @if(count())
+            @if(0)
                 @foreach(get_field_data($field) as $key => $item)
                     <div class="radio block">
                         <label>
@@ -15,4 +15,3 @@
         </div>
     </div>
 </fieldset>
-{!! BBRenderUnits() !!}

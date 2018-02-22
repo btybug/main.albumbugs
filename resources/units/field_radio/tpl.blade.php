@@ -1,3 +1,5 @@
+{!! BBstyle($_this->path.DS.'css/main.css') !!}
+
 @php
     $arr = [];
     if(isset($settings['json_data']) && count($settings['json_data'])){
@@ -20,38 +22,28 @@
         }
     }
 @endphp
-<div class="col-md-6 ">
 
-    <fieldset class="bty-form-radio formgeneral" id="bty-input-id-0">
-        <div class="form-group">
-            <label class="col-sm-6 control-label">
-            <span class="input-group-addon col-md-2">
-                    <i class="fa {!! issetReturn($settings,'icon',null) !!}"></i>
-                </span>{!! issetReturn($settings,'label',null) !!}</label>
-            <div class="col-sm-12 {!! issetReturn($settings,'radio_inp',null) !!}">
-                @if(count($arr))
-                    @foreach($arr as $key => $item)
-                        <div class="radio block ">
-                            <input name="table_name_column_name" value="{{ $key }}" type="radio" id="bty-gender-form-{{ $key }}">
-                            <label for="bty-gender-form-{{ $key }}">{{$item}}</label>
-                            {{--<label>--}}
-                                {{--<input name="table_name_column_name" value="{{ $key }}" type="radio"--}}
-                                       {{--id="bty-gender-form-{{ $key }}">--}}
-                                {{--{{$item}}--}}
-                            {{--</label>--}}
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-            <div class="col-sm-3">
-            <span class="input-group-addon tooltip1">
-                        <i class="fa {!! issetReturn($settings,'tooltip_icon',null)!!}"></i>
-                    <span class="tooltiptext">{!! issetReturn($settings,'help',null) !!}</span>
+
+<div class="form-group {!! issetReturn($settings,'radio_inp',null) !!}">
+    <h4>
+        @if(has_setting($settings, 'icon'))
+        <i class="fa {!! issetReturn($settings,'icon',null) !!}"></i>
+        @endif
+        {!! issetReturn($settings,'label',null) !!}
+        @if(has_setting($settings, 'tooltip_icon'))
+            <span title="{!! issetReturn($settings,'help',null) !!}">
+                <i class="fa {!! issetReturn($settings,'tooltip_icon',null) !!}"></i>
             </span>
+        @endif
+    </h4>
+    @if(count($arr))
+        @foreach($arr as $key => $item)
+            <div class="radio-input">
+                <input type="radio" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
+                <label for="optionsRadios-{{ $key }}">
+                    {{$item}}
+                </label>
             </div>
-        </div>
-    </fieldset>
-
+        @endforeach
+    @endif
 </div>
-
-

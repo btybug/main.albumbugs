@@ -17,14 +17,8 @@
                         <div class="col-md-9">
                             <select name="radio_inp" id="" class="form-control">
                                 <option value="">Select radio</option>
-                                <option value="input-radio-1-bty">radio-1</option>
-                                <option value="input-radio-2-bty">radio-2</option>
-                                <option value="input-radio-3-bty">radio-3</option>
-                                <option value="input-radio-4-bty">radio-4</option>
-                                <option value="input-radio-5-bty">radio-5</option>
-                                <option value="input-radio-6-bty">radio-6</option>
-                                <option value="input-radio-7-bty">radio-7</option>
-                                <option value="input-radio-8-bty">radio-8</option>
+                                <option value="input-radio-2-bty">Style 1</option>
+                                <option value="input-radio-7-bty">Style 2</option>
                             </select>
                         </div>
                         <div class="clearfix"></div>

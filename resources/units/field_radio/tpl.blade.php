@@ -20,11 +20,10 @@
         }
     }
 @endphp
-<div class="col-md-6">
+<div class="col-md-6 {!! issetReturn($settings,'vahag_ste_kdnes_selectid_namen',null) !!}">
 
     <fieldset class="bty-form-radio formgeneral" id="bty-input-id-0">
         <div class="form-group">
-
             <label class="col-sm-6 control-label">
             <span class="input-group-addon col-md-2">
                     <i class="fa {!! issetReturn($settings,'icon',null) !!}"></i>

@@ -13,31 +13,55 @@
         </div>
     </div>
     <div class="select_op_box">
-        {{--{!! dd($field->json_data) !!}--}}
+        @if(isset($settings['data_source']))
+            @if($settings['data_source'] == 'manual')
+                <div class="form-group data_source_manual">
+                    {!! Form::textarea('json_data[manual]',null,['class' => 'form-control','id' => 'data_source_manual']) !!}
+                </div>
+            @endif
+            @if($settings['data_source'] == 'related')
+                <div class="form-group data-source-box">
+                    <label class="col-md-4 control-label" for="bbfunction">Select Table</label>
+                    <div class="col-md-4">
+                        {!! Form::select('json_data[data_source_table_name]',['' => 'Select Table'] + BBGetTables(), null,['class' => 'form-control','id' => 'data_source_table_name']) !!}
+                    </div>
+                </div>
+                @if(isset($settings['json_data']['data_source_table_name']) && count(BBGetTableColumn($settings['json_data']['data_source_table_name'])))
+                    <div class="form-group columns_list">
+                        <label class="col-md-4 control-label" for="bbfunction">Select Column</label>
+                        <div class="col-md-4">
+                            {!! Form::select('json_data[data_source_columns]',['' => 'Select Column'] + BBGetTableColumn($settings['json_data']['data_source_table_name']) ,
+                            null,['class' => 'form-control','id' => 'table_column']) !!}
+                        </div>
+                    </div>
+                @endif
+            @endif
 
-        {{--<div class="data-source-box">--}}
-        {{--@if(isset($settings['data_source_type_val']))--}}
-        {{--<div class="form-group file-box">--}}
-        {{--<div class="col-xs-8 col-md-offset-4">--}}
-        {{--{!! Form::select('data_source_type_val',['' => 'Select Data Value'] + (array)\App\helpers\FieldHelper::getHeading($settings['file-unit']),$settings['data_source_type_val'],['class' => 'form-control','id' =>'data_source_type_val']) !!}--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@endif--}}
-        {{--@if(isset($settings['data_source_type_key']))--}}
-        {{--<div class="form-group file-box">--}}
-        {{--<div class="col-xs-8 col-md-offset-4">--}}
-        {{--{!! Form::select('data_source_type_key',['' => 'Select Data Key'] + (array)\App\helpers\FieldHelper::getHeading($settings['file-unit']),$settings['data_source_type_key'],['class' => 'form-control','id' =>'data_source_type_key']) !!}--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@if(isset($settings['data_source_type_default']))--}}
-        {{--<div class="form-group file-box">--}}
-        {{--<div class="col-xs-8 col-md-offset-4">--}}
-        {{--{!! Form::select('data_source_type_default', ['' => 'Select Default'] + (array)\App\helpers\FieldHelper::getPluck($settings['file-unit'],$settings['data_source_type_key']),$settings['data_source_type_default'],['class' => 'form-control','id' =>'data_source_type_default']) !!}--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@endif--}}
-        {{--@endif--}}
-        {{--</div>--}}
+            @if($settings['data_source'] == 'api')
+                <div class="form-group data_source_api">
+                    {!! Form::text('json_data[api]',null,['class' => 'btn btn-warning btn-md input-md','id' => 'data_source_api','placeholder' => 'Put Api Url ...']) !!}
+                </div>
+            @endif
+
+            @if($settings['data_source'] == 'bb')
+                <div class="form-group data-source-box">
+                    <label class="col-md-4 control-label" for="bbfunction">Insert BB</label>
+                    <div class="col-md-4">
+                        {!! Form::text('json_data[bb]',null,['class' => 'btn btn-warning btn-md input-md']) !!}
+                    </div>
+                </div>
+            @endif
+
+            @if($settings['data_source'] == 'file')
+                <div class="form-group">
+                    <label class="col-xs-4 col-md-4 control-label" for="selectbasic">Files</label>
+                    <div class="col-xs-8 col-md-8">
+                        {!! BBbutton('json_data[file]','file-unit','Select File',['class' => 'form-control input-md','data-type' => 'files','model' => (isset($settings['data_source'])) ? $settings['json_data'] : ""]) !!}
+                    </div>
+                </div>
+            @endif
+        @endif
+
     </div>
 </div>
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}

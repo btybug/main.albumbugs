@@ -120,6 +120,7 @@ Route::group(['prefix'=>'structure'], function () {
     Route::group(['prefix' => 'hooks'], function () {
         Route::get('/', 'HooksController@getIndex',true)->name('frontsite_hooks_index');
         Route::get('/edit/{id}', 'HooksController@getEdit',true)->name('frontsite_hooks_edit');
+        Route::post('/edit/{id}', 'HooksController@saveEdit',true)->name('frontsite_hooks_edit_save');
 
     });
     Route::group(['prefix' => 'filters'], function () {

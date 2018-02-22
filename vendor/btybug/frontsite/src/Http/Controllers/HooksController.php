@@ -34,4 +34,10 @@ class HooksController extends Controller
         $hook = $hookRepository->findOrFail($id);
         return view('manage::frontend.hooks.edit', compact(["hook"]));
     }
+    public function saveEdit($id, HookRepository $hookRepository, Request $request)
+    {
+        $data = $request->except("_token");
+        $update = $hookRepository->update($id,$data);
+        return redirect()->route('frontsite_hooks_index');
+    }
 }

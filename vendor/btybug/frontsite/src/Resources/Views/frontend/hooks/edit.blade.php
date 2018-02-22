@@ -2,14 +2,12 @@
 @section('content')
     <div role="tabpanel" class="m-t-10" id="main">
             <div class="head-top">
-                <div class="col-md-3 name">
-                    Hook Name
+                {!! Form::model($hook,['url' => route('frontsite_hooks_edit_save',$hook->id)]) !!}
+                <div class="col-md-3">
+                    {!! Form::text('name',$hook->name,["class" => "form-control"]) !!}
                 </div>
                 <div class="col-md-3">
-                    <select name="" id="" class="form-control">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                    </select>
+                    {!! Form::select('type',['Horizontal'=>"Horizontal","Vertical"=>"Vertical"],$hook->type,["class"=>"form-control"]) !!}
                 </div>
                 <div class="col-md-6">
                     <button class="btn btn-info pull-right">Save</button>

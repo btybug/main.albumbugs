@@ -41,16 +41,6 @@
       "title": "Top hook"
     }
   },
-  "hook":{
-    "top_hook": {
-      "units":[
-        "my_account_left_menu.default"
-      ],
-      "type": "unit",
-      "tag": "hook",
-      "title": "Top hook"
-    }
-  },
   "folder": "front_layout_with_test",
   "active": false,
   "tags":["front_pages_layout"],

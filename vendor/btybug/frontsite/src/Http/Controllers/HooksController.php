@@ -40,4 +40,9 @@ class HooksController extends Controller
         $update = $hookRepository->update($id,$data);
         return redirect()->route('frontsite_hooks_index');
     }
+    public function renderBbButton(Request $request){
+        $repl = $request->id;
+        $html = $html = \View::make('manage::frontend.hooks._partials.hook_tpl', compact('repl'))->render();
+        return response()->json(["html"=>$html]);
+    }
 }

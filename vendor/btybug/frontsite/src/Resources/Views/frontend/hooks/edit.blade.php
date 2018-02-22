@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 custom_margin bordered is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
+            <div class="col-md-12 custom_margin is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
 
             </div>
     </div>
@@ -103,35 +103,34 @@
 
 
 @section('JS')
-
-    <script type="template" id="temp1">
-        <div class="form-group lets_each">
-            <div class="col-md-7">
-                {!! BBbutton2('menus','menu_area[{repl}]','frontend','Select Menu',['class'=>'form-control input-md ic','model'=>null]) !!}
-            </div>
-            <div class="col-md-4">
-                <label for="" class="col-sm-3">Style</label>
-                <div class="col-md-9">
-                    <select name="menu_area[{repl1}][style]" id="" class="form-control style">
-                        <option>Style 1</option>
-                        <option>Style 2</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <button class="btn btn-danger pull-right remove_this"><i class="fa fa-minus"></i></button>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </script>
     <script>
         window.onload = function(){
+            function makeid() {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for (var i = 0; i < 5; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }
             var icons_index = {{isset($settings['icons']) ? count($settings['icons']) : 0}};
             $("body").delegate(".render_icons","click",function(e){
                 e.preventDefault();
-                var html = $("#temp1").html();
-                html = html.replace('{repl}',icons_index).replace('{repl1}',icons_index);
-                $(".prepend_template").before(html);
+                $.ajax({
+                    type: "post",
+                    datatype: "json",
+                    url: "/admin/front-site/structure/hooks/renderbbbuton",
+                    data: {id: icons_index},
+                    async:false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('[name="_token"]').val()
+                    },
+                    success: function (data) {
+                        $(".prepend_template").before(data.html);
+                    }
+                });
+
                 return icons_index += 1;
             });
             $("body").delegate(".remove_this","click",function(e){
@@ -154,6 +153,34 @@
                 }else{
                     $(".is_show").addClass("custom_hide");
                 }
+            });
+            $("body").delegate(".item.item-unit","click",function(){
+                var html = '';
+                $(".bb-button-realted-hidden-input").each(function(index,item){
+                    var val = $(item).val();
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: "/admin/console/bburl/render-unit",
+                        data: {id: val},
+                        async:false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('[name="_token"]').val()
+                        },
+                        success: function (data) {
+                            var col = $(".get_col").val();
+                            if(!col){
+                                col = 4;
+                            }
+                            html += '<div class="col-md-'+col+'">'+data.html+'</div>';
+                        }
+                    });
+                });
+                $(".is_show").html(html);
+            });
+            $("body").delegate(".input-group-addon button","click",function(){
+                $(".input-group-addon button").parents(".lets_each").find("select.style").removeClass("get_col");
+                $(this).parents(".lets_each").find("select.style").addClass("get_col");
             });
         }
     </script>

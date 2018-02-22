@@ -14,7 +14,7 @@
                     <button class="btn btn-info pull-right">Save</button>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-12 custom_margin is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
+                <div class="col-md-12 custom_margin">
                     <div class="bty-panel-collapse">
                         <div>
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
@@ -65,50 +65,11 @@
                     </div>
                 </div>
             </div>
-    </div>
+            <div class="col-md-12 custom_margin bordered is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
 
-
-
-    <div class="modal fade" id="view-unit" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Unit Preview</h4>
-                </div>
-                <div class="modal-body">
-
-                </div>
             </div>
-        </div>
     </div>
 
-    <div class="modal fade" id="full-page-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <button class="btn close-live-edit" data-dismiss="modal" aria-label="Close">
-                    <span class="fa fa-power-off"></span>
-                </button>
-                <div class="modal-body">
-                    <div class="live-edit-menu">
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                Action
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Some live action</a></li>
-                                <li><a href="#">Some live Settings</a></li>
-                                <li><a href="#">Some live etc</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="iframe-area"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 @stop
@@ -128,6 +89,10 @@
         }
         .custom_hide{
             display:none;
+        }
+        .bordered{
+            height:300px;
+            border: 1px solid;
         }
     </style>
     {!! HTML::style('public/css/menu.css?v=0.16') !!}

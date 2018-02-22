@@ -1,6 +1,1 @@
-{
-  "title": "default",
-  "settings": {
-  },
-  "id": "field_radio.default"
-}
+{"title":"default","settings":{"label":null,"placeholder":null,"icon":null,"tooltip_icon":null,"help":null,"validation_message":null,"data_source":"related","json_data":{"data_source_table_name":"admin_pages","data_source_columns":"title"},"extravalidation":null},"id":"field_radio.default"}

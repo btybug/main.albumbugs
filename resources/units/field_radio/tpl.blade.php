@@ -24,26 +24,32 @@
 @endphp
 
 
-<div class="form-group {!! issetReturn($settings,'radio_inp',null) !!}">
-    <h4>
-        @if(has_setting($settings, 'icon'))
-        <i class="fa {!! issetReturn($settings,'icon',null) !!}"></i>
-        @endif
-        {!! issetReturn($settings,'label',null) !!}
-        @if(has_setting($settings, 'tooltip_icon'))
-            <span title="{!! issetReturn($settings,'help',null) !!}">
+<div class="form-group">
+    <div class="{!! issetReturn($settings,'radio_inp',null) !!}">
+        <h4>
+            @if(has_setting($settings, 'icon'))
+                <i class="fa {!! issetReturn($settings,'icon',null) !!}"></i>
+            @endif
+            {!! issetReturn($settings,'label',null) !!}
+            @if(has_setting($settings, 'tooltip_icon'))
+                <span title="{!! issetReturn($settings,'help',null) !!}">
                 <i class="fa {!! issetReturn($settings,'tooltip_icon',null) !!}"></i>
             </span>
-        @endif
-    </h4>
-    @if(count($arr))
-        @foreach($arr as $key => $item)
-            <div class="radio-input">
-                <input type="radio" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
-                <label for="optionsRadios-{{ $key }}">
-                    {{$item}}
-                </label>
-            </div>
-        @endforeach
-    @endif
+            @endif
+        </h4>
+        <div class="input-group">
+            @if(count($arr))
+                @foreach($arr as $key => $item)
+                    @if($item != "")
+                        <div class="radio-input">
+                            <input type="radio" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
+                            <label for="optionsRadios-{{ $key }}">
+                                {{$item}}
+                            </label>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+        </div>
+    </div>
 </div>

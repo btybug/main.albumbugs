@@ -31,12 +31,6 @@
                                 {!! Form::text('label',null,['class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="placeholder" class="col-sm-3 control-label m-0 text-left ">Placeholder</label>
-                            <div class="col-sm-8">
-                                {!! Form::text('placeholder',null,['class' => 'form-control']) !!}
-                            </div>
-                        </div>
                         <div class="clearfix"></div>
                     </div>
 

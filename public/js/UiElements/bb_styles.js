@@ -198,6 +198,7 @@ $(document).ready(function () {
                             .attr('href','/admin/uploads/gears/settings/'+value+'.'+key);
 
                         $('body').find('input[data-name="'+BBcustomize.data('key')+'"]').attr('value',value+'.'+key).trigger('change');
+                        $('body').find('button[data-key="'+BBcustomize.data('key')+'"]').attr('data-value',value+'.'+key);
 
                         $('body').find('[data-id="'+BBcustomize.data('key')+'"]')
                             .attr('value',data.unit.title);

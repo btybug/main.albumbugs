@@ -242,7 +242,7 @@ body{ background:#FFF;overflow-x: hidden;}
 
 }
 
-button.BBbuttons {
+button.BBbuttons, button.BBcustomize {
     border: none;
     background: transparent;
     font-weight: bold;

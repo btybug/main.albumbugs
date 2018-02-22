@@ -16,6 +16,7 @@
             }
 
 @endphp
+
 <div class="input-group">
     <div class="input-group-addon">{!! $text !!}</div>
     <input type="text"

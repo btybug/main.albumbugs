@@ -192,7 +192,7 @@ class ModalityController extends Controller
             $variation = $unit->variations(false)->find($variationName);
         }
 
-        return \Response::json(['error' => false, 'variation' => $variation->toArray()]);
+        return \Response::json(['error' => false,'unit' => $unit->toArray(),'variation' => $variation->toArray()]);
     }
 
     public function getUnits($data)

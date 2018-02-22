@@ -195,6 +195,15 @@ $(document).ready(function () {
                         $('body').find('a[data-strcuture="'+key+'"]')
                             .attr('href','/admin/uploads/gears/settings/'+value+'.'+key);
 
+                        $('body').find('.bb-button-realted-hidden-input[data-name="'+BBcustomize.data('key')+'"]')
+                            .attr('value',value+'.'+key);
+
+                        $('body').find('[data-id="'+BBcustomize.data('key')+'"]')
+                            .attr('value',data.unit.title);
+
+                        $("input[data-name='" + BBcustomize.attr("data-key") + "']").val($(this).find('input').attr('data-value')).trigger('change');
+
+
                         $('body').find('.modal-data-items .btn-primary')
                             .removeAttr('name')
                             .removeAttr('value');
@@ -204,14 +213,7 @@ $(document).ready(function () {
                             .addClass('btn-info');
                         $(this).removeClass('btn-info')
                         $(this).addClass('btn-primary').addClass('active');
-                        $("input[data-name='" + BBcustomize.attr("data-key") + "']").val($(this).find('input').attr('data-value')).trigger('change');
                         $('#magic-settings span[aria-hidden=true]').click();
-
-                        $('[data-bbplace="' + BBcustomize.attr('data-key') + '"]')
-                            .removeClass($('[data-bbplace="' + BBcustomize.attr('data-key') + '"]')
-                                .attr('data-style-old'))
-                            .attr('data-style-old', $(this).find('input').attr('data-value'))
-                            .addClass($(this).find('input').attr('data-value'));
                     }
                 }
             });

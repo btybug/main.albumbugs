@@ -34,10 +34,23 @@ class HooksController extends Controller
         $hook = $hookRepository->findOrFail($id);
         return view('manage::frontend.hooks.edit', compact(["hook"]));
     }
+    public function create(HookRepository $hookRepository){
+        $hook = $hookRepository->model();
+        return view('manage::frontend.hooks.create', compact(["hook"]));
+    }
+    public function createSave(HookRepository $hookRepository, Request $request){
+        $data = $request->except("_token");
+        $create = $hookRepository->saveHook($data);
+        return redirect()->route('frontsite_hooks_index');
+    }
     public function saveEdit($id, HookRepository $hookRepository, Request $request)
     {
         $data = $request->except("_token");
         $update = $hookRepository->update($id,$data);
+        return redirect()->route('frontsite_hooks_index');
+    }
+    public function remove($id, HookRepository $hookRepository){
+        $hook = $hookRepository->delete($id);
         return redirect()->route('frontsite_hooks_index');
     }
     public function renderBbButton(Request $request){

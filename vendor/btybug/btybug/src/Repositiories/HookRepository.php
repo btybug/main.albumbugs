@@ -67,9 +67,28 @@ class HookRepository extends GeneralRepository
             }
         }
         if(count($arr)){
-            $model->data = json_encode($arr);
+            $model->data = $arr;
         }
-        $model->save($data);
+        $model->save();
+        return $model;
+    }
+    public function saveHook(array $data){
+        $model = $this->model();
+        $model->name = $data['name'];
+        $model->type = $data['type'];
+        $model->author_id = auth()->user()->id;
+        $arr = [];
+        if(isset($data["menu_area"])){
+            foreach ($data["menu_area"] as $unit){
+                if($unit["variation"]){
+                    $arr[] = $unit;
+                }
+            }
+        }
+        if(count($arr)){
+            $model->data = $arr;
+        }
+        $model->save();
         return $model;
     }
 }

@@ -27,6 +27,7 @@
                             <th>{{ BBgetDateFormat($hook->created_at) }}</th>
                             <th>
                                 <a href="{!! route("frontsite_hooks_edit",$hook->id) !!}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                <a href="{!! route("frontsite_hooks_remove",$hook->id) !!}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             </th>
                         </tr>
                     @endforeach
@@ -39,6 +40,7 @@
                 @endif
                 </tbody>
             </table>
+            <a href="{{route('frontsite_hooks_create')}}" class="btn btn-primary pull-right">Add new</a>
         </div>
     </div>
     @include('resources::assests.magicModal')
@@ -48,6 +50,11 @@
     {!! HTML::style('public/css/admin_pages.css') !!}
     {!! HTML::style('public/css/tool-css.css?v=0.23') !!}
     {!! HTML::style('public/css/page.css?v=0.15') !!}
+    <style>
+        #tpl-table .btn-danger{
+            border-radius: 4px;
+        }
+    </style>
 @stop
 
 

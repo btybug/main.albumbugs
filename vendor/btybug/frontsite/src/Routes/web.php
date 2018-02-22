@@ -121,8 +121,10 @@ Route::group(['prefix'=>'structure'], function () {
         Route::get('/', 'HooksController@getIndex',true)->name('frontsite_hooks_index');
         Route::post('/renderbbbuton', 'HooksController@renderBbButton')->name('render_bbbutton');
         Route::get('/edit/{id}', 'HooksController@getEdit',true)->name('frontsite_hooks_edit');
+        Route::get('/create', 'HooksController@create',true)->name('frontsite_hooks_create');
+        Route::post('/create', 'HooksController@createSave')->name('frontsite_hooks_create_save');
         Route::post('/edit/{id}', 'HooksController@saveEdit')->name('frontsite_hooks_edit_save');
-
+        Route::get('/remove/{id}', 'HooksController@remove',true)->name('frontsite_hooks_remove');
     });
     Route::group(['prefix' => 'filters'], function () {
         Route::get('/', 'FiltersController@getIndex',true);

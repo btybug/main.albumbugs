@@ -2,70 +2,43 @@
 @include('resources::assests.magicModal')
 @section('content')
     <div role="tabpanel" class="m-t-10" id="main">
-            <div class="head-top">
-                {!! Form::model($hook,['url' => route('frontsite_hooks_edit_save',$hook->id)]) !!}
-                    <div class="col-md-3">
-                        {!! Form::text('name',$hook->name,["class" => "form-control"]) !!}
-                    </div>
-                    <div class="col-md-3">
-                        {!! Form::select('type',["Vertical"=>"Vertical",'Horizontal'=>"Horizontal"],$hook->type,["class"=>"form-control is_horizontal"]) !!}
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-info pull-right">Save</button>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-12 custom_margin">
-                        <div class="bty-panel-collapse">
-                            <div>
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
-                                   aria-expanded="true">
-                                    <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                    <span class="title">Place holder</span>
-                                </a>
-                            </div>
-                            <div id="placeholder" class="collapse in" aria-expanded="true" style="">
-                                <div class="content bty-settings-panel">
-                                    @if(count($hook->data))
-                                        @foreach($hook->data as $key => $value)
-                                            <div class="form-group lets_each" data-id="{{$key}}">
-                                                <div class="col-md-7">
-                                                    {!! BBbutton2('unit','menu_area['.$key.'][variation]','frontend','Select Menu',['class'=>'form-control input-md ic','model'=>$value['variation']]) !!}
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="" class="col-sm-3">Grid</label>
-                                                    <div class="col-md-9">
-                                                        {!! Form::select('menu_area['.$key.'][style]',[0=>'select grid',1=>'1',2=>'2',3=>'3',4=>'4',5=>'5',6=>'6',7=>'7',8=>'8',9=>'9',10=>'10',11=>'11',12=>'12'],$value['style'],['class'=>'form-control style custom_change_grid','data-parent'=>$key]) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <button class="btn btn-danger pull-right remove_this"><i class="fa fa-minus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        @endforeach
-                                    @endif
-                                    <div class="col-md-12 prepend_template">
-                                        <button class="btn btn-primary pull-right render_icons"><i class="fa fa-plus"></i></button>
-                                    </div>
+        <div class="head-top">
+            {!! Form::model($hook,['url' => route('frontsite_hooks_create_save')]) !!}
+                <div class="col-md-3">
+                    {!! Form::text('name',null,["class" => "form-control"]) !!}
+                </div>
+                <div class="col-md-3">
+                    {!! Form::select('type',['Horizontal'=>"Horizontal","Vertical"=>"Vertical"],null,["class"=>"form-control is_horizontal"]) !!}
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-info pull-right">Save</button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 custom_margin">
+                    <div class="bty-panel-collapse">
+                        <div>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
+                               aria-expanded="true">
+                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                                <span class="title">Place holder</span>
+                            </a>
+                        </div>
+                        <div id="placeholder" class="collapse in" aria-expanded="true" style="">
+                            <div class="content bty-settings-panel">
+
+                                <div class="col-md-12 prepend_template">
+                                    <button class="btn btn-primary pull-right render_icons"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {!! Form::close() !!}
-            </div>
-            <div class="col-md-12 custom_margin is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
-                @if(count($hook->data))
-                    @foreach($hook->data as $key => $value)
-                        <div class="col-md-{{$value['style']}} lets_change_grid_or_remove_{{$key}}">
-                            {!! BBRenderUnits($value['variation']) !!}
-                        </div>
-                    @endforeach
-                @endif
-            </div>
+                </div>
+            {!! Form::close() !!}
+        </div>
+        <div class="col-md-12 custom_margin is_show">
+
+        </div>
     </div>
-
-
-
 @stop
 @section('CSS')
     <style>
@@ -99,7 +72,7 @@
 @section('JS')
     <script>
         window.onload = function(){
-            var icons_index = {{count($hook->data) ? count($hook->data) : 0}};
+            var icons_index = 0;
             $("body").delegate(".render_icons","click",function(e){
                 e.preventDefault();
                 $.ajax({

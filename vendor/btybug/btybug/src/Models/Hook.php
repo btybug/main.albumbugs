@@ -13,7 +13,7 @@ class Hook extends Model
      * @var string
      */
     protected $table = 'hooks';
-
+    protected $fillable = ["id","name","data","type"];
     /**
      * @var array
      */

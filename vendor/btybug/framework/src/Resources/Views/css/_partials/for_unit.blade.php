@@ -1,6 +1,118 @@
 <div class="d1">
     <h2>Unit</h2>
     <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-unit">
+                <div>
+                    <div>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h5>User card</h5>
+                        <hr>
+                        <ul>
+                            <li><i class="fa fa-calendar" aria-hidden="true"></i></li>
+                            <li><p>29 Mar 17</p></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div>
+                    <a class="bty-btn-acction bt-edit" href="#"></a>
+                    <a class="bty-btn-acction bt-delete" href="#"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-unit</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+               .bty-unit {
+    background-color: #499bc733;
+    padding: 5px;
+    display: inline-block;
+    box-shadow: 0px 0px 3px 0.2px #00000070;
+    border-radius: 3px;
+    transition: 0.1s ease;
+}
+
+.bty-unit:hover {
+    box-shadow: 0px 1px 6px 0.2px #444;
+}
+
+.bty-unit > div:first-child {
+    float: left;
+}
+
+.bty-unit > div:first-child > div:first-child {
+    float: left;
+
+}
+
+.bty-unit > div:first-child > div:first-child i {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+    padding: 20px;
+    background-color: #499bc7;
+    border-radius: 50%;
+}
+
+.bty-unit > div:first-child > div:last-child {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.bty-unit > div:first-child > div:last-child h5 {
+    font-weight: 400;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 1.75px;
+    font-size: 20px;
+}
+
+.bty-unit > div:first-child > div:last-child h5:after {
+    content: "\f05d";
+    font-family: FontAwesome;
+    color: #0B86C3;
+
+}
+
+.bty-unit > div:first-child > div:last-child hr {
+    border: solid;
+    border-width: 1px;
+    border-color: #0B86C3;
+    margin: 8px 0px;
+}
+
+.bty-unit > div:first-child > div:last-child ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bty-unit > div:first-child > div:last-child ul li {
+    display: inline-block;
+}
+
+.bty-unit > div:first-child > div:last-child ul li:first-child {
+    color: #0B86C3;
+    padding-right: 10%;
+}
+
+.bty-unit > div:first-child > div:last-child ul li:last-child p {
+    margin: 0;
+}
+
+.bty-unit > div:last-child {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-top: 8px;
+    margin-left: 2px;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
         <h4>Unit</h4>
         <h5>bty-unit</h5>
         <div class="bty-unit">

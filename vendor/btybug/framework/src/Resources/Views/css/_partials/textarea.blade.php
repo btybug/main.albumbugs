@@ -6,8 +6,7 @@
         </div>
         <div class="col-md-6">
             <h5>bty-textarea-1</h5>
-            <textarea name="" id="" cols="35" rows="2" readonly=""
-                      style="margin-top: 0; margin-bottom: 0; height: 100px; width: 100%">
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
               .bty-textarea-1 {
     width: 100%;
     height: 100px;
@@ -44,8 +43,7 @@
         </div>
         <div class="col-md-6">
             <h5>bty-textarea-2</h5>
-            <textarea name="" id="" cols="35" rows="2" readonly=""
-                      style="height: 100px; width: 100%">
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
 .bty-textarea-2 {
     width: 100%;
     line-height: 1.308em;
@@ -89,7 +87,7 @@
         </div>
         <div class="col-md-6">
             <h5>bty-textarea-3</h5>
-            <textarea name="" id="" cols="35" rows="2" readonly="" style="height: 100px; width: 100%">
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
 .bty-textarea-3 {
     height: 100px;
     box-shadow: 5px 7px 5px rgba(0, 0, 0, 0.5);

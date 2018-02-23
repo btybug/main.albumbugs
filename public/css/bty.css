@@ -2905,14 +2905,14 @@
     margin: auto;
 }
 
-.unfold {
+.bty-creative-menu-1 .unfold {
     height: 70px;
     -webkit-transform: translate3d(0, 0, 0) rotate3d(0, 0, 0, 0deg) !important;
     transform: translate3d(0, 0, 0) rotate3d(0, 0, 0, 0deg) !important;
     box-shadow: inset 0px -45px 52px -70px rgba(0, 0, 0, 0.75) !important;
 }
 
-.span {
+.bty-creative-menu-1 .span {
     height: auto !important;
 }
 

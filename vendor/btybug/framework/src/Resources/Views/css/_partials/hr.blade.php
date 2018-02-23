@@ -1,6 +1,21 @@
 <div class="d1">
     <h2>HR</h2>
     <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <hr class="bty-hr-1">
+        </div>
+        <div class="col-md-6">
+            <h5>bty-hr-1</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-hr-1 {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
         <h4>Hr style 1</h4>
         <h5>bty-hr-1</h5>
         <hr class="bty-hr-1">

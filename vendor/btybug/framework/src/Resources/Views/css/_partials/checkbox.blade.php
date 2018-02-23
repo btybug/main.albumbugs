@@ -1,6 +1,64 @@
 <div class="d1">
     <h2>Checkbox</h2>
     <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-checkbox-1-bty">
+                <input type="checkbox" id="bty-checkbox1">
+                <label for="bty-checkbox1">checkbox</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-input-checkbox-1</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .input-checkbox-1-bty input[type="checkbox"] {
+    display: none;
+}
+
+.input-checkbox-1-bty label {
+    position: relative;
+    display: inline-block;
+    padding-left: 1.5em;
+    margin-right: 2em;
+    cursor: pointer;
+    line-height: 1em;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-checkbox-1-bty label:before,
+.input-checkbox-1-bty label:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    color: white;
+    border-radius: 50%;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.input-checkbox-1-bty label:before {
+    content: '✗';
+    border-radius: 4px;
+    background-color: white;
+    color: white;
+}
+
+.input-checkbox-1-bty label:hover:before {
+    color: #f0f0f0;
+}
+
+.input-checkbox-1-bty input[type="checkbox"]:checked + label:before {
+    background-color: white;
+    color: #f79420;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
         <div class="col-md-3">
             <h4>Input checkbox 1</h4>
             <h5>bty-input-checkbox-1</h5>

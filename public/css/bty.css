@@ -1885,7 +1885,7 @@
     background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(215, 215, 215, 0.75), rgba(0, 0, 0, 0));
     background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(215, 215, 215, 0.75), rgba(0, 0, 0, 0));
     background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(215, 215, 215, 0.75), rgba(0, 0, 0, 0));
-    box-shadow: 0px -2px 4px rgba(136, 136, 136, 0.75);
+    box-shadow: 0 -2px 4px rgba(136, 136, 136, 0.75);
 }
 
 .bty-hr-10 {
@@ -1917,7 +1917,6 @@
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
-    border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
     border-image: none;
     border-radius: 6px 6px 6px 6px;
     border-style: none solid solid none;
@@ -3950,7 +3949,6 @@
 .bty-horizontal-menu-3 > ul {
     vertical-align: top;
     display: inline-block;
-    box-shadow: 1px -1px -1px 1px #000, -1px 1px -1px 1px #fff, 0 0 6px 3px #fff;
     border-radius: 6px;
 }
 
@@ -4227,7 +4225,7 @@
 }
 
 .bty-horizontal-menu-5 li:hover ul {
-    left: 0px;
+    left: 0;
     opacity: 1;
     margin: 0 !important;
 }
@@ -4237,7 +4235,6 @@
 }
 
 .bty-horizontal-menu-5 > ul li ul a {
-    height: 3em;
     line-height: 3em;
     padding: 0 2em;
     height: inherit;
@@ -4267,7 +4264,6 @@
     margin: 50px auto;
     width: 800px;
     width: -moz-fit-content;
-    width: -webkit-fit-content;
     width: fit-content;
 }
 
@@ -5359,10 +5355,6 @@
 }
 
 .bty-animation-1 {
-
-}
-
-.bty-animation-1 {
     display: table-cell;
     letter-spacing: .2em;
 }
@@ -5380,13 +5372,13 @@
 }
 
 .bty-animation-1 i.floaty {
-    -webkit-animation: float 3s infinite ease-in-out;
-    -moz-animation: float 3s infinite ease-in-out;
-    -o-animation: float 3s infinite ease-in-out;
-    animation: float 3s infinite ease-in-out;
+    -webkit-animation: bty-animation-1-float 3s infinite ease-in-out;
+    -moz-animation: bty-animation-1-float 3s infinite ease-in-out;
+    -o-animation: bty-animation-1-float 3s infinite ease-in-out;
+    animation: bty-animation-1-float 3s infinite ease-in-out;
 }
 
-@-webkit-keyframes float {
+@-webkit-keyframes bty-animation-1-float {
     0% {
         -webkit-transform: translate(0px, -100px) scale(1.1);
         text-shadow: 2px 2px 0 rgb(13, 117, 117),
@@ -5399,7 +5391,7 @@
     }
 }
 
-@-moz-keyframes float {
+@-moz-keyframes bty-animation-1-float {
     0% {
         -moz-transform: translate(0px, -100px) scale(1.1);
         text-shadow: 2px 2px 0 rgb(13, 117, 117),
@@ -5412,7 +5404,7 @@
     }
 }
 
-@-o-keyframes float {
+@-o-keyframes bty-animation-1-float {
     0% {
         -o-transform: translate(0px, -100px) scale(1.1);
         text-shadow: 2px 2px 0 rgb(13, 117, 117),
@@ -5425,20 +5417,17 @@
     }
 }
 
-@-keyframes float {
-0% {
-    transform: translate(0px, -100px) scale(1.1);
-    text-shadow: 2px 2px 0 rgb(13, 117, 117),
-    2px 100px 20px rgba(0, 0, 0, 0.05);
-}
-50% {
-    transform: translate(0px, 0px) scale(0.9);
-    text-shadow: 2px 2px 0 rgb(13, 117, 117),
-    2px 10px 5px rgba(0, 0, 0, 0.2);
-}
-}
-.bty-animation-2 {
-
+@keyframes bty-animation-1-float {
+    0% {
+        transform: translate(0px, -100px) scale(1.1);
+        text-shadow: 2px 2px 0 rgb(13, 117, 117),
+        2px 100px 20px rgba(0, 0, 0, 0.05);
+    }
+    50% {
+        transform: translate(0px, 0px) scale(0.9);
+        text-shadow: 2px 2px 0 rgb(13, 117, 117),
+        2px 10px 5px rgba(0, 0, 0, 0.2);
+    }
 }
 
 .bty-animation-2 {
@@ -5505,9 +5494,10 @@
     -webkit-animation: bty-animation-3-an 3.5s ease-out infinite;
     border-radius: .4em;
     color: #fff;
-    -webkit-mask: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0) 20%) -200px 0 no-repeat content;
     text-shadow: 1px 1px 0 #ccc;
+    mask: linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0) 20%), -200px 0 no-repeat content;
     width: 12em;
+
 }
 
 @-webkit-keyframes bty-animation-3-an {
@@ -5519,8 +5509,6 @@
 .bty-animation-4 {
     color: black;
     border-right: .1em solid black;
-    width: calc(0.55em * 14);
-    width: 14ch;
     white-space: nowrap;
     overflow: hidden;
     -webkit-animation: bty-animation-4-typing 8s steps(14, end),
@@ -6704,10 +6692,10 @@
     /* IE10+ */
     background: linear-gradient(to right, #ff0000 0%, #ff5d00 6%, #ffbb00 12%, #e5ff00 18%, #88ff00 24%, #2aff00 30%, #00ff33 36%, #00ff90 42%, #00ffe9 48%, #00bbff 54%, #005dff 60%, #0000ff 66%, #5d00ff 72%, #bb00ff 78%, #ff00e5 84%, #ff0083 90%, #ff003f 95%, #ff0004 100%);
     /* W3C */
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -o-background-clip: text;
-    background-clip: text;
+    /*-webkit-background-clip: text;*/
+    /*-moz-background-clip: text;*/
+    /*-o-background-clip: text;*/
+    /*background-clip: text;*/
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
     -o-text-fill-color: transparent;
@@ -6718,7 +6706,7 @@
     animation: bty-hover-8-hover 5s infinite linear;
 }
 
-@-webkit-keyframes "bty-hover-8-hover" {
+@-webkit-keyframes bty-hover-8-hover {
     0% {
         background-position: 0 0;
     }
@@ -6736,7 +6724,7 @@
     }
 }
 
-@-o-keyframes "bty-hover-8-hover" {
+@-o-keyframes bty-hover-8-hover {
     0% {
         background-position: 0 0;
     }
@@ -6745,7 +6733,7 @@
     }
 }
 
-@keyframes "bty-hover-8-hover" {
+@keyframes bty-hover-8-hover {
     0% {
         background-position: 0 0;
     }
@@ -7043,8 +7031,6 @@
 }
 
 .bty-hover-19:hover {
-    -webkit-mask-image: linear-gradient(-75deg, rgba(0, 0, 0, .6) 30%, #000 50%, rgba(0, 0, 0, .6) 70%);
-    -webkit-mask-size: 200%;
     animation: bty-hover-19-shine 2s infinite;
 }
 
@@ -7992,7 +7978,7 @@
     color: #8F8F8F;
     font-size: 18px;
     top: -30px;
-    left: 0px;
+    left: 0;
     z-index: -1;
     -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
     transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
@@ -8016,7 +8002,6 @@
 }
 
 .bty-input-label-2 {
-    background-color: none;
     border: 1px solid #499bc7;
     line-height: 0;
     font-size: 16px;
@@ -10793,7 +10778,8 @@
 
 }
 .bty-responsive-tab-2>ul {
-    display: -webkit-inline-box;
+    /*display: -webkit-inline-box;*/
+    display: inline-flex;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -13467,36 +13453,23 @@ form.bty-form-3{
     float: left;
     width: 40%;
     height: 100%;
-    display: box;
-    box-pack: center;
-    box-align: center;
-    display: -ms-flexbox;
-    -ms-flex-pack: center;
-    -ms-flex-align: center;
-    display: -moz-box;
-    -moz-box-pack: center;
-    -moz-box-align: center;
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .bty-calendar-1 >div:first-of-type .date {
-    position: relative;
     float: left;
     width: 60%;
     height: 100%;
-    display: box;
-    box-pack: center;
-    box-align: center;
     display: -ms-flexbox;
     -ms-flex-pack: center;
     -ms-flex-align: center;
     display: -moz-box;
     -moz-box-pack: center;
     -moz-box-align: center;
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: -1px 0 rgba(255, 255, 255, 0.6), inset 1px 0 rgba(0, 0, 0, 0.15);
 }
 .bty-calendar-1 >div:last-of-type .ui-datepicker {
@@ -13600,7 +13573,7 @@ form.bty-form-3{
     box-shadow: inset -1px 0 rgba(255, 255, 255, 0.6), 1px 0 rgba(0, 0, 0, 0.15);
 }
 .bty-calendar-1 >div:last-of-type .ui-datepicker thead th:last-child.ui-datepicker-week-end {
-    box-shadow: inset 1px 0 rgba(0, 0, 0, 0.15), -1px 0 rgba(255, 255, 255, 0.6);
+    box-shadow: inset 1px 0 rgba(255, 255, 255, 0.6), 0px 0 rgba(255, 255, 255, 0.6);
 }
 .bty-calendar-1 >div:last-of-type .ui-datepicker tbody td {
     padding: 0;
@@ -13613,18 +13586,13 @@ form.bty-form-3{
     margin: 0;
     border: 0;
     background: transparent;
-    display: box;
-    box-pack: center;
-    box-align: center;
-    display: -ms-flexbox;
-    -ms-flex-pack: center;
-    -ms-flex-align: center;
-    display: -moz-box;
-    -moz-box-pack: center;
-    -moz-box-align: center;
     display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: rgba(255, 255, 255, 0.6);
     text-align: center;
 }

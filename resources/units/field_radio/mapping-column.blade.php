@@ -22,8 +22,8 @@
                     <div class="div-manual">
                         @if(isset($settings['manual_item']))
                             @foreach($settings['manual_item'] as $key => $value)
-                                <div class="form-group lets_each">
-                                    <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt" placeholder="Left item" value="{{$value}}" >
+                                <div class="form-group lets_each_item">
+                                    <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
                                     <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
                                 </div>
 
@@ -35,12 +35,6 @@
                     <div class="col-md-12 prepend_template">
                         <button class="btn btn-primary pull-right add-manual"><i class="fa fa-plus"></i></button>
                     </div>
-                </div>
-
-                <div class="form-group data_source_manual">
-                    {!! Form::textarea('json_data[manual]',
-                   (isset($settings['json_data']['manual'])) ? $settings['json_data']['manual'] : null,
-                    ['class' => 'form-control','id' => 'data_source_manual']) !!}
                 </div>
             @endif
             @if($settings['data_source'] == 'related')
@@ -103,8 +97,8 @@
                     <div class="div-manual">
                         @if(isset($settings['manual_item']))
         @foreach($settings['manual_item'] as $key => $value)
-            <div class="form-group lets_each">
-                <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt" placeholder="Left item" value="{{$value}}" >
+            <div class="form-group lets_each_item">
+                <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
                                     <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
                                 </div>
 
@@ -141,7 +135,7 @@
             }
 
             $(".lets_each_item").each(function(index,item){
-                $(item).find("input.txt-item").attr("name",'manual_item['+(index+1)+']');
+                $(item).find("input.txt-item").attr("name",'manual_item['+index+']');
             });
             $("input.txt-item").trigger("keyup");
             return nv_left_item;

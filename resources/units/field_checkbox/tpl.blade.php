@@ -42,7 +42,8 @@
                 @foreach($arr as $key => $item)
                     @if($item != "")
                         <div class="radio-input">
-                            <input type="checkbox" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
+                            <input name="{!! (isset($source['field'])) ? print_field_name($source['field']) : "" !!}"
+                                   type="checkbox" id="optionsRadios-{{ $key }}" value="{{ $key }}">
                             <label for="optionsRadios-{{ $key }}">
                                 {{$item}}
                             </label>
@@ -62,7 +63,7 @@
                 @foreach($settings['manual_item'] as $key => $item)
                     @if($item != "")
                         <div class="radio-input">
-                            <input type="checkbox" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
+                            <input type="checkbox" name="{!! (isset($source['field'])) ? print_field_name($source['field']) : "" !!}" id="optionsRadios-{{ $key }}" value="{{ $key }}">
                             <label for="optionsRadios-{{ $key }}">
                                 {{$item}}
                             </label>

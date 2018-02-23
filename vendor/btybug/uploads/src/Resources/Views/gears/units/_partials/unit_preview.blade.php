@@ -6,7 +6,7 @@
     {!! HTML::style("public/js/jquery-ui/jquery-ui.min.css") !!}
     {!! HTML::style("public/css/preview-template.css?v=".rand('1111','9999')) !!}
     {!! HTML::style('public/css/cms.css') !!}
-    {!! HTML::style('public/css/bty.css') !!}
+    {!! HTML::style("public/css/bty.css?v=".rand('1111','9999')) !!}
     {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$ui->slug).'.css') !!}
 </head>
 

@@ -1,6 +1,70 @@
 <div class="d1">
     <h2>Ratings</h2>
     <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-rating-star-1">
+                <input id="star-6" type="radio" name="star"/>
+                <label for="star-6"></label>
+                <input id="star-5" type="radio" name="star"/>
+                <label for="star-5"></label>
+                <input id="star-4" type="radio" name="star"/>
+                <label for="star-4"></label>
+                <input id="star-3" type="radio" name="star"/>
+                <label for="star-3"></label>
+                <input id="star-2" type="radio" name="star"/>
+                <label for="star-2"></label>
+                <input id="star-1" type="radio" name="star"/>
+                <label for="star-1"></label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-rating-star-1</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .bty-rating-star-1{
+    width: auto;
+    display: inline-block;
+}
+
+.bty-rating-star-1 input{
+    display: none;
+}
+
+.bty-rating-star-1 label {
+    float: right;
+    padding: 10px;
+    font-size: 36px;
+    color: #444;
+    transition: all .2s;
+}
+
+.bty-rating-star-1 input:checked ~ label:before {
+    content:'\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+
+
+.bty-rating-star-1 input:first-of-type:checked ~ label:before {
+    color:#FE7;
+    text-shadow: 0 0 20px #952;
+}
+
+.bty-rating-star-1 input:last-of-type:checked ~ label:before {
+    color: #F62;
+}
+
+.bty-rating-star-1 label:hover{
+    transform: rotate(-15deg) scale(1.3);
+}
+
+.bty-rating-star-1 label:before{
+    content:'\f006';
+    font-family: FontAwesome;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
         <h4>Rating Star 1</h4>
         <h5>bty-rating-star-1</h5>
         <div class="bty-rating-star-1">

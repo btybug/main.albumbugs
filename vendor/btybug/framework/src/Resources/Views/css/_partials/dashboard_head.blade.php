@@ -1,6 +1,76 @@
 <div class="d1">
     <h2>Dashboard Head</h2>
     <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-dashboard-head-1">
+                <div>
+                    <i class="fa fa-desktop"></i>
+                </div>
+                <div>
+                    <h4>Lorem ipsum</h4>
+                    <p>000-0000-00</p>
+                </div>
+                <div>
+                    <a href="#">
+                        More
+                        <i class="fa fa-arrow-circle-o-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-dashboard-head-1</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .bty-dashboard-head-1{
+    padding: 15px;
+    overflow: hidden;
+    border-radius: 3px;
+    position: relative;
+    background: #499bc7;
+    color: white;
+}
+.bty-dashboard-head-1>div:nth-of-type(1){
+    font-size: 42px;
+    height: 56px;
+    width: 56px;
+    text-align: center;
+    line-height: 56px;
+    margin-left: 15px;
+    color: #fff;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    opacity: .2;
+}
+.bty-dashboard-head-1>div:nth-of-type(2) h4{
+    font-size: 12px;
+    margin: 5px 0;
+    color: #fff;
+}
+.bty-dashboard-head-1>div:nth-of-type(2) p{
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+.bty-dashboard-head-1>div:nth-of-type(3) a{
+    display: block;
+    margin: 15px -15px -15px;
+    padding: 7px 15px;
+    background: rgba(0,0,0,.4);
+    text-align: right;
+    color: #ddd;
+    font-weight: 300;
+    text-decoration: none;
+    transition: 0.4s ease;
+}
+.bty-dashboard-head-1>div:nth-of-type(3) a:hover{
+    background: rgba(0,0,0,.6);
+    color: #fff;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
         <h4>dashboard head 1</h4>
         <h5>bty-dashboard-head-1</h5>
         <div class="col-md-6">

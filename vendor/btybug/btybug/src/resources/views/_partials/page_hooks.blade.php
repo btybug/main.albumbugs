@@ -37,5 +37,6 @@
 <?php
 $hook = json_decode($page->settings,true);
 $hook = $hook["children"];
+$hooks[0] = "Select Hook";
 ?>
 {!! Form::select('children[hook]',$hooks,issetReturn($hook,'hook',null),['class'=>'form-control']) !!}

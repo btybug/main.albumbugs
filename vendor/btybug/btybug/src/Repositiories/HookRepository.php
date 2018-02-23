@@ -99,6 +99,9 @@ class HookRepository extends GeneralRepository
     public static function renderHooks($id,$settings){
         $model = new static();
         $hook = $model->model()->find($id);
+        if(!$hook){
+            return '';
+        }
         $units = $hook->data;
         $html = '';
         if(count($units)){

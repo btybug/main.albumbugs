@@ -5,7 +5,7 @@
 @stop
 
 @section( 'JS' )
-    {!! Html::script("public/css/form-builder/form-builder.js") !!}
+    {!! Html::script("public/js/form-builder/form-builder.js") !!}
 @stop
 
 @section( 'content' )
@@ -38,7 +38,7 @@
     <hr/>
 
     <div class="row ">
-        <div class="col-md-9 original-html-area">
+        <div class="col-md-9 original-html-area" id="original">
             @if($form->original_html)
                 {!! $form->original_html !!}
             @else
@@ -79,6 +79,29 @@
         </div>
     </div>
 
+    <div class="row real-form hidden">
+        <div class="form-builder-tabs" id="originalform">
+            <div class="form-fields-area">
+
+            </div>
+        </div>
+        <!-- Button -->
+        <div class="form-group">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="template" id="field-html">
+        <div class="form-group">
+            <fieldset class="bty-form-text" id="bty-input-id-19">
+                <div>
+                    {field}
+                </div>
+            </fieldset>
+        </div>
+    </script>
 @stop
 @section( 'JS' )
 

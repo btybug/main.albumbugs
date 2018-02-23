@@ -109,19 +109,22 @@ $(document).ready(function () {
 
     function rebulder() {
         var elements = $(".original-html-area").find('div[data-shortcode]');
+        console.log($(".original-html-area").attr('id'));
         var id = $(".original-html-area").attr('id') + 'form';
         $('#' + id).find('.form-fields-area').empty();
+        console.log(id);
         var data = [];
+        console.log(elements);
         $.each(elements, function (k, v) {
             var tpl = $('#field-html').html();
             var shortcode = $(v).attr('data-shortcode');
             data.push($(v).attr('data-id'));
             tpl = tpl.replace('{field}', shortcode);
             $('#' + id).find('.form-fields-area').append(tpl);
-
+            console.log(tpl);
         });
 
-        $('.generated_html').val('');
+        $('.generated_html').val($('.real-form').html());
         $('.original_html').val($('.original-html-area').html());
         rebulderJson();
     }

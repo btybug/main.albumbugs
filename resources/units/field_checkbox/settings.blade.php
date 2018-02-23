@@ -21,10 +21,8 @@
                                 <option value="input-checkbox-2-bty">checkbox-2</option>
                                 <option value="input-checkbox-3-bty">checkbox-3</option>
                                 <option value="input-checkbox-4-bty">checkbox-4</option>
-                                <option value="input-checkbox-5-bty">checkbox-5</option>
-                                <option value="input-checkbox-6-bty">checkbox-6</option>
-                                <option value="input-checkbox-7-bty">checkbox-7</option>
-                                <option value="input-checkbox-8-bty">checkbox-8</option>
+                                <option value="input-checkbox-7-bty">checkbox-5</option>
+                                <option value="input-checkbox-8-bty">checkbox-6</option>
                             </select>
                         </div>
                         <div class="clearfix"></div>

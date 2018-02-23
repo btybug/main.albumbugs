@@ -53,3 +53,23 @@
         </div>
     </div>
 </div>
+
+
+@if(isset($settings['manual_item']) && count($settings['manual_item']))
+    <div class="form-group">
+        <div class="{!! issetReturn($settings,'checkbox_inp',null) !!}">
+            <div class="input-group">
+                @foreach($settings['manual_item'] as $key => $item)
+                    @if($item != "")
+                        <div class="radio-input">
+                            <input type="checkbox" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
+                            <label for="optionsRadios-{{ $key }}">
+                                {{$item}}
+                            </label>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </div>
+@endif

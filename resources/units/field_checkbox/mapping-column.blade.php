@@ -16,11 +16,29 @@
     <div class="select_op_box">
         @if(isset($settings['data_source']))
             @if($settings['data_source'] == 'manual')
-                <div class="form-group data_source_manual">
-                    {!! Form::textarea('json_data[manual]',
-                   (isset($settings['json_data']['manual'])) ? $settings['json_data']['manual'] : null,
-                    ['class' => 'form-control','id' => 'data_source_manual']) !!}
+                <div class="content bty-settings-panel">
+                    <div class="div-manual">
+                        @if(isset($settings['manual_item']))
+                            @foreach($settings['manual_item'] as $key => $value)
+                                <div class="form-group lets_each_item">
+                                    <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
+                                    <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
+                                </div>
+
+                            @endforeach
+                        @endif
+
+
+                    </div>
+                    <div class="col-md-12 prepend_template">
+                        <button class="btn btn-primary pull-right add-manual"><i class="fa fa-plus"></i></button>
+                    </div>
                 </div>
+                {{--<div class="form-group data_source_manual">--}}
+                    {{--{!! Form::textarea('json_data[manual]',--}}
+                   {{--(isset($settings['json_data']['manual'])) ? $settings['json_data']['manual'] : null,--}}
+                    {{--['class' => 'form-control','id' => 'data_source_manual']) !!}--}}
+                {{--</div>--}}
             @endif
             @if($settings['data_source'] == 'related')
                 <div class="form-group data-source-box">
@@ -78,26 +96,55 @@
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script type="temolate" id="manual-field-option">
-    {{--<textarea class="form-control" type="textarea" id='data_source_manual' placeholder='Type options separated with' name='json_data[manual]'></textarea>--}}
-    <div>
-        <div class="form-group">
-        <div class="col-md-4">
+        <div class="content bty-settings-panel">
+                    <div class="div-manual">
+                        @if(isset($settings['manual_item']))
+        @foreach($settings['manual_item'] as $key => $value)
+            <div class="form-group lets_each_item">
+                <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
+                                    <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
+                                </div>
 
-</div>
-<div class="col-md-7">
-<input type="text" class="form-control">
-</div>
-<div class="col-md-1">
-<button class="btn btn-danger pull-right remove_this" type="button"><i class="fa fa-minus"></i></button>
-</div>
-        </div>
-        <div class="col-md-12">
-             <button class="btn btn-primary pull-right render_icons" type="button"><i class="fa fa-plus"></i></button>
-        </div>
+                            @endforeach
+    @endif
+
+
     </div>
-    <div class="clearfix"></div>
+    <div class="col-md-12 prepend_template">
+        <button class="btn btn-primary pull-right add-manual"><i class="fa fa-plus"></i></button>
+    </div>
+</div>
 </script>
 <script>
+
+    $(document).ready(function () {
+        var nv_left_item='{{isset($settings['manual_item']) ? count($settings['manual_item']) : 0}}';
+        $("body").delegate(".add-manual","click",function(){
+            var left_item_div='<div class="form-group lets_each_item">\n' +
+                '    <input type="text" name="manual_item['+nv_left_item+']" class="bty-input-text-4 txt-item" placeholder="Manual" >\n' +
+                '\n' +
+                '    <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>\n' +
+                '</div> ';
+            $('.div-manual').append(left_item_div);
+            nv_left_item++;
+            return nv_left_item;
+        });
+
+
+        $("body").delegate(".remove_this_item","click",function(){
+            $(this).parent().remove();
+            if(nv_left_item != 0){
+                nv_left_item -= 1;
+            }
+
+            $(".lets_each_item").each(function(index,item){
+                $(item).find("input.txt-item").attr("name",'manual_item['+index+']');
+            });
+            $("input.txt-item").trigger("keyup");
+            return nv_left_item;
+
+        });
+    });
     $('.icp').iconpicker();
     var dd = console.log;
     var activefieldtype = ''

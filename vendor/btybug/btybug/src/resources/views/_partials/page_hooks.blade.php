@@ -1,4 +1,4 @@
-<table class="table table-striped">
+{{--<table class="table table-striped">
     <thead>
     <tr>
         <th>Name</th>
@@ -6,7 +6,7 @@
     </tr>
     </thead>
     <tbody>
-    {{--@if(isset($layout->settings['hook']))
+    --}}{{--@if(isset($layout->settings['hook']))
         @foreach($layout->settings['hook'] as $key=>$cms_hook)
             <tr>
                 <td>{!! $key !!}</td>
@@ -19,7 +19,7 @@
                 </td>
             </tr>
         @endforeach
-    @endif--}}
+    @endif--}}{{--
     @if(isset($_this->placeholders) && is_array($_this->placeholders))
         @foreach($_this->placeholders as $key=>$placeholder)
             @if(isset($placeholder['tag']) && $placeholder['tag'] == "hook")
@@ -33,4 +33,9 @@
         @endforeach
     @endif
     </tbody>
-</table>
+</table>--}}
+<?php
+$hook = json_decode($page->settings,true);
+$hook = $hook["children"];
+?>
+{!! Form::select('children[hook]',$hooks,issetReturn($hook,'hook',null),['class'=>'form-control']) !!}

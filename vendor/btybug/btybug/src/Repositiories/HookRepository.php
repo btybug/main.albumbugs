@@ -20,6 +20,11 @@ class HookRepository extends GeneralRepository
     {
         return new Hook();
     }
+    public static function get()
+    {
+        $model = new static();
+        return $model->model()->all();
+    }
 
     public function addUnit($id,$variation)
     {
@@ -90,5 +95,20 @@ class HookRepository extends GeneralRepository
         }
         $model->save();
         return $model;
+    }
+    public static function renderHooks($id,$settings){
+        $model = new static();
+        $hook = $model->model()->find($id);
+        $units = $hook->data;
+        $html = '';
+        if(count($units)){
+            foreach ($units as $key => $unit){
+                $col = $unit["style"] == 0 ? 4: $unit["style"];
+                $html .= "<div class='col-md-".$col."'>";
+                    $html .= BBRenderUnits($unit["variation"],isset($settings['_page'])?['_page'=>$settings['_page']]:[]);
+                $html .= "</div>";
+            }
+        }
+        return $html;
     }
 }

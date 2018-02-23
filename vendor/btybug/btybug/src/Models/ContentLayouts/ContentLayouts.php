@@ -3,6 +3,7 @@
 use Btybug\btybug\Models\Painter\BasePainter;
 use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Models\Universal\VariationAccess;
+use Btybug\btybug\Repositories\HookRepository;
 use File;
 use Btybug\btybug\Models\Hook;
 use Btybug\btybug\Repositories\AdminsettingRepository;
@@ -553,6 +554,8 @@ class ContentLayouts extends BasePainter implements VariationAccess
         return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
     }
     protected function getPageLayoutWidgetHook($page,$hide_top = false){
+        $hooks = HookRepository::get()->pluck("name","id");
+
         $_this = null;
         if (isset($this->placeholders)) {
             $_this = $this;
@@ -566,7 +569,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
             }
         }
         //return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
-        return \View::make('btybug::_partials.page_hooks', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
+        return \View::make('btybug::_partials.page_hooks', compact(['_this', 'page', 'hooks','hide_top', 'enabledSelectLayout']))->render();
     }
 
     protected function getAdminPageLayoutWidget($page, $hide_top = false)

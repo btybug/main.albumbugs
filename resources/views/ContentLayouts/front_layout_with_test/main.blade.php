@@ -9,8 +9,10 @@
         </div>
         <div class="col-md-9">
             <div class="top-bar">
-                @if(has_setting($settings,"top_hook",false))
-                    {!! BBRenderUnits($settings['top_hook'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                @if(has_setting($settings,"children",false))
+                    @if(isset($settings["children"]["hook"]))
+                        {!! \Btybug\btybug\Repositories\HookRepository::renderHooks($settings["children"]["hook"],$settings) !!}
+                    @endif
                 @endif
             </div>
             <div class="top-bar">

@@ -25,7 +25,7 @@
                             </div>
                             <div id="placeholder" class="collapse in" aria-expanded="true" style="">
                                 <div class="content bty-settings-panel">
-                                    @if(count($hook->data))
+                                    @if(count($hook->data) > 0)
                                         @foreach($hook->data as $key => $value)
                                             <div class="form-group lets_each" data-id="{{$key}}">
                                                 <div class="col-md-7">
@@ -54,7 +54,7 @@
                 {!! Form::close() !!}
             </div>
             <div class="col-md-12 custom_margin is_show {{$hook->type=="Vertical" ? 'custom_hide' : ''}}">
-                @if(count($hook->data))
+                @if(count($hook->data) > 0)
                     @foreach($hook->data as $key => $value)
                         <div class="col-md-{{$value['style']}} lets_change_grid_or_remove_{{$key}}">
                             {!! BBRenderUnits($value['variation']) !!}

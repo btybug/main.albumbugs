@@ -26,7 +26,7 @@
                             <div id="placeholder" class="collapse in" aria-expanded="true" style="">
                                 <div class="content bty-settings-panel">
                                     @if(count($hook->data) > 0)
-                                        {{dd($hook)}}
+                                        {{dd($hook->data)}}
                                         @foreach($hook->data as $key => $value)
                                             <div class="form-group lets_each" data-id="{{$key}}">
                                                 <div class="col-md-7">

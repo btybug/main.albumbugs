@@ -23,7 +23,7 @@
 <fieldset class="bty-form-radio formgeneral" id="bty-input-id-0">
     <div class="form-group">
         <label class="col-sm-12 control-label">{!! issetReturn($settings,'label',null) !!}</label>
-        <div class="col-sm-12">
+        <div class="{!! issetReturn($settings,'select_inp',null) !!}">
             <select name="table_name_column_name" class="form-control">
                 <option value="{!! issetReturn($settings,'default_key',null) !!}">{!! issetReturn($settings,'default_text',null) !!}</option>
             @if(count($arr))
@@ -33,5 +33,6 @@
             @endif
             </select>
         </div>
+        <div class="clearfix"></div>
     </div>
 </fieldset>

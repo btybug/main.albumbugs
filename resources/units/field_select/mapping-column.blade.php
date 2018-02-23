@@ -21,7 +21,7 @@
                         @if(isset($settings['manual_item']))
                             @foreach($settings['manual_item'] as $key => $value)
                                 <div class="form-group lets_each_item">
-                                    <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
+                                    <input type="text" name="json_data[manual][{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
                                     <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
                                 </div>
                             @endforeach
@@ -97,10 +97,10 @@
 <script type="temolate" id="manual-field-option">
    <div class="content bty-settings-panel">
                     <div class="div-manual">
-                        @if(isset($settings['manual_item']))
-        @foreach($settings['manual_item'] as $key => $value)
+                        @if(isset($settings['json_data']['manual']))
+        @foreach($settings['json_data']['manual'] as $key => $value)
             <div class="form-group lets_each_item">
-                <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
+                <input type="text" name="json_data['manual'][{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
                  <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
              </div>
 
@@ -114,10 +114,10 @@
 </script>
 <script>
     $(document).ready(function () {
-        var nv_left_item='{{isset($settings['manual_item']) ? count($settings['manual_item']) : 0}}';
+        var nv_left_item='{{isset($settings['data_source']['manual']) ? count($settings['data_source']['manual']) : 0}}';
         $("body").delegate(".add-manual","click",function(){
             var left_item_div='<div class="form-group lets_each_item">\n' +
-                '    <input type="text" name="manual_item['+nv_left_item+']" class="bty-input-text-4 txt-item" placeholder="Manual" >\n' +
+                '    <input type="text" name="data_source[manual]['+nv_left_item+']" class="bty-input-text-4 txt-item" placeholder="Manual" >\n' +
                 '\n' +
                 '    <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>\n' +
                 '</div> ';

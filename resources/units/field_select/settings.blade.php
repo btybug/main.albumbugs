@@ -81,24 +81,6 @@
             </div>
             <div id="inputdata" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Default
-                                Text</label>
-                            <div class="col-sm-8">
-                                {!!Form::text('default_text',null,['class' => 'form-control'])  !!}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Default
-                                Value</label>
-                            <div class="col-sm-8">
-                                {!!Form::text('default_key',null,['class' => 'form-control'])  !!}
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
                     <div class="col-md-12">
                         <div class="row m-b-10 mapping-column">
                             @include($_this->slug."::mapping-column")

@@ -13,8 +13,8 @@
                 }
                 break;
             case "manual" :
-                if(isset($settings['json_data']['manual']) && $settings['json_data']['manual']){
-                    $arr = (count(explode(',',$settings['json_data']['manual']))) ? explode(',',$settings['json_data']['manual']) : [];
+                if(isset($settings['json_data']['manual'])){
+                    $arr = $settings['json_data']['manual'];
                 }
                 break;
         }
@@ -24,7 +24,7 @@
     <div class="form-group">
         <label class="col-sm-12 control-label">{!! issetReturn($settings,'label',null) !!}</label>
         <div class="{!! issetReturn($settings,'select_inp',null) !!}">
-            <select name="table_name_column_name" class="form-control">
+            <select name="{!! (isset($source['field'])) ? print_field_name($source['field']) : "" !!}" class="form-control">
                 <option value="{!! issetReturn($settings,'default_key',null) !!}">{!! issetReturn($settings,'default_text',null) !!}</option>
             @if(count($arr))
                 @foreach($arr as $key => $item)
@@ -37,21 +37,4 @@
     </div>
 </fieldset>
 
-@if(isset($settings['manual_item']) && count($settings['manual_item']))
-    <fieldset class="bty-form-radio formgeneral" id="bty-input-id-0">
-        <div class="form-group">
-            <label class="col-sm-12 control-label">{!! issetReturn($settings,'label',null) !!}</label>
-            <div class="{!! issetReturn($settings,'select_inp',null) !!}">
-                <select name="table_name_column_name" class="form-control">
-                    <option value="{!! issetReturn($settings,'default_key',null) !!}">{!! issetReturn($settings,'default_text',null) !!}</option>
 
-                    @foreach($settings['manual_item'] as $key => $item)
-                            <option   value="{{ $key }}" type="radio" id="bty-gender-form-{{ $key }}">  {{$item}}</option>
-                        @endforeach
-
-                </select>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </fieldset>
-@endif

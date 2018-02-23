@@ -1912,6 +1912,10 @@ function get_field_data($field){
     return null;
 }
 
+function print_field_name($field){
+    return $field['table_name'] . '_' . $field['column_name'];
+}
+
 //TODO: make this for plugins
 function register_form(){
 

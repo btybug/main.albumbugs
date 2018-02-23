@@ -187,6 +187,7 @@ class ModalityController extends Controller
         $variationName = $slug . '.' . str_slug($key);
 
         $unit = Painter::find($slug);
+        if (! $unit) return \Response::json(['error' => true]);
 
         $variation = $unit->variations(false)->find($variationName);
 

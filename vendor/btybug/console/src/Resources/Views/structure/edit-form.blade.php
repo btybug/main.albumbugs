@@ -1,10 +1,13 @@
 @extends( 'btybug::layouts.admin' )
 
 @section( 'CSS' )
+    {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
     {!! Html::style("public/css/form-builder/form-builder.css") !!}
 @stop
 
 @section( 'JS' )
+    {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
+    {!! Html::script("public/js/form-builder/css-studio.js") !!}
     {!! Html::script("public/js/form-builder/form-builder.js") !!}
 @stop
 
@@ -14,17 +17,14 @@
     {!! Form::hidden('id',$form->id) !!}
     <div class="bb-form-header">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <label>Form name</label>
                 {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'Form Name']) !!}
             </div>
-            <div class="col-md-4">
-                <a href="#" class="btn btn-default btn-sm add-form-tab">
-                    <i class="fa fa-plus"></i> Add Tab
-                </a>
-                <button type="submit" class="form-save pull-right"><span>Save</span></button>
-                <button type="button" class="items-panel-trigger pull-right" data-toggle="modal"
-                        data-target="#myModal0"><span>Fields</span></button>
+            <div class="col-md-5">
+                <button type="submit" class="form-save pull-right">Save</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openStudioWindow">Styling</button>
             </div>
         </div>
     </div>
@@ -38,68 +38,63 @@
     <hr/>
 
     <div class="row ">
-        <div class="col-md-9 original-html-area" id="original">
-            @if($form->original_html)
-                {!! $form->original_html !!}
-            @else
-                <div class="form-builder-tabs">
-                    <div class="form-builder-area"></div>
-                </div>
-                <!-- Button -->
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </div>
-                </div>
-            @endif
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Fields</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="html-elements-list">
-                        @if(count($fields))
-                            @foreach($fields as $field)
-                                <div class="html-element-item draggable-element {!! (in_array($field->slug,$existingFields)) ? 'hide' : '' !!}"  data-id="{!! $field->id !!}"
-                                     data-shortcode="[field id={{$field->id}}]">
-                                    {{ $field->name }}
-                                    <div class="html-element-item-sample hidden">
-                                        <div class="form-group">
-                                            {!! field_render(['id' => $field->id]) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <div class="col-md-12">
+            <div class="form-builder-area"></div>
 
-    <div class="row real-form hidden">
-        <div class="form-builder-tabs" id="originalform">
-            <div class="form-fields-area">
-
-            </div>
-        </div>
-        <!-- Button -->
-        <div class="form-group">
-            <div class="col-md-4">
+            <!-- Button -->
+            <div class="form-group">
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
         </div>
     </div>
 
-    <script type="template" id="field-html">
-        <div class="form-group">
-            <fieldset class="bty-form-text" id="bty-input-id-19">
-                <div>
-                    {field}
-                </div>
-            </fieldset>
+    <script type="template" id="fields-html">
+        <div class="form-elements-list">
+            @if(count($fields))
+                @foreach($fields as $field)
+                    <div class="form-element-item draggable-element {!! (in_array($field->slug,$existingFields)) ? 'hide' : '' !!}"  data-id="{!! $field->id !!}"
+                         data-shortcode="[field id={{$field->id}}]">
+                        {{ $field->name }}
+                        <div class="form-element-item-sample hidden">
+                            <div class="form-group">
+                                {!! field_render(['id' => $field->id]) !!}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </script>
+
+    <!-- CSS Studio Templates -->
+    <script type="template" id="bbt-editor-list">
+        <h4>Select Item</h4>
+        <ul class="bbs-editor-list">{groups}</ul>
+    </script>
+
+    <script type="template" id="bbt-properties-container">
+        <li class="bbs-property-group">
+            <h3>{title}</h3>
+            <div class="bbs-properties-list">{properties}</div>
+        </li>
+    </script>
+
+    <script type="template" id="bbt-property-container">
+        <div class="bbs-property-container">
+            <label for="bbs-{id}">{label}</label>
+            <div class="bbs-property-field">{field}</div>
+        </div>
+    </script>
+
+    <script type="template" id="bbt-dropdown">
+        <div class="bbs-dropdown-box">
+            <select id="bbs-{id}">{options}</select>
+        </div>
+    </script>
+
+    <script type="template" id="bbt-color">
+        <div class="bbs-color-box">
+            <input type="color" id="bbs-{id}">
         </div>
     </script>
 @stop

@@ -28,7 +28,7 @@ $(document).ready(function () {
         // Open studio window
         openStudioWindow: function ($this) {
             jsPanel.create({
-                id: 'studio-panel', container: 'body', theme: 'primary', boxShadow: 0, position: 'right-bottom', contentSize: '300 350',
+                id: 'studio-panel', container: 'body', theme: 'primary', boxShadow: 0, position: 'right-bottom', contentSize: '300 ' + ($(window).height() - 250),
                 dragit: {
                     snap: true
                 },
@@ -58,5 +58,8 @@ $(document).ready(function () {
             var event = $(this).attr('bb-click');
             clickEvents[event]($(this), e);
         });
+
+    // Trigger open studio TODO: Remove this trigger
+    clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
 
 });

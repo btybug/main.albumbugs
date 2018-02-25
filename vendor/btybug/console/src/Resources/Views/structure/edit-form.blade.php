@@ -3,10 +3,16 @@
 @section( 'CSS' )
     {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
     {!! Html::style("public/css/form-builder/form-builder.css") !!}
+    {!! Html::style("public/libs/easyui/easyui.css") !!}
+    {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
+    {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}
 @stop
 
 @section( 'JS' )
+    {!! HTML::script("public/libs/easyui/jquery.easyui.min.js") !!}
     {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
+    {!! HTML::script("public/libs/toggle/jquery.toggleinput.js") !!}
+    {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}
     {!! Html::script("public/js/form-builder/css-studio.js") !!}
     {!! Html::script("public/js/form-builder/form-builder.js") !!}
 @stop
@@ -74,7 +80,10 @@
 
     <script type="template" id="bbt-properties-container">
         <li class="bbs-property-group">
-            <h3>{title}</h3>
+            <h3 bbs-click="toggleOpen">
+                {title}
+                <i class="fa fa-chevron-right"></i>
+            </h3>
             <div class="bbs-properties-list">{properties}</div>
         </li>
     </script>
@@ -88,13 +97,38 @@
 
     <script type="template" id="bbt-dropdown">
         <div class="bbs-dropdown-box">
-            <select id="bbs-{id}">{options}</select>
+            <select class="bbs-combobox" id="bbs-{id}">{options}</select>
         </div>
     </script>
 
     <script type="template" id="bbt-color">
         <div class="bbs-color-box">
-            <input type="color" id="bbs-{id}">
+            <input class="bbs-input bbs-color" id="bbs-{id}">
+        </div>
+    </script>
+
+    <script type="template" id="bbt-number">
+        <div class="bbs-number-spinner">
+            <input class="bbs-input bbs-number" id="bbs-{id}">
+        </div>
+    </script>
+
+    <script type="template" id="bbt-toggle">
+        <div class="bbs-toggle">
+            <div class="form-check radio-toggle">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    Right
+                </label>
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    Center
+                </label>
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    Left
+                </label>
+            </div>
         </div>
     </script>
 @stop

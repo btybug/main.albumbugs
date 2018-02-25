@@ -243,12 +243,12 @@
   right: 5px;
 }
 .minicolors-theme-default.minicolors {
-  width: auto;
   display: inline-block;
+  width: 100%;
 }
 .minicolors-theme-default .minicolors-input {
-  height: 20px;
-  width: auto;
+  height: 27px;
+  width: 100%;
   display: inline-block;
   padding-left: 26px;
 }

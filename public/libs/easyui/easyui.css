@@ -109,7 +109,7 @@
 }
 .panel-header,
 .panel-body {
-  border-color: #D3D3D3;
+  border-color: #676767;
 }
 .panel-header {
   background-color: #f3f3f3;
@@ -792,30 +792,29 @@
 }
 .textbox {
   position: relative;
-  border: 1px solid #D3D3D3;
-  background-color: #fff;
+  border: 1px solid #676767;
+  background-color: #373638;
   vertical-align: middle;
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  -moz-border-radius: 5px 5px 5px 5px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  width: 100%;
 }
 .textbox .textbox-text {
-  font-size: 12px;
+  font-size: 13px;
   border: 0;
   margin: 0;
-  padding: 4px;
+  padding: 7px;
   white-space: normal;
   vertical-align: top;
   outline-style: none;
   resize: none;
-  -moz-border-radius: 5px 5px 5px 5px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  width: 100%!important;
+  background: #4e4e4e;
+  line-height: 25px!important;
+  height: 25px!important;
 }
 .textbox .textbox-text::-ms-clear,
 .textbox .textbox-text::-ms-reveal {
@@ -920,10 +919,10 @@
   filter: alpha(opacity=60);
 }
 .textbox-focused {
-  border-color: #bababa;
-  -moz-box-shadow: 0 0 3px 0 #D3D3D3;
-  -webkit-box-shadow: 0 0 3px 0 #D3D3D3;
-  box-shadow: 0 0 3px 0 #D3D3D3;
+  border-color: #383838;
+  -moz-box-shadow: 0 0 3px 0 #505050;
+  -webkit-box-shadow: 0 0 3px 0 #505050;
+  box-shadow: 0 0 3px 0 #505050;
 }
 .textbox-invalid {
   border-color: #ffa8a8;
@@ -957,7 +956,7 @@
 }
 .combo-arrow {
   width: 18px;
-  height: 20px;
+  height: 25px!important;
   overflow: hidden;
   display: inline-block;
   vertical-align: top;
@@ -971,21 +970,24 @@
 }
 .combo-panel {
   overflow: auto;
+  height: auto!important;
+  max-height: 300px;
 }
 .combo-arrow {
   background: url('images/combo_arrow.png') no-repeat center center;
 }
 .combo-panel {
-  background-color: #ffffff;
+  background-color: #4e4e4e;
 }
 .combo-arrow {
-  background-color: #f3f3f3;
+  background-color: #676767;
+  outline: none!important;
 }
 .combo-arrow-hover {
   background-color: #e2e2e2;
 }
 .combo-arrow:hover {
-  background-color: #e2e2e2;
+  background-color: #909090;
 }
 .combo .textbox-icon-disabled:hover {
   cursor: default;
@@ -995,6 +997,7 @@
 .combobox-stick {
   font-size: 12px;
   padding: 3px;
+  color: #cccccc;
 }
 .combobox-item-disabled {
   opacity: 0.5;
@@ -1019,7 +1022,7 @@
   color: #000000;
 }
 .combobox-item-selected {
-  background-color: #0092DC;
+  background-color: #676767;
   color: #fff;
 }
 .combobox-icon {
@@ -2385,6 +2388,7 @@
   color: #444;
   outline-style: none;
   background-color: #f3f3f3;
+  outline: none!important;
 }
 .spinner-arrow-hover {
   background-color: #e2e2e2;

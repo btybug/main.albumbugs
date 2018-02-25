@@ -32,6 +32,21 @@ var cssStudio = {
                             title: 'Bold'
                         }
                     ]
+                },
+                {
+                    title: 'Font Size',
+                    css: 'font-size',
+                    type: 'number'
+                },
+                {
+                    title: 'Text Color',
+                    css: 'color',
+                    type: 'color'
+                },
+                {
+                    title: 'Text Align',
+                    css: 'text-align',
+                    type: 'toggle'
                 }
             ]
         },
@@ -72,8 +87,46 @@ var cssStudio = {
             }
         }
 
-
         return fieldTemplate;
+    },
+
+    // Click events
+    clickEvents: {
+        // Toggle open and close groups
+        toggleOpen: function ($this) {
+            var isOpened = $this.attr("data-opened");
+
+            if(isOpened){
+                // Mark as closed
+                $this.removeAttr("data-opened");
+
+                // Show all groups
+                $('.bbs-property-group').show();
+
+                // Hide lists
+                $('.bbs-properties-list').hide();
+
+                // Flip chevron
+                $this.find("i").removeClass("fa-chevron-down");
+                $this.find("i").addClass("fa-chevron-right");
+            }
+            else {
+                // Mark as opened
+                $this.attr("data-opened", true);
+
+                // Hide all lists
+                $('.bbs-property-group').hide();
+                $('.bbs-properties-list').hide();
+
+                // Show clicked list
+                $this.parent('.bbs-property-group').show();
+                $this.parent('.bbs-property-group').find('.bbs-properties-list').show();
+
+                // Flip chevron
+                $this.find("i").removeClass("fa-chevron-right");
+                $this.find("i").addClass("fa-chevron-down");
+            }
+        }
     },
 
     // Build editor list
@@ -113,10 +166,45 @@ var cssStudio = {
         listTemplate = listTemplate.replace(/{groups}/g, groupsHTML);
 
         $('#bb-css-studio').html(listTemplate);
+
+        // Init fields JS actions
+        this.fieldsJSActions();
+    },
+
+    // Fields JS Actions
+    fieldsJSActions: function () {
+
+        // Combo box field
+        $('.bbs-combobox').combobox();
+
+        // Color
+        $('.bbs-color').minicolors({
+            format: 'rgb',
+            opacity: true
+        });
+
+        // Number
+        $('.bbs-number').numberspinner({
+            min: 10,
+            max: 100,
+            editable: false,
+            suffix: 'px'
+        });
+
+        // Toggle
+        $('.radio-toggle').toggleInput();
     },
 
     // Init CSS Studio
     init: function () {
+        var $this = this;
         this.buildEditorList();
+
+        // Events
+        $('#bb-css-studio').on('click', '[bbs-click]', function (e) {
+            e.preventDefault();
+            var event = $(this).attr('bbs-click');
+            $this.clickEvents[event]($(this), e);
+        });
     }
 };

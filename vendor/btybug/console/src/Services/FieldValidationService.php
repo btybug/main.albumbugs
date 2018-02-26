@@ -100,7 +100,8 @@ class FieldValidationService
         return $rules;
     }
 
-    public function isRequired($table, $column){
+    public function isRequired($table, $column)
+    {
         $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = '$this->db' AND table_name ='$table'  AND column_name ='$column'"));
         $this->tableName = $table;
         $this->column = array_first($column_info);
@@ -110,9 +111,10 @@ class FieldValidationService
         return (!$is_nullable && is_null($this->column->COLUMN_DEFAULT)) ? true : false;
     }
 
-    public function isAutoIncrement($table, $column){
+    public function isAutoIncrement($table, $column)
+    {
         $column_info = (\DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = '$this->db' AND table_name ='$table'  AND column_name ='$column' AND EXTRA like '%auto_increment%'"));
-        if(count($column_info)) return true;
+        if (count($column_info)) return true;
 
         return false;
     }

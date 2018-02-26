@@ -1,17 +1,24 @@
 <div class="col-md-12">
     <div class="form-group">
         <label class="col-xs-4 col-md-4 control-label" for="name">Data Source</label>
-        <div class="col-xs-8 col-md-8">
-            <!-- check if Data source is data-source -->
-            {!! Form::select('data_source',[
-             ''=>'-- Select Data source --',
-             'manual'=>'Manual',
-             'api'=>'From api',
-             'related'=>'Related',
-             'bb'=>'BB Functions',
-             'file'=>'File'], null,['class'=>'form-control','id'=>'data_source']) !!}
+        <div class="col-xs-8">
+            <div class="col-md-12 prepend_template">
+                <button class="btn btn-primary pull-right add-manual"><i class="fa fa-plus"></i></button>
+            </div>
         </div>
         <div class="clearfix"></div>
+    </div>
+    <div class="col-md-12">
+        <div class="div-manual">
+            @if(isset($settings['manual_item']))
+                @foreach($settings['manual_item'] as $key => $value)
+                    <div class="form-group lets_each_item">
+                        <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
+                        <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
     </div>
     <div class="select_op_box">
 
@@ -94,23 +101,20 @@
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script type="temolate" id="manual-field-option">
      <div class="content bty-settings-panel">
-                    <div class="div-manual">
-                        @if(isset($settings['manual_item']))
-        @foreach($settings['manual_item'] as $key => $value)
-            <div class="form-group lets_each_item">
-                <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
-                                    <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
-                                </div>
-
-                            @endforeach
-    @endif
-
-
+        <div class="div-manual">
+            @if(isset($settings['manual_item']))
+                @foreach($settings['manual_item'] as $key => $value)
+                    <div class="form-group lets_each_item">
+                        <input type="text" name="manual_item[{{$key}}]" class="bty-input-text-4 txt-item" placeholder="Manual" value="{{$value}}" >
+                        <button class="btn btn-danger remove_this_item"><i class="fa fa-minus"></i></button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-md-12 prepend_template">
+            <button class="btn btn-primary pull-right add-manual"><i class="fa fa-plus"></i></button>
+        </div>
     </div>
-    <div class="col-md-12 prepend_template">
-        <button class="btn btn-primary pull-right add-manual"><i class="fa fa-plus"></i></button>
-    </div>
-</div>
 </script>
 <script>
     $(document).ready(function () {
@@ -123,6 +127,7 @@
                 '</div> ';
             $('.div-manual').append(left_item_div);
             nv_left_item++;
+            $(".lets_each_item input").trigger('keyup');
             return nv_left_item;
         });
 

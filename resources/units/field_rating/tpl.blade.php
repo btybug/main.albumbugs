@@ -38,56 +38,35 @@
             @endif
         </h4>
         <div class="input-group">
-            @if(count($arr))
-                @foreach($arr as $key => $item)
-                    @if($item != "")
-                        <div class="radio-input">
-                            <input name="{!! (isset($source['field'])) ? print_field_name($source['field']) : "" !!}"
-                                   type="radio" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
-                            <label for="optionsRadios-{{ $key }}">
-                                {{$item}}
-                            </label>
-                        </div>
-                    @endif
-                @endforeach
-            @endif
+            <div class="bty-rating-star-1">
+                @if(count($arr))
+                    @foreach($arr as $key => $item)
+                        @if($item != "")
+                            <div class="radio-input">
+                                <input name="{!! (isset($source['field'])) ? print_field_name($source['field']) : "" !!}"
+                                       type="radio" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
+                                <label for="optionsRadios-{{ $key }}">
+                                    {{$item}}
+                                </label>
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
 </div>
-<div class="bty-rating-star-1">
-    <input id="star-6" type="radio" name="star">
-    <label for="star-6"></label>
-    <input id="star-5" type="radio" name="star">
-    <label for="star-5"></label>
-    <input id="star-4" type="radio" name="star">
-    <label for="star-4"></label>
-    <input id="star-3" type="radio" name="star">
-    <label for="star-3"></label>
-    <input id="star-2" type="radio" name="star">
-    <label for="star-2"></label>
-    <input id="star-1" type="radio" name="star">
-    <label for="star-1"></label>
-</div>
-
-
-
-
 
 @if(isset($settings['manual_item']) && count($settings['manual_item']))
     <div class="form-group">
         <div class="{!! issetReturn($settings,'radio_inp',null) !!}">
             <div class="input-group">
-                @foreach($settings['manual_item'] as $key => $item)
-                    @if($item != "")
-                        <div class="radio-input">
-                            <input type="radio" name="optionsRadios" id="optionsRadios-{{ $key }}" value="{{ $key }}">
-                            <label for="optionsRadios-{{ $key }}">
-                                {{$item}}
-                            </label>
-                        </div>
-                    @endif
-                @endforeach
-
+                <div class="bty-rating-star-1">
+                    @foreach($settings['manual_item'] as $key => $item)
+                        <input id="star-{{$key}}" type="radio" name="star" value="{{$item}}">
+                        <label for="star-{{$key}}"></label>
+                    @endforeach
+                </div>
             </div>
          </div>
     </div>

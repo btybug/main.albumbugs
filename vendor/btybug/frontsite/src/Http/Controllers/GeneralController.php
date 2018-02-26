@@ -12,11 +12,11 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use File;
-use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\dbhelper;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Repositories\AdminsettingRepository as Settings;
+use File;
+use Illuminate\Http\Request;
 
 /**
  * Class SettingsController
@@ -50,7 +50,6 @@ class GeneralController extends Controller
         $this->settings = $settings;
         $this->helpers = new helpers();
     }
-
 
 
     /**

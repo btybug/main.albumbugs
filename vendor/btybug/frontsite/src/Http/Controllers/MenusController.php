@@ -1,7 +1,6 @@
 <?php namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Btybug\btybug\Repositories\MenuRepository;
 use Btybug\Console\Http\Requests\Structure\MenuCreateRequest;
 use Btybug\Console\Http\Requests\Structure\MenuDeleteRequest;
@@ -56,7 +55,7 @@ class MenusController extends Controller
     {
         $menu = $menuRepository->findOrFail($id);
         $pageGrouped = $frontPagesRepository->getGroupedWithModule();
-        return view('manage::frontend.menus.edit', compact(['menu','pageGrouped']));
+        return view('manage::frontend.menus.edit', compact(['menu', 'pageGrouped']));
     }
 
     public function postEdit(

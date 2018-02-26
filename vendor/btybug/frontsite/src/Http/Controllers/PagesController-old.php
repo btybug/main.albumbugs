@@ -12,13 +12,13 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Helpers\helpers;
+use Btybug\btybug\Models\Settings;
+use Btybug\FrontSite\Models\FrontendPage;
+use Btybug\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Response;
-use Btybug\btybug\Helpers\helpers;
-use Btybug\FrontSite\Models\FrontendPage;
-use Btybug\btybug\Models\Settings;
-use Btybug\User\User;
 use Validator;
 use View;
 

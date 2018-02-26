@@ -8,11 +8,11 @@
 
 namespace Btybug\FrontSite\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Btybug\FrontSite\Models\EmailGroups;
 use Btybug\FrontSite\Models\Emails;
 use Btybug\Modules\Models\Forms;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Yajra\Datatables\Datatables;
 
 class EmailsController extends Controller

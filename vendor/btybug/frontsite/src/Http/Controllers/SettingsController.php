@@ -12,14 +12,14 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use File;
-use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Helpers\MainHelper as Helper;
-use Btybug\FrontSite\Services\SettingsService;
-use Btybug\btybug\Repositories\AdminsettingRepository as Settings;
 use Btybug\btybug\Repositories\AdminsettingRepository;
+use Btybug\btybug\Repositories\AdminsettingRepository as Settings;
 use Btybug\FrontSite\Repository\VersionsRepository;
+use Btybug\FrontSite\Services\SettingsService;
+use File;
+use Illuminate\Http\Request;
 use Validator;
 
 /**
@@ -250,6 +250,7 @@ class SettingsController extends Controller
     {
         return view('manage::system.api');
     }
+
     public function getFrontSettings(VersionsRepository $versionsRepository, AdminsettingRepository $adminsettingRepository)
     {
         $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
@@ -257,6 +258,7 @@ class SettingsController extends Controller
         $model = $adminsettingRepository->getVersionsSettings('versions', 'frontend');
         return view('manage::system.front_settings', compact(['cssData', 'model', 'jsData']));
     }
+
     public function postFrontSettings(Request $request, AdminsettingRepository $adminsettingRepository, SettingsService $service)
     {
         $data = $request->except('_token');

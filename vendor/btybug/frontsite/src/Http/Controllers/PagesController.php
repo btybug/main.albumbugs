@@ -13,23 +13,21 @@ namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Events\PageCreateEvent;
 use App\Http\Controllers\Controller;
-use BtyBugHook\Forms\Services\CommonService;
-use Illuminate\Http\Request;
-use Response;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\ContentLayouts\MainBody;
+use Btybug\btybug\Models\Settings;
 use Btybug\btybug\Services\CmsItemReader;
-use Btybug\btybug\Services\HookService;
 use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\FrontSite\Models\FrontendPage;
 use Btybug\FrontSite\Repository\ClassifierRepository;
 use Btybug\FrontSite\Services\ClassifierService;
 use Btybug\FrontSite\Services\FrontendPageService;
 use Btybug\Modules\Models\Fields;
-use Btybug\btybug\Models\Settings;
 use Btybug\User\Services\RoleService;
 use Btybug\User\Services\UserService;
+use Illuminate\Http\Request;
+use Response;
 use Validator;
 use View;
 
@@ -195,7 +193,7 @@ class PagesController extends Controller
     )
     {
         $new = $frontendPageService->addNewPage();
-        event(new PageCreateEvent($new,$request->all()));
+        event(new PageCreateEvent($new, $request->all()));
 
         if ($new) return redirect()->back();
 
@@ -398,8 +396,9 @@ class PagesController extends Controller
     public function postSortPages(
         Request $request,
         FrontendPageService $pageService
-    ){
-        $result = $pageService->sort($request->only('item','parent'));
+    )
+    {
+        $result = $pageService->sort($request->only('item', 'parent'));
         return Response::json(['error' => $result]);
     }
 

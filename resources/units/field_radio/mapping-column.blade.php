@@ -128,7 +128,6 @@
 
 
         $("body").delegate(".remove_this_item","click",function(){
-            console.log(nv_left_item)
             $(this).parent().remove();
             if(nv_left_item != 0){
                 nv_left_item -= 1;
@@ -159,7 +158,7 @@
                 if (d) {
                     $(".mapping-column").html(d.data);
                 }
-            })
+            });
         });
 
         $("body").delegate("form#edit-field textarea,input,select", 'input', function () {
@@ -187,7 +186,7 @@
                 $(".default-value-box").removeClass("hide");
                 $(".default-value-box").addClass("show");
             }
-        })
+        });
 
         $("body").on("click", '.item-unit', function () {
             var data = $("#edit-field").serialize();
@@ -196,7 +195,7 @@
                     $(".field-html-box").html(d.data);
                 }
             })
-        })
+        });
 
         // function layoutData(variation) {
         //     var data;

@@ -12,11 +12,11 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Btybug\User\Models\Roles;
 use Datatables;
 use File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Btybug\User\Models\Roles;
 use Table;
 use TableView;
 use Validator;

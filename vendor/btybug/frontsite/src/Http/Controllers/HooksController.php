@@ -3,8 +3,8 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Btybug\btybug\Repositories\HookRepository;
+use Illuminate\Http\Request;
 
 
 /**
@@ -34,28 +34,37 @@ class HooksController extends Controller
         $hook = $hookRepository->findOrFail($id);
         return view('manage::frontend.hooks.edit', compact(["hook"]));
     }
-    public function create(HookRepository $hookRepository){
+
+    public function create(HookRepository $hookRepository)
+    {
         $hook = $hookRepository->model();
         return view('manage::frontend.hooks.create', compact(["hook"]));
     }
-    public function createSave(HookRepository $hookRepository, Request $request){
+
+    public function createSave(HookRepository $hookRepository, Request $request)
+    {
         $data = $request->except("_token");
         $create = $hookRepository->saveHook($data);
         return redirect()->route('frontsite_hooks_index');
     }
+
     public function saveEdit($id, HookRepository $hookRepository, Request $request)
     {
         $data = $request->except("_token");
-        $update = $hookRepository->update($id,$data);
+        $update = $hookRepository->update($id, $data);
         return redirect()->route('frontsite_hooks_index');
     }
-    public function remove($id, HookRepository $hookRepository){
+
+    public function remove($id, HookRepository $hookRepository)
+    {
         $hook = $hookRepository->delete($id);
         return redirect()->route('frontsite_hooks_index');
     }
-    public function renderBbButton(Request $request){
+
+    public function renderBbButton(Request $request)
+    {
         $repl = $request->id;
         $html = $html = \View::make('manage::frontend.hooks._partials.hook_tpl', compact('repl'))->render();
-        return response()->json(["html"=>$html]);
+        return response()->json(["html" => $html]);
     }
 }

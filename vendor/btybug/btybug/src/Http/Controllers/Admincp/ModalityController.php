@@ -171,11 +171,11 @@ class ModalityController extends Controller
         $units = Painter::all()->sortByTag($key);
         $selected = null;
 
-        if(isset($data['value'])) $selected = Painter::findByVariation($data['value']);
+        if (isset($data['value'])) $selected = Painter::findByVariation($data['value']);
 
         if (!count($units)) return \Response::json(['error' => true]);
 
-        $html = View::make('btybug::styles.c_units', compact('units', 'data','selected'))->render();
+        $html = View::make('btybug::styles.c_units', compact('units', 'data', 'selected'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -187,16 +187,16 @@ class ModalityController extends Controller
         $variationName = $slug . '.' . str_slug($key);
 
         $unit = Painter::find($slug);
-        if (! $unit) return \Response::json(['error' => true]);
+        if (!$unit) return \Response::json(['error' => true]);
 
         $variation = $unit->variations(false)->find($variationName);
 
         if (!$variation) {
-            $unit->variations()->createVariation(['title' => $key], str_slug($key),true);
+            $unit->variations()->createVariation(['title' => $key], str_slug($key), true);
             $variation = $unit->variations(false)->find($variationName);
         }
 
-        return \Response::json(['error' => false,'unit' => $unit->toArray(),'variation' => $variation->toArray()]);
+        return \Response::json(['error' => false, 'unit' => $unit->toArray(), 'variation' => $variation->toArray()]);
     }
 
     public function getUnits($data)

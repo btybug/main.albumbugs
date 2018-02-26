@@ -181,7 +181,7 @@ class StructureService extends GeneralService
 
     public function saveMenu($menu, $request)
     {
-        return $menu->update(['json_data' => $request->json_data,'name' => $request->name]);
+        return $menu->update(['json_data' => $request->json_data, 'name' => $request->name]);
     }
 
     /**
@@ -627,29 +627,31 @@ class StructureService extends GeneralService
         return ['file' => $file, 'slug' => $slug, 'builder' => $builder];
     }
 
-    public function getUrls($method){
+    public function getUrls($method)
+    {
         $this->plugins->modules();
         $modules = $this->plugins->getPlugins();
-        $moduleRoutes = $this->collectRoutes($modules,$method);
+        $moduleRoutes = $this->collectRoutes($modules, $method);
 
         $this->plugins->plugins();
         $plugins = $this->plugins->getPlugins();
-        $pluginRoutes = $this->collectRoutes($plugins,$method);
+        $pluginRoutes = $this->collectRoutes($plugins, $method);
 
-        return array_merge($moduleRoutes,$pluginRoutes);
+        return array_merge($moduleRoutes, $pluginRoutes);
     }
 
-    private function collectRoutes($modules,$method){
+    private function collectRoutes($modules, $method)
+    {
         $routes = [];
-        if(count($modules)){
-            foreach ($modules as $module){
-                if(isset($module['route'])){
+        if (count($modules)) {
+            foreach ($modules as $module) {
+                if (isset($module['route'])) {
                     $url = strtolower('admin/' . $module['route']);
-                    if($method == 'all'){
-                        $routes['GET'][$module['route']] = Routes::getModuleRoutes('GET',$url);
-                        $routes['POST'][$module['route']] = Routes::getModuleRoutes('POST',$url);
-                    }else if($method == 'GET' || $method == 'POST'){
-                        $routes[$method][$module['route']] = Routes::getModuleRoutes($method,$url);
+                    if ($method == 'all') {
+                        $routes['GET'][$module['route']] = Routes::getModuleRoutes('GET', $url);
+                        $routes['POST'][$module['route']] = Routes::getModuleRoutes('POST', $url);
+                    } else if ($method == 'GET' || $method == 'POST') {
+                        $routes[$method][$module['route']] = Routes::getModuleRoutes($method, $url);
                     }
                 }
             }

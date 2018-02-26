@@ -37,7 +37,7 @@ class Home
     public function render($url, $settings = [])
     {
         $page = FrontendPage::where('url', $url)->orWhere('url', "/" . $url)->first();
-        if($page->content_type=='special') return view('btybug::app', compact('page'));
+        if ($page->content_type == 'special') return view('btybug::app', compact('page'));
         if ($page) {
             if (!isset($settings['pl_live_settings'])) {
                 if ($page->status == 'draft')
@@ -49,24 +49,24 @@ class Home
 
                 $parentPage = $page->parent;
 
-                if($parentPage && $page->page_layout == null){
-                    if($parentPage->settings) {
-                        $parentSettings = json_decode($parentPage->settings,true);
-                        if(isset($parentSettings['children']['page_layout'])){
+                if ($parentPage && $page->page_layout == null) {
+                    if ($parentPage->settings) {
+                        $parentSettings = json_decode($parentPage->settings, true);
+                        if (isset($parentSettings['children']['page_layout'])) {
                             $page->page_layout = $parentSettings['children']['page_layout'];
                         }
 
-                        if(isset($parentSettings['children_page_layout_settings'])){
-                            $settings = array_merge($settings,$parentSettings['children_page_layout_settings']);
+                        if (isset($parentSettings['children_page_layout_settings'])) {
+                            $settings = array_merge($settings, $parentSettings['children_page_layout_settings']);
                         }
                     }
-                }else{
+                } else {
                     if (is_array($page->page_layout_settings)) {
                         $settings = array_merge($settings, $page->page_layout_settings);
                     }
                 }
 
-                
+
                 $page_settings = json_decode($page->settings, true);
                 if (!is_array($page_settings)) {
                     $page_settings = [];

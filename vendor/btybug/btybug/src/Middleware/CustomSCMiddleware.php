@@ -69,8 +69,8 @@ class CustomSCMiddleware
             $url = substr($url, 0, strpos($url, '?'));
         }
         $explodeUrl = explode('/', $url);
-        $extraExcepts = \Config::get('shortcode.except.url',[]);
-        $this->except = array_merge($this->except,$extraExcepts);
+        $extraExcepts = \Config::get('shortcode.except.url', []);
+        $this->except = array_merge($this->except, $extraExcepts);
         foreach ($this->except as $except) {
             $flag = 1;
             $exceptExp = explode('/', $except);
@@ -102,7 +102,7 @@ class CustomSCMiddleware
     {
         $cores = \config::get('shortcode.code', []);
         $extras = \config::get('shortcode.extra');
-        $this->conf = array_merge($cores,$extras);
+        $this->conf = array_merge($cores, $extras);
         foreach ($this->conf as $val) {
             $key = array_keys($val)[0];
             $fn = $val[$key];
@@ -114,6 +114,7 @@ class CustomSCMiddleware
         }
         return $content;
     }
+
     /**
      * @param $fn
      * @param $content
@@ -146,9 +147,9 @@ class CustomSCMiddleware
                 $final_arg[$arg[0]] = $arg[1];
         }
 
-        if(! function_exists($fn)) {
+        if (!function_exists($fn)) {
             $code = null;
-        }else{
+        } else {
             $code = $fn($final_arg);
         }
 

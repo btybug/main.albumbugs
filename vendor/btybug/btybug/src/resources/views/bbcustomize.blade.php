@@ -1,19 +1,19 @@
 @php
-        $indentificator=uniqid();
-            if($value){
-                switch ($type){
-                    case 'layouts':
-                    $obj=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
-                    $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
-                    break;
-                    case 'unit':
-                    $obj=\Btybug\btybug\Models\Painter\Painter::findByVariation($value);
-                    if($obj){
-                        $variation = $obj->variations(false)->find($value);
-                    }
-                    break;
+    $indentificator=uniqid();
+        if($value){
+            switch ($type){
+                case 'layouts':
+                $obj=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
+                $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
+                break;
+                case 'unit':
+                $obj=\Btybug\btybug\Models\Painter\Painter::findByVariation($value);
+                if($obj){
+                    $variation = $obj->variations(false)->find($value);
                 }
+                break;
             }
+        }
 
 @endphp
 
@@ -44,10 +44,12 @@
             @endif
     >
     <div class="input-group-addon">
-        <button type="button" data-value="{!! $value !!}" data-strcuture="{!! $structure !!}" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
+        <button type="button" data-value="{!! $value !!}" data-strcuture="{!! $structure !!}"
+                data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
-    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation)) {{ "/admin/uploads/gears/settings/".$variation->id }} @endif" data-strcuture="{!! $structure !!}"
+    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation)) {{ "/admin/uploads/gears/settings/".$variation->id }} @endif"
+       data-strcuture="{!! $structure !!}"
        class="btn btn-info customize-button pull-left" style="border-radius: 0px;">Customize
     </a>
     <input

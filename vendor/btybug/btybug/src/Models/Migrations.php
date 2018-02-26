@@ -245,9 +245,9 @@ class Migrations
             foreach ($data['column'] as $column) {
                 $columnRepository = new ColumnsRepository();
                 $columnRepository->create([
-                   'db_table' => $table,
-                   'table_column' => $column['name'],
-                   'user_id' => \Auth::id()
+                    'db_table' => $table,
+                    'table_column' => $column['name'],
+                    'user_id' => \Auth::id()
                 ]);
 
                 if (isset($column['field']) && $column['field'] == 'yes') {
@@ -293,11 +293,6 @@ class Migrations
                     $table->renameColumn($column_old, $name)->change();
                 });
             }
-
-
-
-
-
 
 
             \Schema::table($table, function (Blueprint $table) use ($data, $column_old, $table_name) {

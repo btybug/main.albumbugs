@@ -40,7 +40,7 @@ class DashboardController extends Controller
      */
     public function getIndex()
     {
-        return view('btybug::admin.dashboard',compact('units'));
+        return view('btybug::admin.dashboard', compact('units'));
     }
 
     /**

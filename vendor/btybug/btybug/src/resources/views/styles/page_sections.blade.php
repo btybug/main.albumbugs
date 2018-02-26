@@ -12,7 +12,7 @@
                 @endforeach
             </ul>
         </div>
-@endif
+        @endif
         <div class="col-md-8 modal-data-items builder-modalright">
             <h5>Select Variation</h5>
             @if(!isset($items))
@@ -29,21 +29,21 @@
                         </li>
                         @endforeach
                     </ul>
-            @else
-                    <ul class="formlisting">
-                        @foreach($items as $item)
-                            <li>
-                                <a class="btn item" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                    <input type="hidden" data-action="page_sections"
-                                           data-value="{!! $item->id !!}"/>
-                                    <img src="{!! url('images/form-list2.jpg') !!}"></a>
-                                <span>{!! $item->title !!}<a href="#" target="_blank"><i
-                                                class="fa fa-pencil pull-right" aria-hidden="true"></i></a></span>
+                    @else
+                        <ul class="formlisting">
+                            @foreach($items as $item)
+                                <li>
+                                    <a class="btn item" data-value="{!! $item->id !!}" href="javascript:void(0)">
+                                        <input type="hidden" data-action="page_sections"
+                                               data-value="{!! $item->id !!}"/>
+                                        <img src="{!! url('images/form-list2.jpg') !!}"></a>
+                                    <span>{!! $item->title !!}<a href="#" target="_blank"><i
+                                                    class="fa fa-pencil pull-right" aria-hidden="true"></i></a></span>
 
-                            </li>
-                        @endforeach
-                    </ul>
-            @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
         </div>
         @if(!isset($ajax))
     </div>

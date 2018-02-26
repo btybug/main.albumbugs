@@ -33,9 +33,9 @@ class HookService extends GeneralService
         $help_text = (isset($data['help_text'])) ? $data['help_text'] : null;
 
         return $this->hookRepo->create([
-           'name' => $data['name'],
-           'tag'  => $data['tag'],
-           'slug' => md5(uniqid()),
+            'name' => $data['name'],
+            'tag' => $data['tag'],
+            'slug' => md5(uniqid()),
             'type' => $type,
             'author_id' => $authorID,
             'help_text' => $help_text

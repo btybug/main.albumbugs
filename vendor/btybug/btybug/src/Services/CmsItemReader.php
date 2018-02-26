@@ -78,7 +78,6 @@ class CmsItemReader extends TplModel
     }
 
 
-
     public function deleteGear()
     {
         if ($this && $this->self_type) {

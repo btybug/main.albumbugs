@@ -26,7 +26,7 @@ class HomeController extends Controller
      *
      * @param page $page
      */
-    public function __construct (Home $homemodel)
+    public function __construct(Home $homemodel)
     {
         $this->homemodel = $homemodel;
     }
@@ -36,7 +36,7 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function pages (Request $request)
+    public function pages(Request $request)
     {
         $url = $request->path();
         $settings = $request->all();
@@ -45,7 +45,7 @@ class HomeController extends Controller
         return $this->homemodel->render($url, $settings);
     }
 
-    public function blog_pages (Request $request)
+    public function blog_pages(Request $request)
     {
         $settings = [];
         $url = $request->route()->uri();
@@ -54,7 +54,7 @@ class HomeController extends Controller
     }
 
 //    public function unitStyles($slug, $path)
-    public function unitStyles ($css)
+    public function unitStyles($css)
     {
         $stylePaths = session()->get('custom.styles', []);
         $contentArray = [];
@@ -72,11 +72,11 @@ class HomeController extends Controller
         $response = \Response::make($content);
         $response->header('Content-Type', 'text/css');
 
-           $response->header('Cache-Control', 'max-age=31104000');
+        $response->header('Cache-Control', 'max-age=31104000');
         return $response;
     }
 
-    public function unitScripts ($js)
+    public function unitScripts($js)
     {
         $scriptPaths = \Session::get('custom.scripts', []);
         $contentArray = [];
@@ -99,17 +99,17 @@ class HomeController extends Controller
         $response = \Response::make($content);
         $response->header('Content-Type', 'application/javascript', false);
 
-            $response->header('Cache-Control', 'max-age=31536000');
+        $response->header('Cache-Control', 'max-age=31536000');
 
         return $response;
     }
 
-    public function unitImg ($slug, $path)
+    public function unitImg($slug, $path)
     {
 
         $unit = ContentLayouts::find($slug);
-        if (! $unit) $unit = Painter::find($slug);
-        if (! \File::exists($unit->getPath() . DS . $path)) abort(500);
+        if (!$unit) $unit = Painter::find($slug);
+        if (!\File::exists($unit->getPath() . DS . $path)) abort(500);
         $file = \File::get($unit->getPath() . DS . $path);
         $response = \Response::make($file);
         $response->header('Cache-Control', 'max-age=31104000');
@@ -117,7 +117,7 @@ class HomeController extends Controller
         return $response;
     }
 
-    public function pagesOptimize ()
+    public function pagesOptimize()
     {
 //        $package = new Plugins();
 //        $package->plugins();

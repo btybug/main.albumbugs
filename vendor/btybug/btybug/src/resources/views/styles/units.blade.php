@@ -18,7 +18,7 @@
                 @endforeach
             </ul>
         </div>
-@endif
+        @endif
         <div class="col-md-9 modal-list-content builder-modalright modal-data-items">
             <h5>Select Variation</h5>
             @if(!isset($items))

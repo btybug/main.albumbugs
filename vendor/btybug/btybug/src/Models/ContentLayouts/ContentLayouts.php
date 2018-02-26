@@ -16,7 +16,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 {
     use autoinclude;
     /**
-    /**
+     * /**
      * @var string
      */
     protected $dir;
@@ -50,6 +50,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
         return $tpl;
     }
+
     public function scopeFind(string $slug)
     {
         $path = $this->getItemConfigJsonPath($slug);
@@ -77,6 +78,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
         return view('uploads::gears.units.preview', compact(['model', "ui", 'data', 'settings', 'variation']));
     }
+
     /**
      * @return string
      */
@@ -164,8 +166,8 @@ class ContentLayouts extends BasePainter implements VariationAccess
      */
     public static function findVariation($id)
     {
-       $layout=new self();
-      return $layout->findByVariation($id)->variations()->find($id);
+        $layout = new self();
+        return $layout->findByVariation($id)->variations()->find($id);
     }
 
     /**
@@ -178,7 +180,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
     public static function savePageSectionSettings($slug, $title = NULL, $data, $isSave = NULL)
     {
         if ($isSave && $isSave == 'save') {
-           // $variation = new static();
+            // $variation = new static();
             $tpl = self::findByVariation($slug);
             $existingVariation = $variation = self::findByVariation($slug)->variations()->find($slug);
             $dataToInsert = [
@@ -214,6 +216,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         $tpl = self::find($slug[0]);
         return ContentLayoutVariations::delete($id, $tpl);
     }
+
     /**
      * @return array|bool
      */
@@ -503,7 +506,8 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     }
 
-    public function scopeGetPageLayoutHook($page, $hide_top = false){
+    public function scopeGetPageLayoutHook($page, $hide_top = false)
+    {
         $layout = self::findByVariation($page->page_layout);
         if ($layout) {
             return $layout->getPageLayoutWidgetHook($page, $hide_top);
@@ -553,8 +557,10 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
         return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
     }
-    protected function getPageLayoutWidgetHook($page,$hide_top = false){
-        $hooks = HookRepository::get()->pluck("name","id");
+
+    protected function getPageLayoutWidgetHook($page, $hide_top = false)
+    {
+        $hooks = HookRepository::get()->pluck("name", "id");
 
         $_this = null;
         if (isset($this->placeholders)) {
@@ -569,7 +575,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
             }
         }
         //return \View::make('btybug::_partials.layout', compact(['_this', 'page', 'hide_top', 'enabledSelectLayout']))->render();
-        return \View::make('btybug::_partials.page_hooks', compact(['_this', 'page', 'hooks','hide_top', 'enabledSelectLayout']))->render();
+        return \View::make('btybug::_partials.page_hooks', compact(['_this', 'page', 'hooks', 'hide_top', 'enabledSelectLayout']))->render();
     }
 
     protected function getAdminPageLayoutWidget($page, $hide_top = false)
@@ -583,7 +589,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function scopeGetDefaultLayoutPlaceholders($system)
     {
-        if (!isset($system['page_layout'])){
+        if (!isset($system['page_layout'])) {
             return $this->getDefaultPlaceholders();
         }
 
@@ -643,7 +649,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function scopeGetPageLayoutHooks($page)
     {
-        if($page->page_layout){
+        if ($page->page_layout) {
             $layout = self::findByVariation($page->page_layout)->variations()->find($page->page_layout);
             if ($layout) {
                 $html = \View::make('btybug::_partials.page_hooks', compact('layout'));
@@ -655,7 +661,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function scopeGetChildrenPageLayout($page)
     {
-        if(! $page->parent_id){
+        if (!$page->parent_id) {
             $settings = ($page->settings) ? json_decode($page->settings, true) : null;
             $layout = null;
             if ($settings) {
@@ -682,7 +688,9 @@ class ContentLayouts extends BasePainter implements VariationAccess
     {
         return base_path($this->path);
     }
-    public function scopeRemoveLayoutJson(){
+
+    public function scopeRemoveLayoutJson()
+    {
         $path = $this->getConfigPath();
         return \File::delete($path);
     }

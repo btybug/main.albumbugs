@@ -22,7 +22,7 @@ class Painter extends BasePainter
      */
     public function getStoragePath()
     {
-       return config('painter.PAINTERSPATHS');
+        return config('painter.PAINTERSPATHS');
     }
 
     /**
@@ -33,7 +33,8 @@ class Painter extends BasePainter
         return storage_path(config('painter.CONFIG'));
     }
 
-    public function scopeFindByVariation($id){
+    public function scopeFindByVariation($id)
+    {
         $slug = explode('.', $id);
         $tpl = Painter::find($slug[0]);
 
@@ -50,7 +51,7 @@ class Painter extends BasePainter
         $variation = $ui->variations(false)->find($slug);
 
         $settings = [];
-        if(count($variation->settings) > 0){
+        if (count($variation->settings) > 0) {
             $settings = $variation->settings;
         }
 
@@ -59,10 +60,10 @@ class Painter extends BasePainter
         $data['body'] = $body;
         $data['settings'] = $dataSettings;
 
-        return view('uploads::gears.units.preview', compact(['model',"ui", 'data', 'settings', 'variation']));
+        return view('uploads::gears.units.preview', compact(['model', "ui", 'data', 'settings', 'variation']));
     }
 
-    public function scopeRenderSettings($variables=null)
+    public function scopeRenderSettings($variables = null)
     {
         $path = $this->getPath();
         $variables['tplPath'] = $path;
@@ -71,7 +72,7 @@ class Painter extends BasePainter
 
         $is_wrong = $this->validateSettings('settings.blade.php');
 
-        if ($is_wrong){
+        if ($is_wrong) {
             return $is_wrong;
         }
 
@@ -89,7 +90,7 @@ class Painter extends BasePainter
         View::addLocation($path);
         View::addNamespace("$slug", $path);
 
-        if ($this->autoinclude){
+        if ($this->autoinclude) {
             return $this->getAutoInclude()->render($variables['variation']->toArray(), "$slug::");
         }
         if ($this->example) {
@@ -102,15 +103,17 @@ class Painter extends BasePainter
         } else {
             $tpl = "tpl";
         }
-        $this->path  = $path;
+        $this->path = $path;
         return View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this])->render();
     }
+
     public function getPath()
     {
         return base_path($this->path);
     }
 
-    public function scopeRemovePainterJson(){
+    public function scopeRemovePainterJson()
+    {
         $path = $this->getConfigPath();
         return \File::delete($path);
     }

@@ -90,30 +90,31 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
         if (!is_null($section)) {
             $variation = $section->variations()->find($variation_id);
             if (!is_null($variation)) {
-               return $variation->render($source);
+                return $variation->render($source);
             }
         }
         return false;
     }
 }
 
-function BBRenderFrontLayout($page,$settings){
-    if($page->parent_id){
-       $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+function BBRenderFrontLayout($page, $settings)
+{
+    if ($page->parent_id) {
+        $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
 
         $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
-        if(count($p)){
+        if (count($p)) {
             $firstParent = array_first($p);
-            $page_settings = json_decode($firstParent->settings,true);
-            if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
+            $page_settings = json_decode($firstParent->settings, true);
+            if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
                 return BBRenderPageSections($page_settings['children']['page_layout'],
                     (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
             }
-        }else{
+        } else {
             $parent = $forntPageRepository->find($page->parent_id);
-            if($parent && $parent->settings){
-                $page_settings = json_decode($parent->settings,true);
-                if(isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])){
+            if ($parent && $parent->settings) {
+                $page_settings = json_decode($parent->settings, true);
+                if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
                     return BBRenderPageSections($page_settings['children']['page_layout'],
                         (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
                 }
@@ -121,12 +122,13 @@ function BBRenderFrontLayout($page,$settings){
         }
     }
 
-    return  BBRenderPageSections($page->page_layout,$settings);
+    return BBRenderPageSections($page->page_layout, $settings);
 }
 
-function BBgetFrontPage($idOrSlug){
+function BBgetFrontPage($idOrSlug)
+{
     $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
-    return $forntPageRepository->model()->where('id',$idOrSlug)->orWhere('slug',$idOrSlug)->first();
+    return $forntPageRepository->model()->where('id', $idOrSlug)->orWhere('slug', $idOrSlug)->first();
 }
 
 function BBRenderPageBody($slug, $data = [], $main_view = null)
@@ -311,7 +313,7 @@ function main_content()
         if ($page->content_type == "editor") {
             echo $page->main_content;
         } else {
-            return BBRenderUnits($page->template,['_page'=>$page]);
+            return BBRenderUnits($page->template, ['_page' => $page]);
         }
     }
 }
@@ -555,7 +557,7 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
                     array_filter($liveSettings, function ($value) {
                         return $value !== '';
                     });
-                    $settings = array_merge($settings,$liveSettings);
+                    $settings = array_merge($settings, $liveSettings);
                 }
                 return $unit->render(compact(['variation', 'settings', 'source', 'field', 'cheked', 'data']));
             }
@@ -579,7 +581,7 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
     if ($data) {
         foreach ($data as $item) {
             $children = $item->childs;
-            $output .= '<li data-id="' . $item->id . '" data-type="'.$item->type.'">';
+            $output .= '<li data-id="' . $item->id . '" data-type="' . $item->type . '">';
             $title = 'core';
             $output .= '<div class="listinginfo bb-menu-item">';
             switch ($item->type) {
@@ -615,7 +617,7 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             /* Actions END */
             if (count($children)) {
                 $output .= '<ol>';
-                    $output .= hierarchyAdminPagesListFull($children, false, $icon, 0);
+                $output .= hierarchyAdminPagesListFull($children, false, $icon, 0);
                 $output .= '</ol>';
             }
 
@@ -705,7 +707,7 @@ function BBbutton($action, $key, $text, array $array = [])
         . $array . ' value="' . $value . '" data-name="' . $data_key . '" name="' . $hiddenName . '">';
 }
 
-function BBcustomize($type, $key, $tag, $text, $structure,$array = [])
+function BBcustomize($type, $key, $tag, $text, $structure, $array = [])
 {
     $atributes = ' ';
     $value = '';
@@ -738,7 +740,7 @@ function BBcustomize($type, $key, $tag, $text, $structure,$array = [])
         $array = 'data-array="true"';
     }
     $data_key = str_replace('[]', '', $key);
-    $html = View::make('btybug::bbcustomize', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName','structure'))->render();
+    $html = View::make('btybug::bbcustomize', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName', 'structure'))->render();
     return $html;
 }
 
@@ -1156,13 +1158,13 @@ function hierarchyAdminPagesListPermissions($data, $parent = true, $icon = true,
 }
 
 //TODO transver in Manage
-function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $id = 0,$module = false)
+function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $id = 0, $module = false)
 {
     $output = '';
     // Loop through items
     if ($data) {
         foreach ($data as $item) {
-            if($module && $module != $item->module_id) return false;
+            if ($module && $module != $item->module_id) return false;
             $children = $item->childs;
 
             $output .= ' <ol class="pagelisting">';
@@ -1568,19 +1570,19 @@ function get_settings($settings, $setting, $default = '')
 function form_render($attr)
 {
     $formRepo = new \Btybug\Console\Repository\FormsRepository();
-    $form = $formRepo->findByIdOrSlug(issetReturn($attr, 'id',issetReturn($attr, 'slug',null)));
+    $form = $formRepo->findByIdOrSlug(issetReturn($attr, 'id', issetReturn($attr, 'slug', null)));
 
     if ($form) {
-        return \Btybug\Console\Services\FormService::renderFormBlade($form,$attr);
+        return \Btybug\Console\Services\FormService::renderFormBlade($form, $attr);
     }
 }
 
 function field_render($attr)
 {
-    if(count($attr)){
+    if (count($attr)) {
         $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
-        if(isset($attr['id'])){
-            $field = $fieldRepo->findBy('id',$attr['id']);
+        if (isset($attr['id'])) {
+            $field = $fieldRepo->findBy('id', $attr['id']);
         }
 
         if ($field) {
@@ -1589,10 +1591,11 @@ function field_render($attr)
     }
 }
 
-function get_field_by_slug($slug){
+function get_field_by_slug($slug)
+{
     $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
-    $field = $fieldRepo->findBy('slug',$slug);
-    return ($field)?$field->id:null;
+    $field = $fieldRepo->findBy('slug', $slug);
+    return ($field) ? $field->id : null;
 }
 
 function register_frontend_page(array $data)
@@ -1746,7 +1749,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '<div class="col-md-4">';
             $output .= '<div class="form-group">';
             $output .= '<label>Icon</label>';
-            $output .= '<input type="text" value="'.$item['icon'].'" data-placement="right" class="form-control input-sm icp readonly">';
+            $output .= '<input type="text" value="' . $item['icon'] . '" data-placement="right" class="form-control input-sm icp readonly">';
             $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="col-md-8">';
@@ -1789,7 +1792,6 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             }
             $output .= '</li>';
         }
-
 
 
         if ($parent) {
@@ -1862,10 +1864,10 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '</div>';
         $output .= '</div>';
 
-	    if (count($item->childs)) {
+        if (count($item->childs)) {
 //	        dd($item->childs);
-		    $output .= '<ul class="menu-item-children">' . renderFrontPagesInMenu($item->childs, false, $i + 1, $children) . '</ul>';
-	    }
+            $output .= '<ul class="menu-item-children">' . renderFrontPagesInMenu($item->childs, false, $i + 1, $children) . '</ul>';
+        }
         $output .= '</li>';
 
     }
@@ -1877,34 +1879,37 @@ function recursive_hook_menus()
 {
 }
 
-function get_classifier_items($classify_id){
+function get_classifier_items($classify_id)
+{
     $classifyRepo = new \Btybug\FrontSite\Repository\ClassifierRepository();
-    $classify = $classifyRepo->findby('id',$classify_id);
+    $classify = $classifyRepo->findby('id', $classify_id);
     return ($classify) ? $classify->classifierItem : [];
 }
 
-function get_classifiers($array = false){
+function get_classifiers($array = false)
+{
     $classifyRepo = new \Btybug\FrontSite\Repository\ClassifierRepository();
-    $classifiers = $classifyRepo->pluck('title','id');
+    $classifiers = $classifyRepo->pluck('title', 'id');
     return ($array) ? $classifiers->toArray() : $classifiers;
 }
 
-function get_field_data($field){
-    if($field && count($field['json_data'])){
-        switch ($field['data_source']){
+function get_field_data($field)
+{
+    if ($field && count($field['json_data'])) {
+        switch ($field['data_source']) {
             case "related" :
-                if(isset($field['json_data']['data_source_table_name']) && isset($field['json_data']['data_source_columns'])){
+                if (isset($field['json_data']['data_source_table_name']) && isset($field['json_data']['data_source_columns'])) {
                     $table = $field['json_data']['data_source_table_name'];
                     $column = $field['json_data']['data_source_columns'];
                     if (\Schema::hasColumn($table, $column)) {
-                        $result = \DB::table($table)->pluck($column,'id');
+                        $result = \DB::table($table)->pluck($column, 'id');
                         return (count($result)) ? $result->toArray() : [];
                     }
                 }
                 break;
             case "manual" :
-                if(isset($field['json_data']['manual']) && $field['json_data']['manual']){
-                    return (count(explode(',',$field['json_data']['manual']))) ? explode(',',$field['json_data']['manual']) : [];
+                if (isset($field['json_data']['manual']) && $field['json_data']['manual']) {
+                    return (count(explode(',', $field['json_data']['manual']))) ? explode(',', $field['json_data']['manual']) : [];
                 }
                 break;
         }
@@ -1912,40 +1917,48 @@ function get_field_data($field){
     return null;
 }
 
-function print_field_name($field){
+function print_field_name($field)
+{
     return $field['table_name'] . '_' . $field['column_name'];
 }
 
 //TODO: make this for plugins
-function register_form(){
+function register_form()
+{
 
 }
 
 // Extract ajax data
-function ajaxExtract($data){
-	$return = [];
-	foreach($data as $datum){
-		$return[$datum['name']] = $datum['value'];
-	}
+function ajaxExtract($data)
+{
+    $return = [];
+    foreach ($data as $datum) {
+        $return[$datum['name']] = $datum['value'];
+    }
 
-	return $return;
+    return $return;
 }
 
-function get_frontend_pages_pluck($is_array = false){
+function get_frontend_pages_pluck($is_array = false)
+{
     $pageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
-    $page = $pageRepository->pluck('title','id');
+    $page = $pageRepository->pluck('title', 'id');
     return ($is_array) ? $page->toArray() : $page;
 }
-function getDinamicStyle($filename){
-    $styles = \App\Http\Controllers\PhpJsonParser::getClasses(base_path('public/dinamiccss/'.$filename.'.css'));
+
+function getDinamicStyle($filename)
+{
+    $styles = \App\Http\Controllers\PhpJsonParser::getClasses(base_path('public/dinamiccss/' . $filename . '.css'));
     return $styles;
 }
 
-function getDinamicStyleDemo($filename){
-    $styles = \App\Http\Controllers\PhpJsonParser::getClassesForDemo(base_path('public/dinamiccss/'.$filename.'.css'));
+function getDinamicStyleDemo($filename)
+{
+    $styles = \App\Http\Controllers\PhpJsonParser::getClassesForDemo(base_path('public/dinamiccss/' . $filename . '.css'));
     return $styles;
 }
 
-function useDinamicStyle($filename){
-    return '<link href="'.asset('public/dinamiccss/'.$filename.'.css').'" rel="stylesheet">';
+function useDinamicStyle($filename)
+{
+    return '<link href="' . asset('public/dinamiccss/' . $filename . '.css') . '" rel="stylesheet">';
 }

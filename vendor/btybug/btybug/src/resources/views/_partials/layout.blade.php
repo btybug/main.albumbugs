@@ -17,34 +17,34 @@
 </div>
 
 @if($enabledSelectLayout)
-<div class="form-group">
-    <div class="col-md-12">
-        <label>Select Page Layout</label>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-12 m-b-10">
-            {!! BBbutton2('layouts','page_layout','front_pages_layout',(isset($page) && $page->page_layout)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($page) && $page->page_layout)?$page->page_layout:null]) !!}
+    <div class="form-group">
+        <div class="col-md-12">
+            <label>Select Page Layout</label>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12 m-b-10">
+                {!! BBbutton2('layouts','page_layout','front_pages_layout',(isset($page) && $page->page_layout)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($page) && $page->page_layout)?$page->page_layout:null]) !!}
+            </div>
         </div>
     </div>
-</div>
 
-<div class="form-group">
-    <div class="col-md-12">
-        <label>Select Page Layout Placeholders</label>
-    </div>
-    <div class="col-md-12 layout-data">
-        <div id="placeholders">
-            @if(isset($_this->placeholders) && is_array($_this->placeholders))
-                @foreach($_this->placeholders as $key=>$placeholder)
-                    <div>
-                        @if(isset($placeholder['tag']) && $placeholder['tag'] != "hook")
+    <div class="form-group">
+        <div class="col-md-12">
+            <label>Select Page Layout Placeholders</label>
+        </div>
+        <div class="col-md-12 layout-data">
+            <div id="placeholders">
+                @if(isset($_this->placeholders) && is_array($_this->placeholders))
+                    @foreach($_this->placeholders as $key=>$placeholder)
+                        <div>
+                            @if(isset($placeholder['tag']) && $placeholder['tag'] != "hook")
 
-                            {!! BBbutton2('unit',$key,$placeholder['tag'],(isset($placeholder['title'])?$placeholder['title']:'Sidebar'),['class'=>'btn btn-default change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'page_layout_settings','model'=>($page->page_layout_settings[$key])??null]) !!}
-                        @endif
-                    </div>
-                @endforeach
-            @endif
+                                {!! BBbutton2('unit',$key,$placeholder['tag'],(isset($placeholder['title'])?$placeholder['title']:'Sidebar'),['class'=>'btn btn-default change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'page_layout_settings','model'=>($page->page_layout_settings[$key])??null]) !!}
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
-</div>
 @endif

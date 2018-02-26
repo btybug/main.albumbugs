@@ -17,7 +17,8 @@
                                     'data-name-prefix'=>'placeholders',
                                     'model'=>($page->settings[$key])??null]) !!}
 
-                                    <a data-view="{!! ($page->settings[$key])??null !!}" class="btn btn-primary view-placeholder">View</a>
+                                    <a data-view="{!! ($page->settings[$key])??null !!}"
+                                       class="btn btn-primary view-placeholder">View</a>
                                     <a data-reset="{!! $key !!}" class="btn btn-danger reset-placeholder">Reset</a>
                                 @endif
                             </div>

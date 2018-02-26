@@ -82,24 +82,29 @@
                 <span class="title">Panel Title</span>
             </div>
             <div class="content">
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to using 'Content here, content here', making it look like
+                    readable English.</p>
             </div>
         </div>
         <h3>Panel Collapse</h3>
-                <div class="panel-btybug">
-                    <div class="heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                <span class="title">Panel Title</span>
-                            </a>
-                    </div>
-                    <div id="collapseOne" class="collapse in">
-                        <div class="content">
-                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                        </div>
-                    </div>
+        <div class="panel-btybug">
+            <div class="heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                    <span class="title">Panel Title</span>
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse in">
+                <div class="content">
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page
+                        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                        distribution of letters, as opposed to using 'Content here, content here', making it look like
+                        readable English.</p>
                 </div>
-
+            </div>
+        </div>
 
 
     </div>

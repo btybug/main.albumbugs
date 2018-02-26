@@ -5,7 +5,7 @@
     <div class="row modal-data">
         <div class="col-md-12" style="border: 1px solid;padding: 10px;">
             <h4>Selected Units</h4>
-            <input type="hidden" id="bbSelected" value="" />
+            <input type="hidden" id="bbSelected" value=""/>
             <div class="row selected-data">
                 <div class="col-md-4 selected-item">
                     <p>Unit: Frontend pages </p>
@@ -72,7 +72,7 @@
     </div>
 @endif
 <style>
-    .selected-item{
+    .selected-item {
         border: 1px solid;
         background: violet;
     }

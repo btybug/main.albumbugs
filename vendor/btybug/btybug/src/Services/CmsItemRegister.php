@@ -201,8 +201,8 @@ class CmsItemRegister
                     $existingDataDecoded = json_decode($existingData, true);
                     $isUnique = self::isUnique($existingDataDecoded, $configFileData);
                     if (!$isUnique) {
-                        $path=base_path($configFileData['path']);
-                        if(File::isDirectory($path)){
+                        $path = base_path($configFileData['path']);
+                        if (File::isDirectory($path)) {
                             File::deleteDirectory($path);
                         }
                         return false;
@@ -415,7 +415,7 @@ class CmsItemRegister
             $delta = $existing['title'] . $existing['author'];
 
             if ($delta == $needle) {
-                echo $delta .'=='. $needle;
+                echo $delta . '==' . $needle;
                 return false;
             }
         }

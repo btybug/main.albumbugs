@@ -44,9 +44,9 @@
         <div class="adm-top">
             @include(BBgetPageLayout(),['settings'=>BBgetPageLayoutSettings()])
         </div>
-    <div class="bty-footer-fix">
-        {!! BBfooterBack() !!}
-    </div>
+        <div class="bty-footer-fix">
+            {!! BBfooterBack() !!}
+        </div>
     @endif
 </div>
 @include('modal')

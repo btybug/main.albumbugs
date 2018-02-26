@@ -47,7 +47,7 @@ class Routes
         ksort($routes[$method]);
         $routes[$method] = (self::keysort($routes[$method], $sub));
         $_this = new static();
-        if(isset($routes[$method][$sub]))
+        if (isset($routes[$method][$sub]))
             $_this->array = collect($routes[$method][$sub]);
 
         return $_this;
@@ -172,13 +172,13 @@ class Routes
             $package->modules();
             $module = $package->find($slug);
         }
-        if(! $module) {
+        if (!$module) {
             $package->appPlugins();
             $module = $package->find($slug);
         }
 
         if ($module) {
-            if ($module->type == 'app-plugin' || $module->type == 'plugin' || $module->type == 'module' || $module->type == 'addon' || $module->type=='package') {
+            if ($module->type == 'app-plugin' || $module->type == 'plugin' || $module->type == 'module' || $module->type == 'addon' || $module->type == 'package') {
                 $url = strtolower('admin/' . $module->route);
             } else {
                 return false;
@@ -265,8 +265,8 @@ class Routes
     public function html()
     {
         $array = $this->array;
-        if($array)
-        return $this->keysort_html($array->toArray()).'</ul>';
+        if ($array)
+            return $this->keysort_html($array->toArray()) . '</ul>';
     }
 
     protected function keysort_html($array, $count = 0, $url = null)

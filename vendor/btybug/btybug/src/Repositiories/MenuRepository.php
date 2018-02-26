@@ -15,7 +15,7 @@ class MenuRepository extends GeneralRepository
 
     public function getFrontend()
     {
-        return $this->model->where('place','frontend')->get();
+        return $this->model->where('place', 'frontend')->get();
     }
 
     public function getWhereNotPlugins()

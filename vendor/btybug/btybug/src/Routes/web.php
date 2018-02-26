@@ -44,7 +44,7 @@ Route::get('register', '\App\Modules\Users\Http\Controllers\Auth\AuthController@
 Route::post('register', '\App\Modules\Users\Http\Controllers\Auth\AuthController@postRegister')->middleware('guest');
 Route::get('activate/{username}/{token}', '\App\Modules\Users\Http\Controllers\Auth\AuthController@activate')->middleware('guest');
 Route::group(
-    ['domain' => env('DOMAIN'),'middleware' => 'form'],
+    ['domain' => env('DOMAIN'), 'middleware' => 'form'],
     function () {
 
         Route::get('form-test', function () {
@@ -104,14 +104,14 @@ Route::group(
             $url = \Request::server('REQUEST_URI'); //$_SERVER['REQUEST_URI'];
             if (!starts_with($url, '/admin')) {
                 $pages = Btybug\FrontSite\Models\FrontendPage::pluck('id', 'url')->all();
-                    Route::group(['middleware' => 'frontPermissions'], function () use ($pages) {
-                        foreach ($pages as $key => $value) {
-                            Route::get($key, function () use ($key) {
-                                $home = new Btybug\btybug\Models\Home();
-                                return $home->render($key, Request::all());
-                            });
-                        }
-                    });
+                Route::group(['middleware' => 'frontPermissions'], function () use ($pages) {
+                    foreach ($pages as $key => $value) {
+                        Route::get($key, function () use ($key) {
+                            $home = new Btybug\btybug\Models\Home();
+                            return $home->render($key, Request::all());
+                        });
+                    }
+                });
             }
         }
     }

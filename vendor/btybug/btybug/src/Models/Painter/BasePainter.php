@@ -58,30 +58,30 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         $all = [];
         // $path = $this->base_path; // TODO: this is right way
         $paths = $this->base_path; // TODO: this should be removed
-        if(count($paths)){
-            foreach ($paths as $path){
+        if (count($paths)) {
+            foreach ($paths as $path) {
                 $units = \File::directories(base_path($path));
 
                 if (!count($units)) $this->throwError("There is no unit found");
-                    foreach ($units as $key => $unit) {
-                        $full_path = $unit . DS . $this->name_of_json;
-                        $obj = new static();
-                        $is_true = $obj->validateWithReturn($full_path);
-                        $test[$full_path]=$is_true;
-                        if ($is_true) {
-                            $all[] = $obj->makeItem($full_path);
-                        }
+                foreach ($units as $key => $unit) {
+                    $full_path = $unit . DS . $this->name_of_json;
+                    $obj = new static();
+                    $is_true = $obj->validateWithReturn($full_path);
+                    $test[$full_path] = $is_true;
+                    if ($is_true) {
+                        $all[] = $obj->makeItem($full_path);
                     }
+                }
             }
         }
         $this->storage = $all;
         return $this;
     }
 
-    public function scopeVariations(bool $hidden=true)
+    public function scopeVariations(bool $hidden = true)
     {
 
-        return new Variations($this,$hidden);
+        return new Variations($this, $hidden);
     }
 
     public function scopeFind(string $slug)
@@ -93,7 +93,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     protected function makeItem($path)
     {
         $is_valis = $this->validate($path);
-        if ($is_valis){
+        if ($is_valis) {
             $config = json_decode(\File::get($path), true);
             $this->attributes = $config;
             $this->original = $config;
@@ -102,11 +102,12 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         return null;
     }
 
-    public function scopeMakeUnits($data){
-        if(count($data)){
+    public function scopeMakeUnits($data)
+    {
+        if (count($data)) {
             $all = [];
             foreach ($data as $key => $unit) {
-                $full_path = $this->getPath() . DS .$unit['path'] .DS.  $this->name_of_json;
+                $full_path = $this->getPath() . DS . $unit['path'] . DS . $this->name_of_json;
                 $obj = new static();
                 $is_true = $obj->validateWithReturn($full_path);
                 if ($is_true) {
@@ -184,17 +185,17 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         $format = 'Y-m-d';
         $filtered = [];
 
-        if(!$from || !$to){
-            foreach ($arr as $unit){
-                if(!$from){
+        if (!$from || !$to) {
+            foreach ($arr as $unit) {
+                if (!$from) {
                     $dateTo = strtotime($to);
                     $filtered = $this->where('created_at', '<', $dateTo)->get();
-                }else{
+                } else {
                     $dateFrom = strtotime($from);
                     $filtered = $this->where('created_at', '>', $dateFrom)->get();
                 }
             }
-        }else{
+        } else {
             $dateFrom = $carbon::parse($from)->format($format); // at first change datepicker format
             $dateTo = $carbon::parse($to)->format($format);
 
@@ -214,17 +215,19 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         $this->storage = collect($filtered);
         return $this;
     }
-    public function scopeWhereTag(string $tagg){
+
+    public function scopeWhereTag(string $tagg)
+    {
         if (is_null($this->storage)) {
             $this->scopeAll();
         }
         $arr = $this->storage;
         $filtered = [];
-        foreach ($arr as $unit){
+        foreach ($arr as $unit) {
             $tags = $unit->tags;
-            if($tags){
-                foreach ($tags as $tag){
-                    if(str_contains(strtolower($tag),strtolower($tagg))){
+            if ($tags) {
+                foreach ($tags as $tag) {
+                    if (str_contains(strtolower($tag), strtolower($tagg))) {
                         $filtered[] = $unit;
                     }
                 }
@@ -282,7 +285,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
     public function makeConfigJson()
     {
         if (!\File::exists($this->config_path)) {
-             \File::put($this->config_path, '{}');
+            \File::put($this->config_path, '{}');
             $this->scopeOptimize();
         }
         return true;
@@ -529,7 +532,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
                 $bool = $arg1 >= $arg2;
                 break;
             case "like":
-                $bool = str_contains(strtolower($arg1),strtolower($arg2));
+                $bool = str_contains(strtolower($arg1), strtolower($arg2));
                 break;
             default:
                 $this->throwError("Condition is not exist");
@@ -555,7 +558,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
 
     public function getVariationsPath()
     {
-        return $this->getPath(). DS . 'variations';
+        return $this->getPath() . DS . 'variations';
     }
 
     public function getViewFile()

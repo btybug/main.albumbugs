@@ -67,7 +67,7 @@ class FormSettingsMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->isMethod('post')) {
-            $formID = $request->get('form_id',null);
+            $formID = $request->get('form_id', null);
             if ($formID && $this->form = $this->formRepo->find($formID)) {
                 if ($this->form->blocked) return false;
 

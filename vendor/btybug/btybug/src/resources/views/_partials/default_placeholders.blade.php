@@ -17,7 +17,7 @@
                 <div id="placeholders">
                     @if($_this)
                         @foreach($_this->placeholders as $key=>$placeholder)
-                                                       @if(isset($placeholder['tag']))
+                            @if(isset($placeholder['tag']))
                                 {!! BBbutton2('unit',$key,$placeholder['tag'],"Change",['class'=>'form-control input-md btn btn-info change-layout','data-type'=>$placeholder['tag'],'data-name-prefix'=>'placeholders','model'=>($system['placeholders'][$key])??null]) !!}
                             @endif
                         @endforeach

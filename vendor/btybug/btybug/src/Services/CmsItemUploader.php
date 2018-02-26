@@ -195,19 +195,19 @@ class CmsItemUploader
                 File::deleteDirectory($this->uf, true);
                 $basePath = base_path($this->path . $result['data']['folder']);
                 $registerPath = $this->path . $result['data']['folder'];
-                if(CmsItemRegister::registerGear($basePath, $registerPath, $response['place'], $this->self_type)){
+                if (CmsItemRegister::registerGear($basePath, $registerPath, $response['place'], $this->self_type)) {
                     $variation = $this->makeVariations($result['data']);
                     $this->registerField($basePath, $variation);
                     return $result;
-                }else{
-                    $response['error']=true;
-                    $response['code']=301;
-                    $response['message']='unit exists';
+                } else {
+                    $response['error'] = true;
+                    $response['code'] = 301;
+                    $response['message'] = 'unit exists';
                 };
             }
         }
-            File::deleteDirectory($this->uf, true);
-            return $response;
+        File::deleteDirectory($this->uf, true);
+        return $response;
     }
 
     //uxel ver@ nshvac cod@

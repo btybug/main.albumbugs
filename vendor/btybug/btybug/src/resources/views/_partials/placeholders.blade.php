@@ -2,7 +2,7 @@
     <div class="panel-heading">
         Select Page Layout Placeholders
         <a href="javascript:void(0)" data-live="live_edit"
-            class="btn btn-primary pull-right full-page-view">Live Edit</a>
+           class="btn btn-primary pull-right full-page-view">Live Edit</a>
     </div>
     <div class="panel-body">
         <div class="row">
@@ -17,7 +17,8 @@
                                     'data-name-prefix'=>'page_layout_settings',
                                     'model'=>($page->page_layout_settings[$key])??null]) !!}
 
-                                    <a data-view="{!! ($page->page_layout_settings[$key])??null !!}" class="btn btn-primary view-placeholder">View</a>
+                                    <a data-view="{!! ($page->page_layout_settings[$key])??null !!}"
+                                       class="btn btn-primary view-placeholder">View</a>
                                     <a data-reset="{!! $key !!}" class="btn btn-danger reset-placeholder">Reset</a>
                                 @endif
                             </div>

@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 use JsonSerializable;
 
 
-class Paginator implements ArrayAccess, Countable, IteratorAggregate, Arrayable,JsonSerializable,Jsonable
+class Paginator implements ArrayAccess, Countable, IteratorAggregate, Arrayable, JsonSerializable, Jsonable
 {
     protected $items = [];
     /**
@@ -214,10 +214,12 @@ class Paginator implements ArrayAccess, Countable, IteratorAggregate, Arrayable,
     {
         return $this->items;
     }
+
     public function jsonSerialize()
     {
         return $this->toArray();
     }
+
     public function toJson($options = 0)
     {
         return json_encode($this->jsonSerialize(), $options);

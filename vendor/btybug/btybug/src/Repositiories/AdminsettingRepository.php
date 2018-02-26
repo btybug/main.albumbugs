@@ -129,11 +129,11 @@ class AdminsettingRepository extends GeneralRepository
         return $system;
     }
 
-    public function getSettings($section, $settingkey,$value = false)
+    public function getSettings($section, $settingkey, $value = false)
     {
         $data = [];
         $system = $this->model->where('section', $section)->where('settingkey', $settingkey)->first();
-        if($value){
+        if ($value) {
             if ($system) {
                 $data = (json_decode($system->val, true));
             }
@@ -286,8 +286,8 @@ class AdminsettingRepository extends GeneralRepository
     public function findOneByMultipleSettingsArray(array $conditions)
     {
         $settings = $this->findOneByMultiple($conditions, ['val']);
-        if($settings){
-            $settings=json_decode($settings['val'],true);
+        if ($settings) {
+            $settings = json_decode($settings['val'], true);
         }
         return collect($settings);
     }

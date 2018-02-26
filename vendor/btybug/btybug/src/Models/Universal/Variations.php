@@ -101,9 +101,9 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this;
     }
 
-    public function makeVariation(array $array,$slug=null, bool $hidden=false)
+    public function makeVariation(array $array, $slug = null, bool $hidden = false)
     {
-        $rand_id =($slug)?$slug: uniqid();
+        $rand_id = ($slug) ? $slug : uniqid();
         $id = $this->model->getSlug() . '.' . $rand_id;
         $path = $this->path . DS . $id . '.json';
 
@@ -128,9 +128,9 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this;
     }
 
-    public function createVariation(array $array,$slug=null, bool $hidden=false)
+    public function createVariation(array $array, $slug = null, bool $hidden = false)
     {
-        return $this->makeVariation($array,$slug,$hidden)->save();
+        return $this->makeVariation($array, $slug, $hidden)->save();
     }
 
     public function setAttributes($key, $value)
@@ -192,11 +192,12 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this->items->count();
     }
 
-    public function copy(){
+    public function copy()
+    {
         $dublicate = $this->attributes->toArray();
         return $this->model
             ->variations(false)
-            ->makeVariation($dublicate,null,true)
+            ->makeVariation($dublicate, null, true)
             ->save();
     }
 

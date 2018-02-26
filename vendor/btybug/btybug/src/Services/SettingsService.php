@@ -14,7 +14,7 @@ class SettingsService extends GeneralService
     public $adminPageRepo;
     public $adminsettingRepository;
 
-    public function __construct (
+    public function __construct(
         AdminsettingRepository $adminsettingRepository,
         AdminPagesRepository $adminPageRepo
     )
@@ -23,12 +23,12 @@ class SettingsService extends GeneralService
         $this->adminPageRepo = $adminPageRepo;
     }
 
-    public function changeSitePageSettings (array $data)
+    public function changeSitePageSettings(array $data)
     {
         $this->adminPageRepo->updateAll([
-            'footer'    => $data['footer'],
+            'footer' => $data['footer'],
             'layout_id' => $data['backend_page_section'],
-            'settings'  => isset($data['placeholders']) ? json_encode(['placeholders' => $data['placeholders']], true) : null
+            'settings' => isset($data['placeholders']) ? json_encode(['placeholders' => $data['placeholders']], true) : null
         ]);
         $this->adminsettingRepository->createOrUpdateToJson($data, 'backend_site_settings', 'backend_site_settings');
     }

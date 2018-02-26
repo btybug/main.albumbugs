@@ -23,7 +23,7 @@ class EventyServiceProvider extends ServiceProvider
         \Eventy::addAction('shortcode.except.url', function ($what) {
             $excepts = \Config::get('shortcode.except.url', []);
             foreach ($what as $key => $value) {
-                $excepts[] = (starts_with('/',$value)) ? $value : "/".$value;
+                $excepts[] = (starts_with('/', $value)) ? $value : "/" . $value;
             }
             \Config::set('shortcode.except.url', $excepts);
             return (\Config::get('shortcode.except.url'));
@@ -61,7 +61,7 @@ class EventyServiceProvider extends ServiceProvider
 //        });
 
         \Eventy::addAction('admin.menus', function ($what) {
-            $menu_array = \Config::get('admin_menus',[]);
+            $menu_array = \Config::get('admin_menus', []);
             $sub = true;
             foreach ($menu_array as $key => $value) {
                 if ($value['title'] == $what['title']) {

@@ -35,7 +35,7 @@
     </tbody>
 </table>--}}
 <?php
-$hook = json_decode($page->settings,true);
+$hook = json_decode($page->settings, true);
 $hook = $hook["children"];
 $hooks[0] = "Select Hook";
 ?>

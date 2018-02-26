@@ -14,7 +14,7 @@ $(function () {
 
     });
     $('body').on('click','.menu-item',function () {
-        $('body').find('.menu-item a').removeClass('active')
+        $('body').find('.menu-item a').removeClass('active');
         $(this).find('a').addClass('active');
     });
     $(window).scroll(function (event) {
@@ -25,8 +25,6 @@ $(function () {
        }else {
            $('.sahak-header').removeClass('fixed');
            $('.site-name').addClass('hide');
-
-       };
-       ;
+       }
     });
-})
+});

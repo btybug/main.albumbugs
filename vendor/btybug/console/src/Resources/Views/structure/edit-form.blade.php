@@ -31,6 +31,7 @@
                 <button type="submit" class="form-save pull-right">Save</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openStudioWindow">Styling</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal">Logic</button>
             </div>
         </div>
     </div>

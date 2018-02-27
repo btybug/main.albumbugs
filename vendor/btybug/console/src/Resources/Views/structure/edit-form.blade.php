@@ -2,7 +2,7 @@
 
 @section( 'CSS' )
     {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
-    {!! Html::style("public/css/form-builder/form-builder.css") !!}
+    {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
     {!! Html::style("public/libs/easyui/easyui.css") !!}
     {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
     {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}

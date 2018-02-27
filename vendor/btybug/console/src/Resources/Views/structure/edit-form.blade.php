@@ -31,7 +31,7 @@
                 <button type="submit" class="form-save pull-right">Save</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openStudioWindow">Styling</button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal">Logic</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal" data-target="#logicModal">Logic</button>
             </div>
         </div>
     </div>
@@ -52,14 +52,149 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
+
         </div>
     </div>
+
+
+        <div class="modal fade" id="logicModal" role="dialog">
+            <div class="modal-dialog modal-logic">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="logic-box">
+                            <div class="logic-tabs">
+                                <div class="active">
+                                    <div class="logic-head">
+                                        <div class="condition">
+                                            Conditions
+                                        </div>
+                                        <div class="action">
+                                            Actions
+                                        </div>
+                                    </div>
+                                    <div class="logic-area">
+                                        <div class="logic-text if">
+                                            if
+                                        </div>
+                                        <div class="group-cond">
+                                            <div class="group-row">
+                                                <div class="field">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(field)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="trigger">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(trigger)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="text">
+                                                    <input type="text" placeholder=" ..." class="logic-touch">
+                                                </div>
+                                                <div class="remove-action">
+                                                    x
+                                                </div>
+                                                <div class="and-or">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">AND</option>
+                                                        <option value="">OR</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="group-row">
+                                                <div class="field">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(field)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="trigger">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(trigger)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="text">
+                                                    <input type="text" placeholder=" ..." class="logic-touch">
+                                                </div>
+                                                <div class="remove-action">
+                                                    x
+                                                </div>
+                                            </div>
+                                            <div class="add-group">add condition row</div>
+                                        </div>
+                                        <div class="logic-text than">
+                                            than
+                                        </div>
+                                        <div class="group-action">
+                                            <div class="group-row">
+                                                <div class="set-value">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(action)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="result">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(fields)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="remove-action act-rem">x</div>
+                                            </div>
+                                            <div class="group-row">
+                                                <div class="sign-and">&</div>
+                                                <div class="set-value">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(action)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="result">
+                                                    <select name="" id="" class="logic-touch">
+                                                        <option value="">(fields)</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="remove-action act-rem">x</div>
+                                            </div>
+                                            <div class="add-group">add action row</div>
+                                        </div>
+
+                                        <div class="logic-remove">×</div>
+                                    </div>
+                                    <div class="add-logic-cover">
+                                        <button class="add-logic-button">Add New Logic</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     <script type="template" id="fields-html">
         <div class="form-elements-list">
             @if(count($fields))
                 @foreach($fields as $field)
-                    <div class="form-element-item draggable-element {!! (in_array($field->slug,$existingFields)) ? 'hide' : '' !!}"  data-id="{!! $field->id !!}"
+                    <div class="form-element-item draggable-element {!! (in_array($field->slug,$existingFields)) ? 'hide' : '' !!}"
+                         data-id="{!! $field->id !!}"
                          data-shortcode="[field id={{$field->id}}]">
                         {{ $field->name }}
                         <div class="form-element-item-sample hidden">
@@ -120,10 +255,12 @@
         </div>
     </script>
 @stop
+
 @section( 'JS' )
 
     <script>
         $(function () {
+
 //get partial options view
             $('body').on('change', '.partials-change', function () {
 
@@ -184,6 +321,7 @@
 
 
     <script>
+
         $("body").on('input', '.form-title-settings', function () {
             var val = $(this).val();
 
@@ -235,4 +373,5 @@
             });
         });
     </script>
+
 @stop

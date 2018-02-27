@@ -86,29 +86,23 @@
                             <label class="col-sm-3 control-label text-left">Show</label>
                             <div class="col-sm-8">
                                 <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="">
+                                    <input type="checkbox" name="manual_item">
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="row m-b-10 mapping-column">
-                            @include($_this->slug."::mapping-column")
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <div class="col-md-6">
                             <label class="col-sm-3 control-label text-left">Stars</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="" type="number">
+                                <input class="form-control" name="star_setting[stars]" type="number" value="{{isset($settings['star_setting']['stars']) ? $settings['star_setting']['stars'] : 5}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="col-sm-3 control-label text-left">Step</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="" type="number">
+                                <input class="form-control" name="star_setting[step]" type="number" value="{{isset($settings['star_setting']['step']) ? $settings['star_setting']['step'] : 0.5}}">
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -117,13 +111,13 @@
                         <div class="col-md-6">
                             <label class="col-sm-3 control-label text-left">Min</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="" type="number">
+                                <input class="form-control" name="star_setting[min]" type="number" value="{{isset($settings['star_setting']['min']) ? $settings['star_setting']['min'] : 0}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="col-sm-3 control-label text-left">Max</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="" type="number">
+                                <input class="form-control" name="star_setting[max]" type="number" value="{{isset($settings['star_setting']['max']) ? $settings['star_setting']['max'] : 5}}">
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -133,14 +127,7 @@
                             <label>Size</label>
                         </div>
                         <div class="col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">Select size</option>
-                                <option value="xl">xl</option>
-                                <option value="lg">lg</option>
-                                <option value="md">md</option>
-                                <option value="sm">sm</option>
-                                <option value="xs">xs</option>
-                            </select>
+                            {!! Form::select('star_setting[size]',['md'=>'md','xl'=>'xl','lg'=>'lg','sm'=>'sm','xs'=>'xs'],isset($settings["star_setting"]["size"]) ? $settings["star_setting"]["size"] : null,["class"=>'form-control']) !!}
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -149,7 +136,7 @@
                             <label class="col-sm-3 control-label text-left">Disable</label>
                             <div class="col-sm-8">
                                 <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="">
+                                    <input type="checkbox" name="star_setting[disabled]" {{isset($settings['star_setting']['disabled']) ? 'checked' : ''}}>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +144,7 @@
                             <label class="col-sm-3 control-label text-left">Animate</label>
                             <div class="col-sm-8">
                                 <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="">
+                                    <input type="checkbox" name="star_setting[animate]" {{isset($settings['star_setting']['animate']) ? 'checked' : ''}}>
                                 </div>
                             </div>
                         </div>

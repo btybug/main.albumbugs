@@ -11,3 +11,6 @@
     clear: both;
     display: table;
 }
+.bty-settings-panel input[type="checkbox"]{
+    margin: 0;
+}

@@ -81,10 +81,87 @@
             </div>
             <div id="inputdata" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Show</label>
+                            <div class="col-sm-8">
+                                <div class="input-checkbox-3-bty">
+                                    <input type="checkbox" name="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="col-md-12">
                         <div class="row m-b-10 mapping-column">
                             @include($_this->slug."::mapping-column")
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Stars</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="" type="number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Step</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="" type="number">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Min</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="" type="number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Max</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="" type="number">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="col-md-2">
+                            <label>Size</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select name="" id="" class="form-control">
+                                <option value="">Select size</option>
+                                <option value="xl">xl</option>
+                                <option value="lg">lg</option>
+                                <option value="md">md</option>
+                                <option value="sm">sm</option>
+                                <option value="xs">xs</option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Disable</label>
+                            <div class="col-sm-8">
+                                <div class="input-checkbox-3-bty">
+                                    <input type="checkbox" name="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Animate</label>
+                            <div class="col-sm-8">
+                                <div class="input-checkbox-3-bty">
+                                    <input type="checkbox" name="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="form-group col-md-12 m-b-10">
                         <label class="col-sm-4 p-l-0 control-label m-0  text-left">Extra Validation</label>

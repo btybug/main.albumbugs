@@ -154,6 +154,22 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Empty Icon</label>
+                            <div class="col-sm-8">
+                                {!!Form::text('icon',null,['class' => 'form-control icp'])  !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tooltip-icon" class="col-sm-3 m-0 control-label text-left">Fill Icon</label>
+                            <div class="col-sm-8">
+                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','id'=>'tooltip-icon'])  !!}
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="form-group col-md-12">
                         <div class="col-md-2">
                             <label>Field color</label>
@@ -196,3 +212,8 @@
     </div>
  </div>
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
+{!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+<script>
+    $('.icp').iconpicker();
+</script>

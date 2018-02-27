@@ -135,6 +135,25 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Show reset</label>
+                            <div class="col-sm-8">
+                                <div class="input-checkbox-3-bty">
+                                    <input type="checkbox" name="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-sm-3 control-label text-left">Show caption</label>
+                            <div class="col-sm-8">
+                                <div class="input-checkbox-3-bty">
+                                    <input type="checkbox" name="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="form-group col-md-12 m-b-10">
                         <label class="col-sm-4 p-l-0 control-label m-0  text-left">Extra Validation</label>
                         <div class="col-sm-8">

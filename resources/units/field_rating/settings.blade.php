@@ -107,21 +107,6 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <label class="col-sm-3 control-label text-left">Min</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="star_setting[min]" type="number" value="{{isset($settings['star_setting']['min']) ? $settings['star_setting']['min'] : 0}}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="col-sm-3 control-label text-left">Max</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="star_setting[max]" type="number" value="{{isset($settings['star_setting']['max']) ? $settings['star_setting']['max'] : 5}}">
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="form-group col-md-12">
                         <div class="col-md-2">
                             <label>Size</label>

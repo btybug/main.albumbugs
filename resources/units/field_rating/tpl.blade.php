@@ -57,8 +57,8 @@
                 if($("#input-1").length) {
                    data.star_setting.step = data.star_setting.step ? data.star_setting.step : 0.5;
                    data.star_setting.stars = data.star_setting.stars ? data.star_setting.stars : 5;
-                   data.star_setting.max = data.star_setting.max ? data.star_setting.max : 5;
-                   data.star_setting.min = data.star_setting.min ? data.star_setting.min : 0;
+                  // data.star_setting.max = data.star_setting.max ? data.star_setting.max : 5;
+                  // data.star_setting.min = data.star_setting.min ? data.star_setting.min : 0;
                    data.star_setting.disabled = data.star_setting.disabled && data.star_setting.disabled == "on" ? true : false;
                    data.star_setting.animate = data.star_setting.animate && data.star_setting.animate == "on" ? true : false;
 

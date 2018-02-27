@@ -1,4 +1,6 @@
 {!! BBstyle($_this->path.DS.'css/main.css') !!}
+{!! BBstyle($_this->path.DS.'css/star-rating.css') !!}
+{!! BBstyle($_this->path.DS.'css/theme.css') !!}
 
 @php
     $arr = [];
@@ -72,3 +74,12 @@
     </div>
 
 @endif
+{!! BBscript($_this->path.DS.'js/star-rating.js') !!}
+{!! BBscript($_this->path.DS.'js/theme.js') !!}
+<label for="input-1" class="control-label">Rate This</label>
+<input id="input-1" name="input-1" value="4.3" class="rating-loading">
+<script>
+    $(document).on('ready', function(){
+        $('#input-1').rating({min: 0, max: 8, step: 0.1, stars: 8});
+    });
+</script>

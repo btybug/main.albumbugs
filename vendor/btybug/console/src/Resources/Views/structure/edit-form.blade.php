@@ -15,6 +15,7 @@
     {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}
     {!! Html::script("public/js/form-builder/css-studio.js") !!}
     {!! Html::script("public/js/form-builder/form-builder.js?m=m") !!}
+    {!! Html::script("public/js/form-builder/form-logic.js?m=m") !!}
 @stop
 
 @section( 'content' )
@@ -50,7 +51,6 @@
         <div class="row form-builder-area"></div>
     </div>
 
-
     <div class="modal fade" id="logicModal" role="dialog">
         <div class="modal-dialog modal-logic">
             <div class="modal-content">
@@ -69,107 +69,7 @@
                                         Actions
                                     </div>
                                 </div>
-                                <div class="logic-area">
-                                    <div class="logic-text if">
-                                        if
-                                    </div>
-                                    <div class="group-cond">
-                                        <div class="group-row">
-                                            <div class="field">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(field)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="trigger">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(trigger)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="text">
-                                                <input type="text" placeholder=" ..." class="logic-touch">
-                                            </div>
-                                            <div class="remove-action">
-                                                x
-                                            </div>
-                                            <div class="and-or">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">AND</option>
-                                                    <option value="">OR</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="group-row">
-                                            <div class="field">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(field)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="trigger">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(trigger)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="text">
-                                                <input type="text" placeholder=" ..." class="logic-touch">
-                                            </div>
-                                            <div class="remove-action">
-                                                x
-                                            </div>
-                                        </div>
-                                        <div class="add-group">add condition row</div>
-                                    </div>
-                                    <div class="logic-text than">
-                                        than
-                                    </div>
-                                    <div class="group-action">
-                                        <div class="group-row">
-                                            <div class="set-value">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(action)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="result">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(fields)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="remove-action act-rem">x</div>
-                                        </div>
-                                        <div class="group-row">
-                                            <div class="sign-and">&</div>
-                                            <div class="set-value">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(action)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="result">
-                                                <select name="" id="" class="logic-touch">
-                                                    <option value="">(fields)</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                </select>
-                                            </div>
-                                            <div class="remove-action act-rem">x</div>
-                                        </div>
-                                        <div class="add-group">add action row</div>
-                                    </div>
-
-                                    <div class="logic-remove">×</div>
-                                </div>
+                                <div class="logic-list"></div>
                                 <div class="add-logic-cover">
                                     <button class="add-logic-button">Add New Logic</button>
                                 </div>
@@ -245,6 +145,140 @@
     <script type="template" id="bbt-toggle">
         <div class="bbs-toggle">
             {options}
+        </div>
+    </script>
+
+    <script type="template" id="condition-row">
+        <div class="group-row">
+            <div class="and-or">
+                <select name="" id="" class="logic-touch">
+                    <option value="">AND</option>
+                    <option value="">OR</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <select name="" id="" class="logic-touch">
+                    <option value="">(field)</option>
+                    <option value="">1</option>
+                    <option value="">2</option>
+                </select>
+            </div>
+            <div class="trigger">
+                <select name="" id="" class="logic-touch">
+                    <option value="">(trigger)</option>
+                    <option value="equal_to">is equal to</option>
+                    <option value="not_equal_to">is not equal to</option>
+                    <option value="contains">contains</option>
+                    <option value="contains_not">doest not contain</option>
+                    <option value="greater_than">is greater than</option>
+                    <option value="less_than">is less than</option>
+                </select>
+            </div>
+            <div class="text">
+                <input type="text" placeholder=" ..." class="logic-touch">
+            </div>
+            <div class="remove-action">
+                x
+            </div>
+        </div>
+    </script>
+
+
+
+    <script type="template" id="fields-selectBox">
+        <select name="" id="" class="logic-touch">
+            <option value="">(fields)</option>
+            <option value="">1</option>
+            <option value="">2</option>
+        </select>
+    </script>
+
+    <script type="template" id="input-box">
+        <input type="text" class="logic-touch" placeholder="..."/>
+    </script>
+
+    <script type="template" id="then-row">
+        <div class="group-row">
+            <div class="sign-and">&</div>
+            <div class="set-value">
+                <select name="" id="" class="logic-touch than-action">
+                    <option value="">(action)</option>
+                    <option value="show_fields">show fields</option>
+                    <option value="hide_fields">hide fields</option>
+                    <option value="email_to">send email to</option>
+                    <option value="redirect_to">redirect to</option>
+                    <option value="trigger_integration">trigger integration</option>
+                    <option value="set_value">set value of</option>
+                </select>
+            </div>
+            <div class="result">
+
+            </div>
+            <div class="remove-action act-rem">x</div>
+        </div>
+    </script>
+
+    <script type="template" id="logic-html">
+        <div class="logic-area">
+            <div class="logic-text if">
+                if
+            </div>
+            <div class="group-cond">
+                <div class="group-row">
+                    <div class="field">
+                        <select name="" id="" class="logic-touch">
+                            <option value="">(field)</option>
+                            <option value="">1</option>
+                            <option value="">2</option>
+                        </select>
+                    </div>
+                    <div class="trigger">
+                        <select name="" id="" class="logic-touch">
+                            <option value="">(trigger)</option>
+                            <option value="equal_to">is equal to</option>
+                            <option value="not_equal_to">is not equal to</option>
+                            <option value="contains">contains</option>
+                            <option value="contains_not">doest not contain</option>
+                            <option value="greater_than">is greater than</option>
+                            <option value="less_than">is less than</option>
+                        </select>
+                    </div>
+                    <div class="text">
+                        <input type="text" placeholder=" ..." class="logic-touch">
+                    </div>
+                    <div class="remove-action">
+                        x
+                    </div>
+                </div>
+                <div class="add-group add-cond-row">add condition row</div>
+            </div>
+            <div class="logic-text than">
+                then
+            </div>
+            <div class="group-action">
+                <div class="group-row">
+                    <div class="set-value">
+                        <select name="" id="" class="logic-touch than-action">
+                            <option value="">(action)</option>
+                            <option value="show_fields">show fields</option>
+                            <option value="hide_fields">hide fields</option>
+                            <option value="email_to">send email to</option>
+                            <option value="redirect_to">redirect to</option>
+                            <option value="trigger_integration">trigger integration</option>
+                            <option value="set_value">set value of</option>
+                        </select>
+                    </div>
+                    <div class="result">
+
+                    </div>
+                    <div class="remove-action act-rem">x</div>
+                </div>
+
+                <div class="add-group add-action-row">add action row</div>
+            </div>
+
+            <div class="logic-remove">×</div>
         </div>
     </script>
 @stop

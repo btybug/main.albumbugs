@@ -140,7 +140,7 @@
                             <label class="col-sm-3 control-label text-left">Show reset</label>
                             <div class="col-sm-8">
                                 <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="">
+                                    <input type="checkbox" name="star_setting[showClear]" {{isset($settings['star_setting']['showClear']) ? 'checked' : ''}}>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                             <label class="col-sm-3 control-label text-left">Show caption</label>
                             <div class="col-sm-8">
                                 <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="">
+                                    <input type="checkbox" name="star_setting[showCaption]" {{isset($settings['star_setting']['showCaption']) ? 'checked' : ''}}>
                                 </div>
                             </div>
                         </div>

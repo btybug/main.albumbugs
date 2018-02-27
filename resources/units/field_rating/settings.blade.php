@@ -154,6 +154,35 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="form-group col-md-12">
+                        <div class="col-md-2">
+                            <label>Field color</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select name="" id="" class="form-control">
+                                <option value="">Select color</option>
+                                <option value="rating-cl-black">black</option>
+                                <option value="rating-cl-grey">grey</option>
+                                <option value="rating-cl-skyblue">skyblue</option>
+                                <option value="rating-cl-darksalmon">darksalmon</option>
+                                <option value="rating-cl-deeppink">deeppink</option>
+                                <option value="rating-cl-fuchsia">fuchsia</option>
+                                <option value="rating-cl-brown">brown</option>
+                                <option value="rating-cl-red">red</option>
+                                <option value="rating-cl-cyan">cyan</option>
+                                <option value="rating-cl-lightcoral">lightcoral</option>
+                                <option value="rating-cl-darkorange">darkorange</option>
+                                <option value="rating-cl-forestgreen">forestgreen</option>
+                                <option value="rating-cl-yellow">yellow</option>
+                                <option value="rating-cl-crimson">crimson</option>
+                                <option value="rating-cl-deepskyblue">deepskyblue</option>
+                                <option value="rating-cl-darkblue">darkblue</option>
+                                <option value="rating-cl-peru">peru</option>
+                                <option value="rating-cl-orange">orange</option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="form-group col-md-12 m-b-10">
                         <label class="col-sm-4 p-l-0 control-label m-0  text-left">Extra Validation</label>
                         <div class="col-sm-8">

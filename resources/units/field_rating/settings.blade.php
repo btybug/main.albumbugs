@@ -159,7 +159,7 @@
                             <label>Field color</label>
                         </div>
                         <div class="col-md-9">
-                            <select name="" id="" class="form-control">
+                            <select name="custom_color" id="" class="form-control">
                                 <option value="">Select color</option>
                                 <option value="rating-cl-black">black</option>
                                 <option value="rating-cl-grey">grey</option>

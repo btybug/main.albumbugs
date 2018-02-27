@@ -7,9 +7,10 @@
     "tooltip_icon": null,
     "help": null,
     "validation_message": null,
-    "manual_item": [
+    "manual_item": "on",
+    "star_setting": {
 
-    ],
+    },
     "extravalidation": null
   },
   "id": "field_rating.default"

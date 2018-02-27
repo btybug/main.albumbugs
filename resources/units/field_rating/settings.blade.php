@@ -158,13 +158,13 @@
                         <div class="col-md-6">
                             <label for="fieldicon" class="col-sm-3 p-l-0 control-label m-0 text-left">Empty Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('icon',null,['class' => 'form-control icp'])  !!}
+                                {!!Form::text('star_setting[emptyStar]',isset($settings["star_setting"]["emptyStar"])?$settings["star_setting"]["emptyStar"]:null,['class' => 'form-control icpp'])  !!}
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="tooltip-icon" class="col-sm-3 m-0 control-label text-left">Fill Icon</label>
+                            <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">Filled Icon</label>
                             <div class="col-sm-8">
-                                {!!Form::text('tooltip_icon',null,['class' => 'form-control icp','id'=>'tooltip-icon'])  !!}
+                                {!!Form::text('star_setting[filledStar]',isset($settings["star_setting"]["filledStar"])?$settings["star_setting"]["filledStar"]:null,['class' => 'form-control icpp','id'=>'tooltip-icon'])  !!}
 
                             </div>
                         </div>
@@ -215,5 +215,5 @@
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script>
-    $('.icp').iconpicker();
+    $('.icpp').iconpicker();
 </script>

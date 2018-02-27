@@ -20,7 +20,7 @@
 @if(isset($settings['manual_item']))
     <div class="form-group">
         <div>
-            <div class="input-group">
+            <div class="input-group {{isset($settings["custom_color"]) ? $settings["custom_color"] : ''}}">
                 <div class="">
                     <label for="input-1" class="control-label"></label>
                     <input id="input-1" name="star" value="" class="rating-loading">
@@ -50,19 +50,31 @@
     function getStars(data){
         if(typeof window.onload == 'function'){
             if (data.manual_item) {
+                data.star_setting.showClear = data.star_setting.showClear && data.star_setting.showClear == "on" ? true : false;
+                data.star_setting.showCaption = data.star_setting.showCaption && data.star_setting.showCaption == "on" ? true : false;
+                data.star_setting.filledStar = data.star_setting.filledStar ? '<i class="fa '+data.star_setting.filledStar+'"></i>' : '<i class="glyphicon glyphicon-star"></i>';
+                data.star_setting.emptyStar = data.star_setting.emptyStar ? '<i class="fa '+data.star_setting.emptyStar+'"></i>' : '<i class="glyphicon glyphicon-star-empty"></i>';
                 $("#input-1").rating('refresh', data.star_setting);
             }
         }else{
             window.onload = function(){
                 if($("#input-1").length) {
+                    if(!data.star_setting){
+                        return $("#input-1").rating({
+                            showClear:false,
+                            showCaption:false
+                        });
+                    }
                    data.star_setting.step = data.star_setting.step ? data.star_setting.step : 0.5;
                    data.star_setting.stars = data.star_setting.stars ? data.star_setting.stars : 5;
-                  // data.star_setting.max = data.star_setting.max ? data.star_setting.max : 5;
-                  // data.star_setting.min = data.star_setting.min ? data.star_setting.min : 0;
                    data.star_setting.disabled = data.star_setting.disabled && data.star_setting.disabled == "on" ? true : false;
                    data.star_setting.animate = data.star_setting.animate && data.star_setting.animate == "on" ? true : false;
+                   data.star_setting.showClear = data.star_setting.showClear && data.star_setting.showClear == "on" ? true : false;
+                   data.star_setting.showCaption = data.star_setting.showCaption && data.star_setting.showCaption == "on" ? true : false;
+                   data.star_setting.filledStar = data.star_setting.filledStar ? '<i class="fa '+data.star_setting.filledStar+'"></i>' : '<i class="glyphicon glyphicon-star"></i>';
+                   data.star_setting.emptyStar = data.star_setting.emptyStar ? '<i class="fa '+data.star_setting.emptyStar+'"></i>' : '<i class="glyphicon glyphicon-star-empty"></i>';
 
-                   $("#input-1").rating(data.star_setting);
+                   return $("#input-1").rating(data.star_setting);
                 }
             }
         }

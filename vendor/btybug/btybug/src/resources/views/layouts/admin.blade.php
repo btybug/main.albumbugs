@@ -36,7 +36,6 @@
 </head>
 <body>
 <div id="wrapper">
-
     @if($page)
         <div class="bty-header-fix">
             {!! BBheaderBack() !!}
@@ -70,6 +69,8 @@
 @yield('JS')
 {!! BBscriptsHook() !!}
 @stack('javascript')
+
+@yield('Footer')
 </body>
 </html>
 

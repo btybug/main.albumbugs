@@ -52,6 +52,74 @@ $(document).ready(function () {
         }
     };
 
+    // Fields controls
+    var fieldsControl = {
+        activateField: function ($this) {
+            drawActiveHelpers($this);
+        }
+    };
+
+    function drawActiveHelpers($this){
+        var width = $this.outerWidth(),
+            height = $this.outerHeight(),
+            left = $this.offset().left,
+            top = $this.offset().top;
+
+        // Activate node
+        var nodeActionMenu = $('.bb-node-action-menu'),
+            nodeActionSize = $('.bb-node-action-size');
+
+        nodeActionSize.css({
+            width: width,
+            height: height,
+            left: left,
+            top: top
+        });
+
+        nodeActionMenu
+            .css({
+                left: left - 2,
+                top: top - nodeActionMenu.outerHeight() - 2
+            })
+            .attr("data-selected-node", $this.attr("data-bb-id"));
+
+        // Column resize
+        var rowWidth = $this.parent('.row').outerWidth(),
+            columnWidth = rowWidth/12;
+
+        nodeActionSize.resizable({
+            handles: 'e',
+            grid: columnWidth,
+            minWidth: 0.5,
+            classes: {
+                "ui-resizable-e": "bb-column-resize-handler"
+            },
+            start: function (){
+                $this.parent('.row').addClass("grid-overlay");
+            },
+            stop: function (){
+                $this.parent('.row').removeClass("grid-overlay");
+            },
+            resize: function (event,ui){
+                var columns,
+                    width = ui.size.width;
+
+                columns = Math.round(width/columnWidth);
+
+                // Remove column classes
+                $this.removeClass (function (index, className) {
+                    return (className.match (/(^|\s)col-md-\S+/g) || []).join(' ');
+                });
+
+                // Add new column class
+                $this.addClass("col-md-" + columns);
+
+                // Redraw active helpers
+                drawActiveHelpers($this);
+            }
+        });
+    }
+
     // Droppable fields area
     function activateDroppable() {
         $('body').find('.form-builder-area').droppable({
@@ -68,10 +136,8 @@ $(document).ready(function () {
                     template = $(elementHTML),
                     target = $('.form-builder-area');
 
-                console.log($(ui).find(".form-element-item-sample"));
+                template.attr('data-field', true);
 
-                template.attr('data-shortcode', $(ui.draggable).attr('data-shortcode'));
-                template.attr('data-id', $(ui.draggable).attr('data-id'));
                 $(ui).hide();
                 target.append(template);
             }
@@ -93,6 +159,10 @@ $(document).ready(function () {
             e.preventDefault();
             var event = $(this).attr('bb-click');
             clickEvents[event]($(this), e);
+        })
+        .on('click', '[data-field]', function (e) {
+            e.preventDefault();
+            fieldsControl.activateField($(this));
         });
 
     // Activate droppable areas
@@ -100,5 +170,6 @@ $(document).ready(function () {
 
     // Trigger open studio TODO: Remove this trigger
     // clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
+    clickEvents.openFieldsWindow($('[bb-click="openFieldsWindow"]'));
 
 });

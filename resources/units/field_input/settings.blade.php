@@ -11,23 +11,29 @@
             <div id="inputsetting" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
 
-                        <div class="col-md-6">
-                            <label for="valid" class="col-sm-3 m-0 control-label text-left">Validation Rules</label>
-                            <div class="col-sm-8">
-                                {!! Form::textarea('validation',null,['class'=>'form-control','id'=>'valid']) !!}
-                            </div>
+                    <div class="form-group">
+                        <label for="valid" class="col-sm-3 m-0 control-label text-left">Tags</label>
+                        <div class="col-sm-9">
+                            <select multiple data-role="tagsinput" class="form-control">
+                                <option value="Amsterdam">Amsterdam</option>
+                                <option value="Washington">Washington</option>
+                            </select>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
+
             </div>
         </div>
     </div>
-
 </div>
+
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'bootstrap-tagsinput.css') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'bootstrap-tagsinput.js') !!}
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script>
     $('.icp').iconpicker();
+    $("select").tagsinput('items');
 </script>

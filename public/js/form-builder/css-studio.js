@@ -39,6 +39,25 @@ var cssStudio = {
                     type: 'number'
                 },
                 {
+                    title: '',
+                    css: 'text-align',
+                    type: 'toggle',
+                    options: [
+                        {
+                            value: 'px',
+                            title: 'px'
+                        },
+                        {
+                            value: 'em',
+                            title: 'em'
+                        },
+                        {
+                            value: '%',
+                            title: '%'
+                        }
+                    ]
+                },
+                {
                     title: 'Text Color',
                     css: 'color',
                     type: 'color'
@@ -46,7 +65,21 @@ var cssStudio = {
                 {
                     title: 'Text Align',
                     css: 'text-align',
-                    type: 'toggle'
+                    type: 'toggle',
+                    options: [
+                        {
+                            value: 'right',
+                            title: 'Right'
+                        },
+                        {
+                            value: 'center',
+                            title: 'Center'
+                        },
+                        {
+                            value: 'left',
+                            title: 'Left'
+                        }
+                    ]
                 }
             ]
         },
@@ -62,6 +95,9 @@ var cssStudio = {
         }
     ],
 
+    // CSS JSON Object
+    CSSJSON: {},
+
     // Load template
     loadTemplate: function loadTemplate(template) {
         return $('#bbt-' + template).html();
@@ -74,13 +110,25 @@ var cssStudio = {
 
     // Render field type
     renderField: function (field) {
-        var fieldTemplate = this.loadTemplate(field.type);
+        var fieldTemplate = this.loadTemplate(field.type),
+            buildOptions = '';
 
         if (field.type === "dropdown") {
-            var buildOptions = '';
+            buildOptions = '';
             if (field.options && field.options.length > 0) {
                 $.each(field.options, function (i, option) {
                     buildOptions += '<option value="' + option.value + '">' + option.title + '</option>';
+                });
+
+                fieldTemplate = fieldTemplate.replace(/{options}/g, buildOptions);
+            }
+        }
+
+        if (field.type === "toggle") {
+            buildOptions = '';
+            if (field.options && field.options.length > 0) {
+                $.each(field.options, function (i, option) {
+                    buildOptions += '<label class="form-check-label">' + '<input class="form-check-input" type="radio" name="exampleRadios" value="' + option.value + '">' + option.title + '</label>';
                 });
 
                 fieldTemplate = fieldTemplate.replace(/{options}/g, buildOptions);
@@ -96,7 +144,7 @@ var cssStudio = {
         toggleOpen: function ($this) {
             var isOpened = $this.attr("data-opened");
 
-            if(isOpened){
+            if (isOpened) {
                 // Mark as closed
                 $this.removeAttr("data-opened");
 
@@ -147,11 +195,13 @@ var cssStudio = {
             $.each(propertyGroup.fields, function (i, field) {
                 var fieldTemplate = $this.loadTemplate('property-container');
                 fieldTemplate = fieldTemplate.replace(/{label}/g, field.title);
+                fieldTemplate = fieldTemplate.replace(/{id}/g, field.css);
 
                 // Field HTML
                 if (field.type && $this.loadTemplate(field.type)) {
                     var fieldTypeTemplate = $this.renderField(field);
-                    fieldTypeTemplate = fieldTypeTemplate.replace(/{id}/g, 'aaa');
+                    fieldTypeTemplate = fieldTypeTemplate.replace(/{id}/g, field.css);
+                    fieldTypeTemplate = fieldTypeTemplate.replace(/{name}/g, field.css);
 
                     fieldTemplate = fieldTemplate.replace(/{field}/g, fieldTypeTemplate);
                     fieldsHTML += fieldTemplate;
@@ -173,9 +223,15 @@ var cssStudio = {
 
     // Fields JS Actions
     fieldsJSActions: function () {
+        var CSSJSON = this.CSSJSON;
 
         // Combo box field
-        $('.bbs-combobox').combobox();
+        $('.bbs-combobox').combobox({
+            onChange: function (value) {
+                var property = $(this).attr("textboxname");
+                CSSJSON[property] = value;
+            }
+        });
 
         // Color
         $('.bbs-color').minicolors({
@@ -188,11 +244,15 @@ var cssStudio = {
             min: 10,
             max: 100,
             editable: false,
-            suffix: 'px'
+            suffix: 'px',
+            onChange: function (value) {
+                var property = $(this).attr("textboxname");
+                CSSJSON[property] = value;
+            }
         });
 
         // Toggle
-        $('.radio-toggle').toggleInput();
+        $('.bbs-toggle').toggleInput();
     },
 
     // Init CSS Studio

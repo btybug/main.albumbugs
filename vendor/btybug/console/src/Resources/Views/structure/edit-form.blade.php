@@ -97,38 +97,25 @@
 
     <script type="template" id="bbt-dropdown">
         <div class="bbs-dropdown-box">
-            <select class="bbs-combobox" id="bbs-{id}">{options}</select>
+            <select class="bbs-combobox" id="bbs-{id}" name="{name}">{options}</select>
         </div>
     </script>
 
     <script type="template" id="bbt-color">
         <div class="bbs-color-box">
-            <input class="bbs-input bbs-color" id="bbs-{id}">
+            <input class="bbs-input bbs-color" id="bbs-{id}" name="{name}">
         </div>
     </script>
 
     <script type="template" id="bbt-number">
         <div class="bbs-number-spinner">
-            <input class="bbs-input bbs-number" id="bbs-{id}">
+            <input class="bbs-input bbs-number" id="bbs-{id}" name="{name}">
         </div>
     </script>
 
     <script type="template" id="bbt-toggle">
         <div class="bbs-toggle">
-            <div class="form-check radio-toggle">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    Right
-                </label>
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    Center
-                </label>
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    Left
-                </label>
-            </div>
+            {options}
         </div>
     </script>
 @stop

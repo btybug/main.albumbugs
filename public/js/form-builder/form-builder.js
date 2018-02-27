@@ -19,6 +19,12 @@ $(document).ready(function () {
                 content: loadTemplate('fields-html'),
                 callback: function () {
                     $this.addClass("disabled");
+
+                    // Draggable fields
+                    $('.draggable-element').draggable({
+                        revert:true,
+                        proxy:'clone'
+                    });;
                 },
                 onclosed: function () {
                     $this.removeClass("disabled");
@@ -46,6 +52,36 @@ $(document).ready(function () {
         }
     };
 
+    // Droppable fields area
+    function activateDroppable() {
+        $('body').find('.form-builder-area').droppable({
+            accept: ".draggable-element",
+            onDragEnter: function (e,source) {
+
+            },
+            onDragLeave:function(e,source){
+
+            },
+            onDrop: function (event, ui) {
+                // Insert template
+                var elementHTML = $(ui).find(".form-element-item-sample").html(),
+                    template = $(elementHTML),
+                    target = $('.form-builder-area');
+
+                console.log($(ui).find(".form-element-item-sample"));
+
+                template.attr('data-shortcode', $(ui.draggable).attr('data-shortcode'));
+                template.attr('data-id', $(ui.draggable).attr('data-id'));
+                $(ui).hide();
+                target.append(template);
+            }
+        }).sortable({
+            update: function (event, ui) {
+
+            }
+        });
+    }
+
     // Load inline template
     function loadTemplate(template){
         return $('#' + template).html();
@@ -59,7 +95,10 @@ $(document).ready(function () {
             clickEvents[event]($(this), e);
         });
 
+    // Activate droppable areas
+    activateDroppable();
+
     // Trigger open studio TODO: Remove this trigger
-    clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
+    // clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
 
 });

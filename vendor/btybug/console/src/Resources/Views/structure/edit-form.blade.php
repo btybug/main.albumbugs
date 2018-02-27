@@ -45,7 +45,7 @@
 
     <div class="row ">
         <div class="col-md-12">
-            <div class="form-builder-area"></div>
+            <div class="row form-builder-area"></div>
 
             <!-- Button -->
             <div class="form-group">
@@ -62,7 +62,7 @@
                          data-shortcode="[field id={{$field->id}}]">
                         {{ $field->name }}
                         <div class="form-element-item-sample hidden">
-                            <div class="form-group">
+                            <div class="col-md-12">
                                 {!! field_render(['id' => $field->id]) !!}
                             </div>
                         </div>

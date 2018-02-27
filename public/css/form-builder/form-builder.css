@@ -143,6 +143,9 @@ button.disabled {
     padding: 10px;
 }
 
+#fields-panel .jsPanel-content {
+    overflow: visible!important;
+}
 
 /* CSS Visual Studio */
 .jsPanel-theme-primary {

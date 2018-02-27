@@ -14,7 +14,7 @@
     {!! HTML::script("public/libs/toggle/jquery.toggleinput.js") !!}
     {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}
     {!! Html::script("public/js/form-builder/css-studio.js") !!}
-    {!! Html::script("public/js/form-builder/form-builder.js") !!}
+    {!! Html::script("public/js/form-builder/form-builder.js?m=m") !!}
 @stop
 
 @section( 'content' )

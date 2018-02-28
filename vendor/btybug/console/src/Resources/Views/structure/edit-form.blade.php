@@ -135,6 +135,23 @@
                                 {!! Form::select('allowed_roles',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
                             </div>
                         </div>
+                        <div class="form-group m-l-0 m-r-0">
+                            <label for="" class="col-sm-4">Is Ajax</label>
+                            <div class="col-sm-8">
+                                <div class="customelement radio-inline">
+                                    <input name="is_ajax" id="is_ajax_yes"
+                                           <?php echo (isset($settings['is_ajax']) && $settings['is_ajax'] == 'yes') ? 'checked' : '' ?> value="yes"
+                                           type="radio">
+                                    <label for="is_ajax_yes">Yes</label>
+                                </div>
+                                <div class="customelement radio-inline">
+                                    <input name="is_ajax" id="is_ajax_no"
+                                   <?php echo (isset($settings['is_ajax'])
+                                       && $settings['is_ajax'] == 'no') ? 'checked' : (isset($settings['is_ajax']) && $settings['is_ajax'] == 'yes') ? '' : 'checked' ?>
+                                   value="no" type="radio"> <label for="is_ajax_no">No</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

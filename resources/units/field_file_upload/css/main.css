@@ -228,7 +228,6 @@
 }
 .rem-btn-bg-cl-yellow .fileinput-remove-button, .upl-btn-bg-cl-yellow .fileinput-upload-button{
     background-color: #FFFF00 !important;
-    color: #fff !important;
 }
 .rem-btn-bg-cl-yellow .fileinput-remove-button:hover, .upl-btn-bg-cl-yellow .fileinput-upload-button:hover{
     background-color: rgba(255, 255, 0, 0.4) !important;

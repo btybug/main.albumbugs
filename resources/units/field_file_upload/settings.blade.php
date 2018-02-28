@@ -322,8 +322,25 @@
                                 <label class="control-label text-left">Select Class</label>
                                 <div>
                                     <select name="" id="" class="form-control">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
+                                        <option value="">Select class</option>
+                                        <option value="br-btn-bg-cl-black">black</option>
+                                        <option value="br-btn-bg-cl-grey">grey</option>
+                                        <option value="br-btn-bg-cl-skyblue">skyblue</option>
+                                        <option value="br-btn-bg-cl-darksalmon">darksalmon</option>
+                                        <option value="br-btn-bg-cl-deeppink">deeppink</option>
+                                        <option value="br-btn-bg-cl-fuchsia">fuchsia</option>
+                                        <option value="br-btn-bg-cl-brown">brown</option>
+                                        <option value="br-btn-bg-cl-red">red</option>
+                                        <option value="br-btn-bg-cl-cyan">cyan</option>
+                                        <option value="br-btn-bg-cl-lightcoral">lightcoral</option>
+                                        <option value="br-btn-bg-cl-darkorange">darkorange</option>
+                                        <option value="br-btn-bg-cl-forestgreen">forestgreen</option>
+                                        <option value="br-btn-bg-cl-yellow">yellow</option>
+                                        <option value="br-btn-bg-cl-crimson">crimson</option>
+                                        <option value="br-btn-bg-cl-deepskyblue">deepskyblue</option>
+                                        <option value="br-btn-bg-cl-darkblue">darkblue</option>
+                                        <option value="br-btn-bg-cl-peru">peru</option>
+                                        <option value="br-btn-bg-cl-orange">orange</option>
                                     </select>
                                 </div>
                             </div>
@@ -357,8 +374,25 @@
                                 <label class="control-label text-left">Select Class</label>
                                 <div>
                                     <select name="" id="" class="form-control">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
+                                        <option value="">Select class</option>
+                                        <option value="upl-btn-bg-cl-black">black</option>
+                                        <option value="upl-btn-bg-cl-grey">grey</option>
+                                        <option value="upl-btn-bg-cl-skyblue">skyblue</option>
+                                        <option value="upl-btn-bg-cl-darksalmon">darksalmon</option>
+                                        <option value="upl-btn-bg-cl-deeppink">deeppink</option>
+                                        <option value="upl-btn-bg-cl-fuchsia">fuchsia</option>
+                                        <option value="upl-btn-bg-cl-brown">brown</option>
+                                        <option value="upl-btn-bg-cl-red">red</option>
+                                        <option value="upl-btn-bg-cl-cyan">cyan</option>
+                                        <option value="upl-btn-bg-cl-lightcoral">lightcoral</option>
+                                        <option value="upl-btn-bg-cl-darkorange">darkorange</option>
+                                        <option value="rem-btn-bg-cl-forestgreen">forestgreen</option>
+                                        <option value="upl-btn-bg-cl-yellow">yellow</option>
+                                        <option value="upl-btn-bg-cl-crimson">crimson</option>
+                                        <option value="rem-btn-bg-cl-deepskyblue">deepskyblue</option>
+                                        <option value="upl-btn-bg-cl-darkblue">darkblue</option>
+                                        <option value="upl-btn-bg-cl-peru">peru</option>
+                                        <option value="upl-btn-bg-cl-orange">orange</option>
                                     </select>
                                 </div>
                             </div>
@@ -392,8 +426,25 @@
                                 <label class="control-label text-left">Select Class</label>
                                 <div>
                                     <select name="" id="" class="form-control">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
+                                        <option value="">Select class</option>
+                                        <option value="rem-btn-bg-cl-black">black</option>
+                                        <option value="rem-btn-bg-cl-grey">grey</option>
+                                        <option value="rem-btn-bg-cl-skyblue">skyblue</option>
+                                        <option value="rem-btn-bg-cl-darksalmon">darksalmon</option>
+                                        <option value="rem-btn-bg-cl-deeppink">deeppink</option>
+                                        <option value="rem-btn-bg-cl-fuchsia">fuchsia</option>
+                                        <option value="rem-btn-bg-cl-brown">brown</option>
+                                        <option value="rem-btn-bg-cl-red">red</option>
+                                        <option value="rem-btn-bg-cl-cyan">cyan</option>
+                                        <option value="rem-btn-bg-cl-lightcoral">lightcoral</option>
+                                        <option value="rem-btn-bg-cl-darkorange">darkorange</option>
+                                        <option value="rem-btn-bg-cl-forestgreen">forestgreen</option>
+                                        <option value="rem-btn-bg-cl-yellow">yellow</option>
+                                        <option value="rem-btn-bg-cl-crimson">crimson</option>
+                                        <option value="rem-btn-bg-cl-deepskyblue">deepskyblue</option>
+                                        <option value="rem-btn-bg-cl-darkblue">darkblue</option>
+                                        <option value="rem-btn-bg-cl-peru">peru</option>
+                                        <option value="rem-btn-bg-cl-orange">orange</option>
                                     </select>
                                 </div>
                             </div>

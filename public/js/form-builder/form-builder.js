@@ -217,7 +217,7 @@ $(document).ready(function () {
     activateDroppable();
 
     // Trigger open studio TODO: Remove this trigger
-    // clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
-    clickEvents.openFieldsWindow($('[bb-click="openFieldsWindow"]'));
+    clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
+    // clickEvents.openFieldsWindow($('[bb-click="openFieldsWindow"]'));
 
 });

@@ -40,7 +40,7 @@ var cssStudio = {
                 },
                 {
                     title: '',
-                    css: 'text-align',
+                    css: 'font-size-unit',
                     type: 'toggle',
                     options: [
                         {
@@ -95,9 +95,6 @@ var cssStudio = {
         }
     ],
 
-    // CSS JSON Object
-    CSSJSON: {},
-
     // Load template
     loadTemplate: function loadTemplate(template) {
         return $('#bbt-' + template).html();
@@ -128,7 +125,7 @@ var cssStudio = {
             buildOptions = '';
             if (field.options && field.options.length > 0) {
                 $.each(field.options, function (i, option) {
-                    buildOptions += '<label class="form-check-label">' + '<input class="form-check-input" type="radio" name="exampleRadios" value="' + option.value + '">' + option.title + '</label>';
+                    buildOptions += '<label class="form-check-label">' + '<input class="form-check-input" type="radio" name="' + field.css + '" value="' + option.value + '">' + option.title + '</label>';
                 });
 
                 fieldTemplate = fieldTemplate.replace(/{options}/g, buildOptions);
@@ -221,38 +218,73 @@ var cssStudio = {
         this.fieldsJSActions();
     },
 
+    // CSS JSON Object
+    CSSJSON: {},
+
+    // Update CSS
+    updateCSS: function (property, value) {
+        cssStudio.CSSJSON[property] = value;
+
+        var cssString = "",
+            cssJSON = cssStudio.CSSJSON;
+
+        cssString += ".bbcc-form {";
+
+        for (var cssPropertyName in cssJSON) {
+            cssString += cssPropertyName + ": " + cssJSON[cssPropertyName] + ";";
+        }
+
+        cssString += "}";
+
+        $('#bbcc-form-style').text(cssString);
+
+        console.log(cssStudio.CSSJSON);
+        console.log(cssString);
+    },
+
     // Fields JS Actions
     fieldsJSActions: function () {
-        var CSSJSON = this.CSSJSON;
+        var updateCSS = this.updateCSS;
 
         // Combo box field
-        $('.bbs-combobox').combobox({
-            onChange: function (value) {
-                var property = $(this).attr("textboxname");
-                CSSJSON[property] = value;
-            }
+        easyloader.load(['combobox', 'menu'], function () {
+            $('.bbs-combobox').combobox({
+                onChange: function (value) {
+                    var property = $(this).attr("textboxname");
+                    updateCSS(property, value);
+                }
+            });
+        });
+
+        // Number
+        easyloader.load('numberspinner', function () {
+            $('.bbs-number').numberspinner({
+                min: 10,
+                max: 100,
+                editable: false,
+                suffix: 'px',
+                onChange: function (value) {
+                    var property = $(this).attr("textboxname");
+                    updateCSS(property, value);
+                }
+            });
         });
 
         // Color
         $('.bbs-color').minicolors({
             format: 'rgb',
-            opacity: true
-        });
-
-        // Number
-        $('.bbs-number').numberspinner({
-            min: 10,
-            max: 100,
-            editable: false,
-            suffix: 'px',
-            onChange: function (value) {
-                var property = $(this).attr("textboxname");
-                CSSJSON[property] = value;
+            opacity: true,
+            change: function (value) {
+                var property = $(this).attr("name");
+                updateCSS(property, value);
             }
         });
 
         // Toggle
-        $('.bbs-toggle').toggleInput();
+        $('.bbs-toggle').toggleInput(function ($this) {
+            var property = $this.attr("name");
+            updateCSS(property, $('[name=' + property + ']:checked').val());
+        });
     },
 
     // Init CSS Studio

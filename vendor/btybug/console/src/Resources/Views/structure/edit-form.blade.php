@@ -9,7 +9,11 @@
 @stop
 
 @section( 'JS' )
-    {{--{!! HTML::script("public/libs/easyui/jquery.easyui.min.js") !!}--}}
+    {!! HTML::script("public/libs/easyui/easyloader.js") !!}
+    <script>
+        easyloader.base = '<?php echo url("public/libs/easyui/") ?>/';
+        easyloader.css = false;
+    </script>
     {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
     {!! HTML::script("public/libs/toggle/jquery.toggleinput.js") !!}
     {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}
@@ -51,7 +55,8 @@
     <hr/>
 
     <div class="container-fluid">
-        <div class="row form-builder-area"></div>
+        <style id="bbcc-form-style"></style>
+        <div class="row form-builder-area bbcc-form"></div>
     </div>
 
     <div class="modal fade" id="logicModal" role="dialog">

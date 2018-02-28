@@ -1,4 +1,4 @@
-jQuery.fn.toggleInput = function () {
+jQuery.fn.toggleInput = function (callback) {
 	var $ = jQuery;
 	var _container = this;
 
@@ -28,5 +28,9 @@ jQuery.fn.toggleInput = function () {
 
 		$( 'input[name="' + _input.attr( 'name' ) + '"]:checked' ).prop( 'checked', false ).removeAttr( 'checked' );
 		_input.prop( 'checked', true ).attr( 'checked', 'checked' );
+
+		if(callback){
+            callback(_input);
+		}
 	} );
 };

@@ -105,7 +105,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Images extensions</label>
                                 <div class="col-sm-9">
-                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                    <select class="extensions-multiple" name="upload_setting[allowedFileExtensions][]" multiple="multiple">
                                         <option value="PNG">PNG</option>
                                         <option value="JPG">JPG</option>
                                         <option value="JPEG">JPEG</option>
@@ -117,7 +117,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Image Size</label>
                                 <div class="col-sm-4">
-                                    <input type="number" class="form-control">
+                                    <input type="number" name="upload_setting[previewSettings][image][size]" class="form-control">
                                 </div>
                                 <div class="col-sm-1">
                                     <strong>MB</strong>
@@ -134,7 +134,7 @@
                                 </div>
                                 <label class="col-sm-3 control-label text-right">No of images</label>
                                 <div class="col-sm-4">
-                                    <input type="number" class="form-control">
+                                    <input type="number" name="upload_setting[previewSettings][image][maxFileCount]" class="form-control">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -154,7 +154,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Video extensions</label>
                                 <div class="col-sm-9">
-                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                    <select class="extensions-multiple" name="upload_setting[allowedFileExtensions][]" multiple="multiple">
                                         <option value="AVI">AVI</option>
                                         <option value="MP4">MP4</option>
                                         <option value="Mov">Mov</option>
@@ -193,7 +193,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Music extensions</label>
                                 <div class="col-sm-9">
-                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                    <select class="extensions-multiple" name="upload_setting[allowedFileExtensions][]" multiple="multiple">
                                         <option value="mp3">mp3</option>
                                         <option value="m4a">m4a</option>
                                         <option value="mv3">mv3</option>
@@ -231,7 +231,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Docs extensions</label>
                                 <div class="col-sm-9">
-                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                    <select class="extensions-multiple" name="upload_setting[allowedFileExtensions][]" multiple="multiple">
                                         <option value="pdf">pdf</option>
                                         <option value="ZIP">ZIP</option>
                                         <option value="txt">txt</option>

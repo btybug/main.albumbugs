@@ -9,20 +9,20 @@
 }
 
 .form-builder-area:empty {
-    outline: 1px dashed #c0c0c0;
     position: relative;
-    height: 50px;
+    height: 100px;
     margin: 0 0 20px;
 }
 
 .form-builder-area:empty:after {
-    content: "Drop Form Fields Here";
-    color: #bdbdbd;
+    color: #525252;
     position: absolute;
     width: 100%;
     height: 100%;
     text-align: center;
-    line-height: 50px;
+    line-height: 100px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQIW2NgQAXGZHAAGioAza6+Hk0AAAAASUVORK5CYII=);
 }
 
 .form-builder-tabs .tab-pane {

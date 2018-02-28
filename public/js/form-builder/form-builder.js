@@ -22,9 +22,8 @@ $(document).ready(function () {
 
                     // Draggable fields
                     $('.draggable-element').draggable({
-                        revert:true,
-                        proxy:'clone'
-                    });;
+                        helper:'clone'
+                    });
                 },
                 onclosed: function () {
                     $this.removeClass("disabled");
@@ -124,21 +123,19 @@ $(document).ready(function () {
     function activateDroppable() {
         $('body').find('.form-builder-area').droppable({
             accept: ".draggable-element",
-            onDragEnter: function (e,source) {
-
+            classes: {
+                "ui-droppable-active": "form-area-active",
+                "ui-droppable-hover": "form-area-hover"
             },
-            onDragLeave:function(e,source){
-
-            },
-            onDrop: function (event, ui) {
+            drop: function (event, ui) {
                 // Insert template
-                var elementHTML = $(ui).find(".form-element-item-sample").html(),
+                var elementHTML = $(ui.draggable).find(".form-element-item-sample").html(),
                     template = $(elementHTML),
                     target = $('.form-builder-area');
 
                 template.attr('data-field', true);
 
-                $(ui).hide();
+                $(ui.draggable).hide();
                 target.append(template);
             }
         }).sortable({

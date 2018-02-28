@@ -9,7 +9,7 @@
 @stop
 
 @section( 'JS' )
-    {!! HTML::script("public/libs/easyui/jquery.easyui.min.js") !!}
+    {{--{!! HTML::script("public/libs/easyui/jquery.easyui.min.js") !!}--}}
     {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
     {!! HTML::script("public/libs/toggle/jquery.toggleinput.js") !!}
     {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}

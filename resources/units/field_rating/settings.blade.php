@@ -70,16 +70,16 @@
             </div>
         </div>
     </div>
-    <div  class="row visibility-box {!! (1) ? "show" : "hide" !!}">
+    <div class="row  visibility-box  {!! (1) ? "show" : "hide" !!}">
         <div class="bty-panel-collapse">
             <div>
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#inputdata"
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#generalsettings"
                    aria-expanded="true">
                     <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                    <span class="title">Input Data</span>
+                    <span class="title">General Rating Settings</span>
                 </a>
             </div>
-            <div id="inputdata" class="collapse in" aria-expanded="true" style="">
+            <div id="generalsettings" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
                     <div class="form-group">
                         <div class="col-md-6">
@@ -96,17 +96,74 @@
                         <div class="col-md-6">
                             <label class="col-sm-3 control-label text-left">Stars</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="star_setting[stars]" type="number" value="{{isset($settings['star_setting']['stars']) ? $settings['star_setting']['stars'] : 5}}">
+                                <input class="form-control" id="stars" name="star_setting[stars]" min="1" max="20" type="number" value="{{isset($settings['star_setting']['stars']) ? $settings['star_setting']['stars'] : 5}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="col-sm-3 control-label text-left">Step</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="star_setting[step]" type="number" value="{{isset($settings['star_setting']['step']) ? $settings['star_setting']['step'] : 0.5}}">
+                                <input class="form-control" id="steps" name="star_setting[step]" min="0.1" max="20" type="number" value="{{isset($settings['star_setting']['step']) ? $settings['star_setting']['step'] : 0.5}}">
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-sm-3 control-label text-left">Show caption</label>
+                            <div class="col-sm-8">
+                                <div class="input-checkbox-3-bty">
+                                    <input type="checkbox" class="show_messages" name="star_setting[showCaption]" {{isset($settings['star_setting']['showCaption']) ? 'checked' : ''}}>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group children_caption {{(isset($settings["star_setting"]["starCaptions"]) || isset($settings['star_setting']['showCaption'])) ? '' : 'custom_hidden'}}">
+                        @if(isset($settings["star_setting"]["starCaptions"]) && isset($settings['star_setting']['showCaption']))
+                            @foreach($settings["star_setting"]["starCaptions"] as $key => $val)
+                                <div class="col-md-12 children_div" data-key="{{$key}}">
+                                    <label class="col-sm-3 control-label text-left">{{$key}}</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-checkbox-3-bty">
+                                            <input type="text" name="star_setting[starCaptions][{{$key}}]" value="{{$val}}" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            @endforeach
+                        @endif
+                        @if(!isset($settings["star_setting"]["starCaptions"]) && isset($settings['star_setting']['showCaption']))
+                            <?php
+                                $count = isset($settings['star_setting']['stars']) ? $settings['star_setting']['stars'] : 5;
+                            ?>
+                            @for($key = 1;$key <= $count; ++$key)
+                                <div class="col-md-12 children_div" data-key="{{$key}}">
+                                    <label class="col-sm-3 control-label text-left">{{$key}}</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-checkbox-3-bty">
+                                            <input type="text" name="star_setting[starCaptions][{{$key}}]" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            @endfor
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="row visibility-box {!! (1) ? "show" : "hide" !!}">
+        <div class="bty-panel-collapse">
+            <div>
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#inputdata"
+                   aria-expanded="true">
+                    <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                    <span class="title">Additional Rating Settings</span>
+                </a>
+            </div>
+            <div id="inputdata" class="collapse in" aria-expanded="true" style="">
+                <div class="content bty-settings-panel">
                     <div class="form-group col-md-12">
                         <div class="col-md-2">
                             <label>Size</label>
@@ -144,14 +201,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="col-sm-3 control-label text-left">Show caption</label>
-                            <div class="col-sm-8">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="star_setting[showCaption]" {{isset($settings['star_setting']['showCaption']) ? 'checked' : ''}}>
-                                </div>
-                            </div>
-                        </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
@@ -165,7 +214,6 @@
                             <label for="fieldicon" class="col-sm-3 m-0 control-label text-left">Filled Icon</label>
                             <div class="col-sm-8">
                                 {!!Form::text('star_setting[filledStar]',isset($settings["star_setting"]["filledStar"])?$settings["star_setting"]["filledStar"]:null,['class' => 'form-control icpp','id'=>'tooltip-icon'])  !!}
-
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -205,7 +253,6 @@
                             {!! Form::text('extravalidation',null,['class' => 'form-control core-val']) !!}
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -214,6 +261,101 @@
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+<script type="template" id="get_template">
+    <div class="col-md-12 children_div" data-key="{repl2}">
+        <label class="col-sm-3 control-label text-left">{repl}</label>
+        <div class="col-sm-8">
+            <div class="input-checkbox-3-bty">
+                <input type="text" name="star_setting[starCaptions][{repl1}]" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</script>
 <script>
     $('.icpp').iconpicker();
+    window.onload = function(){
+
+        function check(){
+            var obj = $(".children_caption");
+            var is_checked = $(".show_messages").prop("checked");
+            var stars = $("#stars").val();
+            var steps = $("#steps").val();
+
+            if(is_checked){
+                if(stars){
+                    var all_childs = obj.children(".children_div");
+                    var ht = '';
+                    for(var i = 1; i <= stars; ++i){
+                        if(all_childs.length < stars){
+                            var have_children = obj.children(".children_div[data-key='"+i+"']");
+                            if(have_children.length === 0){
+                                var html = $("#get_template").html();
+                                html = html.replace('{repl}','Star '+i).replace("{repl1}",i).replace("{repl2}",i);
+                                obj.append(html);
+                            }
+                        }else{
+                            ht += "<div class='col-md-12 children_div' data-key='"+i+"'>" + $(all_childs[i-1]).html() + "</div>";
+                        }
+                    }
+                    if(ht.length){
+                        obj.removeClass("custom_hidden");
+                        return obj.html(ht);
+                    }
+                    return obj.removeClass("custom_hidden");
+                }
+            }else{
+                obj.addClass("custom_hidden");
+            }
+        }
+        $("body").delegate(".show_messages","change",function(){
+            check();
+        });
+        $("body").delegate("#stars","input",function(){
+            var val = $(this).val();
+            if(val < 0){
+                $(this).val(1);
+            }
+            setTimeout(function(){
+                check();
+            },1000);
+        });
+        $("body").delegate("#steps","input",function(){
+            var val = $(this).val();
+            if(val < 0){
+                return $(this).val(0.1);
+            }
+        });
+
+
+        /*$("body").delegate(".show_messages","change",function(){
+            var is_checked = $(this).prop("checked");
+            var stars = $("#stars").val();
+            var steps = $("#steps").val()/1;
+
+            if(is_checked){
+                if(stars){
+                    var count = stars/steps;
+                    var qaq=steps;
+                    for(var i = 0; i < count; i++){
+                        var have_children = $(".children_caption").children(".children_div[data-key='"+steps+"']");
+                        console.log(have_children.length);
+                        if(have_children.length === 0){
+                            var html = $("#get_template").html();
+                            html = html.replace('{repl}',steps).replace("{repl1}",steps).replace("{repl2}",steps);
+                            $(".children_caption").append(html);
+                        }
+                        steps+=qaq;
+
+                    }
+
+                }
+
+                $(".children_caption").removeClass("custom_hidden");
+            }else{
+                $(".children_caption").addClass("custom_hidden");
+            }
+        });*/
+
+    }
 </script>

@@ -8,9 +8,7 @@
     "help": null,
     "validation_message": null,
     "manual_item": "on",
-    "star_setting": {
-
-    },
+    "custom_color": null,
     "extravalidation": null
   },
   "id": "field_rating.default"

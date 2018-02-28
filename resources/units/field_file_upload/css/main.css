@@ -142,3 +142,129 @@
     background-color: #e79600 !important;
     border-color: #e79600 !important;
 }
+.rem-btn-bg-cl-black .fileinput-remove-button, .upl-btn-bg-cl-black .fileinput-upload-button{
+    background-color: black !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-black .fileinput-remove-button:hover, .upl-btn-bg-cl-black .fileinput-upload-button:hover{
+    background-color: #4f4f4f !important;
+}
+.rem-btn-bg-cl-grey .fileinput-remove-button, .upl-btn-bg-cl-grey .fileinput-upload-button{
+    background-color: grey !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-grey .fileinput-remove-button:hover, .upl-btn-bg-cl-grey .fileinput-upload-button:hover{
+    background-color: #b4b4b4 !important;
+}
+.rem-btn-bg-cl-skyblue .fileinput-remove-button, .upl-btn-bg-cl-skyblue .fileinput-upload-button{
+    background-color: #87CEEB !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-skyblue .fileinput-remove-button:hover, .upl-btn-bg-cl-skyblue .fileinput-upload-button:hover{
+    background-color: rgba(135, 206, 235, 0.4) !important;
+}
+.rem-btn-bg-cl-darksalmon .fileinput-remove-button, .upl-btn-bg-cl-darksalmon .fileinput-upload-button{
+    background-color: #E9967A !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-darksalmon .fileinput-remove-button:hover, .upl-btn-bg-cl-darksalmon .fileinput-upload-button:hover{
+    background-color: rgba(233, 150, 122, 0.4) !important;
+}
+.rem-btn-bg-cl-deeppink .fileinput-remove-button, .upl-btn-bg-cl-deeppink .fileinput-upload-button{
+    background-color: #FF1493 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-deeppink .fileinput-remove-button:hover, .upl-btn-bg-cl-deeppink .fileinput-upload-button:hover{
+    background-color: rgba(255, 20, 147, 0.4) !important;
+}
+.rem-btn-bg-cl-fuchsia .fileinput-remove-button, .upl-btn-bg-cl-fuchsia .fileinput-upload-button{
+    background-color: #FF00FF !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-fuchsia .fileinput-remove-button:hover, .upl-btn-bg-cl-fuchsia .fileinput-upload-button:hover{
+    background-color: rgba(255, 0, 255, 0.4) !important;
+}
+.rem-btn-bg-cl-brown .fileinput-remove-button, .upl-btn-bg-cl-brown .fileinput-upload-button{
+    background-color: #A52A2A !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-brown .fileinput-remove-button:hover, .upl-btn-bg-cl-brown .fileinput-upload-button:hover{
+    background-color: rgba(165, 42, 42, 0.4) !important;
+}
+.rem-btn-bg-cl-red .fileinput-remove-button, .upl-btn-bg-cl-red .fileinput-upload-button{
+    background-color: #FF0000 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-red .fileinput-remove-button:hover, .upl-btn-bg-cl-red .fileinput-upload-button:hover{
+    background-color: rgba(255, 0, 0, 0.4) !important;
+}
+.rem-btn-bg-cl-cyan .fileinput-remove-button, .upl-btn-bg-cl-cyan .fileinput-upload-button{
+    background-color: #00FFFF !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-cyan .fileinput-remove-button:hover, .upl-btn-bg-cl-cyan .fileinput-upload-button:hover{
+    background-color: rgba(0, 255, 255, 0.4) !important;
+}
+.rem-btn-bg-cl-lightcoral .fileinput-remove-button, .upl-btn-bg-cl-lightcoral .fileinput-upload-button{
+    background-color: #F08080 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-lightcoral .fileinput-remove-button:hover, .upl-btn-bg-cl-lightcoral .fileinput-upload-button:hover{
+    background-color: rgba(240, 128, 128, 0.4) !important;
+}
+.rem-btn-bg-cl-darkorange .fileinput-remove-button, .upl-btn-bg-cl-darkorange .fileinput-upload-button{
+    background-color: #FF8C00 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-darkorange .fileinput-remove-button:hover, .upl-btn-bg-cl-darkorange .fileinput-upload-button:hover{
+    background-color: rgba(255, 140, 0, 0.4) !important;
+}
+.rem-btn-bg-cl-forestgreen .fileinput-remove-button, .upl-btn-bg-cl-forestgreen .fileinput-upload-button{
+    background-color: #228B22 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-forestgreen .fileinput-remove-button:hover, .upl-btn-bg-cl-forestgreen .fileinput-upload-button:hover{
+    background-color: rgba(34, 139, 34, 0.4) !important;
+}
+.rem-btn-bg-cl-yellow .fileinput-remove-button, .upl-btn-bg-cl-yellow .fileinput-upload-button{
+    background-color: #FFFF00 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-yellow .fileinput-remove-button:hover, .upl-btn-bg-cl-yellow .fileinput-upload-button:hover{
+    background-color: rgba(255, 255, 0, 0.4) !important;
+}
+.rem-btn-bg-cl-crimson .fileinput-remove-button, .upl-btn-bg-cl-crimson .fileinput-upload-button{
+    background-color: #DC143C !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-crimson .fileinput-remove-button:hover, .upl-btn-bg-cl-crimson .fileinput-upload-button:hover{
+    background-color: rgba(220, 20, 60, 0.4) !important;
+}
+.rem-btn-bg-cl-deepskyblue .fileinput-remove-button, .upl-btn-bg-cl-deepskyblue .fileinput-upload-button{
+    background-color: #00BFFF !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-deepskyblue .fileinput-remove-button:hover, .upl-btn-bg-cl-deepskyblue .fileinput-upload-button:hover{
+    background-color: rgba(0, 191, 255, 0.4) !important;
+}
+.rem-btn-bg-cl-darkblue .fileinput-remove-button, .upl-btn-bg-cl-darkblue .fileinput-upload-button{
+    background-color: #00008B !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-darkblue .fileinput-remove-button:hover, .upl-btn-bg-cl-darkblue .fileinput-upload-button:hover{
+    background-color: rgba(0, 0, 139, 0.4) !important;
+}
+.rem-btn-bg-cl-peru .fileinput-remove-button, .upl-btn-bg-cl-peru .fileinput-upload-button{
+    background-color: #CD853F !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-peru .fileinput-remove-button:hover, .upl-btn-bg-cl-peru .fileinput-upload-button:hover{
+    background-color: rgba(205, 133, 63, 0.4) !important;
+}
+.rem-btn-bg-cl-orange .fileinput-remove-button, .upl-btn-bg-cl-orange .fileinput-upload-button{
+    background-color: #FFA500 !important;
+    color: #fff !important;
+}
+.rem-btn-bg-cl-orange .fileinput-remove-button:hover, .upl-btn-bg-cl-orange .fileinput-upload-button:hover{
+    background-color: rgba(255, 165, 0, 0.4) !important;
+}

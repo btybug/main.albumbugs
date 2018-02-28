@@ -17,3 +17,6 @@
 .input-checkbox-5-bty label:after{
     background: linear-gradient(to bottom, #158dc6 0%, #158dc6 100%);
 }
+.bty-settings-panel .select2-container{
+    width: 100% !important;
+}

@@ -105,7 +105,12 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Images extensions</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control">
+                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                        <option value="PNG">PNG</option>
+                                        <option value="JPG">JPG</option>
+                                        <option value="JPEG">JPEG</option>
+                                        <option value="GIF">GIF</option>
+                                    </select>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -149,7 +154,12 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Video extensions</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control">
+                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                        <option value="AVI">AVI</option>
+                                        <option value="MP4">MP4</option>
+                                        <option value="Mov">Mov</option>
+                                        <option value="Mkv">Mkv</option>
+                                    </select>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -183,7 +193,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Music extensions</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control">
+                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                        <option value="mp3">mp3</option>
+                                        <option value="m4a">m4a</option>
+                                        <option value="mv3">mv3</option>
+                                    </select>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -217,7 +231,12 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label text-left">Docs extensions</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control">
+                                    <select class="extensions-multiple" name="states[]" multiple="multiple">
+                                        <option value="pdf">pdf</option>
+                                        <option value="ZIP">ZIP</option>
+                                        <option value="txt">txt</option>
+                                        <option value="docx">docx</option>
+                                    </select>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -439,11 +458,14 @@
     </div>
 </div>
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'select2.min.css') !!}
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'select2.min.js') !!}
 <script>
     $('.icpp').iconpicker();
     $( document ).ready(function() {
+        $('.extensions-multiple').select2();
         var checkClick = $('.checkClick');
         var checkBlock = $('.checkBlock');
         checkBlock.hide();

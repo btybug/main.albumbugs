@@ -1,5 +1,9 @@
 @import "form-controls";
 
+[data-field]{
+    cursor: move;
+}
+
 [data-field]:hover {
     outline: 2px dashed #e2e2e2;
 }
@@ -11,7 +15,6 @@
 .form-builder-area:empty {
     position: relative;
     height: 100px;
-    margin: 0 0 20px;
 }
 
 .form-builder-area:empty:after {

@@ -13,9 +13,21 @@
     margin-right: 5px;
   }
 
-  .bb-node-move{
-    cursor: move;
+  .bb-node-move.disabled{
+    opacity: 0.5;
   }
+
+}
+
+.ui-sortable-helper{
+  outline: 2px solid #4584ea!important;
+  background: #fff;
+}
+
+.ui-sortable-placeholder {
+  visibility: visible!important;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQIW2NgQAXGZHAAGioAza6+Hk0AAAAASUVORK5CYII=);
 }
 
 .bb-node-active-title{
@@ -37,6 +49,7 @@
   cursor: e-resize;
   right: -7px;
   top: calc(50% - 25px);
+  visibility: hidden;
 
   &:before {
     position: absolute;
@@ -70,12 +83,34 @@
   background: url(../../images/grid_overlay.png) repeat-y;
   opacity: 0.3;
   background-size: contain;
+  display: block;
 }
 
 .form-area-active {
   background: #fffacd;
+  position: relative;
+
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(255, 250, 205, 0.63);
+    display: block;
+    z-index: 1;
+  }
 }
 
 .form-area-hover {
   background: #deffcd;
+
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(222, 255, 205, 0.63);
+    display: block;
+    z-index: 1;
+  }
 }

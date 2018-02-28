@@ -48,12 +48,43 @@ $(document).ready(function () {
                     $this.removeClass("disabled");
                 }
             });
+        },
+        // Toggle resizing mode
+        toggleResize: function ($this) {
+            if($this.hasClass("disabled")){
+                $this.removeClass("disabled");
+                $('.bb-column-resize-handler').css("visibility", "visible");
+                $('.bb-node-action-size').css("pointer-events", "all");
+            }
+            else {
+                $this.addClass("disabled");
+                $('.bb-column-resize-handler').css("visibility", "hidden");
+                $('.bb-node-action-size').css("pointer-events", "none");
+            }
+        },
+        // Delete active field
+        deleteActiveField: function ($this) {
+            $('[data-active-field]').fadeOut(function () {
+                var fieldID = $(this).attr("data-id");
+                $('.form-element-item[data-id=' + fieldID + ']').show();
+                $(this).remove();
+                hideActiveNode();
+            });
         }
     };
 
     // Fields controls
     var fieldsControl = {
         activateField: function ($this) {
+            // Reset resizable
+            $('.bb-node-move').addClass("disabled");
+            $('.bb-node-action-size').css("pointer-events", "none");
+
+            // Mark as active
+            $('[data-active-field]').removeAttr("data-active-field");
+            $this.attr("data-active-field", true);
+
+            // Draw active helpers
             drawActiveHelpers($this);
         }
     };
@@ -119,6 +150,18 @@ $(document).ready(function () {
         });
     }
 
+    function hideActiveNode() {
+        $('.bb-node-action-menu, .bb-node-active-title').css({
+            left: -2000
+        });
+
+        $('.bb-node-action-size').css({
+            width: 0,
+            height: 0,
+            left: -2000
+        });
+    }
+
     // Droppable fields area
     function activateDroppable() {
         $('body').find('.form-builder-area').droppable({
@@ -134,13 +177,21 @@ $(document).ready(function () {
                     target = $('.form-builder-area');
 
                 template.attr('data-field', true);
+                template.attr('data-id', $(ui.draggable).attr("data-id"));
 
                 $(ui.draggable).hide();
                 target.append(template);
             }
         }).sortable({
-            update: function (event, ui) {
-
+            helper: "clone",
+            start: function (event, ui) {
+                var $this = $(ui.item);
+                $('.ui-sortable-placeholder').css("height", $this.height());
+                hideActiveNode();
+            },
+            stop: function (event, ui) {
+                var $this = $(ui.item);
+                fieldsControl.activateField($this);
             }
         });
     }

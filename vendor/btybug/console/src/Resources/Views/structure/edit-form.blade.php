@@ -376,9 +376,9 @@
 @section( 'Footer' )
     <div class="bb-node-action-size"></div>
     <div class="bb-node-action-menu">
-        <i class="fa fa-arrows bb-node-move"></i>
-        <i class="fa fa-trash bb-node-delete"></i>
-        <i class="fa fa-paint-brush bb-node-edit"></i>
+        <i class="fa fa-arrows-h bb-node-move" bb-click="toggleResize"></i>
+        <i class="fa fa-trash bb-node-delete" bb-click="deleteActiveField"></i>
+        <i class="fa fa-paint-brush bb-node-edit" bb-click="openStudioWindow"></i>
     </div>
 @stop
 

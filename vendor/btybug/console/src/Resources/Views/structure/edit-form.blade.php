@@ -108,33 +108,47 @@
                             </div>
                         </div>
                         <div class="form-group m-l-0 m-r-0">
-                            <label for="success_message" class="col-sm-4 ">Permission</label>
+                            <label for="success_message" class="col-sm-4 ">Create Permission</label>
                             <div class="col-sm-8">
-                               <label>allow guest
-                                {!! Form::radio('allow',0,true,['class' => 'allow_permission']) !!}
-                               </label>
-                                <label>Logged In
-                                {!! Form::radio('allow',1,null,['class' => 'allow_permission']) !!}
-                               </label>
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0 hide allow-logged">
-                            <label for="success_message" class="col-sm-4 ">Allow</label>
-                            <div class="col-sm-8">
-                                <label>All
-                                    {!! Form::radio('allow_logged',1,true,['class' => 'allow_logged_radio']) !!}
+                                <label>allow guest
+                                    {!! Form::checkbox('create_allow',0,null,['class' => 'allow_create_permission']) !!}
                                 </label>
-                                <label>Customize
-                                    {!! Form::radio('allow_logged',0,null,['class' => 'allow_logged_radio']) !!}
+                                <label>allow Logged In
+                                    {!! Form::checkbox('create_allow',1,null,['class' => 'allow_create_permission']) !!}
+                                </label>
+                                <label>allow Admins
+                                    {!! Form::checkbox('create_allow',2,null,['class' => 'allow_create_permission allow_create_admins']) !!}
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group m-l-0 m-r-0 hide roles-box">
+                        <div class="form-group m-l-0 m-r-0 hide create-roles-box">
                             <label for="success_message" class="col-sm-4 ">Select Roles</label>
                             <div class="col-sm-8">
-                                {!! Form::select('allowed_roles',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
+                                {!! Form::select('create_allowed_roles',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
                             </div>
                         </div>
+
+                        <div class="form-group m-l-0 m-r-0">
+                            <label for="success_message" class="col-sm-4 ">Edit Permission</label>
+                            <div class="col-sm-8">
+                                <label>allow guest
+                                    {!! Form::checkbox('edit_allow',0,true,[]) !!}
+                                </label>
+                                <label>allow Logged In
+                                    {!! Form::checkbox('edit_allow',1,null,[]) !!}
+                                </label>
+                                <label>allow Admins
+                                    {!! Form::checkbox('edit_allow',2,null,['class' => 'allow_edit_permission']) !!}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group m-l-0 m-r-0 hide edit-roles-box">
+                            <label for="success_message" class="col-sm-4 ">Select Roles</label>
+                            <div class="col-sm-8">
+                                {!! Form::select('edit_allowed_roles',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
+                            </div>
+                        </div>
+
                         <div class="form-group m-l-0 m-r-0">
                             <label for="" class="col-sm-4">Is Ajax</label>
                             <div class="col-sm-8">

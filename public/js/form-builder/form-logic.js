@@ -74,4 +74,26 @@ $(document).ready(function () {
         // $(ui).hide();
         target.append(template);
     });
+
+    $('body').on('change','.allow_permission',function() {
+        if (this.value == 1) {
+            $('.allow-logged').removeClass('hide');
+            $('.allow-logged').addClass('show');
+        }else{
+            $('.allow-logged').removeClass('show');
+            $('.allow-logged').addClass('hide');
+            $('.roles-box').removeClass('show');
+            $('.roles-box').addClass('hide');
+        }
+    });
+
+    $('body').on('change','.allow_logged_radio',function() {
+        if (this.value == 0) {
+            $('.roles-box').removeClass('hide');
+            $('.roles-box').addClass('show');
+        }else{
+            $('.roles-box').removeClass('show');
+            $('.roles-box').addClass('hide');
+        }
+    });
 });

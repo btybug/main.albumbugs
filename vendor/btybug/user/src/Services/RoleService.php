@@ -41,4 +41,10 @@ class RoleService extends GeneralService
         $data = $this->roleRepository->model()->where('access', $access)->pluck('slug', 'slug')->toArray();
         return implode($seperator, $data);
     }
+
+    public static function getList()
+    {
+        $repo = new RoleRepository();
+        return $repo->model()->pluck('name', 'id')->toArray();
+    }
 }

@@ -20,3 +20,6 @@
 .bty-settings-panel .select2-container{
     width: 100% !important;
 }
+.custom_hidden{
+    display:none;
+}

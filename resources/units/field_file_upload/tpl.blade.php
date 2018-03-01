@@ -16,68 +16,78 @@
     </div>
 </div>
 
-<input id="input-id" type="file" class="file" data-preview-file-type="text">
 
 
-<textarea id="star_setting" class="hidden">{{isset($settings["star_setting"]) ? json_encode($settings["star_setting"],true) : ''}}</textarea>
+
+<textarea id="upload_setting" class="hidden">{{isset($settings["upload_setting"]) ? json_encode($settings["upload_setting"],true) : ''}}</textarea>
 @if(isset($settings['manual_item']))
     <div class="form-group">
-        <div>
-            <div class="input-group {{isset($settings["custom_color"]) ? $settings["custom_color"] : ''}}">
-                <div class="">
-                    <label for="input-1" class="control-label"></label>
-                    <input id="input-1" name="star" value="" class="rating-loading">
-                </div>
-            </div>
-        </div>
+        <input id="input-id" type="file" class="file" multiple>
     </div>
 @endif
 {!! BBscript($_this->path.DS.'js/fileinput.js') !!}
 <script>
-    $("#input-id").fileinput({'showUpload':false, 'previewFileType':'any'});
 
     window.frameElement.contentWindow.targetFunction(1);
 
     function targetFunction(is_called){
         if(is_called) {
-            var hidden_data = $('#star_setting').val();
+            var hidden_data = $('#upload_setting').val();
             if(hidden_data){
                 hidden_data = JSON.parse(hidden_data);
             }
             var data = {};
             data.manual_item = {{isset($settings["manual_item"]) ? 1 : 0}};
-            data.star_setting = hidden_data;
+            data.upload_setting = hidden_data;
             getStars(data);
         }
     }
     function getStars(data){
-        if(typeof window.onload == 'function'){
+        console.log(data.upload_setting);
+        var obj = $("#input-id");
+        if(typeof window.onload === 'function'){
             if (data.manual_item) {
-                data.star_setting.showClear = data.star_setting.showClear && data.star_setting.showClear == "on" ? true : false;
-                data.star_setting.showCaption = data.star_setting.showCaption && data.star_setting.showCaption == "on" ? true : false;
-                data.star_setting.filledStar = data.star_setting.filledStar ? '<i class="fa '+data.star_setting.filledStar+'"></i>' : '<i class="glyphicon glyphicon-star"></i>';
-                data.star_setting.emptyStar = data.star_setting.emptyStar ? '<i class="fa '+data.star_setting.emptyStar+'"></i>' : '<i class="glyphicon glyphicon-star-empty"></i>';
-                $("#input-1").rating('refresh', data.star_setting);
+                data.upload_setting.fileActionSettings.showRemove = data.upload_setting.fileActionSettings.showRemove && data.upload_setting.fileActionSettings.showRemove == 'true' ? true : false;
+                data.upload_setting.fileActionSettings.removeClass = data.upload_setting.fileActionSettings.removeClass ? data.upload_setting.fileActionSettings.removeClass : 'btn btn-kv btn-default btn-outline-secondary';
+                data.upload_setting.fileActionSettings.removeIcon = data.upload_setting.fileActionSettings.removeIcon ? '<i class="fa '+data.upload_setting.fileActionSettings.removeIcon+'"></i>' : '<i class="glyphicon glyphicon-trash"></i>';
+                data.upload_setting.fileActionSettings.removeTitle = data.upload_setting.fileActionSettings.removeTitle ? data.upload_setting.fileActionSettings.removeTitle : 'Remove file';
+                data.upload_setting.fileActionSettings.showUpload = data.upload_setting.fileActionSettings.showUpload && data.upload_setting.fileActionSettings.showUpload == 'true' ? true : false;
+                data.upload_setting.fileActionSettings.uploadClass = data.upload_setting.fileActionSettings.uploadClass ? data.upload_setting.fileActionSettings.uploadClass : 'btn btn-kv btn-default btn-outline-secondary';
+                data.upload_setting.fileActionSettings.uploadIcon = data.upload_setting.fileActionSettings.uploadIcon ? '<i class="fa '+data.upload_setting.fileActionSettings.uploadIcon+'"></i>' : '<i class="glyphicon glyphicon-upload"></i>';
+                data.upload_setting.fileActionSettings.uploadTitle = data.upload_setting.fileActionSettings.uploadTitle ? data.upload_setting.fileActionSettings.uploadTitle : 'Upload file';
+                data.upload_setting.fileActionSettings.showDownload = data.upload_setting.fileActionSettings.showDownload && data.upload_setting.fileActionSettings.showDownload == 'true' ? true : false;
+                data.upload_setting.showBrowse = data.upload_setting.showBrowse && data.upload_setting.showBrowse == 'true' ? true : false;
+                data.upload_setting.showCancel = data.upload_setting.showCancel && data.upload_setting.showCancel == 'true' ? true : false;
+                data.upload_setting.showCaption = data.upload_setting.showCaption && data.upload_setting.showCaption == 'true' ? true : false;
+                data.upload_setting.showPreview = data.upload_setting.showPreview && data.upload_setting.showPreview == 'true' ? true : false;
+                data.upload_setting.showRemove = data.upload_setting.showRemove && data.upload_setting.showRemove == 'true' ? true : false;
+                data.upload_setting.showUpload = data.upload_setting.showUpload && data.upload_setting.showUpload == 'true' ? true : false;
+
+                obj.fileinput(data.upload_setting);
             }
         }else{
             window.onload = function(){
-                if($("#input-1").length) {
-                    if(!data.star_setting){
-                        return $("#input-1").rating({
-                            showClear:false,
-                            showCaption:false
-                        });
+                if(obj.length) {
+                    if(!data.upload_setting){
+                        return obj.fileinput({'showUpload':false, 'previewFileType':'any'});
                     }
-                   data.star_setting.step = data.star_setting.step ? data.star_setting.step : 0.5;
-                   data.star_setting.stars = data.star_setting.stars ? data.star_setting.stars : 5;
-                   data.star_setting.disabled = data.star_setting.disabled && data.star_setting.disabled == "on" ? true : false;
-                   data.star_setting.animate = data.star_setting.animate && data.star_setting.animate == "on" ? true : false;
-                   data.star_setting.showClear = data.star_setting.showClear && data.star_setting.showClear == "on" ? true : false;
-                   data.star_setting.showCaption = data.star_setting.showCaption && data.star_setting.showCaption == "on" ? true : false;
-                   data.star_setting.filledStar = data.star_setting.filledStar ? '<i class="fa '+data.star_setting.filledStar+'"></i>' : '<i class="glyphicon glyphicon-star"></i>';
-                   data.star_setting.emptyStar = data.star_setting.emptyStar ? '<i class="fa '+data.star_setting.emptyStar+'"></i>' : '<i class="glyphicon glyphicon-star-empty"></i>';
+                    data.upload_setting.fileActionSettings.showRemove = data.upload_setting.fileActionSettings.showRemove && data.upload_setting.fileActionSettings.showRemove == 'true' ? true : false;
+                    data.upload_setting.fileActionSettings.removeClass = data.upload_setting.fileActionSettings.removeClass ? data.upload_setting.fileActionSettings.removeClass : 'btn btn-kv btn-default btn-outline-secondary';
+                    data.upload_setting.fileActionSettings.removeIcon = data.upload_setting.fileActionSettings.removeIcon ? '<i class="fa '+data.upload_setting.fileActionSettings.removeIcon+'"></i>' : '<i class="glyphicon glyphicon-trash"></i>';
+                    data.upload_setting.fileActionSettings.removeTitle = data.upload_setting.fileActionSettings.removeTitle ? data.upload_setting.fileActionSettings.removeTitle : 'Remove file';
+                    data.upload_setting.fileActionSettings.showUpload = data.upload_setting.fileActionSettings.showUpload && data.upload_setting.fileActionSettings.showUpload == 'true' ? true : false;
+                    data.upload_setting.fileActionSettings.uploadClass = data.upload_setting.fileActionSettings.uploadClass ? data.upload_setting.fileActionSettings.uploadClass : 'btn btn-kv btn-default btn-outline-secondary';
+                    data.upload_setting.fileActionSettings.uploadIcon = data.upload_setting.fileActionSettings.uploadIcon ? '<i class="fa '+data.upload_setting.fileActionSettings.uploadIcon+'"></i>' : '<i class="glyphicon glyphicon-upload"></i>';
+                    data.upload_setting.fileActionSettings.uploadTitle = data.upload_setting.fileActionSettings.uploadTitle ? data.upload_setting.fileActionSettings.uploadTitle : 'Upload file';
+                    data.upload_setting.fileActionSettings.showDownload = data.upload_setting.fileActionSettings.showDownload && data.upload_setting.fileActionSettings.showDownload == 'true' ? true : false;
+                    data.upload_setting.showBrowse = data.upload_setting.showBrowse && data.upload_setting.showBrowse == 'true' ? true : false;
+                    data.upload_setting.showCancel = data.upload_setting.showCancel && data.upload_setting.showCancel == 'true' ? true : false;
+                    data.upload_setting.showCaption = data.upload_setting.showCaption && data.upload_setting.showCaption == 'true' ? true : false;
+                    data.upload_setting.showPreview = data.upload_setting.showPreview && data.upload_setting.showPreview == 'true' ? true : false;
+                    data.upload_setting.showRemove = data.upload_setting.showRemove && data.upload_setting.showRemove == 'true' ? true : false;
+                    data.upload_setting.showUpload = data.upload_setting.showUpload && data.upload_setting.showUpload == 'true' ? true : false;
 
-                   return $("#input-1").rating(data.star_setting);
+                    return obj.fileinput(data.upload_setting);
                 }
             }
         }

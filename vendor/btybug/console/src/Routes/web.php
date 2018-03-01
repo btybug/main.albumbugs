@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('console::index');
 },true);
+Route::get('/test', function () {
+    return view('console::test');
+},true);
 
 Route::get('/optimisation', function () {
     Artisan::call('plugin:optimaze');

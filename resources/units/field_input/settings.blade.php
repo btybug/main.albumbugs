@@ -21,6 +21,13 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="valid">Validation</label>
+                        <div class="col-md-4">
+                            <input id="valid" name="validation" type="text" placeholder="placeholder" class="form-control input-md">
+
+                        </div>
+                    </div>
                 </div>
 
             </div>

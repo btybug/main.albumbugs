@@ -744,7 +744,7 @@ function BBcustomize($type, $key, $tag, $text, $structure, $array = [])
     return $html;
 }
 
-function BBbutton2($type, $key, $tag, $text, $array = [])
+function BBbutton2($type, $key, $tag, $text, $array = [],$getData=[])
 {
     $atributes = ' ';
     $value = '';
@@ -777,7 +777,7 @@ function BBbutton2($type, $key, $tag, $text, $array = [])
         $array = 'data-array="true"';
     }
     $data_key = str_replace('[]', '', $key);
-    $html = View::make('btybug::bbbutton', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName'))->render();
+    $html = View::make('btybug::bbbutton', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName','getData'))->render();
     return $html;
 }
 

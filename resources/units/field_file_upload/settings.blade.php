@@ -323,12 +323,10 @@ $data_for_select = [
                 <div class="content bty-settings-panel">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Browse Button</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="hidden" name="upload_setting[showBrowse]" value="false">
-                                    <input type="checkbox" name="upload_setting[showBrowse]" value="true" {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"]=='true' ? 'checked' : ''}}>
-                                </div>
+                            <div class="customcheck">
+                                <input type="hidden" name="upload_setting[showBrowse]" value="false">
+                                <input type="checkbox" name="upload_setting[showBrowse]" id="browseButton" value="true" {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"]=='true' ? 'checked' : ''}}>
+                                <label for="browseButton">Browse Button</label>
                             </div>
                         </div>
                        {{-- <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"]=='true' ? '' : 'custom_hidden'}}">

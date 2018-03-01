@@ -17,30 +17,28 @@
                                 <div>
                                     <div class="row rows">
                                         <div class="col-md-12 ">
-
                                             <div class="col-md-2">
                                                 <i class="fa fa-universal-access" aria-hidden="true"></i><span
                                                         class="labls">Page access</span>
                                                 <div class="radio">
                                                     <label for="radios-0">
-                                                        {!! Form::radio('page_access',0,true,['class' => 'access-radio']) !!}
                                                         Public
                                                     </label>
+                                                    {!! Form::radio('page_access',0,true,['class' => 'access-radio' ,'id' =>'radios-0']) !!}
                                                 </div>
-                                                {{--<div class="radio">--}}
-                                                    {{--<label for="radios-1">--}}
-                                                        {{--{!! Form::radio('page_access',1,null,['class' => 'access-radio']) !!}--}}
-                                                        {{--Roles--}}
-                                                    {{--</label>--}}
-                                                {{--</div>--}}
                                                 <div class="radio">
                                                     <label for="radios-1">
-                                                        {!! Form::radio('page_access',2,null,['class' => 'access-radio']) !!}
-                                                        Loged in
+                                                        Memberships
                                                     </label>
+                                                    {!! Form::radio('page_access',1,null,['class' => 'access-radio','id' =>'radios-1']) !!}
+                                                </div>
+                                                <div class="col-md-12 memberships-box hide">
+                                                    <label>
+                                                        Select Memberships
+                                                    </label>
+                                                    {!! Form::select('memberships',[],null,['class' => 'form-control']) !!}
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -247,9 +245,9 @@
         $(document).ready(function () {
             $(".access-radio").click(function () {
                 if ($(this).val() == 1) {
-                    $(".roles-box").removeClass("hide").addClass("show");
+                    $(".memberships-box").removeClass("hide").addClass("show");
                 } else {
-                    $(".roles-box").removeClass("show").addClass("hide");
+                    $(".memberships-box").removeClass("show").addClass("hide");
                 }
             });
 

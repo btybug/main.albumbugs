@@ -15,15 +15,4 @@ class Membership extends Model
 {
     protected $table = 'memberships';
     protected $guarded = ['id'];
-
-    public function users()
-    {
-        return $this->hasMany('App\Modules\Users\User', 'membership');
-    }
-
-    public function permissions()
-    {
-        return $this->belongsToMany('App\Modules\Users\Models\Permissions', 'membership_permission', 'membership_id', 'permission_id');
-    }
-
 }

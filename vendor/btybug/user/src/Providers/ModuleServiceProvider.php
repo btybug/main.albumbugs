@@ -52,8 +52,14 @@ class ModuleServiceProvider extends ServiceProvider
                 ]
             ], 'role_membership' => [
                 [
-                    'title' => 'Roles',
+                    'title' => 'Admin Roles',
                     'url' => '/admin/users/roles',
+                ],[
+                    'title' => 'Memberships',
+                    'url' => '/admin/users/memberships',
+                ],[
+                    'title' => 'Special access',
+                    'url' => '/admin/users/special-access',
                 ],
                 [
                     'title' => 'Statuses',

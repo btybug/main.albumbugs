@@ -109,3 +109,14 @@
 .bty-panel-collapse .icon .fa{
     transition: transform 0.6s ease;
 }
+.customcheck.lab-right label::before, .customcheck.lab-right input[type="checkbox"]{
+    left: auto;
+    right: -40px;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.bty-settings-panel>.form-group{
+    margin: 0;
+    padding: 15px 0;
+}

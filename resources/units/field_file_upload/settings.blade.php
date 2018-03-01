@@ -34,16 +34,18 @@ $data_for_select = [
             </div>
             <div id="inputsetting" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
-                    <div class="form-group col-md-12">
-                        <div class="col-md-2">
-                            <label>Field style</label>
-                        </div>
-                        <div class="col-md-9">
-                            <select name="radio_inp" id="" class="form-control">
-                                <option value="">Select rating</option>
-                                <option value="">Style 1</option>
-                                <option value="">Style 2</option>
-                            </select>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <label>Field style</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select name="radio_inp" id="" class="form-control">
+                                    <option value="">Select rating</option>
+                                    <option value="">Style 1</option>
+                                    <option value="">Style 2</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -88,6 +90,7 @@ $data_for_select = [
                                 {!! Form::textarea('validation_message',null,['class' => 'form-control','id'=>'validation_message']) !!}
                             </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -106,37 +109,36 @@ $data_for_select = [
             <div id="uploadsettings" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
                     <div class="form-group">
-                        <div class="col-md-6">
-                            <label class="col-sm-3 control-label text-left">Show Upload</label>
-                            <div class="col-sm-8">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="manual_item">
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="checkbox" id="allowshowup" name="manual_item">
+                                <label for="allowshowup">Show Upload</label>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Allow Images</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="upload_setting[allowedPreviewTypes][]" value="image" class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("image", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="checkbox" id="allowImg" name="upload_setting[allowedPreviewTypes][]"
+                                       value="image"
+                                       class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("image", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
+                                <label for="allowImg">Allow Images</label>
                             </div>
                         </div>
-                        <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("image", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
+                        <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("image", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Images extensions</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4 control-label text-right">Images extensions</label>
+                                <div class="col-sm-8">
                                     {!! Form::select("upload_setting[allowedFileExtensions][]",['png' => 'PNG','jpg' => 'JPG','jpeg' => 'JPEG','gif' => 'GIF'],isset($settings["upload_setting"]["allowedFileExtensions"]) ? $settings["upload_setting"]["allowedFileExtensions"] : null,["class" => "extensions-multiple","multiple" => "multiple"]) !!}
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Image Size</label>
+                                <label class="col-sm-4 control-label text-right">Image Size</label>
                                 <div class="col-sm-4">
-                                    <input type="number" name="upload_setting[previewSettings][image][size]" class="form-control">
+                                    <input type="number" name="upload_setting[previewSettings][image][size]"
+                                           class="form-control">
                                 </div>
                                 <div class="col-sm-1">
                                     <strong>MB</strong>
@@ -144,16 +146,16 @@ $data_for_select = [
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Unlimitted upload</label>
-                                <div class="col-sm-2">
-                                    <div class="input-checkbox-5-bty">
+                                <div class="col-sm-4">
+                                    <div class="customcheck lab-right">
                                         <input type="checkbox" id="unlimupload">
-                                        <label for="unlimupload"></label>
+                                        <label for="unlimupload">Unlimitted upload</label>
                                     </div>
                                 </div>
-                                <label class="col-sm-3 control-label text-right">No of images</label>
+                                <label class="col-sm-4 control-label text-right">No of images</label>
                                 <div class="col-sm-4">
-                                    <input type="number" name="upload_setting[previewSettings][image][maxFileCount]" class="form-control">
+                                    <input type="number" name="upload_setting[previewSettings][image][maxFileCount]"
+                                           class="form-control">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -161,32 +163,32 @@ $data_for_select = [
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Allow video</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="upload_setting[allowedPreviewTypes][]" value="video" class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("video", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="checkbox" id="allowVideo" name="upload_setting[allowedPreviewTypes][]"
+                                       value="video"
+                                       class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("video", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
+                                <label for="allowVideo">Allow video</label>
                             </div>
                         </div>
-                        <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("video", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
+                        <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("video", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Video extensions</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4 control-label text-right">Video extensions</label>
+                                <div class="col-sm-8">
                                     {!! Form::select("upload_setting[allowedFileExtensions][]",['avi' => 'AVI','mp4' => 'MP4','mov' => 'MOV','mpa' => 'MPA'],isset($settings["upload_setting"]["allowedFileExtensions"]) ? $settings["upload_setting"]["allowedFileExtensions"] : null,["class" => "extensions-multiple","multiple" => "multiple"]) !!}
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Video Size</label>
-                                <div class="col-sm-3">
+                                <label class="col-sm-4 control-label text-right">Video Size</label>
+                                <div class="col-sm-2">
                                     <input type="number" class="form-control">
                                 </div>
                                 <div class="col-sm-1">
                                     <strong>MB</strong>
                                 </div>
-                                <label class="col-sm-2 control-label text-right">No of video</label>
-                                <div class="col-sm-3">
+                                <label class="col-sm-3 control-label text-right">No of video</label>
+                                <div class="col-sm-2">
                                     <input type="number" class="form-control">
                                 </div>
                                 <div class="clearfix"></div>
@@ -195,32 +197,32 @@ $data_for_select = [
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Allow music</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="upload_setting[allowedPreviewTypes][]" value="audio" class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("audio", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="checkbox" id="allowMusic" name="upload_setting[allowedPreviewTypes][]"
+                                       value="audio"
+                                       class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("audio", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
+                                <label for="allowMusic">Allow music</label>
                             </div>
                         </div>
-                        <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("audio", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
+                        <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("audio", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Music extensions</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4 control-label text-right">Music extensions</label>
+                                <div class="col-sm-8">
                                     {!! Form::select("upload_setting[allowedFileExtensions][]",['mp3' => 'MP3','mod' => 'MOD','mpga' => 'MPGA'],isset($settings["upload_setting"]["allowedFileExtensions"]) ? $settings["upload_setting"]["allowedFileExtensions"] : null,["class" => "extensions-multiple","multiple" => "multiple"]) !!}
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Music Size</label>
-                                <div class="col-sm-3">
+                                <label class="col-sm-4 control-label text-right">Music Size</label>
+                                <div class="col-sm-2">
                                     <input type="number" class="form-control">
                                 </div>
                                 <div class="col-sm-1">
                                     <strong>MB</strong>
                                 </div>
-                                <label class="col-sm-2 control-label text-right">No of music</label>
-                                <div class="col-sm-3">
+                                <label class="col-sm-3 control-label text-right">No of music</label>
+                                <div class="col-sm-2">
                                     <input type="number" class="form-control">
                                 </div>
                                 <div class="clearfix"></div>
@@ -229,32 +231,32 @@ $data_for_select = [
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Allow docs</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="checkbox" name="upload_setting[allowedPreviewTypes][]" value="text" class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("text", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="checkbox" id="allowDocs" name="upload_setting[allowedPreviewTypes][]"
+                                       value="text"
+                                       class="checkClick" {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("text", $settings["upload_setting"]["allowedPreviewTypes"]) ? 'checked' : ''}}>
+                                <label for="allowDocs">Allow docs</label>
                             </div>
                         </div>
-                        <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("text", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
+                        <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["allowedPreviewTypes"]) && in_array("text", $settings["upload_setting"]["allowedPreviewTypes"]) ? '' : 'custom_hidden'}}">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Docs extensions</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4 control-label text-right">Docs extensions</label>
+                                <div class="col-sm-8">
                                     {!! Form::select("upload_setting[allowedFileExtensions][]",['pdf' => 'PDF','zip' => 'ZIP','txt' => 'TEXT','docx' => 'DOCX'],isset($settings["upload_setting"]["allowedFileExtensions"]) ? $settings["upload_setting"]["allowedFileExtensions"] : null,["class" => "extensions-multiple","multiple" => "multiple"]) !!}
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label text-left">Docs Size</label>
-                                <div class="col-sm-3">
+                                <label class="col-sm-4 control-label text-right">Docs Size</label>
+                                <div class="col-sm-2">
                                     <input type="number" class="form-control">
                                 </div>
                                 <div class="col-sm-1">
                                     <strong>MB</strong>
                                 </div>
-                                <label class="col-sm-2 control-label text-right">No of docs</label>
-                                <div class="col-sm-3">
+                                <label class="col-sm-3 control-label text-right">No of docs</label>
+                                <div class="col-sm-2">
                                     <input type="number" class="form-control">
                                 </div>
                                 <div class="clearfix"></div>
@@ -263,21 +265,24 @@ $data_for_select = [
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Allow Download</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-5-bty">
-                                    <input type="hidden" name="upload_setting[fileActionSettings][showDownload]" value="false">
-                                    <input type="checkbox" id="setdownload" name="upload_setting[fileActionSettings][showDownload]" value="true" {{isset($settings["upload_setting"]["fileActionSettings"]["showDownload"]) && $settings["upload_setting"]["fileActionSettings"]["showDownload"] == 'true' ? 'checked' : ''}}>
-                                    <label for="setdownload"></label>
-                                </div>
+                        <div class="col-md-3 col-md-offset-3 form-group text-right">
+                            <div class="customcheck lab-right">
+                                <input type="hidden" name="upload_setting[fileActionSettings][showDownload]"
+                                       value="false">
+                                <input type="checkbox" id="allowDownload"
+                                       name="upload_setting[fileActionSettings][showDownload]"
+                                       value="true" {{isset($settings["upload_setting"]["fileActionSettings"]["showDownload"]) && $settings["upload_setting"]["fileActionSettings"]["showDownload"] == 'true' ? 'checked' : ''}}>
+                                <label for="allowDownload">Allow Download</label>
                             </div>
+
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 col-md-offset-2">
                             <div class="form-group">
-                                <label class="col-sm-7 control-label text-left">Total maximum size to upload</label>
-                                <div class="col-sm-3">
-                                    <input type="number" min="0" max="1024" name="upload_setting[maxFileSize]" value="{{isset($settings["upload_setting"]["maxFileSize"]) ? $settings["upload_setting"]["maxFileSize"] : ''}}" class="form-control">
+                                <label class="col-sm-6 control-label text-right">Total maximum size to upload</label>
+                                <div class="col-sm-4">
+                                    <input type="number" min="0" max="1024" name="upload_setting[maxFileSize]"
+                                           value="{{isset($settings["upload_setting"]["maxFileSize"]) ? $settings["upload_setting"]["maxFileSize"] : ''}}"
+                                           class="form-control">
                                 </div>
                                 <div class="col-sm-2">
                                     <strong>MB</strong>
@@ -303,71 +308,75 @@ $data_for_select = [
             <div id="uploadbesic" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
                     <div class="form-group">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="customcheck">
                                 <input type="hidden" name="upload_setting[showBrowse]" value="false">
-                                <input type="checkbox" name="upload_setting[showBrowse]" id="browseButton" value="true" {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"] == 'true' ? 'checked' : ''}}>
+                                <input type="checkbox" name="upload_setting[showBrowse]" id="browseButton"
+                                       value="true" {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"] == 'true' ? 'checked' : ''}}>
                                 <label for="browseButton">Browse Button</label>
                             </div>
                         </div>
-                       {{-- <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"]=='true' ? '' : 'custom_hidden'}}">
-                            <div class="col-md-4">
-                                <label class="control-label text-left">Title</label>
-                                <div>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="control-label text-left">Select Icon</label>
-                                <div>
-                                    {!!Form::text('star_setting[filledStar]',isset($settings["star_setting"]["filledStar"])?$settings["star_setting"]["filledStar"]:null,['class' => 'form-control icpp','id'=>'tooltip-icon'])  !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="control-label text-left">Select Class</label>
-                                <div>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">Select class</option>
-                                        <option value="br-btn-bg-cl-black">black</option>
-                                        <option value="br-btn-bg-cl-grey">grey</option>
-                                        <option value="br-btn-bg-cl-skyblue">skyblue</option>
-                                        <option value="br-btn-bg-cl-darksalmon">darksalmon</option>
-                                        <option value="br-btn-bg-cl-deeppink">deeppink</option>
-                                        <option value="br-btn-bg-cl-fuchsia">fuchsia</option>
-                                        <option value="br-btn-bg-cl-brown">brown</option>
-                                        <option value="br-btn-bg-cl-red">red</option>
-                                        <option value="br-btn-bg-cl-cyan">cyan</option>
-                                        <option value="br-btn-bg-cl-lightcoral">lightcoral</option>
-                                        <option value="br-btn-bg-cl-darkorange">darkorange</option>
-                                        <option value="br-btn-bg-cl-forestgreen">forestgreen</option>
-                                        <option value="br-btn-bg-cl-yellow">yellow</option>
-                                        <option value="br-btn-bg-cl-crimson">crimson</option>
-                                        <option value="br-btn-bg-cl-deepskyblue">deepskyblue</option>
-                                        <option value="br-btn-bg-cl-darkblue">darkblue</option>
-                                        <option value="br-btn-bg-cl-peru">peru</option>
-                                        <option value="br-btn-bg-cl-orange">orange</option>
-                                    </select>
-                                </div>
-                            </div>
+                        {{-- <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["showBrowse"]) && $settings["upload_setting"]["showBrowse"]=='true' ? '' : 'custom_hidden'}}">
+                             <div class="col-md-4">
+                                 <label class="control-label text-left">Title</label>
+                                 <div>
+                                     <input type="text" class="form-control">
+                                 </div>
+                             </div>
+                             <div class="col-md-4">
+                                 <label class="control-label text-left">Select Icon</label>
+                                 <div>
+                                     {!!Form::text('star_setting[filledStar]',isset($settings["star_setting"]["filledStar"])?$settings["star_setting"]["filledStar"]:null,['class' => 'form-control icpp','id'=>'tooltip-icon'])  !!}
+                                 </div>
+                             </div>
+                             <div class="col-md-4">
+                                 <label class="control-label text-left">Select Class</label>
+                                 <div>
+                                     <select name="" id="" class="form-control">
+                                         <option value="">Select class</option>
+                                         <option value="br-btn-bg-cl-black">black</option>
+                                         <option value="br-btn-bg-cl-grey">grey</option>
+                                         <option value="br-btn-bg-cl-skyblue">skyblue</option>
+                                         <option value="br-btn-bg-cl-darksalmon">darksalmon</option>
+                                         <option value="br-btn-bg-cl-deeppink">deeppink</option>
+                                         <option value="br-btn-bg-cl-fuchsia">fuchsia</option>
+                                         <option value="br-btn-bg-cl-brown">brown</option>
+                                         <option value="br-btn-bg-cl-red">red</option>
+                                         <option value="br-btn-bg-cl-cyan">cyan</option>
+                                         <option value="br-btn-bg-cl-lightcoral">lightcoral</option>
+                                         <option value="br-btn-bg-cl-darkorange">darkorange</option>
+                                         <option value="br-btn-bg-cl-forestgreen">forestgreen</option>
+                                         <option value="br-btn-bg-cl-yellow">yellow</option>
+                                         <option value="br-btn-bg-cl-crimson">crimson</option>
+                                         <option value="br-btn-bg-cl-deepskyblue">deepskyblue</option>
+                                         <option value="br-btn-bg-cl-darkblue">darkblue</option>
+                                         <option value="br-btn-bg-cl-peru">peru</option>
+                                         <option value="br-btn-bg-cl-orange">orange</option>
+                                     </select>
+                                 </div>
+                             </div>
 
-                        </div>--}}
+                         </div>--}}
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Upload Button</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="hidden" name="upload_setting[fileActionSettings][showUpload]" value="false" class="checkClick">
-                                    <input type="checkbox" name="upload_setting[fileActionSettings][showUpload]" value="true" class="checkClick" {{isset($settings["upload_setting"]["fileActionSettings"]["showUpload"]) && $settings["upload_setting"]["fileActionSettings"]["showUpload"]=='true' ? 'checked' : ''}}>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="hidden" name="upload_setting[fileActionSettings][showUpload]" value="false"
+                                       class="checkClick">
+                                <input type="checkbox" name="upload_setting[fileActionSettings][showUpload]"
+                                       id="uploadButton" value="true"
+                                       class="checkClick" {{isset($settings["upload_setting"]["fileActionSettings"]["showUpload"]) && $settings["upload_setting"]["fileActionSettings"]["showUpload"]=='true' ? 'checked' : ''}}>
+                                <label for="uploadButton">Upload Button</label>
                             </div>
                         </div>
-                        <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["fileActionSettings"]["showUpload"]) && $settings["upload_setting"]["fileActionSettings"]["showUpload"]=='true' ? '' : 'custom_hidden'}}">
+                        <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["fileActionSettings"]["showUpload"]) && $settings["upload_setting"]["fileActionSettings"]["showUpload"]=='true' ? '' : 'custom_hidden'}}">
                             <div class="col-md-4">
                                 <label class="control-label text-left">Title</label>
                                 <div>
-                                    <input type="text" name="upload_setting[fileActionSettings][uploadTitle]" value="{{isset($settings['upload_setting']['fileActionSettings']['uploadTitle']) ? $settings['upload_setting']['fileActionSettings']['uploadTitle'] : ''}}" class="form-control">
+                                    <input type="text" name="upload_setting[fileActionSettings][uploadTitle]"
+                                           value="{{isset($settings['upload_setting']['fileActionSettings']['uploadTitle']) ? $settings['upload_setting']['fileActionSettings']['uploadTitle'] : ''}}"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -387,20 +396,23 @@ $data_for_select = [
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-sm-5 control-label text-left">Remove Button</label>
-                            <div class="col-sm-7">
-                                <div class="input-checkbox-3-bty">
-                                    <input type="hidden" name="upload_setting[fileActionSettings][showRemove]" value="false" class="checkClick">
-                                    <input type="checkbox" name="upload_setting[fileActionSettings][showRemove]" value="true" class="checkClick" {{isset($settings["upload_setting"]["fileActionSettings"]["showRemove"]) && $settings["upload_setting"]["fileActionSettings"]["showRemove"] == 'true' ? 'checked' : ''}}>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="customcheck">
+                                <input type="hidden" name="upload_setting[fileActionSettings][showRemove]" value="false"
+                                       class="checkClick">
+                                <input type="checkbox" name="upload_setting[fileActionSettings][showRemove]"
+                                       value="true" id="removeButton"
+                                       class="checkClick" {{isset($settings["upload_setting"]["fileActionSettings"]["showRemove"]) && $settings["upload_setting"]["fileActionSettings"]["showRemove"] == 'true' ? 'checked' : ''}}>
+                                <label for="removeButton">Remove Button</label>
                             </div>
                         </div>
-                        <div class="col-md-8 checkBlock {{isset($settings["upload_setting"]["fileActionSettings"]["showRemove"]) && $settings["upload_setting"]["fileActionSettings"]["showRemove"]=='true' ? '' : 'custom_hidden'}}">
+                        <div class="col-md-9 checkBlock {{isset($settings["upload_setting"]["fileActionSettings"]["showRemove"]) && $settings["upload_setting"]["fileActionSettings"]["showRemove"]=='true' ? '' : 'custom_hidden'}}">
                             <div class="col-md-4">
                                 <label class="control-label text-left">Title</label>
                                 <div>
-                                    <input type="text" class="form-control" name="upload_setting[fileActionSettings][removeTitle]" value="{{isset($settings['upload_setting']['fileActionSettings']['removeTitle']) ? $settings['upload_setting']['fileActionSettings']['removeTitle'] : ''}}">
+                                    <input type="text" class="form-control"
+                                           name="upload_setting[fileActionSettings][removeTitle]"
+                                           value="{{isset($settings['upload_setting']['fileActionSettings']['removeTitle']) ? $settings['upload_setting']['fileActionSettings']['removeTitle'] : ''}}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -421,56 +433,47 @@ $data_for_select = [
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-sm-8 control-label text-left">Show Caption</label>
-                            <div class="col-sm-3">
-                                <div class="input-checkbox-5-bty">
-                                    <input type="hidden" name="upload_setting[showCaption]" value="false">
-                                    <input type="checkbox" id="showcaption" value="true" name="upload_setting[showCaption]" {{isset($settings['upload_setting']['showCaption']) && $settings['upload_setting']['showCaption'] == 'true' ? 'checked' : ''}}>
-                                    <label for="showcaption"></label>
-                                </div>
+                            <div class="customcheck">
+                                <input type="hidden" name="upload_setting[showCaption]" value="false">
+                                <input type="checkbox" id="showcaption" value="true"
+                                       name="upload_setting[showCaption]" {{isset($settings['upload_setting']['showCaption']) && $settings['upload_setting']['showCaption'] == 'true' ? 'checked' : ''}}>
+                                <label for="showcaption">Show Caption</label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="customcheck">
+                                <input type="hidden" name="upload_setting[showCancel]" value="false">
+                                <input type="checkbox" id="showCancel" name="upload_setting[showCancel]"
+                                       value="true" {{isset($settings['upload_setting']['showCancel']) && $settings['upload_setting']['showCancel'] == 'true' ? 'checked' : ''}}>
+                                <label for="showCancel">Show Cancel</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label class="col-sm-8 control-label text-left">Show Cancel</label>
-                            <div class="col-sm-3">
-                                <div class="input-checkbox-5-bty">
-                                    <input type="hidden" name="upload_setting[showCancel]" value="false">
-                                    <input type="checkbox" id="showCancel" name="upload_setting[showCancel]" value="true" {{isset($settings['upload_setting']['showCancel']) && $settings['upload_setting']['showCancel'] == 'true' ? 'checked' : ''}}>
-                                    <label for="showCancel"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-sm-8 control-label text-left">Show Preview</label>
-                            <div class="col-sm-3">
-                                <div class="input-checkbox-5-bty">
-                                    <input type="hidden" value="false" name="upload_setting[showPreview]">
-                                    <input type="checkbox" id="showpreview" value="true" name="upload_setting[showPreview]" {{isset($settings['upload_setting']['showPreview']) && $settings['upload_setting']['showPreview'] == 'true' ? 'checked' : ''}}>
-                                    <label for="showpreview"></label>
-                                </div>
+                            <div class="customcheck">
+                                <input type="hidden" value="false" name="upload_setting[showPreview]">
+                                <input type="checkbox" id="showpreview" value="true"
+                                       name="upload_setting[showPreview]" {{isset($settings['upload_setting']['showPreview']) && $settings['upload_setting']['showPreview'] == 'true' ? 'checked' : ''}}>
+                                <label for="showpreview">Show Preview</label>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-sm-8 control-label text-left">Show Upload</label>
-                            <div class="col-sm-3">
-                                <div class="input-checkbox-5-bty">
-                                    <input type="hidden" value="false" name="upload_setting[showUpload]">
-                                    <input type="checkbox" id="showupload" value="true" name="upload_setting[showUpload]" {{isset($settings['upload_setting']['showUpload']) && $settings['upload_setting']['showUpload'] == 'true' ? 'checked' : ''}}>
-                                    <label for="showupload"></label>
-                                </div>
+                            <div class="customcheck">
+                                <input type="hidden" value="false" name="upload_setting[showUpload]">
+                                <input type="checkbox" id="showupload" value="true"
+                                       name="upload_setting[showUpload]" {{isset($settings['upload_setting']['showUpload']) && $settings['upload_setting']['showUpload'] == 'true' ? 'checked' : ''}}>
+                                <label for="showupload">Show Upload</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label class="col-sm-8 control-label text-left">Show Remove</label>
-                            <div class="col-sm-3">
-                                <div class="input-checkbox-5-bty">
-                                    <input type="hidden" value="false" name="upload_setting[showRemove]">
-                                    <input type="checkbox" id="showremove" value="true" name="upload_setting[showRemove]" {{isset($settings['upload_setting']['showRemove']) && $settings['upload_setting']['showRemove'] == 'true' ? 'checked' : ''}}>
-                                    <label for="showremove"></label>
-                                </div>
+                            <div class="customcheck">
+                                <input type="hidden" value="false" name="upload_setting[showRemove]">
+                                <input type="checkbox" id="showremove" value="true"
+                                       name="upload_setting[showRemove]" {{isset($settings['upload_setting']['showRemove']) && $settings['upload_setting']['showRemove'] == 'true' ? 'checked' : ''}}>
+                                <label for="showremove">Show Remove</label>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -487,12 +490,12 @@ $data_for_select = [
 {!! BBscript($_this->path.DS.'js'.DS.'select2.min.js') !!}
 <script>
     $('.icpp').iconpicker();
-    $( document ).ready(function() {
+    $(document).ready(function () {
         $('.extensions-multiple').select2();
         var checkClick = $('.checkClick');
         var checkBlock = $('.checkBlock');
-        checkClick.on('click', function() {
-            if($(this).is(':checked')) {
+        checkClick.on('click', function () {
+            if ($(this).is(':checked')) {
                 $(this).closest('.form-group').find(checkBlock).removeClass("custom_hidden");
             } else {
                 $(this).closest('.form-group').find(checkBlock).addClass("custom_hidden");

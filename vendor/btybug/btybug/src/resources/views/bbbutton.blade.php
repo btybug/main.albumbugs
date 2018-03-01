@@ -56,7 +56,7 @@
 
 @foreach($getData as $attribute)
     <div class="form-group">
-        <label class="col-md-4 control-label" for="textarea">Text Area</label>
+        <label class="col-md-8 control-label" for="textarea">{!! $attribute !!} data from {!! $value !!} variation</label>
         <div class="col-md-4">
 
             <textarea class="form-control" id="textarea" name="textarea">

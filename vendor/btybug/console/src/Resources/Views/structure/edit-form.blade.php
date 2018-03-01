@@ -33,7 +33,7 @@
                 {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'Form Name']) !!}
             </div>
             <div class="col-md-7">
-                <button type="submit" class="form-save pull-right">Save</button>
+                <button type="submit" class="form-save pull-right" bb-click="saveHTML">Save</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openStudioWindow">Styling</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal"
@@ -56,7 +56,7 @@
 
     <div class="container-fluid">
         <style id="bbcc-form-style"></style>
-        <div class="row form-builder-area bbcc-form"></div>
+        <div class="row form-builder-area bbcc-form">{!! $form->original_html !!}</div>
     </div>
 
     <div class="modal fade" id="logicModal" role="dialog">

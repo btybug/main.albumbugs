@@ -70,6 +70,39 @@ $(document).ready(function () {
                 $(this).remove();
                 hideActiveNode();
             });
+        },
+        // Save html
+        saveHTML: function ($this) {
+            var fields = $('.form-builder-area').children(),
+                fieldsHTML = '',
+                originalHTML = '';
+
+            if(fields.length === 0) {
+                alert("Please add fields first");
+                return;
+            }
+
+            fieldsHTML += '<div class="row bbcc-form">';
+
+            $.each(fields, function (index, field) {
+                var cleanField = $(field).clone(),
+                    shortCode = cleanField.data("shortcode");
+
+                originalHTML += cleanField.get(0).outerHTML;
+
+                cleanField.removeAttr("data-field data-id data-shortcode");
+                cleanField.html(shortCode);
+
+                fieldsHTML += cleanField.get(0).outerHTML;
+            });
+
+            fieldsHTML += '</div>';
+
+            $('.generated_html').val(fieldsHTML);
+            $('.original_html').val(originalHTML);
+
+            // Submit form
+            $('#fields-list')[0].submit();
         }
     };
 
@@ -178,6 +211,7 @@ $(document).ready(function () {
 
                 template.attr('data-field', true);
                 template.attr('data-id', $(ui.draggable).attr("data-id"));
+                template.attr('data-shortcode', $(ui.draggable).attr("data-shortcode"));
 
                 $(ui.draggable).hide();
                 target.append(template);
@@ -217,7 +251,7 @@ $(document).ready(function () {
     activateDroppable();
 
     // Trigger open studio TODO: Remove this trigger
-    clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
+    // clickEvents.openStudioWindow($('[bb-click="openStudioWindow"]'));
     // clickEvents.openFieldsWindow($('[bb-click="openFieldsWindow"]'));
 
 });

@@ -237,9 +237,6 @@ var cssStudio = {
         cssString += "}";
 
         $('#bbcc-form-style').text(cssString);
-
-        console.log(cssStudio.CSSJSON);
-        console.log(cssString);
     },
 
     // Fields JS Actions

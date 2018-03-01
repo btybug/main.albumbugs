@@ -114,3 +114,33 @@
     z-index: 1;
   }
 }
+
+.bbs-field-selectors {
+  color: #d6d6d6;
+  margin: 0;
+  padding: 0;
+}
+
+.bbs-field-selectors li {
+  line-height: 30px;
+  padding: 0 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #585858;
+  user-select: none;
+}
+
+.bbs-field-selectors li:hover {
+  color: #ffffff;
+  background: #585858;
+}
+
+.bbs-field-selectors li i {
+  cursor: pointer;
+  line-height: 30px;
+  color: #ababab;
+  display: none;
+}
+
+.bbs-field-selectors li:hover i {
+  display: block;
+}

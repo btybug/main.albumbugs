@@ -38,11 +38,28 @@ $(document).ready(function () {
                     snap: true
                 },
                 headerTitle: 'Styling',
-                content: '<div id="bb-css-studio"></div>',
+                content: '<div id="bb-css-studio" class="bb-css-studio"></div>',
                 callback: function () {
-                    $this.addClass("disabled");
+                    // $this.addClass("disabled");
                     // Init CSS studio
                     cssStudio.init();
+                },
+                onclosed: function () {
+                    // $this.removeClass("disabled");
+                }
+            });
+        },
+        // Open selectors window
+        openSelectorsWindow: function ($this) {
+            var panel = jsPanel.create({
+                id: 'selectors-panel', container: 'body', theme: 'primary', boxShadow: 0, position: 'right-bottom', contentSize: '300 150',
+                dragit: {
+                    snap: true
+                },
+                headerTitle: 'Select Element',
+                content: '<div class="bb-css-studio">' + loadTemplate("bbt-field-selector") + '</div>',
+                callback: function () {
+                    $this.addClass("disabled");
                 },
                 onclosed: function () {
                     $this.removeClass("disabled");

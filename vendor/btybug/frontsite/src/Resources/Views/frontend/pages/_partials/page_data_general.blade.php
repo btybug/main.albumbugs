@@ -36,7 +36,7 @@
                                                     <label>
                                                         Select Memberships
                                                     </label>
-                                                    {!! Form::select('memberships',[],null,['class' => 'form-control']) !!}
+                                                    {!! Form::select('memberships',[],null,['class' => 'form-control memberships-select','multiple' => true]) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -203,6 +203,7 @@
     {!! HTML::style('public/css/bootstrap/css/bootstrap-switch.min.css') !!}
     {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
     {!! HTML::style('public/css/menus.css?v='.rand(1111,9999)) !!}
+    {!! HTML::style("public/css/select2/select2.min.css") !!}
 
     <style>
         #main-wrapper {
@@ -240,9 +241,12 @@
     {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
     {!! HTML::script('public/js/menus.js') !!}
+    {!! HTML::script('public/js/select2/select2.full.min.js') !!}
     <script>
 
         $(document).ready(function () {
+            $(".memberships-select").select2({tags: true});
+
             $(".access-radio").click(function () {
                 if ($(this).val() == 1) {
                     $(".memberships-box").removeClass("hide").addClass("show");

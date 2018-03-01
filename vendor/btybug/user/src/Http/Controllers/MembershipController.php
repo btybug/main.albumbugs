@@ -1,36 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Comp2
- * Date: 27-Mar-17
- * Time: 14:58
- */
 
 namespace Btybug\User\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use App\Modules\Manage\Models\FrontendPage;
-use App\Modules\Users\Models\Membership;
-use App\Modules\Users\Models\MembershipPermissions;
-use App\Modules\Users\Models\PermissionRole;
-use App\Modules\Users\Models\Roles;
+use Btybug\User\Repository\MembershipRepository;
 use Illuminate\Http\Request;
 
 class MembershipController extends Controller
 {
+    private $membershipRepository;
+
+    public function __construct(MembershipRepository $membershipRepository)
+    {
+        $this->membershipRepository = $membershipRepository;
+    }
 
     public function getIndex()
     {
-        $memberships = Membership::all();
+        $memberships = $this->membershipRepository->getAll();
         return view('users::membership.index', compact(['memberships']));
     }
 
-    public function getCreate(Request $request)
+    public function getCreate()
     {
         return view('users::membership.create');
     }
-
 
     public function postCreate(Request $request)
     {
@@ -42,25 +37,20 @@ class MembershipController extends Controller
         $validator = \Validator::make($data, $rules);
         if ($validator->fails()) return redirect()->back()->with('errors', $validator->errors());
 
-        Membership::create($data);
-        return redirect()->route('admin.users.membership.list')->with('message', 'Membership has been created successfully');
+        $this->membershipRepository->create($data);
+        return redirect()->route('user_membership_index')->with('message', 'Membership has been created successfully');
     }
 
-    public function getEdit(Request $request)
+    public function getEdit(Request $request,$id)
     {
-        $membership = Membership::where('slug', $request->slug)->first();
-        if (!$membership) {
-            abort(404);
-        }
+        $membership = $this->membershipRepository->findOrFail($id);
 
         return view('users::membership.edit', compact('membership'));
     }
 
-    public function postEdit(Request $request)
+    public function postEdit(Request $request,$id)
     {
-        $membership = Membership::where('slug', $request->slug)->first();
-
-        if (!$membership) abort(404);
+        $membership = $this->membershipRepository->findOrFail($id);
 
         $data = $request->except('_token');
         $rules = array_merge([
@@ -71,14 +61,14 @@ class MembershipController extends Controller
         if ($validator->fails()) return redirect()->back()->with('errors', $validator->errors());
 
         $membership->update($data);
-        return redirect()->route('admin.users.membership.list')->with('message', 'Membership has been updated successfully');
+        return redirect()->route('user_membership_index')->with('message', 'Membership has been updated successfully');
     }
 
     public function postDelete(Request $request)
     {
         $result = false;
         if ($request->slug) {
-            $result = Membership::find($request->slug)->delete();
+            $result = $this->membershipRepository->deleteByCondition('id',$request->slug);
         }
         return \Response::json(['success' => $result]);
     }

@@ -73,3 +73,16 @@ Route::group(['prefix' => '/roles'], function () {
         Route::get('/', 'ConditionController@getIndex',true)->name('user_roles_conditions_index');
     });
 });
+
+Route::group(['prefix' => '/memberships'], function () {
+    Route::get('/', 'MembershipController@getIndex', true)->name('user_membership_index');
+    Route::get('/create', 'MembershipController@getCreate', true)->name('user_membership_create');
+    Route::post('/create', 'MembershipController@postCreate')->name('user_membership_create_post');
+    Route::get('/edit/{id}', 'MembershipController@getEdit', true)->name('user_membership_edit');
+    Route::post('/edit/{id}', 'MembershipController@postEdit')->name('user_membership_edit_post');
+    Route::post('/delete', 'MembershipController@postDelete')->name('user_membership_delete');
+});
+
+Route::group(['prefix' => '/special-access'], function () {
+    Route::get('/', 'SpecialAccessController@getIndex', true)->name('user_special_access_index');
+});

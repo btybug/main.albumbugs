@@ -15,7 +15,6 @@
                             <th>Icon</th>
                             <th>Name</th>
                             <th>Slug</th>
-                            <th>Access to</th>
                             <th>Options</th>
                         </tr>
                         </thead>
@@ -33,7 +32,6 @@
                                 </td>
                                 <td>{!! $role->name !!}</td>
                                 <td>{!! $role->slug !!}</td>
-                                <td>{!! $role->getAccessName() !!}</td>
                                 <td>
                                     @if(!in_array($role->id, $defaultRoles))
                                         <a data-href="{!! url('/admin/users/roles/delete') !!}"

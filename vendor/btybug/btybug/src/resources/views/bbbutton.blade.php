@@ -64,7 +64,7 @@
                     @php
                         $data=$variation->toArray();
                     @endphp
-                   {!! isset($data['settings'][$attribute])?$data['settings'][$attribute]:null !!}
+                   {{--{!! isset($data['settings'][$attribute])? $data['settings'][$attribute] :null !!}--}}
                 @endif
             </textarea>
         </div>

@@ -8,6 +8,44 @@
                     <a class="btn btn-primary pull-right" href="javascript:void(0)" data-toggle="modal"
                        data-target="#specialModal">Create New</a>
                 </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover datatable">
+                            <thead>
+                            <tr>
+                                <th>Tag Name</th>
+                                <th>Tag Slug</th>
+                                <th>Tag Description</th>
+                                <th>Blog</th>
+                                <th>Product title</th>
+                                <th>Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($specials as $special)
+                                <tr>
+                                    <td>{!! $special->name !!}</td>
+                                    <td>{!! $special->slug !!}</td>
+                                    <td>{!! $special->description !!}</td>
+                                    <td>{!! $special->blog !!}</td>
+                                    <td>{!! $special->product !!}</td>
+                                    <td>
+                                        <a data-href=""
+                                           data-key="{!! $special->id !!}" data-type="Special {{ $special->name }}"
+                                           class="delete-button btn btn-danger"><i
+                                                    class="fa fa-trash-o f-s-14 "></i></a>
+
+                                        <a href=""
+                                           class="btn btn-info edit-class">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -20,6 +58,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
+                    {!! Form::open(['class' => 'form-horizontal','url' => url(route('user_special_access_create_post'))]) !!}
                     <div class="row">
                         <div class="form-group m-l-0 m-r-0">
                             <label for="name" class="col-sm-4 ">Tag name</label>
@@ -52,7 +91,12 @@
                                 {!! Form::select('product',[],null,['class' => 'form-control select-product']) !!}
                             </div>
                         </div>
+
+                        <div class="form-group m-l-0 m-r-0 hide products-box">
+                            {!! Form::submit('Add',['class' => 'btn btn-primary pull-right']) !!}
+                        </div>
                     </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -64,12 +108,12 @@
     <script>
         $(document).ready(function () {
             $("body").on('change','.select-blog',function () {
-                var slug = $(this).val();
+                var id = $(this).val();
 
                 $.ajax({
                     type: 'POST',
                     url: "{!! route('user_special_access_get_products') !!}",
-                    data: {slug:slug},
+                    data: {id:id},
                     headers: {
                         'X-CSRF-TOKEN': $("input[name='_token']").val()
                     },

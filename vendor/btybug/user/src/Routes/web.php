@@ -86,5 +86,6 @@ Route::group(['prefix' => '/memberships'], function () {
 Route::group(['prefix' => '/special-access'], function () {
     Route::get('/', 'SpecialAccessController@getIndex', true)->name('user_special_access_index');
     Route::post('/get-products', 'SpecialAccessController@postProducts')->name('user_special_access_get_products');
+    Route::post('/create', 'SpecialAccessController@postCreate')->name('user_special_access_create_post');
 
 });

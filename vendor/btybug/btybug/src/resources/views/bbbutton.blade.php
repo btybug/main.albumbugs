@@ -54,19 +54,3 @@
             name="{!! $hiddenName !!}"/>
 </div>
 
-@foreach($getData as $attribute)
-    <div class="form-group">
-        <label class="col-md-8 control-label" for="textarea">{!! $attribute !!} data from {!! $value !!} variation</label>
-        <div class="col-md-4">
-
-            <textarea class="form-control" id="textarea" name="textarea">
-                @if(isset($variation))
-                    @php
-                        $data=$variation->toArray();
-                    @endphp
-                   {{--{!! isset($data['settings'][$attribute])? $data['settings'][$attribute] :null !!}--}}
-                @endif
-            </textarea>
-        </div>
-    </div>
-@endforeach

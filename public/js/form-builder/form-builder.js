@@ -75,7 +75,8 @@ $(document).ready(function () {
         saveHTML: function ($this) {
             var fields = $('.form-builder-area').children(),
                 fieldsHTML = '',
-                originalHTML = '';
+                originalHTML = '',
+                fieldsIDs = [];
 
             if(fields.length === 0) {
                 alert("Please add fields first");
@@ -90,6 +91,8 @@ $(document).ready(function () {
 
                 originalHTML += cleanField.get(0).outerHTML;
 
+                fieldsIDs.push(cleanField.data("id"));
+
                 cleanField.removeAttr("data-field data-id data-shortcode");
                 cleanField.html(shortCode);
 
@@ -100,6 +103,7 @@ $(document).ready(function () {
 
             $('.generated_html').val(fieldsHTML);
             $('.original_html').val(originalHTML);
+            $('.generated_json').val(JSON.stringify(fieldsIDs));
 
             // Submit form
             $('#fields-list')[0].submit();

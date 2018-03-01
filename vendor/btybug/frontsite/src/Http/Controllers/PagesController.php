@@ -24,6 +24,7 @@ use Btybug\FrontSite\Repository\ClassifierRepository;
 use Btybug\FrontSite\Services\ClassifierService;
 use Btybug\FrontSite\Services\FrontendPageService;
 use Btybug\Modules\Models\Fields;
+use Btybug\User\Repository\MembershipRepository;
 use Btybug\User\Services\RoleService;
 use Btybug\User\Services\UserService;
 use Illuminate\Http\Request;
@@ -107,7 +108,8 @@ class PagesController extends Controller
         ClassifierRepository $classifierRepository,
         ClassifierService $classifierService,
         FrontendPageService $frontendPageService,
-        RoleService $roleService
+        RoleService $roleService,
+        MembershipRepository $membershipRepository
     )
     {
         $id = $request->id;
@@ -117,8 +119,8 @@ class PagesController extends Controller
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
-
-        return view('manage::frontend.pages.general', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders']));
+        $memberships = $membershipRepository->pluck('name','id')->toArray();
+        return view('manage::frontend.pages.general', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
     }
 
     public function postSettings(

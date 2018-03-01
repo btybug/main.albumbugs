@@ -36,7 +36,7 @@
                                                     <label>
                                                         Select Memberships
                                                     </label>
-                                                    {!! Form::select('memberships',[],null,['class' => 'form-control memberships-select','multiple' => true]) !!}
+                                                    {!! Form::select('memberships',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
                                                 </div>
                                             </div>
                                         </div>

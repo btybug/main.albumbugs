@@ -245,7 +245,7 @@
     <script>
 
         $(document).ready(function () {
-            $(".memberships-select").select2({tags: true});
+            $(".memberships-select").select2();
 
             $(".access-radio").click(function () {
                 if ($(this).val() == 1) {

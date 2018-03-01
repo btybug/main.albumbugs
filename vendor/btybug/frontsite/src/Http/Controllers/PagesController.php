@@ -25,6 +25,7 @@ use Btybug\FrontSite\Services\ClassifierService;
 use Btybug\FrontSite\Services\FrontendPageService;
 use Btybug\Modules\Models\Fields;
 use Btybug\User\Repository\MembershipRepository;
+use Btybug\User\Repository\SpecialAccessRepository;
 use Btybug\User\Services\RoleService;
 use Btybug\User\Services\UserService;
 use Illuminate\Http\Request;
@@ -109,7 +110,8 @@ class PagesController extends Controller
         ClassifierService $classifierService,
         FrontendPageService $frontendPageService,
         RoleService $roleService,
-        MembershipRepository $membershipRepository
+        MembershipRepository $membershipRepository,
+        SpecialAccessRepository $specialAccessRepository
     )
     {
         $id = $request->id;
@@ -120,7 +122,8 @@ class PagesController extends Controller
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
         $memberships = $membershipRepository->pluck('name','id')->toArray();
-        return view('manage::frontend.pages.general', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
+        $specials = $specialAccessRepository->pluck('name','id')->toArray();
+        return view('manage::frontend.pages.general', compact(['page', 'admins','specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
     }
 
     public function postSettings(

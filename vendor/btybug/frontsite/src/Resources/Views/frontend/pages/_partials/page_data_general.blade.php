@@ -17,7 +17,7 @@
                                 <div>
                                     <div class="row rows">
                                         <div class="col-md-12 ">
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <i class="fa fa-universal-access" aria-hidden="true"></i><span
                                                         class="labls">Page access</span>
                                                 <div class="radio">
@@ -37,6 +37,17 @@
                                                         Select Memberships
                                                     </label>
                                                     {!! Form::select('memberships',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <i class="fa fa-universal-access" aria-hidden="true"></i><span
+                                                        class="labls">Special access</span>
+
+                                                <div class="col-md-12">
+                                                    <label>
+                                                        Select
+                                                    </label>
+                                                    {!! Form::select('special_access',$specials,null,['class' => 'form-control special-select','multiple' => true]) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -246,6 +257,7 @@
 
         $(document).ready(function () {
             $(".memberships-select").select2();
+            $(".special-select").select2();
 
             $(".access-radio").click(function () {
                 if ($(this).val() == 1) {

@@ -1,3 +1,7 @@
+@php
+$validations=\Sahak\Validator\Models\Validations::pluck('title','code');
+@endphp
+
 <div class="col-md-12">
     <div class="row  visibility-box  {!! (1) ? "show" : "hide" !!}">
         <div class="bty-panel-collapse">
@@ -21,10 +25,10 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
                         <label class="col-md-4 control-label" for="valid">Validation</label>
-                        <div class="col-md-4">
-                            <input id="valid" name="validation" type="text" placeholder="placeholder" class="form-control input-md">
+                        <div class="col-md-4" style="color: black">
+                            {!! Form::select('validation',$validations,null,['class'=>'form-control input-md']) !!}
 
                         </div>
                     </div>

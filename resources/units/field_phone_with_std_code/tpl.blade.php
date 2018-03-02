@@ -3,9 +3,8 @@
 {!! BBstyle($_this->path.DS.'css/intlTelInput.css') !!}
 
 <form>
-    <div>
+    <div class="{{isset($settings["flag_style"]) ? $settings["flag_style"] : ''}} {{isset($settings["input_style"]) ? $settings["input_style"] : ''}} {{isset($settings["list_style"]) ? $settings["list_style"] : ''}}">
         <input id="phone" type="tel">
-        <button type="submit">Submit</button>
     </div>
 </form>
 

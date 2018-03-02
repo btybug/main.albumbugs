@@ -1,5 +1,5 @@
 <?php
-$data_for_select = [
+$data_for_select_flag = [
     0 => 'Select class',
     'flag-cl-orange' => 'orange',
     'flag-cl-crimson' => 'crimson',
@@ -7,7 +7,7 @@ $data_for_select = [
     'flag-cl-deepskyblue' => 'deepskyblue',
     'flag-cl-black' => 'black',
 ];
-$data_for_select = [
+$data_for_select_input = [
     0 => 'Select class',
     'inp-cl-orange' => 'orange',
     'inp-cl-crimson' => 'crimson',
@@ -15,7 +15,7 @@ $data_for_select = [
     'inp-cl-deepskyblue' => 'deepskyblue',
     'inp-cl-black' => 'black',
 ];
-$data_for_select = [
+$data_for_select_list = [
     0 => 'Select class',
     'list-cl-orange' => 'orange',
     'list-cl-crimson' => 'crimson',
@@ -43,11 +43,7 @@ $data_for_select = [
                                 <label>Flag style</label>
                             </div>
                             <div class="col-md-10">
-                                <select name="radio_inp" id="" class="form-control">
-                                    <option value="">Select style</option>
-                                    <option value="">Style 1</option>
-                                    <option value="">Style 2</option>
-                                </select>
+                                {{Form::select("flag_style",$data_for_select_flag,isset($settings["flag_style"]) ? $settings["flag_style"] : null,["class"=>"form-control"])}}
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -58,11 +54,7 @@ $data_for_select = [
                                 <label>Input style</label>
                             </div>
                             <div class="col-md-10">
-                                <select name="radio_inp" id="" class="form-control">
-                                    <option value="">Select style</option>
-                                    <option value="">Style 1</option>
-                                    <option value="">Style 2</option>
-                                </select>
+                                {{Form::select("input_style",$data_for_select_input,isset($settings["input_style"]) ? $settings["input_style"] : null,["class"=>"form-control"])}}
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -73,11 +65,7 @@ $data_for_select = [
                                 <label>List style</label>
                             </div>
                             <div class="col-md-10">
-                                <select name="radio_inp" id="" class="form-control">
-                                    <option value="">Select style</option>
-                                    <option value="">Style 1</option>
-                                    <option value="">Style 2</option>
-                                </select>
+                                {{Form::select("list_style",$data_for_select_list,isset($settings["list_style"]) ? $settings["flag_style"] : null,["class"=>"form-control"])}}
                             </div>
                         </div>
                         <div class="clearfix"></div>

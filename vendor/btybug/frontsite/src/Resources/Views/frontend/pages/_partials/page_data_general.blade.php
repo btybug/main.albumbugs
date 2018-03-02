@@ -1,7 +1,7 @@
 @if($page)
     {!! Form::model($page,['route' => ["frontsite_save_general",$id], 'id' => 'page_settings_form']) !!}
 
-    <div class="row">
+    <div class="">
         <div class="col-xs-12 col-sm-9 connected" data-bbsortable="target">
             <div class="panel panel-default custompanel m-t-20">
                 <div class="panel-heading"> Page Info</div>
@@ -18,36 +18,45 @@
                                     <div class="row rows">
                                         <div class="col-md-12 ">
                                             <div class="col-md-6">
-                                                <i class="fa fa-universal-access" aria-hidden="true"></i><span
-                                                        class="labls">Page access</span>
-                                                <div class="radio">
-                                                    <label for="radios-0">
-                                                        Public
-                                                    </label>
-                                                    {!! Form::radio('page_access',0,true,['class' => 'access-radio' ,'id' =>'radios-0']) !!}
-                                                </div>
-                                                <div class="radio">
-                                                    <label for="radios-1">
-                                                        Memberships
-                                                    </label>
-                                                    {!! Form::radio('page_access',1,null,['class' => 'access-radio','id' =>'radios-1']) !!}
-                                                </div>
-                                                <div class="col-md-12 memberships-box hide">
-                                                    <label>
-                                                        Select Memberships
-                                                    </label>
-                                                    {!! Form::select('memberships',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
+                                                <div class="block-page">
+                                                    <i class="fa fa-universal-access" aria-hidden="true"></i><span
+                                                            class="labls">Page access</span>
+                                                    <div class="page-access">
+                                                        <div class="input-radio-1-bty">
+                                                            {!! Form::radio('page_access',0,true,['class' => 'access-radio' ,'id' =>'radios-0']) !!}
+                                                            <label for="radios-0">
+                                                                Public
+                                                            </label>
+                                                        </div>
+                                                        <div class="input-radio-1-bty">
+                                                            {!! Form::radio('page_access',1,null,['class' => 'access-radio','id' =>'radios-1']) !!}
+                                                            <label for="radios-1">
+                                                                Memberships
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="memberships-box hide">
+                                                        <label>
+                                                            Select Memberships
+                                                        </label>
+                                                        {!! Form::select('memberships',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
+
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <i class="fa fa-universal-access" aria-hidden="true"></i><span
-                                                        class="labls">Special access</span>
+                                                <div class="block-page">
 
-                                                <div class="col-md-12">
-                                                    <label>
-                                                        Select
-                                                    </label>
-                                                    {!! Form::select('special_access',$specials,null,['class' => 'form-control special-select','multiple' => true]) !!}
+
+                                                    <i class="fa fa-universal-access" aria-hidden="true"></i><span
+                                                            class="labls">Special access</span>
+
+                                                    <div class="special-access">
+                                                        <label>
+                                                            Select
+                                                        </label>
+                                                        {!! Form::select('special_access',$specials,null,['class' => 'form-control special-select','multiple' => true]) !!}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +71,7 @@
             <div class="panel panel-default custompanel m-t-20">
                 <div class="panel-heading"> Author Info</div>
                 <div class="panel-body published_1">
-                    <div class="row">
+                    <div class="">
                         <div class="col-xs-12 col-sm-12 right_part_publ">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 author_name_div">
@@ -91,6 +100,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
 
                 </div>
@@ -109,11 +119,8 @@
                 <div class="panel panel-default custompanel m-t-20">
                     <div class="panel-heading"> Page Tags</div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
-                                {!! Form::text('tags','',['class' => 'form-control','id' =>'tags']) !!}
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 m-t-15">
+                        <div class="">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 m-t-15">
                                 <div>
                                     All Tags
                                 </div>
@@ -135,17 +142,21 @@
                                     @endif
                                 </ul>
                             </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                                {!! Form::text('tags','',['class' => 'form-control','id' =>'tags']) !!}
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default custompanel m-t-20">
                     <div class="panel-heading">Select Classify</div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-3">
+                        <div class="">
+                            <div class="col-md-4">
                                 Select Classify
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <select name="classify" class="form-control classify">
                                     <option value="0" data-type="false">Select Classify</option>
                                     @foreach($classifies as $classify)
@@ -154,6 +165,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                         <div class="row classify-box" style="min-height: 300px;">
                             @if($classifierPageRelations->count())
@@ -170,6 +182,7 @@
                 </div>
             @endif
         </div>
+        <div class="clearfix"></div>
     </div>
     {!! Form::close() !!}
 
@@ -240,6 +253,105 @@
             box-shadow: 2px 1px 6px #888888;
             cursor: pointer;
         }
+
+        .input-radio-1-bty input[type="radio"] {
+            display: none;
+            cursor: pointer;
+        }
+
+        .input-radio-1-bty input[type="radio"]:focus, .input-radio-1-bty input[type="radio"]:active {
+            outline: none;
+        }
+
+        .input-radio-1-bty label {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            padding-left: 25px;
+            margin-right: 10px;
+            color: #0b4c6a;
+        }
+
+        .input-radio-1-bty label:before, .input-radio-1-bty label:after {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            left: 0;
+            bottom: 0;
+            text-align: center;
+            position: absolute;
+        }
+
+        .input-radio-1-bty label:before {
+            background-color: #fafafa;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input-radio-1-bty label:after {
+            color: #fff;
+        }
+
+        .input-radio-1-bty input[type="radio"]:checked + label:before {
+            -moz-box-shadow: inset 0 0 0 10px #158EC6;
+            -webkit-box-shadow: inset 0 0 0 10px #158EC6;
+            box-shadow: inset 0 0 0 10px #158EC6;
+        }
+
+        .input-radio-1-bty label:before {
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .input-radio-1-bty label:hover:after, .input-radio-1-bty input[type="radio"]:checked + label:after {
+            content: "\2022";
+            position: absolute;
+            top: 0;
+            font-size: 19px;
+            line-height: 15px;
+        }
+
+        .input-radio-1-bty label:hover:after {
+            color: #c7c7c7;
+        }
+
+        .input-radio-1-bty input[type="radio"]:checked + label:after, .input-radio-1-bty input[type="radio"]:checked + label:hover:after {
+            color: #fff;
+        }
+
+        .block-page .page-access {
+            display: flex;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .block-page {
+            box-shadow: 0 0 2px #ccc;
+            padding: 15px;
+        }
+        .block-page .special-access{
+            margin-top: 10px;
+        }
+        .block-page>i{
+            margin-right: 5px;
+            color: red;
+        }
+        .name_btn_div{
+            padding-left: 0 !important;
+        }
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .m-t-20{
+            margin-top: 20px;
+        }
+
+
     </style>
 @stop
 @section('JS')

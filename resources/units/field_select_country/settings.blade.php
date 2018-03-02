@@ -43,9 +43,7 @@ $data_for_select_list = [
                                 <label>Flag style</label>
                             </div>
                             <div class="col-md-9">
-                                <select name="container_class" class="form-control">
-                                    <option value="">Select</option>
-                                </select>
+                                {{Form::select("flag_style",$data_for_select_flag,isset($settings["flag_style"]) ? $settings["flag_style"] : null,["class"=>"form-control"])}}
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -56,9 +54,7 @@ $data_for_select_list = [
                                 <label>Input style</label>
                             </div>
                             <div class="col-md-9">
-                                <select name="container_class" class="form-control">
-                                    <option value="">Select</option>
-                                </select>
+                                {{Form::select("input_style",$data_for_select_input,isset($settings["input_style"]) ? $settings["input_style"] : null,["class"=>"form-control"])}}
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -69,9 +65,7 @@ $data_for_select_list = [
                                 <label>List style</label>
                             </div>
                             <div class="col-md-9">
-                                <select name="container_class" class="form-control">
-                                    <option value="">Select</option>
-                                </select>
+                                {{Form::select("list_style",$data_for_select_list,isset($settings["list_style"]) ? $settings["flag_style"] : null,["class"=>"form-control"])}}
                             </div>
                         </div>
                         <div class="clearfix"></div>

@@ -45,6 +45,12 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="col-md-5">
+            <label>Form description</label>
+            {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Form Description']) !!}
+        </div>
+    </div>
     {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
     {!! Form::textarea('original_html',null,['class' => 'original_html hide']) !!}
     {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}

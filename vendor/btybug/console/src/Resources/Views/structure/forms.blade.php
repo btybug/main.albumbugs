@@ -13,6 +13,7 @@
                 <tr class="bg-black text-white">
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Shortcode</th>
                     <th>Created By</th>
                     <th>Table</th>
@@ -27,6 +28,7 @@
                         <tr class="field-row">
                             <td>{!! $form->id !!}</td>
                             <td>{!! $form->name !!}</td>
+                            <td>{!! $form->description !!}</td>
                             <td>
                                 <p>[form slug={!! $form->slug !!}] </p>
                                 <p> [form id={!! $form->id !!}] </p>

@@ -28,7 +28,7 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         @if(!$status->is_core)
-                                            <a data-href="{!! url('/admin/users/statuses/delete') !!}"
+                                            <a data-href="{!! url('/admin/users/roles/statuses/delete') !!}"
                                                data-key="{!! $status->id !!}" data-type="Status"
                                                class="delete-button btn btn-danger"><i
                                                         class="fa fa-trash-o f-s-14 "></i></a>

@@ -2,11 +2,10 @@
 {!! BBstyle($_this->path.DS.'css/countrySelect.css') !!}
 
 <form>
-    <div class="form-item">
+    <div class="form-item {{isset($settings["flag_style"]) ? $settings["flag_style"] : ''}} {{isset($settings["input_style"]) ? $settings["input_style"] : ''}} {{isset($settings["list_style"]) ? $settings["list_style"] : ''}}">
         <input id="country_selector" type="text" class="{{isset($settings["container_class"]) ? $settings["container_class"] : ''}}">
     </div>
 </form>
-
 <textarea id="excluded" class="hidden">{{isset($settings["excluded_countries"]) ? json_encode($settings["excluded_countries"],true) : ''}}</textarea>
 <style>
     .country-select .flag{
@@ -14,7 +13,7 @@
         height:15px;
         -webkit-box-shadow:0px 0px 1px 0px #888;
         box-shadow:0px 0px 1px 0px #888;
-        background-image:url({{$_this->path.DS.'img/flags.png'}});
+        background-image:url({{url('resources/units/field_select_country/img/flags.png')}});
         background-repeat:no-repeat;
         background-color:#dbdbdb;
         background-position:20px 0
@@ -25,7 +24,7 @@
     only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx){
         .country-select .flag{
-            background-image:url({{$_this->path.DS."img/flags@2x.png"}})
+            background-image:url({{url('resources/units/field_select_country/img/flags@2x.png')}})
         }
     }
 </style>

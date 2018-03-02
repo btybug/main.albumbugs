@@ -1,3 +1,5 @@
+
+
 @include($_this->slug.'::functions',compact('_this'))
 {!! include_forms($settings,$_this) !!}
 

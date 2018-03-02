@@ -80,7 +80,7 @@ $data_for_select_list = [
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#inputsetting"
                    aria-expanded="true">
                     <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                    <span class="title">Exclude countries</span>
+                    <span class="title">Excluded countries</span>
                 </a>
             </div>
             <div id="inputsetting" class="collapse in" aria-expanded="true" style="">

@@ -406,10 +406,11 @@ class StructureController extends Controller
     )
     {
         $form = $formsRepository->findOrFail($id);
+        $settings = ($form->settings) ? json_decode($form->settings,true) : [];
         $fields = $fieldsRepository->getBy('table_name', $form->fields_type);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return view('console::structure.edit-form', compact('form', 'fields', 'existingFields'));
+        return view('console::structure.edit-form', compact('form', 'fields', 'existingFields','settings'));
     }
 
 

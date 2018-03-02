@@ -2,7 +2,7 @@
 @section('tab')
     <div class="row">
         <div class="col-sm-12">
-            <a class="btn btn-primary pull-right" href="{!! url('admin/users/statuses/create') !!}">Create New
+            <a class="btn btn-primary pull-right" href="{!! url('admin/users/roles/statuses/create') !!}">Create New
                 Status</a>
         </div>
 

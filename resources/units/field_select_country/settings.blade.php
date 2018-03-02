@@ -1,5 +1,29 @@
 <?php
 $countries = DB::table("countries")->get()->pluck(strtolower("name"),"sortname");
+$data_for_select_flag = [
+    0 => 'Select class',
+    'flag-cl-orange' => 'orange',
+    'flag-cl-crimson' => 'crimson',
+    'flag-cl-fuchsia' => 'fuchsia',
+    'flag-cl-deepskyblue' => 'deepskyblue',
+    'flag-cl-black' => 'black',
+];
+$data_for_select_input = [
+    0 => 'Select class',
+    'inp-cl-orange' => 'orange',
+    'inp-cl-crimson' => 'crimson',
+    'inp-cl-fuchsia' => 'fuchsia',
+    'inp-cl-deepskyblue' => 'deepskyblue',
+    'inp-cl-black' => 'black',
+];
+$data_for_select_list = [
+    0 => 'Select class',
+    'list-cl-orange' => 'orange',
+    'list-cl-crimson' => 'crimson',
+    'list-cl-fuchsia' => 'fuchsia',
+    'list-cl-deepskyblue' => 'deepskyblue',
+    'list-cl-black' => 'black',
+];
 ?>
 <div class="col-md-12">
     <div class="row  visibility-box  {!! (1) ? "show" : "hide" !!}">
@@ -15,12 +39,38 @@ $countries = DB::table("countries")->get()->pluck(strtolower("name"),"sortname")
                 <div class="content bty-settings-panel">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <div class="col-md-2">
-                                <label>Container style</label>
+                            <div class="col-md-3">
+                                <label>Flag style</label>
                             </div>
                             <div class="col-md-9">
                                 <select name="container_class" class="form-control">
-                                    <option value="">Select rating</option>
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <label>Input style</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select name="container_class" class="form-control">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <label>List style</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select name="container_class" class="form-control">
+                                    <option value="">Select</option>
                                 </select>
                             </div>
                         </div>
@@ -43,7 +93,7 @@ $countries = DB::table("countries")->get()->pluck(strtolower("name"),"sortname")
                 <div class="content bty-settings-panel">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <label>Select excluded countries</label>
                             </div>
                             <div class="col-md-9">

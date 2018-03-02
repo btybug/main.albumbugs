@@ -23,7 +23,7 @@
                                 <tr>
                                     <td>{!! $status->name !!}</td>
                                     <td>
-                                        <a href="{!! url("admin/users/statuses/edit", [$status->id]) !!}"
+                                        <a href="{!! url(route('user_roles_statuses_edit',$status->id)) !!}"
                                            class="btn btn-info edit-class">
                                             <i class="fa fa-edit"></i>
                                         </a>

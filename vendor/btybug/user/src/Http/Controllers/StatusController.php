@@ -38,7 +38,7 @@ class StatusController extends Controller
     {
         $requestData = $request->except('_token');
         $statusRepository->create($requestData);
-        return redirect('/admin/users/statuses')->with('message', 'Status has been created successfully');
+        return redirect('/admin/users/roles/statuses')->with('message', 'Status has been created successfully');
     }
 
     public function getEdit(
@@ -64,7 +64,7 @@ class StatusController extends Controller
         }
         $requestData = $request->except('_token');
         $statusRepository->update($request->id, $requestData);
-        return redirect('/admin/users/statuses')->with('message', 'Status has been updated successfully');
+        return redirect('/admin/users/roles/statuses')->with('message', 'Status has been updated successfully');
     }
 
     public function postDelete(

@@ -40,6 +40,8 @@ class FrontendPageService extends GeneralService
         $memberships = $user->memberships;
 
         if ($page && $memberships) {
+            if (! $page->memberships) return true;
+
             $checkMembership = array_diff($page->memberships, $memberships);
             if (count($checkMembership) == 0) return true;
         }

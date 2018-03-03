@@ -58,12 +58,18 @@ class EventsController extends Controller
     public function postGetEventFunctionRelation(Request $request)
     {
         $e_name = $request->get('event_namespace');
+        $subscriberProperties = \Subscriber::getSubscriptions()->getProperties();
         $subscripts = \Subscriber::getSubscriptions()->getData();
         $tabs = [];
         if (isset($subscripts[$e_name])) {
             foreach ($subscripts[$e_name] as $key => $value) {
                 $functionNamespace = explode('$', $key);
-                $tabs[] = ['namespace' => $functionNamespace[0], 'data' => $value, 'form' => \Subscriber::getForm($functionNamespace[0])];
+                $tabs[] = [
+                    'namespace' => $functionNamespace[0],
+                    'data' => $value,
+                    'form' => \Subscriber::getForm($functionNamespace[0]),
+                    'name'=>$subscriberProperties[$functionNamespace[0]]['name']
+                ];
             }
         }
 

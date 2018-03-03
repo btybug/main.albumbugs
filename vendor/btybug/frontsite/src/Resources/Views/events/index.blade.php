@@ -74,7 +74,7 @@
                     <a href="#" class="pull-right" data-title="{title}" bb-click="removeAction"><i class="fa fa-trash text-danger"></i></a>
                 </h4>
             </div>
-            <div id="action-{id}" class="panel-collapse collapse in" role="tabpanel">
+            <div id="action-{id}" class="panel-collapse collapse" role="tabpanel">
                 <div class="panel-body">
                     {content}
                 </div>

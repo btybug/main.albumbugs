@@ -169,6 +169,40 @@ $(function () {
         // Select event
         selectEvent: function ($this) {
             if (!$this.is('.active')) {
+                ajax('/admin/front-site/event/get-event-function-relations', {
+                    event_namespace: $this.data('value')
+                }, function (response){
+                    var eventConnections = $('#event-connections');
+                    var currentID = $('#event-connections>.panel').length + 1;
+
+                    var formHTML = $('<form data-form="' + currentID + '" />');
+
+                    $.each(response.tabs, function (index, tab) {
+                        var select2 = {};
+
+                        $.each(tab.form, function (key, val) {
+                            formHTML.append(fieldsParser.formGroup(val, key));
+                            if (val.type === 'select2') {
+                                select2[key] = val;
+                            }
+                        });
+
+                        var template = parseTemplate('action-template', [
+                            {'{id}'        : currentID},
+                            {'{content}'   : formHTML.get(0).outerHTML},
+                            {'{title}'     : $this.attr('data-title')},
+                            {'{namespace}' : tab.namespace}
+                        ]);
+
+                        eventConnections.append(template);
+                    });
+
+
+
+                    // Update JSON
+                    eventBuilder.updateFormData();
+                });
+
                 // Activate item
                 $this.closest('.list-group').find('button').removeClass('active');
                 $this.addClass('active');

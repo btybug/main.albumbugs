@@ -65,10 +65,16 @@ class EventsController extends Controller
             foreach ($subscripts[$e_name] as $key => $value) {
                 $functionNamespace = explode('$', $key);
                 $slug = str_replace('\\', '-', $functionNamespace[0]);
+                $formData=\Subscriber::getForm($functionNamespace[0]);
+                foreach ($value as $key=>$val){
+                   if(isset($formData[$key])){
+                       $formData[$key]['value']=$val;
+                   }
+                }
                 $tabs[] = [
                     'namespace' => $functionNamespace[0],
                     'data' => $value,
-                    'form' => \Subscriber::getForm($functionNamespace[0]),
+                    'form' =>$formData,
                     'name' => $subscriberProperties[$slug]['name']
                 ];
             }

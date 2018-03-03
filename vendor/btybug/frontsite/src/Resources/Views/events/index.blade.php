@@ -99,5 +99,5 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
-    {!! HTML::script('public/js/events/events.js') !!}
+    {!! HTML::script('public/js/events/events.js?v='.rand(1000,9999)) !!}
 @stop

@@ -64,11 +64,12 @@ class EventsController extends Controller
         if (isset($subscripts[$e_name])) {
             foreach ($subscripts[$e_name] as $key => $value) {
                 $functionNamespace = explode('$', $key);
+                $slug = str_replace('\\', '-', $functionNamespace[0]);
                 $tabs[] = [
                     'namespace' => $functionNamespace[0],
                     'data' => $value,
                     'form' => \Subscriber::getForm($functionNamespace[0]),
-                    'name'=>$subscriberProperties[$functionNamespace[0]]['name']
+                    'name' => $subscriberProperties[$slug]['name']
                 ];
             }
         }

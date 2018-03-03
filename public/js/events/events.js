@@ -169,39 +169,15 @@ $(function () {
         // Select event
         selectEvent: function ($this) {
             if (!$this.is('.active')) {
-                ajax('/admin/front-site/event/get-event-function-relations', {
-                    event_namespace: $this.data('value')
-                }, function (response){
-                    var eventConnections = $('#event-connections');
-                    var currentID = $('#event-connections>.panel').length + 1;
 
-                    var formHTML = $('<form data-form="' + currentID + '" />');
+                // Show add buttons
+                $('[data-title]').show();
 
-                    $.each(response.tabs, function (index, tab) {
-                        var select2 = {};
+                // Show actions panel
+                $('[data-panelevent="functions"]').removeClass("hide");
 
-                        $.each(tab.form, function (key, val) {
-                            formHTML.append(fieldsParser.formGroup(val, key));
-                            if (val.type === 'select2') {
-                                select2[key] = val;
-                            }
-                        });
-
-                        var template = parseTemplate('action-template', [
-                            {'{id}'        : currentID},
-                            {'{content}'   : formHTML.get(0).outerHTML},
-                            {'{title}'     : $this.attr('data-title')},
-                            {'{namespace}' : tab.namespace}
-                        ]);
-
-                        eventConnections.append(template);
-                    });
-
-
-
-                    // Update JSON
-                    eventBuilder.updateFormData();
-                });
+                // Clean connections panel
+                $('#event-connections').html("");
 
                 // Activate item
                 $this.closest('.list-group').find('button').removeClass('active');
@@ -213,29 +189,58 @@ $(function () {
 
                 eventBuilder.updateJSON($this.data('value'), {});
 
-                // Show actions panel
-                $('[data-panelevent="functions"]').removeClass("hide");
+                ajax('/admin/front-site/event/get-event-function-relations', {
+                    event_namespace: $this.data('value')
+                }, function (response){
+                    var eventConnections = $('#event-connections');
 
-                // Show add buttons
-                $('[data-title]').show();
+                    $.each(response.tabs, function (index, tab) {
+                        var select2 = {};
 
-                // Clean connections panel
-                $('#event-connections').html("");
+                        var currentID = $('#event-connections>.panel').length + 1;
+                        var formHTML = $('<form data-form="' + currentID + '" />');
+
+                        $.each(tab.form, function (key, val) {
+                            formHTML.append(fieldsParser.formGroup(val, key));
+                            if (val.type === 'select2') {
+                                select2[key] = val;
+                            }
+                        });
+
+                        var template = parseTemplate('action-template', [
+                            {'{id}'        : currentID},
+                            {'{content}'   : formHTML.get(0).outerHTML},
+                            {'{title}'     : tab.name},
+                            {'{namespace}' : tab.namespace}
+                        ]);
+
+                        eventConnections.append(template);
+
+                        // Hide add button
+                        var buttonSpace = tab.namespace.replace(/\\+/g, "\\\\");
+                        $('[data-value="' + buttonSpace + '"]').hide();
+
+                        // Update JSON
+                        eventBuilder.updateFormData();
+
+                        // Increase counter badge
+                        $('.events-list-group>.list-group-item.active>.badge').text(currentID);
+                    });
+                });
             }
         },
         // Add action to event
         addAction: function ($this) {
             var nameSpace = $this.attr("data-value");
-            ajax('/admin/front-site/event/get-event-function-relations', {
-                event_namespace: eventBuilder.json['event_namespace'],
-                function_namespace: nameSpace
+            ajax('/admin/front-site/event/get-function-data', {
+                namespace: nameSpace
             }, function (response) {
                 var eventConnections = $('#event-connections');
                 var currentID = $('#event-connections>.panel').length + 1;
 
                 var formHTML = $('<form data-form="' + currentID + '" />');
                 var select2 = {};
-                $.each(response.form, function (key, val) {
+                $.each(response.data, function (key, val) {
                     formHTML.append(fieldsParser.formGroup(val, key));
                     if (val.type === 'select2') {
                         select2[key] = val;

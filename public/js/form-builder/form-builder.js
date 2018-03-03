@@ -11,7 +11,12 @@ $(document).ready(function () {
         // Open field window
         openFieldsWindow: function ($this) {
             jsPanel.create({
-                id: 'fields-panel', container: 'body', theme: 'primary', boxShadow: 0, position: 'right-bottom', contentSize: '300 350',
+                id: 'fields-panel',
+                container: 'body',
+                theme: 'primary',
+                boxShadow: 0,
+                position: 'right-bottom',
+                contentSize: '300 350',
                 dragit: {
                     snap: true
                 },
@@ -22,7 +27,7 @@ $(document).ready(function () {
 
                     // Draggable fields
                     $('.draggable-element').draggable({
-                        helper:'clone'
+                        helper: 'clone'
                     });
                 },
                 onclosed: function () {
@@ -33,7 +38,12 @@ $(document).ready(function () {
         // Open studio window
         openStudioWindow: function ($this) {
             jsPanel.create({
-                id: 'studio-panel', container: 'body', theme: 'primary', boxShadow: 0, position: 'right-bottom', contentSize: '300 ' + ($(window).height() - 250),
+                id: 'studio-panel',
+                container: 'body',
+                theme: 'primary',
+                boxShadow: 0,
+                position: 'right-bottom',
+                contentSize: '300 ' + ($(window).height() - 250),
                 dragit: {
                     snap: true
                 },
@@ -51,24 +61,57 @@ $(document).ready(function () {
         },
         // Open selectors window
         openSelectorsWindow: function ($this) {
-            var panel = jsPanel.create({
-                id: 'selectors-panel', container: 'body', theme: 'primary', boxShadow: 0, position: 'right-bottom', contentSize: '300 150',
+
+            if ($('#selectors-panel').length !== 0) {
+                clickEvents.loadSelectorsTemplate($this);
+                return;
+            }
+
+            jsPanel.create({
+                id: 'selectors-panel',
+                container: 'body',
+                theme: 'primary',
+                boxShadow: 0,
+                position: 'right-top',
+                contentSize: '300 170',
                 dragit: {
                     snap: true
                 },
                 headerTitle: 'Select Element',
-                content: '<div class="bb-css-studio">' + loadTemplate("bbt-field-selector") + '</div>',
+                content: '<div class="bb-css-studio"></div>',
                 callback: function () {
                     $this.addClass("disabled");
+
+                    // Load selectors template
+                    clickEvents.loadSelectorsTemplate($this);
                 },
                 onclosed: function () {
                     $this.removeClass("disabled");
                 }
             });
+
+        },
+        // Load selectors template
+        loadSelectorsTemplate: function ($this) {
+            var mainSelector = $this.data("main");
+            var selectors = {
+                containerSelector: '.bbcc-form .form-group',
+                labelSelector: 'h4',
+                iconSelector: '.field-icon',
+                helpIconSelector: '.help-icon',
+                helpPopupSelector: '.help-popup'
+            };
+
+            if(mainSelector !== "global"){
+                selectors.containerSelector = '.bbcc-field-' + $this.data("field-id");
+            }
+
+            var template = parseTemplate("bbt-field-selector", selectors);
+            $('.bb-css-studio').html(template);
         },
         // Toggle resizing mode
         toggleResize: function ($this) {
-            if($this.hasClass("disabled")){
+            if ($this.hasClass("disabled")) {
                 $this.removeClass("disabled");
                 $('.bb-column-resize-handler').css("visibility", "visible");
                 $('.bb-node-action-size').css("pointer-events", "all");
@@ -95,7 +138,7 @@ $(document).ready(function () {
                 originalHTML = '',
                 fieldsIDs = [];
 
-            if(fields.length === 0) {
+            if (fields.length === 0) {
                 alert("Please add fields first");
                 return;
             }
@@ -143,7 +186,7 @@ $(document).ready(function () {
         }
     };
 
-    function drawActiveHelpers($this){
+    function drawActiveHelpers($this) {
         var width = $this.outerWidth(),
             height = $this.outerHeight(),
             left = $this.offset().left,
@@ -169,7 +212,7 @@ $(document).ready(function () {
 
         // Column resize
         var rowWidth = $this.parent('.row').outerWidth(),
-            columnWidth = rowWidth/12;
+            columnWidth = rowWidth / 12;
 
         nodeActionSize.resizable({
             handles: 'e',
@@ -178,21 +221,21 @@ $(document).ready(function () {
             classes: {
                 "ui-resizable-e": "bb-column-resize-handler"
             },
-            start: function (){
+            start: function () {
                 $this.parent('.row').addClass("grid-overlay");
             },
-            stop: function (){
+            stop: function () {
                 $this.parent('.row').removeClass("grid-overlay");
             },
-            resize: function (event,ui){
+            resize: function (event, ui) {
                 var columns,
                     width = ui.size.width;
 
-                columns = Math.round(width/columnWidth);
+                columns = Math.round(width / columnWidth);
 
                 // Remove column classes
-                $this.removeClass (function (index, className) {
-                    return (className.match (/(^|\s)col-md-\S+/g) || []).join(' ');
+                $this.removeClass(function (index, className) {
+                    return (className.match(/(^|\s)col-md-\S+/g) || []).join(' ');
                 });
 
                 // Add new column class
@@ -252,8 +295,19 @@ $(document).ready(function () {
     }
 
     // Load inline template
-    function loadTemplate(template){
+    function loadTemplate(template) {
         return $('#' + template).html();
+    }
+
+    // Parse inline template
+    function parseTemplate(template, variables) {
+        var templateHTML = $('#' + template).html();
+        $.each(variables, function (key, value) {
+            key = "{" + key + "}";
+            templateHTML = templateHTML.replace(new RegExp(key, "gm"), value);
+        });
+
+        return templateHTML;
     }
 
     // Body events

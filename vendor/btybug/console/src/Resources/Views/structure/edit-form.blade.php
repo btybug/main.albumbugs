@@ -35,7 +35,7 @@
             <div class="col-md-7">
                 <button type="submit" class="form-save pull-right" bb-click="saveHTML">Save</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow">Styling</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow" data-main="global">Styling</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal"
                         data-target="#logicModal">Logic
                 </button>
@@ -220,11 +220,11 @@
     <!-- CSS Studio Templates -->
     <script type="template" id="bbt-field-selector">
         <ul class="bbs-field-selectors">
-            <li bb-click="openStudioWindow">Field Container <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow">Field Label <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow">Field Icon <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow">Help Icon <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow">Help Popup <i class="fa fa-paint-brush pull-right"></i></li>
+            <li bb-click="openStudioWindow" data-selector="{containerSelector}">Field Container <i class="fa fa-paint-brush pull-right"></i></li>
+            <li bb-click="openStudioWindow" data-selector="{labelSelector}">Field Label <i class="fa fa-paint-brush pull-right"></i></li>
+            <li bb-click="openStudioWindow" data-selector="{iconSelector}">Field Icon <i class="fa fa-paint-brush pull-right"></i></li>
+            <li bb-click="openStudioWindow" data-selector="{helpIconSelector}">Help Icon <i class="fa fa-paint-brush pull-right"></i></li>
+            <li bb-click="openStudioWindow" data-selector="{helpPopupSelector}">Help Popup <i class="fa fa-paint-brush pull-right"></i></li>
         </ul>
     </script>
 

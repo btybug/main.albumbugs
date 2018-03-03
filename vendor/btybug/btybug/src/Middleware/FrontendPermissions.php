@@ -38,20 +38,17 @@ class FrontendPermissions
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
-        //TODO: need move to plugin for plans
-//        $page = RenderService::getFrontPageByURL();
-//        if($page) {
-//            if ($page->page_access == 0) return $next($request);
-//
-//            if ($page->page_access == 2 && \Auth::check()) return $next($request);
-//
-//            if ($page->page_access == 1 && \Auth::check() && \Auth::user()->role && FrontendPageService::checkAccess($page->id, \Auth::user()->role->slug)) {
-//                return $next($request);
-//            }
-//        }
-//
-//        abort(404);
+        $page = RenderService::getFrontPageByURL();
+        if($page) {
+            if ($page->page_access == 0) return $next($request);
+
+            if ($page->page_access == 1 && \Auth::check() &&
+                FrontendPageService::checkAccess($page->id, \Auth::user())) {
+                return $next($request);
+            }
+        }
+
+        abort(404);
     }
 
 }

@@ -35,11 +35,11 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div class="memberships-box hide">
+                                                    <div class="memberships-box {!! ($page->page_access) ? '' : 'hide' !!}">
                                                         <label>
                                                             Select Memberships
                                                         </label>
-                                                        {!! Form::select('memberships',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
+                                                        {!! Form::select('memberships[]',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
 
                                                     </div>
                                                 </div>
@@ -55,7 +55,7 @@
                                                         <label>
                                                             Select
                                                         </label>
-                                                        {!! Form::select('special_access',$specials,null,['class' => 'form-control special-select','multiple' => true]) !!}
+                                                        {!! Form::select('special_access[]',$specials,null,['class' => 'form-control special-select','multiple' => true]) !!}
                                                     </div>
                                                 </div>
                                             </div>

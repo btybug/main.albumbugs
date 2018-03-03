@@ -29,7 +29,9 @@ class FrontendPage extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'page_layout_settings' => 'json'
+        'page_layout_settings' => 'json',
+        'memberships' => 'json',
+        'special_access' => 'json',
     ];
 
     public static function addTags($tags, $id)

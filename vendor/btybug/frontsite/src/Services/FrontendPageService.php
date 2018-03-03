@@ -33,14 +33,15 @@ class FrontendPageService extends GeneralService
         $this->permissionRoleRepository = $permissionRoleRepository;
     }
 
-    public static function checkAccess ($page_id, $role_slug)
+    public static function checkAccess ($page_id, $user)
     {
-        if ($role_slug == SUPERADMIN) return true;
-        $page = self::$frontPages->find($page_id);
-        $role = self::$frontPages->findBy('slug', $role_slug);
-        if ($page && $role) {
-            $access = $page->permission_role->where('role_id', $role->id)->first();
-            if ($access) return true;
+        $frontPages = new FrontPagesRepository();
+        $page = $frontPages->find($page_id);
+        $memberships = $user->memberships;
+
+        if ($page && $memberships) {
+            $checkMembership = array_diff($page->memberships, $memberships);
+            if (count($checkMembership) == 0) return true;
         }
 
         return false;
@@ -130,11 +131,10 @@ class FrontendPageService extends GeneralService
     {
         $page = $this->frontPagesRepository->findOrFail($request->id);
         $this->frontPagesRepository->update($page->id, [
-            'page_access' => $request->get('page_access')
+            'page_access' => $request->get('page_access'),
+            'memberships' => $request->get('memberships',null),
+            'special_access' => $request->get('special_access',null)
         ]);
-//dd(implode(',', $request->roles));
-        if ($request->get('page_access') && $request->roles)
-            $this->permissionRoleRepository->optimizePageRoles($page, $request->roles, 'front');
 
         return $page;
     }

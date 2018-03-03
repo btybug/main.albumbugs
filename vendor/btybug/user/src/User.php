@@ -75,6 +75,11 @@ class User extends Authenticatable
      */
     protected $dates = ['created_at', 'updated_at'];
 
+    protected $casts = [
+        'memberships' => 'json',
+        'special_access' => 'json',
+    ];
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

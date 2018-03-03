@@ -73,7 +73,6 @@ class EventsController extends Controller
                 }
                 $tabs[] = [
                     'namespace' => $functionNamespace[0],
-                    'data' => $value,
                     'form' =>$formData,
                     'name' => $subscriberProperties[$slug]['name']
                 ];

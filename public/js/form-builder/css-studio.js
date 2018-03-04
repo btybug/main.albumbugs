@@ -229,12 +229,13 @@ var cssStudio = {
                 });
 
                 // Field HTML
-                if (! field.isUnit && field.type && $this.loadTemplate(field.type)) {
+                if (field.type && $this.loadTemplate(field.type)) {
                     var fieldTypeTemplate = $this.renderField(field);
                     fieldTypeTemplate = fieldTypeTemplate.replace(/{id}/g, field.css);
                     fieldTypeTemplate = fieldTypeTemplate.replace(/{name}/g, field.css);
 
                     fieldTemplate = fieldTemplate.replace(/{field}/g, fieldTypeTemplate);
+
                     fieldsHTML += fieldTemplate;
                 }
             });
@@ -250,6 +251,9 @@ var cssStudio = {
 
         // Init fields JS actions
         this.fieldsJSActions();
+
+        // Assign default values
+        this.assignDefaultValues();
     },
 
     // CSS JSON Object
@@ -293,6 +297,23 @@ var cssStudio = {
         $('#bbcc-form-style').text(cssString);
     },
 
+    // Assign default values
+    assignDefaultValues: function () {
+        var activeSelector = $('.active-selector').text(),
+            cssJSON = this.properties;
+
+        $.each(cssJSON, function (index, group) {
+            $.each(group.fields, function (index, field) {
+                var cssValue = $(activeSelector).css(field.css);
+                $('.bbs-editor-list').find('[name='+field.css+']').val(cssValue);
+
+                console.log(field.css, cssValue);
+            });
+        });
+
+
+    },
+
     // Fields JS Actions
     fieldsJSActions: function () {
         var updateCSS = this.updateCSS;
@@ -310,8 +331,6 @@ var cssStudio = {
         // Number
         easyloader.load('numberspinner', function () {
             $('.bbs-number').numberspinner({
-                min: 10,
-                max: 100,
                 editable: false,
                 onChange: function (value) {
                     var property = $(this).attr("textboxname");

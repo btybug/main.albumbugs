@@ -220,16 +220,17 @@
     <!-- CSS Studio Templates -->
     <script type="template" id="bbt-field-selector">
         <ul class="bbs-field-selectors">
-            <li bb-click="openStudioWindow" data-selector="{containerSelector}">Field Container <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow" data-selector="{labelSelector}">Field Label <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow" data-selector="{iconSelector}">Field Icon <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow" data-selector="{helpIconSelector}">Help Icon <i class="fa fa-paint-brush pull-right"></i></li>
-            <li bb-click="openStudioWindow" data-selector="{helpPopupSelector}">Help Popup <i class="fa fa-paint-brush pull-right"></i></li>
+            <li data-selector="{containerSelector}">Field Container <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
+            <li data-selector="{labelSelector}">Field Label <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
+            <li data-selector="{iconSelector}">Field Icon <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
+            <li data-selector="{helpIconSelector}">Help Icon <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
+            <li data-selector="{helpPopupSelector}">Help Popup <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
         </ul>
     </script>
 
     <script type="template" id="bbt-editor-list">
-        <h4>Select Item</h4>
+        <h4>Editing: {element}</h4>
+        <h3 class="active-selector">{selector}</h3>
         <ul class="bbs-editor-list">{groups}</ul>
     </script>
 

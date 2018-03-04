@@ -1,3 +1,9 @@
+var unitArray = [
+    { value: 'px', title: 'px' },
+    { value: 'em', title: 'em' },
+    { value: '%', title: '%' }
+];
+
 var cssStudio = {
     properties: [
         {
@@ -36,26 +42,11 @@ var cssStudio = {
                 {
                     title: 'Font Size',
                     css: 'font-size',
-                    type: 'number'
-                },
-                {
-                    title: '',
-                    css: 'font-size-unit',
-                    type: 'toggle',
-                    options: [
-                        {
-                            value: 'px',
-                            title: 'px'
-                        },
-                        {
-                            value: 'em',
-                            title: 'em'
-                        },
-                        {
-                            value: '%',
-                            title: '%'
-                        }
-                    ]
+                    type: 'number',
+                    hasUnit: {
+                        type: 'toggle',
+                        options: unitArray
+                    }
                 },
                 {
                     title: 'Text Color',
@@ -92,12 +83,37 @@ var cssStudio = {
                     type: 'color'
                 }
             ]
+        },
+        {
+            title: 'Padding',
+            fields: [
+                {
+                    title: 'Padding Top',
+                    css: 'padding-top',
+                    type: 'number',
+                    hasUnit: {
+                        type: 'toggle',
+                        options: unitArray
+                    }
+                }
+            ]
         }
     ],
 
     // Load template
     loadTemplate: function loadTemplate(template) {
         return $('#bbt-' + template).html();
+    },
+
+    // Parse inline template
+    parseTemplate: function (template, variables) {
+        var templateHTML = $('#bbt-' + template).html();
+        $.each(variables, function (key, value) {
+            key = "{" + key + "}";
+            templateHTML = templateHTML.replace(new RegExp(key, "gm"), value);
+        });
+
+        return templateHTML;
     },
 
     // Get properties array
@@ -130,6 +146,11 @@ var cssStudio = {
 
                 fieldTemplate = fieldTemplate.replace(/{options}/g, buildOptions);
             }
+        }
+
+        if(field.hasUnit){
+            field.hasUnit.css = field.css + "-unit";
+            fieldTemplate += cssStudio.renderField(field.hasUnit);
         }
 
         return fieldTemplate;
@@ -178,24 +199,37 @@ var cssStudio = {
     buildEditorList: function () {
         var $this = this,
             properties = this.getProperties(),
-            listTemplate = this.loadTemplate('editor-list'),
-            groupsHTML = '';
+            groupsHTML = '',
+            activeElement = $('.bbs-field-selectors>li.active');
+
+        var activeSelector = $('.bbs-field-selectors>li').first().data("selector") + " " + activeElement.data("selector");
+
+        if ($('.bbs-field-selectors>li').first().data("selector") === activeElement.data("selector")) {
+            activeSelector = activeElement.data("selector");
+        }
+
+        var listTemplate = this.parseTemplate('editor-list', {
+            element: activeElement.text().trim(),
+            selector: activeSelector
+        });
 
         // Group
         $.each(properties, function (i, propertyGroup) {
-            var groupTemplate = $this.loadTemplate('properties-container'),
-                fieldsHTML = '';
+            var groupTemplate = $this.parseTemplate('properties-container', {
+                    title: propertyGroup.title
+                }),
 
-            groupTemplate = groupTemplate.replace(/{title}/g, propertyGroup.title);
+                fieldsHTML = '';
 
             // Field container
             $.each(propertyGroup.fields, function (i, field) {
-                var fieldTemplate = $this.loadTemplate('property-container');
-                fieldTemplate = fieldTemplate.replace(/{label}/g, field.title);
-                fieldTemplate = fieldTemplate.replace(/{id}/g, field.css);
+                var fieldTemplate = $this.parseTemplate('property-container', {
+                    label: field.title,
+                    id: field.css
+                });
 
                 // Field HTML
-                if (field.type && $this.loadTemplate(field.type)) {
+                if (! field.isUnit && field.type && $this.loadTemplate(field.type)) {
                     var fieldTypeTemplate = $this.renderField(field);
                     fieldTypeTemplate = fieldTypeTemplate.replace(/{id}/g, field.css);
                     fieldTypeTemplate = fieldTypeTemplate.replace(/{name}/g, field.css);
@@ -223,18 +257,38 @@ var cssStudio = {
 
     // Update CSS
     updateCSS: function (property, value) {
-        cssStudio.CSSJSON[property] = value;
+        var activeSelector = $('.active-selector').text();
+
+        if(! cssStudio.CSSJSON[activeSelector]) cssStudio.CSSJSON[activeSelector] = {};
+
+        cssStudio.CSSJSON[activeSelector][property] = value;
 
         var cssString = "",
-            cssJSON = cssStudio.CSSJSON;
+            rulesWithUnit = ["font-size", "padding", "padding-top", "margin", "border-width", "outline-width"];
 
-        cssString += ".bbcc-form {";
+        $.each(cssStudio.CSSJSON, function (selector, cssJSON){
+            cssString += selector + " {\n";
 
-        for (var cssPropertyName in cssJSON) {
-            cssString += cssPropertyName + ": " + cssJSON[cssPropertyName] + ";";
-        }
+            for (var cssPropertyName in cssJSON) {
+                var ruleValue = cssJSON[cssPropertyName];
 
-        cssString += "}";
+                if($.inArray(cssPropertyName, rulesWithUnit) !== -1){
+                    var unit = "px";
+                    if(cssJSON[cssPropertyName + "-unit"]){
+                        unit = cssJSON[cssPropertyName + "-unit"];
+                    }
+
+                    ruleValue = ruleValue + unit;
+                }
+
+                if(cssPropertyName.indexOf("-unit") === -1){
+                    cssString += "\t" + cssPropertyName + ": " + ruleValue + ";\n";
+                }
+            }
+
+            cssString += "}\n";
+        });
+
 
         $('#bbcc-form-style').text(cssString);
     },
@@ -259,7 +313,6 @@ var cssStudio = {
                 min: 10,
                 max: 100,
                 editable: false,
-                suffix: 'px',
                 onChange: function (value) {
                     var property = $(this).attr("textboxname");
                     updateCSS(property, value);
@@ -285,15 +338,17 @@ var cssStudio = {
     },
 
     // Init CSS Studio
-    init: function () {
+    init: function (opened) {
         var $this = this;
         this.buildEditorList();
 
         // Events
-        $('#bb-css-studio').on('click', '[bbs-click]', function (e) {
-            e.preventDefault();
-            var event = $(this).attr('bbs-click');
-            $this.clickEvents[event]($(this), e);
-        });
+        $('#bb-css-studio')
+            .off("click")
+            .on('click', '[bbs-click]', function (e) {
+                e.preventDefault();
+                var event = $(this).attr('bbs-click');
+                $this.clickEvents[event]($(this), e);
+            });
     }
 };

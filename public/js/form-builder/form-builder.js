@@ -37,6 +37,15 @@ $(document).ready(function () {
         },
         // Open studio window
         openStudioWindow: function ($this) {
+            $('.bbs-field-selectors>li').removeClass("active");
+            $this.parent("li").addClass("active");
+
+            if ($('#studio-panel').length !== 0) {
+                // Init CSS studio
+                cssStudio.init();
+                return;
+            }
+
             jsPanel.create({
                 id: 'studio-panel',
                 container: 'body',
@@ -50,13 +59,10 @@ $(document).ready(function () {
                 headerTitle: 'Styling',
                 content: '<div id="bb-css-studio" class="bb-css-studio"></div>',
                 callback: function () {
-                    // $this.addClass("disabled");
                     // Init CSS studio
                     cssStudio.init();
                 },
-                onclosed: function () {
-                    // $this.removeClass("disabled");
-                }
+                onclosed: function () {}
             });
         },
         // Open selectors window

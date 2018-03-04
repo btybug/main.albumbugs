@@ -119,6 +119,19 @@
 .bbs-field-selectors li:hover i {
   display: block; }
 
+.bbs-field-selectors li.active {
+  background: #000000; }
+
+.bb-css-studio > h3 {
+  font-size: 13px;
+  margin: 0;
+  padding: 0 10px 10px;
+  color: #868686; }
+
+.bbs-number-spinner {
+  float: left;
+  margin-right: 10px; }
+
 [data-field] {
   cursor: move; }
 
@@ -300,7 +313,9 @@ button.disabled {
 .bbs-property-container {
   border-bottom: 1px solid #4c4c4c;
   padding: 0 15px 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  display: table;
+  width: 100%; }
 
 .bbs-input {
   width: 100%;

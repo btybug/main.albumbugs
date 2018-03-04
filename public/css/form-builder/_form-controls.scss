@@ -144,3 +144,19 @@
 .bbs-field-selectors li:hover i {
   display: block;
 }
+
+.bbs-field-selectors li.active {
+  background: #000000;
+}
+
+.bb-css-studio > h3 {
+  font-size: 13px;
+  margin: 0;
+  padding: 0 10px 10px;
+  color: #868686;
+}
+
+.bbs-number-spinner {
+  float: left;
+  margin-right: 10px;
+}

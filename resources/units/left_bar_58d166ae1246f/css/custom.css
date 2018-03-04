@@ -151,7 +151,7 @@
     color: #FFFFFF;
 }
 .aside-left .user-profile{
-    background: url(https://images7.alphacoders.com/438/438372.jpg) no-repeat;
+    background: url(../../../public/images/438372.jpg) no-repeat;
     position: relative;
     background-size: cover;
 }

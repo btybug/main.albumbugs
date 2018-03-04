@@ -26,6 +26,5 @@
 
 .bbs-toggle {
     display: table;
-    width: 100%;
     user-select: none;
 }

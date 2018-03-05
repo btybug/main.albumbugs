@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="col-md-12 dis-flex">
-        <div class="col-md-9 p-0">
+        <div class="col-md-9 p-0 dis-fl-dir">
             <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
                 <div class="panel-heading bg-black-darker text-white">Email Content</div>
                 <div class="panel-body p-5">
@@ -68,73 +68,7 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>
-                                <div class="p-5">Notify To</div>
-                            </td>
-                            <td>
-                                <div class="input-group">
-                                    {!! Form::text('notify_to',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
 
-                                    <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
-                                         title=""
-                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
-                                        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="p-5">CC</div>
-                            </td>
-                            <td>
-                                <div class="input-group">
-                                    {!! Form::text('cc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                    <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
-                                         title=""
-                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
-                                        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="p-5">BCC</div>
-                            </td>
-                            <td>
-                                <div class="input-group">
-                                    {!! Form::text('bcc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                    <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
-                                         title=""
-                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
-                                        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="p-5">Reply To</div>
-                            </td>
-                            <td>
-                                {!! Form::select('replyto',
-                            [
-                            'info@avatarbugs.com'=>'Info',
-                            'support@avatarbugs.com'=>'Support',
-                            'admin@avatarbugs.com'=>'Admin',
-                            'sales@avatarbugs.com'=>'Sales',
-                            'tech@avatarbugs.com'=>'Technical Staff'
-                            ],null,['class'=>'form-control']) !!}
-                            </td>
-                        </tr>
 
 
 
@@ -162,8 +96,93 @@
 
                         </tbody>
                     </table>
+                    <div class="bty-panel-collapse">
+                        <div>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#advancedopt" aria-expanded="true">
+                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                                <span class="title">Advanced options</span>
+                            </a>
+                        </div>
+                        <div id="advancedopt" class="collapse in" aria-expanded="true" style="">
+                            <div class="content">
+                                <table class="table borderless m-0">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="p-5">Notify To</div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                {!! Form::text('notify_to',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
+
+                                                <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                                     title=""
+                                                     data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
+                                                    <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="p-5">CC</div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                {!! Form::text('cc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                                     title=""
+                                                     data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
+                                                    <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="p-5">BCC</div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                {!! Form::text('bcc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                                     title=""
+                                                     data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
+                                                    <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="p-5">Reply To</div>
+                                        </td>
+                                        <td>
+                                            {!! Form::select('replyto',
+                                        [
+                                        'info@avatarbugs.com'=>'Info',
+                                        'support@avatarbugs.com'=>'Support',
+                                        'admin@avatarbugs.com'=>'Admin',
+                                        'sales@avatarbugs.com'=>'Sales',
+                                        'tech@avatarbugs.com'=>'Technical Staff'
+                                        ],null,['class'=>'form-control']) !!}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="col-md-3">
             <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
@@ -337,6 +356,10 @@
             background: none;
             outline: none;
         }
+        /*.dis-fl-dir{*/
+            /*display: flex;*/
+            /*flex-direction: column;*/
+        /*}*/
     </style>
 @stop
 @section( 'JS' )

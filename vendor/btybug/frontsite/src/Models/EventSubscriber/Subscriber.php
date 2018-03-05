@@ -42,10 +42,10 @@ class Subscriber
         return $this->store[$event][$action . '$' . uniqid()] = $settings;
     }
 
-    public function addEvent($name, $namespace)
+    public function addEvent($name, $namespace,$settings=[])
     {
         $slug=str_replace('\\','-',$namespace);
-        $this->events[$slug] = ['namespace'=>$namespace,'name'=>$name];
+        $this->events[] = ['namespace'=>$namespace,'name'=>$name,'settings'=>$settings];
         return $this;
     }
 

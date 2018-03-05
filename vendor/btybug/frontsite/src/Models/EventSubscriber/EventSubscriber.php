@@ -83,9 +83,9 @@ final class EventSubscriber
         return $this;
     }
 
-    private function scopeAddEvent($name, $namespace)
+    private function scopeAddEvent($name, $namespace,$settings=[])
     {
-        $this->subscribe->addEvent($name, $namespace);
+        $this->subscribe->addEvent($name, $namespace,$settings);
         return $this;
     }
 

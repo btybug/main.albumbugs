@@ -111,8 +111,8 @@ class EmailsController extends Controller
         $obj = Datatables::of($emails);
         $obj->addColumn(
             'action', function ($email) {
-            return '<a href="' . url('/admin/manage/emails/update', $email->id) . '" class="btn btn-default btn-warning btn-xs"><i class="fa fa-cog set-iconz"></i></a>
-<a data-href="' . url('/admin/manage/emails/delete-email', $email->id) . '"  data-key="' . $email->id . '" data-type="Email ' . $email->name . '" type="button" class="btn btn-danger delete-button btn-primary btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
+            return '<a href="' . url('/admin/front-site/emails/update', $email->id) . '" class="btn btn-default btn-warning btn-xs"><i class="fa fa-cog set-iconz"></i></a>
+<a data-href="' . url('/admin/front-site/emails/delete-email', $email->id) . '"  data-key="' . $email->id . '" data-type="Email ' . $email->name . '" type="button" class="btn btn-danger delete-button btn-primary btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
         }
         );
         $obj = $obj->make(true);

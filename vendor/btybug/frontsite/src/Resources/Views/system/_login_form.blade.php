@@ -59,6 +59,14 @@
     </div>
 </div>
 
+<div class="form-group">
+    {!! Form::label('login_unit','Login Form Unit',['class' => 'control-label labels'])!!}
+    <div>
+        {!! BBcustomize('unit','login_unit','login_form',
+                (isset($system['login_unit']) && $system['login_unit'])?'Change':'Select','cms-login',['class'=>'btn btn-default change-layout','model' =>(isset($system['login_unit']) && $system['login_unit']) ?$system['login_unit'] : null]) !!}
+    </div>
+</div>
+
 {{--<div class="form-group">--}}
 {{--{!! Form::label('tnc_on_register','Terms & Condition on Registration',['class' => 'col-sm-6 control-label'])!!}--}}
 {{--<div class="col-sm-6">--}}

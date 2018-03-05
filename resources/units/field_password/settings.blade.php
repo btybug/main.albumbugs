@@ -10,6 +10,17 @@
             </div>
             <div id="inputsetting" class="collapse in" aria-expanded="true" style="">
                 <div class="content bty-settings-panel">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label for="lablename" class="col-sm-3 p-l-0 control-label m-0  text-left">Password confirmation</label>
+                            <div class="col-sm-8">
+                                {!! Form::hidden('password_confirmation',0) !!}
+                                {!! Form::checkbox('password_confirmation',1,null,['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
                     <div class="form-group col-md-12">
                         <div class="col-md-2">
                             <label>Field style</label>

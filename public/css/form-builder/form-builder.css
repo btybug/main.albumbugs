@@ -157,6 +157,18 @@ span.tag {
   background: #757414;
   user-select: none; }
 
+.layout-list {
+  padding: 10px; }
+
+a.layout-item {
+  width: 50%;
+  float: left;
+  text-align: center;
+  margin-bottom: 15px; }
+
+.form-builder-area {
+  min-height: 50px; }
+
 [data-field] {
   cursor: move; }
 
@@ -307,7 +319,7 @@ button.disabled {
 .form-elements-list {
   padding: 10px; }
 
-#fields-panel .jsPanel-content {
+.jsPanel-content {
   overflow: visible !important; }
 
 /* CSS Visual Studio */

@@ -142,6 +142,95 @@ $(document).ready(function () {
             });
 
         },
+        // Open layout window
+        openLayoutWindow: function ($this) {
+
+            if ($('#layout-panel').length !== 0) {
+                return;
+            }
+
+            jsPanel.create({
+                id: 'layout-panel',
+                container: 'body',
+                theme: 'primary',
+                boxShadow: 0,
+                position: 'right-top',
+                contentSize: '300 170',
+                dragit: {
+                    snap: true
+                },
+                headerTitle: 'Select Form Layout',
+                content: loadTemplate("bbt-layout-panel"),
+                callback: function () {
+
+                },
+                onclosed: function () {
+                    $this.removeClass("disabled");
+                }
+            });
+
+        },
+        // Apply layout
+        applyLayout: function ($this) {
+            var layout = $this.data("layout");
+            var columns = layout.split("-");
+
+            // Backup fields
+            var fieldsHTML = '';
+            $('[data-field]').each(function () {
+                fieldsHTML += $(this).get(0).outerHTML;
+            });
+
+            var layoutHTML = '';
+            $.each(columns, function (index, column) {
+                var fields = '';
+                if(index === $this.data("index")){
+                    fields = fieldsHTML;
+                }
+
+                layoutHTML += '<div class="col-md-'+column+'">\n' +
+                    '<div class="row form-builder-area bbcc-form">'+fields+'</div>\n' +
+                    '</div>';
+            });
+
+            // Render layout
+            $('#form-builder-rows').html(layoutHTML);
+        },
+        // Open panel window
+        openPanelWindow: function ($this) {
+
+            if ($('#panel-panel').length !== 0) {
+                return;
+            }
+
+            jsPanel.create({
+                id: 'panel-panel',
+                container: 'body',
+                theme: 'primary',
+                boxShadow: 0,
+                position: 'right-top',
+                contentSize: '300 170',
+                dragit: {
+                    snap: true
+                },
+                headerTitle: 'Add Panel',
+                content: loadTemplate("bbt-panel-panel"),
+                callback: function () {
+                    // Draggable fields
+                    $('.draggable-element').draggable({
+                        helper: 'clone'
+                    });
+                },
+                onclosed: function () {
+                    $this.removeClass("disabled");
+                }
+            });
+
+        },
+        // Add panel
+        addPanel: function ($this) {
+
+        },
         // Load selectors template
         loadSelectorsTemplate: function ($this) {
             var mainSelector = $this.data("main");
@@ -296,6 +385,14 @@ $(document).ready(function () {
                 drawActiveHelpers($this);
             }
         });
+
+        // Hide delete button for protected elements
+        var deleteBtn =  $('.bb-node-delete');
+        deleteBtn.show();
+
+        if($this.data("id") === 0){
+            deleteBtn.hide();
+        }
     }
 
     function hideActiveNode() {
@@ -322,7 +419,7 @@ $(document).ready(function () {
                 // Insert template
                 var elementHTML = $(ui.draggable).find(".form-element-item-sample").html(),
                     template = $(elementHTML),
-                    target = $('.form-builder-area');
+                    target = $(event.target);
 
                 template.attr('data-field', true);
                 template.attr('data-id', $(ui.draggable).attr("data-id"));
@@ -330,8 +427,11 @@ $(document).ready(function () {
 
                 $(ui.draggable).hide();
                 target.append(template);
+
+                activateDroppable();
             }
         }).sortable({
+            connectWith: '.form-builder-area',
             helper: "clone",
             start: function (event, ui) {
                 var $this = $(ui.item);

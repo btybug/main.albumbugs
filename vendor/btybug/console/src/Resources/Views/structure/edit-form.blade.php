@@ -3,7 +3,7 @@
 @section( 'CSS' )
     {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
     {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
-    {!! Html::style("public/libs/easyui/easyui.css") !!}
+    {{--{!! Html::style("public/libs/easyui/easyui.css") !!}--}}
     {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
     {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}
 
@@ -37,15 +37,7 @@
             </div>
             <div class="col-md-8">
                 <button type="submit" class="form-save pull-right" bb-click="saveHTML">Save</button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow"
-                        data-main="global">Styling
-                </button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal"
-                        data-target="#logicModal">Logic
-                </button>
-                <button type="button" class="panel-trigger pull-right" data-toggle="modal"
-                        data-target="#settingsModal">Settings
+                <button type="button" class="panel-trigger pull-right" data-toggle="modal" data-target="#settingsModal">Settings
                 </button>
             </div>
         </div>
@@ -55,6 +47,20 @@
             <div class="col-md-12">
                 <label>Form description</label>
                 {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Form Description']) !!}
+            </div>
+        </div>
+    </div>
+    <div class="bb-form-header">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow"
+                        data-main="global">Styling
+                </button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal" data-target="#logicModal">Logic</button>
+
+                <button type="button" class="panel-trigger pull-right" bb-click="openLayoutWindow">Layout</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openPanelWindow">Panel</button>
             </div>
         </div>
     </div>
@@ -162,23 +168,30 @@
 
     {!! Form::close() !!}
 
-    <h3>Preview Area</h3>
-
     <hr/>
 
     <div class="container-fluid">
         <style id="bbcc-form-style"></style>
-        <div class="row form-builder-area bbcc-form">
-            @if(! $form->original_html)
-            <div class="col-md-12" data-field="true" data-id="0">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
+
+        <div class="row" id="form-builder-rows">
+            <div class="col-md-8">
+                <div class="row form-builder-area bbcc-form">
+                    @if(! $form->original_html)
+                        <div class="col-md-12" data-field="true" data-id="0">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    @endif
+
+                    {!! $form->original_html !!}
                 </div>
             </div>
-            @endif
-            
-            {!! $form->original_html !!}
+            <div class="col-md-4">
+                <div class="row form-builder-area bbcc-form"></div>
+            </div>
         </div>
+
     </div>
 
     <div class="modal fade" id="logicModal" role="dialog">
@@ -212,9 +225,6 @@
         </div>
     </div>
 
-
-
-
     <script type="template" id="fields-html">
         <div class="form-elements-list">
             @if(count($fields))
@@ -231,6 +241,43 @@
                     </div>
                 @endforeach
             @endif
+        </div>
+    </script>
+
+    <!-- Edit Panel Panel -->
+    <script type="template/html" id="bbt-panel-panel">
+        <div class="form-elements-list">
+            <div class="form-element-item draggable-element ui-draggable ui-draggable-handle">
+                Panel 1
+                <div class="form-element-item-sample hidden">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Panel heading without title</div>
+                            <div class="panel-body">
+                                <div class="row form-builder-area bbcc-form"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <!-- Edit Layout Panel -->
+    <script type="template/html" id="bbt-layout-panel">
+        <div class="layout-list">
+            <a href="#" class="layout-item" data-layout="9-3" data-index="0" bb-click="applyLayout">
+                <img src="{!! url("public/images/layouts/cols-9-3.png") !!}" alt="">
+            </a>
+            <a href="#" class="layout-item" data-layout="3-9" data-index="1" bb-click="applyLayout">
+                <img src="{!! url("public/images/layouts/cols-3-9.png") !!}" alt="">
+            </a>
+            <a href="#" class="layout-item" data-layout="6-6" data-index="0" bb-click="applyLayout">
+                <img src="{!! url("public/images/layouts/cols-6-6.png") !!}" alt="">
+            </a>
+            <a href="#" class="layout-item" data-layout="4-4-4" data-index="0" bb-click="applyLayout">
+                <img src="{!! url("public/images/layouts/cols-4-4-4.png") !!}" alt="">
+            </a>
         </div>
     </script>
 

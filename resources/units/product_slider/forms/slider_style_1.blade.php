@@ -9,7 +9,6 @@ if (isset($settings["blog"]) && !count($product)) {
         $product = collect($product)->toArray();
     }
 }
-//dd($product[0]->image);
 ?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,12 +16,10 @@ if (isset($settings["blog"]) && !count($product)) {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-
+@if(isset($product)&&count($product)>0)
 <section class="bty-slider">
     <div class="container">
         <div class="owl-carousel owl-theme slider-carousel custom">
-
-            @if(isset($product)&&count($product)>0)
                 @foreach($product as $key => $value)
 
                     <div class="item">
@@ -32,32 +29,20 @@ if (isset($settings["blog"]) && !count($product)) {
                             {{--<span class="badge">{{$value['sale_prec']}}%</span>--}}
                             <h4 class="text-center">{{$value->title}}</h4>
                             {{--<h5 class="text-center"><p class="item-price text-center"><strike>${{$value['or_price']}}</strike> <b>${{$value['sale_price']}}</b></p></h5>--}}
-                            {{--<div class="text-center add-cart">--}}
-                                {{--<a href="" class=" btn btn-primary " >Add to Cart</a>--}}
-                            {{--</div>--}}
+                            <?php preg_match('!\d+!', $value->price, $matches);?>
+                            <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
+                            @if(isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on')
+                            <div class="text-center add-cart">
+                                <a href="" class=" btn btn-primary " >Add to Cart</a>
+                            </div>
+                                @endif
                         </div>
                     </div>
                 @endforeach
-            @endif
-
-            {{--@if(isset($settings['img'])&&count($settings['img'])>0)--}}
-                {{--@foreach($settings['img'] as $key => $value)--}}
-                    {{--<div class="item">--}}
-                        {{--<div class="">--}}
-                            {{--<a href="#"><img src="{{$value['path']}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>--}}
-                            {{--<span class="badge">{{$value['sale_prec']}}%</span>--}}
-                            {{--<h4 class="text-center">{{$value['pr_name']}}</h4>--}}
-                            {{--<h5 class="text-center"><p class="item-price text-center"><strike>${{$value['or_price']}}</strike> <b>${{$value['sale_price']}}</b></p></h5>--}}
-                            {{--<div class="text-center add-cart">--}}
-                                {{--<a href="" class=" btn btn-primary " >Add to Cart</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
-            {{--@endif--}}
         </div>
     </div>
 </section>
+
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -77,4 +62,4 @@ if (isset($settings["blog"]) && !count($product)) {
         })
     })
 </script>
-
+@endif

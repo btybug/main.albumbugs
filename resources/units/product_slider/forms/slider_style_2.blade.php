@@ -39,7 +39,6 @@
             $product = collect($product)->toArray();
         }
     }
-    //dd($product[0]->image);
     ?>
 
     @if(isset($product)&&count($product)>0)
@@ -79,7 +78,11 @@
                                                             </ul>
                                                         </div>
                                                         {{--<p class="item-price"><strike>${{$value['or_price']}}</strike> <b>${{$value['sale_price']}}</b></p>--}}
+                                                        <?php preg_match('!\d+!', $value->price, $matches);?>
+                                                        <p class="item-price"><b>${{(head($matches))}}</b></p>
+                                                        @if(isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on')
                                                         <a href="#" class="btn btn-primary">Add to Cart</a>
+                                                            @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,64 +103,6 @@
             </div>
         </div>
     @endif
-
-{{--@if(isset($settings['img'])&&count($settings['img'])>0)--}}
-{{--<div class="container">--}}
-    {{--<div class="row">--}}
-        {{--<div class="col-md-12">--}}
-            {{--<h2>Featured <b>Products</b></h2>--}}
-            {{--<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">--}}
-                {{--<!-- Carousel indicators -->--}}
-                {{--<ol class="carousel-indicators">--}}
-                    {{--@foreach(array_chunk($settings['img'],4) as $key=>$setting)--}}
-                    {{--<li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key==0?'active':''}}"></li>--}}
-                        {{--@endforeach--}}
-                {{--</ol>--}}
-                {{--<!-- Wrapper for carousel items -->--}}
-                {{--<div class="carousel-inner">--}}
-                    {{--@foreach(array_chunk($settings['img'],4) as $key=>$setting)--}}
-                            {{--<div class="item carousel-item {{$key==0?'active':''}}">--}}
-                                {{--<div class="row">--}}
-                                    {{--@foreach ($setting as $value)--}}
-                                    {{--<div class="col-sm-3">--}}
-                                        {{--<div class="thumb-wrapper">--}}
-                                            {{--<span class="wish-icon"><i class="fa fa-heart-o"></i></span>--}}
-                                            {{--<div class="img-box">--}}
-                                                {{--<img src="{{$value['path']}}" class="img-responsive img-fluid" alt="">--}}
-                                            {{--</div>--}}
-                                            {{--<div class="thumb-content">--}}
-                                                {{--<h4>{{$value['pr_name']}}</h4>--}}
-                                                {{--<div class="star-rating">--}}
-                                                    {{--<ul class="list-inline">--}}
-                                                        {{--<li class="list-inline-item"><i class="fa fa-star"></i></li>--}}
-                                                        {{--<li class="list-inline-item"><i class="fa fa-star"></i></li>--}}
-                                                        {{--<li class="list-inline-item"><i class="fa fa-star"></i></li>--}}
-                                                        {{--<li class="list-inline-item"><i class="fa fa-star"></i></li>--}}
-                                                        {{--<li class="list-inline-item"><i class="fa fa-star-o"></i></li>--}}
-                                                    {{--</ul>--}}
-                                                {{--</div>--}}
-                                                {{--<p class="item-price"><strike>${{$value['or_price']}}</strike> <b>${{$value['sale_price']}}</b></p>--}}
-                                                {{--<a href="#" class="btn btn-primary">Add to Cart</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                        {{--@endforeach--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--@endforeach--}}
-        {{--</div>--}}
-                {{--<!-- Carousel controls -->--}}
-                {{--<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">--}}
-                    {{--<i class="fa fa-angle-left"></i>--}}
-                {{--</a>--}}
-                {{--<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">--}}
-                    {{--<i class="fa fa-angle-right"></i>--}}
-                {{--</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-{{--@endif--}}
     <script type="text/javascript">
         $(document).ready(function(){
             $(".wish-icon i").click(function(){

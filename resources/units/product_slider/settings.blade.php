@@ -1,18 +1,10 @@
 
 <?php
-
-
 $blogs= DB::table('blogs')->pluck('title', 'slug');
-//dd($blogs[0]);
-
-
 ?>
-
+<h3>Select Blog</h3>
 <div class="form-group">
-    <div class="col-md-6">
-        <label for="">Select Blog</label>
-    </div>
-    <div class="col-md-6" style="margin-bottom:15px">
+    <div class="col-md-9" style="">
         <select name="blog" class="form-control">
             <option value="">select option</option>
             @if(count($blogs))
@@ -22,12 +14,9 @@ $blogs= DB::table('blogs')->pluck('title', 'slug');
             @endif
         </select>
     </div>
-</div>
-
-
-
-
+</div><br>
 <hr align="left" width="100%">
+
 <h3>Slider styles</h3>
 <div class="col-md-9">
     <select name="slider_stl" id="" class="form-control">
@@ -37,6 +26,20 @@ $blogs= DB::table('blogs')->pluck('title', 'slug');
     </select>
 </div><br>
 <hr align="left" width="100%">
+
+<h3>Add to cart</h3>
+<div class="form-group ">
+    <div class="checkbox checbox-switch switch-success">
+        <label>
+            <input type="checkbox" name="bottom_nb_ch" {{isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on'?'checked':''}} class="pull-right">
+            <span></span>
+            On/off
+        </label>
+    </div>
+</div>
+<hr align="left" width="100%">
+
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 
 {{--<h3>Slider images</h3>--}}
 {{--<div class="content bty-settings-panel">--}}

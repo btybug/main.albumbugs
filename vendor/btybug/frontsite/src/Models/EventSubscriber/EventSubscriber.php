@@ -73,6 +73,7 @@ final class EventSubscriber
 
     protected function scopeGetSubscriptions()
     {
+
         return $this->subscribe->getAll();
     }
 

@@ -192,21 +192,10 @@
                     <tr class="select-trigger-td">
                         <td>
                             <div class="p-b-5">Event / Trigger</div>
-                            {!! Form::select('event_code',[
-                                'auth.login' => 'User Login',
-                                'auth.logout' => 'User Logout',
-                                'user.register' => 'User Register',
-                                'forgot.password' => 'Forgot Password',
-                                'account.activated' => 'Account Activate',
-                                'CustomFormSubmittedEvent' => 'Form Was Submit',
-                                'form_submited' => 'Form Submited',
-                            ], null, ['id' => 'event_trigger','class' => 'form-control']) !!}
+                            {!! Form::select('event_code',$subscriber, null, ['id' => 'event_trigger','class' => 'form-control']) !!}
                         </td>
                     </tr>
 
-                    @if($email->event_code == 'form_submited')
-                        @include('manage::emails._partial.form_lists')
-                    @endif
 
                     <tr>
                         <td>

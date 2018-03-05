@@ -74,13 +74,13 @@ class Subscriber
     public function getEvents($lists = false)
     {
         if (!$lists) {
-            return $this->events;
+            return collect($this->events);
         }
         $listData = [];
         foreach ($this->events as $key => $value) {
             $listData[$value] = $key;
         }
-        return $listData;
+        return collect($listData);
     }
 
     public function getProperties()

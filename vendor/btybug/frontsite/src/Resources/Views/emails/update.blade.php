@@ -1,4 +1,4 @@
-@extends( 'layouts.admin' )
+@extends( 'btybug::layouts.admin' )
 @section( 'content' )
     {!! Form::model($email,['class'=>'form-horizontal']) !!}
     <div class="row">

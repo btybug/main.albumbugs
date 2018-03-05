@@ -89,7 +89,7 @@ class EmailsController extends Controller
      */
     public function getUpdate($id = null)
     {
-        $forms = Forms::all()->pluck('name', 'slug')->toArray();
+        $forms =  \Btybug\Console\Models\Forms::all()->pluck('name', 'slug')->toArray();
         $email = Emails::findOrFail($id);
         return view('manage::emails.update', compact('email', 'forms'));
     }

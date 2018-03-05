@@ -159,204 +159,293 @@
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Message 1</h4>
-        <h5>bty-message-1</h5>
-        <div class="bty-message-1">
-            <ul>
-                <li>
-                    <a href="">
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </a>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </a>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </a>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </a>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-            </ul>
-            <div>
-                <form>
-                    <div>
-                        <input type="text" placeholder="Enter message">
-                        <span>
-							<button type="button"><i class="fa fa-pencil"></i></button>
-						</span>
-                    </div>
-                </form>
+        <div class="col-md-6">
+            <h4>Message 2</h4>
+            <div class="bty-message-2">
+                <ul>
+                    <li>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
+                                ultricies. Fusce sit amet massa malesuada</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
+                                ultricies. Fusce sit amet massa malesuada</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
+                                ultricies. Fusce sit amet massa malesuada</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
+                                ultricies. Fusce sit amet massa malesuada</p>
+                        </div>
+                    </li>
+
+                </ul>
+                <div>
+                    <button>More</button>
+                </div>
             </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-message-2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .bty-message-2{
+    background-color: #1F2d43;
+    color: #BECEDE;
+}
+.bty-message-2>ul{
+    padding: 20px;
+    margin: 0;
+    list-style-type: none;
+}
+.bty-message-2>ul li{
+    display: flex;
+    padding: 15px 0;
+}
+.bty-message-2>ul li:not(:last-child){
+    border-bottom: 1px solid #5f718e;
+}
+.bty-message-2>ul li i{
+    /*align-self: center;*/
+    padding-right: 10px;
+    font-size: 32px;
+}
+.bty-message-2>ul li>div h5{
+    font-size: 14px;
+    margin: 0;
+}
+.bty-message-2>ul li>div p{
+    font-size: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin:0;
+}
+.bty-message-2>ul li>div{
+    overflow: hidden;
+}
+.bty-message-2>div{
+    border-top: 1px solid #5f718e;
+    padding:15px 20px;
+}
+.bty-message-2>div button{
+    padding: 3px 15px;
+    color: white;
+    background-color: #499bc7;
+    border: 1px solid #becede;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    box-shadow: 0px 0px 6px 1px #becede;
+}
+            </textarea>
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Message 2</h4>
-        <h5>bty-message-2</h5>
-        <div class="bty-message-2">
-            <ul>
-                <li>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                </li>
+        <div class="col-md-6">
+            <h4>Message 3</h4>
+            <div class="bty-message-3">
+                <ul>
+                    <li>
+                        <div>
+                            <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
+                                 alt="">
+                        </div>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
+                                ultricies. Fusce sit amet massa malesuada</p>
+                        </div>
+                        <div>
+                            14:50 am
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
+                                 alt="">
+                        </div>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie l</p>
+                        </div>
+                        <div>
+                            14:50 am
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
+                                 alt="">
+                        </div>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit a malesuada</p>
+                        </div>
+                        <div>
+                            14:50 am
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
+                                 alt="">
+                        </div>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
+                                vestibulum ut id felis. Nunc molestie </p>
+                        </div>
+                        <div>
+                            14:50 am
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
+                                 alt="">
+                        </div>
+                        <div>
+                            <h5>Lorem name</h5>
+                            <p>Lorem ipsum dolor sit amet, </p>
+                        </div>
+                        <div>
+                            14:50 am
+                        </div>
+                    </li>
 
-            </ul>
-            <div>
-                <button>More</button>
+
+                </ul>
+                <div>
+                    <div>
+                        <textarea name="" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div>
+                        <button type="button"><i class="fa fa-paper-plane-o"></i> </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-12">
-        <h4>Message 3</h4>
-        <h5>bty-message-3</h5>
-        <div class="bty-message-3">
-            <ul>
-                <li>
-                    <div>
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </div>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis
-                            ultricies. Fusce sit amet massa malesuada</p>
-                    </div>
-                    <div>
-                        14:50 am
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </div>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie l</p>
-                    </div>
-                    <div>
-                        14:50 am
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </div>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit a malesuada</p>
-                    </div>
-                    <div>
-                        14:50 am
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </div>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum
-                            vestibulum ut id felis. Nunc molestie </p>
-                    </div>
-                    <div>
-                        14:50 am
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <img src="https://www.seducewithpersonality.com/wp-content/uploads/2013/08/How-to-attract-a-girl.jpg"
-                             alt="">
-                    </div>
-                    <div>
-                        <h5>Lorem name</h5>
-                        <p>Lorem ipsum dolor sit amet, </p>
-                    </div>
-                    <div>
-                        14:50 am
-                    </div>
-                </li>
+        <div class="col-md-6">
+            <h5>bty-message-3</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+                .bty-message-3{
+    background-color: white;
+}
+.bty-message-3>ul{
+    padding: 20px;
+    list-style: none;
+    margin:0;
+}
+.bty-message-3>ul li img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.bty-message-3>ul li{
+    display: flex;
+    margin-bottom: 30px;
+}
+.bty-message-3>ul li >div:nth-of-type(1){
+    flex-shrink: 0;
+}
+.bty-message-3>ul li >div:nth-of-type(2){
+    padding: 0 10px;
+}
+.bty-message-3>ul li >div:nth-of-type(2) h5{
+    color: #99abb4;
+    line-height: 18px;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 7px;
+}
+.bty-message-3>ul li >div:nth-of-type(2) p{
+    margin: 0;
+    color: #777;
+    border-radius: 4px;
+    padding: 10px;
+}
+.bty-message-3>ul li:nth-of-type(odd) p{
+    background-color: #cfecfe;
+}
+.bty-message-3>ul li:nth-of-type(even) p{
+    background-color: #e8fdeb;
+}
+.bty-message-3>ul li >div:nth-of-type(3){
+    flex-shrink: 0;
+    font-size: 13px;
+    color: #99abb4;
+    align-self: flex-end;
+}
+.bty-message-3>div{
+    padding: 15px 20px;
+    width: 100%;
+    border-top: 1px solid #eee;
+    display: table;
+}
+.bty-message-3>div>div:first-of-type{
+    width: 100%;
+    display: table-cell;
+}
+.bty-message-3>div>div:last-of-type{
+    display: table-cell;
+}
+.bty-message-3>div textarea{
+    resize: none;
+    border: none;
+    width: 100%;
+    vertical-align: middle;
+}
+.bty-message-3>div textarea:focus{
+    outline: none;
+}
+.bty-message-3>div>div:last-of-type button{
+    display: table-cell;
+    background-color: #499bc7;
+    border: 0;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    color: white;
+}
+.bty-message-3>div textarea::-webkit-input-placeholder {
+    color: #ccc;
+}
 
+.bty-message-3>div textarea:-moz-placeholder {
+    color: #ccc;
+}
 
-            </ul>
-            <div>
-                <div>
-                    <textarea name="" placeholder="Type your message here..."></textarea>
-                </div>
-                <div>
-                    <button type="button"><i class="fa fa-paper-plane-o"></i> </button>
-                </div>
-            </div>
+.bty-message-3>div textarea:-ms-input-placeholder {
+    color: #ccc;
+}
+            </textarea>
         </div>
     </div>
 </div>

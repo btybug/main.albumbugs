@@ -14,9 +14,6 @@
 .bty-settings-panel input[type="checkbox"]{
     margin: 0;
 }
-.input-checkbox-5-bty label:after{
-    background: linear-gradient(to bottom, #158dc6 0%, #158dc6 100%);
-}
 .bty-settings-panel .select2-container{
     width: 100% !important;
 }
@@ -28,7 +25,7 @@
     padding: 0;
     position: relative;
     padding-left: 22px;
-    min-width: 112px;
+    min-width: 50px;
 }
 .customcheck input{
     display: none;
@@ -121,5 +118,15 @@
     padding: 15px 0;
 }
 .week-day-check{
-
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+}
+.week-day-check .customcheck.type-radio label:before{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
 }

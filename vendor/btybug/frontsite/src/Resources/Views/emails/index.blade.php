@@ -127,7 +127,7 @@
                 processing: true,
                 serverSide: true,
                 pageLength: 1000,
-                ajax: '/admin/manage/emails/data/{{$id}}',
+                ajax: '/admin/front-site/emails/data/{{$id}}',
                 dom: 'Bfrtip',
                 buttons: [
                     'colvis', 'copy', 'csv', 'excel', 'pdf', 'print'

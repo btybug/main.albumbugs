@@ -230,7 +230,8 @@
                     {{--value="{!! BBgetUnitAttr(($page->template)??null,'title') !!}"--}}
                     {{-->--}}
                     {{--</div>--}}
-                    {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content']) !!}
+                    {!! BBcustomize('unit','template','mail_template',
+                (isset($email['template']) && $email['template'])?'Change':'Select','email-template',['class'=>'btn btn-default change-layout','model' =>(isset($email['template']) && $email['template']) ?$email['template']: null]) !!}
                 </div>
             </div>
         </div>

@@ -39,13 +39,15 @@
             $product = collect($product)->toArray();
         }
     }
+
+    $img='<div class="img-box"><img src="{{$value->image}}" class="img-responsive img-fluid" alt=""></div>';
     ?>
 
     @if(isset($product)&&count($product)>0)
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Featured <b>Products</b></h2>
+                    {{--<h2>Featured <b>Products</b></h2>--}}
                     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
                         <!-- Carousel indicators -->
                         <ol class="carousel-indicators">
@@ -62,12 +64,21 @@
 
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
-                                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                    <div class="img-box">
+                                                    {{--<span class="wish-icon"><i class="fa fa-heart-o"></i></span>--}}
+
+
+                                                    {{--<div class="img-box">--}}
+                                                        {{--<img src="{{$value->image}}" class="img-responsive img-fluid" alt="">--}}
+                                                    {{--</div>--}}
+                                                    @if(isset($settings['first_item']) && $settings['first_item']=='style_image')
+                                                        <div class="img-box">
                                                         <img src="{{$value->image}}" class="img-responsive img-fluid" alt="">
-                                                    </div>
-                                                    <div class="thumb-content">
+                                                        </div>
+                                                        @endif
+                                                    @if(isset($settings['first_item']) && $settings['first_item']=='style_name')
                                                         <h4>{{$value->title}}</h4>
+                                                        @endif
+                                                    @if(isset($settings['first_item']) && $settings['first_item']=='style_rating')
                                                         <div class="star-rating">
                                                             <ul class="list-inline">
                                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -77,12 +88,129 @@
                                                                 <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                         </div>
-                                                        {{--<p class="item-price"><strike>${{$value['or_price']}}</strike> <b>${{$value['sale_price']}}</b></p>--}}
+                                                        @endif
+                                                    @if(isset($settings['first_item']) && $settings['first_item']=='style_price')
                                                         <?php preg_match('!\d+!', $value->price, $matches);?>
                                                         <p class="item-price"><b>${{(head($matches))}}</b></p>
-                                                        @if(isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on')
-                                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                                        @endif
+                                                    @if(isset($settings['first_item']) && $settings['first_item']=='style_cart')
+                                                        <a href="#" class="btn btn-primary ok">Add to Cart</a>
+                                                        @endif
+
+
+
+                                                    <div class="thumb-content">
+                                                        @if(isset($settings['second_item']) && $settings['second_item']=='style_image')
+                                                            <div class="img-box">
+                                                                <img src="{{$value->image}}" class="img-responsive img-fluid" alt="">
+                                                            </div>
+                                                        @endif
+                                                        @if(isset($settings['second_item']) && $settings['second_item']=='style_name')
+                                                            <h4>{{$value->title}}</h4>
+                                                        @endif
+                                                        @if(isset($settings['second_item']) && $settings['second_item']=='style_rating')
+                                                            <div class="star-rating">
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        @endif
+                                                        @if(isset($settings['second_item']) && $settings['second_item']=='style_price')
+                                                            <?php preg_match('!\d+!', $value->price, $matches);?>
+                                                            <p class="item-price"><b>${{(head($matches))}}</b></p>
+                                                        @endif
+                                                        @if(isset($settings['second_item']) && $settings['second_item']=='style_cart')
+                                                            <a href="#" class="btn btn-primary ok">Add to Cart</a>
+                                                        @endif
+
+                                                            {{--//3--}}
+                                                            @if(isset($settings['third_item']) && $settings['third_item']=='style_image')
+                                                                <div class="img-box">
+                                                                    <img src="{{$value->image}}" class="img-responsive img-fluid" alt="">
+                                                                </div>
                                                             @endif
+                                                            @if(isset($settings['third_item']) && $settings['third_item']=='style_name')
+                                                                <h4>{{$value->title}}</h4>
+                                                            @endif
+                                                            @if(isset($settings['third_item']) && $settings['third_item']=='style_rating')
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+                                                            @if(isset($settings['third_item']) && $settings['third_item']=='style_price')
+                                                                <?php preg_match('!\d+!', $value->price, $matches);?>
+                                                                <p class="item-price"><b>${{(head($matches))}}</b></p>
+                                                            @endif
+                                                            @if(isset($settings['third_item']) && $settings['third_item']=='style_cart')
+                                                                <a href="#" class="btn btn-primary ok">Add to Cart</a>
+                                                            @endif
+
+
+                                                            @if(isset($settings['forth_item']) && $settings['forth_item']=='style_image')
+                                                                <div class="img-box">
+                                                                    <img src="{{$value->image}}" class="img-responsive img-fluid" alt="">
+                                                                </div>
+                                                            @endif
+                                                            @if(isset($settings['forth_item']) && $settings['forth_item']=='style_name')
+                                                                <h4>{{$value->title}}</h4>
+                                                            @endif
+                                                            @if(isset($settings['forth_item']) && $settings['forth_item']=='style_rating')
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+                                                            @if(isset($settings['forth_item']) && $settings['forth_item']=='style_price')
+                                                                <?php preg_match('!\d+!', $value->price, $matches);?>
+                                                                <p class="item-price"><b>${{(head($matches))}}</b></p>
+                                                            @endif
+                                                            @if(isset($settings['forth_item']) && $settings['forth_item']=='style_cart')
+                                                                <a href="#" class="btn btn-primary ok">Add to Cart</a>
+                                                            @endif
+
+
+                                                            @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_image')
+                                                                <div class="img-box">
+                                                                    <img src="{{$value->image}}" class="img-responsive img-fluid" alt="">
+                                                                </div>
+                                                            @endif
+                                                            @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_name')
+                                                                <h4>{{$value->title}}</h4>
+                                                            @endif
+                                                            @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_rating')
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+                                                            @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_price')
+                                                                <?php preg_match('!\d+!', $value->price, $matches);?>
+                                                                <p class="item-price"><b>${{(head($matches))}}</b></p>
+                                                            @endif
+                                                            @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_cart')
+                                                                <a href="#" class="btn btn-primary ok">Add to Cart</a>
+                                                            @endif
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,6 +218,7 @@
                                     </div>
                                 </div>
                             @endforeach
+
                         </div>
                         <!-- Carousel controls -->
                         <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">

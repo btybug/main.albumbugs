@@ -25,17 +25,154 @@ if (isset($settings["blog"]) && !count($product)) {
                     <div class="item">
                         <div class="">
 
-                            <a href="#"><img alt="Product image" src="{{($value->image)!=null?$value->image:''}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>
-                            {{--<span class="badge">{{$value['sale_prec']}}%</span>--}}
-                            <h4 class="text-center">{{$value->title}}</h4>
-                            {{--<h5 class="text-center"><p class="item-price text-center"><strike>${{$value['or_price']}}</strike> <b>${{$value['sale_price']}}</b></p></h5>--}}
-                            <?php preg_match('!\d+!', $value->price, $matches);?>
-                            <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
-                            @if(isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on')
-                            <div class="text-center add-cart">
-                                <a href="" class=" btn btn-primary " >Add to Cart</a>
-                            </div>
+                            @if(isset($settings['first_item']) && $settings['first_item']=='style_image')
+                                <div class="img-box">
+                                    <a href="#"><img alt="Product image" src="{{($value->image)!=null?$value->image:''}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>
+                                </div>
+                            @endif
+                            @if(isset($settings['first_item']) && $settings['first_item']=='style_name')
+                                <h4 class="text-center">{{$value->title}}</h4>
+                            @endif
+                            @if(isset($settings['first_item']) && $settings['first_item']=='style_rating')
+                                <div class="star-rating text-center">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                </div>
+                            @endif
+                            @if(isset($settings['first_item']) && $settings['first_item']=='style_price')
+                                    <?php preg_match('!\d+!', $value->price, $matches);?>
+                                    <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
+                            @endif
+                            @if(isset($settings['first_item']) && $settings['first_item']=='style_cart')
+                                    <div class="text-center add-cart">
+                                        <a href="" class=" btn btn-primary " >Add to Cart</a>
+                                    </div>
+                            @endif
+
+                                @if(isset($settings['second_item']) && $settings['second_item']=='style_image')
+                                    <div class="img-box">
+                                        <a href="#"><img alt="Product image" src="{{($value->image)!=null?$value->image:''}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>
+                                    </div>
                                 @endif
+                                @if(isset($settings['second_item']) && $settings['second_item']=='style_name')
+                                    <h4 class="text-center">{{$value->title}}</h4>
+                                @endif
+                                @if(isset($settings['second_item']) && $settings['second_item']=='style_rating')
+                                    <div class="star-rating text-center">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(isset($settings['second_item']) && $settings['second_item']=='style_price')
+                                    <?php preg_match('!\d+!', $value->price, $matches);?>
+                                    <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
+                                @endif
+                                @if(isset($settings['second_item']) && $settings['second_item']=='style_cart')
+                                    <div class="text-center add-cart">
+                                        <a href="" class=" btn btn-primary " >Add to Cart</a>
+                                    </div>
+                                @endif
+
+                                @if(isset($settings['third_item']) && $settings['third_item']=='style_image')
+                                    <div class="img-box">
+                                        <a href="#"><img alt="Product image" src="{{($value->image)!=null?$value->image:''}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>
+                                    </div>
+                                @endif
+                                @if(isset($settings['third_item']) && $settings['third_item']=='style_name')
+                                    <h4 class="text-center">{{$value->title}}</h4>
+                                @endif
+                                @if(isset($settings['third_item']) && $settings['third_item']=='style_rating')
+                                    <div class="star-rating text-center">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(isset($settings['third_item']) && $settings['third_item']=='style_price')
+                                    <?php preg_match('!\d+!', $value->price, $matches);?>
+                                    <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
+                                @endif
+                                @if(isset($settings['third_item']) && $settings['third_item']=='style_cart')
+                                    <div class="text-center add-cart">
+                                        <a href="" class=" btn btn-primary " >Add to Cart</a>
+                                    </div>
+                                @endif
+
+
+                                @if(isset($settings['forth_item']) && $settings['forth_item']=='style_image')
+                                    <div class="img-box">
+                                        <a href="#"><img alt="Product image" src="{{($value->image)!=null?$value->image:''}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>
+                                    </div>
+                                @endif
+                                @if(isset($settings['forth_item']) && $settings['forth_item']=='style_name')
+                                    <h4 class="text-center">{{$value->title}}</h4>
+                                @endif
+                                @if(isset($settings['forth_item']) && $settings['forth_item']=='style_rating')
+                                    <div class="star-rating text-center">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(isset($settings['forth_item']) && $settings['forth_item']=='style_price')
+                                    <?php preg_match('!\d+!', $value->price, $matches);?>
+                                    <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
+                                @endif
+                                @if(isset($settings['forth_item']) && $settings['forth_item']=='style_cart')
+                                    <div class="text-center add-cart">
+                                        <a href="" class=" btn btn-primary " >Add to Cart</a>
+                                    </div>
+                                @endif
+
+
+
+                                @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_image')
+                                    <div class="img-box">
+                                        <a href="#"><img alt="Product image" src="{{($value->image)!=null?$value->image:''}}" class="img-responsive center-block" style="height: 180px;width: 170px"></a>
+                                    </div>
+                                @endif
+                                @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_name')
+                                    <h4 class="text-center">{{$value->title}}</h4>
+                                @endif
+                                @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_rating')
+                                    <div class="star-rating text-center">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_price')
+                                    <?php preg_match('!\d+!', $value->price, $matches);?>
+                                    <h5 class="text-center"><p class="item-price text-center"><b>${{(head($matches))}}</b></p></h5>
+                                @endif
+                                @if(isset($settings['fifth_item']) && $settings['fifth_item']=='style_cart')
+                                    <div class="text-center add-cart">
+                                        <a href="" class=" btn btn-primary " >Add to Cart</a>
+                                    </div>
+                                @endif
+
                         </div>
                     </div>
                 @endforeach

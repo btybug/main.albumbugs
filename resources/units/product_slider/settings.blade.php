@@ -27,16 +27,90 @@ $blogs= DB::table('blogs')->pluck('title', 'slug');
 </div><br>
 <hr align="left" width="100%">
 
-<h3>Add to cart</h3>
-<div class="form-group ">
-    <div class="checkbox checbox-switch switch-success">
-        <label>
-            <input type="checkbox" name="bottom_nb_ch" {{isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on'?'checked':''}} class="pull-right">
-            <span></span>
-            On/off
-        </label>
+{{--<h3>Add to cart</h3>--}}
+{{--<div class="form-group ">--}}
+    {{--<div class="checkbox checbox-switch switch-success">--}}
+        {{--<label>--}}
+            {{--<input type="checkbox" name="bottom_nb_ch" {{isset($settings['bottom_nb_ch'])&&$settings['bottom_nb_ch']=='on'?'checked':''}} class="pull-right">--}}
+            {{--<span></span>--}}
+            {{--On/off--}}
+        {{--</label>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--<hr align="left" width="100%">--}}
+<h3>CONTENT OPTION 1</h3>
+<div class="form-group">
+    <div class="col-md-9" style="">
+        <select name="first_item" class="form-control">
+            <option value="">select option</option>
+            <option value="style_image">Product image</option>
+            <option value="style_name">Product name</option>
+            <option value="style_rating">Rating</option>
+            <option value="style_price">Price</option>
+            <option value="style_cart">Add to cart button</option>
+        </select>
     </div>
-</div>
+</div><br>
+<hr align="left" width="100%">
+
+<h3>CONTENT OPTION 2</h3>
+<div class="form-group">
+    <div class="col-md-9" style="">
+        <select name="second_item" class="form-control">
+            <option value="">select option</option>
+            <option value="style_image">Product image</option>
+            <option value="style_name">Product name</option>
+            <option value="style_rating">Rating</option>
+            <option value="style_price">Price</option>
+            <option value="style_cart">Add to cart button</option>
+        </select>
+    </div>
+</div><br>
+<hr align="left" width="100%">
+
+<h3>CONTENT OPTION 3</h3>
+<div class="form-group">
+    <div class="col-md-9" style="">
+        <select name="third_item" class="form-control">
+            <option value="">select option</option>
+            <option value="style_image">Product image</option>
+            <option value="style_name">Product name</option>
+            <option value="style_rating">Rating</option>
+            <option value="style_price">Price</option>
+            <option value="style_cart">Add to cart button</option>
+        </select>
+    </div>
+</div><br>
+<hr align="left" width="100%">
+
+<h3>CONTENT OPTION 4</h3>
+<div class="form-group">
+    <div class="col-md-9" style="">
+        <select name="forth_item" class="form-control">
+            <option value="">select option</option>
+            <option value="style_image">Product image</option>
+            <option value="style_name">Product name</option>
+            <option value="style_rating">Rating</option>
+            <option value="style_price">Price</option>
+            <option value="style_cart">Add to cart button</option>
+        </select>
+    </div>
+</div><br>
+<hr align="left" width="100%">
+
+<h3>CONTENT OPTION 5</h3>
+<div class="form-group">
+    <div class="col-md-9" style="">
+        <select name="fifth_item" class="form-control">
+            <option value="">select option</option>
+            <option value="style_image">Product image</option>
+            <option value="style_name">Product name</option>
+            <option value="style_rating">Rating</option>
+            <option value="style_price">Price</option>
+            <option value="style_cart">Add to cart button</option>
+        </select>
+    </div>
+</div><br>
 <hr align="left" width="100%">
 
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}

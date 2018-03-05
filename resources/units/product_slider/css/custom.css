@@ -40,6 +40,8 @@ h2::after {
     text-align: center;
     position: relative;
     box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+ width: 227.5px;
+    height: 301px;
 }
 .carousel .item .img-box {
     height: 120px;
@@ -62,6 +64,29 @@ h2::after {
 }
 .carousel .item h4, .carousel .item p, .carousel .item ul {
     margin-bottom: 5px;
+}
+
+.carousel .thumb-wrapper .btn {
+    color: #7ac400;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #7ac400;
+    padding: 6px 14px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 20px;
+}
+.carousel .thumb-wrapper .btn:hover, .carousel .thumb-wrapper .btn:focus {
+    color: #fff;
+    background: #7ac400;
+    box-shadow: none;
+}
+.carousel .thumb-wrapper .btn i {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
 }
 .carousel .thumb-content .btn {
     color: #7ac400;
@@ -189,5 +214,8 @@ h2::after {
     height: 540px;
     object-fit: cover;
 }
+
+
+
 
 

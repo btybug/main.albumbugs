@@ -1,94 +1,112 @@
-.date-icon-cl-blue .input-group-addon {
+.datepic-icon-cl-blue .input-group-addon {
     background-color: cornflowerblue !important;
     color: white !important;
     border: 1px solid cornflowerblue !important;
 }
 
-.date-icon-cl-red .input-group-addon {
+.datepic-icon-cl-red .input-group-addon {
     background-color: #da534f !important;
     color: white !important;
     border: 1px solid #da534f !important;
 }
 
-.date-icon-cl-black .input-group-addon {
+.datepic-icon-cl-black .input-group-addon {
     background-color: black !important;
     color: white !important;
     border: 1px solid black !important;
 }
 
-.date-icon-cl-gold .input-group-addon {
+.datepic-icon-cl-gold .input-group-addon {
     background-color: gold !important;
     color: white !important;
     border: 1px solid gold !important;
 }
-.date-table-fs-12 .table-condensed{
+.datepic-table-fs-12 .table-condensed{
     font-size: 12px !important;
 }
-.date-table-fs-14 .table-condensed{
+.datepic-table-fs-14 .table-condensed{
     font-size: 14px !important;
 }
-.date-table-fs-16 .table-condensed{
+.datepic-table-fs-16 .table-condensed{
     font-size: 16px !important;
 }
-.date-table-fs-18 .table-condensed{
+.datepic-table-fs-18 .table-condensed{
     font-size: 18px !important;
 }
-.date-table-fs-20 .table-condensed{
+.datepic-table-fs-20 .table-condensed{
     font-size: 20px !important;
 }
-.date-table-fs-22 .table-condensed{
+.datepic-table-fs-22 .table-condensed{
     font-size: 22px !important;
 }
-.date-table-fs-12-border-th .table-condensed{
+.datepic-table-fs-12-border-th .table-condensed{
     font-size: 12px !important;
 }
-.date-table-fs-14-border-th .table-condensed{
+.datepic-table-fs-14-border-th .table-condensed{
     font-size: 14px !important;
 }
-.date-table-fs-16-border-th .table-condensed{
+.datepic-table-fs-16-border-th .table-condensed{
     font-size: 16px !important;
 }
-.date-table-fs-18-border-th .table-condensed{
+.datepic-table-fs-18-border-th .table-condensed{
     font-size: 18px !important;
 }
-.date-table-fs-20-border-th .table-condensed{
+.datepic-table-fs-20-border-th .table-condensed{
     font-size: 20px !important;
 }
-.date-table-fs-22-border-th .table-condensed{
+.datepic-table-fs-22-border-th .table-condensed{
     font-size: 22px !important;
 }
-.date-table-fs-12-border-th thead{
+.datepic-table-fs-12-border-th thead{
     border-bottom: 1px solid #ccc !important;
 }
-.date-table-fs-14-border-th thead{
+.datepic-table-fs-14-border-th thead{
     border-bottom: 1px solid #ccc !important;
 }
-.date-table-fs-16-border-th thead{
+.datepic-table-fs-16-border-th thead{
     border-bottom: 1px solid #ccc !important;
 }
-.date-table-fs-18-border-th thead{
+.datepic-table-fs-18-border-th thead{
     border-bottom: 1px solid #ccc !important;
 }
-.date-table-fs-20-border-th thead{
+.datepic-table-fs-20-border-th thead{
     border-bottom: 1px solid #ccc !important;
 }
-.date-table-fs-22-border-th thead{
+.datepic-table-fs-22-border-th thead{
     border-bottom: 1px solid #ccc !important;
 }
 
-.date-hover-cl-black table tr td.day:hover, .date-hover-cl-black table tr td.focused, .date-hover-cl-black .datepicker-switch:hover, .date-hover-cl-black .next:hover, .date-hover-cl-black .prev:hover, .date-hover-cl-black tfoot tr th:hover{
+.datepic-hover-cl-black table tr td.day:hover, .datepic-hover-cl-black table tr td.focused, .datepic-hover-cl-black .datepicker-switch:hover, .datepic-hover-cl-black .next:hover, .datepic-hover-cl-black .prev:hover, .datepic-hover-cl-black tfoot tr th:hover{
     background: #000 !important;
     color: #fff !important;
 }
-.date-hover-cl-blue table tr td.day:hover, .date-hover-cl-blue table tr td.focused, .date-hover-cl-blue .datepicker-switch:hover, .date-hover-cl-blue .next:hover, .date-hover-cl-blue .prev:hover, .date-hover-cl-blue tfoot tr th:hover{
+.datepic-hover-cl-blue table tr td.day:hover, .datepic-hover-cl-blue table tr td.focused, .datepic-hover-cl-blue .datepicker-switch:hover, .datepic-hover-cl-blue .next:hover, .date-hover-cl-blue .prev:hover, .datepic-hover-cl-blue tfoot tr th:hover{
     background: cornflowerblue !important;
     color: #fff !important;
 }
-.date-hover-cl-red table tr td.day:hover, .date-hover-cl-red table tr td.focused, .date-hover-cl-red .datepicker-switch:hover, .date-hover-cl-red .next:hover, .date-hover-cl-red .prev:hover, .date-hover-cl-red tfoot tr th:hover{
+.datepic-hover-cl-red table tr td.day:hover, .datepic-hover-cl-red table tr td.focused, .datepic-hover-cl-red .datepicker-switch:hover, .datepic-hover-cl-red .next:hover, .datepic-hover-cl-red .prev:hover, .datepic-hover-cl-red tfoot tr th:hover{
     background: #da534f !important;
     color: #fff !important;
 }
-.date-hover-cl-gold table tr td.day:hover, .date-hover-cl-gold table tr td.focused, .date-hover-cl-gold .datepicker-switch:hover, .date-hover-cl-gold .next:hover, .date-hover-cl-gold .prev:hover, .date-hover-cl-gold tfoot tr th:hover{
+.datepic-hover-cl-gold table tr td.day:hover, .datepic-hover-cl-gold table tr td.focused, .datepic-hover-cl-gold .datepicker-switch:hover, .datepic-hover-cl-gold .next:hover, .datepic-hover-cl-gold .prev:hover, .datepic-hover-cl-gold tfoot tr th:hover{
     background: gold !important;
     color: #fff !important;
+}
+.datepic-inp-cl-aliceblue input{
+    background-color: aliceblue !important;
+}
+.datepic-inp-cl-gold input{
+    background-color: gold !important;
+}
+.datepic-inp-cl-red input{
+    background-color: #da534f !important;
+    color: white !important;
+}
+.datepic-inp-cl-blue input{
+    background-color: cornflowerblue !important;
+    color: white !important;
+}
+.datepic-inp-cl-black input{
+    background-color: black !important;
+    color: white !important;
 }

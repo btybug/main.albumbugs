@@ -3,7 +3,7 @@
 @section( 'CSS' )
     {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
     {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
-    {{--{!! Html::style("public/libs/easyui/easyui.css") !!}--}}
+    {!! Html::style("public/libs/easyui/easyui.css") !!}
     {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
     {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}
 
@@ -309,6 +309,11 @@
     <!-- CSS Studio Templates -->
     <script type="template" id="bbt-field-selector">
         <ul class="bbs-field-selectors">
+            <li data-selector="{mainSelector}">
+                Main Container
+                <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>
+                <i class="fa fa-plus pull-right" bb-click="openAddClassWindow"></i>
+            </li>
             <li data-selector="{containerSelector}">
                 Field Container
                 <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>

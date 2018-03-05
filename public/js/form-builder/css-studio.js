@@ -97,6 +97,20 @@ var cssStudio = {
                     }
                 }
             ]
+        },
+        {
+            title: 'Sizing',
+            fields: [
+                {
+                    title: 'Width',
+                    css: 'width',
+                    type: 'number',
+                    hasUnit: {
+                        type: 'toggle',
+                        options: unitArray
+                    }
+                }
+            ]
         }
     ],
 
@@ -268,7 +282,7 @@ var cssStudio = {
         cssStudio.CSSJSON[activeSelector][property] = value;
 
         var cssString = "",
-            rulesWithUnit = ["font-size", "padding", "padding-top", "margin", "border-width", "outline-width"];
+            rulesWithUnit = ["font-size", "padding", "padding-top", "margin", "border-width", "outline-width", "width"];
 
         $.each(cssStudio.CSSJSON, function (selector, cssJSON){
             cssString += selector + " {\n";
@@ -331,7 +345,6 @@ var cssStudio = {
         // Number
         easyloader.load('numberspinner', function () {
             $('.bbs-number').numberspinner({
-                editable: false,
                 onChange: function (value) {
                     var property = $(this).attr("textboxname");
                     updateCSS(property, value);

@@ -235,6 +235,7 @@ $(document).ready(function () {
         loadSelectorsTemplate: function ($this) {
             var mainSelector = $this.data("main");
             var selectors = {
+                mainSelector: '#form-builder-rows',
                 containerSelector: '.bbcc-form .form-group',
                 labelSelector: 'h4',
                 iconSelector: '.field-icon',

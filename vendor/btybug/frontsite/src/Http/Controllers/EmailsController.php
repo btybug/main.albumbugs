@@ -8,6 +8,7 @@
 
 namespace Btybug\FrontSite\Http\Controllers;
 
+use Btybug\btybug\Models\Settings;
 use Btybug\FrontSite\Models\EmailGroups;
 use Btybug\FrontSite\Models\Emails;
 use Btybug\Modules\Models\Forms;
@@ -43,7 +44,7 @@ class EmailsController extends Controller
     public function getSettings()
     {
         Emails::setConfig();
-        $model = Setting::where('section', 'mail_settings')->pluck('val', 'settingkey');
+        $model = Settings::where('section', 'mail_settings')->pluck('val', 'settingkey');
         return view('manage::emails.settings', compact('model'));
     }
 
@@ -56,21 +57,21 @@ class EmailsController extends Controller
             $MailSettings['section'] = 'mail_settings';
             $MailSettings['settingkey'] = $key;
             $MailSettings['val'] = $datum;
-            if (Setting::where('section', 'mail_settings')->where('settingkey', $key)->exists()) {
-                Setting::where('section', 'mail_settings')->where('settingkey', $key)->update($MailSettings);
+            if (Settings::where('section', 'mail_settings')->where('settingkey', $key)->exists()) {
+                Settings::where('section', 'mail_settings')->where('settingkey', $key)->update($MailSettings);
             } else {
-                Setting::create($MailSettings);
+                Settings::create($MailSettings);
             }
 
         }
         $MailSettings['section'] = 'mail_settings';
         $MailSettings['settingkey'] = 'is_invalid';
         $MailSettings['val'] = self::NOTCHECKED;
-        if (Setting::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->exists()) {
-            Setting::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->update($MailSettings);
+        if (Settings::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->exists()) {
+            Settings::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->update($MailSettings);
 
         } else {
-            Setting::create($MailSettings);
+            Settings::create($MailSettings);
         }
         return redirect()->back();
     }
@@ -177,14 +178,14 @@ class EmailsController extends Controller
                 $message->to($data['email'], 'jon')->subject('test!');
             });
         } catch (\Exception $e) {
-            if (Setting::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->exists()) {
-                Setting::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->update([
+            if (Settings::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->exists()) {
+                Settings::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->update([
                     'section' => 'mail_settings',
                     'settingkey' => 'is_invalid',
                     'val' => self::INVALID
                 ]);
             } else {
-                Setting::create([
+                Settings::create([
                     'section' => 'mail_settings',
                     'settingkey' => 'is_invalid',
                     'val' => self::INVALID

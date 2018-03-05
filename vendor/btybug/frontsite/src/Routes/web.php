@@ -157,8 +157,8 @@ Route::group(['prefix' => 'event'], function () {
 
 Route::group(['prefix' => 'emails'], function () {
     Route::get('/', "EmailsController@getIndex",true);
-    Route::get('/{id?}', "EmailsController@getIndex",true)->name('frontsite_emails_index');
     Route::get('/settings', "EmailsController@getSettings",true)->name('frontsite_emails_settings');
+    Route::get('/{id}', "EmailsController@getIndex",true)->name('frontsite_emails_index');
     Route::post('/settings', "EmailsController@postSettings");
     Route::get('/update/{id?}', "EmailsController@getUpdate",true)->name('frontsite_emails_update');
     Route::post('/update/{id}', "EmailsController@postUpdate");

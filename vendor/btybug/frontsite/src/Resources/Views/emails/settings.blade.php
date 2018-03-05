@@ -368,7 +368,7 @@
                     }
                     ;
                 }
-                postAjax('/admin/manage/emails/check-email-settings', data, callBack);
+                postAjax('/admin/front-site/emails/check-email-settings', data, callBack);
             })
         })
     </script>

@@ -250,7 +250,7 @@
                         bootbox.alert(message);
                     }
                 }
-                postAjax('/admin/manage/emails/create-email', data, alferdone);
+                postAjax('/admin/front-site/emails/create-email', data, alferdone);
             })
 
 

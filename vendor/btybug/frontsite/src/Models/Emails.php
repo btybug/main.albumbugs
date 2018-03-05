@@ -12,6 +12,7 @@ namespace Btybug\FrontSite\Models;
 use App\Http\Middleware\CustomSCMiddleware;
 use App\Models\EventSubscriber\Independent\Independent;
 use App\Models\Setting;
+use Btybug\btybug\Models\Settings;
 use Illuminate\Database\Eloquent\Model;
 
 class Emails extends Model
@@ -73,7 +74,7 @@ class Emails extends Model
 
     public static function setConfig($flag = false)
     {
-        $model = Setting::where('section', 'mail_settings')->pluck('val', 'settingkey')->toArray();
+        $model = Settings::where('section', 'mail_settings')->pluck('val', 'settingkey')->toArray();
         $configuration = [
             'driver' => self::configKey($model, 'driver'),
             'host' => self::configKey($model, 'host'),

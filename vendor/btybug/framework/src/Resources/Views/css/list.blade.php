@@ -6,6 +6,12 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
+    @if(Session::has('error'))
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ Session::get('error') }}</strong>
+        </div>
+    @endif
     <div class="main_lay_cont">
         {{--<div class="row for_title_row">--}}
         {{--<h1 class="text-center">Components</h1>--}}

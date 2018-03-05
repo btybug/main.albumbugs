@@ -316,3 +316,63 @@
         </li>
     </ul>
 </div>
+
+<div class="cms_module_list module_list_1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Groups <a href="{{route("create_folder")}}" class="btn btn-success pull-right"><i class="fa fa-plus"></i></a></h3>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            @if(count($directories))
+                @foreach($directories as $directory)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{$directory["dirname"]}}
+                                <span class="pull-right">
+                                    @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
+                                        <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-danger"><i class="fa fa-remove"></i></button>
+                                    @endif
+                                    <a href="{{route("create_file",$directory["dirname"])}}" class="btn btn-success"><i class="fa fa-plus"></i></a>
+                                </span>
+                            </h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled menuList m-t-10" id="components-list" data-role="componentslist">
+                                @if(count($directory["children"]))
+                                    @foreach($directory["children"] as $sub_group)
+                                        <?php
+                                            $original_name = explode('.',$sub_group->getFilename())[0];
+                                            $name = explode("_",explode('.',$sub_group->getFilename())[0]);
+                                            foreach ($name as $ind => $to_up){
+                                                $name[$ind] = ucfirst($to_up);
+                                            }
+                                            $name = implode(' ',$name);
+                                        ?>
+                                        <li class="custom_padding_left_0">
+                                            <a href="" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {{$name}}</a>
+                                            <span class="inline-block pull-right">
+                                                <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
+                                                @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
+                                                    <button class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                                                @endif
+                                            </span>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+</div>
+<style>
+    .custom_padding_left_0{
+        padding-left:0!important;
+    }
+</style>

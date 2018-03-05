@@ -277,7 +277,7 @@
 
 @stop
 @section( 'CSS' )
-    {!!HTML::style( '/resources/assets/js/tag-it/css/jquery.tagit.css' ) !!}
+    {!!HTML::style( 'public/css/tag-it/jquery.tagit.css' ) !!}
     <style>
         .input-group-addon.addonNone {
             background: none;
@@ -288,7 +288,7 @@
 @stop
 @section( 'JS' )
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
-    {!! HTML::script('public/js/tag-it/js/tag-it.js') !!}
+    {!! HTML::script('public/js/tag-it/tag-it.js') !!}
     <script>
         tinymce.init({
             selector: 'textarea#contentEditor',

@@ -160,3 +160,34 @@
   float: left;
   margin-right: 10px;
 }
+
+.class-list {
+  margin-top: 10px;
+}
+
+div#element-edit-panel {
+  padding: 10px;
+}
+
+.bb-type-panel {
+  margin-top: 10px;
+}
+
+.class-item {
+  cursor: pointer;
+  background: #e8e61c;
+  color: #464646;
+}
+
+#element-edit-panel .bootstrap-tagsinput {
+  min-height: 32px;
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  background: #000;
+}
+
+span.tag {
+  background: #757414;
+  user-select: none;
+}

@@ -132,6 +132,31 @@
   float: left;
   margin-right: 10px; }
 
+.class-list {
+  margin-top: 10px; }
+
+div#element-edit-panel {
+  padding: 10px; }
+
+.bb-type-panel {
+  margin-top: 10px; }
+
+.class-item {
+  cursor: pointer;
+  background: #e8e61c;
+  color: #464646; }
+
+#element-edit-panel .bootstrap-tagsinput {
+  min-height: 32px;
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  background: #000; }
+
+span.tag {
+  background: #757414;
+  user-select: none; }
+
 [data-field] {
   cursor: move; }
 
@@ -167,6 +192,29 @@ a.bb-form-layout {
   color: #fff;
   padding: 10px 15px;
   margin: 0 -15px; }
+
+.bb-form-sub-header {
+  background: #50626e;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 0 -15px; }
+
+.bb-form-sub-header label {
+  position: absolute;
+  color: #ffffff;
+  left: 31px;
+  background: #37444c;
+  top: 0;
+  padding: 0 10px;
+  border-radius: 8px; }
+
+textarea.form-description {
+  height: 60px;
+  border: none;
+  resize: none;
+  margin-top: 10px;
+  padding: 15px 5px 5px;
+  color: #000; }
 
 input.form-name {
   margin-left: 10px;

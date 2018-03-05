@@ -6,14 +6,17 @@
     {!! Html::style("public/libs/easyui/easyui.css") !!}
     {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
     {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}
+
+    {!! HTML::style("public/libs/tagsinput/bootstrap-tagsinput.css") !!}
 @stop
 
 @section( 'JS' )
     {!! HTML::script("public/libs/easyui/easyloader.js") !!}
     <script>
-        easyloader.base = '<?php echo url("public/libs/easyui/") ?>/';
+        easyloader.base = '<?php echo url( "public/libs/easyui/" ) ?>/';
         easyloader.css = false;
     </script>
+    {!! HTML::script("public/libs/tagsinput/bootstrap-tagsinput.min.js") !!}
     {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
     {!! HTML::script("public/libs/toggle/jquery.toggleinput.js") !!}
     {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}
@@ -28,14 +31,16 @@
     {!! Form::hidden('id',$form->id) !!}
     <div class="bb-form-header">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <label>Form name</label>
                 {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'Form Name']) !!}
             </div>
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <button type="submit" class="form-save pull-right" bb-click="saveHTML">Save</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow" data-main="global">Styling</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow"
+                        data-main="global">Styling
+                </button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal"
                         data-target="#logicModal">Logic
                 </button>
@@ -45,10 +50,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="col-md-5">
-            <label>Form description</label>
-            {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Form Description']) !!}
+    <div class="bb-form-sub-header">
+        <div class="row">
+            <div class="col-md-12">
+                <label>Form description</label>
+                {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Form Description']) !!}
+            </div>
         </div>
     </div>
     {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
@@ -129,14 +136,14 @@
                             <div class="col-sm-8">
                                 <div class="customelement radio-inline">
                                     <input name="settings[is_ajax]" id="is_ajax_yes"
-                                           <?php echo (isset($settings['is_ajax']) && $settings['is_ajax'] == 'yes') ? 'checked' : '' ?> value="yes"
+									       <?php echo ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? 'checked' : '' ?> value="yes"
                                            type="radio">
                                     <label for="is_ajax_yes">Yes</label>
                                 </div>
                                 <div class="customelement radio-inline">
                                     <input name="settings[is_ajax]" id="is_ajax_no"
-                                           <?php echo (isset($settings['is_ajax'])
-                                               && $settings['is_ajax'] == 'no') ? 'checked' : (isset($settings['is_ajax']) && $settings['is_ajax'] == 'yes') ? '' : 'checked' ?>
+									       <?php echo ( isset( $settings['is_ajax'] )
+									                    && $settings['is_ajax'] == 'no' ) ? 'checked' : ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? '' : 'checked' ?>
                                            value="no" type="radio"> <label for="is_ajax_no">No</label>
                                 </div>
                             </div>
@@ -161,7 +168,17 @@
 
     <div class="container-fluid">
         <style id="bbcc-form-style"></style>
-        <div class="row form-builder-area bbcc-form">{!! $form->original_html !!}</div>
+        <div class="row form-builder-area bbcc-form">
+            @if(! $form->original_html)
+            <div class="col-md-12" data-field="true" data-id="0">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            @endif
+            
+            {!! $form->original_html !!}
+        </div>
     </div>
 
     <div class="modal fade" id="logicModal" role="dialog">
@@ -217,14 +234,59 @@
         </div>
     </script>
 
+    <!-- Edit Element Panel -->
+    <script type="template/html" id="bbt-edit-panel">
+        <h4>Adding classes to: {element}</h4>
+        <h3 class="active-selector">{selector}</h3>
+
+        <div class="p-2" id="element-edit-panel">
+            <div class="card mb-2">
+                <div class="card-body p-2">
+                    <input type="text" class="element-classes"/>
+                </div>
+            </div>
+
+            <!-- Available Classes -->
+            <div class="bb-type-panel mb-2 bb-css-add-panel">
+                <input type="text" class="form-control form-control-sm mb-2" placeholder="Search Available Classes"/>
+
+                <div class="class-list">
+                    <div class="class-item badge badge-warning" data-class="class-1">Class 1</div>
+                    <div class="class-item badge badge-warning" data-class="class-2">Class 2</div>
+                    <div class="class-item badge badge-warning" data-class="class-3">Class 3</div>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <!-- CSS Studio Templates -->
     <script type="template" id="bbt-field-selector">
         <ul class="bbs-field-selectors">
-            <li data-selector="{containerSelector}">Field Container <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
-            <li data-selector="{labelSelector}">Field Label <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
-            <li data-selector="{iconSelector}">Field Icon <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
-            <li data-selector="{helpIconSelector}">Help Icon <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
-            <li data-selector="{helpPopupSelector}">Help Popup <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i></li>
+            <li data-selector="{containerSelector}">
+                Field Container
+                <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>
+                <i class="fa fa-plus pull-right" bb-click="openAddClassWindow"></i>
+            </li>
+            <li data-selector="{labelSelector}">
+                Field Label
+                <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>
+                <i class="fa fa-plus pull-right" bb-click="openAddClassWindow"></i>
+            </li>
+            <li data-selector="{iconSelector}">
+                Field Icon
+                <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>
+                <i class="fa fa-plus pull-right" bb-click="openAddClassWindow"></i>
+            </li>
+            <li data-selector="{helpIconSelector}">
+                Help Icon
+                <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>
+                <i class="fa fa-plus pull-right" bb-click="openAddClassWindow"></i>
+            </li>
+            <li data-selector="{helpPopupSelector}">
+                Help Popup
+                <i class="fa fa-paint-brush pull-right" bb-click="openStudioWindow"></i>
+                <i class="fa fa-plus pull-right" bb-click="openAddClassWindow"></i>
+            </li>
         </ul>
     </script>
 

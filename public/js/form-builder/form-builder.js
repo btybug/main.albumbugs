@@ -65,6 +65,51 @@ $(document).ready(function () {
                 onclosed: function () {}
             });
         },
+        // Open add class window
+        openAddClassWindow: function ($this) {
+            $('.bbs-field-selectors>li').removeClass("active");
+            $this.parent("li").addClass("active");
+
+            var activeElement = $('.bbs-field-selectors>li.active');
+            var activeSelector = $('.bbs-field-selectors>li').first().data("selector") + " " + activeElement.data("selector");
+
+            if ($('.bbs-field-selectors>li').first().data("selector") === activeElement.data("selector")) {
+                activeSelector = activeElement.data("selector");
+            }
+
+            if ($('#add-class-panel').length !== 0) {
+
+                return;
+            }
+
+            jsPanel.create({
+                id: 'add-class-panel',
+                container: 'body',
+                theme: 'primary',
+                boxShadow: 0,
+                position: 'right-center',
+                contentSize: '300 350',
+                dragit: {
+                    snap: true
+                },
+                headerTitle: 'Add Class',
+                content: '<div id="bb-css-add-class" class="bb-css-studio"></div>',
+                callback: function () {
+                    var template = parseTemplate('bbt-edit-panel', {
+                        element: activeElement.text().trim(),
+                        selector: activeSelector
+                    });
+
+                    $('#bb-css-add-class').html(template);
+
+                    // Tags input
+                    $('.element-classes').tagsinput({
+                        tagClass: 'badge badge-dark'
+                    });
+                },
+                onclosed: function () {}
+            });
+        },
         // Open selectors window
         openSelectorsWindow: function ($this) {
 
@@ -326,6 +371,9 @@ $(document).ready(function () {
         .on('click', '[data-field]', function (e) {
             e.preventDefault();
             fieldsControl.activateField($(this));
+        })
+        .on("click", ".class-item", function () {
+            $('.element-classes').tagsinput('add', $(this).attr("data-class"));
         });
 
     // Activate droppable areas

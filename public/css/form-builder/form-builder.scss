@@ -44,6 +44,32 @@ a.bb-form-layout {
     margin: 0 -15px;
 }
 
+.bb-form-sub-header {
+    background: #50626e;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 0 -15px;
+}
+
+.bb-form-sub-header label {
+    position: absolute;
+    color: #ffffff;
+    left: 31px;
+    background: #37444c;
+    top: 0;
+    padding: 0 10px;
+    border-radius: 8px;
+}
+
+textarea.form-description {
+    height: 60px;
+    border: none;
+    resize: none;
+    margin-top: 10px;
+    padding: 15px 5px 5px;
+    color: #000;
+}
+
 input.form-name {
     margin-left: 10px;
     text-indent: 5px;

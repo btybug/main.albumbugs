@@ -52,6 +52,21 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="p-5">Subject</div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                                    <div class="input-group-addon">
+                                        <button type="button" class="subj-attach">
+                                            <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
 
                         <tr>
                             <td>
@@ -122,25 +137,18 @@
                         </tr>
 
 
-                        <tr>
-                            <td>
-                                <div class="p-5">Subject</div>
-                            </td>
-                            <td>
-                                {!! Form::text('subject',null,['class'=>'form-control']) !!}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="p-5">Attachment</div>
-                            </td>
-                            <td>
-                                <button class="btn btn-default" type="button" data-role="browseMediabutton">Browse Media
-                                </button>
-                                <span class="m-l-10"></span>
-                                {!! Form::text('attachment',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                            </td>
-                        </tr>
+
+                        {{--<tr>--}}
+                            {{--<td>--}}
+                                {{--<div class="p-5">Attachment</div>--}}
+                            {{--</td>--}}
+                            {{--<td>--}}
+                                {{--<button class="btn btn-default" type="button" data-role="browseMediabutton">Browse Media--}}
+                                {{--</button>--}}
+                                {{--<span class="m-l-10"></span>--}}
+                                {{--{!! Form::text('attachment',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}--}}
+                            {{--</td>--}}
+                        {{--</tr>--}}
 
 
                         {{--<tr id="editor">--}}
@@ -323,6 +331,11 @@
         }
         .editor_body{
             display: none;
+        }
+        .subj-attach{
+            border: 0;
+            background: none;
+            outline: none;
         }
     </style>
 @stop

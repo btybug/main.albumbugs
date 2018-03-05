@@ -63,7 +63,7 @@ class PhpJsonParser
         return $str;
     }
     public static function getFoldersWithChildrens(){
-       $path = base_path('public/dinamiccss');
+       $path = base_path('public'.DS.'dinamiccss');
        $dirs = \File::directories($path);
        if(count($dirs)){
            $arr = [];

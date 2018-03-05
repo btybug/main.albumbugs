@@ -103,7 +103,7 @@
                                 <span class="title">Advanced options</span>
                             </a>
                         </div>
-                        <div id="advancedopt" class="collapse in" aria-expanded="true" style="">
+                        <div id="advancedopt" class="collapse" aria-expanded="true" style="">
                             <div class="content">
                                 <table class="table borderless m-0">
                                     <tbody>

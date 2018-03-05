@@ -220,7 +220,7 @@
                         Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
                 </div>
                 <div class="panel-body editor_body">
-                    {!! Form::textarea('main_content',null,['id' => 'main_content']) !!}
+                    {!! Form::textarea('content',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
                 </div>
 
                 <div class="panel-body template_body">

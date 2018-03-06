@@ -1352,16 +1352,12 @@ function BBGiveMe($type, $data = null, $index = null)
     }
 }
 
-function BBGetMenu(
-    $id
-)
+function BBGetMenu($id)
 {
     $menuRepo = new \Btybug\btybug\Repositories\MenuRepository();
-
     $menu = $menuRepo->find($id);
     if ($menu) return json_decode($menu->json_data);
 }
-
 
 function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon = true, $membershipSlug = null, $checkbox = false)
 {

@@ -9,15 +9,22 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 
+use Btybug\Console\Repository\FormsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class EventsController extends Controller
 {
-    public function getIndex()
+    public function getIndex(FormsRepository $formsRepository)
     {
 
-//        dd($tabs);
+        $forms = $formsRepository->getAll();
+        foreach($forms as $form){
+            if(isset($form->settings['event']) && $form->settings['event']){
+               
+                \Subscriber::addEvent($form->name, 'App\Events\FormSubmit$'.$form->id);
+            }
+        }
         $subscriber = \Subscriber::getSubscriptions();
         return view('manage::events.index', compact('subscriber'));
     }
@@ -65,15 +72,15 @@ class EventsController extends Controller
             foreach ($subscripts[$e_name] as $key => $value) {
                 $functionNamespace = explode('$', $key);
                 $slug = str_replace('\\', '-', $functionNamespace[0]);
-                $formData=\Subscriber::getForm($functionNamespace[0]);
-                foreach ($value as $key=>$val){
-                   if(isset($formData[$key])){
-                       $formData[$key]['value']=$val;
-                   }
+                $formData = \Subscriber::getForm($functionNamespace[0]);
+                foreach ($value as $key => $val) {
+                    if (isset($formData[$key])) {
+                        $formData[$key]['value'] = $val;
+                    }
                 }
                 $tabs[] = [
                     'namespace' => $functionNamespace[0],
-                    'form' =>$formData,
+                    'form' => $formData,
                     'name' => $subscriberProperties[$slug]['name']
                 ];
             }

@@ -49,8 +49,8 @@ class EventServiceProvider extends ServiceProvider
 
 
         \Subscriber::addProperty('Notification', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@Notification');
-        \Subscriber::addProperty('Dates Between', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@DatesBetween');
-        \Subscriber::addProperty('check User Age', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@checkUserAge');
+//        \Subscriber::addProperty('Dates Between', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@DatesBetween');
+//        \Subscriber::addProperty('check User Age', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@checkUserAge');
         \Subscriber::add('App\Events\FormSubmit', 'BtybugManage\Models\Emails@onFormSubmit', ['name' => 'value']);
 //        \Subscriber::add('App\Events\AfterLoginEvent','Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@Notification', ['message' => 'Hi Abokamal','alert_class'=>'info']);
 //        \Subscriber::add('App\Events\AfterLoginEvent','Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@Notification', ['message' => 'Hi Edo','alert_class'=>'success']);

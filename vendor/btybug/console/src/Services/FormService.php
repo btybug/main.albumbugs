@@ -508,7 +508,7 @@ class FormService extends GeneralService
                     'original_html' => issetReturn($data,'original_html',null),
                     'form_layout' => issetReturn($data,'form_layout',null),
                     'fields_html' => issetReturn($data,'fields_html',null),
-                    'settings' =>  json_encode(issetReturn($data,'settings',[]),true)
+                    'settings' =>  issetReturn($data,'settings',[])
                 ]);
             }
         }else{
@@ -522,7 +522,7 @@ class FormService extends GeneralService
                 'fields_type' => $data['fields_type'],
                 'form_layout' => issetReturn($data,'form_layout',null),
                 'fields_html' => issetReturn($data,'fields_html',null),
-                'settings' =>  json_encode(issetReturn($data,'settings',[]),true)
+                'settings' =>  issetReturn($data,'settings',[])
             ]);
         }
 

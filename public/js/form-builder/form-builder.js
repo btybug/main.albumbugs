@@ -195,6 +195,8 @@ $(document).ready(function () {
 
             // Render layout
             $('#form-builder-rows').html(layoutHTML);
+
+            activateDroppable();
         },
         // Open panel window
         openPanelWindow: function ($this) {
@@ -274,36 +276,32 @@ $(document).ready(function () {
         },
         // Save html
         saveHTML: function ($this) {
-            var fields = $('.form-builder-area').children(),
-                fieldsHTML = '',
-                originalHTML = '',
-                fieldsIDs = [];
+            var formContainer = $('#form-builder-rows').clone(),
+                cssContainer = $('#bbcc-form-style');
 
-            if (fields.length === 0) {
-                alert("Please add fields first");
-                return;
-            }
+            formContainer.find('*').removeAttr('data-active-field');
 
-            fieldsHTML += '<div class="row bbcc-form">';
+            // Original HTML
+            var originalHTML = formContainer.html();
 
-            $.each(fields, function (index, field) {
-                var cleanField = $(field).clone(),
-                    shortCode = cleanField.data("shortcode");
-
-                originalHTML += cleanField.get(0).outerHTML;
-
-                fieldsIDs.push(cleanField.data("id"));
-
-                cleanField.removeAttr("data-field data-id data-shortcode");
-                cleanField.html(shortCode);
-
-                fieldsHTML += cleanField.get(0).outerHTML;
+            // Clean HTML
+            formContainer.find('[data-shortcode]').each(function () {
+                $(this).html($(this).data("shortcode"));
             });
 
-            fieldsHTML += '</div>';
+            formContainer.find('*').removeAttr('data-id data-field data-shortcode style');
+            formContainer.find('*').removeClass('ui-droppable ui-sortable ui-sortable-handle');
+            var fieldsHTML = cssContainer.get(0).outerHTML + '<div class="row">' + formContainer.html() + '</div>';
+
+            // Extract ids
+            var fieldsIDs = [];
+            formContainer.find('[data-id]').each(function () {
+                fieldsIDs.push($(this).data("id"));
+            });
 
             $('.generated_html').val(fieldsHTML);
             $('.original_html').val(originalHTML);
+            $('.original_css').val(cssContainer.html());
             $('.generated_json').val(JSON.stringify(fieldsIDs));
 
             // Submit form

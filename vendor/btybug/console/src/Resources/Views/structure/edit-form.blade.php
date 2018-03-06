@@ -66,6 +66,7 @@
     </div>
     {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
     {!! Form::textarea('original_html',null,['class' => 'original_html hide']) !!}
+    {!! Form::textarea('original_css',null,['class' => 'original_css hide']) !!}
     {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}
 
     <div class="modal fade" id="settingsModal" role="dialog">
@@ -171,26 +172,20 @@
     <hr/>
 
     <div class="container-fluid">
-        <style id="bbcc-form-style"></style>
+        <style id="bbcc-form-style">{!! $form->original_css !!}</style>
 
         <div class="row" id="form-builder-rows">
-            <div class="col-md-8">
-                <div class="row form-builder-area bbcc-form">
-                    @if(! $form->original_html)
-                        <div class="col-md-12" data-field="true" data-id="0">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    @endif
-
-                    {!! $form->original_html !!}
+            @if(! $form->original_html)
+                <div class="col-md-12" data-field="true" data-id="0">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row form-builder-area bbcc-form"></div>
-            </div>
+            @endif
+
+            {!! $form->original_html !!}
         </div>
+
 
     </div>
 

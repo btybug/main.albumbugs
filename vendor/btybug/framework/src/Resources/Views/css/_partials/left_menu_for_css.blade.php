@@ -1,19 +1,20 @@
+<div class="top_left">
+    <h3 class="panel-title">Groups </h3>
+    <a href="{{route("create_folder")}}" class="btn btn-sm btn-success pull-right custom_create_group"><i class="fa fa-plus"></i></a>
+</div>
+
+<div class="clearfix"></div>
 <div class="cms_module_list module_list_1">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#listcollapseOne" aria-expanded="true">
-                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="panel-title">Groups</span>
-            </a>
-            <a href="{{route("create_folder")}}" class="btn btn-sm btn-success pull-right custom_create_group"><i class="fa fa-plus"></i></a>
-            <div class="clearfix"></div>
-        </div>
-        <div class="panel-body body_append collapse in"  id="listcollapseOne" aria-expanded="true">
+        <div class="panel-body body_append">
             @if(count($directories))
-                @foreach($directories as $directory)
+                @foreach($directories as $index => $directory)
                     <div class="panel panel-default class_for_remove">
                         <div class="panel-heading">
-                            <h3 class="panel-title">{{$directory["dirname"]}}
+                            <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$index}}" aria-expanded="true">
+                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                                <span class="title">{{$directory["dirname"]}}</span>
+                            </a>
                                 <span class="pull-right">
                                     @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
                                         <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
@@ -21,10 +22,9 @@
                                     @endif
                                     <a href="{{route("create_file",$directory["dirname"])}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
                                 </span>
-                            </h3>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-content collapse in" id="collapseOne_{{$index}}" aria-expanded="true">
                             <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
                                 @if(count($directory["children"]))
                                     @foreach($directory["children"] as $sub_group)
@@ -37,18 +37,18 @@
                                             $name = implode(' ',$name);
                                         ?>
                                         <li class="custom_padding_left_0">
-                                            <a href="{{route("get_content")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {{$name}}</a>
+                                            <a href="{{route("get_content")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"> {{$name}}</a>
                                             <span class="inline-block pull-right">
                                                 <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
                                                 @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
                                                     <button class="btn btn-xs btn-danger remove_file" data-name="{{$original_name}}"><i class="fa fa-remove"></i></button>
                                                 @endif
                                             </span>
-                                            <div class="clearfix"></div>
                                         </li>
                                     @endforeach
                                 @endif
                             </ul>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                 @endforeach
@@ -184,9 +184,45 @@
     .custom_padding_left_0{
         padding-left:0!important;
     }
+    .top_left{
+        color: #333;
+        background-color: #f5f5f5;
+        border-color: #ddd;
+        padding: 10px 15px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     .colps{
         text-decoration: none !important;
-        color: black;
-        font-weight: 400;
+        color: #333;
+    }
+    .cms_module_list > .panel-default{
+        margin: 0;
+    }
+    .cms_module_list .menuList{
+        float: right;
+        padding: 0;
+    }
+    .cms_module_list .menuList li a{
+        margin: 0 13px;
+    }
+    .cms_module_list .menuList li{
+        display: flex;
+        justify-content: space-between;
+    }
+    .panel-content{
+        margin-top:15px;
+    }
+    .panel-body{
+        padding: 0;
+    }
+    .panel-default{
+        border: none;
+        margin: 0;
     }
 </style>

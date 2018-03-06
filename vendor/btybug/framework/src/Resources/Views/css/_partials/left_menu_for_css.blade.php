@@ -1,10 +1,14 @@
 <div class="cms_module_list module_list_1">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Groups <a href="{{route("create_folder")}}" class="btn btn-success pull-right custom_create_group"><i class="fa fa-plus"></i></a></h3>
+            <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#listcollapseOne" aria-expanded="true">
+                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <span class="panel-title">Groups</span>
+            </a>
+            <a href="{{route("create_folder")}}" class="btn btn-sm btn-success pull-right custom_create_group"><i class="fa fa-plus"></i></a>
             <div class="clearfix"></div>
         </div>
-        <div class="panel-body body_append">
+        <div class="panel-body body_append collapse in"  id="listcollapseOne" aria-expanded="true">
             @if(count($directories))
                 @foreach($directories as $directory)
                     <div class="panel panel-default class_for_remove">
@@ -12,10 +16,10 @@
                             <h3 class="panel-title">{{$directory["dirname"]}}
                                 <span class="pull-right">
                                     @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
-                                        <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                                        <button class="btn btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
+                                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
                                     @endif
-                                    <a href="{{route("create_file",$directory["dirname"])}}" class="btn btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
+                                    <a href="{{route("create_file",$directory["dirname"])}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
                                 </span>
                             </h3>
                             <div class="clearfix"></div>
@@ -58,9 +62,9 @@
         <div class="panel-heading">
             <h3 class="panel-title">{dirname}
                 <span class="pull-right">
-                    <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
-                    <a href="{{route("create_file",'repl')}}" class="btn btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
+                    <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
+                    <a href="{{route("create_file",'repl')}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
                 </span>
             </h3>
             <div class="clearfix"></div>
@@ -179,5 +183,10 @@
 <style>
     .custom_padding_left_0{
         padding-left:0!important;
+    }
+    .colps{
+        text-decoration: none !important;
+        color: black;
+        font-weight: 400;
     }
 </style>

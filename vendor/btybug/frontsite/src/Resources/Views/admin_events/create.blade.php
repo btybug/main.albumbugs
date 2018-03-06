@@ -13,6 +13,14 @@
                    </div>
                </div>
            </div>
+           <div class="bb-form-sub-header">
+               <div class="row">
+                   <div class="col-md-12">
+                       <label>Select Trigger</label>
+                       {!! Form::select('trigger',[],null,['class' => 'form-control']) !!}
+                   </div>
+               </div>
+           </div>
 
            <div class="panel panel-default p-0 boxpanelminheight">
                <div class="panel-heading">1. Select Trigger</div>

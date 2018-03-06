@@ -207,6 +207,7 @@
     .cms_module_list .menuList{
         float: right;
         padding: 0;
+        margin: 0;
     }
     .cms_module_list .menuList li a{
         margin: 0 13px;
@@ -214,10 +215,9 @@
     .cms_module_list .menuList li{
         display: flex;
         justify-content: space-between;
+        margin-top: 5px;
     }
-    .panel-content{
-        margin-top:15px;
-    }
+
     .panel-body{
         padding: 0;
     }

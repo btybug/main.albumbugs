@@ -406,7 +406,7 @@ class StructureController extends Controller
     )
     {
         $form = $formsRepository->findOrFail($id);
-        $settings = ($form->settings) ? json_decode($form->settings,true) : [];
+        $settings = $form->settings;
         $fields = $fieldsRepository->getBy('table_name', $form->fields_type);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 

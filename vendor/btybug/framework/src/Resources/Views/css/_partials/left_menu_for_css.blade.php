@@ -205,9 +205,10 @@
         margin: 0;
     }
     .cms_module_list .menuList{
-        float: right;
+        float: left;
         padding: 0;
         margin: 0;
+        margin-left: 29px;
     }
     .cms_module_list .menuList li a{
         margin: 0 13px;

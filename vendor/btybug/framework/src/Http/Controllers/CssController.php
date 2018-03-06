@@ -37,7 +37,7 @@ class CssController extends Controller
         $new_folder_name = "new_".str_random(4).rand(111,999);
         $full_path = $path.DS.$new_folder_name;
         mkdir($full_path,0777);
-        return redirect()->back()->with("success","Group was added successfully");
+        return response()->json(["dirname" => $new_folder_name]);
     }
     public function createFile($dirname){
         $path = base_path('public'.DS.'dinamiccss'.DS.$dirname);
@@ -46,8 +46,8 @@ class CssController extends Controller
         if (!\File::exists($full_path)){
             \File::put($full_path,'');
         }else{
-            return redirect()->back()->with("error","File name exists");
+            return response()->json(["error" => 1]);
         }
-        return redirect()->back()->with("success","File was created successfully");
+        return response()->json(["error" => 0,"filename" => $file_name]);
     }
 }

@@ -40,7 +40,12 @@
             }
     }
     ?>
-
+    <style type="text/css">
+        body {
+            background: #e2eaef;
+            font-family: "Open Sans", sans-serif;
+        }
+    </style>
 
     @if(isset($product)&&count($product)>0)
         <div class="container">

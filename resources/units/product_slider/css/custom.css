@@ -40,7 +40,7 @@ h2::after {
     text-align: center;
     position: relative;
     box-shadow: 0 2px 3px rgba(0,0,0,0.2);
- width: 227.5px;
+    width: 227.5px;
     height: 301px;
 }
 .carousel .item .img-box {

@@ -9,7 +9,6 @@
 {!! BBstyle($_this->path.DS.'css'.DS.'owl.carousel.min.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'main.css') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'main.js') !!}
-
 {!! BBscript($_this->path.DS.'js'.DS.'owl.carousel.min.js') !!}
 
 

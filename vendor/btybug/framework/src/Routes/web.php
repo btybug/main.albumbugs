@@ -21,6 +21,10 @@ Route::group(['prefix' => 'css'], function () {
         Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
         Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
         Route::get('/', 'CssController@getContent', true)->name('get_content');
+
+        Route::group(['prefix' => 'new'], function () {
+            Route::get('/', 'CssController@newPage', true)->name('new_page');
+        });
     });
 });
 

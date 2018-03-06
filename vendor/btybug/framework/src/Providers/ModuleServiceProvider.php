@@ -67,6 +67,12 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/framework/css/file",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],
+                [
+                    "title" => "CSS classes",
+                    "custom-link" => "/admin/framework/css/file/new",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ]
             ]
         ]);

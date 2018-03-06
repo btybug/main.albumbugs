@@ -79,4 +79,8 @@ class CssController extends Controller
         }
         return response()->json(["error" => 1]);
     }
+    public function newPage(){
+        
+        return view('framework::css.new_page');
+    }
 }

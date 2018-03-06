@@ -29,7 +29,12 @@ class CssController extends Controller
         $type = $request->type;
         $class_name = $request->class_name;
         $code = $request->code;
-        \File::append(base_path('public'.DS.'dinamiccss'.DS.$type.'.css'), '.'.$class_name.' {'.$code.'}');
+
+        $file = PhpJsonParser::getFileByName($type);
+        if(!$file){
+            return redirect()->back()->with("error","File does not exists");
+        }
+        \File::append($file->getPathname(), '.'.$class_name.' {'.$code.'}');
         return redirect()->back()->with("success","Style was saved successfully");
     }
     public function createFolder(){
@@ -49,5 +54,29 @@ class CssController extends Controller
             return response()->json(["error" => 1]);
         }
         return response()->json(["error" => 0,"filename" => $file_name]);
+    }
+    public function getContent(Request $request, $type = "icons"){
+        $directories = PhpJsonParser::getFoldersWithChildrens();
+
+        $slug = $request->get('type',$type);
+        return view('framework::css.list_for_css_files', compact(['slug','directories']));
+    }
+    public function removeDir(Request $request){
+        $dirname = $request->dirname;
+        $path = base_path('public'.DS.'dinamiccss'.DS.$dirname);
+        $removed = \File::deleteDirectory($path);
+        if($removed){
+            return response()->json(["error" => 0]);
+        }
+        return response()->json(["error" => 1]);
+    }
+    public function removeFile(Request $request){
+        $filename = $request->filename;
+        $file = PhpJsonParser::getFileByName($filename);
+        if($file){
+            \File::delete($file->getPathname());
+            return response()->json(["error" => 0]);
+        }
+        return response()->json(["error" => 1]);
     }
 }

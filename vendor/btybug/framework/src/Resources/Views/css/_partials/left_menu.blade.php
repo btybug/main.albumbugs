@@ -1,4 +1,4 @@
-<div class="cms_module_list module_list_1">
+{{--<div class="cms_module_list module_list_1">
     <ul class="list-unstyled menuList m-t-10" id="components-list" data-role="componentslist">
         <li class="@if($slug=="buttons") active_class @endif">
             <a href="?type=buttons" profile-id="11" main-type="text_size"
@@ -315,7 +315,7 @@
             </a><a data-type="images" class="add-class-modal pull-right gettype"></a>
         </li>
     </ul>
-</div>
+</div>--}}
 
 <div class="cms_module_list module_list_1">
     <div class="panel panel-default">
@@ -326,13 +326,13 @@
         <div class="panel-body body_append">
             @if(count($directories))
                 @foreach($directories as $directory)
-                    <div class="panel panel-default">
+                    <div class="panel panel-default class_for_remove">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{$directory["dirname"]}}
                                 <span class="pull-right">
                                     @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
                                         <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-remove"></i></button>
+                                        <button class="btn btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
                                     @endif
                                     <a href="{{route("create_file",$directory["dirname"])}}" class="btn btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
                                 </span>
@@ -352,11 +352,11 @@
                                             $name = implode(' ',$name);
                                         ?>
                                         <li class="custom_padding_left_0">
-                                            <a href="" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {{$name}}</a>
+                                            <a href="{{route("get_content")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {{$name}}</a>
                                             <span class="inline-block pull-right">
                                                 <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
                                                 @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
-                                                    <button class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+                                                    <button class="btn btn-xs btn-danger remove_file" data-name="{{$original_name}}"><i class="fa fa-remove"></i></button>
                                                 @endif
                                             </span>
                                             <div class="clearfix"></div>
@@ -371,13 +371,14 @@
         </div>
     </div>
 </div>
+<div id="div_for_scroll"></div>
 <script type="template" id="append_group">
-    <div class="panel panel-default">
+    <div class="panel panel-default class_for_remove">
         <div class="panel-heading">
             <h3 class="panel-title">{dirname}
                 <span class="pull-right">
                     <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-remove"></i></button>
+                    <button class="btn btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
                     <a href="{{route("create_file",'repl')}}" class="btn btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
                 </span>
             </h3>
@@ -392,10 +393,10 @@
 </script>
 <script type="template" id="append_new_file">
     <li class="custom_padding_left_0">
-        <a href="" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {filename}</a>
+        <a href="{{route("get_content")}}?type={original_name}" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {filename}</a>
         <span class="inline-block pull-right">
             <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></button>
+            <button class="btn btn-xs btn-danger remove_file" data-name="{fname}"><i class="fa fa-remove"></i></button>
         </span>
         <div class="clearfix"></div>
     </li>
@@ -426,8 +427,8 @@
                 success: function (data) {
                     if(data.dirname){
                         var name = titleCase(data.dirname);
-                        template = template.replace("{dirname}",name).replace("repl",data.dirname);
-                        return $(".body_append").append(template);
+                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname);
+                         return $(".body_append").append(template);
                     }
                 },
                 type: 'POST'
@@ -447,8 +448,46 @@
                 success: function (data) {
                     if(!data.error){
                         var name = titleCase(data.filename);
-                        template = template.replace("{filename}",name);
+                        template = template.replace("{filename}",name).replace("{original_name}",data.filename).replace("{fname}",data.filename);
                         return that.parents("div.panel.panel-default").children(".panel-body").children("ul.components_list").append(template);
+                    }
+                },
+                type: 'POST'
+            });
+        });
+        $("body").delegate(".remove_group","click",function(){
+            var dirname = $(this).data("name");
+            var that = $(this);
+            var _token = $('input[name=_token]').val();
+            var url = base_path + "/admin/framework/css/removedir";
+            $.ajax({
+                url: url,
+                data: {
+                    dirname:dirname,
+                    _token: _token
+                },
+                success: function (data) {
+                    if(!data.error){
+                        that.parents("div.panel.panel-default.class_for_remove").remove();
+                    }
+                },
+                type: 'POST'
+            });
+        });
+        $("body").delegate(".remove_file","click",function(){
+            var filename = $(this).data("name");
+            var that = $(this);
+            var _token = $('input[name=_token]').val();
+            var url = base_path + "/admin/framework/css/removefile";
+            $.ajax({
+                url: url,
+                data: {
+                    filename:filename,
+                    _token: _token
+                },
+                success: function (data) {
+                    if(!data.error){
+                        that.parents("li.custom_padding_left_0").remove();
                     }
                 },
                 type: 'POST'

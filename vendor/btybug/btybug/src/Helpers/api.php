@@ -1958,6 +1958,12 @@ function getDinamicStyleDemo($filename)
     return $styles;
 }
 
+function getDinamicStyleForCssFileDemo($filename)
+{
+    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename);
+    return $styles;
+}
+
 function useDinamicStyle($filename)
 {
     return '<link href="' . asset('public/dinamiccss/' . $filename . '.css') . '" rel="stylesheet">';

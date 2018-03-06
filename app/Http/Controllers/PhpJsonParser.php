@@ -55,6 +55,31 @@ class PhpJsonParser
 
        return $html;
    }
+
+    public static function getClassesCssFileDemo($filename){
+        $file = self::getFileByName($filename);
+        if(!$file){
+            return null;
+        }
+        $file = \File::get($file->getPathname());
+        // preg_match_all('/([a-z0-9]\.?.*?)\s?\{/', $file, $matches);
+        preg_match_all('/\.[a-z_-][\w-:]*(?=[^{}]*{[^{}]*})/', $file, $matches);
+
+        preg_match_all('/(\{)(?<=\{)(.*?)(?=\})/s', $file, $match);
+
+        $html = '';
+        if(count($matches[0])){
+            $html = self::renderHtmlForFileDemo($matches[0],$match[0]);
+        }
+        return $html;
+    }
+    public static function renderHtmlForFileDemo($data,$codes){
+        $str = '';
+        foreach ($data as $key => $item){
+            $str .= "<h5>".$item."</h5><textarea class='code_textarea form-control' readonly>".$item.$codes[$key]."}</textarea>";
+        }
+        return $str;
+    }
     public static function renderHtmlForDemo($data,$codes){
         $str = '';
         foreach ($data as $key => $item){
@@ -75,6 +100,21 @@ class PhpJsonParser
            }
            return $arr;
        }
+    }
+    public static function getFileByName($filename){
+        $path = base_path('public'.DS.'dinamiccss');
+        $dirs = \File::directories($path);
+        if(count($dirs)){
+            foreach ($dirs as $key => $dir){
+                $all = \File::allFiles($dir);
+                foreach ($all as $file){
+                    $basename = $file->getBasename();
+                    if($basename === $filename.".css"){
+                        return $file;
+                    }
+                }
+            }
+        }
     }
 
 }

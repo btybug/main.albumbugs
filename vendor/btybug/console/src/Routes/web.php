@@ -13,10 +13,10 @@
 
 Route::get('/', function () {
     return view('console::index');
-},true);
+}, true);
 Route::get('/test', function () {
     return view('console::test');
-},true);
+}, true);
 
 Route::get('/optimisation', function () {
     Artisan::call('plugin:optimaze');
@@ -24,29 +24,29 @@ Route::get('/optimisation', function () {
 });
 
 Route::group(['prefix' => 'structure'], function () {
-    Route::get('/', 'StructureController@getIndex',true)->name('index');
+    Route::get('/', 'StructureController@getIndex', true)->name('index');
     Route::group(['prefix' => 'field-types'], function () {
-        Route::get('/', 'FieldTypesController@getIndex',true)->name('field_types_index');
+        Route::get('/', 'FieldTypesController@getIndex', true)->name('field_types_index');
     });
 
     Route::group(['prefix' => 'pages'], function () {
-        Route::get('/', 'StructureController@getPages',true)->name('pages_index');
-        Route::get('/settings/{id}', 'StructureController@getPageSettings',true)->name('pages_settings');
+        Route::get('/', 'StructureController@getPages', true)->name('pages_index');
+        Route::get('/settings/{id}', 'StructureController@getPageSettings', true)->name('pages_settings');
         Route::post('/settings/{id}', 'StructureController@postPageSettings');
         Route::post('/', 'StructureController@postEdit');
         Route::post('/get-data', 'StructureController@postPageData');
     });
 
-    Route::get('/urls', 'StructureController@getUrls',true)->name('urls');
-    Route::get('/classify', 'StructureController@getClassify',true)->name('classify');
+    Route::get('/urls', 'StructureController@getUrls', true)->name('urls');
+    Route::get('/classify', 'StructureController@getClassify', true)->name('classify');
 //    Route::get('/settings', 'StructureController@getSettings');
 
     Route::group(['prefix' => 'fields'], function () {
-        Route::get('/', 'StructureController@getFields',true)->name("fields");
-        Route::get('/create', 'StructureController@getCreateField',true);
-        Route::get('/create-new', 'StructureController@getCreateFieldNew',true);
-        Route::get('/edit/{id}', 'StructureController@getEditField',true)->name("edit_field");
-        Route::get('/view/{id}', 'StructureController@getViewField',true)->name("view_field");
+        Route::get('/', 'StructureController@getFields', true)->name("fields");
+        Route::get('/create', 'StructureController@getCreateField', true);
+        Route::get('/create-new', 'StructureController@getCreateFieldNew', true);
+        Route::get('/edit/{id}', 'StructureController@getEditField', true)->name("edit_field");
+        Route::get('/view/{id}', 'StructureController@getViewField', true)->name("view_field");
         Route::post('/edit/{id}', 'StructureController@postEditField');
         Route::post('/render-html', 'StructureController@postRenderFieldHtml');
         Route::post('/render-html-for-result/{id}', 'StructureController@postRenderFieldHtmlForResult');
@@ -55,19 +55,19 @@ Route::group(['prefix' => 'structure'], function () {
         Route::post('/change-status', 'StructureController@postChangeFieldStatus');
     });
 
-    Route::get('/edit-forms', 'StructureController@getEditForms',true);
+    Route::get('/edit-forms', 'StructureController@getEditForms', true);
     Route::get('/get-default-html', 'StructureController@getDefaultHtml');
     Route::post('/get-custom-html', 'StructureController@getCustomHtml');
     Route::post('/get-saved-html-type', 'StructureController@getSavedHtmlType');
 
     Route::group(['prefix' => 'forms'], function () {
-        Route::get('/', 'StructureController@getForms',true);
-        Route::get('/edit/{id}', 'StructureController@getFormEdit',true);
-        Route::get('/entries/{id}', 'StructureController@getFormEntries',true);
-        Route::get('/view-entries/{id}', 'StructureController@getViewEntries',true);
+        Route::get('/', 'StructureController@getForms', true);
+        Route::get('/edit/{id}', 'StructureController@getFormEdit', true);
+        Route::get('/entries/{id}', 'StructureController@getFormEntries', true);
+        Route::get('/view-entries/{id}', 'StructureController@getViewEntries', true);
         Route::post('/get-entries-data', 'StructureController@postGetEntryData');
-        Route::get('/settings/{id}', 'StructureController@getFormSettings',true);
-        Route::post('/settings/{id}', 'StructureController@postFormSettings',true);
+        Route::get('/settings/{id}', 'StructureController@getFormSettings', true);
+        Route::post('/settings/{id}', 'StructureController@postFormSettings', true);
         Route::post('/get-available-fields-settings', 'StructureController@postAvailableFields');
         Route::post('/edit/{id}', 'StructureController@postFormEdit')->name('save_core_forms');
         Route::get('/create', 'StructureController@getCreateForm');
@@ -88,26 +88,26 @@ Route::group(['prefix' => 'structure'], function () {
     });
 
     Route::group(['prefix' => 'settings'], function () {
-        Route::get('/', 'GeneralController@getIndex',true)->name('settings_index');
+        Route::get('/', 'GeneralController@getIndex', true)->name('settings_index');
         Route::post('/', 'GeneralController@postSettings');
     });
 
     Route::group(['prefix' => 'menus'], function () {
-        Route::get('/', 'MenusController@getIndex',true)->name('menus_index');
-        Route::get('/edit/{menu}/{role}', 'MenusController@getEdit',true)->name('console_menu_edit');
-        Route::get('/view/{menu}/{role}', 'MenusController@getView',true)->name('console_menu_view');
+        Route::get('/', 'MenusController@getIndex', true)->name('menus_index');
+        Route::get('/edit/{menu}/{role}', 'MenusController@getEdit', true)->name('console_menu_edit');
+        Route::get('/view/{menu}/{role}', 'MenusController@getView', true)->name('console_menu_view');
         Route::post('/edit/{menu}/{role}', 'MenusController@postEdit');
         Route::post('/create', 'MenusController@postCreate');
         Route::post('/delete', 'MenusController@postDelete');
     });
 
     Route::group(['prefix' => 'tables'], function () {
-        Route::get('/', 'Developers\StructureController@getIndex',true)->name('tables');
-        Route::get('/edit/{table}', 'Developers\StructureController@getEditTable',true);
+        Route::get('/', 'Developers\StructureController@getIndex', true)->name('tables');
+        Route::get('/edit/{table}', 'Developers\StructureController@getEditTable', true);
         Route::post('/get-column', 'Developers\StructureController@postGetTableColumn');
-        Route::get('/add-column/{table}', 'Developers\StructureController@getAddColumn',true);
+        Route::get('/add-column/{table}', 'Developers\StructureController@getAddColumn', true);
         Route::post('/add-column/{table}', 'Developers\StructureController@postAddColumn');
-        Route::get('/edit-column/{table}/{column}', 'Developers\StructureController@getEditTableColumn',true);
+        Route::get('/edit-column/{table}/{column}', 'Developers\StructureController@getEditTableColumn', true);
         Route::post('/edit-column/{table}/{column}', 'Developers\StructureController@postEditTableColumn');
         Route::get('/delete-column/{table}/{column}', 'Developers\StructureController@postDeleteColumn');
         Route::post('/edit-column-field/{table}/{column}', 'Developers\StructureController@postEditColumnField');
@@ -139,11 +139,11 @@ Route::group(['prefix' => 'structure'], function () {
 
 
 Route::group(['prefix' => 'settings'], function () {
-    Route::get('/', 'BackendController@getIndex',true)->name('backend_settings_index');
-    Route::get('/general', 'BackendController@settings',true)->name('general');
+    Route::get('/', 'BackendController@getIndex', true)->name('backend_settings_index');
+    Route::get('/general', 'BackendController@settings', true)->name('general');
     Route::post('/general', 'BackendController@postSaveSettings');
     Route::post('/site-settings', 'BackendController@postSiteSettings')->name('site_settings_console');
-    Route::get('/css-js', 'BackendController@getCssJs',true)->name('css-js');
+    Route::get('/css-js', 'BackendController@getCssJs', true)->name('css-js');
     Route::post('/css-js', 'BackendController@postCssJs');
 });
 
@@ -151,9 +151,9 @@ Route::group(['prefix' => 'settings'], function () {
 Route::group(['prefix' => 'general'], function () {
     Route::get('/', function () {
         return view('console::structure.general.index');
-    },true);
-    Route::get('/validations', 'GeneralController@getValidations',true)->name('validations');
-    Route::get('/trigger-events', 'GeneralController@getTriggerEvents',true)->name('trigger_events');
+    }, true);
+    Route::get('/validations', 'GeneralController@getValidations', true)->name('validations');
+    Route::get('/trigger-events', 'GeneralController@getTriggerEvents', true)->name('trigger_events');
 });
 
 Route::group(['prefix' => 'config'], function () {

@@ -44,7 +44,8 @@
                             <td>
                                 <div class="input-group">
                                     {!! Form::text('to_',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                    <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                    <div class="input-group-addon addonNone" data-toggle="tooltip"
+                                         data-placement="right"
                                          title=""
                                          data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User,user submitted form">
                                         <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
@@ -58,7 +59,7 @@
                             </td>
                             <td>
                                 <div class="input-group">
-                                {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                                    {!! Form::text('subject',null,['class'=>'form-control']) !!}
                                     <div class="input-group-addon">
                                         <button type="button" class="subj-attach">
                                             <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
@@ -69,19 +70,16 @@
                         </tr>
 
 
-
-
-
                         {{--<tr>--}}
-                            {{--<td>--}}
-                                {{--<div class="p-5">Attachment</div>--}}
-                            {{--</td>--}}
-                            {{--<td>--}}
-                                {{--<button class="btn btn-default" type="button" data-role="browseMediabutton">Browse Media--}}
-                                {{--</button>--}}
-                                {{--<span class="m-l-10"></span>--}}
-                                {{--{!! Form::text('attachment',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}--}}
-                            {{--</td>--}}
+                        {{--<td>--}}
+                        {{--<div class="p-5">Attachment</div>--}}
+                        {{--</td>--}}
+                        {{--<td>--}}
+                        {{--<button class="btn btn-default" type="button" data-role="browseMediabutton">Browse Media--}}
+                        {{--</button>--}}
+                        {{--<span class="m-l-10"></span>--}}
+                        {{--{!! Form::text('attachment',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}--}}
+                        {{--</td>--}}
                         {{--</tr>--}}
 
 
@@ -98,7 +96,8 @@
                     </table>
                     <div class="bty-panel-collapse">
                         <div>
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#advancedopt" aria-expanded="true">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                               href="#advancedopt" aria-expanded="true">
                                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                                 <span class="title">Advanced options</span>
                             </a>
@@ -115,7 +114,8 @@
                                             <div class="input-group">
                                                 {!! Form::text('notify_to',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
 
-                                                <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                                <div class="input-group-addon addonNone" data-toggle="tooltip"
+                                                     data-placement="right"
                                                      title=""
                                                      data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
                                                     <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
@@ -132,7 +132,8 @@
                                         <td>
                                             <div class="input-group">
                                                 {!! Form::text('cc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                                <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                                <div class="input-group-addon addonNone" data-toggle="tooltip"
+                                                     data-placement="right"
                                                      title=""
                                                      data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
                                                     <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
@@ -149,7 +150,8 @@
                                         <td>
                                             <div class="input-group">
                                                 {!! Form::text('bcc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                                <div class="input-group-addon addonNone" data-toggle="tooltip" data-placement="right"
+                                                <div class="input-group-addon addonNone" data-toggle="tooltip"
+                                                     data-placement="right"
                                                      title=""
                                                      data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
                                                     <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
@@ -295,34 +297,34 @@
 
     <div class="col-md-3 p-0 p-l-5">
         {{--<div class="panel panel-default p-0" data-sortable-id="ui-typography-7">--}}
-            {{--<div class="panel-heading bg-black-darker text-white">Content</div>--}}
-            {{--<div class="panel-body p-5">--}}
-                {{--<table class="table borderless m-0">--}}
-                    {{--<tbody>--}}
-                    {{--<tr>--}}
-                        {{--<td>--}}
-                            {{--<div class="p-b-5">Content Type</div>--}}
-                            {{--{!! Form::select('content_type',--}}
-                {{--[--}}
-                {{--'iwysiwyg'=>'WYSIWYG',--}}
-                {{--'template'=>'Template',--}}
-                {{--],null,['class'=>'form-control']) !!}--}}
+        {{--<div class="panel-heading bg-black-darker text-white">Content</div>--}}
+        {{--<div class="panel-body p-5">--}}
+        {{--<table class="table borderless m-0">--}}
+        {{--<tbody>--}}
+        {{--<tr>--}}
+        {{--<td>--}}
+        {{--<div class="p-b-5">Content Type</div>--}}
+        {{--{!! Form::select('content_type',--}}
+        {{--[--}}
+        {{--'iwysiwyg'=>'WYSIWYG',--}}
+        {{--'template'=>'Template',--}}
+        {{--],null,['class'=>'form-control']) !!}--}}
 
-                        {{--</td>--}}
-                    {{--</tr>--}}
-                    {{--<tr class="template">--}}
-                        {{--<td>--}}
-                            {{--<div class="p-b-5">Templates</div>--}}
-                            {{--<select class="form-control" id="template" name="template_id"></select></td>--}}
-                    {{--</tr>--}}
-                    {{--<tr class="template-var" style="display:none">--}}
-                        {{--<td>--}}
-                            {{--<div class="p-b-5">Variations</div>--}}
-                            {{--<select class="form-control" id="variation_id" name="variation_id"></select></td>--}}
-                    {{--</tr>--}}
-                    {{--</tbody>--}}
-                {{--</table>--}}
-            {{--</div>--}}
+        {{--</td>--}}
+        {{--</tr>--}}
+        {{--<tr class="template">--}}
+        {{--<td>--}}
+        {{--<div class="p-b-5">Templates</div>--}}
+        {{--<select class="form-control" id="template" name="template_id"></select></td>--}}
+        {{--</tr>--}}
+        {{--<tr class="template-var" style="display:none">--}}
+        {{--<td>--}}
+        {{--<div class="p-b-5">Variations</div>--}}
+        {{--<select class="form-control" id="variation_id" name="variation_id"></select></td>--}}
+        {{--</tr>--}}
+        {{--</tbody>--}}
+        {{--</table>--}}
+        {{--</div>--}}
         {{--</div>--}}
 
 
@@ -339,26 +341,31 @@
             border: 0;
             box-shadow: none
         }
-        .dis-flex{
+
+        .dis-flex {
             display: flex;
             height: 100%;
-            margin-top:20px;
+            margin-top: 20px;
         }
-        .panel-default{
+
+        .panel-default {
             height: 100%;
 
         }
-        .editor_body{
+
+        .editor_body {
             display: none;
         }
-        .subj-attach{
+
+        .subj-attach {
             border: 0;
             background: none;
             outline: none;
         }
+
         /*.dis-fl-dir{*/
-            /*display: flex;*/
-            /*flex-direction: column;*/
+        /*display: flex;*/
+        /*flex-direction: column;*/
         /*}*/
     </style>
 @stop
@@ -456,7 +463,7 @@
 
         $(document).ready(function () {
             var checkedit = $("input[value='editor']");
-            var checktemple = $( "input[value='template']");
+            var checktemple = $("input[value='template']");
             var edBody = $('.editor_body');
             var temBody = $('.template_body');
             checkedit.on('click', function () {

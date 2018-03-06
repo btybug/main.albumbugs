@@ -116,6 +116,11 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/front-site/event",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],[
+                    "title" => "Admin Events",
+                    "custom-link" => "/admin/front-site/admin-events",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ], [
                     "title" => "Emails",
                     "custom-link" => "/admin/front-site/emails",
@@ -125,7 +130,7 @@ class ModuleServiceProvider extends ServiceProvider
             ]
         ]);
 
-        //  \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/manage');
+          \Btybug\btybug\Models\Routes::registerPages('btybug/frontsite');
 
     }
 

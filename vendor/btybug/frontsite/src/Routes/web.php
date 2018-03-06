@@ -155,6 +155,11 @@ Route::group(['prefix' => 'event'], function () {
     Route::post('/save-event-function-relations', 'EventsController@postSaveEventFunctionRelation');
 });
 
+Route::group(['prefix' => 'admin-events'], function () {
+    Route::get('/', 'AdminEventsController@getIndex',true)->name('frontsite_admin_event_index');
+    Route::get('/create', 'AdminEventsController@getCreate',true)->name('frontsite_admin_event_index_new');
+});
+
 Route::group(['prefix' => 'emails'], function () {
     Route::get('/', "EmailsController@getIndex",true);
     Route::get('/settings', "EmailsController@getSettings",true)->name('frontsite_emails_settings');

@@ -15,10 +15,12 @@ Route::get('/', 'IndexController@getIndex',true);
 Route::group(['prefix' => 'css'], function () {
     Route::get('/', 'CssController@getIndex',true)->name('css');
     Route::get('/savestyle', 'CssController@saveStyle',true)->name('save_style');
-    Route::post('/createfolder', 'CssController@createFolder')->name('create_folder');
-    Route::post('/createfile/{dirname}', 'CssController@createFile')->name('create_file');
-    Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
-    Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
-    Route::get('/file', 'CssController@getContent',true)->name('get_content');
+    Route::group(['prefix' => 'file'], function () {
+        Route::post('/createfolder', 'CssController@createFolder')->name('create_folder');
+        Route::post('/createfile/{dirname}', 'CssController@createFile')->name('create_file');
+        Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
+        Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
+        Route::get('/', 'CssController@getContent', true)->name('get_content');
+    });
 });
 

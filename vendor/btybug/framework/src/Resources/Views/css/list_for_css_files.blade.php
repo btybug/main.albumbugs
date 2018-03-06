@@ -59,7 +59,7 @@
 
         <div class="row layouts_row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-                @include("framework::css._partials.left_menu")
+                @include("framework::css._partials.left_menu_for_css")
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 @include("framework::css._partials.partial_for_css_file")

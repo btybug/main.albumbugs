@@ -21,6 +21,7 @@ Route::group(['prefix' => 'css'], function () {
         Route::post('/createfile/{dirname}', 'CssController@createFile')->name('create_file');
         Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
         Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
+        Route::post('/removeclass', 'CssController@removeClass')->name('remove_class');
         Route::post('/reset', 'CssController@resetFile')->name('reset_file');
         Route::get('/savestyle', 'CssController@saveStyleWithHtml', true)->name('save_style_with_html');
         Route::get('/', 'CssController@getContent', true)->name('get_content');

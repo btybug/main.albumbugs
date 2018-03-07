@@ -13,18 +13,28 @@
 @if(isset($data["data"]))
     <script type="template" id="get_for_append">
         @foreach($data["data"] as $index => $classname)
-            @if(isset($style_from_db->html))
-                <div class="col-md-4 parent">
-                    {!! $style_from_db->html !!}
-                </div>
-                <div class="col-md-8">
-                    <h5>{{$classname}}</h5><textarea class='code_textarea form-control' readonly>{!! ".".$classname."{".$data["codes"][$index]."}" !!}</textarea>
-                </div>
-            @else
-                <div class="col-md-12">
-                    <h5>{{$classname}}</h5><textarea class='code_textarea form-control' readonly>{!! ".".$classname."{".$data["codes"][$index]."}" !!}</textarea>
-                </div>
-            @endif
+            <div class="class_for_delete">
+                @if(isset($style_from_db->html))
+                    <div class="col-md-4 parent">
+                        {!! $style_from_db->html !!}
+                    </div>
+                    <div class="col-md-8">
+                        <h5>{{$classname}}</h5>
+                        <div class="this_flex">
+                            <textarea class='code_textarea form-control' readonly>{!! ".".$classname." {".$data["codes"][$index]."}" !!}</textarea>
+                            <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$classname}}">delete</button>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-12">
+                        <h5>{{$classname}}</h5>
+                        <div class="this_flex">
+                            <textarea class='code_textarea form-control' readonly>{!! ".".$classname." {".$data["codes"][$index]."}" !!}</textarea>
+                            <button class="btn btn-danger btn-md" data-slug="{{$slug}}" data-class="{{$classname}}">delete</button>
+                        </div>
+                    </div>
+                @endif
+            </div>
         @endforeach
     </script>
 @endif
@@ -33,7 +43,7 @@
         var html = $("#get_for_append").html();
         $(".append_here").html(html);
         if(html){
-            var childs = $(".append_here").children("div.parent").children();
+            var childs = $(".append_here").children("div.class_for_delete").children("div.parent").children();
             if(childs.length){
                 var data = JSON.parse($(".get_data").val());
                 data = data.data;
@@ -42,5 +52,28 @@
                 });
             }
         }
+        $("body").delegate(".remove_this_class","click",function () {
+            var slug = $(this).data("slug");
+            var class_name = $(this).prev().html();
+            class_name = class_name.replace(/(\n|\r|)+/g,'');
+            var _token = $('input[name=_token]').val();
+            var that = $(this);
+            var url = base_path + "/admin/framework/css/file/removeclass";
+            $.ajax({
+                url: url,
+                data: {
+                    slug:slug,
+                    class_name:class_name,
+                    _token: _token
+                },
+                success: function (data) {
+                    if(!data.error){
+                       return that.parents("div.class_for_delete").remove();
+                    }
+                    return alert("File does not exists");
+                },
+                type: 'POST'
+            });
+        });
     }
 </script>

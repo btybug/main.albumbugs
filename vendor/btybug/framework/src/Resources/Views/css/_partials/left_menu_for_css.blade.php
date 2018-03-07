@@ -231,4 +231,11 @@
         border: none;
         margin: 0;
     }
+    .this_flex{
+        display: flex;
+        align-items: center;
+    }
+    .this_flex button{
+        margin-left: 10px;
+    }
 </style>

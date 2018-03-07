@@ -113,6 +113,20 @@ class CssController extends Controller
         }
         return response()->json(["error" => 1]);
     }
+    public function removeClass(Request $request){
+        $slug = $request->slug;
+        $classname = $request->class_name;
+        $file = PhpJsonParser::getFileByName($slug);
+        if($file){
+            $content = \File::get($file->getPathname(),true);
+            $content = preg_replace("/(\n|\r|)+/", "", $content);
+            $content = str_replace($classname,'',$content);
+
+            \File::put($file->getPathname(),$content);
+            return response()->json(["error"=>0]);
+        }
+        return response()->json(["error"=>1]);
+    }
     public function newPage(){
         
         return view('framework::css.new_page');

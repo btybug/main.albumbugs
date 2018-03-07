@@ -21,11 +21,46 @@
         </div>
         <div class="col-md-9">
             <div class=" headar-btn">
-                <div></div>
                 <div>
+                    {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",$slug))}}
+                </div>
+                <div>
+                    <button class="btn btn-primary show_form_for_setting">Settings</button>
                     <button type="button" class="btn btn-info show_form"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
+
+
+            <div class="form-comp col-md-12 custom_hidden is_show_for_setting">
+                {!! Form::open(['url'=>route('save_style_with_html'),'method' => 'get']) !!}
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="filename">Item name</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="filename" name="filename" class="form-control" value="{{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",$slug))}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Item html</label>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea name="file_html" id="" cols="30" rows="10" class="form-control">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
+                <div class="col-md-12">
+                    <button class="btn btn-danger pull-right btn-lg">Delete this item and its classes</button>
+                    <button class="btn btn-lg btn-success pull-right">Save</button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+
 
             <div class="form-comp col-md-12 custom_hidden is_show">
                 {!! Form::open(['url'=>route('save_style'),'method' => 'get']) !!}
@@ -70,7 +105,6 @@
 @section('CSS')
     {!! HTML::style('public/css/bty.css?v='.rand(1111,9999)) !!}
     {!! HTML::style('public/css/new-store.css') !!}
-    {!! useDinamicStyle('images') !!}
     <style>
         .main_lay_cont {
             min-height: 500px;

@@ -21,11 +21,15 @@ Route::group(['prefix' => 'css'], function () {
         Route::post('/createfile/{dirname}', 'CssController@createFile')->name('create_file');
         Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
         Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
+        Route::get('/savestyle', 'CssController@saveStyleWithHtml', true)->name('save_style_with_html');
         Route::get('/', 'CssController@getContent', true)->name('get_content');
 
         Route::group(['prefix' => 'new'], function () {
             Route::get('/', 'CssController@newPage', true)->name('new_page');
         });
+    });
+    Route::get('/createtablecss', function(){
+        \Btybug\Framework\Database\CreateTableCssTable::up();
     });
 });
 

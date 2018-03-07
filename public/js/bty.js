@@ -126,8 +126,18 @@ $(document).ready(function () {
         var is_show = $(".is_show").hasClass("custom_hidden");
         if(is_show){
             $(".is_show").removeClass('custom_hidden');
+            $(".is_show_for_setting").addClass('custom_hidden');
         }else{
             $(".is_show").addClass('custom_hidden');
+        }
+    });
+    $("body").delegate(".show_form_for_setting","click",function(){
+        var is_show = $(".is_show_for_setting").hasClass("custom_hidden");
+        if(is_show){
+            $(".is_show_for_setting").removeClass('custom_hidden');
+            $(".is_show").addClass('custom_hidden');
+        }else{
+            $(".is_show_for_setting").addClass('custom_hidden');
         }
     });
 });

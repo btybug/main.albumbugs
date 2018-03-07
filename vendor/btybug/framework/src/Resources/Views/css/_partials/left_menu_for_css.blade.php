@@ -30,14 +30,9 @@
                                     @foreach($directory["children"] as $sub_group)
                                         <?php
                                             $original_name = explode('.',$sub_group->getFilename())[0];
-                                            $name = explode("_",explode('.',$sub_group->getFilename())[0]);
-                                            foreach ($name as $ind => $to_up){
-                                                $name[$ind] = ucfirst($to_up);
-                                            }
-                                            $name = implode(' ',$name);
                                         ?>
                                         <li class="custom_padding_left_0">
-                                            <a href="{{route("get_content")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"> {{$name}}</a>
+                                            <a href="{{route("get_content")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"> {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",explode('.',$sub_group->getFilename())[0]))}}</a>
                                             <span class="inline-block pull-right">
                                                 <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
                                                 @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
@@ -60,25 +55,28 @@
 <script type="template" id="append_group">
     <div class="panel panel-default class_for_remove">
         <div class="panel-heading">
-            <h3 class="panel-title">{dirname}
-                <span class="pull-right">
-                    <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-sm btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
-                    <a href="{{route("create_file",'repl')}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
-                </span>
-            </h3>
+            <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{rand_str}" aria-expanded="true">
+                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <span class="title">{dirname}</span>
+            </a>
+            <span class="pull-right">
+                <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
+                <a href="{{route("create_file",'repl')}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
+            </span>
             <div class="clearfix"></div>
         </div>
-        <div class="panel-body">
+        <div class="panel-content collapse in" id="collapseOne_{rand_str}" aria-expanded="true">
             <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
 
             </ul>
+            <div class="clearfix"></div>
         </div>
     </div>
 </script>
 <script type="template" id="append_new_file">
     <li class="custom_padding_left_0">
-        <a href="{{route("get_content")}}?type={original_name}" rel="tab" class="tpl-left-items"><span class="module_icon"></span> {filename}</a>
+        <a href="{{route("get_content")}}?type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
         <span class="inline-block pull-right">
             <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-xs btn-danger remove_file" data-name="{fname}"><i class="fa fa-remove"></i></button>
@@ -97,7 +95,15 @@
         }
         return str.join(' ');
     }
-    window.onload = function(){
+    function makeid() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < 5; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
         var base_path = window.location.origin;
         $("body").delegate(".custom_create_group","click",function(event){
             event.preventDefault();
@@ -112,7 +118,7 @@
                 success: function (data) {
                     if(data.dirname){
                         var name = titleCase(data.dirname);
-                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname);
+                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{rand_str}",makeid());
                          return $(".body_append").append(template);
                     }
                 },
@@ -134,7 +140,7 @@
                     if(!data.error){
                         var name = titleCase(data.filename);
                         template = template.replace("{filename}",name).replace("{original_name}",data.filename).replace("{fname}",data.filename);
-                        return that.parents("div.panel.panel-default").children(".panel-body").children("ul.components_list").append(template);
+                        return that.parents("div.panel.panel-default").children(".panel-content").children("ul.components_list").append(template);
                     }
                 },
                 type: 'POST'
@@ -178,7 +184,6 @@
                 type: 'POST'
             });
         });
-    }
 </script>
 <style>
     .custom_padding_left_0{

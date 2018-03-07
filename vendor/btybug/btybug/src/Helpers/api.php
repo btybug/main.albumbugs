@@ -1964,3 +1964,10 @@ function useDinamicStyle($filename)
 {
     return '<link href="' . asset('public/dinamiccss/' . $filename . '.css') . '" rel="stylesheet">';
 }
+function useDinamicStyleByPath($path)
+{
+    $arr = explode(DS,$path);
+    $filename = $arr[count($arr) - 1];
+    $foldername = $arr[count($arr) - 2];
+    return '<link href="' .asset('public'.DS.'dinamiccss'.DS.$foldername.DS.$filename.'?v='.rand(111,999)). '" rel="stylesheet">';
+}

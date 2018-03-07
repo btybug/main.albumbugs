@@ -7,6 +7,7 @@ namespace Btybug\Framework\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PhpJsonParser;
+use Btybug\Framework\Models\TableCss;
 use Illuminate\Http\Request;
 use Btybug\Framework\Repository\VersionsRepository;
 use Btybug\Framework\Services\SettingsService;
@@ -37,6 +38,23 @@ class CssController extends Controller
         \File::append($file->getPathname(), '.'.$class_name.' {'.$code.'}');
         return redirect()->back()->with("success","Style was saved successfully");
     }
+    public function saveStyleWithHtml(Request $request){
+        $slug = $request->type;
+        $html = $request->file_html;
+        $filename = PhpJsonParser::generateSlug($request->filename);
+        $data = TableCss::where("slug",$slug)->first();
+        if(!$data){
+            abort(404);
+        }
+        $data->slug = $filename;
+        $data->html = $html;
+        if($data->save()){
+            $file = PhpJsonParser::getFileByName($slug);
+            $to = str_replace($file->getFilename(),$filename.".".$file->getExtension(),$file->getPathname());
+            \File::move($file->getPathname(),$to);
+            return redirect()->to(route("get_content")."?type=".$filename);
+        }
+    }
     public function createFolder(){
         $path = base_path('public'.DS.'dinamiccss');
         $new_folder_name = "new_".str_random(4).rand(111,999);
@@ -50,6 +68,9 @@ class CssController extends Controller
         $full_path = $path.DS.$file_name.".css";
         if (!\File::exists($full_path)){
             \File::put($full_path,'');
+            $insert = new TableCss();
+            $insert->slug = $file_name;
+            $insert->save();
         }else{
             return response()->json(["error" => 1]);
         }
@@ -57,9 +78,9 @@ class CssController extends Controller
     }
     public function getContent(Request $request, $type = "icons"){
         $directories = PhpJsonParser::getFoldersWithChildrens();
-
         $slug = $request->get('type',$type);
-        return view('framework::css.list_for_css_files', compact(['slug','directories']));
+        $style_from_db = TableCss::where("slug",$slug)->first();
+        return view('framework::css.list_for_css_files', compact(['slug','directories','style_from_db']));
     }
     public function removeDir(Request $request){
         $dirname = $request->dirname;
@@ -75,6 +96,7 @@ class CssController extends Controller
         $file = PhpJsonParser::getFileByName($filename);
         if($file){
             \File::delete($file->getPathname());
+            TableCss::where("slug",$filename)->delete();
             return response()->json(["error" => 0]);
         }
         return response()->json(["error" => 1]);

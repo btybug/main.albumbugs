@@ -111,4 +111,14 @@ class CoreIndependents extends Independent
             ],
         ];
     }
+
+    public function sendEmailForm()
+    {
+        return [];
+    }
+
+    public function sendEmail()
+    {
+        
+    }
 }

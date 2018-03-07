@@ -47,6 +47,7 @@ class EventServiceProvider extends ServiceProvider
         \Subscriber::addEvent('on Page Create', 'App\Events\PageCreateEvent');
 
 
+        \Subscriber::addProperty('Send Email', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@sendEmail');
         \Subscriber::addProperty('Notification', 'Btybug\FrontSite\Models\EventSubscriber\Independent\CoreIndependents@Notification');
         \Subscriber::add('App\Events\FormSubmit', 'BtybugManage\Models\Emails@onFormSubmit', ['name' => 'value']);
         \Subscriber::add('App\Events\CustomEvent', 'Btybug\FrontSite\Models\Emails@test');

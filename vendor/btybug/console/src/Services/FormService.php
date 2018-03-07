@@ -502,6 +502,7 @@ class FormService extends GeneralService
                 $this->form->update($data['id'], [
                     'name' => $data['name'],
                     'description' => $data['description'],
+                    'original_css' => $data['original_css'],
                     'fields_json' => (is_array(issetReturn($data,'fields_json',[])))
                         ? json_encode(issetReturn($data,'fields_json',[]),true)
                         : issetReturn($data,'fields_json',[]),
@@ -517,6 +518,7 @@ class FormService extends GeneralService
                 'description' => $data['description'],
                 'slug' => uniqid(),
                 'created_by' => 'custom',
+                'original_css' => $data['original_css'],
                 'fields_json' => issetReturn($data,'fields_json',null),
                 'original_html' => issetReturn($data,'original_html',null),
                 'fields_type' => $data['fields_type'],

@@ -55,7 +55,9 @@
                 </div>
                 <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
                 <div class="col-md-12">
-                    <button class="btn btn-danger pull-right btn-lg">Delete this item and its classes</button>
+                    @if($slug != "xl_large_text" && $slug != "l_text" && $slug != "m_text" && $slug != "s_text" && $slug != "xs_text" && $slug != "link_text" && $slug != "icons")
+                        <button type="button" class="btn btn-danger pull-right btn-lg custom_margin_left delete_item_and_classes" data-name="{{$slug}}">Delete this item and its classes</button>
+                    @endif
                     <button class="btn btn-lg btn-success pull-right">Save</button>
                 </div>
                 {!! Form::close() !!}
@@ -140,6 +142,9 @@
         }
         .code_textarea{
             height:130px!important;
+        }
+        .custom_margin_left{
+            margin-left:15px;
         }
     </style>
 @stop

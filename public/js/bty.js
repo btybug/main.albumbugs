@@ -140,4 +140,23 @@ $(document).ready(function () {
             $(".is_show_for_setting").addClass('custom_hidden');
         }
     });
+    $("body").delegate(".delete_item_and_classes","click",function(){
+        var slug = $(this).data("name");
+        var _token = $('input[name=_token]').val();
+        var url = base_path + "/admin/framework/css/file/reset";
+        $.ajax({
+            url: url,
+            data: {
+                slug:slug,
+                _token: _token
+            },
+            success: function (data) {
+                if(!data.error){
+                   return window.location.reload();
+                }
+                alert("File does not exists");
+            },
+            type: 'POST'
+        });
+    })
 });

@@ -101,6 +101,18 @@ class CssController extends Controller
         }
         return response()->json(["error" => 1]);
     }
+    public function resetFile(Request $request){
+        $slug = $request->slug;
+        $file = PhpJsonParser::getFileByName($slug);
+        if($file){
+            \File::put($file->getPathname(),'');
+            TableCss::where("slug",$slug)->update([
+                "html" => null
+            ]);
+            return response()->json(["error" => 0]);
+        }
+        return response()->json(["error" => 1]);
+    }
     public function newPage(){
         
         return view('framework::css.new_page');

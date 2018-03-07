@@ -48,6 +48,11 @@ class FormService extends GeneralService
         $this->formRolesRepository = $formRolesRepository;
     }
 
+    public function makeFormObject($id){
+        $this->formObject = $this->form->find($id);
+        return $this;
+    }
+
     public static function checkFields($json)
     {
         $fields = json_decode($json, true);

@@ -171,7 +171,7 @@ Route::group(['prefix' => 'emails'], function () {
     Route::get('/data/{id}', "EmailsController@getData");
     Route::post('/create-group', "EmailsController@postCreateGroup");
     Route::post('/get-forms-lists', "EmailsController@postGetFormLists");
-    Route::post('/get-forms-shortcodes', "EmailsController@getFormShortcodes");
+    Route::post('/get-forms-shortcodes', "EmailsController@getFormShortcodes")->name('frontsite_emails_get_form_shortcodes');
     Route::post('/create-email', "EmailsController@postCreateEmail");
     Route::post('/delete-email/{id}', "EmailsController@postDeleteEmail");
     Route::post('check-email-settings', "EmailsController@postCheckEmail");

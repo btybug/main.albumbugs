@@ -9,9 +9,11 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 use Btybug\btybug\Models\Settings;
+use Btybug\Console\Repository\FieldsRepository;
+use Btybug\Console\Repository\FormsRepository;
+use Btybug\Console\Services\FormService;
 use Btybug\FrontSite\Models\EmailGroups;
 use Btybug\FrontSite\Models\Emails;
-use Btybug\Modules\Models\Forms;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Yajra\Datatables\Datatables;
@@ -87,17 +89,21 @@ class EmailsController extends Controller
      * @param null $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getUpdate($id = null)
+    public function getUpdate(
+        FormsRepository $formsRepository,
+        $id = null
+    )
     {
-        $subscriber = \Subscriber::getEvents()->pluck('name','namespace');
-        $forms =  \Btybug\Console\Models\Forms::all()->pluck('name', 'slug')->toArray();
         $email = Emails::findOrFail($id);
+        $subscriber = \Subscriber::getEvents()->pluck('name','namespace');
+        $forms =  $formsRepository->pluck('name','id')->toArray();
+
         return view('manage::emails.update', compact('email', 'forms','subscriber'));
     }
 
-    public function postUpdate(Request $request)
+    public function postUpdate(Request $request,$id)
     {
-        $email = Emails::findOrFail($request->id);
+        $email = Emails::findOrFail($id);
         $email->update($request->except('_token'));
         return redirect()->back();
     }
@@ -210,14 +216,17 @@ class EmailsController extends Controller
         return \Response::json(['code' => self::VALID]);
     }
 
-    public function getFormShortcodes(Request $request)
+    public function getFormShortcodes(
+        Request $request,
+        FormsRepository $formsRepository,
+        FormService $formService
+    )
     {
         $shortcodes = [];
-        $form = Forms::where('slug', $request->form_slug)->first();
+        $form = $formService->makeFormObject($request->id);
+
         if ($form) {
-            $tableData = BBGetTableColumn($form->fields_type);
-            foreach ($tableData as $column)
-                $shortcodes[$column] = '[special key=' . $column . ']';
+            $shortcodes = $form->getFields(false,true);
         }
         $html = view('manage::emails._partial.specific_shortcodes', compact(['shortcodes']))->render();
         return \Response::json(['html' => $html]);

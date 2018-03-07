@@ -195,8 +195,8 @@
                         <tbody>
                         <tr class="select-trigger-td">
                             <td>
-                                <div class="p-b-5">Event / Trigger</div>
-                                {!! Form::select('event_code',$subscriber, null, ['id' => 'event_trigger','class' => 'form-control']) !!}
+                                <div class="p-b-5">Form</div>
+                                {!! Form::select('event_form_id',['' => 'Select Form'] + $forms, null, ['id' => 'form_event','class' => 'form-control']) !!}
                             </td>
                         </tr>
 
@@ -248,11 +248,10 @@
                         Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
                         Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
                 </div>
-                <div class="panel-body editor_body">
+                <div class="panel-body editor_body {{ ($email['content_type'] == 'editor') ? 'show' : 'hide' }}">
                     {!! Form::textarea('content',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
                 </div>
-
-                <div class="panel-body template_body">
+                <div class="panel-body template_body {{ ($email['content_type'] == 'template') ? 'show' : 'hide' }}">
                     {{--<div class="col-sm-5 p-l-0 p-r-10">--}}
                     {{--<input name="selcteunit" data-key="title" readonly="readonly" data-id="template"--}}
                     {{--class="page-layout-title form-control"--}}
@@ -280,7 +279,6 @@
                                     <td>
                                         <div class="sc-item m-b-5">[general key=logo]</div>
                                         <div class="sc-item m-b-5">[general key=site_name]</div>
-
                                     </td>
                                 </tr>
                                 </tbody>
@@ -413,13 +411,13 @@
                 }
             });
 
-            $('body').on('change', 'select[name="trigger_on_form"]', function () {
+            $('body').on('change', '#form_event', function () {
                 if ($(this).val() != '0') {
                     $.ajax({
-                        url: "{!! url('/admin/manage/emails/get-forms-shortcodes') !!}",
+                        url: "{!! route('frontsite_emails_get_form_shortcodes') !!}",
                         type: 'POST',
                         data: {
-                            form_slug: $(this).val()
+                            id: $(this).val()
                         },
                         headers: {
                             'X-CSRF-TOKEN': $("input[name='_token']").val()
@@ -429,31 +427,27 @@
                     }).fail(function () {
                         alert('Could not load shortcodes. Please try again.');
                     });
+                }else{
+                    $('#specific_shortcodes').html('');
                 }
-
             });
 
-            var event_code = $('#event_trigger').val();
-            if (event_code == 'form_submited') {
-                var form_slug = $('select[name="trigger_on_form"]').val();
-
-                if (form_slug != '0') {
-                    $.ajax({
-                        url: "{!! url('/admin/manage/emails/get-forms-shortcodes') !!}",
-                        type: 'POST',
-                        data: {
-                            form_slug: form_slug
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $("input[name='_token']").val()
-                        }
-                    }).done(function (data) {
-                        $('#specific_shortcodes').html(data.html);
-                    }).fail(function () {
-                        alert('Could not load shortcodes. Please try again.');
-                    });
-                }
-
+            var form_slug = $('#form_event').val();
+            if (form_slug) {
+                $.ajax({
+                    url: "{!! route('frontsite_emails_get_form_shortcodes') !!}",
+                    type: 'POST',
+                    data: {
+                        id: form_slug
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    }
+                }).done(function (data) {
+                    $('#specific_shortcodes').html(data.html);
+                }).fail(function () {
+                    alert('Could not load shortcodes. Please try again.');
+                });
             }
         });
 

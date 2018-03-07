@@ -4,7 +4,7 @@
         <tr>
             <td class="specific-sc-container">
                 @foreach($shortcodes as $shortcode)
-                    <div class="sc-item m-b-5">{!! $shortcode !!}</div>
+                    <div class="sc-item m-b-5">[special key={!! $shortcode->column_name !!}]</div>
                 @endforeach
             </td>
         </tr>

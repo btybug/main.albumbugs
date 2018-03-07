@@ -31,7 +31,7 @@
                         @foreach($groups as $group)
                             <li class="{!! ($group->id==$id)?'active':'' !!} list-group-item"
                                 data-id="{!! $group->id !!}"><a
-                                        href="{!! url('/admin/manage/emails',$group->id) !!}"> {!! $group->name !!} </a><span
+                                        href="{!! url('/admin/front-site/emails',$group->id) !!}"> {!! $group->name !!} </a><span
                                         class="listtool"><a href="#" class="btn btn-default" data-action="editGroup"
                                                             data-id="4" data-title="common"><i class="fa fa-pencil"
                                                                                                aria-hidden="true"></i></a> <a
@@ -200,7 +200,7 @@
                         var hItem = '<li class="list-group-item"><a href="/admin/settings/email/custom/' + d.id + '">  ' + d.name + ' </a><span class="listtool"><a href="#" class="btn btn-default" data-action="editGroup" data-id="' + d.id + '" data-title="' + d.name + '"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="#" class="btn btn-default" data-action="deleteGroup" data-id="' + d.id + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></li>';
 
                     }
-                    postAjax('/admin/manage/emails/create-group', {'name': getvalue}, afterDone);
+                    postAjax('/admin/front-site/emails/create-group', {'name': getvalue}, afterDone);
                 }
 
             })

@@ -334,6 +334,14 @@
     {!!HTML::style( 'public/css/tag-it/jquery.tagit.css' ) !!}
     {!! BBstyle(plugins_path("vendor/sahak.avatar/membership/src/public/css/form-builder.css")) !!}
     <style>
+        .sc-item{
+            background: darkturquoise;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 3px;
+            color: ghostwhite;
+            cursor: pointer;
+        }
         .input-group-addon.addonNone {
             background: none;
             border: 0;

@@ -9,6 +9,8 @@
 namespace Btybug\FrontSite\Models\EventSubscriber\Independent;
 
 
+use Btybug\FrontSite\Models\Emails;
+
 class CoreIndependents extends Independent
 {
 
@@ -114,11 +116,20 @@ class CoreIndependents extends Independent
 
     public function sendEmailForm()
     {
-        return [];
+        $emails=Emails::all()->pluck('name','id')->toArray();
+        return [
+            'email' => [
+                'type' => 'select',
+                'label' => 'Select Email',
+                'data' =>['0'=>'Select One']+$emails ,
+                'value' => '0',
+            ]
+        ];
     }
 
     public function sendEmail()
     {
-        
+
+
     }
 }

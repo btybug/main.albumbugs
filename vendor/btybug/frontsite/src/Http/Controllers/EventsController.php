@@ -78,11 +78,14 @@ class EventsController extends Controller
                         $formData[$key]['value'] = $val;
                     }
                 }
-                $tabs[] = [
-                    'namespace' => $functionNamespace[0],
-                    'form' => $formData,
-                    'name' => $subscriberProperties[$slug]['name']
-                ];
+                if(isset($subscriberProperties[$slug])){
+                    $tabs[] = [
+                        'namespace' => $functionNamespace[0],
+                        'form' => $formData,
+                        'name' => $subscriberProperties[$slug]['name']
+                    ];
+                }
+
             }
         }
 

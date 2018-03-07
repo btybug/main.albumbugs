@@ -100,7 +100,6 @@ class PhpJsonParser
                 $arr[$key]["dirname"] = $name;
                 $arr[$key]["children"] = \File::allFiles($dir);
            }
-           dd($arr);
            return $arr;
        }
     }

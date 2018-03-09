@@ -150,7 +150,7 @@
             var dirname = $(this).data("name");
             var that = $(this);
             var _token = $('input[name=_token]').val();
-            var url = base_path + "/admin/framework/css/file/removedir";
+            var url = base_path + "/admin/framework/css-classes/removedir";
             $.ajax({
                 url: url,
                 data: {
@@ -169,7 +169,7 @@
             var filename = $(this).data("name");
             var that = $(this);
             var _token = $('input[name=_token]').val();
-            var url = base_path + "/admin/framework/css/file/removefile";
+            var url = base_path + "/admin/framework/css-classes/removefile";
             $.ajax({
                 url: url,
                 data: {

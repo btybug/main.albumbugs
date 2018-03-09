@@ -65,14 +65,14 @@
 
 
             <div class="form-comp col-md-12 custom_hidden is_show">
-                {!! Form::open(['url'=>route('save_style'),'method' => 'get']) !!}
+                {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
                     <div class="col-md-7">
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label for="">Class Name</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" name="class_name" class="form-control">
+                                <input type="text" name="class_name" class="form-control this_very_classname">
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -81,16 +81,29 @@
                                 <label for="">Class Code</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea name="code" id="" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="code" id="" cols="30" rows="10" class="form-control this_very_textarea"></textarea>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
+                    <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
                     <div class="col-md-5">
-                        <button class="btn btn-lg btn-success pull-right">Save</button>
+                        <button class="btn btn-lg btn-success pull-right validate_textarea" type="button">Save</button>
                     </div>
                 {!! Form::close() !!}
+                <div class="clearfix"></div>
+                <div class="alert alert-danger alert-block remove_hidden_for_error custom_hidden">
+                    <strong>
+                        Error: You have a css syntax error. Please be careful and write right content.
+                        <br>Example<br>
+                        <span>
+                            color:#FF0000;<br>
+                            font-size:25px;<br>
+                            etc...<br>
+                        </span>
+                        <div class="clearfix"></div>
+                    </strong>
+                </div>
             </div>
         </div>
 
@@ -145,6 +158,9 @@
         }
         .custom_margin_left{
             margin-left:15px;
+        }
+        .error{
+            color:#a94442;
         }
     </style>
 @stop

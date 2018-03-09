@@ -30,12 +30,17 @@ class CssController extends Controller
         $type = $request->type;
         $class_name = $request->class_name;
         $code = $request->code;
-
+        $full_style = $request->full_style;
         $file = PhpJsonParser::getFileByName($type);
         if(!$file){
             return redirect()->back()->with("error","File does not exists");
         }
-        \File::append($file->getPathname(), '.'.$class_name.' {'.$code.'}');
+        if(!$class_name || !$code){
+            return redirect()->back()->with("error","Class name and its styles couldn't be empty");
+        }
+        if($full_style){
+            \File::append($file->getPathname(), $full_style);
+        }
         return redirect()->back()->with("success","Style was saved successfully");
     }
     public function saveStyleWithHtml(Request $request){
@@ -119,7 +124,7 @@ class CssController extends Controller
         $file = PhpJsonParser::getFileByName($slug);
         if($file){
             $content = \File::get($file->getPathname(),true);
-            $content = preg_replace("/(\n|\r|)+/", "", $content);
+            $content = preg_replace("/(\r)+/", "", $content);
             $content = str_replace($classname,'',$content);
 
             \File::put($file->getPathname(),$content);
@@ -128,7 +133,6 @@ class CssController extends Controller
         return response()->json(["error"=>1]);
     }
     public function newPage(){
-        
         return view('framework::css.new_page');
     }
 }

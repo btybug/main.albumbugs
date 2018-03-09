@@ -21,7 +21,7 @@
                     <div class="col-md-8">
                         <h5>{{$classname}}</h5>
                         <div class="this_flex">
-                            <textarea class='code_textarea form-control' readonly>{!! ".".$classname." {".$data["codes"][$index]."}" !!}</textarea>
+                            <textarea class='code_textarea form-control' readonly>{{ ".".$classname."\t{".$data["codes"][$index]."}" }}</textarea>
                             <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$classname}}">delete</button>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-12">
                         <h5>{{$classname}}</h5>
                         <div class="this_flex">
-                            <textarea class='code_textarea form-control' readonly>{!! ".".$classname." {".$data["codes"][$index]."}" !!}</textarea>
+                            <textarea class='code_textarea form-control' readonly>{{ ".".$classname."\t{".$data["codes"][$index]."}" }}</textarea>
                             <button class="btn btn-danger btn-md" data-slug="{{$slug}}" data-class="{{$classname}}">delete</button>
                         </div>
                     </div>
@@ -55,7 +55,6 @@
         $("body").delegate(".remove_this_class","click",function () {
             var slug = $(this).data("slug");
             var class_name = $(this).prev().html();
-            class_name = class_name.replace(/(\n|\r|)+/g,'');
             var _token = $('input[name=_token]').val();
             var that = $(this);
             var url = base_path + "/admin/framework/css/file/removeclass";

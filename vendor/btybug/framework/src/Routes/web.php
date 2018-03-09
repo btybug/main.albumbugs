@@ -14,24 +14,24 @@ Route::get('/', 'IndexController@getIndex',true);
 
 Route::group(['prefix' => 'css'], function () {
     Route::get('/', 'CssController@getIndex',true)->name('css');
-    Route::get('/savestyle', 'CssController@saveStyle',true)->name('save_style');
+    Route::post('/savestyle', 'CssController@saveStyle')->name('save_style');
 
-    Route::group(['prefix' => 'file'], function () {
-        Route::post('/createfolder', 'CssController@createFolder')->name('create_folder');
-        Route::post('/createfile/{dirname}', 'CssController@createFile')->name('create_file');
-        Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
-        Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
-        Route::post('/removeclass', 'CssController@removeClass')->name('remove_class');
-        Route::post('/reset', 'CssController@resetFile')->name('reset_file');
-        Route::get('/savestyle', 'CssController@saveStyleWithHtml', true)->name('save_style_with_html');
-        Route::get('/', 'CssController@getContent', true)->name('get_content');
-
-        Route::group(['prefix' => 'new'], function () {
-            Route::get('/', 'CssController@newPage', true)->name('new_page');
-        });
-    });
     Route::get('/createtablecss', function(){
         \Btybug\Framework\Database\CreateTableCssTable::up();
     });
+});
+Route::group(['prefix' => 'css-classes'], function () {
+    Route::post('/createfolder', 'CssController@createFolder')->name('create_folder');
+    Route::post('/createfile/{dirname}', 'CssController@createFile')->name('create_file');
+    Route::post('/removedir', 'CssController@removeDir')->name('remove_dir');
+    Route::post('/removefile', 'CssController@removeFile')->name('remove_file');
+    Route::post('/removeclass', 'CssController@removeClass')->name('remove_class');
+    Route::post('/reset', 'CssController@resetFile')->name('reset_file');
+    Route::get('/savestyle', 'CssController@saveStyleWithHtml', true)->name('save_style_with_html');
+    Route::get('/', 'CssController@getContent', true)->name('get_content');
+
+});
+Route::group(['prefix' => 'component'], function () {
+    Route::get('/', 'CssController@newPage', true)->name('new_page');
 });
 

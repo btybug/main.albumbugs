@@ -143,7 +143,7 @@ $(document).ready(function () {
     $("body").delegate(".delete_item_and_classes","click",function(){
         var slug = $(this).data("name");
         var _token = $('input[name=_token]').val();
-        var url = base_path + "/admin/framework/css/file/reset";
+        var url = base_path + "/admin/framework/css-classes/reset";
         $.ajax({
             url: url,
             data: {
@@ -158,5 +158,21 @@ $(document).ready(function () {
             },
             type: 'POST'
         });
-    })
+    });
+    $("body").delegate(".validate_textarea","click",function(){
+        var validate =  /([#.@]?[\w.:> ]+)[\s]{[\r\n]?([A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*(?:[A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*(?:2)*)*)}/;
+        var styles = $(".this_very_textarea").val();
+        var class_name = $(".this_very_classname").val();
+
+        var build_full_syntax = "." + class_name + "\t{\n" + styles + "\n}";
+
+        if(validate.test(build_full_syntax)){
+            return (
+                $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+build_full_syntax+"'>").submit()
+            );
+        }else{
+            $(".this_very_textarea").closest(".form-group").addClass("has-error").find("label").addClass("error");
+            $(".remove_hidden_for_error").removeClass("custom_hidden");
+        }
+    });
 });

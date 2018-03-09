@@ -200,13 +200,13 @@ class EmailsController extends Controller
             }
             return \Response::json(['code' => self::INVALID, 'message' => $e->getMessage()]);
         }
-        if (Setting::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->exists()) {
-            Setting::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->update([
+        if (Settings::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->exists()) {
+            Settings::where('section', 'mail_settings')->where('settingkey', 'is_invalid')->update([
                 'section' => 'mail_settings',
                 'settingkey' => 'is_invalid',
                 'val' => self::VALID]);
         } else {
-            Setting::create([
+            Settings::create([
                 'section' => 'mail_settings',
                 'settingkey' => 'is_invalid',
                 'val' => self::VALID

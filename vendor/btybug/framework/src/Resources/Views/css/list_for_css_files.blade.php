@@ -108,7 +108,7 @@
         </div>
 
         <div class="row layouts_row">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 m-t-54">
                 @include("framework::css._partials.left_menu_for_css")
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
@@ -161,6 +161,14 @@
         }
         .error{
             color:#a94442;
+        }
+        .m-t-54{
+            margin-top:-54px;
+        }
+        @media (max-width: 992px){
+            .m-t-54{
+                margin-top:0;
+            }
         }
     </style>
 @stop

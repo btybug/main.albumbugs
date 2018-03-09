@@ -48,7 +48,8 @@
                             <label for="">Item html</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea name="file_html" id="" cols="30" rows="10" class="form-control">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                            <textarea name="" id="html_val" cols="30" rows="10" class="hidden">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                            <textarea name="file_html" id="editor_html" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -81,7 +82,8 @@
                                 <label for="">Class Code</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea name="code" id="" cols="30" rows="10" class="form-control this_very_textarea"></textarea>
+                                <textarea name="code" id="editor" cols="30" rows="10" class="form-control this_very_textarea"></textarea>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -170,8 +172,25 @@
                 margin-top:0;
             }
         }
+        .ace_editor{
+            height:160px;
+        }
     </style>
 @stop
 @section('JS')
+    {!! HTML::script('public/js/ace-editor/ace.js') !!}
+    <script>
+        window.onload = function(){
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/css");
+
+            var html_val = $("#html_val").val();
+            var editor_html = ace.edit("editor_html");
+            editor_html.setTheme("ace/theme/monokai");
+            editor_html.session.setMode("ace/mode/html");
+            editor_html.setValue(html_val);
+        }
+    </script>
     {!! HTML::script('public/js/bty.js?v='.rand(1111,9999)) !!}
 @stop

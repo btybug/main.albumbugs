@@ -39,7 +39,7 @@
     </script>
 @endif
 <script>
-    window.onload = function(){
+    $(document).ready(function(){
         var html = $("#get_for_append").html();
         $(".append_here").html(html);
         if(html){
@@ -67,12 +67,12 @@
                 },
                 success: function (data) {
                     if(!data.error){
-                       return that.parents("div.class_for_delete").remove();
+                        return that.parents("div.class_for_delete").remove();
                     }
                     return alert("File does not exists");
                 },
                 type: 'POST'
             });
         });
-    }
+    });
 </script>

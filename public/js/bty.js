@@ -166,13 +166,13 @@ $(document).ready(function () {
 
         var build_full_syntax = "." + class_name + "\t{\n" + styles + "\n}";
 
-        if(validate.test(build_full_syntax)){
+       // if(validate.test(build_full_syntax)){
             return (
                 $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+build_full_syntax+"'>").submit()
             );
-        }else{
-            $(".this_very_textarea").closest(".form-group").addClass("has-error").find("label").addClass("error");
-            $(".remove_hidden_for_error").removeClass("custom_hidden");
-        }
+      //  }else{
+       //     $(".this_very_textarea").closest(".form-group").addClass("has-error").find("label").addClass("error");
+       //     $(".remove_hidden_for_error").removeClass("custom_hidden");
+      //  }
     });
 });

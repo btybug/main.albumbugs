@@ -19,7 +19,8 @@ class EventsController extends Controller
     public function getIndex(FormsRepository $formsRepository,Generator $generator)
     {
 //        $generator->getEvents();
-//        $generator->generate('form',5,'My Test Event');
+        $generator->generate('form',26,'User detail form');
+        dd('done');
         $forms = $formsRepository->getAll();
         foreach($forms as $form){
             if(isset($form->settings['event']) && $form->settings['event']){

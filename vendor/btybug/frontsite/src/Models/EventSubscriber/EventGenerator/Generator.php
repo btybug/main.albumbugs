@@ -28,15 +28,15 @@ class Generator
         if (!\File::exists($this->jsonPath)) {
             \File::put($this->jsonPath, '[]');
         }
-        $this->data=$this->getStorageData();
+        $this->data = $this->getStorageData();
     }
 
-    public function generate($type, $id,$name)
+    public function generate($type, $id, $name)
     {
         $className = $type . md5($id);
         $event = $this->createEvent($className);
         $listner = $this->createListner($className);
-        dd($this->put($type,$event,$listner,$name));
+        return $this->put($type, $event, $listner, $name);
     }
 
     private function createEvent($className)
@@ -67,12 +67,12 @@ class Generator
         return 'App\Listeners\Generator' . '\\' . $className;
     }
 
-    private function put($type, $event, $listner,$name)
+    private function put($type, $event, $listner, $name)
     {
         $data = $this->getStorageData();
-        $data[$type][$event]['name']=$name;
-        $data[$type][$event]['listner']=$listner;
-        $data['subscribes'][]=$listner;
+        $data[$type][$event]['name'] = $name;
+        $data[$type][$event]['listner'] = $listner;
+        $data['subscribes'][] = $listner;
         return $this->putStorageData($data);
     }
 
@@ -90,28 +90,29 @@ class Generator
     public function getSubscribes()
     {
 
-        return isset($this->data['subscribes'])?$this->data['subscribes']:[];
+        return isset($this->data['subscribes']) ? $this->data['subscribes'] : [];
     }
 
     public function getEvents()
     {
-        $data=$this->data;
-        $result=[];
+        $data = $this->data;
+        $result = [];
         unset($data['subscribes']);
-        foreach ($data as $types){
-            foreach($types as $event=>$type);
-            $result[$event][]=$type['listner'];
+        foreach ($data as $types) {
+            foreach ($types as $event => $type) ;
+            $result[$event][] = $type['listner'];
         }
         return $result;
     }
+
     public function getEventsRegister()
     {
-        $data=$this->data;
-        $result=[];
+        $data = $this->data;
+        $result = [];
         unset($data['subscribes']);
-        foreach ($data as $types){
-            foreach($types as $event=>$type);
-            \Subscriber::addEvent($type['name'],$event);
+        foreach ($data as $types) {
+            foreach ($types as $event => $type) ;
+            \Subscriber::addEvent($type['name'], $event);
         }
         return $result;
     }

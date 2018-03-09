@@ -142,6 +142,7 @@ class ModuleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(EventServiceProvider::class);
+        $this->app->register(GeneratorEventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
     }
 }

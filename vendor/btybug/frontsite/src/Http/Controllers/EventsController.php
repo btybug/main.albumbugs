@@ -12,12 +12,14 @@ namespace Btybug\FrontSite\Http\Controllers;
 use Btybug\Console\Repository\FormsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Btybug\FrontSite\Models\EventSubscriber\EventGenerator\Generator;
 
 class EventsController extends Controller
 {
-    public function getIndex(FormsRepository $formsRepository)
+    public function getIndex(FormsRepository $formsRepository,Generator $generator)
     {
-
+//        $generator->getEvents();
+//        $generator->generate('form',5,'My Test Event');
         $forms = $formsRepository->getAll();
         foreach($forms as $form){
             if(isset($form->settings['event']) && $form->settings['event']){

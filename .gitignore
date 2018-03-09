@@ -60,3 +60,5 @@ composer.lock
 /vendor/fildeloper
 /vendor/fideloper
 /public/app
+/app/Events/Generator/*.php
+/app/Listeners/Generator/*.php

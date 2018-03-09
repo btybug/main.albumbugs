@@ -7,7 +7,7 @@
  */
 function module_path($path = '')
 {
-    return app()->basePath() . (DS . 'vendor' . DS . 'sahak.avatar') . ($path ? DS . $path : $path);
+    return app()->basePath() . (DS . 'vendor' . DS . 'btybug') . ($path ? DS . $path : $path);
 }
 
 function BBaddShortcode($key, $function)

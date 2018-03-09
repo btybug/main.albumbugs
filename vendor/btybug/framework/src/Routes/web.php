@@ -32,6 +32,13 @@ Route::group(['prefix' => 'css-classes'], function () {
 
 });
 Route::group(['prefix' => 'component'], function () {
-    Route::get('/', 'CssController@newPage', true)->name('new_page');
+    Route::get('/', 'CssController@getComponent', true)->name('get_component');
+    Route::post('/createfolder', 'CssController@createFolderComponent')->name('create_folder_component');
+    Route::post('/createfile/{dirname}', 'CssController@createFileComponent')->name('create_file_component');
+    Route::post('/removedir', 'CssController@removeDirComponent')->name('remove_dir_component');
+    Route::post('/removefile', 'CssController@removeFileComponent')->name('remove_file_component');
+    Route::post('/removeclass', 'CssController@removeClassComponent')->name('remove_class_component');
+    Route::post('/reset', 'CssController@resetFileComponent')->name('reset_file_component');
+    Route::get('/savestyle', 'CssController@saveStyleWithHtmlComponent', true)->name('save_style_with_html_component');
 });
 

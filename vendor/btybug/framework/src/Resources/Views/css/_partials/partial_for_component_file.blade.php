@@ -57,7 +57,7 @@
             var class_name = $(this).prev().html();
             var _token = $('input[name=_token]').val();
             var that = $(this);
-            var url = base_path + "/admin/framework/css-classes/removeclass";
+            var url = base_path + "/admin/framework/component/removeclass";
             $.ajax({
                 url: url,
                 data: {

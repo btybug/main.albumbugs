@@ -4,53 +4,6 @@
 </div>
 
 <div class="clearfix"></div>
-<div class="cms_module_list module_list_1">
-    <div class="panel panel-default">
-        <div class="panel-body body_append">
-            @if(count($directories))
-                @foreach($directories as $index => $directory)
-                    <div class="panel panel-default class_for_remove">
-                        <div class="panel-heading">
-                            <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$index}}" aria-expanded="true">
-                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                <span class="title">{{$directory["dirname"]}}</span>
-                            </a>
-                                <span class="pull-right">
-                                    @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
-                                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
-                                    @endif
-                                    <a href="{{route("create_file_component",$directory["dirname"])}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
-                                </span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-content collapse in" id="collapseOne_{{$index}}" aria-expanded="true">
-                            <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
-                                @if(count($directory["children"]))
-                                    @foreach($directory["children"] as $sub_group)
-                                        <?php
-                                            $original_name = explode('.',$sub_group->getFilename())[0];
-                                        ?>
-                                        <li class="custom_padding_left_0">
-                                            <a href="{{route("get_component")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"> {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",explode('.',$sub_group->getFilename())[0]))}}</a>
-                                            <span class="inline-block pull-right">
-                                                <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
-                                                @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
-                                                    <button class="btn btn-xs btn-danger remove_file" data-name="{{$original_name}}"><i class="fa fa-remove"></i></button>
-                                                @endif
-                                            </span>
-                                        </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-    </div>
-</div>
 <div id="div_for_scroll"></div>
 <script type="template" id="append_group">
     <div class="panel panel-default class_for_remove">

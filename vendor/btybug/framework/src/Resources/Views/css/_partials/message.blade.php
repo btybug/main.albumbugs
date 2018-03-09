@@ -68,15 +68,15 @@
         <div class="col-md-6">
             <h5>bty-message-1</h5>
             <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
-                .bty-message-1{
+.bty-message-1{
     background-color: white;
 }
-.bty-message-1>ul{
+.bty-message-1 ul{
     list-style: none;
     margin: 0;
     padding: 20px;
 }
-.bty-message-1>ul li>a{
+.bty-message-1 ul li a{
     float: left;
     padding-right: 15px;
 }
@@ -86,34 +86,36 @@
     object-fit: cover;
     border-radius: 50%;
 }
-.bty-message-1>ul li:after{
+.bty-message-1 ul li:after{
     content: "";
     display: table;
     clear: both;
 }
-.bty-message-1>ul li>div h5{
+.bty-message-1 ul li div h5{
     margin: 0;
     padding-bottom: 3px;
     color: #444;
     font-size: 14px;
 }
-.bty-message-1>ul li>div{
+.bty-message-1 ul li div{
     display: table;
 }
 .bty-message-1>ul li{
     padding: 10px 0;
     border-bottom: 1px solid #e2e2e2;
 }
-.bty-message-1>ul li>div p{
+.bty-message-1 ul li div p{
     color: #777;
     font-size: 12px;
 }
-.bty-message-1 form>div{
+.bty-message-1 form div{
     position: relative;
     display: table;
     border-collapse: separate;
+    padding: 21px;
+    border-top: 1px solid #ccc;
 }
-.bty-message-1 form>div input{
+.bty-message-1 form div input{
     position: relative;
     z-index: 2;
     float: left;
@@ -132,16 +134,16 @@
     line-height: 1.42857143;
     color: #555;
 }
-.bty-message-1 form>div input:focus{
+.bty-message-1 form div input:focus{
     outline: none;
 }
-.bty-message-1 form>div>span{
+.bty-message-1 form div span{
     width: 1%;
     white-space: nowrap;
     vertical-align: middle;
     display: table-cell;
 }
-.bty-message-1 form>div button{
+.bty-message-1 form div button{
     color: #fff;
     background: #348fe2;
     border-radius: 0 3px 3px 0;
@@ -150,10 +152,6 @@
     margin-bottom: 0;
     font-size: 14px;
     border: none;
-}
-.bty-message-1 form>div{
-    padding: 21px;
-    border-top: 1px solid #ccc;
 }
             </textarea>
         </div>
@@ -213,35 +211,35 @@
     background-color: #1F2d43;
     color: #BECEDE;
 }
-.bty-message-2>ul{
+.bty-message-2 ul{
     padding: 20px;
     margin: 0;
     list-style-type: none;
 }
-.bty-message-2>ul li{
+.bty-message-2 ul li{
     display: flex;
     padding: 15px 0;
 }
-.bty-message-2>ul li:not(:last-child){
+.bty-message-2 ul li:not(:last-child){
     border-bottom: 1px solid #5f718e;
 }
-.bty-message-2>ul li i{
+.bty-message-2 ul li i{
     /*align-self: center;*/
     padding-right: 10px;
     font-size: 32px;
 }
-.bty-message-2>ul li>div h5{
+.bty-message-2 ul li div h5{
     font-size: 14px;
     margin: 0;
 }
-.bty-message-2>ul li>div p{
+.bty-message-2 ul li div p{
     font-size: 12px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     margin:0;
 }
-.bty-message-2>ul li>div{
+.bty-message-2 ul li div{
     overflow: hidden;
 }
 .bty-message-2>div{
@@ -256,7 +254,7 @@
     font-size: 14px;
     font-weight: bold;
     border-radius: 4px;
-    box-shadow: 0px 0px 6px 1px #becede;
+    box-shadow: 0 0 6px 1px #becede;
 }
             </textarea>
         </div>
@@ -351,15 +349,15 @@
         <div class="col-md-6">
             <h5>bty-message-3</h5>
             <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
-                .bty-message-3{
+.bty-message-3{
     background-color: white;
 }
-.bty-message-3>ul{
+.bty-message-3 ul{
     padding: 20px;
     list-style: none;
     margin:0;
 }
-.bty-message-3>ul li img{
+.bty-message-3 ul li img{
     width: 50px;
     height: 50px;
     object-fit: cover;
@@ -367,17 +365,17 @@
     -moz-border-radius: 50%;
     border-radius: 50%;
 }
-.bty-message-3>ul li{
+.bty-message-3 ul li{
     display: flex;
     margin-bottom: 30px;
 }
-.bty-message-3>ul li >div:nth-of-type(1){
+.bty-message-3 ul li div:nth-of-type(1){
     flex-shrink: 0;
 }
-.bty-message-3>ul li >div:nth-of-type(2){
+.bty-message-3 ul li div:nth-of-type(2){
     padding: 0 10px;
 }
-.bty-message-3>ul li >div:nth-of-type(2) h5{
+.bty-message-3 ul li div:nth-of-type(2) h5{
     color: #99abb4;
     line-height: 18px;
     font-size: 16px;
@@ -385,19 +383,19 @@
     margin: 0;
     margin-bottom: 7px;
 }
-.bty-message-3>ul li >div:nth-of-type(2) p{
+.bty-message-3 ul li div:nth-of-type(2) p{
     margin: 0;
     color: #777;
     border-radius: 4px;
     padding: 10px;
 }
-.bty-message-3>ul li:nth-of-type(odd) p{
+.bty-message-3 ul li:nth-of-type(odd) p{
     background-color: #cfecfe;
 }
-.bty-message-3>ul li:nth-of-type(even) p{
+.bty-message-3 ul li:nth-of-type(even) p{
     background-color: #e8fdeb;
 }
-.bty-message-3>ul li >div:nth-of-type(3){
+.bty-message-3 ul li div:nth-of-type(3){
     flex-shrink: 0;
     font-size: 13px;
     color: #99abb4;
@@ -409,11 +407,11 @@
     border-top: 1px solid #eee;
     display: table;
 }
-.bty-message-3>div>div:first-of-type{
+.bty-message-3>div div:first-of-type{
     width: 100%;
     display: table-cell;
 }
-.bty-message-3>div>div:last-of-type{
+.bty-message-3>div div:last-of-type{
     display: table-cell;
 }
 .bty-message-3>div textarea{
@@ -425,7 +423,7 @@
 .bty-message-3>div textarea:focus{
     outline: none;
 }
-.bty-message-3>div>div:last-of-type button{
+.bty-message-3>div div:last-of-type button{
     display: table-cell;
     background-color: #499bc7;
     border: 0;

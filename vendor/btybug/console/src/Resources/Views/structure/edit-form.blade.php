@@ -23,6 +23,29 @@
     {!! Html::script("public/js/form-builder/css-studio.js") !!}
     {!! Html::script("public/js/form-builder/form-builder.js?m=m") !!}
     {!! Html::script("public/js/form-builder/form-logic.js?m=m") !!}
+    {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
+    <script>
+        tinymce.init({
+            selector: '#contentEditor',
+            height: 500,
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools'
+            ],
+            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            image_advtab: true,
+
+        });
+
+        $('body').on('click', ".sc-item", function () {
+            tinymce.activeEditor.execCommand('mceInsertContent', false, $(this).text());
+        });
+    </script>
+
 @stop
 
 @section( 'content' )
@@ -169,7 +192,52 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="email-tmp">
-
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="panel panel-default custompanel m-t-20">
+                                        <div class="panel-heading bg-black-darker text-white">Main Content
+                                            <div class="pull-right">
+                                                Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
+                                                Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
+                                        </div>
+                                        <div class="panel-body editor_body show">
+                                            {!! Form::textarea('template_content',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
+                                        </div>
+                                        <div class="panel-body template_body hide">
+                                            {!! BBcustomize('unit','template','mail_template',
+                                        (isset($settings['template']) && $settings['template'])?'Change':'Select','email-template',['class'=>'btn btn-default change-layout','model' =>(isset($settings['template']) && $settings['template']) ?$settings['template']: null]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
+                                        <div class="panel-heading bg-black-darker text-white">Available Codes</div>
+                                        <div class="panel-body p-5">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#general_shortcodes">General</a></li>
+                                                <li><a data-toggle="tab" href="#specific_shortcodes">Specific</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div id="general_shortcodes" class="tab-pane fade in active">
+                                                    <table class="table borderless m-0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="sc-item m-b-5">[general key=logo]</div>
+                                                                <div class="sc-item m-b-5">[general key=site_name]</div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="specific_shortcodes" class="tab-pane fade">
+                                                    <h3>Specific shortcodes here</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -540,10 +608,32 @@
 @stop
 
 @section( 'JS' )
-
     <script>
         $(function () {
+            var checkedit = $("input[value='editor']");
+            var checktemple = $("input[value='template']");
+            var edBody = $('.editor_body');
+            var temBody = $('.template_body');
+            checkedit.on('click', function () {
+                if ($(this).is(':checked')) {
+                    $(this).closest('.dis-flex').find(edBody).show();
+                    $(this).closest('.dis-flex').find(temBody).hide();
+                } else {
+                    alert(55);
+                    $(this).closest('.dis-flex').find(edBody).hide();
+                    $(this).closest('.dis-flex').find(temBody).show();
 
+                }
+            });
+            checktemple.on('click', function () {
+                if ($(this).is(':checked')) {
+                    $(this).closest('.dis-flex').find(edBody).hide();
+                    $(this).closest('.dis-flex').find(temBody).show();
+                } else {
+                    $(this).closest('.dis-flex').find(temBody).hide();
+
+                }
+            });
 //get partial options view
             $('body').on('change', '.partials-change', function () {
 

@@ -123,7 +123,21 @@ class CoreIndependents extends Independent
                 'label' => 'Select Email',
                 'data' =>['0'=>'Select One']+$emails ,
                 'value' => '0',
-            ]
+            ],
+            'from'=>[
+                'type' => 'select',
+                'label' => 'From',
+                'data' =>['0'=>'Info','1'=>'Support','2'=>'Admin','3'=>'Sales'] ,
+                'value' => '0',
+            ],
+            'to' => [
+                'type' => 'text',
+                'label' => 'To'
+            ],
+            'subject' => [
+                'type' => 'text',
+                'label' => 'Subject'
+            ],
         ];
     }
 

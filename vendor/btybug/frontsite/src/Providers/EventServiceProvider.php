@@ -41,7 +41,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Subscriber::addEvent('After Login', 'App\Events\AfterLoginEvent',['id'=>22]);
+        \Subscriber::addEvent('After Login', 'App\Events\AfterLoginEvent',['id'=>22,'type'=>'form']);
         \Subscriber::addEvent('After Log out', 'App\Events\AfterLogOutEvent');
         \Subscriber::addEvent('on registred', 'Illuminate\Auth\Events\Registred');
         \Subscriber::addEvent('on Page Create', 'App\Events\PageCreateEvent');

@@ -20,6 +20,9 @@
                                 <button type="button" data-value="{!! $event['namespace'] !!}" class="list-group-item list-group-item-action" bb-click="selectEvent">
                                     {!! $event['name'] !!}
                                     <span class="badge">0</span>
+                                    @if(isset($event['settings']['type']))
+                                        <span class="event_type">{!! $event['settings']['type'] !!}</span>
+                                        @endif
                                 </button>
                             @endforeach
                         </div>
@@ -94,6 +97,15 @@
 
         [bb-click=saveEvent]{
             margin-top: 7px;
+        }
+        .event_type{
+            background: #f0950c;
+            width: 42px;
+            font-size: 14px;
+            border-radius: 5px;
+            color: white;
+            float: right;
+            text-align: center;
         }
     </style>
 @stop

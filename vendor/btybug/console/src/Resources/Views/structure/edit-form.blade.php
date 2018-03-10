@@ -69,99 +69,110 @@
     {!! Form::textarea('original_css',null,['class' => 'original_css hide']) !!}
     {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}
 
-    <div class="modal fade" id="settingsModal" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade bs-example-modal-lg" id="settingsModal" role="dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    Form Settings
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#form-settings" aria-controls="form-settings" role="tab" data-toggle="tab">Form Settings</a></li>
+                        <li><a href="#email-tmp" aria-controls="email-tmp" role="tab" data-toggle="tab">Email Template</a></li>
+                    </ul>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group m-l-0 m-r-0">
-                            <label for="success_message" class="col-sm-4 ">Fire Event</label>
-                            <div class="col-sm-8">
-                                {!! Form::checkbox('settings[event]',1,(isset($settings['event'])) ? $settings['event'] : null ,['class' =>'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0">
-                            <label for="success_message" class="col-sm-4 ">Success Message</label>
-                            <div class="col-sm-8">
-                                {!! Form::text('settings[message]',(isset($settings['message'])) ? $settings['message'] : null ,['class' =>'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0">
-                            <label for="success_message" class="col-sm-4 ">Redirect on Submit</label>
-                            <div class="col-sm-8">
-                                {!! Form::text('settings[redirect_url]',(isset($settings['redirect_url'])) ? $settings['redirect_url'] : null ,['class' =>'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0">
-                            <label for="success_message" class="col-sm-4 ">Create Permission</label>
-                            <div class="col-sm-8">
-                                <label>allow guest
-                                    {!! Form::checkbox('settings[create_allow]',0,null,['class' => 'allow_create_permission']) !!}
-                                </label>
-                                <label>allow Logged In
-                                    {!! Form::checkbox('settings[create_allow]',1,null,['class' => 'allow_create_permission']) !!}
-                                </label>
-                                <label>allow Admins
-                                    {!! Form::checkbox('settings[create_allow]',2,null,['class' => 'allow_create_permission allow_create_admins']) !!}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0 hide create-roles-box">
-                            <label for="success_message" class="col-sm-4 ">Select Roles</label>
-                            <div class="col-sm-8">
-                                {!! Form::select('settings[create_allowed_roles]',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group m-l-0 m-r-0">
-                            <label for="success_message" class="col-sm-4 ">Edit Permission</label>
-                            <div class="col-sm-8">
-                                <label>allow guest
-                                    {!! Form::checkbox('settings[edit_allow]',0,true,[]) !!}
-                                </label>
-                                <label>allow Logged In
-                                    {!! Form::checkbox('settings[edit_allow]',1,null,[]) !!}
-                                </label>
-                                <label>allow Admins
-                                    {!! Form::checkbox('settings[edit_allow]',2,null,['class' => 'allow_edit_permission']) !!}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0 hide edit-roles-box">
-                            <label for="success_message" class="col-sm-4 ">Select Roles</label>
-                            <div class="col-sm-8">
-                                {!! Form::select('settings[edit_allowed_roles]',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group m-l-0 m-r-0">
-                            <label for="" class="col-sm-4">Is Ajax</label>
-                            <div class="col-sm-8">
-                                <div class="customelement radio-inline">
-                                    <input name="settings[is_ajax]" id="is_ajax_yes"
-									       <?php echo ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? 'checked' : '' ?> value="yes"
-                                           type="radio">
-                                    <label for="is_ajax_yes">Yes</label>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="form-settings">
+                            <div class="row">
+                                <div class="form-group m-l-0 m-r-0">
+                                    <label for="success_message" class="col-sm-4 ">Fire Event</label>
+                                    <div class="col-sm-8">
+                                        {!! Form::checkbox('settings[event]',1,(isset($settings['event'])) ? $settings['event'] : null ,['class' =>'form-control']) !!}
+                                    </div>
                                 </div>
-                                <div class="customelement radio-inline">
-                                    <input name="settings[is_ajax]" id="is_ajax_no"
-									       <?php echo ( isset( $settings['is_ajax'] )
-									                    && $settings['is_ajax'] == 'no' ) ? 'checked' : ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? '' : 'checked' ?>
-                                           value="no" type="radio"> <label for="is_ajax_no">No</label>
+                                <div class="form-group m-l-0 m-r-0">
+                                    <label for="success_message" class="col-sm-4 ">Success Message</label>
+                                    <div class="col-sm-8">
+                                        {!! Form::text('settings[message]',(isset($settings['message'])) ? $settings['message'] : null ,['class' =>'form-control']) !!}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group m-l-0 m-r-0">
-                            <div class="col-sm-8">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Apply</button>
-                            </div>
-                        </div>
+                                <div class="form-group m-l-0 m-r-0">
+                                    <label for="success_message" class="col-sm-4 ">Redirect on Submit</label>
+                                    <div class="col-sm-8">
+                                        {!! Form::text('settings[redirect_url]',(isset($settings['redirect_url'])) ? $settings['redirect_url'] : null ,['class' =>'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group m-l-0 m-r-0">
+                                    <label for="success_message" class="col-sm-4 ">Create Permission</label>
+                                    <div class="col-sm-8">
+                                        <label>allow guest
+                                            {!! Form::checkbox('settings[create_allow]',0,null,['class' => 'allow_create_permission']) !!}
+                                        </label>
+                                        <label>allow Logged In
+                                            {!! Form::checkbox('settings[create_allow]',1,null,['class' => 'allow_create_permission']) !!}
+                                        </label>
+                                        <label>allow Admins
+                                            {!! Form::checkbox('settings[create_allow]',2,null,['class' => 'allow_create_permission allow_create_admins']) !!}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group m-l-0 m-r-0 hide create-roles-box">
+                                    <label for="success_message" class="col-sm-4 ">Select Roles</label>
+                                    <div class="col-sm-8">
+                                        {!! Form::select('settings[create_allowed_roles]',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
+                                    </div>
+                                </div>
 
+                                <div class="form-group m-l-0 m-r-0">
+                                    <label for="success_message" class="col-sm-4 ">Edit Permission</label>
+                                    <div class="col-sm-8">
+                                        <label>allow guest
+                                            {!! Form::checkbox('settings[edit_allow]',0,true,[]) !!}
+                                        </label>
+                                        <label>allow Logged In
+                                            {!! Form::checkbox('settings[edit_allow]',1,null,[]) !!}
+                                        </label>
+                                        <label>allow Admins
+                                            {!! Form::checkbox('settings[edit_allow]',2,null,['class' => 'allow_edit_permission']) !!}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group m-l-0 m-r-0 hide edit-roles-box">
+                                    <label for="success_message" class="col-sm-4 ">Select Roles</label>
+                                    <div class="col-sm-8">
+                                        {!! Form::select('settings[edit_allowed_roles]',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-l-0 m-r-0">
+                                    <label for="" class="col-sm-4">Is Ajax</label>
+                                    <div class="col-sm-8">
+                                        <div class="customelement radio-inline">
+                                            <input name="settings[is_ajax]" id="is_ajax_yes"
+                                                   <?php echo ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? 'checked' : '' ?> value="yes"
+                                                   type="radio">
+                                            <label for="is_ajax_yes">Yes</label>
+                                        </div>
+                                        <div class="customelement radio-inline">
+                                            <input name="settings[is_ajax]" id="is_ajax_no"
+                                                   <?php echo ( isset( $settings['is_ajax'] )
+                                                       && $settings['is_ajax'] == 'no' ) ? 'checked' : ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? '' : 'checked' ?>
+                                                   value="no" type="radio"> <label for="is_ajax_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-l-0 m-r-0">
+                                    <div class="col-sm-8">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">Apply</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="email-tmp">
+
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

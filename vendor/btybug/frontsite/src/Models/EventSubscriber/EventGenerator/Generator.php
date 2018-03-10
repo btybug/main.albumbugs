@@ -110,9 +110,9 @@ class Generator
         $data = $this->data;
         $result = [];
         unset($data['subscribes']);
-        foreach ($data as $types) {
+        foreach ($data as $key=>$types) {
             foreach ($types as $event => $type) ;
-            \Subscriber::addEvent($type['name'], $event);
+            \Subscriber::addEvent($type['name'], $event,['type'=>$key]);
         }
         return $result;
     }

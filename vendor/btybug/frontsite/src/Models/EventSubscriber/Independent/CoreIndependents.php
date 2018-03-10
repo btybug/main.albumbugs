@@ -117,32 +117,7 @@ class CoreIndependents extends Independent
     public function sendEmailForm()
     {
         $emails = Emails::all()->pluck('name', 'id')->toArray();
-        return [
-            'email' => [
-                'type' => 'select',
-                'label' => 'Select Email',
-                'data' => ['0' => 'Select One'] + $emails,
-                'value' => '0',
-            ],
-            'from' => [
-                'type' => 'select',
-                'label' => 'From',
-                'data' => ['0' => 'Info', '1' => 'Support', '2' => 'Admin', '3' => 'Sales'],
-                'value' => '0',
-            ],
-            'to' => [
-                'type' => 'text',
-                'label' => 'To',
-                'value' => '',
-
-            ],
-            'subject' => [
-                'type' => 'text',
-                'label' => 'Subject',
-                'value' => '',
-
-            ],
-        ];
+        return [];
     }
 
     public function sendEmail()

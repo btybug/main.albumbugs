@@ -286,7 +286,7 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="email-tmp">
                             <div class="templates-box">
-
+                                @include("console::structure._partials.email-templates")
                             </div>
                             <div class="row">
                                 <div class="col-md-12">

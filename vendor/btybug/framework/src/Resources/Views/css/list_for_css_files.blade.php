@@ -68,7 +68,7 @@
             <div class="form-comp col-md-12 custom_hidden is_show">
                 {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
                     <div class="col-md-7">
-                        <div class="form-group">
+                        {{--<div class="form-group">
                             <div class="col-md-4">
                                 <label for="">Class Name</label>
                             </div>
@@ -76,7 +76,7 @@
                                 <input type="text" name="class_name" class="form-control this_very_classname">
                             </div>
                             <div class="clearfix"></div>
-                        </div>
+                        </div>--}}
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label for="">Class Code</label>

@@ -34,10 +34,10 @@
                                         <li class="custom_padding_left_0">
                                             <a href="{{route("get_content")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"> {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",explode('.',$sub_group->getFilename())[0]))}}</a>
                                             <span class="inline-block pull-right">
-                                                <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
+                                               {{-- <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
                                                 @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
                                                     <button class="btn btn-xs btn-danger remove_file" data-name="{{$original_name}}"><i class="fa fa-remove"></i></button>
-                                                @endif
+                                                @endif--}}
                                             </span>
                                         </li>
                                     @endforeach
@@ -77,10 +77,10 @@
 <script type="template" id="append_new_file">
     <li class="custom_padding_left_0">
         <a href="{{route("get_content")}}?type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
-        <span class="inline-block pull-right">
+        {{--<span class="inline-block pull-right">
             <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-xs btn-danger remove_file" data-name="{fname}"><i class="fa fa-remove"></i></button>
-        </span>
+        </span>--}}
         <div class="clearfix"></div>
     </li>
 </script>
@@ -165,7 +165,7 @@
                 type: 'POST'
             });
         });
-        $("body").delegate(".remove_file","click",function(){
+        /*$("body").delegate(".remove_file","click",function(){
             var filename = $(this).data("name");
             var that = $(this);
             var _token = $('input[name=_token]').val();
@@ -183,7 +183,7 @@
                 },
                 type: 'POST'
             });
-        });
+        });*/
 </script>
 <style>
     .custom_padding_left_0{

@@ -86,8 +86,8 @@
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
     <script>
         tinymce.init({
-            selector: '#contentEditor',
-            height: 500,
+            selector: '.contentEditor',
+            height: 300,
             theme: 'modern',
             plugins: [
                 'advlist autolink lists link image charmap print preview hr anchor pagebreak',

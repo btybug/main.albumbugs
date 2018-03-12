@@ -240,7 +240,7 @@
                                                 Template{!! Form::radio("settings[email_templates][$key][content_type]",'template',null,['data-role'=>'template']) !!}</div>
                                         </div>
                                         <div class="panel-body editor_body show">
-                                            {!! Form::textarea("settings[email_templates][$key][template_content]",null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
+                                            {!! Form::textarea("settings[email_templates][$key][template_content]",null,['class'=>'contentEditor','aria-hidden'=>true]) !!}
                                         </div>
                                         <div class="panel-body template_body hide">
                                             {!! BBcustomize('unit','template','mail_template',

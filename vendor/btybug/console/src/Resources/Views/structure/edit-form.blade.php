@@ -104,11 +104,10 @@
         $('body').on('click', ".sc-item", function () {
             tinymce.activeEditor.execCommand('mceInsertContent', false, $(this).text());
         });
-        var tmp_count = 0;
         $('body').on('click', '.add-tmp', function () {
-            tmp_count += tmp_count;
+            var unique_count = uniqueID();
             var tmpHTML = $("#form-email-template").html();
-            tmpHTML = tmpHTML.replace(/{count}/g, tmp_count);
+            tmpHTML = tmpHTML.replace(/{count}/g, unique_count);
             $(".templates-box").append(tmpHTML);
         });
     </script>
@@ -656,37 +655,25 @@
 
     <script type="template" id="form-email-template">
         <div class="row">
-
-            {{--<div class="col-md-12">--}}
-                {{--<div class="col-md-6">--}}
-                    {{--Template Title--}}
-                    {{--{!! Form::text('settings[{count}][title]',null,['class' => 'form-control']) !!}--}}
-                {{--</div>--}}
-                {{--<div class="col-md-6">--}}
-                    {{--{!! Form::hidden('settings[{count}][active]',0) !!}--}}
-                    {{--Active {!! Form::checkbox('settings[{count}][active]',1,null,[]) !!}--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
             <div class="col-md-12">
                 <div class="bty-panel-collapse">
                     <div class="pn-head">
                         <div>
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                               href="#formTeplate" aria-expanded="true">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{count}"
+                               href="#formTeplate{count}" aria-expanded="true">
                                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                             </a>
                             <div class="title">
                                 <label>Template Title</label>
-                                {!! Form::text('settings[{count}][title]',null,['class' => 'form-control']) !!}
+                                {!! Form::text('settings[email_templates][{count}][title]',null,['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="head-right">
                             <div class="inp-head">
                                 <div class="input-checkbox-2-bty">
-                                    {!! Form::hidden('settings[{count}][active]',0) !!}
-                                    {!! Form::checkbox('settings[{count}][active]',1,null,['id'=>'head-active']) !!}
-                                    <label for="head-active">Active</label>
+                                    {!! Form::hidden('settings[email_templates][{count}][active]',0) !!}
+                                    {!! Form::checkbox('settings[email_templates][{count}][active]',1,null,['id'=>'head-active-{count}']) !!}
+                                    <label for="head-active-{count}">Active</label>
                                 </div>
 
                             </div>
@@ -695,7 +682,7 @@
                         </div>
 
                     </div>
-                    <div id="formTeplate" class="collapse" aria-expanded="true">
+                    <div id="formTeplate{count}" class="collapse" aria-expanded="true">
                         <div class="content">
                             <div class="cont-top">
                                 <div class="col-md-9 p-0 dis-fl-dir">
@@ -709,7 +696,7 @@
                                                         <div class="p-5">From</div>
                                                     </td>
                                                     <td>
-                                                        {!! Form::select('from_',
+                                                        {!! Form::select('settings[email_templates][{count}][from_]',
                                                         [
                                                         'info@avatarbugs.com'=>'Info',
                                                         'support@avatarbugs.com'=>'Support',
@@ -726,7 +713,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
-                                                            {!! Form::text('to_',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                            {!! Form::text('settings[email_templates][{count}][to_]',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
                                                             <div class="input-group-addon addonNone"
                                                                  data-toggle="tooltip"
                                                                  data-placement="right"
@@ -744,7 +731,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
-                                                            {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                                                            {!! Form::text('settings[email_templates][{count}][subject]',null,['class'=>'form-control']) !!}
                                                             <div class="input-group-addon">
                                                                 <button type="button" class="subj-attach">
                                                                     <i class="fa fa-paperclip fa-lg"
@@ -769,7 +756,7 @@
                                                             </td>
                                                             <td>
                                                                 <div class="input-group">
-                                                                    {!! Form::text('notify_to',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                                    {!! Form::text('settings[email_templates][{count}][notify_to]',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
 
                                                                     <div class="input-group-addon addonNone"
                                                                          data-toggle="tooltip"
@@ -790,7 +777,7 @@
                                                             </td>
                                                             <td>
                                                                 <div class="input-group">
-                                                                    {!! Form::text('cc',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                                    {!! Form::text('settings[email_templates][{count}][cc]',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
                                                                     <div class="input-group-addon addonNone"
                                                                          data-toggle="tooltip"
                                                                          data-placement="right"
@@ -810,7 +797,7 @@
                                                             </td>
                                                             <td>
                                                                 <div class="input-group">
-                                                                    {!! Form::text('bcc',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                                    {!! Form::text('settings[email_templates][{count}][bcc]',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
                                                                     <div class="input-group-addon addonNone"
                                                                          data-toggle="tooltip"
                                                                          data-placement="right"
@@ -829,7 +816,7 @@
                                                                 <div class="p-5">Reply To</div>
                                                             </td>
                                                             <td>
-                                                                {!! Form::select('replyto',
+                                                                {!! Form::select('settings[email_templates][{count}][replyto]',
                                                             [
                                                             'info@avatarbugs.com'=>'Info',
                                                             'support@avatarbugs.com'=>'Support',
@@ -857,7 +844,7 @@
                                                 <tr>
                                                     <td>
                                                         <div class="p-b-5">When</div>
-                                                        {!! Form::select('when_',[
+                                                        {!! Form::select('settings[email_templates][{count}][when_]',[
                                                             'immediate' => "Immediate",
                                                             'custom_time' => 'Custom Time'
                                                         ],null,['class' => 'form-control','data-change' => 'afterday' ,'id' => 'when_']) !!}
@@ -868,7 +855,7 @@
                                                     <td>
                                                         <div class="p-b-5">After Days</div>
                                                         <select class="form-control" id="afterday" data-change="settime"
-                                                                name="custom_days">
+                                                                name="settings[email_templates][{count}][custom_days]">
                                                             <option value="1">1 Day</option>
                                                             <option value="3">3 Days</option>
                                                             <option value="5">5 Days</option>
@@ -883,7 +870,7 @@
                                                     <td>
                                                         <div class="p-b-5">Select Date</div>
                                                         <div class="input-group date" data-actions="Timercalendar">
-                                                            <input name="custom_time" class="form-control" value=""
+                                                            <input name="settings[email_templates][{count}][custom_time]" class="form-control" value=""
                                                                    type="text">
                                                             <span class="input-group-addon"> <i class="fa fa-calendar"
                                                                                                 aria-hidden="true"></i> </span>
@@ -903,11 +890,11 @@
                                     <div class="panel panel-default custompanel m-t-20">
                                         <div class="panel-heading bg-grey-darker text-white">Main Content
                                             <div class="pull-right">
-                                                Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
-                                                Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
+                                                Editor{!! Form::radio('settings[email_templates][{count}][content_type]','editor',null,['data-role'=>'editor']) !!}
+                                                Template{!! Form::radio('settings[email_templates][{count}][content_type]','template',null,['data-role'=>'template']) !!}</div>
                                         </div>
                                         <div class="panel-body editor_body show">
-                                            {!! Form::textarea('template_content',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
+                                            {!! Form::textarea('settings[email_templates][{count}][template_content]',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
                                         </div>
                                         <div class="panel-body template_body hide">
                                             {!! BBcustomize('unit','template','mail_template',

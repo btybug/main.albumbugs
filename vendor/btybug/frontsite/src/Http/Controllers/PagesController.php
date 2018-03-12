@@ -143,6 +143,30 @@ class PagesController extends Controller
         return view('manage::frontend.pages.general', compact(['page', 'admins','specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
     }
 
+    public function getSpecialGeneral(
+        Request $request,
+        FrontPagesRepository $frontPagesRepository,
+        UserService $userService,
+        ClassifierRepository $classifierRepository,
+        ClassifierService $classifierService,
+        FrontendPageService $frontendPageService,
+        RoleService $roleService,
+        MembershipRepository $membershipRepository,
+        SpecialAccessRepository $specialAccessRepository
+    )
+    {
+        $id = $request->id;
+        $page = $frontPagesRepository->find($id);
+        $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
+        $tags = $page->tags;
+        $classifies = $classifierRepository->getAll();
+        $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
+        $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
+        $memberships = $membershipRepository->pluck('name','id')->toArray();
+        $specials = $specialAccessRepository->pluck('name','id')->toArray();
+        return view('manage::frontend.pages.special-general', compact(['page', 'admins','specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
+    }
+
     public function postSettings(
         Request $request,
         FrontendPageService $frontendPageService

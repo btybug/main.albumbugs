@@ -104,6 +104,11 @@
         $('body').on('click', ".sc-item", function () {
             tinymce.activeEditor.execCommand('mceInsertContent', false, $(this).text());
         });
+
+        $('body').on('click', ".delete-email", function () {
+            var key = $(this).data('key');
+            $("#data-email-" + key).remove();
+        });
         $('body').on('click', '.add-tmp', function () {
             var unique_count = uniqueID();
             var tmpHTML = $("#form-email-template").html();
@@ -654,7 +659,7 @@
     </script>
 
     <script type="template" id="form-email-template">
-        <div class="row">
+        <div class="row" id="data-email-{count}">
             <div class="col-md-12">
                 <div class="bty-panel-collapse">
                     <div class="pn-head">
@@ -677,8 +682,8 @@
                                 </div>
 
                             </div>
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
+                            <a href="javascript:void(0)" data-key="{count}" class="btn btn-danger btn-sm delete-email"><i class="fa fa-times" aria-hidden="true"></i>
+                            </a>
                         </div>
 
                     </div>

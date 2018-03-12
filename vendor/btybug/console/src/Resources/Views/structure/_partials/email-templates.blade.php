@@ -1,6 +1,6 @@
 @if(isset($form->settings['email_templates']) && count($form->settings['email_templates']))
     @foreach($form->settings['email_templates'] as $key => $templates)
-        <div class="row">
+        <div class="row" id="data-email-{{ $key }}">
             <div class="col-md-12">
                 <div class="bty-panel-collapse">
                     <div class="pn-head">
@@ -23,8 +23,8 @@
                                 </div>
 
                             </div>
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
+                            <a href="javascript:void(0)" data-key="{{ $key }}" class="btn btn-danger btn-sm delete-email"><i class="fa fa-times" aria-hidden="true"></i>
+                            </a>
                         </div>
 
                     </div>

@@ -181,6 +181,9 @@
                     return textarea_editor_for_save.setStyle("set_border");
                 }
             }
+            if(!editor_value){
+                return textarea_editor_for_save.setStyle("set_border");
+            }
             return (
                 $(".submit_form_for_style_edit").append("<input type='hidden' name='changed_style' value='"+editor_value+"'>").submit()
             );

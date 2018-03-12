@@ -177,6 +177,9 @@ $(document).ready(function () {
                 return editor.setStyle("set_border");
             }
         }
+        if(!editor_value){
+            return editor.setStyle("set_border");
+        }
         return (
             $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+editor_value+"'>").submit()
         );

@@ -280,13 +280,6 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="form-group m-l-0 m-r-0">
-                                    <div class="col-sm-12">
-                                        <button type="button" class="btn btn-info pull-right" data-dismiss="modal">Apply
-                                        </button>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="email-tmp">
@@ -301,7 +294,16 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="form-group m-l-0 m-r-0">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-info pull-right" data-dismiss="modal">Apply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

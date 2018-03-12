@@ -152,7 +152,8 @@
         });
         $("body").delegate(".show_in_just_html","click",function(){
             var content = $(this).data("class");
-            $(".just_html").html("<div class='bordered'>" + content + "}" + "</div><div class='clearfix'></div>");
+            $("div.just_for_edit").html("");
+            $(this).parents("div.class_for_delete").children("div.just_for_edit").html("<div class='bordered'>" + content + "}" + "</div><div class='clearfix'></div>");
         });
 
         $("body").delegate(".show_in_just_html_for_edit","click",function(){

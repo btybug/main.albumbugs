@@ -65,22 +65,15 @@ class PhpJsonParser
        // preg_match_all('/\.[a-z_-][\w-:]*(?=[^{}]*{[^{}]*})/', $file, $matches);
        // preg_match_all('/(\{)(?<=\{)(.*?)(?=\})/s', $file, $match);
 
-        preg_match_all('/(?<=\.)((?!:hover)\w+)(?=.{)/', $file, $matches);
-        preg_match_all('/(?<!:hover\{)(?<=\{)(.*?)(?=\})/s', $file, $match);
-        $html = [];
+       // preg_match_all('/(?<=\.)((?!:hover)\w+)(?=.{)/', $file, $matches);
+      //  preg_match_all('/(?<!:hover\{)(?<=\{)(.*?)(?=\})/s', $file, $match);
+       /* $html = [];
         if(count($matches[0])){
             $html["data"] = $matches[0];
             $html["codes"] = $match[0];
-            //$html = self::renderHtmlForFileDemo($matches[0],$match[0]); :TODO remove this
-        }
-        return $html;
-    }
-    public static function renderHtmlForFileDemo($data,$codes){ // :TODO remove this
-        $str = '';
-        foreach ($data as $key => $item){
-            $str .= "<h5>".$item."</h5><textarea class='code_textarea form-control' readonly>".$item.$codes[$key]."}</textarea>";
-        }
-        return $str;
+        }*/
+       $file = explode("}",$file);
+        return $file;
     }
     public static function renderHtmlForDemo($data,$codes){
         $str = '';

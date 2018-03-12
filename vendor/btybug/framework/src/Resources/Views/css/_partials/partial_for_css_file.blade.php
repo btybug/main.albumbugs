@@ -10,31 +10,25 @@
 <div class="col-md-12 append_here">
 
 </div>
-@if(isset($data["data"]))
+@if(count($data))
     <script type="template" id="get_for_append">
-        @foreach($data["data"] as $index => $classname)
-            <div class="class_for_delete">
-                @if(isset($style_from_db->html))
-                    <div class="col-md-4 parent">
-                        {!! $style_from_db->html !!}
-                    </div>
-                    <div class="col-md-8">
-                        <h5>{{$classname}}</h5>
+        @foreach($data as $index => $style)
+            @if($style)
+                <div class="class_for_delete">
+                    @if(isset($style_from_db->html))
+                        <div class="col-md-4 parent">
+                            {!! $style_from_db->html !!}
+                        </div>
+                    @endif
+                    <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
+                        <h5>{{explode("{",$style)[0]}}</h5>
                         <div class="this_flex">
-                            <textarea class='code_textarea form-control' readonly>{{ ".".$classname."\t{".$data["codes"][$index]."}" }}</textarea>
-                            <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$classname}}">delete</button>
+                            <textarea class='code_textarea form-control' id="textarea_{{$index}}">{{ $style."}" }}</textarea>
+                            <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">delete</button>
                         </div>
                     </div>
-                @else
-                    <div class="col-md-12">
-                        <h5>{{$classname}}</h5>
-                        <div class="this_flex">
-                            <textarea class='code_textarea form-control' readonly>{{ ".".$classname."\t{".$data["codes"][$index]."}" }}</textarea>
-                            <button class="btn btn-danger btn-md" data-slug="{{$slug}}" data-class="{{$classname}}">delete</button>
-                        </div>
-                    </div>
-                @endif
-            </div>
+                </div>
+            @endif
         @endforeach
     </script>
 @endif
@@ -42,16 +36,30 @@
     $(document).ready(function(){
         var html = $("#get_for_append").html();
         $(".append_here").html(html);
+        var data = JSON.parse($(".get_data").val());
         if(html){
             var childs = $(".append_here").children("div.class_for_delete").children("div.parent").children();
             if(childs.length){
-                var data = JSON.parse($(".get_data").val());
-                data = data.data;
                 childs.map(function(index,item){
-                    return $(item).addClass(data[index]);
+                    var class_name = data[index].split("{")[0];
+                    class_name = class_name.split(".")[1];
+                    return $(item).addClass(class_name);
                 });
             }
         }
+
+        // initialize ace editors
+            data.map(function(item,indx){
+                if(item.length){
+                    var name = "editor_" + indx;
+                    name = ace.edit("textarea_"+indx);
+                    name.setTheme("ace/theme/monokai");
+                    name.session.setMode("ace/mode/css");
+                    name.setValue(item+"}");
+                }
+            });
+        // end initialize ace editors
+
         $("body").delegate(".remove_this_class","click",function () {
             var slug = $(this).data("slug");
             var class_name = $(this).prev().html();

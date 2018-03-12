@@ -28,15 +28,10 @@ class CssController extends Controller
     }
     public function saveStyle(Request $request){
         $type = $request->type;
-        $class_name = $request->class_name;
-        $code = $request->code;
         $full_style = $request->full_style;
         $file = PhpJsonParser::getFileByName($type);
         if(!$file){
             return redirect()->back()->with("error","File does not exists");
-        }
-        if(!$class_name || !$code){
-            return redirect()->back()->with("error","Class name and its styles couldn't be empty");
         }
         if($full_style){
             \File::append($file->getPathname(), $full_style);
@@ -126,12 +121,13 @@ class CssController extends Controller
             $content = \File::get($file->getPathname(),true);
             $content = preg_replace("/(\r)+/", "", $content);
             $content = str_replace($classname,'',$content);
-
             \File::put($file->getPathname(),$content);
             return response()->json(["error"=>0]);
         }
         return response()->json(["error"=>1]);
     }
+
+
 
 
 

@@ -68,15 +68,6 @@
             <div class="form-comp col-md-12 custom_hidden is_show">
                 {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
                     <div class="col-md-7">
-                        {{--<div class="form-group">
-                            <div class="col-md-4">
-                                <label for="">Class Name</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" name="class_name" class="form-control this_very_classname">
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>--}}
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label for="">Class Code</label>
@@ -94,18 +85,6 @@
                     </div>
                 {!! Form::close() !!}
                 <div class="clearfix"></div>
-                <div class="alert alert-danger alert-block remove_hidden_for_error custom_hidden">
-                    <strong>
-                        Error: You have a css syntax error. Please be careful and write right content.
-                        <br>Example<br>
-                        <span>
-                            color:#FF0000;<br>
-                            font-size:25px;<br>
-                            etc...<br>
-                        </span>
-                        <div class="clearfix"></div>
-                    </strong>
-                </div>
             </div>
         </div>
 
@@ -174,23 +153,14 @@
         }
         .ace_editor{
             height:160px;
+            flex: 1;
+        }
+        .set_border{
+            border: 2px solid #FF0000;
         }
     </style>
 @stop
 @section('JS')
     {!! HTML::script('public/js/ace-editor/ace.js') !!}
-    <script>
-        window.onload = function(){
-            var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
-            editor.session.setMode("ace/mode/css");
-
-            var html_val = $("#html_val").val();
-            var editor_html = ace.edit("editor_html");
-            editor_html.setTheme("ace/theme/monokai");
-            editor_html.session.setMode("ace/mode/html");
-            editor_html.setValue(html_val);
-        }
-    </script>
     {!! HTML::script('public/js/bty.js?v='.rand(1111,9999)) !!}
 @stop

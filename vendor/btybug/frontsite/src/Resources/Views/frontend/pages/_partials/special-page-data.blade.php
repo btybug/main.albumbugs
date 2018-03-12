@@ -36,6 +36,38 @@
                 {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
             </div>
         </div>
+
+        <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">Css
+                <div class="pull-right">
+                    External {!! Form::radio('css_type','external',null,['data-role'=>'css_external','class' => 'content_type_css']) !!}
+                    From CMS{!! Form::radio('css_type','cms',null,['data-role'=>'css_cms','class' => 'content_type_css']) !!}</div>
+            </div>
+            <div class="panel-body css_external">
+                <a href="javascript:void(0)" class="btn btn-success">+Add new</a>
+                {!! Form::text('css[]',null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="panel-body css_cms hide">
+                {!! Form::select('css_cms',[],null,['class' => 'form-control']) !!}
+            </div>
+        </div>
+
+        <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">JS
+                <div class="pull-right">
+                    External {!! Form::radio('js_type','external',null,['data-role'=>'external','class' => 'content_type_js']) !!}
+                    From CMS{!! Form::radio('js_type','cms',null,['data-role'=>'cms','class' => 'content_type_js']) !!}</div>
+            </div>
+            <div class="panel-body js_external">
+                <a href="javascript:void(0)" class="btn btn-success">+Add new</a>
+                {!! Form::text('js[]',null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="panel-body js_cms hide">
+                {!! Form::select('js_cms',[],null,['class' => 'form-control']) !!}
+            </div>
+        </div>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-20">
         <div class="panel panel-default custompanel m-t-20">
@@ -186,6 +218,28 @@
                         $("#view-unit").modal();
                     }
                 });
+            });
+
+            $('body').on('change', '.content_type_css', function () {
+                var value = $(this).val();
+                if (value == 'external') {
+                    $('.css_external').removeClass('hide').addClass('show');
+                    $('.css_cms').removeClass('show').addClass('hide');
+                } else {
+                    $('.css_cms').removeClass('hide').addClass('show');
+                    $('.css_external').removeClass('show').addClass('hide');
+                }
+            });
+
+            $('body').on('change', '.content_type_js', function () {
+                var value = $(this).val();
+                if (value == 'external') {
+                    $('.js_external').removeClass('hide').addClass('show');
+                    $('.js_cms').removeClass('show').addClass('hide');
+                } else {
+                    $('.js_cms').removeClass('hide').addClass('show');
+                    $('.js_external').removeClass('show').addClass('hide');
+                }
             });
         });
     </script>

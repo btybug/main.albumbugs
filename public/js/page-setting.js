@@ -56,6 +56,8 @@ $(function () {
 
     });
 
+
+
     $('body').on('click', '.live-preview-btn', function () {
         if (!$(this).next().hasClass('redirect-type')) {
             var typeInput = $('<input/>', {

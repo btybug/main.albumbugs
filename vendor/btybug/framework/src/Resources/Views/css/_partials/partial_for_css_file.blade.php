@@ -10,6 +10,7 @@
 <div class="col-md-12 append_here">
 
 </div>
+<div class="just_html"></div>
 @if(count($data))
     <script type="template" id="get_for_append">
         @foreach($data as $index => $style)
@@ -21,17 +22,43 @@
                         </div>
                     @endif
                     <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
-                        <h5>{{explode("{",$style)[0]}}</h5>
-                        <div class="this_flex">
+                        <div>
+                            <h5 class="custom_inline_block">{{explode("{",$style)[0]}}</h5>
+                            <button class="btn btn-success btn-sm" data-slug="{{$slug}}" data-class="{{$style}}">Show</button>
+                            <button class="btn btn-warning btn-sm" data-slug="{{$slug}}" data-class="{{$style}}">Edit</button>
+                            <button class="btn btn-danger btn-sm remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">Delete</button>
+                        </div>
+
+                        {{--<div class="this_flex">
                             <textarea class='code_textarea form-control' id="textarea_{{$index}}">{{ $style."}" }}</textarea>
                             <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">delete</button>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             @endif
         @endforeach
     </script>
 @endif
+<script type="template" id="send_form_for_save">
+    {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
+    <div class="class_for_delete">
+        @if(isset($style_from_db->html))
+            <div class="col-md-4 parent">
+                {!! $style_from_db->html !!}
+            </div>
+        @endif
+        <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
+            <h5>class</h5>
+            <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
+            <div class="this_flex">
+                <textarea class='code_textarea form-control' id="textarea_editor_for_save" ></textarea>
+                <button class="btn btn-danger btn-md custom_cancel">Cancel</button>
+                <button class="btn btn-success btn-md" data-slug="{{$slug}}" data-class="{{$style}}">Save</button>
+            </div>
+        </div>
+    </div>
+    {!! Form::close() !!}
+</script>
 <script>
     $(document).ready(function(){
         var html = $("#get_for_append").html();
@@ -48,7 +75,7 @@
             }
         }
 
-        // initialize ace editors
+        /*// initialize ace editors
             data.map(function(item,indx){
                 if(item.length){
                     var name = "editor_" + indx;
@@ -58,7 +85,7 @@
                     name.setValue(item+"}");
                 }
             });
-        // end initialize ace editors
+        // end initialize ace editors*/
 
         $("body").delegate(".remove_this_class","click",function () {
             var slug = $(this).data("slug");

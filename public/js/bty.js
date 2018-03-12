@@ -122,12 +122,12 @@ $(document).ready(function () {
 });
 
 
-var editor = ace.edit("editor");
+/*var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/css");
 editor.on("focus", function(){
     editor.unsetStyle("set_border");
-});
+});*/
 
 var html_val = $("#html_val").val();
 var editor_html = ace.edit("editor_html");
@@ -137,14 +137,14 @@ editor_html.setValue(html_val);
 
 // Dinamic create css class
 $(document).ready(function () {
+
     $("body").delegate(".show_form","click",function(){
-        var is_show = $(".is_show").hasClass("custom_hidden");
-        if(is_show){
-            $(".is_show").removeClass('custom_hidden');
-            $(".is_show_for_setting").addClass('custom_hidden');
-        }else{
-            $(".is_show").addClass('custom_hidden');
-        }
+       var content = $("#send_form_for_save").html();
+        $("div.just_html").html(content);
+
+        var textarea_editor_for_save = ace.edit("textarea_editor_for_save");
+        textarea_editor_for_save.setTheme("ace/theme/monokai");
+        textarea_editor_for_save.session.setMode("ace/mode/css");
     });
     $("body").delegate(".show_form_for_setting","click",function(){
         var is_show = $(".is_show_for_setting").hasClass("custom_hidden");

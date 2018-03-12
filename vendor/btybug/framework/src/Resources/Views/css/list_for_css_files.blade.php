@@ -65,7 +65,7 @@
             </div>
 
 
-            <div class="form-comp col-md-12 custom_hidden is_show">
+           {{-- <div class="form-comp col-md-12 custom_hidden is_show">
                 {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
                     <div class="col-md-7">
                         <div class="form-group">
@@ -85,7 +85,7 @@
                     </div>
                 {!! Form::close() !!}
                 <div class="clearfix"></div>
-            </div>
+            </div>--}}
         </div>
 
         <div class="row layouts_row">
@@ -157,6 +157,9 @@
         }
         .set_border{
             border: 2px solid #FF0000;
+        }
+        .custom_inline_block{
+            display:inline-block;
         }
     </style>
 @stop

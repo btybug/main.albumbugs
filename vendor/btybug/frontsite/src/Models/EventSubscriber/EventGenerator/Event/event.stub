@@ -2,6 +2,7 @@
 
 namespace App\Events\Generator;
 
+use App\Events\Event;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;

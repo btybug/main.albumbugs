@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\CustomEvent' => [
             'App\Listeners\CustomEventLictner',
-        ],
+        ]
     ];
 
     protected $subscribe = [

@@ -120,9 +120,8 @@ class CoreIndependents extends Independent
         return [];
     }
 
-    public function sendEmail()
+    public function sendEmail(...$args)
     {
-
-
+        dd($args);
     }
 }

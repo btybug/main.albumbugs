@@ -108,12 +108,17 @@ class Generator
     public function getEventsRegister()
     {
         $data = $this->data;
-        $result = [];
         unset($data['subscribes']);
         foreach ($data as $key=>$types) {
-            foreach ($types as $event => $type) ;
-            \Subscriber::addEvent($type['name'], $event,['type'=>$key]);
+            foreach ($types as $event => $type) {
+                \Subscriber::addEvent($type['name'], $event,['type'=>$key]);
+            }
         }
-        return $result;
+    }
+
+    public static function fire($type,$id,...$args)
+    {
+        $className = ('App\Events\Generator\\'.$type.md5($id));
+        event(new $className($args));
     }
 }

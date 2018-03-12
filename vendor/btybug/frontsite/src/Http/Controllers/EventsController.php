@@ -9,6 +9,7 @@
 namespace Btybug\FrontSite\Http\Controllers;
 
 
+use Btybug\Console\Models\Forms;
 use Btybug\Console\Repository\FormsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -19,7 +20,8 @@ class EventsController extends Controller
     public function getIndex(FormsRepository $formsRepository,Generator $generator)
     {
 //        $generator->getEvents();
-        //$generator->generate('form',26,'User detail form');
+//        $generator->generate('form',13,'Create fpost');
+//        Generator::fire('form',27,Forms::find(27),\Auth::user());
         $forms = $formsRepository->getAll();
         foreach($forms as $form){
             if(isset($form->settings['event']) && $form->settings['event']){

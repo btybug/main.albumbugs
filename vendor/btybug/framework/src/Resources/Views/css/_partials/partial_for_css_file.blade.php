@@ -48,6 +48,8 @@
                             <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">delete</button>
                         </div>
                     </div>--}}
+                    <div class="clearfix"></div>
+                    <div class="just_for_edit"></div>
                 </div>
                 <div class="clearfix"></div>
             @endif
@@ -162,8 +164,8 @@
 
             var content = $("#send_form_for_edit").html();
             content = content.replace("{repl_classname}","." + class_name).replace("{repl_style}",style + "}").replace("{repl_slug}",slug).replace("{repl_original}",style + "}");
-
-            $("div.just_html").html(content);
+            $("div.just_for_edit").html("");
+            $(this).parents("div.class_for_delete").children("div.just_for_edit").html(content).find("div.parent").children().addClass(class_name);
 
             textarea_editor_for_save = ace.edit("textarea_editor_for_save");
             textarea_editor_for_save.setTheme("ace/theme/monokai");

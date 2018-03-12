@@ -2,6 +2,12 @@
     $data = getDinamicStyleForCssFileDemo($slug);
     $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug);
 ?>
+<style>
+    .m-t-b-21{
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+</style>
 @if($file)
     {!! useDinamicStyleByPath($file->__toString()) !!}
 @endif
@@ -22,7 +28,7 @@
                         </div>
                     @endif
                     <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
-                        <div>
+                        <div class="m-t-b-21">
                             <h5 class="custom_inline_block">{{explode("{",$style)[0]}}</h5>
                             <button class="btn btn-success btn-sm" data-slug="{{$slug}}" data-class="{{$style}}">Show</button>
                             <button class="btn btn-warning btn-sm" data-slug="{{$slug}}" data-class="{{$style}}">Edit</button>

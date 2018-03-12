@@ -38,6 +38,25 @@ class CssController extends Controller
         }
         return redirect()->back()->with("success","Style was saved successfully");
     }
+    public function EditStyle(Request $request){
+        $type = $request->type;
+        $changed_style = $request->changed_style;
+        $original_style = $request->original_style;
+        $file = PhpJsonParser::getFileByName($type);
+        if(!$file){
+            return redirect()->back()->with("error","File does not exists");
+        }
+        if($original_style){
+            $content = \File::get($file->getPathname(),true);
+            $content = preg_replace("/(\r)+/", "", $content);
+            $original_style = preg_replace("/(\r)+/", "", $original_style);
+            $changed_style = preg_replace("/(\r)+/", "", $changed_style);
+            $content = str_replace($original_style,$changed_style,$content);
+            \File::put($file->getPathname(),$content);
+            return redirect()->back()->with("success","Style was saved successfully");
+        }
+        return redirect()->back()->with("error","Something went wrong");
+    }
     public function saveStyleWithHtml(Request $request){
         $slug = $request->type;
         $html = $request->file_html;

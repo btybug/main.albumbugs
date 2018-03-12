@@ -15,6 +15,7 @@ Route::get('/', 'IndexController@getIndex',true);
 Route::group(['prefix' => 'css'], function () {
     Route::get('/', 'CssController@getIndex',true)->name('css');
     Route::post('/savestyle', 'CssController@saveStyle')->name('save_style');
+    Route::post('/editstyle', 'CssController@EditStyle')->name('edit_style');
 
     Route::get('/createtablecss', function(){
         \Btybug\Framework\Database\CreateTableCssTable::up();

@@ -17,7 +17,7 @@
                             </a>
                                 <span class="pull-right">
                                     @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
-                                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-primary edit_folder_name" data-dname="{{$directory["dirname"]}}"><i class="fa fa-edit"></i></button>
                                         <button class="btn btn-sm btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
                                     @endif
                                     <a href="{{route("create_file",$directory["dirname"])}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
@@ -60,7 +60,7 @@
                 <span class="title">{dirname}</span>
             </a>
             <span class="pull-right">
-                <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-sm btn-primary edit_folder_name" data-dname="{dnameforedit}"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-sm btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
                 <a href="{{route("create_file",'repl')}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
             </span>
@@ -118,7 +118,7 @@
                 success: function (data) {
                     if(data.dirname){
                         var name = titleCase(data.dirname);
-                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{rand_str}",makeid());
+                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
                          return $(".body_append").append(template);
                     }
                 },
@@ -184,6 +184,9 @@
                 type: 'POST'
             });
         });*/
+        $("body").delegate(".edit_folder_name","click",function(){
+            alert($(this).data("dname"));
+        });
 </script>
 <style>
     .custom_padding_left_0{
@@ -237,5 +240,10 @@
     }
     .this_flex button{
         margin-left: 10px;
+    }
+    .bordered{
+        width:100%;
+        border: 1px solid #000000;
+        padding:10px;
     }
 </style>

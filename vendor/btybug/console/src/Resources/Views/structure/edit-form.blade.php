@@ -6,14 +6,74 @@
     {!! Html::style("public/libs/easyui/easyui.css") !!}
     {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
     {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}
+    {!! HTML::style("public/css/bty.css") !!}
 
     {!! HTML::style("public/libs/tagsinput/bootstrap-tagsinput.css") !!}
+    <style>
+        .modal-header .nav.nav-pills {
+            display: inline-block;
+        }
+
+        .modal-dialog.modal-lg {
+            min-width: 1200px;
+        }
+
+        .pn-head {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .head-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .pn-head .title {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .pn-head .title label {
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .cont-bottom {
+            margin-top: 20px;
+        }
+
+        .pn-head a {
+            color: white;
+        }
+        .inp-head label{
+            margin-bottom: 0;
+            color: white;
+        }
+        .head-right button{
+            margin-right: 5px;
+        }
+        .subj-attach{
+            background: none;
+            border:0;
+        }
+        .customelement{
+            padding: 0;
+        }
+        .add-tmp{
+            border-radius: 0;
+            margin-top: 5px;
+        }
+        .bty-panel-collapse{
+            margin-top: 5px;
+        }
+    </style>
 @stop
 
 @section( 'JS' )
     {!! HTML::script("public/libs/easyui/easyloader.js") !!}
     <script>
-        easyloader.base = '<?php echo url( "public/libs/easyui/" ) ?>/';
+        easyloader.base = '<?php echo url("public/libs/easyui/") ?>/';
         easyloader.css = false;
     </script>
     {!! HTML::script("public/libs/tagsinput/bootstrap-tagsinput.min.js") !!}
@@ -45,7 +105,7 @@
             tinymce.activeEditor.execCommand('mceInsertContent', false, $(this).text());
         });
         var tmp_count = 0;
-        $('body').on('click','.add-tmp',function(){
+        $('body').on('click', '.add-tmp', function () {
             tmp_count += tmp_count;
             var tmpHTML = $("#form-email-template").html();
             tmpHTML = tmpHTML.replace(/{count}/g, tmp_count);
@@ -67,7 +127,8 @@
             </div>
             <div class="col-md-8">
                 <button type="submit" class="form-save pull-right" bb-click="saveHTML">Save</button>
-                <button type="button" class="panel-trigger pull-right" data-toggle="modal" data-target="#settingsModal">Settings
+                <button type="button" class="panel-trigger pull-right" data-toggle="modal" data-target="#settingsModal">
+                    Settings
                 </button>
             </div>
         </div>
@@ -87,7 +148,9 @@
                 <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow"
                         data-main="global">Styling
                 </button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal" data-target="#logicModal">Logic</button>
+                <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal"
+                        data-target="#logicModal">Logic
+                </button>
 
                 <button type="button" class="panel-trigger pull-right" bb-click="openLayoutWindow">Layout</button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openPanelWindow">Panel</button>
@@ -104,8 +167,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#form-settings" aria-controls="form-settings" role="tab" data-toggle="tab">Form Settings</a></li>
-                        <li><a href="#email-tmp" aria-controls="email-tmp" role="tab" data-toggle="tab">Email Template</a></li>
+                        <li class="active"><a href="#form-settings" aria-controls="form-settings" role="tab"
+                                              data-toggle="tab">Form Settings</a></li>
+                        <li><a href="#email-tmp" aria-controls="email-tmp" role="tab" data-toggle="tab">Email
+                                Template</a></li>
                     </ul>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -116,83 +181,105 @@
                                 <div class="form-group m-l-0 m-r-0">
                                     <label for="success_message" class="col-sm-4 ">Fire Event</label>
                                     <div class="col-sm-8">
-                                        {!! Form::checkbox('settings[event]',1,(isset($settings['event'])) ? $settings['event'] : null ,['class' =>'form-control']) !!}
+
+                                        <div class="input-checkbox-3-bty">
+                                            {!! Form::checkbox('settings[event]',1,(isset($settings['event'])) ? $settings['event'] : null ,['class' =>'']) !!}
+                                        </div>
+
+
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group m-l-0 m-r-0">
                                     <label for="success_message" class="col-sm-4 ">Success Message</label>
                                     <div class="col-sm-8">
                                         {!! Form::text('settings[message]',(isset($settings['message'])) ? $settings['message'] : null ,['class' =>'form-control']) !!}
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group m-l-0 m-r-0">
                                     <label for="success_message" class="col-sm-4 ">Redirect on Submit</label>
                                     <div class="col-sm-8">
                                         {!! Form::text('settings[redirect_url]',(isset($settings['redirect_url'])) ? $settings['redirect_url'] : null ,['class' =>'form-control']) !!}
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group m-l-0 m-r-0">
                                     <label for="success_message" class="col-sm-4 ">Create Permission</label>
                                     <div class="col-sm-8">
-                                        <label>allow guest
-                                            {!! Form::checkbox('settings[create_allow]',0,null,['class' => 'allow_create_permission']) !!}
-                                        </label>
-                                        <label>allow Logged In
-                                            {!! Form::checkbox('settings[create_allow]',1,null,['class' => 'allow_create_permission']) !!}
-                                        </label>
-                                        <label>allow Admins
-                                            {!! Form::checkbox('settings[create_allow]',2,null,['class' => 'allow_create_permission allow_create_admins']) !!}
-                                        </label>
+                                        <div class="input-checkbox-2-bty">
+                                            {!! Form::checkbox('settings[create_allow]',0,null,['class' => 'allow_create_permission','id' => 'allow_guesttt']) !!}
+                                            <label for="allow_guesttt">allow guest</label>
+                                        </div>
+                                        <div class="input-checkbox-2-bty">
+                                            {!! Form::checkbox('settings[create_allow]',1,null,['class' => 'allow_create_permission','id' => 'allow_login_intt']) !!}
+                                            <label for="allow_login_intt">allow Logged In</label>
+                                        </div>
+
+                                        <div class="input-checkbox-2-bty">
+                                            {!! Form::checkbox('settings[create_allow]',2,null,['class' => 'allow_create_permission allow_create_admins','id' => 'allow_adminstt']) !!}
+                                            <label for="allow_adminstt">allow Admins</label>
+                                        </div>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group m-l-0 m-r-0 hide create-roles-box">
                                     <label for="success_message" class="col-sm-4 ">Select Roles</label>
                                     <div class="col-sm-8">
                                         {!! Form::select('settings[create_allowed_roles]',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
 
                                 <div class="form-group m-l-0 m-r-0">
                                     <label for="success_message" class="col-sm-4 ">Edit Permission</label>
                                     <div class="col-sm-8">
-                                        <label>allow guest
-                                            {!! Form::checkbox('settings[edit_allow]',0,true,[]) !!}
-                                        </label>
-                                        <label>allow Logged In
-                                            {!! Form::checkbox('settings[edit_allow]',1,null,[]) !!}
-                                        </label>
-                                        <label>allow Admins
-                                            {!! Form::checkbox('settings[edit_allow]',2,null,['class' => 'allow_edit_permission']) !!}
-                                        </label>
+                                        <div class="input-checkbox-2-bty">
+                                            {!! Form::checkbox('settings[edit_allow]',0,true,['id' => 'allow_guestbb']) !!}
+                                            <label for="allow_guestbb">allow guest</label>
+                                        </div>
+                                        <div class="input-checkbox-2-bty">
+                                            {!! Form::checkbox('settings[edit_allow]',1,null,['id' => 'allow_logged_inbb']) !!}
+                                            <label for="allow_logged_inbb">allow Logged In</label>
+                                        </div>
+                                        <div class="input-checkbox-2-bty">
+                                            {!! Form::checkbox('settings[edit_allow]',2,null,['class' => 'allow_edit_permission','id' => 'allow_adminsbb']) !!}
+                                            <label for="allow_adminsbb">allow Admins</label>
+                                        </div>
+
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group m-l-0 m-r-0 hide edit-roles-box">
                                     <label for="success_message" class="col-sm-4 ">Select Roles</label>
                                     <div class="col-sm-8">
                                         {!! Form::select('settings[edit_allowed_roles]',\Btybug\User\Services\RoleService::getList(),null,['class' => 'form-control select-roles']) !!}
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
 
                                 <div class="form-group m-l-0 m-r-0">
                                     <label for="" class="col-sm-4">Is Ajax</label>
                                     <div class="col-sm-8">
-                                        <div class="customelement radio-inline">
+                                        <div class="customelement radio-inline input-radio-7-bty">
                                             <input name="settings[is_ajax]" id="is_ajax_yes"
-                                                   <?php echo ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? 'checked' : '' ?> value="yes"
+                                                   <?php echo (isset($settings['is_ajax']) && $settings['is_ajax'] == 'yes') ? 'checked' : '' ?> value="yes"
                                                    type="radio">
                                             <label for="is_ajax_yes">Yes</label>
                                         </div>
-                                        <div class="customelement radio-inline">
+                                        <div class="customelement radio-inline input-radio-7-bty">
                                             <input name="settings[is_ajax]" id="is_ajax_no"
-                                                   <?php echo ( isset( $settings['is_ajax'] )
-                                                       && $settings['is_ajax'] == 'no' ) ? 'checked' : ( isset( $settings['is_ajax'] ) && $settings['is_ajax'] == 'yes' ) ? '' : 'checked' ?>
+                                                   <?php echo (isset($settings['is_ajax'])
+                                                       && $settings['is_ajax'] == 'no') ? 'checked' : (isset($settings['is_ajax']) && $settings['is_ajax'] == 'yes') ? '' : 'checked' ?>
                                                    value="no" type="radio"> <label for="is_ajax_no">No</label>
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group m-l-0 m-r-0">
-                                    <div class="col-sm-8">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">Apply</button>
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-info pull-right" data-dismiss="modal">Apply
+                                        </button>
                                     </div>
                                 </div>
 
@@ -203,7 +290,10 @@
 
                             </div>
                             <div class="row">
-                                <a href="javascript:void(0)" class="btn btn-primary add-tmp"><i class="fa fa-plus"></i></a>
+                                <div class="col-md-12">
+                                    <a href="javascript:void(0)" class="btn btn-primary add-tmp pull-right"><i
+                                                class="fa fa-plus"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -566,251 +656,304 @@
 
     <script type="template" id="form-email-template">
         <div class="row">
+
+            {{--<div class="col-md-12">--}}
+                {{--<div class="col-md-6">--}}
+                    {{--Template Title--}}
+                    {{--{!! Form::text('settings[{count}][title]',null,['class' => 'form-control']) !!}--}}
+                {{--</div>--}}
+                {{--<div class="col-md-6">--}}
+                    {{--{!! Form::hidden('settings[{count}][active]',0) !!}--}}
+                    {{--Active {!! Form::checkbox('settings[{count}][active]',1,null,[]) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
             <div class="col-md-12">
-                <div class="col-md-6">
-                    Template Title
-                    {!! Form::text('settings[{count}][title]',null,['class' => 'form-control']) !!}
-                </div>
-                <div class="col-md-6">
-                     {!! Form::hidden('settings[{count}][active]',0) !!}
-                    Active {!! Form::checkbox('settings[{count}][active]',1,null,[]) !!}
-                </div>
-            </div>
-            <div class="col-md-9 p-0 dis-fl-dir">
-                <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
-                    <div class="panel-heading bg-black-darker text-white">Email Content</div>
-                    <div class="panel-body p-5">
-                        <table class="table borderless m-0">
-                            <tbody>
-                            <tr>
-                                <td width="15%">
-                                    <div class="p-5">From</div>
-                                </td>
-                                <td>
-                                    {!! Form::select('from_',
-                                    [
-                                    'info@avatarbugs.com'=>'Info',
-                                    'support@avatarbugs.com'=>'Support',
-                                    'admin@avatarbugs.com'=>'Admin',
-                                    'sales@avatarbugs.com'=>'Sales',
-                                    'tech@avatarbugs.com'=>'Technical Staff'
-                                    ],null,['class'=>'form-control']) !!}
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="p-5">To</div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        {!! Form::text('to_',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                        <div class="input-group-addon addonNone" data-toggle="tooltip"
-                                             data-placement="right"
-                                             title=""
-                                             data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User,user submitted form">
-                                            <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="p-5">Subject</div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        {!! Form::text('subject',null,['class'=>'form-control']) !!}
-                                        <div class="input-group-addon">
-                                            <button type="button" class="subj-attach">
-                                                <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="bty-panel-collapse">
-                            <div>
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                                   href="#advancedopt" aria-expanded="true">
-                                    <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                    <span class="title">Advanced options</span>
-                                </a>
+                <div class="bty-panel-collapse">
+                    <div class="pn-head">
+                        <div>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                               href="#formTeplate" aria-expanded="true">
+                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                            </a>
+                            <div class="title">
+                                <label>Template Title</label>
+                                {!! Form::text('settings[{count}][title]',null,['class' => 'form-control']) !!}
                             </div>
-                            <div id="advancedopt" class="collapse" aria-expanded="true" style="">
-                                <div class="content">
-                                    <table class="table borderless m-0">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="p-5">Notify To</div>
-                                            </td>
-                                            <td>
-                                                <div class="input-group">
-                                                    {!! Form::text('notify_to',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-
-                                                    <div class="input-group-addon addonNone" data-toggle="tooltip"
-                                                         data-placement="right"
-                                                         title=""
-                                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
-                                                        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="p-5">CC</div>
-                                            </td>
-                                            <td>
-                                                <div class="input-group">
-                                                    {!! Form::text('cc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                                    <div class="input-group-addon addonNone" data-toggle="tooltip"
-                                                         data-placement="right"
-                                                         title=""
-                                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
-                                                        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="p-5">BCC</div>
-                                            </td>
-                                            <td>
-                                                <div class="input-group">
-                                                    {!! Form::text('bcc',null,['class'=>'form-control hide tagit-hidden-field','data-tagit'=>'tagit']) !!}
-                                                    <div class="input-group-addon addonNone" data-toggle="tooltip"
-                                                         data-placement="right"
-                                                         title=""
-                                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
-                                                        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="p-5">Reply To</div>
-                                            </td>
-                                            <td>
-                                                {!! Form::select('replyto',
-                                            [
-                                            'info@avatarbugs.com'=>'Info',
-                                            'support@avatarbugs.com'=>'Support',
-                                            'admin@avatarbugs.com'=>'Admin',
-                                            'sales@avatarbugs.com'=>'Sales',
-                                            'tech@avatarbugs.com'=>'Technical Staff'
-                                            ],null,['class'=>'form-control']) !!}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-
-                                    </table>
+                        </div>
+                        <div class="head-right">
+                            <div class="inp-head">
+                                <div class="input-checkbox-2-bty">
+                                    {!! Form::hidden('settings[{count}][active]',0) !!}
+                                    {!! Form::checkbox('settings[{count}][active]',1,null,['id'=>'head-active']) !!}
+                                    <label for="head-active">Active</label>
                                 </div>
+
                             </div>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div id="formTeplate" class="collapse" aria-expanded="true">
+                        <div class="content">
+                            <div class="cont-top">
+                                <div class="col-md-9 p-0 dis-fl-dir">
+                                    <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
+                                        <div class="panel-heading bg-grey-darker text-white">Email Content</div>
+                                        <div class="panel-body p-5">
+                                            <table class="table borderless m-0">
+                                                <tbody>
+                                                <tr>
+                                                    <td width="15%">
+                                                        <div class="p-5">From</div>
+                                                    </td>
+                                                    <td>
+                                                        {!! Form::select('from_',
+                                                        [
+                                                        'info@avatarbugs.com'=>'Info',
+                                                        'support@avatarbugs.com'=>'Support',
+                                                        'admin@avatarbugs.com'=>'Admin',
+                                                        'sales@avatarbugs.com'=>'Sales',
+                                                        'tech@avatarbugs.com'=>'Technical Staff'
+                                                        ],null,['class'=>'form-control']) !!}
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="p-5">To</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            {!! Form::text('to_',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                            <div class="input-group-addon addonNone"
+                                                                 data-toggle="tooltip"
+                                                                 data-placement="right"
+                                                                 title=""
+                                                                 data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User,user submitted form">
+                                                                <i class="fa fa-info-circle fa-lg"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="p-5">Subject</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                                                            <div class="input-group-addon">
+                                                                <button type="button" class="subj-attach">
+                                                                    <i class="fa fa-paperclip fa-lg"
+                                                                       aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="panel panel-default p-0">
+                                                <div class="panel-heading bg-grey-darker text-white">
+                                                    Advanced options
+                                                </div>
+                                                <div class="">
+                                                    <table class="table borderless m-0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="p-5">Notify To</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    {!! Form::text('notify_to',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+
+                                                                    <div class="input-group-addon addonNone"
+                                                                         data-toggle="tooltip"
+                                                                         data-placement="right"
+                                                                         title=""
+                                                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
+                                                                        <i class="fa fa-info-circle fa-lg"
+                                                                           aria-hidden="true"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="p-5">CC</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    {!! Form::text('cc',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                                    <div class="input-group-addon addonNone"
+                                                                         data-toggle="tooltip"
+                                                                         data-placement="right"
+                                                                         title=""
+                                                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
+                                                                        <i class="fa fa-info-circle fa-lg"
+                                                                           aria-hidden="true"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="p-5">BCC</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    {!! Form::text('bcc',null,['class'=>'form-control tagit-hidden-field','data-tagit'=>'tagit']) !!}
+                                                                    <div class="input-group-addon addonNone"
+                                                                         data-toggle="tooltip"
+                                                                         data-placement="right"
+                                                                         title=""
+                                                                         data-original-title="administrator,manager,superadmin,user,Requested Email,Logged  User,Signup User">
+                                                                        <i class="fa fa-info-circle fa-lg"
+                                                                           aria-hidden="true"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="p-5">Reply To</div>
+                                                            </td>
+                                                            <td>
+                                                                {!! Form::select('replyto',
+                                                            [
+                                                            'info@avatarbugs.com'=>'Info',
+                                                            'support@avatarbugs.com'=>'Support',
+                                                            'admin@avatarbugs.com'=>'Admin',
+                                                            'sales@avatarbugs.com'=>'Sales',
+                                                            'tech@avatarbugs.com'=>'Technical Staff'
+                                                            ],null,['class'=>'form-control']) !!}
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
+                                        <div class="panel-heading bg-grey-darker text-white">Event and Time</div>
+                                        <div class="panel-body p-5">
+                                            <table class="table borderless m-0">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="p-b-5">When</div>
+                                                        {!! Form::select('when_',[
+                                                            'immediate' => "Immediate",
+                                                            'custom_time' => 'Custom Time'
+                                                        ],null,['class' => 'form-control','data-change' => 'afterday' ,'id' => 'when_']) !!}
+
+                                                    </td>
+                                                </tr>
+                                                <tr data-container="afterday" class="hide">
+                                                    <td>
+                                                        <div class="p-b-5">After Days</div>
+                                                        <select class="form-control" id="afterday" data-change="settime"
+                                                                name="custom_days">
+                                                            <option value="1">1 Day</option>
+                                                            <option value="3">3 Days</option>
+                                                            <option value="5">5 Days</option>
+                                                            <option value="10">10 Days</option>
+                                                            <option value="15">15 Days</option>
+                                                            <option value="30">30 Days</option>
+                                                            <option value="0" selected="selected">Custom Date</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr data-container="settime" class="hide">
+                                                    <td>
+                                                        <div class="p-b-5">Select Date</div>
+                                                        <div class="input-group date" data-actions="Timercalendar">
+                                                            <input name="custom_time" class="form-control" value=""
+                                                                   type="text">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"
+                                                                                                aria-hidden="true"></i> </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="cont-bottom">
+                                <div class="col-md-9">
+                                    <div class="panel panel-default custompanel m-t-20">
+                                        <div class="panel-heading bg-grey-darker text-white">Main Content
+                                            <div class="pull-right">
+                                                Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
+                                                Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
+                                        </div>
+                                        <div class="panel-body editor_body show">
+                                            {!! Form::textarea('template_content',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
+                                        </div>
+                                        <div class="panel-body template_body hide">
+                                            {!! BBcustomize('unit','template','mail_template',
+                                        (isset($settings['template']) && $settings['template'])?'Change':'Select','email-template',['class'=>'btn btn-default change-layout','model' =>(isset($settings['template']) && $settings['template']) ?$settings['template']: null]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
+                                        <div class="panel-heading bg-grey-darker text-white">Available Codes</div>
+                                        <div class="panel-body p-5">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#general_shortcodes">General</a>
+                                                </li>
+                                                <li><a data-toggle="tab" href="#specific_shortcodes">Specific</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div id="general_shortcodes" class="tab-pane fade in active">
+                                                    <table class="table borderless m-0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="sc-item m-b-5">[general key=logo]</div>
+                                                                <div class="sc-item m-b-5">[general key=site_name]</div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="specific_shortcodes" class="tab-pane fade">
+                                                    <h3>Specific shortcodes here</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
-                    <div class="panel-heading bg-black-darker text-white">Event and Time</div>
-                    <div class="panel-body p-5">
-                        <table class="table borderless m-0">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="p-b-5">When</div>
-                                    {!! Form::select('when_',[
-                                        'immediate' => "Immediate",
-                                        'custom_time' => 'Custom Time'
-                                    ],null,['class' => 'form-control','data-change' => 'afterday' ,'id' => 'when_']) !!}
 
-                                </td>
-                            </tr>
-                            <tr data-container="afterday" class="hide">
-                                <td>
-                                    <div class="p-b-5">After Days</div>
-                                    <select class="form-control" id="afterday" data-change="settime" name="custom_days">
-                                        <option value="1">1 Day</option>
-                                        <option value="3">3 Days</option>
-                                        <option value="5">5 Days</option>
-                                        <option value="10">10 Days</option>
-                                        <option value="15">15 Days</option>
-                                        <option value="30">30 Days</option>
-                                        <option value="0" selected="selected">Custom Date</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr data-container="settime" class="hide">
-                                <td>
-                                    <div class="p-b-5">Select Date</div>
-                                    <div class="input-group date" data-actions="Timercalendar">
-                                        <input name="custom_time" class="form-control" value="" type="text">
-                                        <span class="input-group-addon"> <i class="fa fa-calendar"
-                                                                            aria-hidden="true"></i> </span></div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="panel panel-default custompanel m-t-20">
-                    <div class="panel-heading bg-black-darker text-white">Main Content
-                        <div class="pull-right">
-                            Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
-                            Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
-                    </div>
-                    <div class="panel-body editor_body show">
-                        {!! Form::textarea('template_content',null,['id'=>'contentEditor','aria-hidden'=>true]) !!}
-                    </div>
-                    <div class="panel-body template_body hide">
-                        {!! BBcustomize('unit','template','mail_template',
-                    (isset($settings['template']) && $settings['template'])?'Change':'Select','email-template',['class'=>'btn btn-default change-layout','model' =>(isset($settings['template']) && $settings['template']) ?$settings['template']: null]) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-default p-0" data-sortable-id="ui-typography-7">
-                    <div class="panel-heading bg-black-darker text-white">Available Codes</div>
-                    <div class="panel-body p-5">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#general_shortcodes">General</a></li>
-                            <li><a data-toggle="tab" href="#specific_shortcodes">Specific</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="general_shortcodes" class="tab-pane fade in active">
-                                <table class="table borderless m-0">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="sc-item m-b-5">[general key=logo]</div>
-                                            <div class="sc-item m-b-5">[general key=site_name]</div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="specific_shortcodes" class="tab-pane fade">
-                                <h3>Specific shortcodes here</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </script>
 @stop

@@ -82,6 +82,11 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'General',
                     'url' => '/admin/front-site/structure/front-pages/general/{id}',
                 ],
+            ],'page_special_edit' => [
+                [
+                    'title' => 'Special Settings',
+                    'url' => '/admin/front-site/structure/front-pages/special-settings/{id}',
+                ]
             ],
             'manage_emails' => [
                 [

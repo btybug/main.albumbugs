@@ -102,6 +102,23 @@ class PagesController extends Controller
         return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders']));
     }
 
+    public function getSpecialSettings(
+        Request $request,
+        FrontPagesRepository $frontPagesRepository,
+        UserService $userService,
+        ClassifierRepository $classifierRepository,
+        ClassifierService $classifierService,
+        FrontendPageService $frontendPageService
+    )
+    {
+        $id = $request->param;
+        $page = $frontPagesRepository->find($id);
+        $tags = $page->tags;
+        $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
+
+        return view('manage::frontend.pages.special_settings', compact(['page', 'admins', 'tags', 'id', 'placeholders']));
+    }
+
     public function getGeneral(
         Request $request,
         FrontPagesRepository $frontPagesRepository,
@@ -197,7 +214,7 @@ class PagesController extends Controller
         Request $request
     )
     {
-        $new = $frontendPageService->addNewPage();
+        $new = $frontendPageService->addNewPage(null,$request->get('type'));
         event(new PageCreateEvent($new, $request->all()));
 
         if ($new) return redirect()->back();

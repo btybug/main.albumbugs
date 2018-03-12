@@ -6,7 +6,13 @@
         </div>
         <div class="col-md-6">
             {!! Form::open(['url' => "/admin/front-site/structure/front-pages/new"]) !!}
-            {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> New Page', array('type' => 'submit', 'class' => 'pull-right create_new_btn m-l-20')) }}
+                {!! Form::hidden('type','custom') !!}
+                {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> New Page', array('type' => 'submit', 'class' => 'pull-right create_new_btn m-l-20')) }}
+            {!! Form::close() !!}
+
+            {!! Form::open(['url' => "/admin/front-site/structure/front-pages/new"]) !!}
+            {!! Form::hidden('type','special') !!}
+            {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> New Custom Page', array('type' => 'submit', 'class' => 'pull-right create_new_btn m-l-20','style' =>'width:auto;')) }}
             {!! Form::close() !!}
         </div>
     </div>

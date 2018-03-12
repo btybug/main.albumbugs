@@ -589,6 +589,10 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
                     $title = 'custom';
                     $output .= '<div class="lsitingbutton bb-menu-item-title" style="background: #36e0a0; !important">';
                     break;
+                case  "special" :
+                    $title = 'special custom';
+                    $output .= '<div class="lsitingbutton bb-menu-item-title" style="background: #ffea00; !important">';
+                    break;
                 case  "plugin" :
                     $title = 'plugin';
                     $output .= '<div class="lsitingbutton bb-menu-item-title" style="background: #e0223c;  !important">';
@@ -602,10 +606,14 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             if (isset($settings['edit_url'])) {
                 $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin pull-right"></i></a>';
             } else {
-                $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';
+                if($item->type == 'special'){
+                    $output .= '<a href="' . url('/admin/front-site/structure/front-pages/special-settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';
+                }else{
+                    $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';
+                }
             }
 
-            if ($item->type == 'custom') {
+            if ($item->type == 'custom' || $item->type == 'special') {
                 $output .= '<a data-href="' . url('/admin/front-site/structure/front-pages/delete') . '" data-key="' . $item->id . '" data-type="Page ' . $item->title . '" style="cursor: pointer;"  class="delete-button pull-right trashBtn"><i class="fa fa-trash"></i></a>';
             }
 //        $output .= '<a data-toggle="collapse" data-pagecolid="' . $item->id . '" data-parent="#accordion' . $item->id . '" href="#collapseOne' . $item->id . '" aria-expanded="true" aria-controls="collapseOne" class="link_name collapsed">';

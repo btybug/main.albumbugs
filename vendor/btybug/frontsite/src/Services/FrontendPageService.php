@@ -141,7 +141,7 @@ class FrontendPageService extends GeneralService
         return $page;
     }
 
-    public function addNewPage (int $parentID = null)
+    public function addNewPage (int $parentID = null, $type = 'custom')
     {
         $parent = null;
         if ($parentID) {
@@ -163,7 +163,7 @@ class FrontendPageService extends GeneralService
             'footer'               => ($footer_enabled) ? $footer_enabled->val : 0,
             'url'                  => '',
             'parent_id'            => ($parent) ? $parent->id : null,
-            'type'                 => 'custom'
+            'type'                 => $type
         ]);
         $this->frontPagesRepository->update($new->id, [
             'url' => '/new-page(' . $new->id . ')',

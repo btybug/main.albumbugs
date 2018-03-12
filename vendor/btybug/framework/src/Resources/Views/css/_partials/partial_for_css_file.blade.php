@@ -30,8 +30,8 @@
                     <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
                         <div class="m-t-b-21">
                             <h5 class="custom_inline_block">{{explode("{",$style)[0]}}</h5>
-                            <button class="btn btn-success btn-sm" data-slug="{{$slug}}" data-class="{{$style}}">Show</button>
-                            <button class="btn btn-warning btn-sm" data-slug="{{$slug}}" data-class="{{$style}}">Edit</button>
+                            <button class="btn btn-success btn-sm" data-slug="{{$slug}}" data-class="{{$style}}" data-toggle="modal" data-target="#myModalShow">Show</button>
+                            <button class="btn btn-warning btn-sm" data-slug="{{$slug}}" data-class="{{$style}}" data-toggle="modal" data-target="#myModalEdit">Edit</button>
                             <button class="btn btn-danger btn-sm remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">Delete</button>
                         </div>
 
@@ -45,6 +45,40 @@
         @endforeach
     </script>
 @endif
+<div class="modal fade" id="myModalShow" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Show</h4>
+            </div>
+            <div class="modal-body">
+                <p>Show modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="myModalEdit" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit</h4>
+            </div>
+            <div class="modal-body">
+                <p>Edit modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script type="template" id="send_form_for_save">
     {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
     <div class="class_for_delete">

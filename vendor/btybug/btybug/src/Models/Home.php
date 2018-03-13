@@ -38,6 +38,7 @@ class Home
     {
         $page = FrontendPage::where('url', $url)->orWhere('url', "/" . $url)->first();
         if ($page->content_type == 'special') return view('btybug::app', compact('page'));
+        if ($page->type == 'a_special') return view('btybug::a_special', compact('page'));
         if ($page) {
             if (!isset($settings['pl_live_settings'])) {
                 if ($page->status == 'draft')

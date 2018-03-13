@@ -162,6 +162,7 @@ class FrontendPageService extends GeneralService
             'header'               => ($header_enabled) ? $header_enabled->val : 0,
             'footer'               => ($footer_enabled) ? $footer_enabled->val : 0,
             'url'                  => '',
+            'page_access'          => ZERO,
             'parent_id'            => ($parent) ? $parent->id : null,
             'type'                 => $type
         ]);

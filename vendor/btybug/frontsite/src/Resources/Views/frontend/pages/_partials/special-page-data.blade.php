@@ -1,6 +1,6 @@
 @if($page)
 
-    {!! Form::model($page,['url' => route('frontsite_special_settings',$id), 'id' => 'page_settings_form']) !!}
+    {!! Form::model($page,['url' => route('frontsite_special_settings',$id), 'id' => 'page_settings_form','files' =>true]) !!}
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Page Info</div>

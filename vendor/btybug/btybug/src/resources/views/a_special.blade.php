@@ -7,5 +7,11 @@
 @endphp
     @if($page->content_type == 'template')
         {!! BBRenderUnits($page->template) !!}
+    @else
+        @if(\File::exists($page->main_content))
+           @php
+               echo file_get_contents(base_path($page->main_content));
+           @endphp
+        @endif
     @endif
 @stop

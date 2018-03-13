@@ -13,9 +13,15 @@
                         <div class="panel-heading">
                             <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$index}}" aria-expanded="true">
                                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                                <span class="title">{{$directory["dirname"]}}</span>
+                                <span class="title get_original_name">{{$directory["dirname"]}}</span>
                             </a>
-                                <span class="pull-right">
+                            <span class="custom_hidden changeable_group_name">
+                                <input type="text" value="{{$directory["dirname"]}}">
+                                <button class="btn btn-sm btn-success go_to_save">
+                                    <i class="fa fa-check-square"></i>
+                                </button>
+                            </span>
+                            <span class="pull-right">
                                     @if($directory["dirname"] != "Container" && $directory["dirname"] != "Image" && $directory["dirname"] != "Text")
                                         <button class="btn btn-sm btn-primary edit_folder_name" data-dname="{{$directory["dirname"]}}"><i class="fa fa-edit"></i></button>
                                         <button class="btn btn-sm btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
@@ -57,8 +63,14 @@
         <div class="panel-heading">
             <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{rand_str}" aria-expanded="true">
                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">{dirname}</span>
+                <span class="title get_original_name">{dirname}</span>
             </a>
+            <span class="custom_hidden changeable_group_name">
+                <input type="text" value="{uniq_gr_name}">
+                <button class="btn btn-sm btn-success go_to_save">
+                    <i class="fa fa-check-square"></i>
+                </button>
+            </span>
             <span class="pull-right">
                 <button class="btn btn-sm btn-primary edit_folder_name" data-dname="{dnameforedit}"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-sm btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
@@ -118,7 +130,7 @@
                 success: function (data) {
                     if(data.dirname){
                         var name = titleCase(data.dirname);
-                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
+                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{uniq_gr_name}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
                          return $(".body_append").append(template);
                     }
                 },
@@ -185,7 +197,54 @@
             });
         });*/
         $("body").delegate(".edit_folder_name","click",function(){
-            alert($(this).data("dname"));
+            /*var val = $(this).data("dname");
+            alert(val);*/
+            $(this).parent().prev().prev("a.accordion-toggle.colps").addClass('custom_hidden');
+            return $(this).parent().prev(".changeable_group_name").removeClass("custom_hidden");
+        });
+        $("body").delegate(".go_to_save","click",function(){
+            var new_name = $(this).prev().val();
+           // var old_name = $(this).parent().next().children("button.edit_folder_name").data("dname");
+            var old_name = $(this).parent().prev().children("span.get_original_name").text();
+            var that = $(this);
+            var _token = $('input[name=_token]').val();
+            var url = base_path + "/admin/framework/css-classes/renamefolder";
+            $.ajax({
+                url: url,
+                data: {
+                    new_name:new_name,
+                    old_name:old_name,
+                    _token: _token
+                },
+                success: function (data) {
+                    if(!data.error){
+                        var new_name = data.data.new_name;
+                        /*that.prev().val(new_name).parent().addClass("custom_hidden");
+                        that.parent().prev().removeClass("custom_hidden").children("span.get_original_name").text(new_name);
+                        that.parent().parent().children("span.pull-right").children(".remove_group").removeAttr("data-name").attr("data-name",new_name);
+                        that.parent().parent().children("span.pull-right").children("a").removeAttr("href").attr("href",base_path + "/admin/framework/css-classes/createfile/" + new_name);
+                        return that.parent().parent().children("span.pull-right").children(".edit_folder_name").removeAttr("data-dname").attr("data-dname",new_name);*/
+                       return (that.prev()
+                            .val(new_name)
+                            .parent()
+                            .addClass("custom_hidden")
+                            .prev()
+                            .removeClass("custom_hidden")
+                            .children("span.get_original_name")
+                            .text(new_name)
+                            .parent()
+                            .parent()
+                            .children("span.pull-right")
+                            .children(".edit_folder_name")
+                            .attr("data-dname",new_name)
+                            .next()
+                            .attr("data-name",new_name)
+                            .next()
+                            .attr("href",base_path + "/admin/framework/css-classes/createfile/" + new_name));
+                    }
+                },
+                type: 'POST'
+            });
         });
 </script>
 <style>

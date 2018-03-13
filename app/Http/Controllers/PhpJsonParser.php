@@ -111,6 +111,19 @@ class PhpJsonParser
             }
         }
     }
+    public static function renameFolder($old_name,$new_name){
+        $path = base_path('public'.DS.'dinamiccss');
+        $dirs = \File::directories($path);
+        if(count($dirs)){
+            foreach ($dirs as $key => $dir){
+                $original = \File::name($dir);
+                if($original === $old_name){
+                    $should_be_renamed = $path.DS.$new_name;
+                    return \File::move($dir,$should_be_renamed);
+                }
+            }
+        }
+    }
 
     public static function renderName($original_name){
         foreach ($original_name as $ind => $to_up){

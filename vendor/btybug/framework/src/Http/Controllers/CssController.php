@@ -145,6 +145,15 @@ class CssController extends Controller
         }
         return response()->json(["error"=>1]);
     }
+    public function renameGroup(Request $request){
+        $old_name = $request->old_name;
+        $new_name = $request->new_name;
+        $dir = PhpJsonParser::renameFolder($old_name,$new_name);
+        if ($dir){
+            return response()->json(["error"=>0,"data" => ["old_name"=>$old_name,"new_name" => $new_name]]);
+        }
+        return response()->json(["error"=>1]);
+    }
 
 
 

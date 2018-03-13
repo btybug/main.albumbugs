@@ -115,18 +115,6 @@
             }
         }
 
-        /*// initialize ace editors
-            data.map(function(item,indx){
-                if(item.length){
-                    var name = "editor_" + indx;
-                    name = ace.edit("textarea_"+indx);
-                    name.setTheme("ace/theme/monokai");
-                    name.session.setMode("ace/mode/css");
-                    name.setValue(item+"}");
-                }
-            });
-        // end initialize ace editors*/
-
         $("body").delegate(".remove_this_class","click",function () {
             var slug = $(this).data("slug");
             var class_name = $(this).data("class");

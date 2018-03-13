@@ -130,17 +130,7 @@ editor_html.setValue(html_val);
 // Dinamic create css class
 $(document).ready(function () {
     var editor = {};
-    $("body").delegate(".show_form","click",function(){
-       var content = $("#send_form_for_save").html();
-        $("div.just_html").html(content);
 
-        editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/css");
-        editor.on("focus", function(){
-            editor.unsetStyle("set_border");
-        });
-    });
     $("body").delegate(".show_form_for_setting","click",function(){
         var is_show = $(".is_show_for_setting").hasClass("custom_hidden");
         if(is_show){

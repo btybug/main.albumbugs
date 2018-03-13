@@ -147,17 +147,18 @@ class FrontendPageService extends GeneralService
         }
 
         $this->frontPagesRepository->update($page->id, $data);
-        $extension = $request->file('main_content')->getClientOriginalExtension(); // getting image extension
+        if($request->file('main_content')){
+            $extension = $request->file('main_content')->getClientOriginalExtension(); // getting image extension
+            if(in_array($extension,$this->ext)){
+                $full_name = $request->file('main_content')->getClientOriginalName();
+                $name = str_replace("." . $extension, "", $full_name);
+                \File::cleanDirectory(config('paths.samples').'/'.$page->id);
+                $request->file('main_content')->move(config('paths.samples').'/'.$page->id.'/', $full_name);
 
-        if(in_array($extension,$this->ext)){
-            $full_name = $request->file('main_content')->getClientOriginalName();
-            $name = str_replace("." . $extension, "", $full_name);
-            \File::cleanDirectory(config('paths.samples').'/'.$page->id);
-            $request->file('main_content')->move(config('paths.samples').'/'.$page->id.'/', $full_name);
-
-            $this->frontPagesRepository->update($page->id, [
-                'main_content' => config('paths.samples').'/'.$page->id.'/'.$full_name
-            ]);
+                $this->frontPagesRepository->update($page->id, [
+                    'main_content' => config('paths.samples').'/'.$page->id.'/'.$full_name
+                ]);
+            }
         }
 
         return $page;

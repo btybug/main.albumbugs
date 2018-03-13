@@ -32,6 +32,8 @@ class FrontendPage extends Model
         'page_layout_settings' => 'json',
         'memberships' => 'json',
         'special_access' => 'json',
+        'css' => 'json',
+        'js' => 'json',
     ];
 
     public static function addTags($tags, $id)

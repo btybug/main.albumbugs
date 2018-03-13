@@ -127,6 +127,25 @@ class FrontendPageService extends GeneralService
         return $page;
     }
 
+    public function saveSpecialSettings (
+        Request $request
+    )
+    {
+        $page = $this->frontPagesRepository->findOrFail($request->id);
+        $attributes = $page->getAttributes();
+        $requestData = $request->except('_token');
+        $data = [];
+        foreach ($attributes as $key => $value) {
+            if (isset($requestData[$key])) {
+                $data[$key] = $requestData[$key];
+            }
+        }
+
+        $this->frontPagesRepository->update($page->id, $data);
+
+        return $page;
+    }
+
     public function saveGeneralSettings (
         Request $request
     )

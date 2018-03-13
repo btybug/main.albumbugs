@@ -13,6 +13,13 @@
     @yield('metas')
     <link type="image/x-icon" rel="icon" href="{{ asset('assets/favicon.ico') }}"/>
     <link type="image/x-icon" rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}"/>
+    @if(count($page->css))
+        @foreach($page->css as $css)
+            @if (!filter_var($css, FILTER_VALIDATE_URL) === false)
+                {!! Html::style($css) !!}
+            @endif
+        @endforeach
+    @endif
     @yield('css')
     @stack('CSS')
 </head>
@@ -51,6 +58,13 @@
     @endif
     @yield('content')
 <!-- jQuery first, then Bootstrap JS. -->
+    @if(count($page->js))
+        @foreach($page->js as $js)
+            @if (!filter_var($js, FILTER_VALIDATE_URL) === false)
+                {!! Html::script($js) !!}
+            @endif
+        @endforeach
+    @endif
     @yield('js')
 </div>
 </body>

@@ -5,6 +5,7 @@
         $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
     }
 @endphp
-
-1q1
+    @if($page->content_type == 'template')
+        {!! BBRenderUnits($page->template) !!}
+    @endif
 @stop

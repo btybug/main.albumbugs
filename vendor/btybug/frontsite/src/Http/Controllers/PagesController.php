@@ -184,6 +184,15 @@ class PagesController extends Controller
         return redirect()->back()->with('message', 'Page settings has been saved successfully.');
     }
 
+    public function postSpecialSettings(
+        Request $request,
+        FrontendPageService $frontendPageService
+    )
+    {
+        $updatedPage = $frontendPageService->saveSpecialSettings($request);
+        return redirect()->back()->with('message', 'Page settings has been saved successfully.');
+    }
+
     public function postGeneral(
         Request $request,
         FrontendPageService $frontendPageService

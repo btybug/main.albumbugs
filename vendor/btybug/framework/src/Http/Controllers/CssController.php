@@ -21,8 +21,8 @@ class CssController extends Controller
 {
     public function getIndex(Request $request, $type = "buttons")
     {
-        $directories = PhpJsonParser::getFoldersWithChildrens();
-
+        $path = base_path('public'.DS.'dinamiccss');
+        $directories = PhpJsonParser::getFoldersWithChildrens($path);
         $slug = $request->get('type',$type);
         return view('framework::css.list', compact(['slug','directories']));
     }

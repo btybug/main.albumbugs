@@ -132,7 +132,10 @@ var cssStudio = {
 
     // Get properties array
     getProperties: function () {
-        return this.properties;
+        var $this = this;
+        $.getJSON(ajaxLinks.baseUrl + '/public/js/form-builder/studio.json', function (jsonProperties) {
+            $this.buildEditorList(jsonProperties);
+        });
     },
 
     // Render field type
@@ -140,8 +143,11 @@ var cssStudio = {
         var fieldTemplate = this.loadTemplate(field.type),
             buildOptions = '';
 
+        if(field.options === "unitArray") field.options = unitArray;
+
         if (field.type === "dropdown") {
             buildOptions = '';
+
             if (field.options && field.options.length > 0) {
                 $.each(field.options, function (i, option) {
                     buildOptions += '<option value="' + option.value + '">' + option.title + '</option>';
@@ -210,9 +216,8 @@ var cssStudio = {
     },
 
     // Build editor list
-    buildEditorList: function () {
+    buildEditorList: function (properties) {
         var $this = this,
-            properties = this.getProperties(),
             groupsHTML = '',
             activeElement = $('.bbs-field-selectors>li.active');
 
@@ -372,7 +377,7 @@ var cssStudio = {
     // Init CSS Studio
     init: function (opened) {
         var $this = this;
-        this.buildEditorList();
+        this.getProperties();
 
         // Events
         $('#bb-css-studio')

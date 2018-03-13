@@ -326,7 +326,7 @@ var cssStudio = {
                 var cssValue = $(activeSelector).css(field.css);
                 $('.bbs-editor-list').find('[name='+field.css+']').val(cssValue);
 
-                console.log(field.css, cssValue);
+                // console.log(field.css, cssValue);
             });
         });
 
@@ -375,7 +375,7 @@ var cssStudio = {
     },
 
     // Init CSS Studio
-    init: function (opened) {
+    init: function () {
         var $this = this;
         this.getProperties();
 

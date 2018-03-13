@@ -52,7 +52,7 @@ $(document).ready(function () {
                 theme: 'primary',
                 boxShadow: 0,
                 position: 'right-bottom',
-                contentSize: '300 ' + ($(window).height() - 250),
+                contentSize: '350 ' + ($(window).height() - 250),
                 dragit: {
                     snap: true
                 },

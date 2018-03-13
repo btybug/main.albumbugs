@@ -70,7 +70,7 @@
             <div class="this_flex">
                 <textarea class='code_textarea form-control' id="editor" ></textarea>
                 <button class="btn btn-danger btn-md custom_cancel" type="button">Cancel</button>
-                <button class="btn btn-success btn-md validate_textarea" type="button" data-slug="{{$slug}}" data-class="{{$style}}">Save</button>
+                <button class="btn btn-success btn-md validate_textarea" type="button" data-slug="{{$slug}}" data-class="{{isset($style) ? $style : ''}}">Save</button>
             </div>
         </div>
     </div>

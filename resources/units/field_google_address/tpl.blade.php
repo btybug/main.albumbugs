@@ -1,4 +1,4 @@
-<div class="custom_for_google ">
+<div class="custom_for_google {{isset($settings["container_style"])?$settings["container_style"]:''}} {{isset($settings["label_style"])?$settings["label_style"]:''}}">
     {!! Form::open(['url'=>route('save_shipping_address')]) !!}
 
     <div id="locationField">

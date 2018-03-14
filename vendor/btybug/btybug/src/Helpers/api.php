@@ -1962,9 +1962,9 @@ function getDinamicStyleDemo($filename)
     return $styles;
 }
 
-function getDinamicStyleForCssFileDemo($filename)
+function getDinamicStyleForCssFileDemo($filename,$path)
 {
-    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename);
+    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename,$path);
     return $styles;
 }
 
@@ -1972,10 +1972,10 @@ function useDinamicStyle($filename)
 {
     return '<link href="' . asset('public/dinamiccss/' . $filename . '.css') . '" rel="stylesheet">';
 }
-function useDinamicStyleByPath($path)
+function useDinamicStyleByPath($path,$main)
 {
     $arr = explode(DS,$path);
     $filename = $arr[count($arr) - 1];
     $foldername = $arr[count($arr) - 2];
-    return '<link href="' .asset('public'.DS.'dinamiccss'.DS.$foldername.DS.$filename.'?v='.rand(111,999)). '" rel="stylesheet">';
+    return '<link href="' .asset($main.DS.$foldername.DS.$filename.'?v='.rand(111,999)). '" rel="stylesheet">';
 }

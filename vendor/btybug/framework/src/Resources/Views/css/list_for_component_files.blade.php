@@ -32,7 +32,7 @@
 
 
             <div class="form-comp col-md-12 custom_hidden is_show_for_setting">
-                {!! Form::open(['url'=>route('save_style_with_html_component'),'method' => 'get']) !!}
+                {!! Form::open(['url'=>route('save_style_with_html_component'),'method' => 'get','class'=>'sub_html_tag']) !!}
                 <div class="col-md-7">
                     <div class="form-group">
                         <div class="col-md-4">
@@ -48,7 +48,8 @@
                             <label for="">Item html</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea name="file_html" id="" cols="30" rows="10" class="form-control">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                            <textarea name="" id="html_val" cols="30" rows="10" class="hidden">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                            <textarea id="editor_html" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -58,57 +59,37 @@
                     @if($slug != "xl_large_text" && $slug != "l_text" && $slug != "m_text" && $slug != "s_text" && $slug != "xs_text" && $slug != "link_text" && $slug != "icons")
                         <button type="button" class="btn btn-danger pull-right btn-lg custom_margin_left delete_item_and_classes" data-name="{{$slug}}">Delete this item and its classes</button>
                     @endif
-                    <button class="btn btn-lg btn-success pull-right">Save</button>
+                    <button class="btn btn-lg btn-success pull-right html_before_submit" type="button">Save</button>
                 </div>
                 {!! Form::close() !!}
             </div>
 
 
-            <div class="form-comp col-md-12 custom_hidden is_show">
-                {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <label for="">Class Name</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" name="class_name" class="form-control this_very_classname">
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <label for="">Class Code</label>
-                            </div>
-                            <div class="col-md-8">
-                                <textarea name="code" id="" cols="30" rows="10" class="form-control this_very_textarea"></textarea>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
-                    <div class="col-md-5">
-                        <button class="btn btn-lg btn-success pull-right validate_textarea" type="button">Save</button>
-                    </div>
-                {!! Form::close() !!}
-                <div class="clearfix"></div>
-                <div class="alert alert-danger alert-block remove_hidden_for_error custom_hidden">
-                    <strong>
-                        Error: You have a css syntax error. Please be careful and write right content.
-                        <br>Example<br>
-                        <span>
-                            color:#FF0000;<br>
-                            font-size:25px;<br>
-                            etc...<br>
-                        </span>
-                        <div class="clearfix"></div>
-                    </strong>
-                </div>
-            </div>
+            {{-- <div class="form-comp col-md-12 custom_hidden is_show">
+                 {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
+                     <div class="col-md-7">
+                         <div class="form-group">
+                             <div class="col-md-4">
+                                 <label for="">Class Code</label>
+                             </div>
+                             <div class="col-md-8">
+                                 <textarea name="code" id="editor" cols="30" rows="10" class="form-control this_very_textarea"></textarea>
+                                 <div class="clearfix"></div>
+                             </div>
+                             <div class="clearfix"></div>
+                         </div>
+                     </div>
+                     <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
+                     <div class="col-md-5">
+                         <button class="btn btn-lg btn-success pull-right validate_textarea" type="button">Save</button>
+                     </div>
+                 {!! Form::close() !!}
+                 <div class="clearfix"></div>
+             </div>--}}
         </div>
 
         <div class="row layouts_row">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 m-t-54">
                 @include("framework::css._partials.left_menu_for_component")
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
@@ -162,8 +143,110 @@
         .error{
             color:#a94442;
         }
+        .m-t-54{
+            margin-top:-54px;
+        }
+        @media (max-width: 992px){
+            .m-t-54{
+                margin-top:0;
+            }
+        }
+        .ace_editor{
+            height:160px;
+            flex: 1;
+        }
+        .set_border{
+            border: 2px solid #FF0000;
+        }
+        .custom_inline_block{
+            display:inline-block;
+        }
     </style>
 @stop
 @section('JS')
+    {!! HTML::script('public/js/ace-editor/ace.js') !!}
+
+    <script>
+        $(document).ready(function(){
+            var html_val = $("#html_val").val();
+            var editor_html = ace.edit("editor_html");
+            editor_html.setTheme("ace/theme/monokai");
+            editor_html.session.setMode("ace/mode/html");
+            editor_html.setValue(html_val);
+
+            var editor = {};
+            $("body").delegate(".show_form","click",function(){
+                var content = $("#send_form_for_save").html();
+                $(".is_show_for_setting").addClass("custom_hidden");
+                $("div.just_html").html(content);
+
+                editor = ace.edit("editor");
+                editor.setTheme("ace/theme/monokai");
+                editor.session.setMode("ace/mode/css");
+                editor.on("focus", function(){
+                    editor.unsetStyle("set_border");
+                });
+            });
+            $("body").delegate(".delete_item_and_classes","click",function(){
+                var slug = $(this).data("name");
+                var _token = $('input[name=_token]').val();
+                var url = base_path + "/admin/framework/component/reset";
+                $.ajax({
+                    url: url,
+                    data: {
+                        slug:slug,
+                        _token: _token
+                    },
+                    success: function (data) {
+                        if(!data.error){
+                            return window.location.reload();
+                        }
+                        alert("File does not exists");
+                    },
+                    type: 'POST'
+                });
+            });
+            $("body").delegate(".show_form_for_setting","click",function(){
+                var is_show = $(".is_show_for_setting").hasClass("custom_hidden");
+                if(is_show){
+                    $(".is_show_for_setting").removeClass('custom_hidden');
+                    $(".is_show").addClass('custom_hidden');
+                }else{
+                    $(".is_show_for_setting").addClass('custom_hidden');
+                }
+            });
+            $("body").delegate(".validate_textarea","click",function(){
+                var editor_value = editor.getValue();
+                var annot = editor.getSession().getAnnotations();
+                for (var key in annot){
+                    if (annot.hasOwnProperty(key)) {
+                        return editor.setStyle("set_border");
+                    }
+                }
+                if(!editor_value){
+                    return editor.setStyle("set_border");
+                }
+                return (
+                    $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+editor_value+"'>").submit()
+                );
+            });
+            $("body").delegate(".html_before_submit","click",function(){
+                var editor_value = editor_html.getValue();
+                var annot = editor_html.getSession().getAnnotations();
+                for (var key in annot){
+                    if (annot.hasOwnProperty(key) && annot[key].type !== 'info') {
+                        return editor_html.setStyle("set_border");
+                    }
+                }
+                if(!editor_value){
+                    return editor_html.setStyle("set_border");
+                }
+                return (
+                    $(".sub_html_tag").append("<input type='hidden' name='file_html' value='"+editor_value+"'>").submit()
+                );
+            });
+        });
+    </script>
+
     {!! HTML::script('public/js/bty.js?v='.rand(1111,9999)) !!}
 @stop

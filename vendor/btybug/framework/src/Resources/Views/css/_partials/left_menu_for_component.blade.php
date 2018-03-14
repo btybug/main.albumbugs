@@ -4,16 +4,73 @@
 </div>
 
 <div class="clearfix"></div>
+<div class="cms_module_list module_list_1">
+    <div class="panel panel-default">
+        <div class="panel-body body_append">
+            @if(count($directories))
+                @foreach($directories as $index => $directory)
+                    <div class="panel panel-default class_for_remove">
+                        <div class="panel-heading">
+                            <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$index}}" aria-expanded="true">
+                                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                                <span class="title get_original_name">{{$directory["dirname"]}}</span>
+                            </a>
+                            <span class="custom_hidden changeable_group_name">
+                                <input type="text" value="{{$directory["dirname"]}}">
+                                <button class="btn btn-sm btn-success go_to_save">
+                                    <i class="fa fa-check-square"></i>
+                                </button>
+                            </span>
+                            <span class="pull-right">
+                                <button class="btn btn-sm btn-primary edit_folder_name" data-dname="{{$directory["dirname"]}}"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-sm btn-danger remove_group" data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
+                                <a href="{{route("create_file_component",$directory["dirname"])}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-content collapse in" id="collapseOne_{{$index}}" aria-expanded="true">
+                            <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
+                                @if(count($directory["children"]))
+                                    @foreach($directory["children"] as $sub_group)
+                                        <?php
+                                        $original_name = explode('.',$sub_group->getFilename())[0];
+                                        ?>
+                                        <li class="custom_padding_left_0">
+                                            <a href="{{route("get_content_component")}}?type={{$original_name}}" rel="tab" class="tpl-left-items"> {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",explode('.',$sub_group->getFilename())[0]))}}</a>
+                                            <span class="inline-block pull-right">
+                                               {{-- <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
+                                                @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
+                                                    <button class="btn btn-xs btn-danger remove_file" data-name="{{$original_name}}"><i class="fa fa-remove"></i></button>
+                                                @endif--}}
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+</div>
 <div id="div_for_scroll"></div>
 <script type="template" id="append_group">
     <div class="panel panel-default class_for_remove">
         <div class="panel-heading">
             <a class="accordion-toggle colps" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{rand_str}" aria-expanded="true">
                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">{dirname}</span>
+                <span class="title get_original_name">{dirname}</span>
             </a>
+            <span class="custom_hidden changeable_group_name">
+                <input type="text" value="{uniq_gr_name}">
+                <button class="btn btn-sm btn-success go_to_save">
+                    <i class="fa fa-check-square"></i>
+                </button>
+            </span>
             <span class="pull-right">
-                <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-sm btn-primary edit_folder_name" data-dname="{dnameforedit}"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-sm btn-danger remove_group" data-name="{dname}"><i class="fa fa-remove"></i></button>
                 <a href="{{route("create_file_component",'repl')}}" class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
             </span>
@@ -29,11 +86,11 @@
 </script>
 <script type="template" id="append_new_file">
     <li class="custom_padding_left_0">
-        <a href="{{route("get_component")}}?type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
-        <span class="inline-block pull-right">
+        <a href="{{route("get_content_component")}}?type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
+        {{--<span class="inline-block pull-right">
             <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-xs btn-danger remove_file" data-name="{fname}"><i class="fa fa-remove"></i></button>
-        </span>
+        </span>--}}
         <div class="clearfix"></div>
     </li>
 </script>
@@ -57,86 +114,136 @@
 
         return text;
     }
-        var base_path = window.location.origin;
-        $("body").delegate(".custom_create_group","click",function(event){
-            event.preventDefault();
-            var route_to_back = $(this).attr("href");
-            var _token = $('input[name=_token]').val();
-            var template = $("#append_group").html();
-            $.ajax({
-                url: route_to_back,
-                data: {
-                    _token: _token
-                },
-                success: function (data) {
-                    if(data.dirname){
-                        var name = titleCase(data.dirname);
-                        template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{rand_str}",makeid());
-                         return $(".body_append").append(template);
-                    }
-                },
-                type: 'POST'
-            });
+    var base_path = window.location.origin;
+    $("body").delegate(".custom_create_group","click",function(event){
+        event.preventDefault();
+        var route_to_back = $(this).attr("href");
+        var _token = $('input[name=_token]').val();
+        var template = $("#append_group").html();
+        $.ajax({
+            url: route_to_back,
+            data: {
+                _token: _token
+            },
+            success: function (data) {
+                if(data.dirname){
+                    var name = titleCase(data.dirname);
+                    template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{uniq_gr_name}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
+                    return $(".body_append").append(template);
+                }
+            },
+            type: 'POST'
         });
-        $("body").delegate(".custom_create_new_file","click",function(e){
-            e.preventDefault();
-            var address = $(this).attr("href");
-            var _token = $('input[name=_token]').val();
-            var template = $("#append_new_file").html();
-            var that = $(this);
-            $.ajax({
-                url: address,
-                data: {
-                    _token: _token
-                },
-                success: function (data) {
-                    if(!data.error){
-                        var name = titleCase(data.filename);
-                        template = template.replace("{filename}",name).replace("{original_name}",data.filename).replace("{fname}",data.filename);
-                        return that.parents("div.panel.panel-default").children(".panel-content").children("ul.components_list").append(template);
-                    }
-                },
-                type: 'POST'
-            });
+    });
+    $("body").delegate(".custom_create_new_file","click",function(e){
+        e.preventDefault();
+        var address = $(this).attr("href");
+        var _token = $('input[name=_token]').val();
+        var template = $("#append_new_file").html();
+        var that = $(this);
+        $.ajax({
+            url: address,
+            data: {
+                _token: _token
+            },
+            success: function (data) {
+                if(!data.error){
+                    var name = titleCase(data.filename);
+                    template = template.replace("{filename}",name).replace("{original_name}",data.filename).replace("{fname}",data.filename);
+                    return that.parents("div.panel.panel-default").children(".panel-content").children("ul.components_list").append(template);
+                }
+            },
+            type: 'POST'
         });
-        $("body").delegate(".remove_group","click",function(){
-            var dirname = $(this).data("name");
-            var that = $(this);
-            var _token = $('input[name=_token]').val();
-            var url = base_path + "/admin/framework/component/removedir";
-            $.ajax({
-                url: url,
-                data: {
-                    dirname:dirname,
-                    _token: _token
-                },
-                success: function (data) {
-                    if(!data.error){
-                        that.parents("div.panel.panel-default.class_for_remove").remove();
-                    }
-                },
-                type: 'POST'
-            });
+    });
+    $("body").delegate(".remove_group","click",function(){
+        var dirname = $(this).data("name");
+        var that = $(this);
+        var _token = $('input[name=_token]').val();
+        var url = base_path + "/admin/framework/component/removedir";
+        $.ajax({
+            url: url,
+            data: {
+                dirname:dirname,
+                _token: _token
+            },
+            success: function (data) {
+                if(!data.error){
+                    that.parents("div.panel.panel-default.class_for_remove").remove();
+                }
+            },
+            type: 'POST'
         });
-        $("body").delegate(".remove_file","click",function(){
-            var filename = $(this).data("name");
-            var that = $(this);
-            var _token = $('input[name=_token]').val();
-            var url = base_path + "/admin/framework/component/removefile";
-            $.ajax({
-                url: url,
-                data: {
-                    filename:filename,
-                    _token: _token
-                },
-                success: function (data) {
-                    if(!data.error){
-                        that.parents("li.custom_padding_left_0").remove();
-                    }
-                },
-                type: 'POST'
-            });
+    });
+    /*$("body").delegate(".remove_file","click",function(){
+        var filename = $(this).data("name");
+        var that = $(this);
+        var _token = $('input[name=_token]').val();
+        var url = base_path + "/admin/framework/css-classes/removefile";
+        $.ajax({
+            url: url,
+            data: {
+                filename:filename,
+                _token: _token
+            },
+            success: function (data) {
+                if(!data.error){
+                    that.parents("li.custom_padding_left_0").remove();
+                }
+            },
+            type: 'POST'
         });
+    });*/
+    $("body").delegate(".edit_folder_name","click",function(){
+        /*var val = $(this).data("dname");
+        alert(val);*/
+        $(this).parent().prev().prev("a.accordion-toggle.colps").addClass('custom_hidden');
+        return $(this).parent().prev(".changeable_group_name").removeClass("custom_hidden");
+    });
+    $("body").delegate(".go_to_save","click",function(){
+        var new_name = $(this).prev().val();
+        // var old_name = $(this).parent().next().children("button.edit_folder_name").data("dname");
+        var old_name = $(this).parent().prev().children("span.get_original_name").text();
+        var that = $(this);
+        var _token = $('input[name=_token]').val();
+        var url = base_path + "/admin/framework/component/renamefolder";
+        $.ajax({
+            url: url,
+            data: {
+                new_name:new_name,
+                old_name:old_name,
+                _token: _token
+            },
+            success: function (data) {
+                if(!data.error){
+                    var new_name = data.data.new_name;
+                    /*that.prev().val(new_name).parent().addClass("custom_hidden");
+                    that.parent().prev().removeClass("custom_hidden").children("span.get_original_name").text(new_name);
+                    that.parent().parent().children("span.pull-right").children(".remove_group").removeAttr("data-name").attr("data-name",new_name);
+                    that.parent().parent().children("span.pull-right").children("a").removeAttr("href").attr("href",base_path + "/admin/framework/css-classes/createfile/" + new_name);
+                    return that.parent().parent().children("span.pull-right").children(".edit_folder_name").removeAttr("data-dname").attr("data-dname",new_name);*/
+                    return (that.prev()
+                        .val(new_name)
+                        .parent()
+                        .addClass("custom_hidden")
+                        .prev()
+                        .removeClass("custom_hidden")
+                        .children("span.get_original_name")
+                        .text(new_name)
+                        .parent()
+                        .parent()
+                        .children("span.pull-right")
+                        .children(".edit_folder_name")
+                        .attr("data-dname",new_name)
+                        .next()
+                        .attr("data-name",new_name)
+                        .next()
+                        .attr("href",base_path + "/admin/framework/component/createfile/" + new_name));
+                }
+            },
+            type: 'POST'
+        });
+    });
 </script>
 <style>
     .custom_padding_left_0{
@@ -190,5 +297,10 @@
     }
     .this_flex button{
         margin-left: 10px;
+    }
+    .bordered{
+        width:100%;
+        border: 1px solid #000000;
+        padding:10px;
     }
 </style>

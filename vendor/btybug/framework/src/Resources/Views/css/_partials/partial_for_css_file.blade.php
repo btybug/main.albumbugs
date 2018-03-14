@@ -1,6 +1,7 @@
 <?php
-    $data = getDinamicStyleForCssFileDemo($slug);
-    $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug);
+$path = base_path('public'.DS.'dinamiccss');
+$data = getDinamicStyleForCssFileDemo($slug,$path);
+$file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 ?>
 <style>
     .m-t-b-21{
@@ -9,9 +10,9 @@
     }
 </style>
 @if($file)
-    {!! useDinamicStyleByPath($file->__toString()) !!}
+    {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'dinamiccss') !!}
 @endif
-<input type="hidden" value="{{json_encode(getDinamicStyleForCssFileDemo($slug),true)}}" class="get_data">
+<input type="hidden" value="{{json_encode(getDinamicStyleForCssFileDemo($slug,$path),true)}}" class="get_data">
 
 <div class="col-md-12 append_here">
 

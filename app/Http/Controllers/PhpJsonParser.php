@@ -56,8 +56,8 @@ class PhpJsonParser
        return $html;
    }
 
-    public static function getClassesCssFileDemo($filename){
-        $file = self::getFileByName($filename);
+    public static function getClassesCssFileDemo($filename,$path){
+        $file = self::getFileByName($filename,$path);
         if(!$file){
             return null;
         }
@@ -96,8 +96,7 @@ class PhpJsonParser
        }
            return $arr;
     }
-    public static function getFileByName($filename){
-        $path = base_path('public'.DS.'dinamiccss');
+    public static function getFileByName($filename,$path){
         $dirs = \File::directories($path);
         if(count($dirs)){
             foreach ($dirs as $key => $dir){
@@ -111,8 +110,7 @@ class PhpJsonParser
             }
         }
     }
-    public static function renameFolder($old_name,$new_name){
-        $path = base_path('public'.DS.'dinamiccss');
+    public static function renameFolder($old_name,$new_name,$path){
         $dirs = \File::directories($path);
         if(count($dirs)){
             foreach ($dirs as $key => $dir){

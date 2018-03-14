@@ -96,7 +96,8 @@ class CssController extends Controller
         return response()->json(["error" => 0,"filename" => $file_name]);
     }
     public function getContent(Request $request, $type = "icons"){
-        $directories = PhpJsonParser::getFoldersWithChildrens();
+        $path = base_path('public'.DS.'dinamiccss');
+        $directories = PhpJsonParser::getFoldersWithChildrens($path);
         $slug = $request->get('type',$type);
         $style_from_db = TableCss::where("slug",$slug)->first();
         return view('framework::css.list_for_css_files', compact(['slug','directories','style_from_db']));

@@ -92,6 +92,7 @@ class PhpJsonParser
                $name = $name[count($name)-1];
                 $arr[$key]["dirname"] = $name;
                 $arr[$key]["children"] = \File::allFiles($dir);
+                $arr[$key]["children_dirs"] = PhpJsonParser::getFoldersWithChildrens($path.DS.$name);
            }
        }
            return $arr;

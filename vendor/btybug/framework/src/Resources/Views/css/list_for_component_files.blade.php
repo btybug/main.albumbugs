@@ -242,7 +242,7 @@
                     return editor_html.setStyle("set_border");
                 }
                 return (
-                    $(".sub_html_tag").append("<input type='hidden' name='file_html' value='"+editor_value+"'>").submit()
+                    $(".sub_html_tag").append("<textarea class='hidden' name='file_html'>"+editor_value+"</textarea>").submit()
                 );
             });
         });

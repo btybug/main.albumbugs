@@ -118,8 +118,17 @@ Route::group(['prefix' => 'assets'], function () {
 
 Route::group(['prefix' => 'profiles'], function () {
     Route::get('/', 'AssetProfilesController@getIndex', true)->name('uploads_assets_profiles_index');
-    Route::get('/js', 'AssetProfilesController@getJs', true)->name('uploads_assets_profiles_js');
-    Route::get('/css', 'AssetProfilesController@getCss', true)->name('uploads_assets_profiles_css');
+    Route::group(['prefix' => 'js'], function () {
+        Route::get('/', 'AssetProfilesController@getJs', true)->name('uploads_assets_profiles_js');
+        Route::get('/create', 'AssetProfilesController@getJsCreate', true)->name('uploads_assets_profiles_create_js');
+        Route::post('/create', 'AssetProfilesController@postJsCreate')->name('uploads_assets_profiles_create_js_post');
+    });
+
+    Route::group(['prefix' => 'css'], function () {
+        Route::get('/', 'AssetProfilesController@getCss', true)->name('uploads_assets_profiles_css');
+        Route::get('/create', 'AssetProfilesController@getCssCreate', true)->name('uploads_assets_profiles_create_css');
+        Route::post('/create', 'AssetProfilesController@postCssCreate')->name('uploads_assets_profiles_create_css_post');
+    });
 });
 
 Route::group(['prefix' => 'market'], function ($router) {

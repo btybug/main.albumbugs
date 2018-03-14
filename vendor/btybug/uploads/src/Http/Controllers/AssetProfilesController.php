@@ -64,5 +64,23 @@ class AssetProfilesController extends Controller
         return view('uploads::profiles.css', compact(['plugins']));
     }
 
+    public function getJsCreate(
+        VersionsRepository $versionsRepository,
+        VersionsService $versionsService
+    )
+    {
+        $plugins = $versionsRepository->getJS();
+        return view('uploads::profiles.create_js', compact(['plugins']));
+    }
+
+    public function getCssCreate(
+        VersionsRepository $versionsRepository,
+        VersionsService $versionsService
+    )
+    {
+        $plugins = $versionsRepository->getCss();
+
+        return view('uploads::profiles.create_css', compact(['plugins']));
+    }
 }
 

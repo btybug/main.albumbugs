@@ -72,11 +72,11 @@ class ModuleServiceProvider extends ServiceProvider
             'upload_profile' => [
                 [
                     'title' => 'Js',
-                    'url' => '/admin/uploads/profile/js',
+                    'url' => '/admin/uploads/profiles/js',
                 ],
                 [
                     'title' => 'Css',
-                    'url' => '/admin/uploads/profile/css',
+                    'url' => '/admin/uploads/profiles/css',
                 ]
             ],
             'upload_modules' => [

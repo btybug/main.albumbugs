@@ -161,7 +161,8 @@ class CssController extends Controller
 
 
     public function getComponent(Request $request, $type = "icons"){
-        $directories = PhpJsonParser::getFoldersWithChildrens();
+        $path = base_path('public'.DS.'dinamiccss');
+        $directories = PhpJsonParser::getFoldersWithChildrens($path);
         $slug = $request->get('type',$type);
         $style_from_db = TableCss::where("slug",$slug)->first();
         return view('framework::css.list_for_component_files', compact(['slug','directories','style_from_db']));

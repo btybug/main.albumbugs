@@ -17,10 +17,12 @@ use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\ContentLayouts\MainBody;
 use Btybug\btybug\Models\Settings;
+use Btybug\btybug\Repositories\AdminsettingRepository;
 use Btybug\btybug\Services\CmsItemReader;
 use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\FrontSite\Models\FrontendPage;
 use Btybug\FrontSite\Repository\ClassifierRepository;
+use Btybug\FrontSite\Repository\VersionsRepository;
 use Btybug\FrontSite\Services\ClassifierService;
 use Btybug\FrontSite\Services\FrontendPageService;
 use Btybug\Modules\Models\Fields;
@@ -108,15 +110,19 @@ class PagesController extends Controller
         UserService $userService,
         ClassifierRepository $classifierRepository,
         ClassifierService $classifierService,
-        FrontendPageService $frontendPageService
+        FrontendPageService $frontendPageService,
+        VersionsRepository $versionsRepository,
+        AdminsettingRepository $adminsettingRepository
     )
     {
         $id = $request->param;
         $page = $frontPagesRepository->find($id);
         $tags = $page->tags;
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
+        $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
+        $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
 
-        return view('manage::frontend.pages.special_settings', compact(['page', 'admins', 'tags', 'id', 'placeholders']));
+        return view('manage::frontend.pages.special_settings', compact(['page', 'admins', 'tags', 'id', 'placeholders','cssData','jsData']));
     }
 
     public function getGeneral(
@@ -164,6 +170,7 @@ class PagesController extends Controller
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
         $memberships = $membershipRepository->pluck('name','id')->toArray();
         $specials = $specialAccessRepository->pluck('name','id')->toArray();
+
         return view('manage::frontend.pages.special-general', compact(['page', 'admins','specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
     }
 
@@ -186,10 +193,13 @@ class PagesController extends Controller
 
     public function postSpecialSettings(
         Request $request,
-        FrontendPageService $frontendPageService
+        FrontendPageService $frontendPageService,
+        VersionsRepository $versionsRepository,
+        AdminsettingRepository $adminsettingRepository
     )
     {
         $updatedPage = $frontendPageService->saveSpecialSettings($request);
+
         return redirect()->back()->with('message', 'Page settings has been saved successfully.');
     }
 

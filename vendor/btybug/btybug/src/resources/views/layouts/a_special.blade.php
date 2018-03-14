@@ -13,11 +13,22 @@
     @yield('metas')
     <link type="image/x-icon" rel="icon" href="{{ asset('assets/favicon.ico') }}"/>
     <link type="image/x-icon" rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}"/>
-    @if(count($page->css))
+    @if($page->css_type == 'external' && count($page->css))
         @foreach($page->css as $css)
             @if (!filter_var($css, FILTER_VALIDATE_URL) === false)
                 {!! Html::style($css) !!}
             @endif
+        @endforeach
+    @endif
+
+    @if($page->css_type == 'cms' && count($page->css_cms))
+        @foreach($page->css_cms as $id)
+            @php
+                $versionRepo = new \Btybug\Framework\Repository\VersionsRepository();
+                $version = $versionRepo->find($id);
+                $path = ($version->env =='local') ? "public/css/versions/" . $version->file_name : $version->file_name;
+            @endphp
+            {!! Html::style($path) !!}
         @endforeach
     @endif
     @yield('css')
@@ -63,6 +74,17 @@
             @if (!filter_var($js, FILTER_VALIDATE_URL) === false)
                 {!! Html::script($js) !!}
             @endif
+        @endforeach
+    @endif
+
+    @if($page->js_type == 'cms' && count($page->js_type))
+        @foreach($page->js_cms as $id)
+            @php
+            $versionRepo = new \Btybug\Framework\Repository\VersionsRepository();
+            $version = $versionRepo->find($id);
+            $path = ($version->env =='local') ? "public/js/versions/" . $version->file_name : $version->file_name;
+            @endphp
+            {!! Html::script($path) !!}
         @endforeach
     @endif
     @yield('js')

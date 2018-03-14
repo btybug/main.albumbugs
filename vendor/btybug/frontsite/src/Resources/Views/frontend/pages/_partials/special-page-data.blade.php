@@ -43,7 +43,7 @@
                     External {!! Form::radio('css_type','external',null,['data-role'=>'css_external','class' => 'content_type_css']) !!}
                     From CMS{!! Form::radio('css_type','cms',null,['data-role'=>'css_cms','class' => 'content_type_css']) !!}</div>
             </div>
-            <div class="panel-body css_external">
+            <div class="panel-body css_external {!! ($page->css_type != 'external') ? 'hide' : ''  !!}">
                 <div class="col-md-12">
                     <a href="javascript:void(0)" class="btn btn-primary add-new-css pull-right"><i
                                 class="fa fa-plus"></i></a>
@@ -65,8 +65,9 @@
                 @endif
             </div>
 
-            <div class="panel-body css_cms hide">
-                {!! Form::select('css_cms',[],null,['class' => 'form-control']) !!}
+            <div class="panel-body css_cms {!! ($page->css_type != 'cms') ? 'hide' : ''  !!}">
+                {!! Form::select('css_cms[]',$cssData,null,
+                           ['class' => 'form-control select-dropdowns pull-right','multiple' => 'multiple']) !!}
             </div>
         </div>
 
@@ -77,7 +78,7 @@
                     From
                     CMS{!! Form::radio('js_type','cms',null,['data-role'=>'cms','class' => 'content_type_js']) !!}</div>
             </div>
-            <div class="panel-body js_external">
+            <div class="panel-body js_external {!! ($page->js_type != 'external') ? 'hide' : ''  !!}">
                 <div class="col-md-12">
                     <a href="javascript:void(0)" class="btn btn-primary add-new-js pull-right"><i
                                 class="fa fa-plus"></i></a>
@@ -98,10 +99,10 @@
                         </div>
                     @endforeach
                 @endif
-
-                <div class="panel-body js_cms hide">
-                    {!! Form::select('js_cms',[],null,['class' => 'form-control']) !!}
-                </div>
+            </div>
+            <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
+                {!! Form::select('js_cms[]',$jsData,null,
+                            ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
             </div>
         </div>
     </div>
@@ -232,6 +233,7 @@
 </script>
 @section('CSS')
     {!! HTML::style('public/css/create_pages.css') !!}
+    {!! HTML::style("public/css/select2/select2.min.css") !!}
     <style>
         .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
             padding-right: 15px;
@@ -258,10 +260,13 @@
     {!! HTML::script("public/js/UiElements/ui-settings.js") !!}
     {!! HTML::script("public/js/UiElements/bb_div.js") !!}
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
-
+    {!! HTML::script("public/js/select2/select2.full.min.js") !!}
     <script>
-
         $(document).ready(function () {
+            $('.select-dropdowns').select2({
+                placeholder: 'Select versions'
+            });
+
             $('body').on('change', '.content_type_special', function () {
                 var value = $(this).val();
                 if (value == 'html') {

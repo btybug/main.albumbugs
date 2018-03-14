@@ -142,7 +142,7 @@ $orientation = [
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="form-group">
+                   {{-- <div class="form-group">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <label>Calendar style</label>
@@ -152,7 +152,7 @@ $orientation = [
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                    </div>
+                    </div>--}}
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="col-sm-2 control-label text-left">Type:</label>
@@ -197,7 +197,7 @@ $orientation = [
                             <div class="col-sm-8">
                                 <input class="form-control" name="datepicker_setting[custom_format]" id="format"
                                        type="text"
-                                       value="{{isset($settings["datepicker_setting"]["format"]) ? $settings["datepicker_setting"]["format"] : ''}}"
+                                       value="{{isset($settings["datepicker_setting"]["custom_format"]) ? $settings["datepicker_setting"]["custom_format"] : ''}}"
                                        placeholder="mm/dd/yyyy">
                             </div>
                         </div>

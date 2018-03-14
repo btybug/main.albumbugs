@@ -165,5 +165,88 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/ace-editor/ace.js') !!}
+
+    <script>
+        $(document).ready(function(){
+            var html_val = $("#html_val").val();
+            var editor_html = ace.edit("editor_html");
+            editor_html.setTheme("ace/theme/monokai");
+            editor_html.session.setMode("ace/mode/html");
+            editor_html.setValue(html_val);
+
+            var editor = {};
+            $("body").delegate(".show_form","click",function(){
+                var content = $("#send_form_for_save").html();
+                $(".is_show_for_setting").addClass("custom_hidden");
+                $("div.just_html").html(content);
+
+                editor = ace.edit("editor");
+                editor.setTheme("ace/theme/monokai");
+                editor.session.setMode("ace/mode/css");
+                editor.on("focus", function(){
+                    editor.unsetStyle("set_border");
+                });
+            });
+            $("body").delegate(".delete_item_and_classes","click",function(){
+                var slug = $(this).data("name");
+                var _token = $('input[name=_token]').val();
+                var url = base_path + "/admin/framework/css-classes/reset";
+                $.ajax({
+                    url: url,
+                    data: {
+                        slug:slug,
+                        _token: _token
+                    },
+                    success: function (data) {
+                        if(!data.error){
+                            return window.location.reload();
+                        }
+                        alert("File does not exists");
+                    },
+                    type: 'POST'
+                });
+            });
+            $("body").delegate(".show_form_for_setting","click",function(){
+                var is_show = $(".is_show_for_setting").hasClass("custom_hidden");
+                if(is_show){
+                    $(".is_show_for_setting").removeClass('custom_hidden');
+                    $(".is_show").addClass('custom_hidden');
+                }else{
+                    $(".is_show_for_setting").addClass('custom_hidden');
+                }
+            });
+            $("body").delegate(".validate_textarea","click",function(){
+                var editor_value = editor.getValue();
+                var annot = editor.getSession().getAnnotations();
+                for (var key in annot){
+                    if (annot.hasOwnProperty(key)) {
+                        return editor.setStyle("set_border");
+                    }
+                }
+                if(!editor_value){
+                    return editor.setStyle("set_border");
+                }
+                return (
+                    $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+editor_value+"'>").submit()
+                );
+            });
+            $("body").delegate(".html_before_submit","click",function(){
+                var editor_value = editor_html.getValue();
+                var annot = editor_html.getSession().getAnnotations();
+                for (var key in annot){
+                    if (annot.hasOwnProperty(key) && annot[key].type !== 'info') {
+                        return editor_html.setStyle("set_border");
+                    }
+                }
+                if(!editor_value){
+                    return editor_html.setStyle("set_border");
+                }
+                return (
+                    $(".sub_html_tag").append("<input type='hidden' name='file_html' value='"+editor_value+"'>").submit()
+                );
+            });
+        });
+    </script>
+
     {!! HTML::script('public/js/bty.js?v='.rand(1111,9999)) !!}
 @stop

@@ -31,7 +31,7 @@
             </div>
 
 
-            <div class="form-comp col-md-12 is_show_for_setting">
+            <div class="form-comp col-md-12 custom_hidden is_show_for_setting">
                 {!! Form::open(['url'=>route('save_style_with_html_component'),'method' => 'get','class'=>'sub_html_tag']) !!}
                 <div class="col-md-7">
                     <div class="form-group">

@@ -33,7 +33,7 @@
             </div>
 
             <div class="panel-body template_body @if($page->content_type!='template') hide @endif">
-                {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
+                {!! BBbutton2('unit','template','studio_header',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
             </div>
         </div>
 

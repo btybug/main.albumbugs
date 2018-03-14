@@ -31,6 +31,7 @@
             {!! Html::style($path) !!}
         @endforeach
     @endif
+    {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$page->slug).'.css') !!}
     @yield('css')
     @stack('CSS')
 </head>
@@ -68,6 +69,7 @@
         </div>
     @endif
     @yield('content')
+
 <!-- jQuery first, then Bootstrap JS. -->
     @if(count($page->js))
         @foreach($page->js as $js)
@@ -80,13 +82,15 @@
     @if($page->js_type == 'cms' && count($page->js_type))
         @foreach($page->js_cms as $id)
             @php
-            $versionRepo = new \Btybug\Framework\Repository\VersionsRepository();
-            $version = $versionRepo->find($id);
-            $path = ($version->env =='local') ? "public/js/versions/" . $version->file_name : $version->file_name;
+                $versionRepo = new \Btybug\Framework\Repository\VersionsRepository();
+                $version = $versionRepo->find($id);
+                $path = ($version->env =='local') ? "public/js/versions/" . $version->file_name : $version->file_name;
             @endphp
             {!! Html::script($path) !!}
         @endforeach
     @endif
+    {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->slug).'.js') !!}
+
     @yield('js')
 </div>
 </body>

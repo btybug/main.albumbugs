@@ -219,7 +219,7 @@
                 var editor_value = editor.getValue();
                 var annot = editor.getSession().getAnnotations();
                 for (var key in annot){
-                    if (annot.hasOwnProperty(key)) {
+                    if (annot.hasOwnProperty(key) && annot[key].type === 'error') {
                         return editor.setStyle("set_border");
                     }
                 }
@@ -234,7 +234,7 @@
                 var editor_value = editor_html.getValue();
                 var annot = editor_html.getSession().getAnnotations();
                 for (var key in annot){
-                    if (annot.hasOwnProperty(key) && annot[key].type !== 'info') {
+                    if (annot.hasOwnProperty(key) && annot[key].type === 'error') {
                         return editor_html.setStyle("set_border");
                     }
                 }

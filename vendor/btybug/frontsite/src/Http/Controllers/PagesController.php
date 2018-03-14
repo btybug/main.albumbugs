@@ -259,10 +259,7 @@ class PagesController extends Controller
     {
         $new = $frontendPageService->addNewPage(null,$request->get('type'));
         event(new PageCreateEvent($new, $request->all()));
-
-        if ($new) return redirect()->back();
-
-        return redirect()->back()->with('message', 'Page not Created');
+        return redirect()->back();
     }
 
     public function getAddChild(

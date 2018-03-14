@@ -32,7 +32,7 @@
 
 
             <div class="form-comp col-md-12 custom_hidden is_show_for_setting">
-                {!! Form::open(['url'=>route('save_style_with_html'),'method' => 'get']) !!}
+                {!! Form::open(['url'=>route('save_style_with_html'),'method' => 'get','class'=>'sub_html_tag']) !!}
                 <div class="col-md-7">
                     <div class="form-group">
                         <div class="col-md-4">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-8">
                             <textarea name="" id="html_val" cols="30" rows="10" class="hidden">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
-                            <textarea name="file_html" id="editor_html" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea id="editor_html" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -59,7 +59,7 @@
                     @if($slug != "xl_large_text" && $slug != "l_text" && $slug != "m_text" && $slug != "s_text" && $slug != "xs_text" && $slug != "link_text" && $slug != "icons")
                         <button type="button" class="btn btn-danger pull-right btn-lg custom_margin_left delete_item_and_classes" data-name="{{$slug}}">Delete this item and its classes</button>
                     @endif
-                    <button class="btn btn-lg btn-success pull-right">Save</button>
+                    <button class="btn btn-lg btn-success pull-right html_before_submit" type="button">Save</button>
                 </div>
                 {!! Form::close() !!}
             </div>

@@ -65,10 +65,23 @@
             </div>
         @endif
         <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
-            <h5>class</h5>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#edit">Editor</a></li>
+                <li><a data-toggle="tab" href="#stud">Studio</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="edit" class="tab-pane fade in active">
+                    <textarea class='code_textarea form-control' id="editor" ></textarea>
+                </div>
+                <div id="stud" class="tab-pane fade">
+                    <h3>Area studio</h3>
+                </div>
+            </div>
+
             <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
             <div class="this_flex">
-                <textarea class='code_textarea form-control' id="editor" ></textarea>
                 <button class="btn btn-danger btn-md custom_cancel" type="button">Cancel</button>
                 <button class="btn btn-success btn-md validate_textarea" type="button" data-slug="{{$slug}}" data-class="{{isset($style) ? $style : ''}}">Save</button>
             </div>

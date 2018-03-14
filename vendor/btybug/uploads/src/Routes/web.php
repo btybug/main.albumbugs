@@ -116,6 +116,12 @@ Route::group(['prefix' => 'assets'], function () {
     Route::post('/delete', 'AssetsController@delete');
 });
 
+Route::group(['prefix' => 'profiles'], function () {
+    Route::get('/', 'AssetProfilesController@getIndex', true)->name('uploads_assets_profiles_index');
+    Route::get('/js', 'AssetProfilesController@getJs', true)->name('uploads_assets_profiles_js');
+    Route::get('/css', 'AssetProfilesController@getCss', true)->name('uploads_assets_profiles_css');
+});
+
 Route::group(['prefix' => 'market'], function ($router) {
     Route::get('/', 'MarketController@getIndex', true)->name('market_index');
     Route::get('/packages', 'MarketController@getPackages', true)->name('composer_market');

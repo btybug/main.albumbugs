@@ -69,6 +69,16 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/uploads/assets/fonts',
                 ]
             ],
+            'upload_profile' => [
+                [
+                    'title' => 'Js',
+                    'url' => '/admin/uploads/profile/js',
+                ],
+                [
+                    'title' => 'Css',
+                    'url' => '/admin/uploads/profile/css',
+                ]
+            ],
             'upload_modules' => [
                 [
                     'title' => 'Core Packages',
@@ -207,6 +217,22 @@ class ModuleServiceProvider extends ServiceProvider
                             'custom-link' => '/admin/uploads/assets/fonts'
                         ]
                     ]
+                ],
+                [
+                    "title" => "Profiles",
+                    "custom-link" => "/admin/uploads/profiles",
+                    "icon" => "fa fa-angle-right",
+                    'children' => [
+                        [
+                            "title" => "JS",
+                            "icon" => "fa fa-code",
+                            'custom-link' => '/admin/uploads/profiles/js'
+                        ], [
+                            "title" => "CSS",
+                            "icon" => "fa fa-css3",
+                            'custom-link' => '/admin/uploads/profiles/css'
+                        ]
+                    ]
                 ]
             ]]);
 
@@ -219,7 +245,7 @@ class ModuleServiceProvider extends ServiceProvider
             }
         }
         //TODO; remove when finish all
-        //   \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/uploads');
+           \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/uploads');
     }
 
     /**

@@ -85,16 +85,16 @@ class PhpJsonParser
     public static function getFoldersWithChildrens($path){
 
        $dirs = \File::directories($path);
-       if(count($dirs)){
            $arr = [];
+       if(count($dirs)){
            foreach ($dirs as $key => $dir){
                $name = explode(DS,$dir);
                $name = $name[count($name)-1];
                 $arr[$key]["dirname"] = $name;
                 $arr[$key]["children"] = \File::allFiles($dir);
            }
-           return $arr;
        }
+           return $arr;
     }
     public static function getFileByName($filename){
         $path = base_path('public'.DS.'dinamiccss');

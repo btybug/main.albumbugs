@@ -28,7 +28,7 @@
                             </span>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="panel-content collapse in" id="collapseOne_{{$index}}" aria-expanded="true">
+                        <div class="panel-content collapse" id="collapseOne_{{$index}}" aria-expanded="true">
                             <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
                                 @if(count($directory["children"]))
                                     @foreach($directory["children"] as $sub_group)
@@ -76,7 +76,7 @@
             </span>
             <div class="clearfix"></div>
         </div>
-        <div class="panel-content collapse in" id="collapseOne_{rand_str}" aria-expanded="true">
+        <div class="panel-content collapse" id="collapseOne_{rand_str}" aria-expanded="true">
             <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
 
             </ul>

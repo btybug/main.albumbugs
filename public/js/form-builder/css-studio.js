@@ -5,114 +5,6 @@ var unitArray = [
 ];
 
 var cssStudio = {
-    properties: [
-        {
-            title: 'Text',
-            fields: [
-                {
-                    title: 'Font Family',
-                    css: 'font-family',
-                    type: 'dropdown',
-                    options: [
-                        {
-                            value: 'tahoma',
-                            title: 'Tahoma'
-                        },
-                        {
-                            value: 'arial',
-                            title: 'Arial'
-                        }
-                    ]
-                },
-                {
-                    title: 'Font Weight',
-                    css: 'font-weight',
-                    type: 'dropdown',
-                    options: [
-                        {
-                            value: 'normal',
-                            title: 'Normal'
-                        },
-                        {
-                            value: 'bold',
-                            title: 'Bold'
-                        }
-                    ]
-                },
-                {
-                    title: 'Font Size',
-                    css: 'font-size',
-                    type: 'number',
-                    hasUnit: {
-                        type: 'toggle',
-                        options: unitArray
-                    }
-                },
-                {
-                    title: 'Text Color',
-                    css: 'color',
-                    type: 'color'
-                },
-                {
-                    title: 'Text Align',
-                    css: 'text-align',
-                    type: 'toggle',
-                    options: [
-                        {
-                            value: 'right',
-                            title: 'Right'
-                        },
-                        {
-                            value: 'center',
-                            title: 'Center'
-                        },
-                        {
-                            value: 'left',
-                            title: 'Left'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            title: 'Background',
-            fields: [
-                {
-                    title: 'Background Color',
-                    css: 'background-color',
-                    type: 'color'
-                }
-            ]
-        },
-        {
-            title: 'Padding',
-            fields: [
-                {
-                    title: 'Padding Top',
-                    css: 'padding-top',
-                    type: 'number',
-                    hasUnit: {
-                        type: 'toggle',
-                        options: unitArray
-                    }
-                }
-            ]
-        },
-        {
-            title: 'Sizing',
-            fields: [
-                {
-                    title: 'Width',
-                    css: 'width',
-                    type: 'number',
-                    hasUnit: {
-                        type: 'toggle',
-                        options: unitArray
-                    }
-                }
-            ]
-        }
-    ],
 
     // Load template
     loadTemplate: function loadTemplate(template) {
@@ -374,10 +266,30 @@ var cssStudio = {
         });
     },
 
+    // Extract selectors
+    selectors: [],
+    extractSelectors: function (selector, exclude) {
+        var $this = this;
+        selector.children().each(function () {
+            $this.selectors.push($(this));
+            console.log($(this).context);
+
+            if($(this).children().length > 0){
+                $this.extractSelectors($(this));
+            }
+        });
+
+        return this.selectors;
+    },
+
     // Init CSS Studio
-    init: function () {
+    init: function (selector, exclude) {
         var $this = this;
         this.getProperties();
+
+        // Extract selectors
+        var selectors = this.extractSelectors($(selector), exclude);
+        console.log(selectors);
 
         // Events
         $('#bb-css-studio')

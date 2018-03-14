@@ -40,9 +40,12 @@ $(document).ready(function () {
             $('.bbs-field-selectors>li').removeClass("active");
             $this.parent("li").addClass("active");
 
+            var selector = '.bbcc-form',
+                exclude = ['.col-*', '.row'];
+
             if ($('#studio-panel').length !== 0) {
                 // Init CSS studio
-                cssStudio.init();
+                cssStudio.init(selector, exclude);
                 return;
             }
 
@@ -52,7 +55,7 @@ $(document).ready(function () {
                 theme: 'primary',
                 boxShadow: 0,
                 position: 'right-bottom',
-                contentSize: '350 ' + ($(window).height() - 250),
+                contentSize: $(window).width() + ' 250',
                 dragit: {
                     snap: true
                 },
@@ -60,7 +63,7 @@ $(document).ready(function () {
                 content: '<div id="bb-css-studio" class="bb-css-studio"></div>',
                 callback: function () {
                     // Init CSS studio
-                    cssStudio.init();
+                    cssStudio.init(selector, exclude);
                 },
                 onclosed: function () {}
             });

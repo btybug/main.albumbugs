@@ -155,7 +155,7 @@
         <div class="row">
             <div class="col-md-12">
                 <button type="button" class="panel-trigger pull-right" bb-click="openFieldsWindow">Fields</button>
-                <button type="button" class="panel-trigger pull-right" bb-click="openSelectorsWindow"
+                <button type="button" class="panel-trigger pull-right" bb-click="openStudioWindow"
                         data-main="global">Styling
                 </button>
                 <button type="button" class="panel-trigger pull-right" bb-click="openLogicModal" data-toggle="modal"
@@ -486,9 +486,26 @@
     </script>
 
     <script type="template" id="bbt-editor-list">
-        <h4>Editing: {element}</h4>
-        <h3 class="active-selector">{selector}</h3>
-        <ul class="bbs-editor-list">{groups}</ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <ul class="bbs-field-selectors">
+                        <li data-selector="{mainSelector}">Main Container</li>
+                        <li data-selector="{containerSelector}">Field Container</li>
+                        <li data-selector="{labelSelector}">Field Label</li>
+                        <li data-selector="{iconSelector}">Field Icon</li>
+                        <li data-selector="{helpIconSelector}">Help Icon</li>
+                        <li data-selector="{helpPopupSelector}">Help Popup</li>
+                    </ul>
+                </div>
+                <div class="col-md-7">
+                    <ul class="bbs-editor-list">{groups}</ul>
+                </div>
+                <div class="col-md-3">
+                    {selectors}
+                </div>
+            </div>
+        </div>
     </script>
 
     <script type="template" id="bbt-properties-container">

@@ -5,18 +5,28 @@
             <a href="{!! url(route('uploads_assets_profiles_js')) !!}" class="btn btn-info pull-right">Back</a>
         </div>
         <div class="col-md-12">
-            {!! Form::model(null,['route' => route('uploads_assets_profiles_create_js_post')]) !!}
-                <div class="form-group">
-                    
+            <h2>Generate Js</h2>
+            {!! Form::model(null,['url' => route('uploads_assets_profiles_create_js_post')]) !!}
+            <div class="form-group">
+                {!! Form::label('name','Name') !!}
+                {!! Form::text('name',null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('files','Files') !!}
+                <div class="col-md-12">
+                    @if(count($plugins))
+                        @foreach( $plugins as $plugin)
+                           {{ $plugin->name }} {!! Form::checkbox('files[]',$plugin->id,null) !!}
+                        @endforeach
+                    @endif
                 </div>
-                <div class="form-group">
-
-                </div>
+            </div>
+            <div class="form-group">
+                {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
+            </div>
             {!! Form::close() !!}
         </div>
     </div>
-
-    @include('btybug::_partials.delete_modal')
 @stop
 
 @section('CSS')

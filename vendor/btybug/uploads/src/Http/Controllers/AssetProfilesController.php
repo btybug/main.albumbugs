@@ -13,6 +13,9 @@ namespace Btybug\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\helpers;
+use Btybug\Uploads\Repository\VersionProfilesRepository;
+use Btybug\Uploads\Services\VersionProfilesService;
+use Illuminate\Http\Request;
 use Btybug\Uploads\Repository\VersionsRepository;
 use Btybug\Uploads\Services\VersionsService;
 
@@ -46,21 +49,20 @@ class AssetProfilesController extends Controller
     }
 
     public function getJs(
-        VersionsRepository $versionsRepository,
-        VersionsService $versionsService
+        VersionProfilesRepository $versionsRepository,
+        VersionProfilesService $versionsService
     )
     {
-        $plugins = $versionsRepository->getJS();
-        $jquery = $versionsService->getJqueryVersions();
-
-        return view('uploads::profiles.js', compact(['plugins','jquery']));
+        $plugins = $versionsRepository->getAll();
+        return view('uploads::profiles.js', compact(['plugins']));
     }
 
     public function getCss(
-        VersionsRepository $versionsRepository
+        VersionProfilesRepository $versionsRepository,
+        VersionProfilesService $versionsService
     )
     {
-        $plugins = $versionsRepository->getCss();
+        $plugins = $versionsRepository->getAll();
         return view('uploads::profiles.css', compact(['plugins']));
     }
 
@@ -71,6 +73,18 @@ class AssetProfilesController extends Controller
     {
         $plugins = $versionsRepository->getJS();
         return view('uploads::profiles.create_js', compact(['plugins']));
+    }
+
+    public function postJsCreate (
+        Request $request
+    )
+    {
+        dd($request->all());
+    }
+
+    public function postCssCreate (Request $request)
+    {
+        dd($request->all());
     }
 
     public function getCssCreate(

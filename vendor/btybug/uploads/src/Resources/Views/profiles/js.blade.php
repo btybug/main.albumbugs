@@ -25,8 +25,8 @@
                             <td>No Files</td>
                             <td>
                                 <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-info update-live">Update</a>
-                                <a data-href="{!! url('admin/uploads/assets/delete') !!}"
-                                   data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
+                                <a data-href="{!! url('admin/uploads/profiles/delete') !!}"
+                                   data-key="{!! $item->id !!}" data-type="{{ $item->name }}"
                                    class="delete-button btn btn-danger"><i
                                             class="fa fa-trash-o f-s-14 "></i></a>
                             </td>

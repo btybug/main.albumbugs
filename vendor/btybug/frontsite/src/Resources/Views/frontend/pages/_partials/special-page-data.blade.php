@@ -48,21 +48,23 @@
                     <a href="javascript:void(0)" class="btn btn-primary add-new-css pull-right"><i
                                 class="fa fa-plus"></i></a>
                 </div>
-                @if(count($page->css))
-                    @foreach($page->css as $css)
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <label> Add Link </label>
+                <div class="column">
+                    @if(count($page->css))
+                        @foreach($page->css as $css)
+                            <div class="col-md-12 portlet">
+                                <div class="col-md-2 portlet-handle">
+                                    <label class="lbl"> Add Link </label>
+                                </div>
+                                <div class="col-md-6">
+                                    {!! Form::text('css[]',($css)?$css:'',['class' => 'form-control']) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="javascript:void(0)" class="external_delete btn btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                {!! Form::text('css[]',($css)?$css:'',['class' => 'form-control']) !!}
-                            </div>
-                            <div class="col-md-4">
-                                <a href="javascript:void(0)" class="external_delete btn btn-danger"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
+                        @endforeach
+                    @endif
+                </div>
             </div>
 
             <div class="panel-body css_cms {!! ($page->css_type != 'cms') ? 'hide' : ''  !!}">
@@ -83,22 +85,24 @@
                     <a href="javascript:void(0)" class="btn btn-primary add-new-js pull-right"><i
                                 class="fa fa-plus"></i></a>
                 </div>
+                <div class="column-js">
+                    @if(count($page->js))
+                        @foreach($page->js as $js)
+                            <div class="col-md-12 portlet-js">
+                                <div class="col-md-2 portlet-handle-js">
+                                    <label class="lbl"> Add Link </label>
+                                </div>
+                                <div class="col-md-6">
+                                    {!! Form::text('js[]',($js)?$js:'',['class' => 'form-control']) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="javascript:void(0)" class="external_delete btn btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
 
-                @if(count($page->js))
-                    @foreach($page->js as $js)
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <label> Add Link </label>
-                            </div>
-                            <div class="col-md-6">
-                                {!! Form::text('js[]',($js)?$js:'',['class' => 'form-control']) !!}
-                            </div>
-                            <div class="col-md-4">
-                                <a href="javascript:void(0)" class="external_delete btn btn-danger"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
             </div>
             <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
                 {!! Form::select('js_cms[]',$jsData,null,
@@ -206,9 +210,9 @@
 </div>
 
 <script type="template" id="js_tmp">
-    <div class="col-md-12">
-        <div class="col-md-2">
-            <label> Add Link </label>
+    <div class="col-md-12 portlet-js ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+        <div class="col-md-2 portlet-handle-js ui-widget-header ui-corner-all">
+            <label class="lbl"><span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span> Add Link </label>
         </div>
         <div class="col-md-6">
             {!! Form::text('js[]',null,['class' => 'form-control']) !!}
@@ -219,9 +223,9 @@
     </div>
 </script>
 <script type="template" id="css_tmp">
-    <div class="col-md-12">
-        <div class="col-md-2">
-            <label> Add Link </label>
+    <div class="col-md-12 portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+        <div class="col-md-2 portlet-handle ui-widget-header ui-corner-all">
+            <label class="lbl"><span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span> Add Link </label>
         </div>
         <div class="col-md-6">
             {!! Form::text('css[]',null,['class' => 'form-control']) !!}
@@ -251,9 +255,26 @@
         .page-name > div:nth-of-type(2) .page_labels {
             margin-top: 0;
         }
+        .ui-widget.ui-widget-content {
+            border: 2px dotted #b7b0b0;
+            padding: 10px;
+            margin: 5px;
+        }
+        .column, .column-js{
+            min-height: 100px;
+        }
+        .lbl{
+            height: 28px;
+            line-height: 30px;
+            cursor: move;
+        }
+        .portlet-handle,.portlet-handle-js {
+            cursor: move;
+        }
     </style>
 @stop
 @section('JS')
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
     {!! HTML::script('public/js/page-setting.js') !!}
     {!! HTML::script("public/js/UiElements/ui-preview-setting.js") !!}
@@ -266,6 +287,31 @@
             $('.select-dropdowns').select2({
                 placeholder: 'Select versions'
             });
+
+            $( ".column" ).sortable({
+                connectWith: ".column",
+                handle: ".portlet-handle",
+                placeholder: "portlet-placeholder ui-corner-all"
+            });
+
+            $( ".portlet" )
+                .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
+                .find( ".portlet-handle" )
+                .addClass( "ui-widget-header ui-corner-all" )
+                .prepend( "<span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span>");
+
+
+            $( ".column-js" ).sortable({
+                connectWith: ".column-js",
+                handle: ".portlet-handle-js",
+                placeholder: "portlet-placeholder-js ui-corner-all"
+            });
+
+            $( ".portlet-js" )
+                .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
+                .find( ".portlet-handle-js" )
+                .addClass( "ui-widget-header ui-corner-all" )
+                .prepend( "<span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span>");
 
             $('body').on('change', '.content_type_special', function () {
                 var value = $(this).val();
@@ -287,7 +333,8 @@
 
             $("body").on("click", ".add-new-js", function () {
                 var key = $('#js_tmp').html();
-                $(".js_external").append(key);
+                $(".column-js").append(key);
+                $( ".column-js" ).sortable( "refresh" );
             });
 
             $("body").on("click", ".external_delete", function () {
@@ -296,7 +343,8 @@
 
             $("body").on("click", ".add-new-css", function () {
                 var key = $('#css_tmp').html();
-                $(".css_external").append(key);
+                $(".column").append(key);
+                $( ".column" ).sortable( "refresh" );
             });
 
             $("body").on("click", ".view-placeholder", function () {

@@ -6,7 +6,8 @@
         </div>
         <div class="col-md-12">
             <h2>Generate Js</h2>
-            {!! Form::model(null,['url' => route('uploads_assets_profiles_create_js_post')]) !!}
+            {!! Form::model($model,['url' => route('uploads_assets_profiles_create_js_post')]) !!}
+            {!! Form::hidden('type','js') !!}
             <div class="form-group">
                 {!! Form::label('name','Name') !!}
                 {!! Form::text('name',null, ['class' => 'form-control']) !!}

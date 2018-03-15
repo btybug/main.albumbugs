@@ -53,7 +53,7 @@ class AssetProfilesController extends Controller
         VersionProfilesService $versionsService
     )
     {
-        $plugins = $versionsRepository->getAll();
+        $plugins = $versionsRepository->getBy('type','js');
         return view('uploads::profiles.js', compact(['plugins']));
     }
 
@@ -62,7 +62,7 @@ class AssetProfilesController extends Controller
         VersionProfilesService $versionsService
     )
     {
-        $plugins = $versionsRepository->getAll();
+        $plugins = $versionsRepository->getBy('type','css');
         return view('uploads::profiles.css', compact(['plugins']));
     }
 
@@ -71,8 +71,9 @@ class AssetProfilesController extends Controller
         VersionsService $versionsService
     )
     {
+        $model = null;
         $plugins = $versionsRepository->getJS();
-        return view('uploads::profiles.create_js', compact(['plugins']));
+        return view('uploads::profiles.create_js', compact(['plugins','model']));
     }
 
     public function postJsCreate (
@@ -106,6 +107,19 @@ class AssetProfilesController extends Controller
         $plugins = $versionsRepository->getCss();
 
         return view('uploads::profiles.create_css', compact(['plugins']));
+    }
+
+    public function getJsEdit(
+        $id,
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionsRepository $versionsRepository
+    )
+    {
+       $model = $profilesRepository->findOrFail($id);
+        $plugins = $versionsRepository->getJS();
+
+        return view('uploads::profiles.create_js', compact(['plugins','model']));
     }
 }
 

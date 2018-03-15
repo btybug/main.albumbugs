@@ -1962,9 +1962,9 @@ function getDinamicStyleDemo($filename)
     return $styles;
 }
 
-function getDinamicStyleForCssFileDemo($filename,$path)
+function getDinamicStyleForCssFileDemo($filename)
 {
-    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename,$path);
+    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename);
     return $styles;
 }
 

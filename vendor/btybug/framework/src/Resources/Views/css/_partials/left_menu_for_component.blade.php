@@ -127,8 +127,8 @@
             },
             success: function (data) {
                 if(data.dirname){
-                    var name = titleCase(data.dirname);
-                    template = template.replace("{dirname}",name).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{uniq_gr_name}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
+                   // var name = titleCase(data.dirname);
+                    template = template.replace("{dirname}",data.dirname).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{uniq_gr_name}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
                     return $(".body_append").append(template);
                 }
             },
@@ -175,34 +175,12 @@
             type: 'POST'
         });
     });
-    /*$("body").delegate(".remove_file","click",function(){
-        var filename = $(this).data("name");
-        var that = $(this);
-        var _token = $('input[name=_token]').val();
-        var url = base_path + "/admin/framework/css-classes/removefile";
-        $.ajax({
-            url: url,
-            data: {
-                filename:filename,
-                _token: _token
-            },
-            success: function (data) {
-                if(!data.error){
-                    that.parents("li.custom_padding_left_0").remove();
-                }
-            },
-            type: 'POST'
-        });
-    });*/
     $("body").delegate(".edit_folder_name","click",function(){
-        /*var val = $(this).data("dname");
-        alert(val);*/
         $(this).parent().prev().prev("a.accordion-toggle.colps").addClass('custom_hidden');
         return $(this).parent().prev(".changeable_group_name").removeClass("custom_hidden");
     });
     $("body").delegate(".go_to_save","click",function(){
         var new_name = $(this).prev().val();
-        // var old_name = $(this).parent().next().children("button.edit_folder_name").data("dname");
         var old_name = $(this).parent().prev().children("span.get_original_name").text();
         var that = $(this);
         var _token = $('input[name=_token]').val();

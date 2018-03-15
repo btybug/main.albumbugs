@@ -1,6 +1,6 @@
 <?php
 $path = base_path('public'.DS.'components');
-$data = getDinamicStyleForCssFileDemo($slug,$path);
+$data = getDinamicStyleForCssFileDemo($slug);
 $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 ?>
 <style>
@@ -12,7 +12,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 @if($file)
     {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'components') !!}
 @endif
-<input type="hidden" value="{{json_encode(getDinamicStyleForCssFileDemo($slug,$path),true)}}" class="get_data">
+<textarea class="hidden get_data">{{json_encode($data->styles,true)}}</textarea>
 
 <div class="col-md-12 append_here">
 
@@ -21,34 +21,22 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 <div class="just_html"></div>
 @if(count($data))
     <script type="template" id="get_for_append">
-        @foreach($data as $index => $style)
+        @foreach($data->styles as $index => $style)
         @if($style)
         <div class="class_for_delete">
-            <div class="col-md-3"><h5>{{explode("{",$style)[0]}}</h5></div>
+            <div class="col-md-3"><h5>{{$style->classname}}</h5></div>
             <div class="col-md-6">
-                @if(isset($style_from_db->html))
+                @if(isset($data->html))
                     <div class="col-md-12 parent">
-                        {!! $style_from_db->html !!}
+                        {!! $data->html !!}
                     </div>
                 @endif
             </div>
             <div class="col-md-3">
-                <button class="btn btn-success btn-md show_in_just_html" data-class="{{$style}}">Show</button>
-                <button class="btn btn-warning btn-md show_in_just_html_for_edit" data-slug="{{$slug}}" data-class="{{$style}}">Edit</button>
-                <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">delete</button>
+                <button class="btn btn-success btn-md show_in_just_html" data-class="{{$style->styles}}">Show</button>
+                <button class="btn btn-warning btn-md show_in_just_html_for_edit" data-id="{{$style->id}}" data-classname="{{$style->classname}}" data-slug="{{$slug}}" data-class="{{$style->styles}}">Edit</button>
+                <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-id="{{$style->id}}">delete</button>
             </div>
-            {{--@if(isset($style_from_db->html))
-                <div class="col-md-4 parent">
-                    {!! $style_from_db->html !!}
-                </div>
-            @endif
-            <div class="{{isset($style_from_db->html) ? 'col-md-8' : 'col-md-12'}}">
-                <h5>{{explode("{",$style)[0]}}</h5>
-                <div class="this_flex">
-                    <textarea class='code_textarea form-control' id="textarea_{{$index}}">{{ $style."}" }}</textarea>
-                    <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-class="{{$style}}">delete</button>
-                </div>
-            </div>--}}
             <div class="clearfix"></div>
             <div class="just_for_edit"></div>
         </div>
@@ -104,9 +92,10 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         <div class="col-md-3">
             <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
             <div class="this_flex">
-                <input type="hidden" name="original_style" value="{repl_original}">
-                <textarea class='code_textarea form-control' id="textarea_editor_for_save" ></textarea>
-                <button class="btn btn-success btn-md check_and_submit" type="button" data-slug="{repl_slug}" data-class="{repl_style}">Save</button>
+
+                <textarea class='code_textarea form-control' id="textarea_editor_for_save"></textarea>
+
+                <button class="btn btn-success btn-md check_and_submit" data-id="{repl_id}" type="button" data-slug="{repl_slug}">Save</button>
             </div>
         </div>
     </div>
@@ -115,24 +104,20 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 <script>
     $(document).ready(function(){
         var textarea_editor_for_save = {};
+        var data = JSON.parse($(".get_data").text());
         var html = $("#get_for_append").html();
         $(".append_here").html(html);
-        var data = JSON.parse($(".get_data").val());
         if(html){
-            var childs = $(".append_here").children("div.class_for_delete").children().children("div.parent").children();
-            if(childs.length){
-                childs.map(function(index,item){
-                    var class_name = data[index].split("{")[0];
-                    class_name = class_name.split(".")[1];
-                    return $(item).addClass(class_name);
-                });
-            }
+            $('[class="{your_class_name}"]').each(function(index,elem){
+                var class_name = data[index].classname;
+                return $(elem).attr("class",class_name);
+            });
+           // var childs = $(".append_here").children("div.class_for_delete").children().children("div.parent").children();
         }
 
         $("body").delegate(".remove_this_class","click",function () {
             var slug = $(this).data("slug");
-            var class_name = $(this).data("class");
-            class_name = class_name + "}";
+            var id = $(this).data("id");
             var _token = $('input[name=_token]').val();
             var that = $(this);
             var url = base_path + "/admin/framework/component/removeclass";
@@ -140,7 +125,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
                 url: url,
                 data: {
                     slug:slug,
-                    class_name:class_name,
+                    id:id,
                     _token: _token
                 },
                 success: function (data) {
@@ -155,25 +140,25 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         $("body").delegate(".show_in_just_html","click",function(){
             var content = $(this).data("class");
             $("div.just_for_edit").html("");
-            $(this).parents("div.class_for_delete").children("div.just_for_edit").html("<div class='bordered'>" + content + "}" + "</div><div class='clearfix'></div>");
+            $(this).parents("div.class_for_delete").children("div.just_for_edit").html("<div class='bordered'>" + content + "</div><div class='clearfix'></div>");
         });
 
         $("body").delegate(".show_in_just_html_for_edit","click",function(){
             var style = $(this).data("class");
             var slug = $(this).data("slug");
+            var id = $(this).data("id");
 
-            var class_name = style.split("{")[0];
-            class_name = class_name.split(".")[1];
+            var class_name = $(this).data("classname");
 
             var content = $("#send_form_for_edit").html();
-            content = content.replace("{repl_classname}","." + class_name).replace("{repl_style}",style + "}").replace("{repl_slug}",slug).replace("{repl_original}",style + "}");
+            content = content.replace("{repl_classname}",class_name).replace("{repl_id}",id).replace("{repl_slug}",slug).replace("{repl_original}",style);
             $("div.just_for_edit").html("");
             $(this).parents("div.class_for_delete").children("div.just_for_edit").html(content).find("div.parent").children().addClass(class_name);
 
             textarea_editor_for_save = ace.edit("textarea_editor_for_save");
             textarea_editor_for_save.setTheme("ace/theme/monokai");
             textarea_editor_for_save.session.setMode("ace/mode/css");
-            textarea_editor_for_save.setValue(style + "}");
+            textarea_editor_for_save.setValue(style);
             textarea_editor_for_save.on("focus", function(){
                 textarea_editor_for_save.unsetStyle("set_border");
             });
@@ -181,8 +166,9 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         $("body").delegate(".check_and_submit","click",function(){
             var editor_value = textarea_editor_for_save.getValue();
             var annot = textarea_editor_for_save.getSession().getAnnotations();
+            var id = $(this).data("id");
             for (var key in annot){
-                if (annot.hasOwnProperty(key)) {
+                if (annot.hasOwnProperty(key) && annot[key].type === 'error') {
                     return textarea_editor_for_save.setStyle("set_border");
                 }
             }
@@ -190,7 +176,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
                 return textarea_editor_for_save.setStyle("set_border");
             }
             return (
-                $(".submit_form_for_style_edit").append("<input type='hidden' name='changed_style' value='"+editor_value+"'>").submit()
+                $(".submit_form_for_style_edit").append("<input type='hidden' name='style_id' value='"+id+"'><textarea class='hidden' name='changed_style'>"+editor_value+"</textarea>").submit()
             );
         });
         $("body").delegate(".custom_cancel","click",function(){

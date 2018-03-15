@@ -8,6 +8,7 @@ namespace Btybug\Framework\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PhpJsonParser;
 use Btybug\Framework\Models\TableCss;
+use Btybug\Framework\Models\TableStyles;
 use Illuminate\Http\Request;
 use Btybug\Framework\Repository\VersionsRepository;
 use Btybug\Framework\Services\SettingsService;
@@ -30,12 +31,17 @@ class CssController extends Controller
         $path = base_path('public'.DS.'dinamiccss');
         $type = $request->type;
         $full_style = $request->full_style;
-        $file = PhpJsonParser::getFileByName($type,$path);
-        if(!$file){
-            return redirect()->back()->with("error","File does not exists");
+        $general_name = explode(".",explode("<",explode(" ",explode("{",$full_style)[0])[0])[0])[1];
+        $table_css = TableCss::getByName($type);
+        if(!$table_css){
+            abort(404);
         }
-        if($full_style){
-            \File::append($file->getPathname(), $full_style);
+        $new_style = new TableStyles();
+        $new_style->table_css_id = $table_css->id;
+        $new_style->classname = $general_name;
+        $new_style->styles = $full_style;
+        if($new_style->save()){
+            $generated = PhpJsonParser::generateCssFile($path,$type);
         }
         return redirect()->back()->with("success","Style was saved successfully");
     }
@@ -43,18 +49,14 @@ class CssController extends Controller
         $path = base_path('public'.DS.'dinamiccss');
         $type = $request->type;
         $changed_style = $request->changed_style;
-        $original_style = $request->original_style;
-        $file = PhpJsonParser::getFileByName($type,$path);
-        if(!$file){
-            return redirect()->back()->with("error","File does not exists");
-        }
-        if($original_style){
-            $content = \File::get($file->getPathname(),true);
-            $content = preg_replace("/(\r)+/", "", $content);
-            $original_style = preg_replace("/(\r)+/", "", $original_style);
-            $changed_style = preg_replace("/(\r)+/", "", $changed_style);
-            $content = str_replace($original_style,$changed_style,$content);
-            \File::put($file->getPathname(),$content);
+        $id = $request->style_id;
+
+        $table_styles = TableStyles::where("id",$id)->update([
+            "styles" => json_encode($changed_style)
+        ]);
+
+        if($table_styles){
+            PhpJsonParser::generateCssFile($path,$type);
             return redirect()->back()->with("success","Style was saved successfully");
         }
         return redirect()->back()->with("error","Something went wrong");
@@ -141,13 +143,11 @@ class CssController extends Controller
     public function removeClass(Request $request){
         $path = base_path('public'.DS.'dinamiccss');
         $slug = $request->slug;
-        $classname = $request->class_name;
-        $file = PhpJsonParser::getFileByName($slug,$path);
-        if($file){
-            $content = \File::get($file->getPathname(),true);
-            $content = preg_replace("/(\r)+/", "", $content);
-            $content = str_replace($classname,'',$content);
-            \File::put($file->getPathname(),$content);
+        $id = $request->id;
+
+        $deleted = TableStyles::where("id",$id)->delete();
+        if($deleted){
+            PhpJsonParser::generateCssFile($path,$slug);
             return response()->json(["error"=>0]);
         }
         return response()->json(["error"=>1]);
@@ -178,12 +178,17 @@ class CssController extends Controller
         $path = base_path('public'.DS.'components');
         $type = $request->type;
         $full_style = $request->full_style;
-        $file = PhpJsonParser::getFileByName($type,$path);
-        if(!$file){
-            return redirect()->back()->with("error","File does not exists");
+        $general_name = explode(".",explode("<",explode(" ",explode("{",$full_style)[0])[0])[0])[1];
+        $table_css = TableCss::getByName($type);
+        if(!$table_css){
+            abort(404);
         }
-        if($full_style){
-            \File::append($file->getPathname(), $full_style);
+        $new_style = new TableStyles();
+        $new_style->table_css_id = $table_css->id;
+        $new_style->classname = $general_name;
+        $new_style->styles = $full_style;
+        if($new_style->save()){
+            $generated = PhpJsonParser::generateCssFile($path,$type);
         }
         return redirect()->back()->with("success","Style was saved successfully");
     }
@@ -262,14 +267,11 @@ class CssController extends Controller
     public function removeClassComponent(Request $request){
         $path = base_path('public'.DS.'components');
         $slug = $request->slug;
-        $classname = $request->class_name;
-        $file = PhpJsonParser::getFileByName($slug,$path);
-        if($file){
-            $content = \File::get($file->getPathname(),true);
-            $content = preg_replace("/(\r)+/", "", $content);
-            $content = str_replace($classname,'',$content);
+        $id = $request->id;
 
-            \File::put($file->getPathname(),$content);
+        $deleted = TableStyles::where("id",$id)->delete();
+        if($deleted){
+            PhpJsonParser::generateCssFile($path,$slug);
             return response()->json(["error"=>0]);
         }
         return response()->json(["error"=>1]);
@@ -278,18 +280,14 @@ class CssController extends Controller
         $path = base_path('public'.DS.'components');
         $type = $request->type;
         $changed_style = $request->changed_style;
-        $original_style = $request->original_style;
-        $file = PhpJsonParser::getFileByName($type,$path);
-        if(!$file){
-            return redirect()->back()->with("error","File does not exists");
-        }
-        if($original_style){
-            $content = \File::get($file->getPathname(),true);
-            $content = preg_replace("/(\r)+/", "", $content);
-            $original_style = preg_replace("/(\r)+/", "", $original_style);
-            $changed_style = preg_replace("/(\r)+/", "", $changed_style);
-            $content = str_replace($original_style,$changed_style,$content);
-            \File::put($file->getPathname(),$content);
+        $id = $request->style_id;
+
+        $table_styles = TableStyles::where("id",$id)->update([
+            "styles" => json_encode($changed_style)
+        ]);
+
+        if($table_styles){
+            PhpJsonParser::generateCssFile($path,$type);
             return redirect()->back()->with("success","Style was saved successfully");
         }
         return redirect()->back()->with("error","Something went wrong");

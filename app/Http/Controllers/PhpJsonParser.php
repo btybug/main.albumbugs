@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 
+use Btybug\Framework\Models\TableCss;
+
 class PhpJsonParser
 {
    public static function getClasses($path){
@@ -55,24 +57,8 @@ class PhpJsonParser
 
        return $html;
    }
-
-    public static function getClassesCssFileDemo($filename,$path){
-        $file = self::getFileByName($filename,$path);
-        if(!$file){
-            return null;
-        }
-        $file = \File::get($file->getPathname());
-       // preg_match_all('/\.[a-z_-][\w-:]*(?=[^{}]*{[^{}]*})/', $file, $matches);
-       // preg_match_all('/(\{)(?<=\{)(.*?)(?=\})/s', $file, $match);
-
-       // preg_match_all('/(?<=\.)((?!:hover)\w+)(?=.{)/', $file, $matches);
-      //  preg_match_all('/(?<!:hover\{)(?<=\{)(.*?)(?=\})/s', $file, $match);
-       /* $html = [];
-        if(count($matches[0])){
-            $html["data"] = $matches[0];
-            $html["codes"] = $match[0];
-        }*/
-       $file = explode("}",$file);
+    public static function getClassesCssFileDemo($filename){
+        $file = TableCss::where("slug",$filename)->with("styles")->first();
         return $file;
     }
     public static function renderHtmlForDemo($data,$codes){
@@ -109,6 +95,7 @@ class PhpJsonParser
                     }
                 }
             }
+            return null;
         }
     }
     public static function renameFolder($old_name,$new_name,$path){
@@ -138,6 +125,21 @@ class PhpJsonParser
         }
         $name = implode('_',$name);
         return $name;
+    }
+    public static function generateCssFile($path,$type){
+       $file = self::getFileByName($type,$path);
+       $data =  TableCss::where("slug",$type)->with("styles")->first();
+       $styles = $data->styles;
+        $str = "";
+        if(count($styles)){
+            foreach ($styles as $style){
+                $str .= $style->styles;
+            }
+        }
+       if($file){
+           return \File::put($file->getPathname(),$str);
+       }
+       return null;
     }
 
 }

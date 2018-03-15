@@ -23,6 +23,9 @@ Route::group(['prefix' => 'css'], function () {
     Route::get('/changetablecss', function(){
         \Btybug\Framework\Database\ChangeFieldTableCssTable::up();
     });
+    Route::get('/createtablestyles', function(){
+        \Btybug\Framework\Database\CreateTableStyles::up();
+    });
 });
 Route::group(['prefix' => 'css-classes'], function () {
     Route::post('/createfolder', 'CssController@createFolder')->name('create_folder');

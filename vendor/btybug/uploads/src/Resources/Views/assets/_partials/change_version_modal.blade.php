@@ -22,7 +22,7 @@
                 var id = $(this).data('id');
                 $.ajax({
                     type: "post",
-                    url: "{!! url('/admin/framework/get-versions') !!}",
+                    url: "{!! url('/admin/uploads/assets/get-versions') !!}",
                     cache: false,
                     datatype: "json",
                     data: {

@@ -52,7 +52,7 @@
     </div>
 
     @include('btybug::_partials.delete_modal')
-    @include('framework::versions._partials.upload_js_modal')
+    @include('uploads::versions._partials.upload_js_modal')
 @stop
 
 @section('CSS')
@@ -65,7 +65,7 @@
                 var section = $(this).data('section');
                 $.ajax({
                     type: "post",
-                    url: "{!! url('/admin/framework/get-active-versions') !!}",
+                    url: "{!! url('/admin/uploads/assets/get-active-versions') !!}",
                     cache: false,
                     datatype: "json",
                     data: {

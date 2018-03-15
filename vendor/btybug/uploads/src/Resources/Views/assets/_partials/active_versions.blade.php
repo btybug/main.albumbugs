@@ -1,6 +1,6 @@
 <div class="col-md-12">
     @if(count($data))
-        {!! Form::open(['url' => 'admin/framework/generate-main-js']) !!}
+        {!! Form::open(['url' => 'admin/uploads/assets/generate-main-js']) !!}
         {!! Form::hidden('section',$section,['id' => 'jsSection']) !!}
         @foreach($data as $key => $item)
             <label class="col-md-3 version-item-box">

@@ -1,6 +1,6 @@
 <div class="col-md-12">
     @if(count($data))
-        {!! Form::open(['url' => 'admin/framework/change-version']) !!}
+        {!! Form::open(['url' => 'admin/uploads/assets/change-version']) !!}
         @foreach($data as $key => $item)
             <label class="col-md-3 version-item-box">
                 {!! $item->version !!}

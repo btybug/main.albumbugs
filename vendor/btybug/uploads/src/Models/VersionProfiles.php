@@ -28,6 +28,10 @@ class VersionProfiles extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
+    protected $casts = [
+        'files' => 'json'
+    ];
+
     public function user()
     {
         return $this->belongsTo('Btybug\User\User', 'user_id', 'id');

@@ -5,6 +5,7 @@ namespace Btybug\Uploads\Services;
 use Btybug\btybug\Services\GeneralService;
 use Btybug\Framework\Repository\VersionsRepository;
 use Btybug\btybug\Repositories\AdminsettingRepository;
+use Btybug\Uploads\Repository\VersionProfilesRepository;
 
 /**
  * Class ThemeService
@@ -19,172 +20,53 @@ class VersionProfilesService extends GeneralService
     private $current;
     private $versionsRepository;
     private $adminsettingRepository;
+    private $versionServiceRepository;
     /**
      * @var
      */
     private $result;
 
-    public function __construct(VersionsRepository $versionsRepository, AdminsettingRepository $adminsettingRepository)
+    public function __construct(VersionsRepository $versionsRepository, AdminsettingRepository $adminsettingRepository, VersionProfilesRepository $profilesRepository)
     {
         $this->versionsRepository = $versionsRepository;
         $this->adminsettingRepository = $adminsettingRepository;
+        $this->versionServiceRepository = $profilesRepository;
     }
 
-    public function makeVersion($request)
+    public function generateJS($profile)
     {
-        if($request->get("env") == "link"){
-            $this->versionsRepository->create([
-                'name' => $request->get('name'),
-                'type' => $request->get('type'),
-                'version' => $request->get('version'),
-                'file_name' => $request->get('link'),
-                'author_id' => \Auth::id(),
-                'env' => 1,
-                'active' => 1
-            ]);
-        }else{
-            $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
-            $oname = $request->file('file')->getClientOriginalName(); // getting image extension
-            $fname = uniqid() . '.' . $this->exstension;
-            $request->file('file')->move(public_path($request->type . '/versions/' . $request->get('name') . '/' . $request->get('version')), $fname);
-
-            $this->versionsRepository->create([
-                'name' => $request->get('name'),
-                'type' => $request->get('type'),
-                'version' => $request->get('version'),
-                'file_name' => $fname,
-                'author_id' => \Auth::id(),
-                'active' => 1,
-                'env' => 0,
-                'content' => md5(public_path($request->type . '/versions/' . $request->get('name') . '/' . $request->get('version')))
-            ]);
-        }
+        $this->synchronize($profile,'js');
     }
 
-    public function updateVersion($request)
+    public function generateCSS($profile)
     {
-        $version = $this->versionsRepository->find($request->get('parent_id'));
-
-        $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
-        $oname = $request->file('file')->getClientOriginalName(); // getting image extension
-        $fname = uniqid() . '.' . $this->exstension;
-        $request->file('file')->move(public_path($version->type . '/versions/' . $version->name . '/' . $request->get('version')), $fname);
-
-        $this->versionsRepository->create([
-            'name' => $version->name,
-            'type' => $version->type,
-            'version' => $request->get('version'),
-            'file_name' => $fname,
-            'author_id' => \Auth::id(),
-            'content' => md5(public_path($request->type . '/versions/' . $version->name . '/' . $request->get('version')))
-        ]);
+        $this->synchronize($profile);
     }
 
-
-
-    public function generateJS($data)
-    {
-        $response = $this->versionsRepository->model()->where('id', $data['id'])->where('type', 'js')->first();
-        if($response){
-            $this->versionsRepository->updateWhere($data['id'], '=', [$data['name'] => $data['value']]);
-            $this->synchronize($data['name']);
-        }
-    }
-
-    private function synchronize($section = "is_generated"){
-        $generatingData =  $this->versionsRepository->getLocalData($section);
-        dd($generatingData);
-        $js = "";
+    private function synchronize($profile,$type = 'css'){
+        $generatingData =  $profile->files;
+        $file_data = "";
         if(count($generatingData)){
-            foreach ($generatingData as $key => $val) {
-                if (\File::exists(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
-                    $js .= \File::get(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
-                }
-            }
-        }
-        $section = ($section == 'is_generated') ? 'back' : 'front';
-        $this->MakeMainJS($section, $js);
-    }
-
-    public function MakeMainJS($section, $data)
-    {
-        \File::put(public_path("js/" . $section . ".js"), $data);
-    }
-
-    public function makeCss($request)
-    {
-        if($request->get("env") == "link"){
-            $this->versionsRepository->create([
-                'name' => $request->get('name'),
-                'type' => $request->get('type'),
-                'version' => $request->get('version'),
-                'file_name' => $request->get('link'),
-                'author_id' => \Auth::id(),
-                'env' => 1,
-                'active' => 1
-            ]);
-        }else{
-            $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
-            $oname = $request->file('file')->getClientOriginalName(); // getting image extension
-            $fname = uniqid() . '.' . $this->exstension;
-            $request->file('file')->move(public_path('css/versions'), $fname);
-
-            $this->versionsRepository->create([
-                'name' => $request->get('name'),
-                'type' => "css",
-                'version' => $request->get('version'),
-                'file_name' => $fname,
-                'author_id' => \Auth::id(),
-                'active' => 0,
-                'env' => 0,
-                'content' => md5(public_path('css/versions'))
-            ]);
-        }
-    }
-
-    public function updateLink($request)
-    {
-        $response = $this->versionsRepository->find($request['id']);
-        if($response){
-            $response->update(['file_name' => $request['link']]);
-        }
-    }
-
-    public function delete($item)
-    {
-        if($item->env == 'local'){
-            $data = $this->versionsRepository->getBy('name',$item->name);
-            if(count($data)){
-                foreach ($data as $val){
-                    if (\File::exists(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
-                        unlink(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
+            foreach ($generatingData as $key => $id) {
+                $val = $this->versionsRepository->find($id);
+                if($val){
+                    if (\File::exists(public_path($type."/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
+                        $file_data .= \File::get(public_path($type."/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
                     }
-                    $this->versionsRepository->delete($val->id);
-                }
-                if($item->type == "js"){
-                    $this->synchronize();
-                    $this->synchronize("is_generated_front");
                 }
             }
-        }else{
-            return $this->versionsRepository->delete($item->id);
         }
+        $file = $type."/profiles/" . str_slug($profile->name) . ".".$type;
+        $this->versionServiceRepository->update($profile->id,['hint_path' => $file]);
+        $this->MakeFile($file, $file_data,$type);
     }
 
-    public function getJqueryVersions()
+    public function MakeFile($file, $data , $type)
     {
-        $data = [];
-        $result = $this->versionsRepository->getJQuery();
-        if(count($result)){
-            foreach ($result as $item){
-                if($item->is_generated){
-                    $data["backend_jquery"] = $item;
-                }elseif($item->is_generated_front){
-                    $data["frontend_jquery"] = $item;
-                }
-            }
+        if(! \File::isDirectory(public_path($type."/profiles"))) {
+            \File::makeDirectory(public_path($type."/profiles"));
         }
 
-        return $data;
+        \File::put(public_path($file), $data);
     }
 }

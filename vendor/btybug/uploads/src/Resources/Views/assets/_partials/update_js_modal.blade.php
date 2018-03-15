@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    {!! Form::open(["url" => "admin/framework/upload-version",'class' => 'form-horizontal','files' => true]) !!}
+                    {!! Form::open(["url" => "admin/uploads/assets/upload-version",'class' => 'form-horizontal','files' => true]) !!}
                     {!! Form::hidden('parent_id',null,['id' => 'parentVersionID']) !!}
                     {!! Form::hidden('type','js',['id' => 'version-data-type']) !!}
                     <div>

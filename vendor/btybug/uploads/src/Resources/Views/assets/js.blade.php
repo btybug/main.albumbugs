@@ -128,7 +128,7 @@
                 var value = this.checked ? 1 : 0;
                 $.ajax({
                     type: "post",
-                    url: "{!! url('/admin/framework/generate-main-js') !!}",
+                    url: "{!! url('/admin/uploads/assets/generate-main-js') !!}",
                     cache: false,
                     datatype: "json",
                     data: {

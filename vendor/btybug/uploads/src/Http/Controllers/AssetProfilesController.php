@@ -76,15 +76,26 @@ class AssetProfilesController extends Controller
     }
 
     public function postJsCreate (
-        Request $request
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionProfilesService $profilesService
     )
     {
-        dd($request->all());
+        $profile = $profilesRepository->create($request->except('_token') + ['user_id' => \Auth::id()]);
+        $profilesService->generateJS($profile);
+
+        return redirect()->route('uploads_assets_profiles_js');
     }
 
-    public function postCssCreate (Request $request)
+    public function postCssCreate (
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionProfilesService $profilesService
+    )
     {
-        dd($request->all());
+        $profile = $profilesRepository->create($request->except('_token') + ['user_id' => \Auth::id()]);
+        $profilesService->generateCSS($profile);
+        return redirect()->route('uploads_assets_profiles_css');
     }
 
     public function getCssCreate(

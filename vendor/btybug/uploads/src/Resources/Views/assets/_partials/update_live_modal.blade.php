@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    {!! Form::open(["url" => "admin/framework/update-link",'class' => 'form-horizontal','files' => true]) !!}
+                    {!! Form::open(["url" => "admin/uploads/assets/update-link",'class' => 'form-horizontal','files' => true]) !!}
                     {!! Form::hidden('id',null,['id' => 'live-id']) !!}
                     <div>
                         <label for="username">Link</label>

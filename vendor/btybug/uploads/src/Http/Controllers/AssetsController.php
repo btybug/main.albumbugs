@@ -13,8 +13,15 @@ namespace Btybug\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\helpers;
+use Btybug\Framework\Http\Requests\ChangeVersionRequest;
+use Btybug\Framework\Http\Requests\GenerateJSRequest;
+use Btybug\Framework\Http\Requests\MakeActiveVersionRequest;
+use Btybug\Framework\Http\Requests\UpdateJsRequest;
+use Btybug\Framework\Http\Requests\UploadCssRequest;
+use Btybug\Framework\Http\Requests\UploadJsRequest;
 use Btybug\Uploads\Repository\VersionsRepository;
 use Btybug\Uploads\Services\VersionsService;
+use Illuminate\Http\Request;
 
 /**
  * Class ModulesController
@@ -103,7 +110,7 @@ class AssetsController extends Controller
             $data = $versionsRepository->getByExcept('name', $request->get('name'), 'id', $request->get('id'));
         }
 
-        $html = view('framework::versions._partials.versions', compact(['data']))->render();
+        $html = view('uploads::assets._partials.versions', compact(['data']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -115,7 +122,7 @@ class AssetsController extends Controller
     {
         $data = $versionsRepository->getByExcept('type', "js", 'active', 0);
         $section = $request->get('section');
-        $html = view('framework::versions._partials.active_versions', compact(['data', 'section']))->render();
+        $html = view('uploads::assets._partials.active_versions', compact(['data', 'section']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -193,7 +200,7 @@ class AssetsController extends Controller
     {
         $data = $versionsRepository->findOrFail($request->get('slug'));
         $response = $versionsService->delete($data);
-        return \Response::json(['success' => true, 'url' => url('/admin/framework/js')]);
+        return \Response::json(['success' => true, 'url' => url('/admin/uploads/assets/js')]);
     }
 }
 

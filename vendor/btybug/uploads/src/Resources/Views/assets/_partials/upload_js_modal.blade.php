@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    {!! Form::open(["url" => "admin/framework",'class' => 'form-horizontal','files' => true]) !!}
+                    {!! Form::open(["url" => "admin/uploads/assets",'class' => 'form-horizontal','files' => true]) !!}
                     {!! Form::hidden('type','js') !!}
                     <div>
                         <label for="username">Name</label>

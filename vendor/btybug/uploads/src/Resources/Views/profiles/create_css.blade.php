@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-12">
             <h2>Generate Css</h2>
-            {!! Form::model(null,['url' => route('uploads_assets_profiles_create_css_post')]) !!}
+            {!! Form::model($model,[]) !!}
             {!! Form::hidden('type','css') !!}
 
             <div class="form-group">

@@ -34,7 +34,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td rowspan="5">No js profiles</td>
+                        <td colspan="4">No js profiles</td>
                     </tr>
                 @endif
                 </tbody>

@@ -29,12 +29,7 @@ class AssetProfilesController extends Controller
      * @var helpers
      */
     public $helper;
-    /**
-     * ModulesController constructor.
-     * @param Module $module
-     * @param Upload $upload
-     * @param validateUpl $v
-     */
+
     public function __construct()
     {
         $this->helper = new helpers();
@@ -104,9 +99,10 @@ class AssetProfilesController extends Controller
         VersionsService $versionsService
     )
     {
+        $model = null;
         $plugins = $versionsRepository->getCss();
 
-        return view('uploads::profiles.create_css', compact(['plugins']));
+        return view('uploads::profiles.create_css', compact(['plugins','model']));
     }
 
     public function getJsEdit(
@@ -120,6 +116,61 @@ class AssetProfilesController extends Controller
         $plugins = $versionsRepository->getJS();
 
         return view('uploads::profiles.create_js', compact(['plugins','model']));
+    }
+
+    public function getCssEdit(
+        $id,
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionsRepository $versionsRepository
+    )
+    {
+        $model = $profilesRepository->findOrFail($id);
+        $plugins = $versionsRepository->getCss();
+
+        return view('uploads::profiles.create_css', compact(['plugins','model']));
+    }
+
+    public function postCssEdit(
+        $id,
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionProfilesService $profilesService
+    )
+    {
+        $model = $profilesRepository->findOrFail($id);
+        $profilesService->removeFile($model->hint_path);
+        $updated = $profilesRepository->update($id,$request->except('_token'));
+        $profilesService->generateCSS($updated);
+
+        return redirect()->route('uploads_assets_profiles_css');
+    }
+
+    public function postJsEdit(
+        $id,
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionProfilesService $profilesService
+    )
+    {
+        $model = $profilesRepository->findOrFail($id);
+        $profilesService->removeFile($model->hint_path);
+        $updated = $profilesRepository->update($id,$request->except('_token'));
+        $profilesService->generateJS($updated);
+
+        return redirect()->route('uploads_assets_profiles_js');
+    }
+
+    public function delete(
+        Request $request,
+        VersionProfilesRepository $profilesRepository,
+        VersionProfilesService $profilesService
+    )
+    {
+        $data = $profilesRepository->findOrFail($request->get('slug'));
+        $profilesService->removeFile($data->hint_path);
+        $profilesRepository->delete($request->get('slug'));
+        return \Response::json(['success' => true, 'url' => url('/admin/uploads/profiles/'.$data->type)]);
     }
 }
 

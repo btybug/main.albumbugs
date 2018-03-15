@@ -69,4 +69,9 @@ class VersionProfilesService extends GeneralService
 
         \File::put(public_path($file), $data);
     }
+
+    public function removeFile($path)
+    {
+        \File::delete(public_path($path));
+    }
 }

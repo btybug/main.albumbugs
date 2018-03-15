@@ -126,6 +126,7 @@ Route::group(['prefix' => 'profiles'], function () {
         Route::group(['prefix' => '{id}'], function () {
             Route::get('/', 'AssetProfilesController@getJsEdit', true);
             Route::get('/edit', 'AssetProfilesController@getJsEdit', true)->name('uploads_assets_profiles_edit_js');
+            Route::post('/edit', 'AssetProfilesController@postJsEdit', true)->name('uploads_assets_profiles_edit_js_post');
         });
     });
 
@@ -137,6 +138,8 @@ Route::group(['prefix' => 'profiles'], function () {
         Route::group(['prefix' => '{id}'], function () {
             Route::get('/', 'AssetProfilesController@getCssEdit', true);
             Route::get('/edit', 'AssetProfilesController@getCssEdit', true)->name('uploads_assets_profiles_edit_css');
+            Route::post('/edit', 'AssetProfilesController@postCssEdit', true)->name('uploads_assets_profiles_edit_css_post');
+
         });
     });
 });

@@ -58,7 +58,6 @@
                     <th>Lib</th>
                     <th>Author</th>
                     <th>Version</th>
-                    <th>Positions</th>
                     <th>Live/Local</th>
                     <th>Actions</th>
                 </tr>
@@ -74,14 +73,7 @@
                             <td>{!! $item->name !!}</td>
                             <td>{!! BBGetUserName($item->author_id) !!}</td>
                             <td>{!! $item->version !!}</td>
-                            <td>
-                                @if($item->env)
-                                    <a href="{!! url('admin/uploads/assets/settings') !!}">Choose from Settings</a>
-                                @else
-                                    {!! Form::checkbox('is_generated_front',true,$item->is_generated_front,['class' => 'generate','data-id'=>$item->id]) !!}:frontend
-                                    {!! Form::checkbox('is_generated',true,$item->is_generated,['class' => 'generate','data-id'=>$item->id])!!}:backend
-                                @endif
-                            </td>
+
                             <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
                             <td>
                                 @if($item->env)

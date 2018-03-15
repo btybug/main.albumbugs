@@ -9,12 +9,6 @@
                 <fieldset>
                     <!-- Multiple Radios (inline) -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="radios">Active JS</label>
-                        <div class="col-md-8">
-                            front.js
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-md-4 control-label" for="radios">Select JS</label>
                         <div class="col-md-8">
                             {!! Form::select('js_data[]',$jsData,null,

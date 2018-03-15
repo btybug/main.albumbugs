@@ -126,6 +126,45 @@
                             ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
             </div>
         </div>
+
+        <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">Fonts
+                <div class="pull-right">
+                    {{--External {!! Form::radio('js_type','external',null,['data-role'=>'external','class' => 'content_type_js']) !!}--}}
+                    {{--Profiles {!! Form::radio('js_type','cms',null,['data-role'=>'cms','class' => 'content_type_js']) !!}--}}
+                    {{--Default {!! Form::radio('js_type','default',true,['data-role'=>'default','class' => 'content_type_js']) !!}--}}
+                </div>
+            </div>
+            <div class="panel-body">
+                {{--<div class="col-md-12">--}}
+                    {{--<a href="javascript:void(0)" class="btn btn-primary add-new-js pull-right"><i--}}
+                                {{--class="fa fa-plus"></i></a>--}}
+                {{--</div>--}}
+                {{--<div class="column-js">--}}
+                    {{--@if(count($page->js))--}}
+                        {{--@foreach($page->js as $js)--}}
+                            {{--<div class="col-md-12 portlet-js">--}}
+                                {{--<div class="col-md-2 portlet-handle-js">--}}
+                                    {{--<label class="lbl"> Add Link </label>--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--{!! Form::text('js[]',($js)?$js:'',['class' => 'form-control']) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-4">--}}
+                                    {{--<a href="javascript:void(0)" class="external_delete btn btn-danger"><i--}}
+                                                {{--class="fa fa-trash"></i></a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+
+            {{--</div>--}}
+            {{--<div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">--}}
+                {{--{!! Form::select('js_cms[]',$jsData,null,--}}
+                            {{--['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}--}}
+            {{--</div>--}}
+        </div>
     </div>
     {!! Form::close() !!}
     <input type="hidden" id="page" value="{!! $page->id !!}">

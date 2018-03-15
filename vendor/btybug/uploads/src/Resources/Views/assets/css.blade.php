@@ -54,7 +54,7 @@
     @include('btybug::_partials.delete_modal')
     @include('uploads::assets._partials.upload_modal')
 
-    @include('uploads::versions._partials.update_live_modal')
+    @include('uploads::assets._partials.update_live_modal')
 @stop
 
 @section('CSS')

@@ -23,4 +23,8 @@ class VersionProfilesRepository extends GeneralRepository
         return $this->model()->where($attribute, $value)->where($except, '!=', $exceptValue)->get();
     }
 
+    public function wherePluck(string $attribute, string $attrVal, string $key, string $value)
+    {
+        return $this->model->where($attribute, $attrVal)->pluck($key, $value);
+    }
 }

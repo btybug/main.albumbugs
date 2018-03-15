@@ -30,6 +30,11 @@
                            data-name="backend_jquery"
                            data-id=""
                            class="btn btn-primary change-version"> Change Version </a>
+                       {{--ace editor--}}
+                        <a href="javascript:void(0)"
+                           data-name="edit"
+                           data-id=""
+                           class="btn btn-warning edit-version"> Edit </a>
                     </td>
                 </tr>
                 <tr>
@@ -45,6 +50,11 @@
                            data-name="frontend_jquery"
                            data-id=""
                            class="btn btn-primary change-version"> Change Version </a>
+                        {{--ace editor--}}
+                        <a href="javascript:void(0)"
+                           data-name="edit"
+                           data-id=""
+                           class="btn btn-warning edit-version"> Edit </a>
                     </td>
                 </tr>
                 </tbody>
@@ -86,6 +96,11 @@
                                    data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
                                    class="delete-button btn btn-danger"><i
                                             class="fa fa-trash-o f-s-14 "></i></a>
+                                    {{--ace editor--}}
+                                    <a href="javascript:void(0)"
+                                       data-name="edit"
+                                       data-id=""
+                                       class="btn btn-warning edit-version"> Edit </a>
                             </td>
                         </tr>
                     @endforeach

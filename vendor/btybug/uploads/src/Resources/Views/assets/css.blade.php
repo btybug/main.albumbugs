@@ -1,11 +1,59 @@
 @extends('btybug::layouts.mTabs',['index'=>'upload_assets'])
 @section('tab')
     <div class="col-md-12">
+
+        <h2>Main css framework</h2>
         <div class="col-md-12">
             <a href="javascript:void(0)" class="btn btn-warning pull-right uplCss">add new</a>
         </div>
-        <h2>CSS</h2>
-
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Positions</th>
+                    <th>Live/Local</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Inactive</td>
+                    <td>backend</td>
+                    <td>local</td>
+                    <td>
+                        <a href="javascript:void(0)"
+                           data-id=""
+                           data-jquery="true" class="btn btn-info update-js">
+                            +add new </a>
+                        <a href="javascript:void(0)"
+                           data-name="backend_jquery"
+                           data-id=""
+                           class="btn btn-primary change-version"> Change Version </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Active</td>
+                    <td>frontend</td>
+                    <td>local</td>
+                    <td>
+                        <a href="javascript:void(0)"
+                           data-id=""
+                           data-jquery="true" class="btn btn-info update-js">
+                            +add new </a>
+                        <a href="javascript:void(0)"
+                           data-name="frontend_jquery"
+                           data-id=""
+                           class="btn btn-primary change-version"> Change Version </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2>Custom CSS</h2>
+        <div class="col-md-12">
+            <a href="javascript:void(0)" class="btn btn-warning pull-right uplCss">add new</a>
+        </div>
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>

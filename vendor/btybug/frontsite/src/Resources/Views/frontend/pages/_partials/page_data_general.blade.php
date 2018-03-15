@@ -8,6 +8,27 @@
                 <div class="panel-body published_1">
                     {!! Form::hidden('id') !!}
                     <div class="row">
+                        <div class="page-name">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs">
+                                <i class="fa fa-file-text" aria-hidden="true"></i><span
+                                        class="labls">Page Name</span>
+                                {!! Form::text('title',null,['class' => 'page_name form-control']) !!}
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs">
+                                <i class="fa fa-file-text" aria-hidden="true"></i><span
+                                        class="labls">Page URL</span>
+                                @if($page->type == 'custom')
+                                    {!! Form::text('url',null,['class' => 'page_url form-control']) !!}
+                                @else
+                                    <div class="page_address page_labels">{!! $page->url !!}</div>
+                                    {!! Form::hidden('url',null) !!}
+                                @endif
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12  left_sd verticalcontainer">
                             {{--<div class="vertical-text">--}}
                             {{--<span><i class="fa fa-check-circle icon_pbl"--}}
@@ -112,6 +133,12 @@
                 <div class="panel-body">
                     <a href="javascript:void(0)" class="btn btn-info btn-block full-page-view m-b-5">Full Preview</a>
                     {{ Form::submit('Save', array('class' => 'save_btn m-b-5 btn-block','style' => "width:100%;")) }}
+
+                    <div class="form-group">
+                        <i class="fa fa-file-o" aria-hidden="true"></i>
+                        <span class="labls">Status</span>
+                        {!! Form::select('status',['draft' => 'Draft','published' => 'Published'],null,["class" => 'form-control']) !!}
+                    </div>
                 </div>
             </div>
 

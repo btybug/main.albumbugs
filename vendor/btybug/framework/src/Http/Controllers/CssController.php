@@ -130,15 +130,16 @@ class CssController extends Controller
     public function resetFile(Request $request){
         $path = base_path('public'.DS.'dinamiccss');
         $slug = $request->slug;
-        $file = PhpJsonParser::getFileByName($slug,$path);
-        if($file){
-            \File::put($file->getPathname(),'');
-            TableCss::where("slug",$slug)->update([
-                "html" => null
-            ]);
-            return response()->json(["error" => 0]);
+        $table_css = TableCss::getByName($slug);
+        if(!$table_css){
+            abort(404);
         }
-        return response()->json(["error" => 1]);
+        TableStyles::where("table_css_id",$table_css->id)->delete();
+        TableCss::where("slug",$slug)->update([
+            "html" => null
+        ]);
+        PhpJsonParser::generateCssFile($path,$slug);
+        return response()->json(["error" => 0]);
     }
     public function removeClass(Request $request){
         $path = base_path('public'.DS.'dinamiccss');
@@ -254,15 +255,16 @@ class CssController extends Controller
     public function resetFileComponent(Request $request){
         $path = base_path('public'.DS.'components');
         $slug = $request->slug;
-        $file = PhpJsonParser::getFileByName($slug,$path);
-        if($file){
-            \File::put($file->getPathname(),'');
-            TableCss::where("slug",$slug)->update([
-                "html" => null
-            ]);
-            return response()->json(["error" => 0]);
+        $table_css = TableCss::getByName($slug);
+        if(!$table_css){
+            abort(404);
         }
-        return response()->json(["error" => 1]);
+        TableStyles::where("table_css_id",$table_css->id)->delete();
+        TableCss::where("slug",$slug)->update([
+            "html" => null
+        ]);
+        PhpJsonParser::generateCssFile($path,$slug);
+        return response()->json(["error" => 0]);
     }
     public function removeClassComponent(Request $request){
         $path = base_path('public'.DS.'components');

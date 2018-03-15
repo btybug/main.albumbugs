@@ -1,5 +1,4 @@
 @if($page)
-
     {!! Form::model($page,['url' => route('frontsite_settings',$id), 'id' => 'page_settings_form','files' => true]) !!}
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
         <div class="panel panel-default custompanel m-t-20">
@@ -19,6 +18,35 @@
                     {{--{!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayoutHooks($page) !!}--}}
                     {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayoutHook($page) !!}
                 @endif
+            </div>
+        </div>
+        <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">Main Content
+                <div class="pull-right">
+                    Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
+                    Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
+            </div>
+            <div class="panel-body editor_body @if($page->content_type!='editor') hide @endif">
+                {!! Form::textarea('main_content',null,['id' => 'main_content']) !!}
+            </div>
+
+            <div class="panel-body template_body @if($page->content_type!='template') hide @endif">
+                {{--<div class="col-sm-5 p-l-0 p-r-10">--}}
+                {{--<input name="selcteunit" data-key="title" readonly="readonly" data-id="template"--}}
+                {{--class="page-layout-title form-control"--}}
+                {{--value="{!! BBgetUnitAttr(($page->template)??null,'title') !!}"--}}
+                {{-->--}}
+                {{--</div>--}}
+                {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-20">
+        <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">General</div>
+            <div class="panel-body">
+                <a href="javascript:void(0)" class="btn btn-info btn-block full-page-view m-b-5">Full Preview</a>
+                {{ Form::submit('Save', array('class' => 'save_btn m-b-5 btn-block','style' => "width:100%;")) }}
             </div>
         </div>
 
@@ -96,36 +124,6 @@
             <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
                 {!! Form::select('js_cms[]',$jsData,null,
                             ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
-            </div>
-        </div>
-
-        <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">Main Content
-                <div class="pull-right">
-                    Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
-                    Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
-            </div>
-            <div class="panel-body editor_body @if($page->content_type!='editor') hide @endif">
-                {!! Form::textarea('main_content',null,['id' => 'main_content']) !!}
-            </div>
-
-            <div class="panel-body template_body @if($page->content_type!='template') hide @endif">
-                {{--<div class="col-sm-5 p-l-0 p-r-10">--}}
-                {{--<input name="selcteunit" data-key="title" readonly="readonly" data-id="template"--}}
-                {{--class="page-layout-title form-control"--}}
-                {{--value="{!! BBgetUnitAttr(($page->template)??null,'title') !!}"--}}
-                {{-->--}}
-                {{--</div>--}}
-                {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-20">
-        <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">General</div>
-            <div class="panel-body">
-                <a href="javascript:void(0)" class="btn btn-info btn-block full-page-view m-b-5">Full Preview</a>
-                {{ Form::submit('Save', array('class' => 'save_btn m-b-5 btn-block','style' => "width:100%;")) }}
             </div>
         </div>
     </div>

@@ -1,8 +1,5 @@
 <div class="form-group">
     <div class="col-md-12">
-        <label>Header/Footer</label>
-    </div>
-    <div class="col-md-12">
         {{Form::hidden('header',0)}}
         {{Form::hidden('footer',0)}}
         <label class="bd_layout pull-left m-r-15">{!! Form::checkbox('header',1,null,['style' => 'position:initial;z-index:1;']) !!}

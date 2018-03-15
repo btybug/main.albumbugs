@@ -76,12 +76,15 @@ class ModuleServiceProvider extends ServiceProvider
             ],
             'page_edit' => [
                 [
-                    'title' => 'Settings',
-                    'url' => '/admin/front-site/structure/front-pages/settings/{id}',
-                ], [
                     'title' => 'General',
                     'url' => '/admin/front-site/structure/front-pages/general/{id}',
-                ],
+                ],[
+                    'title' => 'Content',
+                    'url' => '/admin/front-site/structure/front-pages/settings/{id}',
+                ],[
+                    'title' => 'Extra',
+                    'url' => '/admin/front-site/structure/front-pages/extra/{id}',
+                ]
             ],'page_special_edit' => [
                 [
                     'title' => 'Special Settings',

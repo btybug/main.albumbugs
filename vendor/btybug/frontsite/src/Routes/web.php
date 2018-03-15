@@ -33,8 +33,10 @@ Route::group(['prefix'=>'structure'], function () {
         //front pages
         Route::get('/', 'PagesController@getIndex',true)->name('front_pages_index');
         Route::get('/settings/{param}', 'PagesController@getSettings',true)->name('frontsite_settings');
+        Route::get('/extra/{param}', 'PagesController@getExtra',true)->name('frontsite_extra_pages');
         Route::get('/special-settings/{param}', 'PagesController@getSpecialSettings',true)->name('frontsite_special_settings');
         Route::post('/settings/{id}', 'PagesController@postSettings');
+        Route::post('/extra/{id}', 'PagesController@postExtra');
         Route::post('/special-settings/{id}', 'PagesController@postSpecialSettings');
         Route::get('/general/{id}', 'PagesController@getGeneral',true)->name('frontsite_general');
         Route::get('/special-general/{id}', 'PagesController@getSpecialGeneral',true)->name('frontsite_special_general');

@@ -10,10 +10,6 @@
                 {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> New Page', array('type' => 'submit', 'class' => 'pull-right create_new_btn m-l-20')) }}
             {!! Form::close() !!}
 
-            {!! Form::open(['url' => "/admin/front-site/structure/front-pages/new"]) !!}
-            {!! Form::hidden('type','a_special') !!}
-            {{ Form::button('<i class="fa fa-plus" aria-hidden="true"></i> New Custom Page', array('type' => 'submit', 'class' => 'pull-right create_new_btn m-l-20','style' =>'width:auto;')) }}
-            {!! Form::close() !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

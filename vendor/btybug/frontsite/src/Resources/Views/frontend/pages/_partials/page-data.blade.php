@@ -1,6 +1,6 @@
 @if($page)
 
-    {!! Form::model($page,['url' => route('frontsite_settings',$id), 'id' => 'page_settings_form']) !!}
+    {!! Form::model($page,['url' => route('frontsite_settings',$id), 'id' => 'page_settings_form','files' => true]) !!}
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Page Info</div>
@@ -41,6 +41,83 @@
         </div>
 
         <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">Css
+                <div class="pull-right">
+                    External {!! Form::radio('css_type','external',null,['data-role'=>'css_external','class' => 'content_type_css']) !!}
+                    Profiles {!! Form::radio('css_type','cms',null,['data-role'=>'css_cms','class' => 'content_type_css']) !!}
+                    Default {!! Form::radio('css_type','default',true,['data-role'=>'default','class' => 'content_type_css']) !!}
+                </div>
+            </div>
+            <div class="panel-body css_external {!! ($page->css_type != 'external') ? 'hide' : ''  !!}">
+                <div class="col-md-12">
+                    <a href="javascript:void(0)" class="btn btn-primary add-new-css pull-right"><i
+                                class="fa fa-plus"></i></a>
+                </div>
+                <div class="column">
+                    @if(count($page->css))
+                        @foreach($page->css as $css)
+                            <div class="col-md-12 portlet">
+                                <div class="col-md-2 portlet-handle">
+                                    <label class="lbl"> Add Link </label>
+                                </div>
+                                <div class="col-md-6">
+                                    {!! Form::text('css[]',($css)?$css:'',['class' => 'form-control']) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="javascript:void(0)" class="external_delete btn btn-danger"><i
+                                                class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+
+            <div class="panel-body css_cms {!! ($page->css_type != 'cms') ? 'hide' : ''  !!}">
+                {!! Form::select('css_cms[]',$cssData,null,
+                           ['class' => 'form-control select-dropdowns pull-right','multiple' => 'multiple']) !!}
+            </div>
+        </div>
+
+        <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">JS
+                <div class="pull-right">
+                    External {!! Form::radio('js_type','external',null,['data-role'=>'external','class' => 'content_type_js']) !!}
+                    Profiles {!! Form::radio('js_type','cms',null,['data-role'=>'cms','class' => 'content_type_js']) !!}
+                    Default {!! Form::radio('js_type','default',true,['data-role'=>'default','class' => 'content_type_js']) !!}</div>
+            </div>
+            <div class="panel-body js_external {!! ($page->js_type != 'external') ? 'hide' : ''  !!}">
+                <div class="col-md-12">
+                    <a href="javascript:void(0)" class="btn btn-primary add-new-js pull-right"><i
+                                class="fa fa-plus"></i></a>
+                </div>
+                <div class="column-js">
+                    @if(count($page->js))
+                        @foreach($page->js as $js)
+                            <div class="col-md-12 portlet-js">
+                                <div class="col-md-2 portlet-handle-js">
+                                    <label class="lbl"> Add Link </label>
+                                </div>
+                                <div class="col-md-6">
+                                    {!! Form::text('js[]',($js)?$js:'',['class' => 'form-control']) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="javascript:void(0)" class="external_delete btn btn-danger"><i
+                                                class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+
+            </div>
+            <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
+                {!! Form::select('js_cms[]',$jsData,null,
+                            ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
+            </div>
+        </div>
+
+        <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Main Content
                 <div class="pull-right">
                     Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
@@ -52,10 +129,10 @@
 
             <div class="panel-body template_body @if($page->content_type!='template') hide @endif">
                 {{--<div class="col-sm-5 p-l-0 p-r-10">--}}
-                    {{--<input name="selcteunit" data-key="title" readonly="readonly" data-id="template"--}}
-                           {{--class="page-layout-title form-control"--}}
-                           {{--value="{!! BBgetUnitAttr(($page->template)??null,'title') !!}"--}}
-                    {{-->--}}
+                {{--<input name="selcteunit" data-key="title" readonly="readonly" data-id="template"--}}
+                {{--class="page-layout-title form-control"--}}
+                {{--value="{!! BBgetUnitAttr(($page->template)??null,'title') !!}"--}}
+                {{-->--}}
                 {{--</div>--}}
                 {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
             </div>
@@ -95,15 +172,15 @@
                         <label class="col-md-4 control-label" for="checkboxes">Area access</label>
                         <div class="col-md-4">
                             {{--@php--}}
-                                {{--$frontendRoles=new \Btybug\User\Repository\RoleRepository();--}}
+                            {{--$frontendRoles=new \Btybug\User\Repository\RoleRepository();--}}
                             {{--@endphp--}}
                             {{--@foreach($frontendRoles->getFrontRoles() as $role)--}}
-                                {{--<div class="checkbox">--}}
-                                    {{--<label for="checkboxes-1">--}}
-                                        {{--{!! Form::checkbox('page_layout_settings[sidebar_left_roles][]',$role->slug,(isset($page->page_layout_settings['sidebar_left_roles']) && in_array($role->slug,$page->page_layout_settings['sidebar_left_roles']))?1:0) !!}--}}
-                                        {{--{!! $role->name !!}--}}
-                                    {{--</label>--}}
-                                {{--</div>--}}
+                            {{--<div class="checkbox">--}}
+                            {{--<label for="checkboxes-1">--}}
+                            {{--{!! Form::checkbox('page_layout_settings[sidebar_left_roles][]',$role->slug,(isset($page->page_layout_settings['sidebar_left_roles']) && in_array($role->slug,$page->page_layout_settings['sidebar_left_roles']))?1:0) !!}--}}
+                            {{--{!! $role->name !!}--}}
+                            {{--</label>--}}
+                            {{--</div>--}}
                             {{--@endforeach--}}
                         </div>
                     </div>
@@ -160,21 +237,67 @@
     </div>
 </div>
 
+<script type="template" id="js_tmp">
+    <div class="col-md-12 portlet-js ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+        <div class="col-md-2 portlet-handle-js ui-widget-header ui-corner-all">
+            <label class="lbl"><span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span> Add Link </label>
+        </div>
+        <div class="col-md-6">
+            {!! Form::text('js[]',null,['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-4">
+            <a href="javascript:void(0)" class="external_delete btn btn-danger"><i class="fa fa-trash"></i></a>
+        </div>
+    </div>
+</script>
+<script type="template" id="css_tmp">
+    <div class="col-md-12 portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+        <div class="col-md-2 portlet-handle ui-widget-header ui-corner-all">
+            <label class="lbl"><span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span> Add Link </label>
+        </div>
+        <div class="col-md-6">
+            {!! Form::text('css[]',null,['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-4">
+            <a href="javascript:void(0)" class="external_delete btn btn-danger"><i class="fa fa-trash"></i></a>
+        </div>
+    </div>
+</script>
+
 @section('CSS')
     {!! HTML::style('public/css/create_pages.css') !!}
+    {!! HTML::style("public/css/select2/select2.min.css") !!}
+
     <style>
-        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
             padding-right: 15px;
             padding-left: 15px;
         }
-        .m-t-20{
+
+        .m-t-20 {
             margin-top: 20px;
         }
-        .page-name>div:nth-of-type(1)>i{
+
+        .page-name > div:nth-of-type(1) > i {
             margin-left: 0;
         }
-        .page-name>div:nth-of-type(2) .page_labels{
+
+        .page-name > div:nth-of-type(2) .page_labels {
             margin-top: 0;
+        }
+
+        .column, .column-js {
+            min-height: 100px;
+        }
+
+        .lbl {
+            height: 28px;
+            line-height: 30px;
+            cursor: move;
+        }
+
+        .portlet-handle, .portlet-handle-js {
+            cursor: move;
         }
     </style>
 @stop
@@ -185,6 +308,7 @@
     {!! HTML::script("public/js/UiElements/ui-settings.js") !!}
     {!! HTML::script("public/js/UiElements/bb_div.js") !!}
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
+    {!! HTML::script("public/js/select2/select2.full.min.js") !!}
 
     <script>
         tinymce.init({
@@ -206,6 +330,69 @@
                 $("[data-name=" + key + "]").val("");
             });
 
+            $('.select-dropdowns').select2({
+                placeholder: 'Select versions'
+            });
+
+            $(".column").sortable({
+                connectWith: ".column",
+                handle: ".portlet-handle",
+                placeholder: "portlet-placeholder ui-corner-all"
+            });
+
+            $(".portlet")
+                .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+                .find(".portlet-handle")
+                .addClass("ui-widget-header ui-corner-all")
+                .prepend("<span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span>");
+
+
+            $(".column-js").sortable({
+                connectWith: ".column-js",
+                handle: ".portlet-handle-js",
+                placeholder: "portlet-placeholder-js ui-corner-all"
+            });
+
+            $(".portlet-js")
+                .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+                .find(".portlet-handle-js")
+                .addClass("ui-widget-header ui-corner-all")
+                .prepend("<span class='ui-icon ui-icon-grip-diagonal-se portlet-toggle'></span>");
+
+            $('body').on('change', '.content_type_special', function () {
+                var value = $(this).val();
+                if (value == 'html') {
+                    $('.html_body').removeClass('hide').addClass('show');
+                    $('.template_body').removeClass('show').addClass('hide');
+                } else {
+                    $('.template_body').removeClass('hide').addClass('show');
+                    $('.html_body').removeClass('show').addClass('hide');
+                }
+
+            });
+
+            $("body").on("click", ".reset-placeholder", function () {
+                var key = $(this).data("reset");
+                $("[data-id=" + key + "]").val("");
+                $("[data-name=" + key + "]").val("");
+            });
+
+            $("body").on("click", ".add-new-js", function () {
+                var key = $('#js_tmp').html();
+                $(".column-js").append(key);
+                $(".column-js").sortable("refresh");
+            });
+
+            $("body").on("click", ".external_delete", function () {
+                $(this).parents().eq(1).remove();
+            });
+
+            $("body").on("click", ".add-new-css", function () {
+                var key = $('#css_tmp').html();
+                $(".column").append(key);
+                $(".column").sortable("refresh");
+            });
+
             $("body").on("click", ".view-placeholder", function () {
                 var key = $(this).data("view");
                 $.ajax({
@@ -221,6 +408,34 @@
                         $("#view-unit").modal();
                     }
                 });
+            });
+
+            $('body').on('change', '.content_type_css', function () {
+                var value = $(this).val();
+                if (value == 'external') {
+                    $('.css_external').removeClass('hide').addClass('show');
+                    $('.css_cms').removeClass('show').addClass('hide');
+                } else if (value == 'cms') {
+                    $('.css_cms').removeClass('hide').addClass('show');
+                    $('.css_external').removeClass('show').addClass('hide');
+                } else {
+                    $('.css_cms').removeClass('show').addClass('hide');
+                    $('.css_external').removeClass('show').addClass('hide');
+                }
+            });
+
+            $('body').on('change', '.content_type_js', function () {
+                var value = $(this).val();
+                if (value == 'external') {
+                    $('.js_external').removeClass('hide').addClass('show');
+                    $('.js_cms').removeClass('show').addClass('hide');
+                } else if (value == 'cms') {
+                    $('.js_cms').removeClass('hide').addClass('show');
+                    $('.js_external').removeClass('show').addClass('hide');
+                } else {
+                    $('.js_cms').removeClass('show').addClass('hide');
+                    $('.js_external').removeClass('show').addClass('hide');
+                }
             });
         });
     </script>

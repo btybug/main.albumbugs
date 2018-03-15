@@ -90,7 +90,9 @@ class PagesController extends Controller
         UserService $userService,
         ClassifierRepository $classifierRepository,
         ClassifierService $classifierService,
-        FrontendPageService $frontendPageService
+        FrontendPageService $frontendPageService,
+        VersionsRepository $versionsRepository,
+        AdminsettingRepository $adminsettingRepository
     )
     {
         $id = $request->param;
@@ -100,8 +102,10 @@ class PagesController extends Controller
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
+        $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
+        $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
 
-        return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders']));
+        return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','cssData','jsData']));
     }
 
     public function getSpecialSettings(
@@ -462,6 +466,11 @@ class PagesController extends Controller
     {
         $result = $pageService->sort($request->only('item', 'parent'));
         return Response::json(['error' => $result]);
+    }
+
+    public function getExtra ($id)
+    {
+        return view('manage::frontend.pages.extra', compact('id'));
     }
 
 }

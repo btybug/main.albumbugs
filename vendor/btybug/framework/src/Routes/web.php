@@ -47,7 +47,7 @@ Route::group(['prefix' => 'html-component'], function () {
     Route::post('/removefile', 'CssController@removeFileComponent')->name('remove_file_component');
     Route::post('/removeclass', 'CssController@removeClassComponent')->name('remove_class_component');
     Route::post('/reset', 'CssController@resetFileComponent')->name('reset_file_component');
-    Route::get('/savestyle', 'CssController@saveStyleWithHtmlComponent', true)->name('save_style_with_html_component');
+    Route::post('/savestyle', 'CssController@saveStyleWithHtmlComponent')->name('save_style_with_html_component');
     Route::post('/savestylecomponent', 'CssController@saveStyleComponent', true)->name('save_style_component');
     Route::post('/editstylecomponent', 'CssController@EditStyleComponent')->name('edit_style_component');
     Route::post('/renamefolder', 'CssController@renameGroupComponent')->name('rename_group_component');
@@ -61,7 +61,7 @@ Route::group(['prefix' => 'dynamic-component'], function () {
     Route::post('/removefile', 'DynamicComponentController@removeFileComponent')->name('remove_file_component_dynamic');
     Route::post('/removeclass', 'DynamicComponentController@removeClassComponent')->name('remove_class_component_dynamic');
     Route::post('/reset', 'DynamicComponentController@resetFileComponent')->name('reset_file_component_dynamic');
-    Route::get('/savestyle', 'DynamicComponentController@saveStyleWithHtmlComponent', true)->name('save_style_with_html_component_dynamic');
+    Route::post('/savestyle', 'DynamicComponentController@saveStyleWithHtmlComponent')->name('save_style_with_html_component_dynamic');
     Route::post('/savestylecomponent', 'DynamicComponentController@saveStyleComponent', true)->name('save_style_component_dynamic');
     Route::post('/editstylecomponent', 'DynamicComponentController@EditStyleComponent')->name('edit_style_component_dynamic');
     Route::post('/renamefolder', 'DynamicComponentController@renameGroupComponent')->name('rename_group_component_dynamic');

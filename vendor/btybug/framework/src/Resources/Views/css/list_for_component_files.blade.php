@@ -32,7 +32,7 @@
 
 
             <div class="form-comp col-md-12 custom_hidden is_show_for_setting">
-                {!! Form::open(['url'=>route('save_style_with_html_component'),'method' => 'get','class'=>'sub_html_tag']) !!}
+                {!! Form::open(['url'=>route('save_style_with_html_component'),'method' => 'post','class'=>'sub_html_tag']) !!}
                 <div class="col-md-7">
                     <div class="form-group">
                         <div class="col-md-4">
@@ -48,7 +48,7 @@
                             <label for="">Item html</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea name="" id="html_val" cols="30" rows="10" class="hidden">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                            <input id="html_val" type="hidden" value="{{isset($style_from_db) ? $style_from_db->html : ''}}">
                             <textarea id="editor_html" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="clearfix"></div>
@@ -227,7 +227,7 @@
                     return editor.setStyle("set_border");
                 }
                 return (
-                    $(".submit_form_for_style").append("<textarea class='hidden' name='full_style'>"+editor_value+"</textarea>").submit()
+                    $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+editor_value+"'>").submit()
                 );
             });
             $("body").delegate(".html_before_submit","click",function(){
@@ -242,7 +242,7 @@
                     return editor_html.setStyle("set_border");
                 }
                 return (
-                    $(".sub_html_tag").append("<textarea class='hidden' name='file_html'>"+editor_value+"</textarea>").submit()
+                    $(".sub_html_tag").append("<input type='hidden' name='file_html' value='"+editor_value+"'>").submit()
                 );
             });
         });

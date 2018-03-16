@@ -213,7 +213,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
                 return textarea_editor_for_save.setStyle("set_border");
             }
             return (
-                $(".submit_form_for_style_edit").append("<input type='hidden' name='style_id' value='"+id+"'><textarea class='hidden' name='changed_style'>"+editor_value+"</textarea>").submit()
+                $(".submit_form_for_style_edit").append("<input type='hidden' name='style_id' value='"+id+"'><input type='hidden' name='changed_style' value='"+editor_value+"'>").submit()
             );
         });
         $("body").delegate(".allow_ace_for_edit","click",function(){

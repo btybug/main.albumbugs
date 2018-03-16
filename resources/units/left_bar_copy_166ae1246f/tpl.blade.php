@@ -6,13 +6,9 @@
 
     <div class="page-sidebar">
 
-        <div class="@if(isset($settings['user_cart_class'])) user-profile @endif">
-            @if(isset($settings['user_image']))
-                <div class="profile-img"><img src="{!! BBGetUserAvatar() !!}" alt="user"></div>
-            @endif
-            @if(isset($settings['user_name']))
-                <div class="profile-text"><a href="#">{!! BBGetUserName() !!}</a></div>
-                    @endif
+        <div class="user-profile">
+            <div class="profile-img"><img src="{!! BBGetUserAvatar() !!}" alt="user"></div>
+            <div class="profile-text"><a href="#">{!! BBGetUserName() !!}</a></div>
         </div>
 
         @if (is_array($menu_array))

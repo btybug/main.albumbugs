@@ -76,7 +76,7 @@
             </span>
             <div class="clearfix"></div>
         </div>
-        <div class="panel-content collapse" id="collapseOne_{rand_str}" aria-expanded="true">
+        <div class="panel-content collapse" id="collapseOne_{randd_str}" aria-expanded="true">
             <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
 
             </ul>
@@ -128,7 +128,8 @@
             success: function (data) {
                 if(data.dirname){
                    // var name = titleCase(data.dirname);
-                    template = template.replace("{dirname}",data.dirname).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{uniq_gr_name}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",makeid());
+                    var rnd = makeid();
+                    template = template.replace("{dirname}",data.dirname).replace("repl",data.dirname).replace("{dname}",data.dirname).replace("{uniq_gr_name}",data.dirname).replace("{dnameforedit}",data.dirname).replace("{rand_str}",rnd).replace("{randd_str}",rnd);
                     return $(".body_append").append(template);
                 }
             },
@@ -160,7 +161,7 @@
         var dirname = $(this).data("name");
         var that = $(this);
         var _token = $('input[name=_token]').val();
-        var url = base_path + "/admin/framework/component/removedir";
+        var url = base_path + "/admin/framework/html-component/removedir";
         $.ajax({
             url: url,
             data: {
@@ -184,7 +185,7 @@
         var old_name = $(this).parent().prev().children("span.get_original_name").text();
         var that = $(this);
         var _token = $('input[name=_token]').val();
-        var url = base_path + "/admin/framework/component/renamefolder";
+        var url = base_path + "/admin/framework/html-component/renamefolder";
         $.ajax({
             url: url,
             data: {
@@ -216,7 +217,7 @@
                         .next()
                         .attr("data-name",new_name)
                         .next()
-                        .attr("href",base_path + "/admin/framework/component/createfile/" + new_name));
+                        .attr("href",base_path + "/admin/framework/html-component/createfile/" + new_name));
                 }
             },
             type: 'POST'

@@ -227,7 +227,7 @@
                     return editor.setStyle("set_border");
                 }
                 return (
-                    $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+editor_value+"'>").submit()
+                    $(".submit_form_for_style").append("<textarea class='hidden' name='full_style'>"+editor_value+"</textarea>").submit()
                 );
             });
             $("body").delegate(".html_before_submit","click",function(){

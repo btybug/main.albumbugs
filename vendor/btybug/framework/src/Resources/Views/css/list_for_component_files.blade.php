@@ -190,7 +190,7 @@
             $("body").delegate(".delete_item_and_classes","click",function(){
                 var slug = $(this).data("name");
                 var _token = $('input[name=_token]').val();
-                var url = base_path + "/admin/framework/component/reset";
+                var url = base_path + "/admin/framework/html-component/reset";
                 $.ajax({
                     url: url,
                     data: {
@@ -227,7 +227,7 @@
                     return editor.setStyle("set_border");
                 }
                 return (
-                    $(".submit_form_for_style").append("<input type='hidden' name='full_style' value='"+editor_value+"'>").submit()
+                    $(".submit_form_for_style").append("<textarea class='hidden' name='full_style'>"+editor_value+"</textarea>").submit()
                 );
             });
             $("body").delegate(".html_before_submit","click",function(){

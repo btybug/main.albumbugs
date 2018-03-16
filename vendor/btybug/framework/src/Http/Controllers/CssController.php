@@ -41,7 +41,7 @@ class CssController extends Controller
         $new_style->classname = $general_name;
         $new_style->styles = $full_style;
         if($new_style->save()){
-            $generated = PhpJsonParser::generateCssFile($path,$type);
+            $generated = PhpJsonParser::generateCssFile($path,$type,$table_css);
         }
         return redirect()->back()->with("success","Style was saved successfully");
     }
@@ -49,6 +49,7 @@ class CssController extends Controller
         $path = base_path('public'.DS.'dinamiccss');
         $type = $request->type;
         $changed_style = $request->changed_style;
+        $table_css = TableCss::getByName($type);
         $id = $request->style_id;
 
         $table_styles = TableStyles::where("id",$id)->update([
@@ -56,7 +57,7 @@ class CssController extends Controller
         ]);
 
         if($table_styles){
-            PhpJsonParser::generateCssFile($path,$type);
+            PhpJsonParser::generateCssFile($path,$type,$table_css);
             return redirect()->back()->with("success","Style was saved successfully");
         }
         return redirect()->back()->with("error","Something went wrong");
@@ -138,17 +139,18 @@ class CssController extends Controller
         TableCss::where("slug",$slug)->update([
             "html" => null
         ]);
-        PhpJsonParser::generateCssFile($path,$slug);
+        PhpJsonParser::generateCssFile($path,$slug,$table_css);
         return response()->json(["error" => 0]);
     }
     public function removeClass(Request $request){
         $path = base_path('public'.DS.'dinamiccss');
         $slug = $request->slug;
+        $table_css = TableCss::getByName($slug);
         $id = $request->id;
 
         $deleted = TableStyles::where("id",$id)->delete();
         if($deleted){
-            PhpJsonParser::generateCssFile($path,$slug);
+            PhpJsonParser::generateCssFile($path,$slug,$table_css);
             return response()->json(["error"=>0]);
         }
         return response()->json(["error"=>1]);
@@ -189,7 +191,7 @@ class CssController extends Controller
         $new_style->classname = $general_name;
         $new_style->styles = $full_style;
         if($new_style->save()){
-            $generated = PhpJsonParser::generateCssFile($path,$type);
+            $generated = PhpJsonParser::generateCssFile($path,$type,$table_css);
         }
         return redirect()->back()->with("success","Style was saved successfully");
     }
@@ -263,17 +265,18 @@ class CssController extends Controller
         TableCss::where("slug",$slug)->update([
             "html" => null
         ]);
-        PhpJsonParser::generateCssFile($path,$slug);
+        PhpJsonParser::generateCssFile($path,$slug,$table_css);
         return response()->json(["error" => 0]);
     }
     public function removeClassComponent(Request $request){
         $path = base_path('public'.DS.'components');
         $slug = $request->slug;
+        $table_css = TableCss::getByName($slug);
         $id = $request->id;
 
         $deleted = TableStyles::where("id",$id)->delete();
         if($deleted){
-            PhpJsonParser::generateCssFile($path,$slug);
+            PhpJsonParser::generateCssFile($path,$slug,$table_css);
             return response()->json(["error"=>0]);
         }
         return response()->json(["error"=>1]);
@@ -282,6 +285,7 @@ class CssController extends Controller
         $path = base_path('public'.DS.'components');
         $type = $request->type;
         $changed_style = $request->changed_style;
+        $table_css = TableCss::getByName($type);
         $id = $request->style_id;
 
         $table_styles = TableStyles::where("id",$id)->update([
@@ -289,7 +293,7 @@ class CssController extends Controller
         ]);
 
         if($table_styles){
-            PhpJsonParser::generateCssFile($path,$type);
+            PhpJsonParser::generateCssFile($path,$type,$table_css);
             return redirect()->back()->with("success","Style was saved successfully");
         }
         return redirect()->back()->with("error","Something went wrong");

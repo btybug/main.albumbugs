@@ -150,7 +150,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
             var id = $(this).data("id");
             var _token = $('input[name=_token]').val();
             var that = $(this);
-            var url = base_path + "/admin/framework/component/removeclass";
+            var url = base_path + "/admin/framework/html-component/removeclass";
             $.ajax({
                 url: url,
                 data: {

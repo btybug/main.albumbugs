@@ -8,17 +8,27 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         margin-top: 20px;
         margin-bottom: 10px;
     }
+    .modal-dialog {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+    }
+
+    .modal-content {
+        height: 100%;
+        border-radius: 0;
+    }
 </style>
 @if($file)
     {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'dinamiccss') !!}
 @endif
-<textarea class="hidden get_data">{{json_encode($data->styles,true)}}</textarea>
 
 <div class="col-md-12 append_here">
 
 </div>
 <div class="clearfix"></div>
 <div class="just_html"></div>
+<textarea class="hidden get_data">{{json_encode($data->styles,true)}}</textarea>
 @if(count($data))
     <script type="template" id="get_for_append">
         @foreach($data->styles as $index => $style)
@@ -33,7 +43,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
                 @endif
             </div>
             <div class="col-md-3">
-                <button class="btn btn-success btn-md show_in_just_html" data-class="{{$style->styles}}">Show</button>
+                {{--<button class="btn btn-success btn-md show_in_just_html" data-class="{{$style->styles}}">Show</button>--}}
                 <button class="btn btn-warning btn-md show_in_just_html_for_edit" data-id="{{$style->id}}" data-classname="{{$style->classname}}" data-slug="{{$slug}}" data-class="{{$style->styles}}">Edit</button>
                 <button class="btn btn-danger btn-md remove_this_class" data-slug="{{$slug}}" data-id="{{$style->id}}">delete</button>
             </div>
@@ -98,7 +108,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
     {!! Form::close() !!}
 </script>
 <script type="template" id="send_form_for_edit">
-    {!! Form::open(['url'=>route('edit_style_component'),'method' => 'post',"class" => "submit_form_for_style_edit"]) !!}
+    {!! Form::open(['url'=>route('edit_style'),'method' => 'post',"class" => "submit_form_for_style_edit"]) !!}
     <div class="class_for_delete">
         {{--<div class="col-md-3">{repl_classname}</div>--}}
         <div class="col-md-6">
@@ -139,7 +149,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
             var id = $(this).data("id");
             var _token = $('input[name=_token]').val();
             var that = $(this);
-            var url = base_path + "/admin/framework/component/removeclass";
+            var url = base_path + "/admin/framework/css-classes/removeclass";
             $.ajax({
                 url: url,
                 data: {

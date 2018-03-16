@@ -30,6 +30,14 @@ class VersionsService extends GeneralService
         $this->adminsettingRepository = $adminsettingRepository;
     }
 
+    public function getType($type){
+        if($type == 'css' || $type == 'framework'){
+            return 'css';
+        }else{
+            return 'js';
+        }
+    }
+
     public function makeVersion($request)
     {
         if($request->get("env") == "link"){
@@ -46,7 +54,8 @@ class VersionsService extends GeneralService
             $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
             $oname = $request->file('file')->getClientOriginalName(); // getting image extension
             $fname = uniqid() . '.' . $this->exstension;
-            $request->file('file')->move(public_path($request->type . '/versions/' . $request->get('name') . '/' . $request->get('version')), $fname);
+            $type = $this->getType($request->type);
+            $request->file('file')->move(public_path($type . '/versions/' . $request->get('name') . '/' . $request->get('version')), $fname);
 
             $this->versionsRepository->create([
                 'name' => $request->get('name'),
@@ -56,7 +65,7 @@ class VersionsService extends GeneralService
                 'author_id' => \Auth::id(),
                 'active' => 1,
                 'env' => 0,
-                'content' => md5(public_path($request->type . '/versions/' . $request->get('name') . '/' . $request->get('version')))
+                'content' => md5(public_path($type . '/versions/' . $request->get('name') . '/' . $request->get('version')))
             ]);
         }
     }
@@ -68,7 +77,8 @@ class VersionsService extends GeneralService
         $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
         $oname = $request->file('file')->getClientOriginalName(); // getting image extension
         $fname = uniqid() . '.' . $this->exstension;
-        $request->file('file')->move(public_path($version->type . '/versions/' . $version->name . '/' . $request->get('version')), $fname);
+        $type = $this->getType($request->type);
+        $request->file('file')->move(public_path($type . '/versions/' . $version->name . '/' . $request->get('version')), $fname);
 
         $this->versionsRepository->create([
             'name' => $version->name,
@@ -76,7 +86,7 @@ class VersionsService extends GeneralService
             'version' => $request->get('version'),
             'file_name' => $fname,
             'author_id' => \Auth::id(),
-            'content' => md5(public_path($request->type . '/versions/' . $version->name . '/' . $request->get('version')))
+            'content' => md5(public_path($type . '/versions/' . $version->name . '/' . $request->get('version')))
         ]);
     }
 
@@ -86,7 +96,9 @@ class VersionsService extends GeneralService
             $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
             $oname = $request->file('file')->getClientOriginalName(); // getting image extension
             $fname = uniqid() . '.' . $this->exstension;
-            $request->file('file')->move(public_path($request->type . '/versions/' . $request->get('parent_id') . '/' . $request->get('version')), $fname);
+            $type = $this->getType($request->type);
+
+            $request->file('file')->move(public_path($type . '/versions/' . $request->get('parent_id') . '/' . $request->get('version')), $fname);
 
             if($request->get('parent_id') == 'backend_jquery'){
                 $data['is_generated'] = 1;
@@ -102,18 +114,20 @@ class VersionsService extends GeneralService
                 'author_id' => \Auth::id(),
                 'active' => 1,
                 'env' => 0,
-                'content' => md5(public_path($request->type . '/versions/' . $request->get('parent_id') . '/' . $request->get('version')))
+                'content' => md5(public_path($type . '/versions/' . $request->get('parent_id') . '/' . $request->get('version')))
             ] + $data );
 
             $this->synchronize();
             $this->synchronize("is_generated_front");
 
         }else{
+            $type = $this->getType($request->type);
+
             $version = $this->versionsRepository->find($request->get('parent_id'));
             $this->exstension = $request->file('file')->getClientOriginalExtension(); // getting image extension
             $oname = $request->file('file')->getClientOriginalName(); // getting image extension
             $fname = uniqid() . '.' . $this->exstension;
-            $request->file('file')->move(public_path($version->type . '/versions/' . $version->name . '/' . $request->get('version')), $fname);
+            $request->file('file')->move(public_path($type . '/versions/' . $version->name . '/' . $request->get('version')), $fname);
 
             $this->versionsRepository->create([
                 'name' => $version->name,
@@ -121,7 +135,7 @@ class VersionsService extends GeneralService
                 'version' => $request->get('version'),
                 'file_name' => $fname,
                 'author_id' => \Auth::id(),
-                'content' => md5(public_path($request->type . '/versions/' . $version->name . '/' . $request->get('version')))
+                'content' => md5(public_path($type . '/versions/' . $version->name . '/' . $request->get('version')))
             ]);
         }
     }

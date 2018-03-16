@@ -62,9 +62,9 @@ class AssetsController extends Controller
     )
     {
         $plugins = $versionsRepository->getJS();
-        $jquery = $versionsService->getJqueryVersions();
+        $mains = $versionsRepository->getJquery();
 
-        return view('uploads::assets.js', compact(['plugins','jquery']));
+        return view('uploads::assets.js', compact(['plugins','mains']));
     }
     public function postUploadJs(
         UploadJsRequest $request,

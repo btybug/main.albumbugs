@@ -35,7 +35,7 @@ class UploadJsRequest extends Request
             return [
                 'name' => 'required|max:255|alpha_num|unique:versions',
                 'version' => 'required|max:255|alpha_num',
-                'type' => 'required|in:js'
+                'type' => 'required|in:js,jquery'
             ];
         }
         return [];

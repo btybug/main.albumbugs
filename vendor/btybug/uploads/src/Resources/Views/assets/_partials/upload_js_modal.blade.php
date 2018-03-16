@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row">
                     {!! Form::open(["url" => "admin/uploads/assets",'class' => 'form-horizontal','files' => true]) !!}
-                    {!! Form::hidden('type','js') !!}
+                    {!! Form::hidden('type','js',['id'=>'js-type']) !!}
                     <div>
                         <label for="username">Name</label>
                         {!! Form::text('name',null,['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
@@ -55,8 +55,16 @@
     <script>
         $(document).ready(function () {
             $('body').on('click', '.uplJS', function () {
+                $("#js-type").val('js');
                 $('#uploadJs').modal();
             });
+
+
+            $('body').on('click', '.upl-jquery', function () {
+                $("#js-type").val('jquery');
+                $('#uploadJs').modal();
+            });
+
             $('input[name=env]').on('change',function () {
                 var type=$(this).val();
                 switch (type){

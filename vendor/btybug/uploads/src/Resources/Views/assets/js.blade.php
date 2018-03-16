@@ -2,7 +2,7 @@
 @section('tab')
     <div class="col-md-12">
         <div class="col-md-12">
-            <a href="javascript:void(0)" class="btn btn-warning uplJS pull-right">add new</a>
+            <a href="javascript:void(0)" class="btn btn-warning upl-jquery pull-right">add new</a>
         </div>
         <h2>Jquery</h2>
         <div class="col-md-12">
@@ -16,41 +16,53 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{!! (isset($jquery['backend_jquery'])) ? $jquery['backend_jquery']['version'] : "Inactive" !!}</td>
-                    <td>backend</td>
-                    <td>local</td>
-                    <td>
-                        <a href="javascript:void(0)"
-                           data-id="{!! (isset($jquery['backend_jquery'])) ? $jquery['backend_jquery']['id'] : "backend_jquery" !!}"
-                           data-jquery="true" class="btn btn-info update-js">
-                            +add new </a>
-                        <a href="javascript:void(0)"
-                           data-name="backend_jquery"
-                           data-id="{!! (isset($jquery['backend_jquery'])) ? $jquery['backend_jquery']['id'] : "backend_jquery" !!}"
-                           class="btn btn-primary change-version"> Change Version </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>{!! (isset($jquery['frontend_jquery'])) ? $jquery['frontend_jquery']['version'] : "Inactive" !!}</td>
-                    <td>frontend</td>
-                    <td>local</td>
-                    <td>
-                        <a href="javascript:void(0)"
-                           data-id="{!! (isset($jquery['frontend_jquery'])) ? $jquery['frontend_jquery']['id'] : "frontend_jquery" !!}"
-                           data-jquery="true" class="btn btn-info update-js">
-                            +add new </a>
-                        <a href="javascript:void(0)"
-                           data-name="frontend_jquery"
-                           data-id="{!! (isset($jquery['frontend_jquery'])) ? $jquery['frontend_jquery']['id'] : "frontend_jquery" !!}"
-                           class="btn btn-primary change-version"> Change Version </a>
-                    </td>
-                </tr>
+                @if(count($mains))
+                    @foreach($mains as $item)
+                        <tr>
+                            {{--<td>--}}
+                            {{--<input name="assets[{!! $item->id !!}]" value="0" type="hidden" />--}}
+                            {{--<input name="assets[{!! $item->id !!}]" value="1" @if($item->is_generated) checked="checked" @endif type="checkbox" />--}}
+                            {{--</td>--}}
+                            <td>{!! $item->name !!}</td>
+                            <td>{!! BBGetUserName($item->author_id) !!}</td>
+                            <td>{!! $item->version !!}</td>
+
+                            <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
+                            <td>
+
+                                @if($item->env)
+                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
+                                @else
+                                    <a href="javascript:void(0)"
+                                       data-name="edit"
+                                       data-id="{!! $item->id !!}"
+                                       data-type="{!! $item->type !!}"
+                                       class="btn btn-warning edit-version"> Edit </a>
+
+                                    <a href="javascript:void(0)" data-id="{!! $item->id !!}" class="btn btn-info update-js">
+                                        +add new </a>
+                                    <a href="javascript:void(0)" data-name="{!! $item->name !!}" data-id="{!! $item->id !!}"
+                                       class="btn btn-primary change-version"> Change Version </a>
+                                @endif
+                                <a data-href="{!! url('admin/uploads/assets/delete') !!}"
+                                   data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
+                                   class="delete-button btn btn-danger"><i
+                                            class="fa fa-trash-o f-s-14 "></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td rowspan="5">No libraries</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
         <h2>JS</h2>
-
+        <div class="col-md-12">
+            <a href="javascript:void(0)" class="btn btn-warning uplJS pull-right">add new</a>
+        </div>
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -76,9 +88,16 @@
 
                             <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
                             <td>
+
                                 @if($item->env)
-                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-info update-live">Update</a>
+                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
                                 @else
+                                    <a href="javascript:void(0)"
+                                       data-name="edit"
+                                       data-id="{!! $item->id !!}"
+                                       data-type="{!! $item->type !!}"
+                                       class="btn btn-warning edit-version"> Edit </a>
+
                                     <a href="javascript:void(0)" data-id="{!! $item->id !!}" class="btn btn-info update-js">
                                         +add new </a>
                                     <a href="javascript:void(0)" data-name="{!! $item->name !!}" data-id="{!! $item->id !!}"
@@ -106,6 +125,8 @@
     @include('uploads::assets._partials.update_js_modal')
     @include('uploads::assets._partials.update_live_modal')
     @include('uploads::assets._partials.change_version_modal')
+    @include('uploads::assets._partials.ace_modal')
+
 @stop
 
 @section('CSS')

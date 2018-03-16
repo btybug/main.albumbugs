@@ -78,7 +78,7 @@
                             if(type == 'css' || type == 'framework'){
                                 editor_html.session.setMode("ace/mode/css");
                             }else{
-                                editor_html.session.setMode("ace/mode/js");
+                                editor_html.session.setMode("ace/mode/javascript");
                             }
                             editor_html.setValue(data.code);
                             $('#version_id').val(id);

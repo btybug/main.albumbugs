@@ -45,6 +45,25 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         @endforeach
     </script>
 @endif
+
+<div class="modal fade" id="myModalCss" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Details</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                {{-- <button type="button" class="btn btn-primary">Save changes</button>--}}
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="template" id="send_form_for_save">
     {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
     <div class="class_for_delete">
@@ -79,9 +98,9 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
     {!! Form::close() !!}
 </script>
 <script type="template" id="send_form_for_edit">
-    {!! Form::open(['url'=>route('edit_style'),'method' => 'post',"class" => "submit_form_for_style_edit"]) !!}
+    {!! Form::open(['url'=>route('edit_style_component'),'method' => 'post',"class" => "submit_form_for_style_edit"]) !!}
     <div class="class_for_delete">
-        <div class="col-md-3">{repl_classname}</div>
+        {{--<div class="col-md-3">{repl_classname}</div>--}}
         <div class="col-md-6">
             @if(isset($style_from_db->html))
                 <div class="col-md-12 parent">
@@ -89,13 +108,13 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
                 </div>
             @endif
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
             <div class="this_flex">
 
                 <textarea class='code_textarea form-control' id="textarea_editor_for_save"></textarea>
-
-                <button class="btn btn-success btn-md check_and_submit" data-id="{repl_id}" type="button" data-slug="{repl_slug}">Save</button>
+                <button class="btn btn-warning btn-md allow_ace_for_edit" type="button">Edit</button>
+                <button class="btn btn-success btn-md check_and_submit custom_hidden" data-id="{repl_id}" type="button" data-slug="{repl_slug}">Save</button>
             </div>
         </div>
     </div>
@@ -137,11 +156,11 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
                 type: 'POST'
             });
         });
-        $("body").delegate(".show_in_just_html","click",function(){
+        /*$("body").delegate(".show_in_just_html","click",function(){
             var content = $(this).data("class");
             $("div.just_for_edit").html("");
             $(this).parents("div.class_for_delete").children("div.just_for_edit").html("<div class='bordered'>" + content + "</div><div class='clearfix'></div>");
-        });
+        });*/
 
         $("body").delegate(".show_in_just_html_for_edit","click",function(){
             var style = $(this).data("class");
@@ -152,16 +171,23 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 
             var content = $("#send_form_for_edit").html();
             content = content.replace("{repl_classname}",class_name).replace("{repl_id}",id).replace("{repl_slug}",slug).replace("{repl_original}",style);
-            $("div.just_for_edit").html("");
-            $(this).parents("div.class_for_delete").children("div.just_for_edit").html(content).find("div.parent").children().addClass(class_name);
+            $("#myModalCss .modal-dialog .modal-body").html(content+"<div class='clearfix'></div>").find("div.parent").children().addClass(class_name);
+            $("#myModalCss").modal("show");
+            //$("div.just_for_edit").html("");
+            // $(this).parents("div.class_for_delete").children("div.just_for_edit").html(content).find("div.parent").children().addClass(class_name);
 
             textarea_editor_for_save = ace.edit("textarea_editor_for_save");
             textarea_editor_for_save.setTheme("ace/theme/monokai");
             textarea_editor_for_save.session.setMode("ace/mode/css");
+            textarea_editor_for_save.setOptions({
+                maxLines: 25,
+                readOnly: true
+            });
             textarea_editor_for_save.setValue(style);
             textarea_editor_for_save.on("focus", function(){
                 textarea_editor_for_save.unsetStyle("set_border");
             });
+            textarea_editor_for_save.renderer.$cursorLayer.element.style.opacity=0
         });
         $("body").delegate(".check_and_submit","click",function(){
             var editor_value = textarea_editor_for_save.getValue();
@@ -178,6 +204,14 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
             return (
                 $(".submit_form_for_style_edit").append("<input type='hidden' name='style_id' value='"+id+"'><textarea class='hidden' name='changed_style'>"+editor_value+"</textarea>").submit()
             );
+        });
+        $("body").delegate(".allow_ace_for_edit","click",function(){
+            textarea_editor_for_save.setOptions({
+                readOnly: false
+            });
+            textarea_editor_for_save.renderer.$cursorLayer.element.style.opacity=1;
+            $(this).addClass("custom_hidden");
+            $(".check_and_submit").removeClass('custom_hidden');
         });
         $("body").delegate(".custom_cancel","click",function(){
             $("div.just_html").html("");

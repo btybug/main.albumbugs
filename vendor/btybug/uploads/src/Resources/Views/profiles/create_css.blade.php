@@ -14,6 +14,16 @@
                 {!! Form::text('name',null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('files','Framework Files') !!}
+                <div class="col-md-12">
+                    @if(count($mains))
+                        @foreach( $mains as $item)
+                            {{ $item->name }} {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+            <div class="form-group">
                 {!! Form::label('files','Files') !!}
                 <div class="col-md-12">
                     @if(count($plugins))

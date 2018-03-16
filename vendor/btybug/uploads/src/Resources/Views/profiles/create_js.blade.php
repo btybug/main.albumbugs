@@ -6,11 +6,21 @@
         </div>
         <div class="col-md-12">
             <h2>Generate Js</h2>
-            {!! Form::model($model,['url' => route('uploads_assets_profiles_create_js_post')]) !!}
+            {!! Form::model($model) !!}
             {!! Form::hidden('type','js') !!}
             <div class="form-group">
                 {!! Form::label('name','Name') !!}
                 {!! Form::text('name',null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('fi','Main Files') !!}
+                <div class="col-md-12">
+                    @if(count($mains))
+                        @foreach( $mains as $item)
+                            {{ $item->name }} {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
+                        @endforeach
+                    @endif
+                </div>
             </div>
             <div class="form-group">
                 {!! Form::label('files','Files') !!}

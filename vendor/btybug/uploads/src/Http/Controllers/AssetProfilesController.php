@@ -68,7 +68,8 @@ class AssetProfilesController extends Controller
     {
         $model = null;
         $plugins = $versionsRepository->getJS();
-        return view('uploads::profiles.create_js', compact(['plugins','model']));
+        $mains = $versionsRepository->getJQuery();
+        return view('uploads::profiles.create_js', compact(['plugins','model','mains']));
     }
 
     public function postJsCreate (
@@ -101,8 +102,8 @@ class AssetProfilesController extends Controller
     {
         $model = null;
         $plugins = $versionsRepository->getCss();
-
-        return view('uploads::profiles.create_css', compact(['plugins','model']));
+        $mains = $versionsRepository->getFrameworks();
+        return view('uploads::profiles.create_css', compact(['plugins','model','mains']));
     }
 
     public function getJsEdit(
@@ -114,8 +115,9 @@ class AssetProfilesController extends Controller
     {
        $model = $profilesRepository->findOrFail($id);
         $plugins = $versionsRepository->getJS();
+        $mains = $versionsRepository->getJQuery();
 
-        return view('uploads::profiles.create_js', compact(['plugins','model']));
+        return view('uploads::profiles.create_js', compact(['plugins','model','mains']));
     }
 
     public function getCssEdit(
@@ -127,8 +129,9 @@ class AssetProfilesController extends Controller
     {
         $model = $profilesRepository->findOrFail($id);
         $plugins = $versionsRepository->getCss();
+        $mains = $versionsRepository->getFrameworks();
 
-        return view('uploads::profiles.create_css', compact(['plugins','model']));
+        return view('uploads::profiles.create_css', compact(['plugins','model','mains']));
     }
 
     public function postCssEdit(
@@ -138,9 +141,11 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
+        $data = $request->except('_token','main');
+        $data['files'] = array_prepend($data['files'],$request->get('main'));
         $model = $profilesRepository->findOrFail($id);
         $profilesService->removeFile($model->hint_path);
-        $updated = $profilesRepository->update($id,$request->except('_token'));
+        $updated = $profilesRepository->update($id,$data);
         $profilesService->generateCSS($updated);
 
         return redirect()->route('uploads_assets_profiles_css');
@@ -153,9 +158,11 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
+        $data = $request->except('_token','main');
+        $data['files'] = array_prepend($data['files'],$request->get('main'));
         $model = $profilesRepository->findOrFail($id);
         $profilesService->removeFile($model->hint_path);
-        $updated = $profilesRepository->update($id,$request->except('_token'));
+        $updated = $profilesRepository->update($id,$data);
         $profilesService->generateJS($updated);
 
         return redirect()->route('uploads_assets_profiles_js');

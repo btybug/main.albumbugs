@@ -193,7 +193,7 @@ class VersionsService extends GeneralService
 
             $this->versionsRepository->create([
                 'name' => $request->get('name'),
-                'type' => "css",
+                'type' => $request->get('type'),
                 'version' => $request->get('version'),
                 'file_name' => $fname,
                 'author_id' => \Auth::id(),
@@ -248,5 +248,29 @@ class VersionsService extends GeneralService
         }
 
         return $data;
+    }
+
+    public function getContent($val){
+        $code = '';
+        if($val->type == 'css' || $val->type == 'framework'){
+            if (\File::exists(public_path("css/versions/" . $val->file_name))) {
+                $code = \File::get(public_path("css/versions/" . $val->file_name));
+            }
+       }else {
+            if (\File::exists(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
+                $code = \File::get(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
+            }
+        }
+
+        return $code;
+    }
+
+    public function updateContent($val,$code)
+    {
+        if($val->type == 'css' || $val->type == 'framework'){
+            \File::put(public_path("css/versions/" . $val->file_name),$code);
+        }else {
+            \File::put(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name),$code);
+        }
     }
 }

@@ -150,8 +150,9 @@ class AssetsController extends Controller
         VersionsRepository $versionsRepository
     )
     {
+        $frameworks = $versionsRepository->getFrameworks();
         $plugins = $versionsRepository->getCss();
-        return view('uploads::assets.css', compact(['plugins']));
+        return view('uploads::assets.css', compact(['plugins','frameworks']));
     }
 
     public function getProfiles(
@@ -201,6 +202,35 @@ class AssetsController extends Controller
         $data = $versionsRepository->findOrFail($request->get('slug'));
         $response = $versionsService->delete($data);
         return \Response::json(['success' => true, 'url' => url('/admin/uploads/assets/js')]);
+    }
+
+    public function getCode(
+        Request $request,
+        VersionsRepository $versionsRepository,
+        VersionsService $versionsService
+    )
+    {
+        $version = $versionsRepository->find($request->get('id'));
+        if($version){
+            $code = $versionsService->getContent($version);
+            return \Response::json(['success' => true, 'code' => $code]);
+        }
+
+        return \Response::json(['success' => false, 'message' => 'Not Found']);
+    }
+
+    public function postSaveCode(
+        Request $request,
+        VersionsRepository $versionsRepository,
+        VersionsService $versionsService
+    )
+    {
+        $version = $versionsRepository->find($request->get('id'));
+        if($version){
+            $code = $versionsService->updateContent($version,$request->get('code'));
+        }
+
+        return redirect()->back();
     }
 }
 

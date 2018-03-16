@@ -108,6 +108,8 @@ Route::group(['prefix' => 'assets'], function () {
     Route::post('/change-version', 'AssetsController@postChangeVersion');
     Route::post('/update-link', 'AssetsController@postUpdateLink');
     Route::post('/get-versions', 'AssetsController@getVersions');
+    Route::post('/get-data', 'AssetsController@getCode');
+    Route::post('/save-code', 'AssetsController@postSaveCode')->name('assets_save_code');
     Route::post('/get-active-versions', 'AssetsController@getActiveVersions');
     Route::post('/upload-version', 'AssetsController@postUploadVersion');
     Route::post('/generate-main-js', 'AssetsController@postGenerateMainJs');

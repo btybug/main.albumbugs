@@ -4,7 +4,7 @@
 
         <h2>Main css framework</h2>
         <div class="col-md-12">
-            <a href="javascript:void(0)" class="btn btn-warning pull-right uplCss">add new</a>
+            <a href="javascript:void(0)" class="btn btn-warning pull-right upload-framework">add new</a>
         </div>
         <div class="col-md-12">
             <table class="table table-striped">
@@ -17,46 +17,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Inactive</td>
-                    <td>backend</td>
-                    <td>local</td>
-                    <td>
-                        <a href="javascript:void(0)"
-                           data-id=""
-                           data-jquery="true" class="btn btn-info update-js">
-                            +add new </a>
-                        <a href="javascript:void(0)"
-                           data-name="backend_jquery"
-                           data-id=""
-                           class="btn btn-primary change-version"> Change Version </a>
-                       {{--ace editor--}}
-                        <a href="javascript:void(0)"
-                           data-name="edit"
-                           data-id=""
-                           class="btn btn-warning edit-version"> Edit </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Active</td>
-                    <td>frontend</td>
-                    <td>local</td>
-                    <td>
-                        <a href="javascript:void(0)"
-                           data-id=""
-                           data-jquery="true" class="btn btn-info update-js">
-                            +add new </a>
-                        <a href="javascript:void(0)"
-                           data-name="frontend_jquery"
-                           data-id=""
-                           class="btn btn-primary change-version"> Change Version </a>
-                        {{--ace editor--}}
-                        <a href="javascript:void(0)"
-                           data-name="edit"
-                           data-id=""
-                           class="btn btn-warning edit-version"> Edit </a>
-                    </td>
-                </tr>
+                @if(count($frameworks))
+                    @foreach($frameworks as $item)
+                        <tr>
+                            <td>{!! $item->name !!}</td>
+                            <td>{!! BBGetUserName($item->author_id) !!}</td>
+                            <td>{!! $item->version !!}</td>
+                            <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
+                            <td>
+                                @if($item->env)
+                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
+                                @else
+                                    <a href="javascript:void(0)"
+                                       data-name="edit"
+                                       data-id="{!! $item->id !!}"
+                                       data-type="{!! $item->type !!}"
+                                       class="btn btn-warning edit-version"> Edit </a>
+                                @endif
+                                    <a data-href="{!! url('admin/uploads/assets/delete') !!}"
+                                       data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
+                                       class="delete-button btn btn-danger"><i
+                                                class="fa fa-trash-o f-s-14 "></i></a>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="4">No frameworks</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -89,7 +79,13 @@
                             <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
                             <td>
                                 @if($item->env)
-                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-info update-live">Update</a>
+                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
+                                @else
+                                    <a href="javascript:void(0)"
+                                       data-name="edit"
+                                       data-id="{!! $item->id !!}"
+                                       data-type="{!! $item->type !!}"
+                                       class="btn btn-warning edit-version"> Edit </a>
                                 @endif
 
                                 <a data-href="{!! url('admin/uploads/assets/delete') !!}"
@@ -97,16 +93,12 @@
                                    class="delete-button btn btn-danger"><i
                                             class="fa fa-trash-o f-s-14 "></i></a>
                                     {{--ace editor--}}
-                                    <a href="javascript:void(0)"
-                                       data-name="edit"
-                                       data-id=""
-                                       class="btn btn-warning edit-version"> Edit </a>
                             </td>
                         </tr>
                     @endforeach
                 @else
                     <tr>
-                        <td rowspan="4">No libraries</td>
+                        <td colspan="4">No libraries</td>
                     </tr>
                 @endif
                 </tbody>
@@ -116,6 +108,7 @@
 
     @include('btybug::_partials.delete_modal')
     @include('uploads::assets._partials.upload_modal')
+    @include('uploads::assets._partials.ace_modal')
 
     @include('uploads::assets._partials.update_live_modal')
 @stop

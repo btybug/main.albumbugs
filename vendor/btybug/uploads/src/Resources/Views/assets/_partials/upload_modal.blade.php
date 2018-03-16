@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row">
                     {!! Form::open(['class' => 'form-horizontal','files' => true]) !!}
-                    {!! Form::hidden('type','css') !!}
+                    {!! Form::hidden('type','css',['id' => 'cssType']) !!}
                     <div>
                         <label for="username">Name</label>
                         {!! Form::text('name',null,['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
@@ -54,8 +54,14 @@
     <script>
         $(document).ready(function () {
             $('body').on('click', '.uplCss', function () {
+                $("#cssType").val('css');
                 $('#uploadfile').modal();
             });
+            $('body').on('click', '.upload-framework', function () {
+                $("#cssType").val('framework');
+                $('#uploadfile').modal();
+            });
+
             $('input[name=env]').on('change',function () {
                 var type=$(this).val();
                 switch (type){

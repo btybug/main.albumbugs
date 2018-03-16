@@ -38,6 +38,11 @@ class VersionsRepository extends GeneralRepository
         return $this->model->where('type', 'css')->get();
     }
 
+    public function getFrameworks()
+    {
+        return $this->model->where('type', 'framework')->get();
+    }
+
     public function getByExcept(string $attribute, string $value, string $except, string $exceptValue)
     {
         return $this->model()->where($attribute, $value)->where($except, '!=', $exceptValue)->get();

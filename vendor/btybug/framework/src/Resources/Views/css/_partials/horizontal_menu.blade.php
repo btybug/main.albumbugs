@@ -1,7 +1,7 @@
 <div class="d1">
     <h2>Horizontal Menu</h2>
     <div class="col-md-12">
-        <div class="col-md-7 p-t-34">
+        <div class="col-md-8 p-t-34">
             <div class="bty-horizontal-menu-1">
                 <ul>
                     <li><a href="#" target="_blank"><i class="fa fa-fw fa-home"></i>Menu 1</a></li>
@@ -22,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <h5>bty-horizontal-menu-1</h5>
             <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
 .bty-horizontal-menu-1,
@@ -298,164 +298,672 @@
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Horizontal Menu 1</h4>
-        <h5>bty-horizontal-menu-1</h5>
-        <div class="bty-horizontal-menu-1">
-            <ul>
-                <li><a href="#" target="_blank"><i class="fa fa-fw fa-home"></i>Menu 1</a></li>
-                <li class="has-sub"><a href="#"><i class="fa fa-fw fa-bars"></i>
-                        Menu 2</a>
-                    <ul>
-                        <li class="has-sub"><a href="#">Menu 2.1</a>
-                            <ul>
-                                <li><a href="#">Menu 2.1.1</a></li>
-                                <li><a href="#">Menu 2.2.2</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Menu 2.2</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-fw fa-cog"></i> Menu 3</a></li>
-                <li><a href="#"><i class="fa fa-fw fa-phone"></i> Menu 4</a></li>
-            </ul>
+        <div class="col-md-8 p-t-34">
+            <div class="bty-horizontal-menu-2">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Menu 1</a></li>
+                    <li><a href="#">Menu 2</a></li>
+                    <li><a href="#">Menu 3</a></li>
+                    <li><a href="#">Menu 4</a></li>
+                    <li><a href="#">Menu 5</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>bty-horizontal-menu-2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-horizontal-menu-2 > ul {
+    background-color: #000000c9;
+    padding: 17px 0;
+    box-shadow: 0px 1px 2px #545454;
+    display: inline-block;
+}
+
+.bty-horizontal-menu-2 > ul li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0 1.5em;
+    padding: 0;
+}
+
+.bty-horizontal-menu-2 > ul a {
+    padding: 0.6em 0;
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.bty-horizontal-menu-2 > ul a:hover {
+    color: white;
+}
+
+.bty-horizontal-menu-2 > ul a:before,
+.bty-horizontal-menu-2 > ul a:after {
+    position: absolute;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+
+.bty-horizontal-menu-2 > ul a:before {
+    top: 0;
+    display: block;
+    height: 3px;
+    width: 0%;
+    content: "";
+    background-color: #c0392b;
+}
+
+.bty-horizontal-menu-2 > ul a:after {
+    left: 0;
+    top: 0;
+    padding: 0.5em 0;
+    position: absolute;
+    content: attr(data-hover);
+    color: #ffffff;
+    white-space: nowrap;
+    max-width: 0%;
+    overflow: hidden;
+}
+
+.bty-horizontal-menu-2 > ul a:hover:before,
+.bty-horizontal-menu-2 > ul li:first-child a:before {
+    opacity: 1;
+    width: 100%;
+}
+
+.bty-horizontal-menu-2 > ul a:hover:after,
+.bty-horizontal-menu-2 > ul li:first-child a:after {
+    max-width: 100%;
+}
+            </textarea>
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Horizontal Menu 2</h4>
-        <h5>bty-horizontal-menu-2</h5>
-        <p>No dropdown</p>
-        <div class="bty-horizontal-menu-2">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Menu 1</a></li>
-                <li><a href="#">Menu 2</a></li>
-                <li><a href="#">Menu 3</a></li>
-                <li><a href="#">Menu 4</a></li>
-                <li><a href="#">Menu 5</a></li>
-            </ul>
+        <div class="col-md-8 p-t-34">
+            <div class="bty-horizontal-menu-3">
+                <ul>
+                    <li><a href="#">Menu 1</a></li>
+                    <li><a href="#">Menu 2</a>
+                        <ul>
+                            <li><a href="#">Menu 2.1</a></li>
+                            <li><a href="#">Menu 2.2</a></li>
+                            <li><a href="#">Menu 2.3</a></li>
+                            <li><a href="#">Menu 2.4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Menu 3</a>
+                        <ul>
+                            <li><a href="#">Menu 3.1</a></li>
+                            <li><a href="#">Menu 3.2</a>
+                                <ul>
+                                    <li><a href="#">Menu 3.2</a></li>
+                                    <li><a href="#">Menu 3.3</a></li>
+                                    <li><a href="#">Menu 3.4</a></li>
+                                    <li><a href="#">Menu 3.5</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Menu 3.3</a></li>
+                            <li><a href="#">Menu 3.4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Menu 4</a></li>
+                    <li><a href="#">Menu 5</a>
+                        <ul>
+                            <li><a href="#">Menu 5.1</a></li>
+                            <li><a href="#">Menu 5.2</a></li>
+                            <li><a href="#">Menu 5.3</a></li>
+                            <li><a href="#">Menu 5.4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Menu 6</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>bty-horizontal-menu-3</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-horizontal-menu-3 {
+    display: block;
+}
+
+.bty-horizontal-menu-3 ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bty-horizontal-menu-3 > ul a {
+    display: block;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    padding: .8em 1.8em;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-shadow: 0 -1px 0 #000;
+    position: relative;
+}
+
+.bty-horizontal-menu-3 > ul {
+    vertical-align: top;
+    display: inline-block;
+    border-radius: 6px;
+}
+
+.bty-horizontal-menu-3 > ul li {
+    position: relative;
+}
+
+.bty-horizontal-menu-3 > ul > li {
+    float: left;
+    border-bottom: 4px #aaa solid;
+    margin-right: 1px;
+}
+
+.bty-horizontal-menu-3 > ul > li > a {
+    margin-bottom: 1px;
+    box-shadow: inset 0 2em .33em -.5em #555;
+}
+
+.bty-horizontal-menu-3 > ul > li:hover, .bty-horizontal-menu-3 > ul > li:hover > a {
+    border-bottom-color: #499bc7;
+}
+
+.bty-horizontal-menu-3 > ul li:hover > a {
+    color: #499bc7;
+}
+
+.bty-horizontal-menu-3 > ul > li:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.bty-horizontal-menu-3 > ul > li:first-child > a {
+    border-radius: 4px 0 0 0;
+}
+
+.bty-horizontal-menu-3 > ul > li:last-child {
+    border-radius: 0 0 4px 0;
+    margin-right: 0;
+}
+
+.bty-horizontal-menu-3 > ul > li:last-child > a {
+    border-radius: 0 4px 0 0;
+}
+
+.bty-horizontal-menu-3 > ul li li a {
+    margin-top: 1px
+}
+
+.bty-horizontal-menu-3 > ul li a:first-child:nth-last-child(2):before {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: 5px solid transparent;
+    top: 50%;
+    right: 5px;
+}
+
+/* submenu positioning*/
+.bty-horizontal-menu-3 > ul ul {
+    position: absolute;
+    white-space: nowrap;
+    border-bottom: 5px solid #499bc7;
+    z-index: 1;
+    left: -99999em;
+}
+
+.bty-horizontal-menu-3 > ul > li:hover > ul {
+    left: auto;
+    padding-top: 5px;
+    min-width: 100%;
+}
+
+.bty-horizontal-menu-3 > ul > li li ul {
+    border-left: 1px solid #fff;
+}
+
+.bty-horizontal-menu-3 > ul > li li:hover > ul {
+    /* margin-left: 1px */
+    left: 100%;
+    top: -1px;
+}
+
+/* arrow hover styling */
+.bty-horizontal-menu-3 > ul > li > a:first-child:nth-last-child(2):before {
+    border-top-color: #aaa;
+}
+
+.bty-horizontal-menu-3 > ul > li:hover > a:first-child:nth-last-child(2):before {
+    border: 5px solid transparent;
+    border-bottom-color: #499bc7;
+    margin-top: -5px
+}
+
+.bty-horizontal-menu-3 > ul li li > a:first-child:nth-last-child(2):before {
+    border-left-color: #aaa;
+    margin-top: -5px
+}
+
+.bty-horizontal-menu-3 > ul li li:hover > a:first-child:nth-last-child(2):before {
+    border: 5px solid transparent;
+    border-right-color: #499bc7;
+    right: 10px;
+}
+            </textarea>
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Horizontal Menu 3</h4>
-        <h5>bty-horizontal-menu-3</h5>
-        <div class="bty-horizontal-menu-3">
-            <ul>
-                <li><a href="#">Menu 1</a></li>
-                <li><a href="#">Menu 2</a>
-                    <ul>
-                        <li><a href="#">Menu 2.1</a></li>
-                        <li><a href="#">Menu 2.2</a></li>
-                        <li><a href="#">Menu 2.3</a></li>
-                        <li><a href="#">Menu 2.4</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Menu 3</a>
-                    <ul>
-                        <li><a href="#">Menu 3.1</a></li>
-                        <li><a href="#">Menu 3.2</a>
-                            <ul>
-                                <li><a href="#">Menu 3.2</a></li>
-                                <li><a href="#">Menu 3.3</a></li>
-                                <li><a href="#">Menu 3.4</a></li>
-                                <li><a href="#">Menu 3.5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Menu 3.3</a></li>
-                        <li><a href="#">Menu 3.4</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Menu 4</a></li>
-                <li><a href="#">Menu 5</a>
-                    <ul>
-                        <li><a href="#">Menu 5.1</a></li>
-                        <li><a href="#">Menu 5.2</a></li>
-                        <li><a href="#">Menu 5.3</a></li>
-                        <li><a href="#">Menu 5.4</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Menu 6</a></li>
-            </ul>
+        <div class="col-md-8 p-t-34">
+            <div class="bty-horizontal-menu-4">
+                <ul>
+                    <li><a href="#">Menu 1</a></li>
+                    <li><a href="#">Menu 2</a>
+                        <ul>
+                            <li><a href="#">Menu 2.1</a></li>
+                            <li><a href="#">Menu 2.2</a></li>
+                            <li><a href="#">Menu 2.3</a></li>
+                            <li><a href="#">Menu 2.4</a></li>
+                            <li><a href="#">Menu 2.5</a>
+                                <ul>
+                                    <li><a href="#">Level 2</a></li>
+                                    <li><a href="#">Level 2</a></li>
+                                    <li><a href="#">Level 2</a></li>
+                                    <li><a href="#">Level 2</a></li>
+                                    <li><a href="#">Level 2</a>
+                                        <ul>
+                                            <li><a href="#">Level 3</a></li>
+                                            <li><a href="#">Level 3</a>
+                                                <ul>
+                                                    <li><a href="#">Level 4</a></li>
+                                                    <li><a href="#">Level 4</a></li>
+                                                    <li><a href="#">Level 4</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Level 3</a></li>
+                                            <li><a href="#">Level 3</a></li>
+                                            <li><a href="#">Level 3</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Menu 3</a></li>
+                    <li><a href="#">Menu 4</a></li>
+                    <li><a href="#">Menu 5</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>bty-horizontal-menu-4</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-horizontal-menu-4 {
+    display: block;
+}
+
+.bty-horizontal-menu-4 ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bty-horizontal-menu-4 > ul a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: .8em 1.8em;
+    letter-spacing: 2px;
+    text-shadow: 0 -1px 0 #000;
+    position: relative;
+    background: black;
+    background: rgba(0, 0, 0, .6);
+    -webkit-transition: color .3s ease-in;
+    -moz-transition: color .3s ease-in;
+    -o-transition: color .3s ease-in;
+    -ms-transition: color .3s ease-in;
+}
+
+.bty-horizontal-menu-4 > ul {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.bty-horizontal-menu-4 > ul li {
+    position: relative;
+}
+
+.bty-horizontal-menu-4 > ul li a:hover {
+    color: #0fd0f9;
+}
+
+.bty-horizontal-menu-4 > ul > li {
+    float: left;
+    margin-right: 1px;
+}
+
+.bty-horizontal-menu-4 > ul > li > a {
+    margin-bottom: 1px;
+    box-shadow: inset 0 2em .33em -.5em #555;
+}
+
+.bty-horizontal-menu-4 > ul > li:hover, .bty-horizontal-menu-3 > ul > li:hover > a {
+
+}
+
+.bty-horizontal-menu-4 > ul li:hover > a {
+    background: rgba(0, 0, 0, .75);
+}
+
+.bty-horizontal-menu-4 > ul li li a {
+    margin-top: 1px
+}
+
+.bty-horizontal-menu-4 > ul li a:first-child:nth-last-child(2):before {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: 5px solid transparent;
+    top: 50%;
+    right: 5px;
+
+}
+
+/* submenu positioning*/
+.bty-horizontal-menu-4 > ul ul {
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+    left: -99999em;
+    -webkit-transition: .3s ease-in, background .3s ease-in;
+    -moz-transition: .3s ease-in, background .3s ease-in;
+    -o-transition: .3s ease-in, background .3s ease-in;
+    -ms-transition: .3s ease-in, background .3s ease-in;
+}
+
+.bty-horizontal-menu-4 > ul > li:hover > ul {
+    left: auto;
+    min-width: 100%;
+    font-size: 13px;
+}
+
+.bty-horizontal-menu-4 > ul > li li ul {
+    border-left: 1px solid #fff;
+}
+
+.bty-horizontal-menu-4 > ul > li li:hover > ul {
+    /* margin-left: 1px */
+    left: 100%;
+    top: -1px;
+    font-size: 12px;
+}
+
+/* arrow hover styling */
+.bty-horizontal-menu-4 > ul > li > a:first-child:nth-last-child(2):before {
+    border-top-color: white;
+}
+
+.bty-horizontal-menu-4 > ul > li:hover > a:first-child:nth-last-child(2):before {
+    border: 5px solid transparent;
+    border-bottom-color: white;
+    margin-top: -5px
+}
+
+.bty-horizontal-menu-4 > ul li li > a:first-child:nth-last-child(2):before {
+    border-left-color: white;
+    margin-top: -5px
+}
+
+.bty-horizontal-menu-4 > ul li li:hover > a:first-child:nth-last-child(2):before {
+    border: 5px solid transparent;
+    border-right-color: white;
+    right: 10px;
+}
+            </textarea>
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Horizontal Menu 4</h4>
-        <h5>bty-horizontal-menu-4</h5>
-        <div class="bty-horizontal-menu-4">
-            <ul>
-                <li><a href="#">Menu 1</a></li>
-                <li><a href="#">Menu 2</a>
-                    <ul>
-                        <li><a href="#">Menu 2.1</a></li>
-                        <li><a href="#">Menu 2.2</a></li>
-                        <li><a href="#">Menu 2.3</a></li>
-                        <li><a href="#">Menu 2.4</a></li>
-                        <li><a href="#">Menu 2.5</a>
-                            <ul>
-                                <li><a href="#">Level 2</a></li>
-                                <li><a href="#">Level 2</a></li>
-                                <li><a href="#">Level 2</a></li>
-                                <li><a href="#">Level 2</a></li>
-                                <li><a href="#">Level 2</a>
-                                    <ul>
-                                        <li><a href="#">Level 3</a></li>
-                                        <li><a href="#">Level 3</a>
-                                            <ul>
-                                                <li><a href="#">Level 4</a></li>
-                                                <li><a href="#">Level 4</a></li>
-                                                <li><a href="#">Level 4</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Level 3</a></li>
-                                        <li><a href="#">Level 3</a></li>
-                                        <li><a href="#">Level 3</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">Menu 3</a></li>
-                <li><a href="#">Menu 4</a></li>
-                <li><a href="#">Menu 5</a></li>
-            </ul>
+        <div class="col-md-8 p-t-34">
+            <div class="bty-horizontal-menu-5">
+                <ul>
+                    <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 1</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 2</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 3</a>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-fw fa-home"></i>Menu 3.1</a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-home"></i>Menu 3.2</a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-home"></i>Menu 3.3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 4</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 5</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>bty-horizontal-menu-5</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-horizontal-menu-5 {
+    background-color: #499bc7;
+    font-size: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.bty-horizontal-menu-5 ul {
+    font-size: 12px;
+    position: relative;
+}
+
+.bty-horizontal-menu-5 i {
+    font-size: 3em;
+}
+
+.bty-horizontal-menu-5 li {
+    display: inline-block;
+    height: inherit;
+}
+
+.bty-horizontal-menu-5 a {
+    color: #fff;
+    font-size: 1.3em;
+    display: block;
+    height: inherit;
+    margin: 0;
+    text-decoration: none;
+    padding: 6px 12px;
+}
+
+.bty-horizontal-menu-5 a:hover {
+    background-color: #3f7fa5;
+    transition: background .25s ease;
+}
+
+.bty-horizontal-menu-5 > ul li ul {
+    background-color: #3f7fa5;
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    transition: opacity .75s;
+    width: 100%;
+    z-index: 10;
+}
+
+.bty-horizontal-menu-5 li:hover ul {
+    left: 0;
+    opacity: 1;
+    margin: 0 !important;
+}
+
+.bty-horizontal-menu-5 > ul li ul i {
+    font-size: 1em;
+}
+
+.bty-horizontal-menu-5 > ul li ul a {
+    line-height: 3em;
+    padding: 0 2em;
+    height: inherit;
+    width: 100%;
+}
+
+.bty-horizontal-menu-5 > ul li ul a:hover {
+    background-color: #499bc7;
+}
+            </textarea>
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Horizontal Menu 5</h4>
-        <h5>bty-horizontal-menu-5</h5>
-        <div class="bty-horizontal-menu-5">
-            <ul>
-                <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 1</a></li>
-                <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 2</a></li>
-                <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 3</a>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-fw fa-home"></i>Menu 3.1</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-home"></i>Menu 3.2</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-home"></i>Menu 3.3</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 4</a></li>
-                <li><a href="#"><i class="fa fa-fw fa-home"></i><br/>Menu 5</a></li>
-            </ul>
+        <div class="col-md-8 p-t-34">
+            <div class="bty-horizontal-menu-6">
+                <ul>
+                    <li><a href="#">Menu 1</a></li>
+                    <li><a href="#">Menu 2</a></li>
+                    <li><a href="#">Menu 3</a>
+                        <ul>
+                            <li><a href="#">Menu 3.1</a></li>
+                            <li><a href="#">Menu 3.2</a></li>
+                            <li><a href="#">Menu 3.3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Menu 4</a></li>
+                    <li><a href="#">Menu 5</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>bty-horizontal-menu-6</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-horizontal-menu-6 > ul:before, .bty-horizontal-menu-6 > ul:after {
+    content: " ";
+    display: table;
+}
+
+.bty-horizontal-menu-6 > ul:after {
+    clear: both;
+}
+
+.bty-horizontal-menu-6 > ul {
+    *zoom: 1;
+}
+
+.bty-horizontal-menu-6 > ul {
+    list-style: none;
+    margin: 50px auto;
+    width: 800px;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.bty-horizontal-menu-6 > ul > li {
+    background: #34495e;
+    float: left;
+    position: relative;
+    -webkit-transform: skewX(25deg);
+    border-left: 1px solid #999;
+}
+
+.bty-horizontal-menu-6 > ul a {
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.bty-horizontal-menu-6 > ul li:hover {
+    background: #e74c3c;
+}
+
+.bty-horizontal-menu-6 > ul > li > a {
+    -webkit-transform: skewX(-25deg);
+    padding: 1em 2em;
+}
+
+/* Dropdown */
+.bty-horizontal-menu-6 > ul > li ul {
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+    -webkit-transform: skewX(-25deg);
+    -webkit-transform-origin: left top;
+}
+
+.bty-horizontal-menu-6 > ul > li ul li {
+    background-color: #34495e;
+    position: relative;
+    overflow: hidden;
+}
+
+.bty-horizontal-menu-6 > ul > li ul > li > a {
+    padding: 1em 2em;
+}
+
+.bty-horizontal-menu-6 > ul > li ul > li::after {
+    content: '';
+    position: absolute;
+    top: -125%;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 50px rgba(0, 0, 0, .9);
+}
+
+/* Odd stuff */
+.bty-horizontal-menu-6 > ul > li ul > li:nth-child(odd) {
+    -webkit-transform: skewX(-25deg) translateX(0);
+}
+
+.bty-horizontal-menu-6 > ul > li ul > li:nth-child(odd) > a {
+    -webkit-transform: skewX(25deg);
+}
+
+.bty-horizontal-menu-6 > ul > li ul > li:nth-child(odd)::after {
+    right: -50%;
+    -webkit-transform: skewX(-25deg) rotate(3deg);
+}
+
+/* Even stuff */
+.bty-horizontal-menu-6 > ul > li ul > li:nth-child(even) {
+    -webkit-transform: skewX(25deg) translateX(0);
+}
+
+.bty-horizontal-menu-6 > ul > li ul > li:nth-child(even) > a {
+    -webkit-transform: skewX(-25deg);
+}
+
+.bty-horizontal-menu-6 > ul > li ul > li:nth-child(even)::after {
+    left: -50%;
+    -webkit-transform: skewX(25deg) rotate(3deg);
+}
+
+/* Show dropdown */
+.bty-horizontal-menu-6 > ul > li ul, .bty-horizontal-menu-6 > ul > li ul li {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.bty-horizontal-menu-6 > ul > li ul li {
+    transition: .2s ease -webkit-transform;
+}
+
+.bty-horizontal-menu-6 > ul > li:hover ul, .bty-horizontal-menu-6 > ul > li:hover ul li {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bty-horizontal-menu-6 > ul > li:hover ul li:nth-child(even) {
+    -webkit-transform: skewX(25deg) translateX(15px);
+}
+
+.bty-horizontal-menu-6 > ul > li:hover ul li:nth-child(odd) {
+    -webkit-transform: skewX(-25deg) translateX(-15px);
+}
+            </textarea>
         </div>
     </div>
-    <div class="col-md-12">
-        <h4>Horizontal Menu 6</h4>
-        <h5>bty-horizontal-menu-6</h5>
-        <div class="bty-horizontal-menu-6">
-            <ul>
-                <li><a href="#">Menu 1</a></li>
-                <li><a href="#">Menu 2</a></li>
-                <li><a href="#">Menu 3</a>
-                    <ul>
-                        <li><a href="#">Menu 3.1</a></li>
-                        <li><a href="#">Menu 3.2</a></li>
-                        <li><a href="#">Menu 3.3</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Menu 4</a></li>
-                <li><a href="#">Menu 5</a></li>
-            </ul>
-        </div>
-    </div>
+
 </div>

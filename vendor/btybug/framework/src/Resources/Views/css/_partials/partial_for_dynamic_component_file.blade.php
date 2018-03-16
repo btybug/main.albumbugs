@@ -1,6 +1,6 @@
 <?php
-$path = base_path('public'.DS.'components');
-$data = getDinamicStyleForCssFileDemo($slug,"table_css");
+$path = base_path('public'.DS.'dynamic_components');
+$data = getDinamicStyleForCssFileDemo($slug,"dynamic_component_css");
 $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 ?>
 <style>
@@ -20,7 +20,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
     }
 </style>
 @if($file)
-    {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'components') !!}
+    {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'dynamic_components') !!}
 @endif
 
 <div class="col-md-12 append_here">
@@ -76,7 +76,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 
 
 <script type="template" id="send_form_for_save">
-    {!! Form::open(['url'=>route('save_style_component'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
+    {!! Form::open(['url'=>route('save_style_component_dynamic'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
     <div class="class_for_delete">
         @if(isset($style_from_db->html))
             <div class="col-md-4 parent">
@@ -109,7 +109,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
     {!! Form::close() !!}
 </script>
 <script type="template" id="send_form_for_edit">
-    {!! Form::open(['url'=>route('edit_style_component'),'method' => 'post',"class" => "submit_form_for_style_edit"]) !!}
+    {!! Form::open(['url'=>route('edit_style_component_dynamic'),'method' => 'post',"class" => "submit_form_for_style_edit"]) !!}
     <div class="class_for_delete">
         {{--<div class="col-md-3">{repl_classname}</div>--}}
         <div class="col-md-6">
@@ -150,7 +150,7 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
             var id = $(this).data("id");
             var _token = $('input[name=_token]').val();
             var that = $(this);
-            var url = base_path + "/admin/framework/component/removeclass";
+            var url = base_path + "/admin/framework/dynamic-component/removeclass";
             $.ajax({
                 url: url,
                 data: {

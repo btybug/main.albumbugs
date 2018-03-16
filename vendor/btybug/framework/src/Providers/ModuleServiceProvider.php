@@ -69,8 +69,14 @@ class ModuleServiceProvider extends ServiceProvider
                     "is_core" => "yes"
                 ],
                 [
-                    "title" => "Component",
-                    "custom-link" => "/admin/framework/component",
+                    "title" => "HTML Component",
+                    "custom-link" => "/admin/framework/html-component",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],
+                [
+                    "title" => "Dynamic Component",
+                    "custom-link" => "/admin/framework/dynamic-component",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ]

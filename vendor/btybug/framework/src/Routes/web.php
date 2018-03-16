@@ -39,7 +39,7 @@ Route::group(['prefix' => 'css-classes'], function () {
     Route::get('/', 'CssController@getContent', true)->name('get_content');
 
 });
-Route::group(['prefix' => 'component'], function () {
+Route::group(['prefix' => 'html-component'], function () {
     Route::get('/', 'CssController@getComponent', true)->name('get_content_component');
     Route::post('/createfolder', 'CssController@createFolderComponent')->name('create_folder_component');
     Route::post('/createfile/{dirname}', 'CssController@createFileComponent')->name('create_file_component');
@@ -51,5 +51,27 @@ Route::group(['prefix' => 'component'], function () {
     Route::post('/savestylecomponent', 'CssController@saveStyleComponent', true)->name('save_style_component');
     Route::post('/editstylecomponent', 'CssController@EditStyleComponent')->name('edit_style_component');
     Route::post('/renamefolder', 'CssController@renameGroupComponent')->name('rename_group_component');
+});
+
+Route::group(['prefix' => 'dynamic-component'], function () {
+    Route::get('/', 'DynamicComponentController@getComponent', true)->name('get_content_component_dynamic');
+    Route::post('/createfolder', 'DynamicComponentController@createFolderComponent')->name('create_folder_component_dynamic');
+    Route::post('/createfile/{dirname}', 'DynamicComponentController@createFileComponent')->name('create_file_component_dynamic');
+    Route::post('/removedir', 'DynamicComponentController@removeDirComponent')->name('remove_dir_component_dynamic');
+    Route::post('/removefile', 'DynamicComponentController@removeFileComponent')->name('remove_file_component_dynamic');
+    Route::post('/removeclass', 'DynamicComponentController@removeClassComponent')->name('remove_class_component_dynamic');
+    Route::post('/reset', 'DynamicComponentController@resetFileComponent')->name('reset_file_component_dynamic');
+    Route::get('/savestyle', 'DynamicComponentController@saveStyleWithHtmlComponent', true)->name('save_style_with_html_component_dynamic');
+    Route::post('/savestylecomponent', 'DynamicComponentController@saveStyleComponent', true)->name('save_style_component_dynamic');
+    Route::post('/editstylecomponent', 'DynamicComponentController@EditStyleComponent')->name('edit_style_component_dynamic');
+    Route::post('/renamefolder', 'DynamicComponentController@renameGroupComponent')->name('rename_group_component_dynamic');
+
+    Route::get('/createtabledynamictablecss', function(){
+        \Btybug\Framework\Database\CreateDynamicComponentCssTable::up();
+    });
+    Route::get('/createdynamiccomponenttablestyles', function(){
+        \Btybug\Framework\Database\CreateDynamicComponentStyles::up();
+    });
+
 });
 

@@ -1,6 +1,6 @@
 <?php
 $path = base_path('public'.DS.'dinamiccss');
-$data = $data = getDinamicStyleForCssFileDemo($slug);
+$data = $data = getDinamicStyleForCssFileDemo($slug,"table_css");
 $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
 ?>
 <style>

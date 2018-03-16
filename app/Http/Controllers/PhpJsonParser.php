@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use Btybug\Framework\Models\DynamicComponentCss;
 use Btybug\Framework\Models\TableCss;
 
 class PhpJsonParser
@@ -57,8 +58,18 @@ class PhpJsonParser
 
        return $html;
    }
-    public static function getClassesCssFileDemo($filename){
-        $file = TableCss::where("slug",$filename)->with("styles")->first();
+    public static function getClassesCssFileDemo($filename,$table_name){
+       switch ($table_name){
+           case "table_css":
+               $file = TableCss::where("slug",$filename)->with("styles")->first();
+               break;
+           case "dynamic_component_css":
+               $file = DynamicComponentCss::where("slug",$filename)->with("styles")->first();
+               break;
+           default:
+               $file = null;
+       }
+
         return $file;
     }
     public static function renderHtmlForDemo($data,$codes){
@@ -68,9 +79,15 @@ class PhpJsonParser
         }
         return $str;
     }
+    public static function checkAndCreate($path){
+       if(\File::exists($path)){
+           return true;
+       }
+       return \File::makeDirectory($path);
+    }
     public static function getFoldersWithChildrens($path){
-
-       $dirs = \File::directories($path);
+        self::checkAndCreate($path);
+        $dirs = \File::directories($path);
            $arr = [];
        if(count($dirs)){
            foreach ($dirs as $key => $dir){
@@ -126,9 +143,9 @@ class PhpJsonParser
         $name = implode('_',$name);
         return $name;
     }
-    public static function generateCssFile($path,$type){
+    public static function generateCssFile($path,$type,$data){
        $file = self::getFileByName($type,$path);
-       $data =  TableCss::where("slug",$type)->with("styles")->first();
+       //$data =  TableCss::where("slug",$type)->with("styles")->first();
        $styles = $data->styles;
         $str = "";
         if(count($styles)){

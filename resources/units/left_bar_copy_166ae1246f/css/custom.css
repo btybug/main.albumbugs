@@ -150,11 +150,7 @@
     background-color: #0f1722;
     color: #FFFFFF;
 }
-.aside-left .user-profile{
-    background: url(../../../public/images/438372.jpg) no-repeat;
-    position: relative;
-    background-size: cover;
-}
+
 .aside-left .user-profile .profile-img {
     width: 50px;
     margin-left: 30px;

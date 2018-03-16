@@ -11,10 +11,8 @@
                 <div class="profile-img"><img src="{!! BBGetUserAvatar() !!}" alt="user"></div>
             @endif
             @if(isset($settings['user_name']))
-                <div class="profile-text"><a href="#">{!! BBGetUserName() !!}</a>
+                <div class="profile-text"><a href="#">{!! BBGetUserName() !!}</a></div>
                     @endif
-
-                </div>
         </div>
 
         @if (is_array($menu_array))
@@ -55,14 +53,14 @@
 <div class="clearfix"></div>
 
 
-<style>
     @if(isset($settings['background_image']))
+<style>
     .aside-left .user-profile {
         background: url(../../../public/images/438372.jpg) no-repeat;
         position: relative;
         background-size: cover;
     }
-    @endif
 </style>
+    @endif
 {!! BBstyle($_this->path.DS.'css'.DS.'custom.css') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'script.js') !!}

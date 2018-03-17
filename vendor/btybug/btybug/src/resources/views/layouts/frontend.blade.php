@@ -29,8 +29,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
-    <script src="{{ url("public/js/jquery-ui/jquery-ui.min.js") }}" type="text/javascript"></script>
+    {!! BBJs() !!}
+    {{--{!! HTML::script("public/js/jquery-2.1.4.min.js") !!}--}}
+    {{--<script src="{{ url("public/js/jquery-ui/jquery-ui.min.js") }}" type="text/javascript"></script>--}}
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
     {!! HTML::script("public/js/UiElements/bb_iframejs.js") !!}
@@ -70,9 +71,9 @@
     @endif
     @yield('content')
 <!-- jQuery first, then Bootstrap JS. -->
-    {!! BBJquery() !!}
-    {!! BBMainFrontJS() !!}
-    {!! BBJs() !!}
+    {{--{!! BBJquery() !!}--}}
+    {{--{!! BBMainFrontJS() !!}--}}
+    {{--{!! BBJs() !!}--}}
     {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->title).'.js') !!}
     @yield('js')
 </div>

@@ -9,8 +9,9 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Version</th>
+                    <th>Name</th>
                     <th>Positions</th>
+                    <th>Version</th>
                     <th>Live/Local</th>
                     <th>Actions</th>
                 </tr>

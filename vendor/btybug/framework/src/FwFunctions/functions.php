@@ -26,10 +26,12 @@ function BBCss($section = 'frontend')
     if (count($model)) {
         if (isset($model['css_version']) && count($model['css_version'])) {
             foreach ($model['css_version'] as $id){
-                $versionRepo = new \Btybug\Framework\Repository\VersionsRepository();
+                $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
                 $version = $versionRepo->find($id);
-                $path = ($version->env =='local') ? "public/css/versions/" . $version->file_name : $version->file_name;
-                return Html::style($path);
+                if($version){
+                    return Html::style("public/" .$version->hint_path);
+                }
+//                $path = ($version->env =='local') ? "public/css/versions/" . $version->file_name : $version->file_name;
             }
         }
     }
@@ -43,9 +45,11 @@ function BBJs($section = 'frontend')
     if (count($model)) {
         if (isset($model['js_data']) && count($model['js_data'])) {
             foreach ($model['js_data'] as $id){
-                $versionRepo = new \Btybug\Framework\Repository\VersionsRepository();
+                $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
                 $version = $versionRepo->find($id);
-                return Html::style($version->file_name);
+                if($version){
+                    return Html::script("public/" .$version->hint_path);
+                }
             }
         }
     }

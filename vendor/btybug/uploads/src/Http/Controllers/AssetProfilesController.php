@@ -78,7 +78,14 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $profile = $profilesRepository->create($request->except('_token') + ['user_id' => \Auth::id()]);
+        $data = $request->except('_token','main','files');
+        if(isset($data['files'])){
+            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
+        }else{
+            $data['files'][] = $request->get('main');
+        }
+        $data['user_id'] = \Auth::id();
+        $profile = $profilesRepository->create($data);
         $profilesService->generateJS($profile);
 
         return redirect()->route('uploads_assets_profiles_js');
@@ -90,7 +97,14 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $profile = $profilesRepository->create($request->except('_token') + ['user_id' => \Auth::id()]);
+        $data = $request->except('_token','main','files');
+        if(isset($data['files'])){
+            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
+        }else{
+            $data['files'] = $request->get('main');
+        }
+        $data['user_id'] = \Auth::id();
+        $profile = $profilesRepository->create($data);
         $profilesService->generateCSS($profile);
         return redirect()->route('uploads_assets_profiles_css');
     }
@@ -141,8 +155,12 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token','main');
-        $data['files'] = array_prepend($data['files'],$request->get('main'));
+        $data = $request->except('_token','main','files');
+        if(isset($data['files'])){
+            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
+        }else{
+            $data['files'][] = $request->get('main');
+        }
         $model = $profilesRepository->findOrFail($id);
         $profilesService->removeFile($model->hint_path);
         $updated = $profilesRepository->update($id,$data);
@@ -158,8 +176,12 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token','main');
-        $data['files'] = array_prepend($data['files'],$request->get('main'));
+        $data = $request->except('_token','main','files');
+        if(isset($data['files'])){
+            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
+        }else{
+            $data['files'][] = $request->get('main');
+        }
         $model = $profilesRepository->findOrFail($id);
         $profilesService->removeFile($model->hint_path);
         $updated = $profilesRepository->update($id,$data);

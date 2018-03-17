@@ -17,7 +17,13 @@
                 <div class="col-md-12">
                     @if(count($mains))
                         @foreach( $mains as $item)
-                            {{ $item->name }} {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
+                            {{ $item->name }}
+                            @if($model && count($model->files))
+                                {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
+                            @else
+                                {!! Form::radio('main',$item->id,null) !!}
+                            @endif
+
                         @endforeach
                     @endif
                 </div>

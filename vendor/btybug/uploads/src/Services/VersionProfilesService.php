@@ -52,6 +52,10 @@ class VersionProfilesService extends GeneralService
                 if($val){
                     if (\File::exists(public_path($type."/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
                         $file_data .= \File::get(public_path($type."/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
+                    }else{
+                        if (\File::exists(public_path($type."/versions/" .  $val->file_name))) {
+                            $file_data .= \File::get(public_path($type."/versions/" . $val->file_name));
+                        }
                     }
                 }
             }

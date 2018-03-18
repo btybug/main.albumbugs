@@ -60,7 +60,7 @@ $(document).ready(function () {
                     snap: true
                 },
                 headerTitle: 'Styling',
-                content: '<div id="bb-css-studio" class="bb-css-studio"></div>',
+                content: '<div id="bb-css-studio" class="bb-css-studio no-active"></div>',
                 callback: function () {
                     // Init CSS studio
                     cssStudio.init(selector, exclude);

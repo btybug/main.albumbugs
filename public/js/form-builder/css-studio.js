@@ -85,9 +85,13 @@ var cssStudio = {
             // Show clicked list
             $this.parent('.bbs-property-group').find('.bbs-properties-list').show();
 
-            // Flip chevron
-            $this.find("i").removeClass("fa-chevron-right");
-            $this.find("i").addClass("fa-chevron-down");
+            // Activate
+            $(".bbs-property-group h3").removeClass("active");
+            $this.addClass("active");
+
+            // Mark active selector
+            var activeSelector = $('.bbs-field-selectors.active').data("selector");
+            $(activeSelector).addClass("active-selector");
         },
         // Set active node selector
         setActiveSelector: function ($this) {
@@ -96,6 +100,9 @@ var cssStudio = {
 
             // Assign default values
             cssStudio.assignDefaultValues();
+
+            // Remove non active layer
+            $('#bb-css-studio').removeClass("no-active");
         }
     },
 
@@ -173,6 +180,11 @@ var cssStudio = {
 
         // Assign default values
         this.assignDefaultValues();
+
+        // Tags input
+        $('.element-classes').tagsinput({
+            tagClass: 'badge badge-dark'
+        });
     },
 
     // CSS JSON Object

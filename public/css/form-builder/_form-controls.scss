@@ -201,7 +201,7 @@
   right: 0;
   background: #1b1b1b;
   height: 100%;
-  padding: 10px;
+  padding: 2px;
   top: 0;
 }
 
@@ -209,17 +209,13 @@
   margin-top: 10px;
 }
 
-div#element-edit-panel {
-  padding: 10px;
-}
-
-.bb-type-panel {
-  margin-top: 10px;
+.bootstrap-tagsinput {
+  position: absolute;
+  bottom: 2px;
 }
 
 .class-item {
   cursor: pointer;
-  background: #e8e61c;
   color: #464646;
 }
 
@@ -232,8 +228,9 @@ div#element-edit-panel {
 }
 
 span.tag {
-  background: #757414;
+  background: #e8e61c;
   user-select: none;
+  color: #000000!important;
 }
 
 .layout-list {
@@ -258,4 +255,29 @@ a.layout-item {
 
 .bb-unit .bbs-dropdown-box {
   width: 100%;
+}
+
+.bb-css-studio.no-active:before {
+  content: "Select Element First";
+  position: absolute;
+  left: 200px;
+  right: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.66);
+  z-index: 1;
+  text-align: center;
+  color: #3a3a3abd;
+  line-height: 250px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+input.search-classes {
+  border: none;
+  width: 100%;
+  padding: 4px;
+  background: #404040;
+  outline: none;
+  color: #bfbfbf;
 }

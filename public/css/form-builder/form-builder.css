@@ -166,21 +166,18 @@
   right: 0;
   background: #1b1b1b;
   height: 100%;
-  padding: 10px;
+  padding: 2px;
   top: 0; }
 
 .class-list {
   margin-top: 10px; }
 
-div#element-edit-panel {
-  padding: 10px; }
-
-.bb-type-panel {
-  margin-top: 10px; }
+.bootstrap-tagsinput {
+  position: absolute;
+  bottom: 2px; }
 
 .class-item {
   cursor: pointer;
-  background: #e8e61c;
   color: #464646; }
 
 #element-edit-panel .bootstrap-tagsinput {
@@ -191,8 +188,9 @@ div#element-edit-panel {
   background: #000; }
 
 span.tag {
-  background: #757414;
-  user-select: none; }
+  background: #e8e61c;
+  user-select: none;
+  color: #000000 !important; }
 
 .layout-list {
   padding: 10px; }
@@ -212,6 +210,29 @@ a.layout-item {
 
 .bb-unit .bbs-dropdown-box {
   width: 100%; }
+
+.bb-css-studio.no-active:before {
+  content: "Select Element First";
+  position: absolute;
+  left: 200px;
+  right: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.66);
+  z-index: 1;
+  text-align: center;
+  color: #3a3a3abd;
+  line-height: 250px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold; }
+
+input.search-classes {
+  border: none;
+  width: 100%;
+  padding: 4px;
+  background: #404040;
+  outline: none;
+  color: #bfbfbf; }
 
 [data-field] {
   cursor: move; }
@@ -396,13 +417,14 @@ ul.bbs-editor-list {
 .bbs-property-group h3:hover {
   background: #000000; }
 
-.bbs-property-group h3[data-opened] {
-  font-weight: bold; }
+.bbs-property-group h3.active {
+  font-weight: bold;
+  background: #000000; }
 
 .bbs-property-group h3 i {
   float: right;
   line-height: 25px;
-  display: none; }
+  color: #474548; }
 
 .bbs-properties-list {
   color: #e6e4e6;

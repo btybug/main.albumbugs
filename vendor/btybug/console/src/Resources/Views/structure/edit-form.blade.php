@@ -89,6 +89,7 @@
     {!! Html::script("public/js/form-builder/css-studio.js") !!}
     {!! Html::script("public/js/form-builder/form-builder.js?m=m") !!}
     {!! Html::script("public/js/form-builder/form-logic.js?m=m") !!}
+    {!! Html::script("public/js/form-builder/handlebars.js?m=m") !!}
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
     <script>
         tinymce.init({
@@ -485,28 +486,7 @@
         </ul>
     </script>
 
-    <script type="template" id="bbt-editor-list">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2">
-                    <ul class="bbs-field-selectors">
-                        <li data-selector="{mainSelector}">Main Container</li>
-                        <li data-selector="{containerSelector}">Field Container</li>
-                        <li data-selector="{labelSelector}">Field Label</li>
-                        <li data-selector="{iconSelector}">Field Icon</li>
-                        <li data-selector="{helpIconSelector}">Help Icon</li>
-                        <li data-selector="{helpPopupSelector}">Help Popup</li>
-                    </ul>
-                </div>
-                <div class="col-md-7">
-                    <ul class="bbs-editor-list">{groups}</ul>
-                </div>
-                <div class="col-md-3">
-                    {selectors}
-                </div>
-            </div>
-        </div>
-    </script>
+    @include('console::structure.templates.studio')
 
     <script type="template" id="bbt-properties-container">
         <li class="bbs-property-group">

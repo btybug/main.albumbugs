@@ -6,6 +6,8 @@ var unitArray = [
 
 var cssStudio = {
 
+    properties: {},
+
     // Load template
     loadTemplate: function loadTemplate(template) {
         return $('#bbt-' + template).html();
@@ -27,6 +29,7 @@ var cssStudio = {
         var $this = this;
         $.getJSON(ajaxLinks.baseUrl + '/public/js/form-builder/studio.json', function (jsonProperties) {
             $this.buildEditorList(jsonProperties);
+            $this.properties = jsonProperties;
         });
     },
 
@@ -53,6 +56,7 @@ var cssStudio = {
             buildOptions = '';
             if (field.options && field.options.length > 0) {
                 $.each(field.options, function (i, option) {
+                    if(option.icon) option.title = '<i class="'+option.title+'"></i>';
                     buildOptions += '<label class="form-check-label">' + '<input class="form-check-input" type="radio" name="' + field.css + '" value="' + option.value + '">' + option.title + '</label>';
                 });
 
@@ -62,7 +66,10 @@ var cssStudio = {
 
         if(field.hasUnit){
             field.hasUnit.css = field.css + "-unit";
-            fieldTemplate += cssStudio.renderField(field.hasUnit);
+            var unitTemplate = cssStudio.renderField(field.hasUnit);
+            unitTemplate = unitTemplate.replace(/{name}/g, field.css + "-unit");
+
+            fieldTemplate += '<div class="bb-unit">' + unitTemplate + '</div>';
         }
 
         return fieldTemplate;
@@ -72,38 +79,23 @@ var cssStudio = {
     clickEvents: {
         // Toggle open and close groups
         toggleOpen: function ($this) {
-            var isOpened = $this.attr("data-opened");
+            // Hide all lists
+            $('.bbs-properties-list').hide();
 
-            if (isOpened) {
-                // Mark as closed
-                $this.removeAttr("data-opened");
+            // Show clicked list
+            $this.parent('.bbs-property-group').find('.bbs-properties-list').show();
 
-                // Show all groups
-                $('.bbs-property-group').show();
+            // Flip chevron
+            $this.find("i").removeClass("fa-chevron-right");
+            $this.find("i").addClass("fa-chevron-down");
+        },
+        // Set active node selector
+        setActiveSelector: function ($this) {
+            $('.bbs-field-selectors').find('.active').removeClass('active');
+            $this.addClass("active");
 
-                // Hide lists
-                $('.bbs-properties-list').hide();
-
-                // Flip chevron
-                $this.find("i").removeClass("fa-chevron-down");
-                $this.find("i").addClass("fa-chevron-right");
-            }
-            else {
-                // Mark as opened
-                $this.attr("data-opened", true);
-
-                // Hide all lists
-                $('.bbs-property-group').hide();
-                $('.bbs-properties-list').hide();
-
-                // Show clicked list
-                $this.parent('.bbs-property-group').show();
-                $this.parent('.bbs-property-group').find('.bbs-properties-list').show();
-
-                // Flip chevron
-                $this.find("i").removeClass("fa-chevron-right");
-                $this.find("i").addClass("fa-chevron-down");
-            }
+            // Assign default values
+            cssStudio.assignDefaultValues();
         }
     },
 
@@ -122,6 +114,22 @@ var cssStudio = {
         var listTemplate = this.parseTemplate('editor-list', {
             element: activeElement.text().trim(),
             selector: activeSelector
+        });
+
+        // Get unique selectors
+        var selectors = cssStudio.selectors,
+            uniqueSelectors = [];
+
+        selectors = $.unique(selectors);
+        $.each(selectors, function (i, selector) {
+            uniqueSelectors.push({
+                nodeSelector: selector
+            });
+        });
+
+        var compiledTemplate = Handlebars.compile(listTemplate);
+        listTemplate = compiledTemplate({
+            selectors: uniqueSelectors
         });
 
         // Group
@@ -170,16 +178,29 @@ var cssStudio = {
     // CSS JSON Object
     CSSJSON: {},
 
+    // Check if rule has unit
+    hasUnit: function (cssPropertyName) {
+        var unit = false;
+        $.each(cssStudio.properties, function (index, group) {
+            $.each(group.fields, function (index, rule) {
+                if(cssPropertyName === rule.css){
+                    unit = $('[textboxname="'+cssPropertyName+'-unit"]').val();
+                }
+            });
+        });
+
+        return unit;
+    },
+
     // Update CSS
     updateCSS: function (property, value) {
-        var activeSelector = $('.active-selector').text();
+        var activeSelector = $('.bbs-field-selectors>.active').data("selector");
 
         if(! cssStudio.CSSJSON[activeSelector]) cssStudio.CSSJSON[activeSelector] = {};
 
         cssStudio.CSSJSON[activeSelector][property] = value;
 
-        var cssString = "",
-            rulesWithUnit = ["font-size", "padding", "padding-top", "margin", "border-width", "outline-width", "width"];
+        var cssString = "";
 
         $.each(cssStudio.CSSJSON, function (selector, cssJSON){
             cssString += selector + " {\n";
@@ -187,14 +208,8 @@ var cssStudio = {
             for (var cssPropertyName in cssJSON) {
                 var ruleValue = cssJSON[cssPropertyName];
 
-                if($.inArray(cssPropertyName, rulesWithUnit) !== -1){
-                    var unit = "px";
-                    if(cssJSON[cssPropertyName + "-unit"]){
-                        unit = cssJSON[cssPropertyName + "-unit"];
-                    }
-
-                    ruleValue = ruleValue + unit;
-                }
+                var unitValue = cssStudio.hasUnit(cssPropertyName);
+                if(unitValue) ruleValue = ruleValue + unitValue;
 
                 if(cssPropertyName.indexOf("-unit") === -1){
                     cssString += "\t" + cssPropertyName + ": " + ruleValue + ";\n";
@@ -210,19 +225,15 @@ var cssStudio = {
 
     // Assign default values
     assignDefaultValues: function () {
-        var activeSelector = $('.active-selector').text(),
+        var activeSelector = $('.bbs-field-selectors>.active').data("selector"),
             cssJSON = this.properties;
 
         $.each(cssJSON, function (index, group) {
             $.each(group.fields, function (index, field) {
                 var cssValue = $(activeSelector).css(field.css);
                 $('.bbs-editor-list').find('[name='+field.css+']').val(cssValue);
-
-                // console.log(field.css, cssValue);
             });
         });
-
-
     },
 
     // Fields JS Actions
@@ -260,10 +271,12 @@ var cssStudio = {
         });
 
         // Toggle
-        $('.bbs-toggle').toggleInput(function ($this) {
-            var property = $this.attr("name");
-            updateCSS(property, $('[name=' + property + ']:checked').val());
-        });
+        $('.bbs-toggle').each(function () {
+            $(this).toggleInput(function ($this) {
+                var property = $this.attr("name");
+                updateCSS(property, $('[name=' + property + ']:checked').val());
+            });
+        })
     },
 
     // Extract selectors
@@ -271,8 +284,29 @@ var cssStudio = {
     extractSelectors: function (selector, exclude) {
         var $this = this;
         selector.children().each(function () {
-            $this.selectors.push($(this));
-            console.log($(this).context);
+            var node = $(this)[0],
+                nodeSelector = node.tagName.toLowerCase();
+
+            if($(this).attr("id")){
+                nodeSelector += '#' + $(this).attr("id")
+            }else{
+                if($(this).attr("class")){
+                    var classes = $(this).attr("class"),
+                        ignoredClasses = ["ui-droppable", "ui-sortable-handle", "ui-sortable"];
+
+                    $.each(ignoredClasses, function (i, ignoredClass) {
+                        classes = classes.replace(ignoredClass, "");
+                    });
+
+                    classes = classes.trim();
+                    classes = classes.split(" ");
+                    classes = classes.join(".");
+
+                    nodeSelector += '.' + classes;
+                }
+            }
+
+            $this.selectors.push(nodeSelector);
 
             if($(this).children().length > 0){
                 $this.extractSelectors($(this));
@@ -288,8 +322,7 @@ var cssStudio = {
         this.getProperties();
 
         // Extract selectors
-        var selectors = this.extractSelectors($(selector), exclude);
-        console.log(selectors);
+        this.extractSelectors($(selector), exclude);
 
         // Events
         $('#bb-css-studio')

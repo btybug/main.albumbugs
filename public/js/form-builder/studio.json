@@ -29,20 +29,20 @@
       },
       {
         "title": "Font Size", "css": "font-size", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Line Height", "css": "line-height", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray"}
+        "hasUnit": { "type": "dropdown", "options": "unitArray"}
       },
       { "title": "Text Color", "css": "color", "type": "color" },
       {
         "title": "Text Align", "css": "text-align", "type": "toggle",
         "options": [
-          { "value": "left", "title": "Left" },
-          { "value": "center", "title": "Center" },
-          { "value": "right", "title": "Right" },
-          { "value": "justify", "title": "Justify" }
+          { "value": "left", "title": "fa fa-align-left", "icon": true },
+          { "value": "center", "title": "fa fa-align-center", "icon": true },
+          { "value": "right", "title": "fa fa-align-right", "icon": true },
+          { "value": "justify", "title": "fa fa-align-justify", "icon": true }
         ]
       },
       {
@@ -55,11 +55,11 @@
       },
       {
         "title": "Letter Spacing", "css": "letter-spacing", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Word Spacing", "css": "word-spacing", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Text Decoration", "css": "text-decoration", "type": "toggle",
@@ -72,7 +72,7 @@
       },
       {
         "title": "Text Indent", "css": "text-indent", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Word Wrap", "css": "word-wrap", "type": "toggle",
@@ -94,19 +94,19 @@
     "fields": [
       {
         "title": "Padding Top", "css": "padding-top", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Padding Bottom", "css": "padding-bottom", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Padding Left", "css": "padding-left", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Padding Right", "css": "padding-right", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       }
     ]
   },
@@ -115,19 +115,19 @@
     "fields": [
       {
         "title": "Margin Top", "css": "margin-top", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Margin Bottom", "css": "margin-bottom", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Margin Left", "css": "margin-left", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Margin Right", "css": "margin-right", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       }
     ]
   },
@@ -145,7 +145,7 @@
       },
       {
         "title": "Border Width", "css": "border-width", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       { "title": "Border Color", "css": "border-color", "type": "color" }
     ]
@@ -155,19 +155,19 @@
     "fields": [
       {
         "title": "Top Left Radius", "css": "border-top-left-radius", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Top Right Radius", "css": "border-top-right-radius", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Bottom Left Radius", "css": "border-bottom-left-radius", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Bottom Right Radius", "css": "border-right-left-radius", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       }
     ]
   },
@@ -176,7 +176,7 @@
     "fields": [
       {
         "title": "Z Index", "css": "z-index", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Position", "css": "position", "type": "toggle",
@@ -189,19 +189,19 @@
       },
       {
         "title": "Top", "css": "top", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Bottom", "css": "bottom", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Left", "css": "left", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Right", "css": "right", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       }
     ]
   },
@@ -210,11 +210,11 @@
     "fields": [
       {
         "title": "Width", "css": "width", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Height", "css": "height", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Box Sizing", "css": "box-sizing", "type": "toggle",
@@ -225,19 +225,19 @@
       },
       {
         "title": "Min Width", "css": "min-width", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Min Height", "css": "min-height", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Max Width", "css": "max-width", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
         "title": "Max Height", "css": "max-height", "type": "number",
-        "hasUnit": { "type": "toggle", "options": "unitArray" }
+        "hasUnit": { "type": "dropdown", "options": "unitArray" }
       }
     ]
   }

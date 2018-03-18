@@ -1,3 +1,13 @@
+.bb-css-studio {
+  background-color: #373638;
+  height: 100%; }
+
+.bb-css-studio h4 {
+  font-size: 17px;
+  color: #e6e4e6;
+  padding: 10px;
+  margin: 0; }
+
 .bb-node-action-menu {
   position: absolute;
   background: #4584ea;
@@ -96,15 +106,24 @@
 
 .bbs-field-selectors {
   color: #d6d6d6;
-  margin: 0;
-  padding: 0; }
+  padding: 0;
+  overflow-y: auto;
+  height: 100%;
+  width: 200px;
+  float: left;
+  border-right: 5px solid #585858; }
 
 .bbs-field-selectors li {
-  line-height: 30px;
-  padding: 0 10px;
-  font-size: 15px;
+  line-height: 25px;
+  font-size: 14px;
   border-bottom: 1px solid #585858;
-  user-select: none; }
+  user-select: none;
+  cursor: pointer;
+  list-style: none;
+  text-indent: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
 
 .bbs-field-selectors li:hover {
   color: #ffffff;
@@ -130,7 +149,25 @@
 
 .bbs-number-spinner {
   float: left;
-  margin-right: 10px; }
+  margin-right: 10px;
+  width: 70px; }
+  .bbs-number-spinner .textbox {
+    width: 100% !important; }
+
+.bbs-color-box {
+  width: 170px; }
+
+.bbs-dropdown-box {
+  width: 130px; }
+
+.bb-add-class-panel {
+  position: absolute;
+  width: 200px;
+  right: 0;
+  background: #1b1b1b;
+  height: 100%;
+  padding: 10px;
+  top: 0; }
 
 .class-list {
   margin-top: 10px; }
@@ -168,6 +205,13 @@ a.layout-item {
 
 .form-builder-area {
   min-height: 50px; }
+
+.bb-unit {
+  float: left;
+  width: 65px; }
+
+.bb-unit .bbs-dropdown-box {
+  width: 100%; }
 
 [data-field] {
   cursor: move; }
@@ -330,20 +374,12 @@ button.disabled {
 .jsPanel-theme-primary .jsPanel-content {
   background-color: #373638; }
 
-.bb-css-studio {
-  background-color: #373638;
-  overflow: auto;
-  height: 100%; }
-
-.bb-css-studio h4 {
-  font-size: 17px;
-  color: #e6e4e6;
-  padding: 10px;
-  margin: 0; }
-
-li.bbs-property-group {
+ul.bbs-editor-list {
+  margin-left: -15px;
+  width: 150px;
   list-style: none;
-  float: left; }
+  height: 100%;
+  background: #1b1b1b; }
 
 .bbs-property-group h3 {
   background: #1b1b1b;
@@ -373,14 +409,20 @@ li.bbs-property-group {
   font-size: 14px;
   margin-bottom: 10px;
   padding-top: 5px;
-  display: none; }
+  display: none;
+  position: absolute;
+  left: 360px;
+  top: 5px;
+  width: calc(100% - 560px);
+  overflow-y: auto;
+  height: 100%; }
 
 .bbs-property-container {
-  border-bottom: 1px solid #4c4c4c;
-  padding: 0 15px 10px;
+  padding: 0 5px 10px;
   margin-bottom: 10px;
   display: table;
-  width: 100%; }
+  float: left;
+  height: 62px; }
 
 .bbs-input {
   width: 100%;

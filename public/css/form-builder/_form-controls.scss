@@ -1,3 +1,15 @@
+.bb-css-studio{
+  background-color: #373638;
+  height: 100%;
+}
+
+.bb-css-studio h4 {
+  font-size: 17px;
+  color: #e6e4e6;
+  padding: 10px;
+  margin: 0;
+}
+
 .bb-node-action-menu {
   position: absolute;
   background: #4584ea;
@@ -117,16 +129,25 @@
 
 .bbs-field-selectors {
   color: #d6d6d6;
-  margin: 0;
   padding: 0;
+  overflow-y: auto;
+  height: 100%;
+  width: 200px;
+  float: left;
+  border-right: 5px solid #585858;
 }
 
 .bbs-field-selectors li {
-  line-height: 30px;
-  padding: 0 10px;
-  font-size: 15px;
+  line-height: 25px;
+  font-size: 14px;
   border-bottom: 1px solid #585858;
   user-select: none;
+  cursor: pointer;
+  list-style: none;
+  text-indent: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .bbs-field-selectors li:hover {
@@ -159,6 +180,29 @@
 .bbs-number-spinner {
   float: left;
   margin-right: 10px;
+  width: 70px;
+
+  .textbox{
+    width: 100%!important;
+  }
+}
+
+.bbs-color-box {
+  width: 170px;
+}
+
+.bbs-dropdown-box {
+  width: 130px;
+}
+
+.bb-add-class-panel {
+  position: absolute;
+  width: 200px;
+  right: 0;
+  background: #1b1b1b;
+  height: 100%;
+  padding: 10px;
+  top: 0;
 }
 
 .class-list {
@@ -205,4 +249,13 @@ a.layout-item {
 
 .form-builder-area {
   min-height: 50px;
+}
+
+.bb-unit {
+  float: left;
+  width: 65px;
+}
+
+.bb-unit .bbs-dropdown-box {
+  width: 100%;
 }

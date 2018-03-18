@@ -190,22 +190,12 @@ button.disabled {
     background-color: #373638;
 }
 
-.bb-css-studio{
-    background-color: #373638;
-    overflow: auto;
-    height: 100%;
-}
-
-.bb-css-studio h4 {
-    font-size: 17px;
-    color: #e6e4e6;
-    padding: 10px;
-    margin: 0;
-}
-
-li.bbs-property-group {
+ul.bbs-editor-list {
+    margin-left: -15px;
+    width: 150px;
     list-style: none;
-    float: left;
+    height: 100%;
+    background: #1b1b1b;
 }
 
 .bbs-property-group h3 {
@@ -241,14 +231,20 @@ li.bbs-property-group {
     margin-bottom: 10px;
     padding-top: 5px;
     display: none;
+    position: absolute;
+    left: 360px;
+    top: 5px;
+    width: calc(100% - 560px);
+    overflow-y: auto;
+    height: 100%;
 }
 
 .bbs-property-container {
-    border-bottom: 1px solid #4c4c4c;
-    padding: 0 15px 10px;
+    padding: 0 5px 10px;
     margin-bottom: 10px;
     display: table;
-    width: 100%;
+    float: left;
+    height: 62px;
 }
 
 .bbs-input {

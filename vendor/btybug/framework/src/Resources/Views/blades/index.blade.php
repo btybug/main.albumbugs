@@ -50,8 +50,8 @@
                     <div></div>
                 </div>
             </div>
-            {!! Form::open() !!}
-            <div class="col-md-4 col-xs-12">
+            {!! Form::open(['class'=>'col-md-4 col-xs-12']) !!}
+            <div class="col-md-12 col-xs-12">
                 <div class="settings">
                     <!-- Text input-->
                     <div class="form-group">
@@ -72,11 +72,12 @@
                     </div>
                 </div>
             </div>
+            <textarea
+                    cols="200"><?php echo htmlentities('<div class={!! $settings["class_987978"] !!}>{!! $settings["987978"] !!}</div>'); ?></textarea>
+            {!! Form::close() !!}
         </div>
     </div>
-    <textarea
-            cols="200"><?php echo htmlentities('<div class={!! $settings["class_987978"] !!}>{!! $settings["987978"] !!}</div>'); ?></textarea>
-    {!! Form::close() !!}
+
 </section>
 {!! HTML::script('public/js/jquery-3.2.1.min.js') !!}
 <script>

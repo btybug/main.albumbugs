@@ -1,4 +1,36 @@
-{!! HTML::style('public/css/bootstrap/css/bootstrap.min.css') !!}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {!! HTML::style('public/css/bootstrap/css/bootstrap.min.css') !!}
+    <title>Document</title>
+    <style>
+        header {
+            background-color: black;
+            padding: 15px 0;
+        }
+
+        header .head-btn {
+            width: 100%;
+            text-align: right;
+            margin-right: 50px;
+        }
+
+        section.main {
+            margin-top: 20px;
+        }
+
+        section.main .preview, section.main .settings {
+            border: 1px solid #000;
+            min-height: 500px;
+        }
+
+    </style>
+</head>
+<body>
 <header>
     <div class="container-fluid">
         <div class="row">
@@ -25,7 +57,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Div Class</label>
                         <div class="col-md-4">
-                            <input id="textinput" name="class_987978" type="text" placeholder="placeholder" class="form-control input-md">
+                            <input id="textinput" name="class_987978" type="text" placeholder="placeholder"
+                                   class="form-control input-md">
                         </div>
                     </div>
 
@@ -33,37 +66,25 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Div Content</label>
                         <div class="col-md-4">
-                            <input id="textinput" name="content_987978" type="text" placeholder="placeholder" class="form-control input-md">
+                            <input id="textinput" name="content_987978" type="text" placeholder="placeholder"
+                                   class="form-control input-md">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<textarea cols="200"><?php echo htmlentities('<div class={!! $settings["class_987978"] !!}>{!! $settings["987978"] !!}</div>'); ?></textarea>
+    <textarea
+            cols="200"><?php echo htmlentities('<div class={!! $settings["class_987978"] !!}>{!! $settings["987978"] !!}</div>'); ?></textarea>
     {!! Form::close() !!}
 </section>
-
+{!! HTML::script('public/js/jquery-3.2.1.min.js') !!}
 <script>
-    
+
 </script>
-<style>
-    header {
-        background-color: black;
-        padding: 15px 0;
-    }
+</body>
+</html>
 
-    header .head-btn {
-        width: 100%;
-        text-align: right;
-        margin-right: 50px;
-    }
-    section.main{
-        margin-top:20px;
-    }
-    section.main .preview, section.main .settings{
-        border: 1px solid #000;
-        min-height: 500px;
-    }
 
-</style>
+
+

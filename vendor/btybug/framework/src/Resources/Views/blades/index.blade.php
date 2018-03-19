@@ -6,6 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {!! HTML::style('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css') !!}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+
+    {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
+    {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
+
     <title>Document</title>
     <style>
         header {
@@ -31,7 +37,6 @@
         .ace_editor{
             height:100%;
             flex: 1;
-            border: 10px solid #e7e7e7;
         }
         .set_border{
             border: 2px solid #FF0000;
@@ -56,7 +61,8 @@
             height: 100%;
             padding: 10px;
             background: #fff;
-            border: 10px solid #e7e7e7;
+            border-bottom: 10px solid #e7e7e7;
+            border-top: 10px solid #e7e7e7;
             position: relative;
             overflow: scroll;
         }
@@ -90,6 +96,15 @@
 
         .tree-list li {
             list-style: none;
+        }
+
+        .controls {
+            float: right;
+        }
+
+        .controls a {
+            color: #fff;
+            margin-left: 10px;
         }
     </style>
     <script>
@@ -127,6 +142,13 @@
         </div>
     </div>
 </div>
+
+<script type="template" id="bbt-controls">
+    <div class="controls">
+        <a href="#" bb-click="editCode"><i class="fas fa-code"></i></a>
+        <a href="#" bb-click="editCode"><i class="fas fa-edit"></i></a>
+    </div>
+</script>
 
 {!! HTML::script('public/js/jquery-3.2.1.min.js') !!}
 {!! HTML::script('public/js/ace-editor/ace.js') !!}

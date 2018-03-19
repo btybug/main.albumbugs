@@ -75,3 +75,8 @@ Route::group(['prefix' => 'dynamic-component'], function () {
 
 });
 
+
+Route::group(['prefix'=>'blade'],function (){
+    Route::get('/','BladeController@getIndex',true);
+});
+

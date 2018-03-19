@@ -79,7 +79,7 @@ class AssetProfilesController extends Controller
     )
     {
         $data = $request->except('_token','main','files');
-        if(isset($data['files'])){
+        if($request->get('files')){
             $data['files'] = array_prepend($request->get('files'),$request->get('main'));
         }else{
             $data['files'][] = $request->get('main');
@@ -98,7 +98,7 @@ class AssetProfilesController extends Controller
     )
     {
         $data = $request->except('_token','main','files');
-        if(isset($data['files'])){
+        if($request->get('files')){
             $data['files'] = array_prepend($request->get('files'),$request->get('main'));
         }else{
             $data['files'] = $request->get('main');
@@ -156,7 +156,7 @@ class AssetProfilesController extends Controller
     )
     {
         $data = $request->except('_token','main','files');
-        if(isset($data['files'])){
+        if($request->get('files')){
             $data['files'] = array_prepend($request->get('files'),$request->get('main'));
         }else{
             $data['files'][] = $request->get('main');
@@ -177,7 +177,7 @@ class AssetProfilesController extends Controller
     )
     {
         $data = $request->except('_token','main','files');
-        if(isset($data['files'])){
+        if($request->get('files')){
             $data['files'] = array_prepend($request->get('files'),$request->get('main'));
         }else{
             $data['files'][] = $request->get('main');

@@ -159,7 +159,7 @@ $(function () {
     codeEditor.session.setMode("ace/mode/html");
 });
 </script>
-{!! HTML::script('public/js/framework/framework.js') !!}
+{!! HTML::script('public/js/framework/framework.js?rnd='. rand(0,10)) !!}
 </body>
 </html>
 

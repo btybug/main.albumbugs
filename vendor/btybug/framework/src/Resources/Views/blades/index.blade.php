@@ -72,17 +72,32 @@
                     </div>
                 </div>
             </div>
-            <textarea
+            <textarea id="editorCode"
                     cols="200"><?php echo htmlentities('<div class={!! $settings["class_987978"] !!}>{!! $settings["987978"] !!}</div>'); ?></textarea>
             {!! Form::close() !!}
         </div>
     </div>
 
+<style>
+    .ace_editor{
+        height:400px;
+        flex: 1;
+    }
+    .set_border{
+        border: 2px solid #FF0000;
+    }
+    .custom_inline_block{
+        display:inline-block;
+    }
+</style>
 </section>
 {!! HTML::script('public/js/jquery-3.2.1.min.js') !!}
+{!! HTML::script('public/js/ace-editor/ace.js') !!}
 <script>
 $(function () {
-    
+    var editor_html = ace.edit("editorCode");
+    editor_html.setTheme("ace/theme/monokai");
+    editor_html.session.setMode("ace/mode/html");
 });
 </script>
 </body>

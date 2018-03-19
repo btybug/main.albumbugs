@@ -81,7 +81,9 @@
 </section>
 {!! HTML::script('public/js/jquery-3.2.1.min.js') !!}
 <script>
-
+$(function () {
+    
+});
 </script>
 </body>
 </html>

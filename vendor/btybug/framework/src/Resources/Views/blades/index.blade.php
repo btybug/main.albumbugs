@@ -15,19 +15,38 @@
         <div class="row">
             <div class="col-md-8 col-xs-12">
                 <div class="preview">
-
+                    <div></div>
                 </div>
             </div>
+            {!! Form::open() !!}
             <div class="col-md-4 col-xs-12">
                 <div class="settings">
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Div Class</label>
+                        <div class="col-md-4">
+                            <input id="textinput" name="class_987978" type="text" placeholder="placeholder" class="form-control input-md">
+                        </div>
+                    </div>
 
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Div Content</label>
+                        <div class="col-md-4">
+                            <input id="textinput" name="content_987978" type="text" placeholder="placeholder" class="form-control input-md">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+<textarea cols="200"><?php echo htmlentities('<div class={!! $settings["class_987978"] !!}>{!! $settings["987978"] !!}</div>'); ?></textarea>
+    {!! Form::close() !!}
 </section>
 
-
+<script>
+    
+</script>
 <style>
     header {
         background-color: black;

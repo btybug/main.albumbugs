@@ -50,11 +50,11 @@ class VersionProfilesService extends GeneralService
             foreach ($generatingData as $key => $id) {
                 $val = $this->versionsRepository->find($id);
                 if($val){
-                    if (\File::exists(public_path($type."/profiles/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
-                        $file_data .= \File::get(public_path($type."/profiles/" . $val->name . "/" . $val->version . "/" . $val->file_name));
+                    if (\File::exists(public_path($type."/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
+                        $file_data .= \File::get(public_path($type."/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
                     }else{
-                        if (\File::exists(public_path($type."/profiles/" .  $val->file_name))) {
-                            $file_data .= \File::get(public_path($type."/profiles/" . $val->file_name));
+                        if (\File::exists(public_path($type."/versions/" .  $val->file_name))) {
+                            $file_data .= \File::get(public_path($type."/versions/" . $val->file_name));
                         }
                     }
                 }

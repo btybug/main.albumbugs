@@ -12,11 +12,26 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         width: 100%;
         height: 100%;
         padding: 0;
+        margin: 0;
     }
 
     .modal-content {
         height: 100%;
         border-radius: 0;
+    }
+    .modal-header{
+        background-color: #499bc7;
+        color: white;
+        box-shadow: 0 1px 4px 0 #2b2b2bb5;
+        border: 0;
+    }
+    .modal-header button{
+        opacity: 0.7;
+        font-size: 26px;
+    }
+    .modal-body{
+        background-color: #499bc738;
+        min-height: 100%;
     }
 </style>
 @if($file)
@@ -65,10 +80,6 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
             </div>
             <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               {{-- <button type="button" class="btn btn-primary">Save changes</button>--}}
             </div>
         </div>
     </div>

@@ -78,5 +78,6 @@ Route::group(['prefix' => 'dynamic-component'], function () {
 
 Route::group(['prefix'=>'blade'],function (){
     Route::get('/','BladeController@getIndex',true);
+    Route::post('/live-render','BladeController@getLiveRender')->name('blades_live_render');
 });
 

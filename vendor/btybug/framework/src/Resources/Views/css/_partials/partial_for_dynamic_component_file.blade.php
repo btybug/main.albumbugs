@@ -33,6 +33,9 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
         background-color: #499bc738;
         min-height: 100%;
     }
+    #myModalCss{
+        padding: 0!important;
+    }
 </style>
 @if($file)
     {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'dynamic_components') !!}

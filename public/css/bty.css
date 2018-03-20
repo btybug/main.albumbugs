@@ -902,6 +902,7 @@
     color: #000;
     text-shadow: 0 0 6px #000;
 }
+
 /*Borders*/
 .bty-div-bg {
     background-image: linear-gradient(-45deg, transparent 50%, #F1D0CB 50%, #F1D0CB 60%, transparent 60%),
@@ -8500,13 +8501,6 @@
     border-color: rgba(255, 255, 255, 0.75);
 }
 
-.bty-input-text-4.keyup {
-    color: white;
-    border-color: white;
-    text-shadow: 0 0 .125em white;
-    box-shadow: 0 0 .25em white, inset 0 0 .25em white;
-}
-
 .bty-input-text-4::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.5);
     text-shadow: 0 0 .125em transparent;
@@ -8608,7 +8602,6 @@
     border: 2px solid rgba(220, 220, 220, 1);
     color: #2980b9;
     box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset;
-    /* background-color: rgba(52, 152, 219, 0.1); */
     padding: 1em;
     outline: none;
     margin: 0;
@@ -8620,7 +8613,7 @@
 
 .bty-input-text-6:focus {
     border: 2px solid rgba(52, 152, 219, 1);
-    box-shadow: 0px 0px 0px 0px rgba(52, 152, 219, 1);
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 1);
     background-color: rgba(255, 255, 255, 0.5);
     -webkit-transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1);
     -moz-transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1);
@@ -8629,22 +8622,22 @@
 }
 
 .bty-input-text-6::-webkit-input-placeholder {
-    text-indent: 0px;
+    text-indent: 0;
     transition: text-indent 0.3s ease;
 }
 
 .bty-input-text-6::-moz-placeholder {
-    text-indent: 0px;
+    text-indent: 0;
     transition: text-indent 0.3s ease;
 }
 
 .bty-input-text-6:-moz-placeholder {
-    text-indent: 0px;
+    text-indent: 0;
     transition: text-indent 0.3s ease;
 }
 
 .bty-input-text-6:-ms-input-placeholder {
-    text-indent: 0px;
+    text-indent: 0;
     transition: text-indent 0.3s ease;
 }
 
@@ -15686,8 +15679,6 @@ form.bty-form-3 {
     background: rgba(0, 0, 0, .7);
 }
 
-
-
 .bty-dashboard-head-row-3 {
     background-color: rgb(73, 155, 199);
     padding: 0;
@@ -15703,7 +15694,6 @@ form.bty-form-3 {
     flex: 0 0 25%;
 }
 
-
 .bty-dashboard-head-row-3 > div:nth-of-type(2) {
     font-weight: bold;
     font-size: 26px;
@@ -15711,7 +15701,6 @@ form.bty-form-3 {
     flex: 0 0 50%;
     align-self: center;
 }
-
 
 .bty-dashboard-head-row-3 > div:nth-of-type(3) {
     display: none;
@@ -15738,9 +15727,6 @@ form.bty-form-3 {
 .bty-dashboard-head-row-3 > div:nth-of-type(4):hover {
     background: rgba(0, 0, 0, .7);
 }
-
-
-
 
 .bty-dashboard-head-icon-3 {
     background-color: rgb(73, 155, 199);
@@ -15771,7 +15757,6 @@ form.bty-form-3 {
     color: #fff;
 }
 
-
 .bty-dashboard-head-icon-3 > div:nth-of-type(3) {
     height: 2px;
     background-color: #fff;
@@ -15800,10 +15785,6 @@ form.bty-form-3 {
 .bty-dashboard-head-icon-3 > div:nth-of-type(4):hover {
     background: rgba(0, 0, 0, .7);
 }
-
-
-
-
 
 .bty-dashboard-head-4 {
     position: relative;

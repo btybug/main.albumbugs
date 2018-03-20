@@ -86,3 +86,34 @@ function BBMainFrontJS()
     }
     return '<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>';
 }
+
+function BBaddFunctions($key,$settings)
+{
+    $codes = \Config::get('functions', []);
+    $codes[$key] = $settings;
+    \Config::set('functions', $codes);
+}
+
+function BBallFunctions()
+{
+    $codes = \Config::get('functions', []);
+    return $codes;
+}
+
+function BBGetUserForm()
+{
+    return [
+        'alert_class' => [
+            'type' => 'select',
+            'label' => 'Alert class',
+            'data' => ['success' => 'Success', 'info' => 'Info', 'warning' => 'Warning', 'danger' => 'Danger'],
+            'value' => 'success'
+        ],
+        'message' => [
+            'type' => 'text',
+            'label' => 'Message',
+            'value' => 'Hello world'
+        ],
+
+    ];
+}

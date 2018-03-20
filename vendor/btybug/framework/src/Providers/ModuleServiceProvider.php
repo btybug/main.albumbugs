@@ -18,6 +18,12 @@ class ModuleServiceProvider extends ServiceProvider
         BBaddShortcode('FW-get-classes', 'FWgetClasses');
         BBaddShortcode('FW-get', 'FWget');
 
+        BBaddFunctions('get_user',[
+            'fn' => 'BBGetUser',
+            'view' => 'framework::bb_functions._partials.user_options',
+            'description' => 'Get Auth user or select ID for get User'
+        ]);
+
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Lang', 'framework');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'framework');
 
@@ -77,6 +83,18 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     "title" => "Dynamic Component",
                     "custom-link" => "/admin/framework/dynamic-component",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],
+                [
+                    "title" => "Blade Studio",
+                    "custom-link" => "/admin/framework/blade",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],
+                [
+                    "title" => "BB Functions",
+                    "custom-link" => "/admin/framework/bb-functions",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ]

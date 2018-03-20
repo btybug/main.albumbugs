@@ -162,7 +162,7 @@ $(function () {
     codeEditor.session.setMode("ace/mode/html");
 });
 </script>
-{!! HTML::script('public/js/framework/framework.js?rnd='. rand(0,10)) !!}
+{!! HTML::script('public/js/framework/framework.js?rnd='. rand(999,9999)) !!}
 </body>
 </html>
 

@@ -36,6 +36,10 @@ $file = \App\Http\Controllers\PhpJsonParser::getFileByName($slug,$path);
     #myModalCss{
         padding: 0!important;
     }
+    .ace_editor{
+        min-height:500px;
+        flex: 1;
+    }
 </style>
 @if($file)
     {!! useDinamicStyleByPath($file->__toString(),'public'.DS.'dynamic_components') !!}

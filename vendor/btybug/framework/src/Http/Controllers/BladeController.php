@@ -31,7 +31,12 @@ class BladeController extends Controller
 //        }
         $code=$request->get('html');
         \File::put(module_path('framework' . DS . 'src' . DS . 'Resources' . DS . 'Views' . DS . 'blades' . DS . 'autogen.blade.php'), $code);
-        $html = \View::make('framework::blades.autogen')->render();
+        try{
+            $html = \View::make('framework::blades.autogen')->render();
+        }catch (\Exception $e){
+            return \Response::json(['error'=>false,'html'=>$e->getMessage()]);
+        }
+
         return \Response::json(['error'=>false,'html'=>$html]);
     }
 }

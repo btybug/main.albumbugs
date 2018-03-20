@@ -127,6 +127,23 @@
             <a class="bty-btn-acction bt-view" href="#"></a>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <h4>Search</h4>
+            <h5>bty-btn-acction bt-search</h5>
+            <a class="bty-btn-acction bt-search" href="#"></a>
+        </div>
+        <div class="col-md-4">
+            <h4>Envelope</h4>
+            <h5>bty-btn-acction bt-envelope</h5>
+            <a class="bty-btn-acction bt-envelope" href="#"></a>
+        </div>
+        <div class="col-md-4">
+            <h4>Download</h4>
+            <h5>bty-btn-acction bt-download</h5>
+            <a class="bty-btn-acction bt-download" href="#"></a>
+        </div>
+    </div>
 
     <div class="clearfix"></div>
     <h2>Colors</h2>

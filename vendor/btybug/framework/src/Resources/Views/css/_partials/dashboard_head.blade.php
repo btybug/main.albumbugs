@@ -70,27 +70,6 @@
             </textarea>
         </div>
     </div>
-    <div class="col-md-12">
-        <h4>dashboard head 1</h4>
-        <h5>bty-dashboard-head-1</h5>
-        <div class="col-md-6">
-            <div class="bty-dashboard-head-1">
-                <div>
-                    <i class="fa fa-desktop"></i>
-                </div>
-                <div>
-                    <h4>Lorem ipsum</h4>
-                    <p>000-0000-00</p>
-                </div>
-                <div>
-                    <a href="#">
-                        More
-                        <i class="fa fa-arrow-circle-o-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
     <h2>Colors Dashboard Head 1 2 4</h2>
     <div class="col-md-12">
         <h4>Colors</h4>
@@ -139,10 +118,9 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-12">
-        <h4>dashboard head 3</h4>
-        <h5>bty-dashboard-head-3</h5>
-        <div class="col-md-6">
+        <div class="col-md-6 p-t-34">
             <div class="bty-dashboard-head-3">
                 <div>
                     Lorem ipsum
@@ -159,7 +137,242 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <h5>bty-dashboard-head-3</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-dashboard-head-3 {
+    background-color: rgb(73, 155, 199);
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(1) {
+    color: #fff;
+    position: relative;
+    padding: 10px 20px;
+    background-color: #ffffff3d;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(1):before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 10px solid #76b4d4;
+    border-left: 10px solid #e2e2e2;
+    width: 0;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(2) {
+    position: relative;
+    padding: 10px 20px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 26px;
+    color: #fff;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(2):before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 10px solid #499bc7;
+    border-left: 10px solid #e2e2e2;
+    width: 0;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(3) {
+    height: 2px;
+    background-color: #fff;
+    width: 50%;
+    z-index: 2;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(4) {
+    width: 100%;
+    background: rgba(0, 0, 0, .4);
+    z-index: 1;
+    text-align: right;
+    font-weight: bold;
+    padding: 10px 10px;
+    transition: 0.4s ease;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(4) a {
+    display: block;
+    text-align: right;
+    color: #ddd;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.bty-dashboard-head-3 > div:nth-of-type(4):hover {
+    background: rgba(0, 0, 0, .7);
+}
+            </textarea>
+        </div>
     </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-dashboard-head-row-3">
+                <div>
+                    Lorem ipsum
+                </div>
+                <div>
+                    000-0000
+                </div>
+                <div></div>
+                <div>
+                    <a href="">
+                        More
+                        <i class="fa fa-arrow-circle-o-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-dashboard-head-row-3</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-dashboard-head-row-3 {
+    background-color: rgb(73, 155, 199);
+    padding: 0;
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+
+.bty-dashboard-head-row-3 > div:nth-of-type(1) {
+    color: #fff;
+    padding: 10px 20px;
+    background-color: #ffffff3d;
+    flex: 0 0 25%;
+}
+
+
+.bty-dashboard-head-row-3 > div:nth-of-type(2) {
+    font-weight: bold;
+    font-size: 26px;
+    color: #fff;
+    flex: 0 0 50%;
+    align-self: center;
+}
+
+
+.bty-dashboard-head-row-3 > div:nth-of-type(3) {
+    display: none;
+}
+
+.bty-dashboard-head-row-3 > div:nth-of-type(4) {
+    background: rgba(0, 0, 0, .4);
+    font-weight: bold;
+    padding: 10px;
+    transition: 0.4s ease;
+    flex: 0 0 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bty-dashboard-head-row-3 > div:nth-of-type(4) a {
+    display: block;
+    color: #ddd;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.bty-dashboard-head-row-3 > div:nth-of-type(4):hover {
+    background: rgba(0, 0, 0, .7);
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-dashboard-head-icon-3">
+                <div>
+                    Lorem ipsum
+                </div>
+                <div>
+                    000-0000
+                </div>
+                <div></div>
+                <div>
+                    <a href="">
+                        More
+                        <i class="fa fa-arrow-circle-o-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-dashboard-head-icon-3</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-dashboard-head-icon-3 {
+    background-color: rgb(73, 155, 199);
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(1) {
+    color: #fff;
+    padding: 10px;
+    background-color: #ffffff3d;
+}
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(1):before {
+    content: "\f108";
+    font-family: FontAwesome;
+    vertical-align: middle;
+    font-size: 23px;
+    margin: 0 12px;
+}
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(2) {
+    padding: 10px 20px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 26px;
+    color: #fff;
+}
+
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(3) {
+    height: 2px;
+    background-color: #fff;
+    width: 50%;
+    z-index: 2;
+}
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(4) {
+    width: 100%;
+    background: rgba(0, 0, 0, .4);
+    z-index: 1;
+    text-align: right;
+    font-weight: bold;
+    padding: 10px 10px;
+    transition: 0.4s ease;
+}
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(4) a {
+    display: block;
+    text-align: right;
+    color: #ddd;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.bty-dashboard-head-icon-3 > div:nth-of-type(4):hover {
+    background: rgba(0, 0, 0, .7);
+}
+            </textarea>
+        </div>
+    </div>
+
     <h2>Colors Dashboard Head 3</h2>
     <div class="col-md-12">
         <h4>Colors</h4>

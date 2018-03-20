@@ -116,6 +116,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="head-btn">
+                <button class="btn btn-success btn-sm excecte">Excecte</button>
                 <button class="btn btn-warning btn-sm">Ace</button>
                 <button class="btn btn-danger btn-sm">Import</button>
                 <button class="btn btn-info btn-sm">Export</button>
@@ -142,6 +143,8 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="renderUrl" value="{!! route('blades_live_render') !!}">
+{!! csrf_field() !!}
 
 <script type="template" id="bbt-controls">
     <div class="controls">

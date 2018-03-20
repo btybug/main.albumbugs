@@ -94,7 +94,21 @@ $(function () {
         var codeContent = codeEditor.getValue();
         var treeList = framework.nodeTreeGenerator($(codeContent));
         $('.tree-list').html(treeList);
-        $('.preview-area').html(codeContent);
+        var data = {'html':codeContent.toString()};
+        $.ajax({
+            url: $('#renderUrl').val(),
+            type: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $("input[name='_token']").val()
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $('.preview-area').html(data.html);
+                }
+            }
+        });
+        // $('.preview-area').html(codeContent);
     });
 
     // Listen to click events

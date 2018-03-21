@@ -18,4 +18,19 @@ class FunctionsController extends Controller
     {
         return view('console::functions.create');
     }
+
+    public function postCreate (Request $request)
+    {
+        dd($request->all());
+    }
+
+    public function postOptions(Request $request)
+    {
+        $table = $request->get('table_name');
+        $slug = $request->get('slug');
+
+        $html = \View('console::functions._partials.options',compact('table','slug'))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
 }

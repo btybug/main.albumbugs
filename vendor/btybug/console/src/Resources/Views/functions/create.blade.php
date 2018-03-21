@@ -1,5 +1,6 @@
 @extends('btybug::layouts.admin')
 @section('content')
+    {!! Form::model(null,[]) !!}
     <div class="bb-form-header">
         <div class="row">
             <div class="col-md-4">
@@ -29,50 +30,25 @@
                 {!! Form::select('row',['' => 'Select'] +
                 ['single' => 'specific Single row / rows','filtered' => 'Filtered single row / rows'],null,['class' => 'form-control custom_row']) !!}
             </div>
-            <div class="custom_hidden is_hidden">
-                <div class="cust-group append_here">
-                   
+            <div class="form-group">
+                <div class="options-box hide">
+                    <div class="cust-group append_here">
+
+                    </div>
+                    <a href="javascript:void(0)" class="btn btn-md btn-info pull-right add_new_field"><i class=" fa fa-plus"></i></a>
                 </div>
-                <button class="btn btn-md btn-info pull-right add_new_field"><i class=" fa fa-plus"></i></button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group hide number-box">
+                <label>
+                    How Many number of row you want ?
+                </label>
+                {!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}
             </div>
         </div>
     </div>
+    {!! Form::close() !!}
 @stop
-<script type="template" id="get_new_field">
-    <div class="form-group form-horizontal">
-        <div class="col-md-5">
-            <label class="col-md-4 control-label">Select column</label>
-            <div class="col-md-8">
-                <select name="" id="" class="form-control">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label class="col-md-2 control-label">Value</label>
-            <div class="col-md-5">
-                <select name="" id="" class="form-control">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                </select>
-            </div>
-            <div class="col-md-5">
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-md-2">
-            <select name="" id="" class="form-control">
-                <option value="">and</option>
-                <option value="">or</option>
-            </select>
-        </div>
-        <div class="col-md-1">
-            <button class="btn btn-sm btn-danger pull-right remove_this_field"><i class=" fa fa-minus"></i></button>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</script>
 @section('CSS')
     {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
     {!! HTML::style("public/css/bty.css") !!}
@@ -81,27 +57,78 @@
             box-shadow: 0 0 4px #ccc;
             padding: 20px 0;
         }
-        .custom_hidden{
-            display:none;
-        }
+
     </style>
 @stop
 @section('JS')
     <script>
-        window.onload = function(){
-            $("body").delegate(".custom_row","click",function(){
+        window.onload = function () {
+            function Generator() {
+            };
+
+            Generator.prototype.rand = Math.floor(Math.random() * 26) + Date.now();
+
+            Generator.prototype.getId = function () {
+                return this.rand++;
+            };
+            var idGen = new Generator();
+
+            $("body").on( "change",".custom_row", function () {
                 var table_name = $(".custom_table").val();
-                if(table_name !== ''){
-                    $(".is_hidden").removeClass("custom_hidden");
-                }else{
-                    $(".is_hidden").addClass("custom_hidden");
+                if (table_name !== '') {
+                    $(".options-box").removeClass("hide");
+                    $(".options-box").addClass("show");
+                    $(".number-box").removeClass("hide");
+                    $(".number-box").addClass("show");
+                } else {
+                    $(".options-box").removeClass("show");
+                    $(".options-box").addClass("hide");
+                    $(".number-box").removeClass("show");
+                    $(".number-box").addClass("hide");
+                    $(".append_here").html('');
                 }
             });
-            $("body").delegate(".add_new_field","click",function(){
-                var html = $("#get_new_field").html();
-                return $(".append_here").append(html);
+
+            $("body").on("change", ".custom_table", function () {
+                var table_name = $(this).val();
+                if (table_name !== '') {
+                    $(".options-box").removeClass("hide");
+                    $(".options-box").addClass("show");
+                    $(".number-box").removeClass("hide");
+                    $(".number-box").addClass("show");
+                } else {
+                    $(".options-box").removeClass("show");
+                    $(".options-box").addClass("hide");
+                    $(".number-box").removeClass("show");
+                    $(".number-box").addClass("hide");
+                    $(".append_here").html('');
+                }
             });
-            $("body").delegate(".remove_this_field","click",function(){
+
+            $("body").delegate(".add_new_field", "click", function () {
+                var table_name = $(".custom_table").val();
+                if (table_name) {
+                    $.ajax({
+                        type: "post",
+                        url: "{!! url('/admin/console/functions/options') !!}",
+                        cache: false,
+                        datatype: "json",
+                        data: {
+                            table_name: table_name,
+                            slug: idGen.getId()
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $("[name=_token]").val()
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                $(".append_here").append(data.html);
+                            }
+                        }
+                    });
+                }
+            });
+            $("body").delegate(".remove_this_field", "click", function () {
                 return $(this).parent().parent().remove();
             });
         }

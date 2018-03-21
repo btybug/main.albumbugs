@@ -28,7 +28,7 @@
                 </label>
                 {!! Form::select('table',
                 ['single' => 'specific Single row','' => 'Filtered single row',
-                'multy' => 'specific multi rows','' => 'Filtered multi rows'],null,['class' => 'form-control']) !!}
+                'multy' => 'specific multi rows','at' => 'Filtered multi rows'],null,['class' => 'form-control']) !!}
             </div>
         </div>
     </div>

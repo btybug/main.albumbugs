@@ -509,6 +509,118 @@
             </textarea>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-radio-without-lab-1-bty">
+                <input type="radio">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>input-radio-without-lab-1-bty</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.input-radio-without-lab-1-bty input[type="radio"] {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fafafa;
+    position: relative;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-radio-without-lab-1-bty input[type="radio"]:after {
+    content: "";
+    display: flex;
+    font-size: 16px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+.input-radio-without-lab-1-bty input[type="radio"]:checked {
+    -moz-box-shadow: inset 0 0 0 15px #158EC6;
+    -webkit-box-shadow: inset 0 0 0 15px #158EC6;
+    box-shadow: inset 0 0 0 15px #158EC6;
+}
+
+.input-radio-without-lab-1-bty input[type="radio"]:checked:after {
+    color: white;
+    content: "\f00c";
+    font-family: FontAwesome;
+}
+
+.input-radio-without-lab-1-bty input[type="radio"]:focus, .input-radio-without-lab-1-bty input[type="radio"]:active {
+    outline: none !important;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-radio-without-lab-2-bty">
+                <input type="radio">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>input-radio-without-lab-2-bty</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.input-radio-without-lab-2-bty input[type="radio"] {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #158EC6;
+    position: relative;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-radio-without-lab-2-bty input[type="radio"]:after {
+    content: "";
+    display: flex;
+    font-size: 16px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+.input-radio-without-lab-2-bty input[type="radio"]:checked {
+    -moz-box-shadow: inset 0 0 0 15px #ffffff;
+    -webkit-box-shadow: inset 0 0 0 15px #ffffff;
+    box-shadow: inset 0 0 0 15px #ffffff;
+}
+
+.input-radio-without-lab-2-bty input[type="radio"]:checked:after {
+    color: #158EC6;
+    content: "\f00c";
+    font-family: FontAwesome;
+}
+
+.input-radio-without-lab-2-bty input[type="radio"]:focus, .input-radio-without-lab-2-bty input[type="radio"]:active {
+    outline: none !important;
+}
+            </textarea>
+        </div>
+    </div>
 
     {{--<div class="col-md-12">--}}
         {{--<div class="col-md-3">--}}

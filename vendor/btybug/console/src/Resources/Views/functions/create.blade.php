@@ -26,14 +26,11 @@
                 <label>
                     Select Row
                 </label>
-                {!! Form::select('table',
-                ['single' => 'specific Single row / rows','' => 'Filtered single row / rows'],null,['class' => 'form-control']) !!}
+                {!! Form::select('row',['' => 'Select'] +
+                ['single' => 'specific Single row / rows','filtered' => 'Filtered single row / rows'],null,['class' => 'form-control']) !!}
             </div>
-            {{--<div class="form-group">--}}
-                {{--<label>--}}
-                    {{--Select Columns--}}
-                {{--</label>--}}
-                {{--{!! Form::select('column',BBGetTableColumn('users'),null,['class' => 'form-control']) !!}--}}
+            <div class="form-group">
+
             </div>
         </div>
     </div>

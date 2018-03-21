@@ -34,4 +34,9 @@
         <a href="javascript:void(0)" data-slug="{{ $slug }}" class="btn btn-md btn-info pull-right add_new_inside"><i class=" fa fa-plus"></i></a>
     </div>
     <div class="clearfix"></div>
+    <div class="col-md-12">
+        {!! Form::select("conditions[$slug][logic_condition]",
+            ['and' => 'and','or' => 'or']
+       ,null,['class' => 'form-control']) !!}
+    </div>
 </div>

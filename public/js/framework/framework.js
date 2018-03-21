@@ -183,7 +183,7 @@ $(function () {
 
     // Search code API
     $("#search-code").easyAutocomplete({
-        url: 'http://mainbug.local/admin/framework/bb-functions/get-bb-fn-list',
+        url: 'http://forms.albumbugs.com/admin/framework/bb-functions/get-bb-fn-list',
         ajaxSettings: {
             type: 'POST',
             headers: {

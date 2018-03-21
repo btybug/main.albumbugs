@@ -1,14 +1,39 @@
 @extends('btybug::layouts.admin')
 @section('content')
+    <div class="bb-form-header">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Function name</label>
+                {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'Form Name']) !!}
+            </div>
+            <div class="col-md-8">
+                <button type="submit" class="form-save pull-right" bb-click="saveHTML">Save</button>
+            </div>
+        </div>
+    </div>
+
     <div class="row m-b-10">
         <h3>Create Function</h3>
 
         <div class="col-md-12">
+            <div class="form-group">
+                <label>
+                    Select Table
+                </label>
+                {!! Form::select('table',[],null,['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+
+            </div>
         </div>
     </div>
 @stop
 @section('CSS')
+    {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
+    {!! HTML::style("public/css/bty.css") !!}
+    <style>
 
+    </style>
 @stop
 @section('JS')
 @stop

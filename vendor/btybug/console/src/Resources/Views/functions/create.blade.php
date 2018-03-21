@@ -28,7 +28,7 @@
                     Select Row
                 </label>
                 {!! Form::select('row',['' => 'Select'] +
-                ['single' => 'specific Single row / rows','filtered' => 'Filtered single row / rows'],null,['class' => 'form-control custom_row']) !!}
+                ['single' => 'specific row / rows','filtered' => 'Filtered row / rows'],null,['class' => 'form-control custom_row']) !!}
             </div>
             <div class="form-group">
                 <div class="options-box hide">

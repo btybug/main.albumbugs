@@ -27,8 +27,7 @@
                     Select Row
                 </label>
                 {!! Form::select('table',
-                ['single' => 'specific Single row','' => 'Filtered single row',
-                'multy' => 'specific multi rows','at' => 'Filtered multi rows'],null,['class' => 'form-control']) !!}
+                ['single' => 'specific Single row / rows','' => 'Filtered single row / rows'],null,['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <label>

@@ -160,7 +160,6 @@
     -moz-border-radius: 30px;
     -webkit-border-radius: 30px;
     border-radius: 30px;
-@inlcude box-shadow(none);
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
@@ -439,6 +438,204 @@
     content: "\f05c";
     font-family: FontAwesome;
     padding-right: 5px;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-checkbox-without-lab-1-bty">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>input-checkbox-without-lab-1-bty</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.input-checkbox-without-lab-1-bty input[type="checkbox"] {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background-color: #fafafa;
+    position: relative;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.input-checkbox-without-lab-1-bty input[type="checkbox"]:checked {
+    -moz-box-shadow: inset 0 0 0 15px #158EC6;
+    -webkit-box-shadow: inset 0 0 0 15px #158EC6;
+    box-shadow: inset 0 0 0 15px #158EC6;
+}
+
+.input-checkbox-without-lab-1-bty input[type="checkbox"]:focus, .input-checkbox-without-lab-1-bty input[type="checkbox"]:active, .input-checkbox-without-lab-1-bty input[type="checkbox"]:active:hover {
+    outline: none !important;
+    cursor: pointer;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-checkbox-without-lab-2-bty">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>input-checkbox-without-lab-2-bty</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.input-checkbox-without-lab-2-bty input[type="checkbox"] {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 55px;
+    height: 28px;
+    background-color: #fafafa;
+    position: relative;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-checkbox-without-lab-2-bty input[type="checkbox"]:after {
+    content: "\f05e";
+    font-family: FontAwesome;
+    position: absolute;
+    color: red;
+    font-size: 25px;
+    top: 2px;
+    left: 2px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-checkbox-without-lab-2-bty input[type="checkbox"]:checked {
+    -moz-box-shadow: inset 0 0 0 15px #158EC6;
+    -webkit-box-shadow: inset 0 0 0 15px #158EC6;
+    box-shadow: inset 0 0 0 15px #158EC6;
+}
+
+.input-checkbox-without-lab-2-bty input[type="checkbox"]:checked:after {
+    left: 29px;
+    color: white;
+    content: "\f05d";
+}
+
+.input-checkbox-without-lab-2-bty input[type="checkbox"]:focus, .input-checkbox-without-lab-2-bty input[type="checkbox"]:active {
+    outline: none !important;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-checkbox-without-lab-3-bty">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>input-checkbox-without-lab-3-bty</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.input-checkbox-without-lab-3-bty input[type="checkbox"] {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-checkbox-without-lab-3-bty input[type="checkbox"]:after {
+    content: "\f05e";
+    font-family: FontAwesome;
+    position: absolute;
+    color: red;
+    font-size: 25px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-checkbox-without-lab-3-bty input[type="checkbox"]:checked:after {
+    color: black;
+    content: "\f05d";
+}
+
+.input-checkbox-without-lab-3-bty input[type="checkbox"]:focus, .input-checkbox-without-lab-3-bty input[type="checkbox"]:active {
+    outline: none !important;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="input-checkbox-without-lab-4-bty">
+                <input type="checkbox">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>input-checkbox-without-lab-4-bty</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.input-checkbox-without-lab-4-bty input[type="checkbox"] {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #fafafa;
+    position: relative;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-checkbox-without-lab-4-bty input[type="checkbox"]:after {
+    content: "";
+    display: flex;
+    font-size: 16px;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+.input-checkbox-without-lab-4-bty input[type="checkbox"]:checked {
+    -moz-box-shadow: inset 0 0 0 15px #158EC6;
+    -webkit-box-shadow: inset 0 0 0 15px #158EC6;
+    box-shadow: inset 0 0 0 15px #158EC6;
+}
+
+.input-checkbox-without-lab-4-bty input[type="checkbox"]:checked:after {
+    color: white;
+    content: "\f00c";
+    font-family: FontAwesome;
+}
+
+.input-checkbox-without-lab-4-bty input[type="checkbox"]:focus, .input-checkbox-without-lab-4-bty input[type="checkbox"]:active {
+    outline: none !important;
 }
             </textarea>
         </div>

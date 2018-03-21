@@ -26,7 +26,9 @@
                 <label>
                     Select Row
                 </label>
-                {!! Form::select('table',['single' => 'Single Row','multy' => 'Multy Rows'],null,['class' => 'form-control']) !!}
+                {!! Form::select('table',
+                ['single' => 'specific Single row','' => 'Filtered single row',
+                'multy' => 'specific multi rows','' => 'Filtered multi rows'],null,['class' => 'form-control']) !!}
             </div>
         </div>
     </div>

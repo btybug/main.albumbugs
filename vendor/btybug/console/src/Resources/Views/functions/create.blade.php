@@ -30,6 +30,12 @@
                 ['single' => 'specific Single row','' => 'Filtered single row',
                 'multy' => 'specific multi rows','at' => 'Filtered multi rows'],null,['class' => 'form-control']) !!}
             </div>
+            <div class="form-group">
+                <label>
+                    Select Columns
+                </label>
+                {!! Form::select('column',BBGetTableColumn('users'),null,['class' => 'form-control']) !!}
+            </div>
         </div>
     </div>
 @stop

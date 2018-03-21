@@ -98,16 +98,227 @@
         </div>
     </div>
     <div class="col-md-12">
-        <h4>Tab 2</h4>
-        <h5>bty-tab2</h5>
-        <div class="bty-tab2">
-            <ul>
-                <li class="active"><a href="#"><i class="fa fa-fw fa-home"></i>Tab 1</a></li>
-                <li><a href="#"><i class="fa fa-fw fa-bars"></i> Tab 2</a></li>
-                <li><a href="#"><i class="fa fa-fw fa-cog"></i> Tab 3</a></li>
-            </ul>
+        <div class="col-md-6 p-t-34">
+            <div class="bty-tab2">
+                <ul>
+                    <li class="active"><a href="#"><i class="fa fa-fw fa-home"></i>Tab 1</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-bars"></i> Tab 2</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-cog"></i> Tab 3</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-tab2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-tab2 ul,
+.bty-tab2 li,
+.bty-tab2 a {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1;
+}
+
+.bty-tab2 {
+    border: 1px solid #286382;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    width: auto;
+}
+
+.bty-tab2 ul {
+    zoom: 1;
+    background: #70b0d3;
+    background: -moz-linear-gradient(top, #70b0d3 0%, #499bc7 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #70b0d3), color-stop(100%, #499bc7));
+    background: -webkit-linear-gradient(top, #70b0d3 0%, #499bc7 100%);
+    background: -o-linear-gradient(top, #70b0d3 0%, #499bc7 100%);
+    background: -ms-linear-gradient(top, #70b0d3 0%, #499bc7 100%);
+    background: linear-gradient(top, #70b0d3 0%, #499bc7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@top-color', endColorstr='@bottom-color', GradientType=0);
+    padding: 5px 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.bty-tab2 ul:before {
+    content: '';
+    display: block;
+}
+
+.bty-tab2 ul:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.bty-tab2 li {
+    float: left;
+    margin: 0 5px 0 0;
+    border: 1px solid transparent;
+}
+
+.bty-tab2 li a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    padding: 8px 15px 9px 15px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid transparent;
+    font-size: 16px;
+}
+
+.bty-tab2 li.active {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #70b0d3;
+}
+
+.bty-tab2 li.active a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    display: block;
+    background: #3480a9;
+    border: 1px solid #286382;
+    -moz-box-shadow: inset 0 5px 10px #286382;
+    -webkit-box-shadow: inset 0 5px 10px #286382;
+    box-shadow: inset 0 5px 10px #286382;
+}
+
+.bty-tab2 li:hover {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #70b0d3;
+}
+
+.bty-tab2 li:hover a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    display: block;
+    background: #3480a9;
+    border: 1px solid #286382;
+    -moz-box-shadow: inset 0 5px 10px #286382;
+    -webkit-box-shadow: inset 0 5px 10px #286382;
+    box-shadow: inset 0 5px 10px #286382;
+}
+
+            </textarea>
+
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-tab2-dark">
+                <ul>
+                    <li class="active"><a href="#"><i class="fa fa-fw fa-home"></i>Tab 1</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-bars"></i> Tab 2</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-cog"></i> Tab 3</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-tab2-dark</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-tab2-dark {
+    border: 1px solid #286382;
+    width: auto;
+}
+
+.bty-tab2-dark ul,
+.bty-tab2-dark li,
+.bty-tab2-dark a {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1;
+}
+
+.bty-tab2-dark ul {
+    background: #536976; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #292E49, #536976); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 5px 10px;
+    box-shadow: inset 1px 1px 5px #ffffff, inset -1px -1px 5px #ffffff;
+}
+
+.bty-tab2-dark ul:before {
+    content: "";
+    display: block;
+}
+
+.bty-tab2-dark ul:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.bty-tab2-dark li {
+    float: left;
+    margin: 0 5px 0 0;
+    border: 1px solid transparent;
+}
+
+.bty-tab2-dark li a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    padding: 8px 15px 9px 15px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid transparent;
+    font-size: 16px;
+}
+
+.bty-tab2-dark li.active a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    display: block;
+    border: 1px solid #fff;
+
+}
+
+.bty-tab2-dark li:hover a {
+    display: block;
+    background: #fff;
+    border: 1px solid #fff;
+    color: #444;
+
+}
+            </textarea>
+
+        </div>
+    </div>
+
     <div class="col-md-12">
         <h4>Tab 3</h4>
         <h5>bty-tab3</h5>

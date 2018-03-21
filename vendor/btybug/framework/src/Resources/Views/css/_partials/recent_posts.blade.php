@@ -481,25 +481,446 @@
         <div class="col-md-4"></div>
     </div>
     <div class="col-md-12">
-        <h4>Recent Post 3</h4>
-        <h5>bty-recent-post-3</h5>
-            <figure class="bty-recent-post-3">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-recent-post-norm-2">
                 <img src="http://static6.businessinsider.com/image/5948376b9a7af5d1008b564e/gal-gadots-wonder-woman-salary-was-shockingly-low.jpg"
                      alt="">
                 <div>
-                    <span>27</span>
-                    <span>Sep</span>
+                    <div>
+                        27
+                        <small>Sep</small>
+                    </div>
+
+                    <h5>
+                        <a href="#">Title lorem 1 lorem.</a>
+                    </h5>
+
+                    <ul>
+                        <li>By<a href="">5 comment</a></li>
+                    </ul>
                 </div>
-                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                <figcaption>
-                    <h3>Title lorem 1 lorem</h3>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has.
-                    </p>
-                    <button>Read More</button>
-                </figcaption>
-                <a href="#"></a>
-            </figure>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-recent-post-norm-2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-recent-post-norm-2 {
+    overflow: hidden;
+    background-color: white;
+}
+
+.bty-recent-post-norm-2 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bty-recent-post-norm-2 img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.bty-recent-post-norm-2 > div {
+    padding: 0 17px 17px 0;
+}
+
+.bty-recent-post-norm-2 > div div:first-of-type {
+    float: left;
+    margin-right: 10px;
+    padding: 8px 15px;
+    text-align: center;
+    background: #444;
+    font-size: 26px;
+    color: #fff;
+    font-weight: 700;
+    transition: background 0.20s linear 0s;
+}
+
+.bty-recent-post-norm-2 > div div:first-of-type small {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-norm-2 > div div:first-of-type small:before {
+    content: "";
+    display: block;
+    margin-bottom: 5px;
+    border-top: 1px solid #fff;
+}
+
+.bty-recent-post-norm-2 > div h5 {
+    margin: 0;
+    padding-top: 15px;;
+}
+
+.bty-recent-post-norm-2 > div h5 a {
+    font-size: 15px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.bty-recent-post-norm-2 > div > ul li a {
+    color: #a9a9a9;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-norm-2 > div > ul li a:before {
+    content: "|";
+    margin: 0 5px 0 5px;
+    color: #d3d3d3;
+}
+
+.bty-recent-post-norm-2 a {
+    text-decoration: none;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-recent-post-num-2">
+                <img src="http://static6.businessinsider.com/image/5948376b9a7af5d1008b564e/gal-gadots-wonder-woman-salary-was-shockingly-low.jpg"
+                     alt="">
+                <div>
+                    <div>
+                        27
+                        <small>Sep</small>
+                    </div>
+
+                    <h5>
+                        <a href="#">Title lorem 1 lorem.</a>
+                    </h5>
+
+                    <ul>
+                        <li>By<a href="">5 comment</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-recent-post-num-2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+
+.bty-recent-post-num-2 {
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+}
+
+.bty-recent-post-num-2 ul {
+    list-style: none;
+    padding: 0 15px 15px 15px;
+    margin: 0;
+}
+
+.bty-recent-post-num-2 img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.bty-recent-post-num-2 > div div:first-of-type {
+    padding: 8px 15px;
+    text-align: center;
+    background: #444;
+    font-size: 26px;
+    color: #fff;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+}
+
+.bty-recent-post-num-2 > div div:first-of-type small {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-num-2 > div div:first-of-type small:before {
+    content: "";
+    display: block;
+    margin-bottom: 5px;
+    border-top: 1px solid #fff;
+}
+
+.bty-recent-post-num-2 > div h5 {
+    margin: 0;
+    padding: 15px;;
+}
+
+.bty-recent-post-num-2 > div h5 a {
+    font-size: 15px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.bty-recent-post-num-2 > div > ul li a {
+    color: #a9a9a9;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-num-2 > div > ul li a:before {
+    content: "|";
+    margin: 0 5px 0 5px;
+    color: #d3d3d3;
+}
+
+.bty-recent-post-num-2 a {
+    text-decoration: none;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-recent-post-row-2">
+                <img src="http://static6.businessinsider.com/image/5948376b9a7af5d1008b564e/gal-gadots-wonder-woman-salary-was-shockingly-low.jpg"
+                     alt="">
+                <div>
+                    <div>
+                        27
+                        <small>Sep</small>
+                    </div>
+
+                    <h5>
+                        <a href="#">Title lorem 1 lorem.</a>
+                    </h5>
+
+                    <ul>
+                        <li>By<a href="">5 comment</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-recent-post-row-2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-recent-post-row-2 {
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bty-recent-post-row-2 ul {
+    list-style: none;
+    padding: 0 15px 15px 15px;
+    margin: 0;
+}
+
+.bty-recent-post-row-2 img {
+    width: 40%;
+    height: 220px;
+    object-fit: cover;
+}
+.bty-recent-post-row-2>div{
+    width: 60%;
+}
+.bty-recent-post-row-2 > div div:first-of-type {
+    padding: 3px 9px;
+    text-align: center;
+    background: #444;
+    font-size: 17px;
+    color: #fff;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.bty-recent-post-row-2 > div div:first-of-type small {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-row-2 > div div:first-of-type small:before {
+    content: "";
+    display: block;
+    margin-bottom: 5px;
+    border-top: 1px solid #fff;
+}
+
+.bty-recent-post-row-2 > div h5 {
+    margin: 0;
+    padding: 15px;;
+}
+
+.bty-recent-post-row-2 > div h5 a {
+    font-size: 15px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.bty-recent-post-row-2 > div > ul li a {
+    color: #a9a9a9;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-row-2 > div > ul li a:before {
+    content: "|";
+    margin: 0 5px 0 5px;
+    color: #d3d3d3;
+}
+
+.bty-recent-post-row-2 a {
+    text-decoration: none;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 p-t-34">
+            <div class="bty-recent-post-img-right-2">
+                <img src="http://static6.businessinsider.com/image/5948376b9a7af5d1008b564e/gal-gadots-wonder-woman-salary-was-shockingly-low.jpg"
+                     alt="">
+                <div>
+                    <div>
+                        27
+                        <small>Sep</small>
+                    </div>
+
+                    <h5>
+                        <a href="#">Title lorem 1 lorem.</a>
+                    </h5>
+
+                    <ul>
+                        <li>By<a href="">5 comment</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>bty-recent-post-img-right-2</h5>
+            <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>
+.bty-recent-post-img-right-2 {
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+
+}
+
+.bty-recent-post-img-right-2 ul {
+    list-style: none;
+    padding: 0 15px 15px 15px;
+    margin: 0;
+}
+
+.bty-recent-post-img-right-2 img {
+    width: 40%;
+    height: 220px;
+    object-fit: cover;
+}
+.bty-recent-post-img-right-2>div{
+    width: 60%;
+}
+.bty-recent-post-img-right-2 > div div:first-of-type {
+    padding: 3px 9px;
+    text-align: center;
+    background: #444;
+    font-size: 17px;
+    color: #fff;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.bty-recent-post-img-right-2 > div div:first-of-type small {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-img-right-2 > div div:first-of-type small:before {
+    content: "";
+    display: block;
+    margin-bottom: 5px;
+    border-top: 1px solid #fff;
+}
+
+.bty-recent-post-img-right-2 > div h5 {
+    margin: 0;
+    padding: 15px;;
+}
+
+.bty-recent-post-img-right-2 > div h5 a {
+    font-size: 15px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.bty-recent-post-img-right-2 > div > ul li a {
+    color: #a9a9a9;
+    text-transform: capitalize;
+}
+
+.bty-recent-post-img-right-2 > div > ul li a:before {
+    content: "|";
+    margin: 0 5px 0 5px;
+    color: #d3d3d3;
+}
+
+.bty-recent-post-img-right-2 a {
+    text-decoration: none;
+}
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h4>Recent Post 3</h4>
+        <h5>bty-recent-post-3</h5>
+        <figure class="bty-recent-post-3">
+            <img src="http://static6.businessinsider.com/image/5948376b9a7af5d1008b564e/gal-gadots-wonder-woman-salary-was-shockingly-low.jpg"
+                 alt="">
+            <div>
+                <span>27</span>
+                <span>Sep</span>
+            </div>
+            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+            <figcaption>
+                <h3>Title lorem 1 lorem</h3>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has.
+                </p>
+                <button>Read More</button>
+            </figcaption>
+            <a href="#"></a>
+        </figure>
         <figure class="bty-recent-post-3">
             <img src="http://static6.businessinsider.com/image/5948376b9a7af5d1008b564e/gal-gadots-wonder-woman-salary-was-shockingly-low.jpg"
                  alt="">

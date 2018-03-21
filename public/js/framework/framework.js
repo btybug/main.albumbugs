@@ -10,25 +10,35 @@ var framework = {
     // Generate node tree
     nodeTreeGenerator: function (node) {
         var nodeEl = node[0];
-        var output = '<li data-index="' + this.globalIndex + '">';
-        output += '<div class="node-content">' + nodeEl.tagName + this.parseTemplate('controls') + '</div>';
+        var output = '';
+
+        if (nodeEl.tagName !== "WRAP") {
+            output += '<li data-index="' + this.globalIndex + '">';
+            output += '<div class="node-content">' + nodeEl.tagName + this.parseTemplate('controls') + '</div>';
+        }
 
         this.codeWallet.push(node);
 
         // Increase index
         this.globalIndex++;
 
-        if(node.children().length > 0){
-            output += '<ul>';
+        if (node.children().length > 0) {
+            if (nodeEl.tagName !== "WRAP") {
+                output += '<ul>';
+            }
 
             node.children().each(function () {
                 output += framework.nodeTreeGenerator($(this));
             });
 
-            output += '</ul>';
+            if (nodeEl.tagName !== "WRAP") {
+                output += '</ul>';
+            }
         }
 
-        output += '</li>';
+        if (nodeEl.tagName !== "WRAP") {
+            output += '</li>';
+        }
 
         return output;
     },
@@ -44,57 +54,110 @@ var framework = {
         return templateHTML;
     },
 
-    // Set node code editor value
-    setNodeCodeValue: function ($this) {
+    // Get node code editor value
+    getNodeCodeValue: function ($this) {
         var index = $this.closest("[data-index]").data("index"),
             nodeCode = this.codeWallet[index];
 
-        nodeCodeEditor.setValue(nodeCode[0].outerHTML);
+        return nodeCode[0].outerHTML;
     },
 
     // Click events
     clickEvents: {
-        editCode: function ($this) {
+        editPHPCode: function ($this) {
 
-            if($('#node-code-editor').length !== 0) {
-                framework.setNodeCodeValue($this);
-                return;
-            }
+            // Get last saved code
+            var nodeCode = framework.getNodeCodeValue($this);
+            phpCodeEditor.setValue(nodeCode);
 
-            jsPanel.create({
-                id: 'code-editor-panel',
-                container: 'body',
-                theme: 'primary',
-                headerTitle: 'Code Editor',
-                position: 'right-bottom',
-                contentSize: '500 250',
-                content: '<div id="node-code-editor"></div>',
-                callback: function () {
-                    nodeCodeEditor = ace.edit("node-code-editor");
-                    nodeCodeEditor.setTheme("ace/theme/monokai");
-                    nodeCodeEditor.session.setMode("ace/mode/html");
+            framework.hideElement($this);
+            framework.hideElement($('.tree-list'));
+            framework.showElement($('.node-code-editor-area'));
+            framework.showElement($('[bb-click=mainPHPCodeDiscard]'));
+            framework.showElement($('[bb-click=mainPHPCodeSave]'));
+        },
+        mainPHPCodeEdit: function ($this) {
+            // Get last saved code
+            var lastSavedCode  = framework.localGet("mainPHPCode");
+            if(lastSavedCode) phpCodeEditor.setValue(lastSavedCode);
 
-                    framework.setNodeCodeValue($this);
-                },
-                onclosed: function () {
+            framework.hideElement($this);
+            framework.hideElement($('.tree-list'));
+            framework.showElement($('.code-editor-area'));
+            framework.showElement($('[bb-click=mainPHPCodeDiscard]'));
+            framework.showElement($('[bb-click=mainPHPCodeSave]'));
+        },
+        mainPHPCodeDiscard: function ($this) {
+            // Get last saved code
+            var lastSavedCode  = framework.localGet("mainPHPCode");
 
-                }
+            // Clear value
+            phpCodeEditor.setValue(lastSavedCode);
+            phpCodeEditor.clearSelection();
+
+            // Show/Hide Buttons
+            framework.showElement($('[bb-click=mainPHPCodeEdit]'));
+            framework.hideElement($('[bb-click=mainPHPCodeDiscard]'));
+            framework.hideElement($('[bb-click=mainPHPCodeSave]'));
+
+            // Show tree & Hide Editor
+            setTimeout(function () {
+                framework.showElement($('.tree-list'));
+                framework.hideElement($('.code-editor-area'));
+            });
+        },
+        mainPHPCodeSave: function ($this) {
+            // Save code
+            framework.localSave("mainPHPCode", phpCodeEditor.getValue());
+
+            // Show/Hide Buttons
+            framework.showElement($('[bb-click=mainPHPCodeEdit]'));
+            framework.hideElement($('[bb-click=mainPHPCodeDiscard]'));
+            framework.hideElement($('[bb-click=mainPHPCodeSave]'));
+
+            // Show tree & Hide Editor
+            setTimeout(function () {
+                framework.showElement($('.tree-list'));
+                framework.hideElement($('.code-editor-area'));
             });
         }
+    },
+
+    // Show
+    showElement: function (element) {
+        element.removeAttr("hidden");
+    },
+
+    // Hide
+    hideElement: function (element) {
+        element.attr("hidden", true);
+    },
+
+    // Save data in localstorage
+    localSave: function (key, data) {
+        localStorage.setItem(key, data);
+    },
+
+    // Get data from localstorage
+    localGet: function (key) {
+        localStorage.getItem(key)
     }
 };
 
 $(function () {
     // Listen to code change
-    codeEditor.session.on('change', function() {
+    codeEditor.session.on('change', function () {
         // Reset code wallet & global index
         framework.codeWallet = [];
         framework.globalIndex = 0;
-        
+
         var codeContent = codeEditor.getValue();
-        var treeList = framework.nodeTreeGenerator($(codeContent));
+        var treeList = framework.nodeTreeGenerator($('<wrap>' + codeContent + '</wrap>'));
+
         $('.tree-list').html(treeList);
-        var data = {'html':codeContent.toString()};
+
+        // Live render
+        var data = {'html': phpCodeEditor.getValue().toString() + codeContent.toString()};
         $.ajax({
             url: $('#renderUrl').val(),
             type: 'POST',
@@ -108,7 +171,6 @@ $(function () {
                 }
             }
         });
-        // $('.preview-area').html(codeContent);
     });
 
     // Listen to click events
@@ -117,5 +179,29 @@ $(function () {
 
         var clickEvent = $(this).attr("bb-click");
         framework.clickEvents[clickEvent]($(this));
+    });
+
+    // Search code API
+    $("#search-code").easyAutocomplete({
+        url: 'http://mainbug.local/admin/framework/bb-functions/get-bb-fn-list',
+        ajaxSettings: {
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $("input[name='_token']").val()
+            }
+        },
+
+        getValue: function(element) {
+            return element.value;
+        },
+
+        list: {
+            onChooseEvent: function () {
+                var selectedData = $("#search-code").getSelectedItemData();
+                phpCodeEditor.session.insert(phpCodeEditor.getCursorPosition(), selectedData.value);
+            }
+        },
+
+        theme: "square"
     });
 });

@@ -19,11 +19,14 @@ class BBController extends Controller
         $list = [];
         if(count($functions)){
             foreach ($functions as $key => $value){
-                $list[$key] = $value['fn'];
+                $list[] = [
+                	"key" => $key,
+	                "value" => $value['fn']
+                ];
             }
         }
 
-        return \Response::json(['list' => $list]);
+        return \Response::json($list);
     }
 
     public function getOptions(Request $request)

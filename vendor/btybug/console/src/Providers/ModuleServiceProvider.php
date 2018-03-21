@@ -149,6 +149,16 @@ class ModuleServiceProvider extends ServiceProvider
                     "title" => "General",
                     "custom-link" => "/admin/console/general",
                     "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"],
+                [
+                    "title" => "Functions",
+                    "custom-link" => "/admin/console/functions",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"],
+                [
+                    "title" => "Api",
+                    "custom-link" => "/admin/console/api",
+                    "icon" => "fa fa-angle-right",
                     "is_core" => "yes"]
             ]]);
 

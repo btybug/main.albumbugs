@@ -161,6 +161,16 @@ Route::group(['prefix' => 'config'], function () {
     Route::post('/page-preview/{page_id}', 'StructureController@postSavePageSettings');
 });
 
+Route::group(['prefix' => 'functions'], function () {
+    Route::get('/', 'FunctionsController@getIndex',true);
+    Route::get('/create', 'FunctionsController@getCreate',true);
+});
+
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/', 'ApiController@getIndex',true);
+});
+
+
 Route::group(['prefix' => '/bburl'], function () {
     Route::any('/unit/{slug}', 'Developers\BBurlsController@BBunit');
     Route::any('/render-unit', 'Developers\BBurlsController@unitRender');

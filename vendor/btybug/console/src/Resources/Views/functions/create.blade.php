@@ -20,7 +20,7 @@
                 <label>
                     Select Table
                 </label>
-                {!! Form::select('table',[],null,['class' => 'form-control']) !!}
+                {!! Form::select('table',['' => 'Select'] + BBGetTables(),null,['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <label>

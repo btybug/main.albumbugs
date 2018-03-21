@@ -166,6 +166,8 @@ Route::group(['prefix' => 'functions'], function () {
     Route::get('/create', 'FunctionsController@getCreate',true);
     Route::post('/create', 'FunctionsController@postCreate');
     Route::post('/options', 'FunctionsController@postOptions');
+    Route::post('/specific', 'FunctionsController@postSpecific');
+    Route::post('/inside', 'FunctionsController@postInside');
 });
 
 Route::group(['prefix' => 'api'], function () {

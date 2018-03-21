@@ -28,22 +28,27 @@
                     Select Row
                 </label>
                 {!! Form::select('row',['' => 'Select'] +
-                ['single' => 'specific row / rows','filtered' => 'Filtered row / rows'],null,['class' => 'form-control custom_row']) !!}
+                ['specific' => 'specific row / rows','filtered' => 'Filtered row / rows'],null,['class' => 'form-control custom_row']) !!}
             </div>
-            <div class="form-group">
-                <div class="options-box hide">
-                    <div class="cust-group append_here">
+            <div class="filtered hide">
+                <div class="form-group">
+                    <div class="options-box">
+                        <div class="cust-group append_here">
 
+                        </div>
+                        <a href="javascript:void(0)" class="btn btn-md btn-info pull-right add_new_field"><i class=" fa fa-plus"></i></a>
                     </div>
-                    <a href="javascript:void(0)" class="btn btn-md btn-info pull-right add_new_field"><i class=" fa fa-plus"></i></a>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group number-box">
+                    <label>
+                        How Many number of row you want ?
+                    </label>
+                    {!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}
                 </div>
             </div>
-            <div class="clearfix"></div>
-            <div class="form-group hide number-box">
-                <label>
-                    How Many number of row you want ?
-                </label>
-                {!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}
+            <div class="specific hide">
+
             </div>
         </div>
     </div>
@@ -52,55 +57,99 @@
 @section('CSS')
     {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
     {!! HTML::style("public/css/bty.css") !!}
+    {!! HTML::style("public/css/select2/select2.min.css") !!}
+
     <style>
         .cust-group > .form-group {
             box-shadow: 0 0 4px #ccc;
             padding: 20px 0;
         }
-
+        .select2 {
+            width: 100% !important;
+        }
     </style>
 @stop
 @section('JS')
+    {!! HTML::script("public/js/select2/select2.full.min.js") !!}
+
     <script>
         window.onload = function () {
-            function Generator() {
-            };
 
+
+            function Generator() {}
             Generator.prototype.rand = Math.floor(Math.random() * 26) + Date.now();
-
             Generator.prototype.getId = function () {
                 return this.rand++;
             };
             var idGen = new Generator();
 
+            var fn_events = {
+                specific: function () {
+                    var table_name = $(".custom_table").val();
+                    $.ajax({
+                        type: "post",
+                        url: "{!! url('/admin/console/functions/specific') !!}",
+                        cache: false,
+                        datatype: "json",
+                        data: {
+                            table_name: table_name
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $("[name=_token]").val()
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                $(".specific").html(data.html);
+                                $(".specific-select").select2();
+                                $(".specific").removeClass("hide");
+                                $(".specific").addClass("show");
+                            }
+                        }
+                    });
+                    this.revertFiltered();
+                },
+                filtered: function () {
+                    $(".filtered").removeClass("hide");
+                    $(".filtered").addClass("show");
+                    this.revertSpecific()
+                },
+                revertSpecific: function () {
+                    $(".specific").removeClass("show");
+                    $(".specific").addClass("hide");
+                },
+                revertFiltered: function () {
+                    $(".filtered").removeClass("show");
+                    $(".filtered").addClass("hide");
+                },
+                revert: function () {
+                    this.revertFiltered();
+                    this.revertSpecific()
+                }
+            };
+
             $("body").on( "change",".custom_row", function () {
                 var table_name = $(".custom_table").val();
                 if (table_name !== '') {
-                    $(".options-box").removeClass("hide");
-                    $(".options-box").addClass("show");
-                    $(".number-box").removeClass("hide");
-                    $(".number-box").addClass("show");
-                } else {
-                    $(".options-box").removeClass("show");
-                    $(".options-box").addClass("hide");
-                    $(".number-box").removeClass("show");
-                    $(".number-box").addClass("hide");
-                    $(".append_here").html('');
+                    var row = $(this).val();
+                    if($.isFunction(fn_events[row])){
+                        fn_events[row]();
+                    }else{
+                        fn_events.revert();
+                    }
                 }
             });
 
             $("body").on("change", ".custom_table", function () {
                 var table_name = $(this).val();
                 if (table_name !== '') {
-                    $(".options-box").removeClass("hide");
-                    $(".options-box").addClass("show");
-                    $(".number-box").removeClass("hide");
-                    $(".number-box").addClass("show");
+                    var row = $(".custom_row").val();
+                    if($.isFunction(fn_events[row])){
+                        fn_events[row]();
+                    }else{
+                        fn_events.revert();
+                    }
                 } else {
-                    $(".options-box").removeClass("show");
-                    $(".options-box").addClass("hide");
-                    $(".number-box").removeClass("show");
-                    $(".number-box").addClass("hide");
+                    fn_events.revert();
                     $(".append_here").html('');
                 }
             });
@@ -128,6 +177,33 @@
                     });
                 }
             });
+
+            $("body").delegate(".add_new_inside", "click", function () {
+                var table_name = $(".custom_table").val();
+                var slug = $(this).data('slug');
+                var appendBox = $(this).parents().eq(1).find('.inside-conditions');
+                if (table_name) {
+                    $.ajax({
+                        type: "post",
+                        url: "{!! url('/admin/console/functions/inside') !!}",
+                        cache: false,
+                        datatype: "json",
+                        data: {
+                            table_name: table_name,
+                            slug: slug
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $("[name=_token]").val()
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                appendBox.append(data.html);
+                            }
+                        }
+                    });
+                }
+            });
+
             $("body").delegate(".remove_this_field", "click", function () {
                 return $(this).parent().parent().remove();
             });

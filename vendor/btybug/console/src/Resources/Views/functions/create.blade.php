@@ -23,7 +23,10 @@
                 {!! Form::select('table',[],null,['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-
+                <label>
+                    Select Row
+                </label>
+                {!! Form::select('table',['single' => 'Single Row','multy' => 'Multy Rows'],null,['class' => 'form-control']) !!}
             </div>
         </div>
     </div>

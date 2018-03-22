@@ -23,14 +23,15 @@ class QueryBuilder
         switch ($array['row']) {
             case 'filtered':
                 $this->conditions($array['conditions']);
+                if (isset($array['count'])) {
+                    $this->query .= $this->limit($array['count']);
+                }
                 break;
             case 'specific':
                 $this->specificConditions($array['in']);
                 break;
         }
-        if (isset($array['count'])) {
-            $this->query .= $this->limit($array['count']);
-        }
+
         return $this->query;
     }
     public function limit($count = 0)

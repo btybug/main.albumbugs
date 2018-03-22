@@ -1,4 +1,6 @@
-var nodeCodeEditor;
+var codeEditor,
+    phpCodeEditor,
+    phpNodeCodeEditor;
 
 var framework = {
 
@@ -6,6 +8,9 @@ var framework = {
 
     // Code wallet
     codeWallet: [],
+
+    // Current Node code
+    currentNodeCode: '',
 
     // Generate node tree
     nodeTreeGenerator: function (node) {
@@ -62,24 +67,131 @@ var framework = {
         return nodeCode[0].outerHTML;
     },
 
+    // Generate inserted code list of content and attributes
+    generateInsertedList: function () {
+        var nodeCode = phpNodeCodeEditor.getValue(),
+            nodeCodeEl = $(nodeCode),
+            list = '';
+
+        if(nodeCodeEl.text()){
+            list += '<div class="content-item"> Content <div class="controls"> <a href="#" bb-click="removeNodeContent"><i class="fas fa-trash"></i></a> </div> </div>';
+        }
+
+        $.each(nodeCodeEl[0].attributes, function() {
+            list += '<div class="attribute-item"> Attribute: ' + this.name + '<div class="controls"> <a href="#" bb-click="removeNodeAttr" data-attr="' + this.name + '"><i class="fas fa-trash"></i></a> </div> </div>';
+        });
+
+        $('.inserted-code').html(list);
+    },
+
     // Click events
     clickEvents: {
         editPHPCode: function ($this) {
-
             // Get last saved code
             var nodeCode = framework.getNodeCodeValue($this);
-            phpCodeEditor.setValue(nodeCode);
+            phpNodeCodeEditor.setValue(nodeCode);
+            phpNodeCodeEditor.clearSelection();
 
-            framework.hideElement($this);
+            $('#current-node-text').text($this.closest('.node-content').text().trim());
+            $('[bb-click="nodePHPCodeSave"]').attr("data-to-index", $this.closest('li').data("index"));
+
+            framework.currentNodeCode = nodeCode;
+
             framework.hideElement($('.tree-list'));
             framework.showElement($('.node-code-editor-area'));
-            framework.showElement($('[bb-click=mainPHPCodeDiscard]'));
-            framework.showElement($('[bb-click=mainPHPCodeSave]'));
+
+            framework.showElement($('.inserted-code'));
+
+            framework.showElement($('.node-php-code-item'));
+            framework.hideElement($('.php-code-item'));
+
+            framework.generateInsertedList();
+        },
+        nodePHPCodeDiscard: function () {
+            framework.showElement($('.tree-list'));
+            framework.hideElement($('.node-code-editor-area'));
+
+            framework.hideElement($('.node-php-code-item'));
+            framework.showElement($('.php-code-item'));
+
+            framework.hideElement($('.inserted-code'));
+        },
+        nodePHPCodeSave: function () {
+            var nodeCode = framework.currentNodeCode,
+                modifiedCode = phpNodeCodeEditor.getValue(),
+                mainCode = codeEditor.getValue(),
+                newCode;
+
+            newCode = mainCode.replace(nodeCode, modifiedCode);
+            codeEditor.setValue(newCode);
+            codeEditor.clearSelection();
+
+            framework.showElement($('.tree-list'));
+            framework.hideElement($('.node-code-editor-area'));
+
+            framework.hideElement($('.node-php-code-item'));
+            framework.showElement($('.php-code-item'));
+
+            framework.hideElement($('.inserted-code'));
+        },
+        addCode: function () {
+            var codeToInsert = '{!! ' + $('.node-code-select').val() + ' !!}',
+                whereToInsert = $('.node-code-position').val(),
+                nodeCode = phpNodeCodeEditor.getValue(),
+                modifiedCode,
+                customAttr = $('#custom-attribute').val();
+
+            var nodeCodeEl = $(nodeCode);
+            if(whereToInsert === "Attribute"){
+                if(!customAttr) return;
+                whereToInsert = customAttr;
+            }
+
+            if(whereToInsert === "Content"){
+                nodeCodeEl.html(codeToInsert);
+            }else{
+                nodeCodeEl.attr(whereToInsert, codeToInsert);
+            }
+
+            modifiedCode = nodeCodeEl[0].outerHTML;
+
+            phpNodeCodeEditor.setValue(he.decode(modifiedCode));
+            phpNodeCodeEditor.clearSelection();
+
+            framework.generateInsertedList();
+        },
+        removeNodeAttr: function ($this) {
+            var nodeCode = phpNodeCodeEditor.getValue(),
+                nodeCodeEl = $(nodeCode),
+                modifiedCode;
+
+            nodeCodeEl.removeAttr($this.data("attr"));
+
+            modifiedCode = nodeCodeEl[0].outerHTML;
+
+            phpNodeCodeEditor.setValue(he.decode(modifiedCode));
+            phpNodeCodeEditor.clearSelection();
+
+            framework.generateInsertedList();
+        },
+        removeNodeContent: function ($this) {
+            var nodeCode = phpNodeCodeEditor.getValue(),
+                nodeCodeEl = $(nodeCode),
+                modifiedCode;
+
+            nodeCodeEl.html('');
+            modifiedCode = nodeCodeEl[0].outerHTML;
+
+            phpNodeCodeEditor.setValue(he.decode(modifiedCode));
+            phpNodeCodeEditor.clearSelection();
+
+            framework.generateInsertedList();
         },
         mainPHPCodeEdit: function ($this) {
             // Get last saved code
             var lastSavedCode  = framework.localGet("mainPHPCode");
             if(lastSavedCode) phpCodeEditor.setValue(lastSavedCode);
+            phpCodeEditor.clearSelection();
 
             framework.hideElement($this);
             framework.hideElement($('.tree-list'));
@@ -92,7 +204,7 @@ var framework = {
             var lastSavedCode  = framework.localGet("mainPHPCode");
 
             // Clear value
-            phpCodeEditor.setValue(lastSavedCode);
+            if(lastSavedCode) phpCodeEditor.setValue(lastSavedCode);
             phpCodeEditor.clearSelection();
 
             // Show/Hide Buttons
@@ -145,6 +257,29 @@ var framework = {
 };
 
 $(function () {
+    // Init code editors
+    codeEditor = ace.edit("code-editor");
+    codeEditor.setTheme("ace/theme/monokai");
+    codeEditor.session.setMode("ace/mode/php");
+    codeEditor.getSession().setUseWrapMode(true);
+    codeEditor.$blockScrolling = Infinity;
+
+    phpCodeEditor = ace.edit("php-code-editor");
+    phpCodeEditor.setTheme("ace/theme/monokai");
+    phpCodeEditor.session.setMode("ace/mode/php");
+    phpCodeEditor.getSession().setUseWrapMode(true);
+    phpCodeEditor.$blockScrolling = Infinity;
+    phpCodeEditor.setValue('<?php \n\t// Write your code here\n\t\n ?>');
+    phpCodeEditor.selection.moveTo(2, 1);
+    phpCodeEditor.clearSelection();
+
+    phpNodeCodeEditor = ace.edit("php-node-code-editor");
+    phpNodeCodeEditor.setTheme("ace/theme/monokai");
+    phpNodeCodeEditor.session.setMode("ace/mode/php");
+    phpNodeCodeEditor.setReadOnly(true);
+    phpNodeCodeEditor.getSession().setUseWrapMode(true);
+    phpNodeCodeEditor.$blockScrolling = Infinity;
+
     // Listen to code change
     codeEditor.session.on('change', function () {
         // Reset code wallet & global index
@@ -183,7 +318,7 @@ $(function () {
 
     // Search code API
     $("#search-code").easyAutocomplete({
-        url: 'http://forms.albumbugs.com/admin/framework/bb-functions/get-bb-fn-list',
+        url: ajaxUrl.frameworkUrl + 'bb-functions/get-bb-fn-list',
         ajaxSettings: {
             type: 'POST',
             headers: {

@@ -18,12 +18,14 @@
     {!! HTML::style("public/libs/autocomplete/easy-autocomplete.themes.min.css") !!}
     {!! HTML::script("public/libs/autocomplete/jquery.easy-autocomplete.min.js") !!}
 
+    {!! HTML::script('public/js/framework/he.js') !!}
     {!! HTML::style('public/js/framework/framework.css?rnd='. rand(999,9999)) !!}
 
     <title>Document</title>
     <script>
-        var codeEditor,
-            phpCodeEditor;
+        var ajaxUrl = {
+            frameworkUrl: '{!! url("admin/framework") !!}/'
+        };
     </script>
 </head>
 <body>
@@ -62,6 +64,14 @@
                     </div>
                 </div>
 
+                <div class="node-php-code-item" hidden>
+                    <span id="current-node-text">H2</span>
+                    <div class="controls">
+                        <a href="#" class="outline-btn" bb-click="nodePHPCodeDiscard">Discard</a>
+                        <a href="#" class="outline-btn" data-to-index="0" bb-click="nodePHPCodeSave">Save</a>
+                    </div>
+                </div>
+
                 <!-- Tree List -->
                 <ul class="tree-list"></ul>
 
@@ -75,38 +85,30 @@
 
                 <!-- Node PHP Editor -->
                 <div class="node-code-editor-area" hidden>
-                    <div class="code-editor-bar">
-                        <select class="float-left">
-                            <option value="">Content</option>
-                            <option value="">Attribute</option>
+                    <div class="node-code-editor-bar">
+                        <select class="node-code-position custom-select float-left">
+                            <option>Content</option>
+                            <option>title</option>
+                            <option>alt</option>
+                            <option>src</option>
+                            <option>Attribute</option>
                         </select>
-                        <input type="text" placeholder="Custom attribute" class="float-left">
-                        <input type="text" id="search-code" placeholder="Search code">
-                        <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-plus"></i></a>
+
+                        <input type="text" id="custom-attribute" placeholder="attribute" class="float-left" style="width: 110px">
+
+                        <select class="node-code-select custom-select float-left">
+                            <option value="$user->id">id</option>
+                            <option value="$user->username">username</option>
+                            <option value="$user->email">email</option>
+                            <option value="$user->address">address</option>
+                        </select>
+
+                        <a href="#" class="btn btn-warning btn-sm add-code" bb-click="addCode"><i class="fas fa-plus"></i></a>
                     </div>
                     <div id="php-node-code-editor"></div>
                 </div>
 
-                <div class="inserted-code">
-                    <div class="content-item">
-                        Content
-                        <div class="controls">
-                            <a href="#" bb-click="editPHPCode"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                    <div class="attribute-item">
-                        Attribute: Title
-                        <div class="controls">
-                            <a href="#" bb-click="editPHPCode"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                    <div class="attribute-item">
-                        Attribute: Class
-                        <div class="controls">
-                            <a href="#" bb-click="editPHPCode"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
+                <div class="inserted-code" hidden></div>
             </div>
         </div>
     </div>
@@ -133,26 +135,6 @@
 </script>
 
 {!! HTML::script('public/js/ace-editor/ace.js') !!}
-<script>
-$(function () {
-    codeEditor = ace.edit("code-editor");
-    codeEditor.setTheme("ace/theme/monokai");
-    codeEditor.session.setMode("ace/mode/php");
-    codeEditor.getSession().setUseWrapMode(true);
-
-    phpCodeEditor = ace.edit("php-code-editor");
-    phpCodeEditor.setTheme("ace/theme/monokai");
-    phpCodeEditor.session.setMode("ace/mode/php");
-    phpCodeEditor.getSession().setUseWrapMode(true);
-    phpCodeEditor.$blockScrolling = Infinity;
-
-    // phpCodeEditor = ace.edit("php-node-code-editor");
-    // phpCodeEditor.setTheme("ace/theme/monokai");
-    // phpCodeEditor.session.setMode("ace/mode/php");
-    // phpCodeEditor.getSession().setUseWrapMode(true);
-    // phpCodeEditor.$blockScrolling = Infinity;
-});
-</script>
 {!! HTML::script('public/js/framework/framework.js?rnd='. rand(999,9999)) !!}
 </body>
 </html>

@@ -191,10 +191,21 @@ class FunctionsController extends Controller
         try{
             $query = $queryBuilder->make($data);
         }catch (\Exception $exception){
-            return \Response::json(['error' => false,'query' => 'Something wrong in query, try again ']);
+            return \Response::json(['error' => true,'query' => 'Something wrong in query, try again ']);
         }
 
+        $out = BBGetTableColumn($data['table']);
+        $columns = array();
+        foreach ($out as $column => $relativeValue) {
+            // Add this column name
+            $columns[] = array(
+                "title"=>$column,
+                "data"=>$column
+            );
+        }
 
-        return \Response::json(['error' => false,'query' => $query]);
+        $result = \DB::select($query);
+
+        return \Response::json(['error' => false,'query' => $query, 'columns' => $columns,'data' => $result]);
     }
 }

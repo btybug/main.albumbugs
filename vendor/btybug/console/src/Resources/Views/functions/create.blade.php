@@ -22,7 +22,7 @@
                 {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Fn Description']) !!}
             </div>
             <div class="col-md-6 code-here">
-               code here
+                code here
             </div>
         </div>
     </div>
@@ -50,26 +50,29 @@
                         <div class="cust-group append_here">
 
                         </div>
-                        <a href="javascript:void(0)" class="btn btn-md btn-info cust-btn pull-right add_new_field"><i class=" fa fa-plus"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-md btn-info cust-btn pull-right add_new_field"><i
+                                    class=" fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 {{--<div class="form-group number-box">--}}
-                    {{--<label>--}}
-                        {{--How Many number of row you want ?--}}
-                    {{--</label>--}}
-                    {{--{!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}--}}
+                {{--<label>--}}
+                {{--How Many number of row you want ?--}}
+                {{--</label>--}}
+                {{--{!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}--}}
                 {{--</div>--}}
             </div>
             <div class="specific hide">
 
             </div>
             <div class="form-group">
-               <a href="javascript:void(0)" class="btn btn-primary pull-right get-result">Get Result</a>
+                <a href="javascript:void(0)" class="btn btn-primary pull-right get-result">Get Result</a>
             </div>
         </div>
     </div>
     {!! Form::close() !!}
+    <div class="col-md-12 table-div">
+    </div>
 @stop
 @section('CSS')
     {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
@@ -77,32 +80,38 @@
     {!! HTML::style("public/css/select2/select2.min.css") !!}
 
     <style>
-        .cust-group .custom_removable_general_parent>.form-group {
+        .cust-group .custom_removable_general_parent > .form-group {
             box-shadow: 0 0 4px #ccc;
             padding: 20px 0;
             background-color: #5b737f;
             color: white;
         }
+
         .select2 {
             width: 100% !important;
         }
-        .m-10{
-            margin:10px 0;
+
+        .m-10 {
+            margin: 10px 0;
         }
-        .m-b-10{
+
+        .m-b-10 {
             margin-bottom: 10px;
         }
-        .cust-group .form-control{
+
+        .cust-group .form-control {
             background-color: #78909c;
             border-color: #78909c;
             color: #ffffff;
         }
-        .cust-btn{
+
+        .cust-btn {
             color: #fff !important;
             background-color: #e4d700 !important;;
             border-color: #e4d700 !important;;
         }
-        .code-here{
+
+        .code-here {
             height: 60px;
             margin-top: 5px;
             border: 1px solid;
@@ -112,10 +121,12 @@
 @stop
 @section('JS')
     {!! HTML::script("public/js/select2/select2.full.min.js") !!}
-
+    {!! Html::script('public/js/DataTables/datatables.js') !!}
     <script>
         window.onload = function () {
-            function Generator() {}
+            function Generator() {
+            }
+
             Generator.prototype.rand = Math.floor(Math.random() * 26) + Date.now();
             Generator.prototype.getId = function () {
                 return this.rand++;
@@ -153,7 +164,7 @@
                     var key = $('#fn-key').val();
                     var table_name = $(".custom_table").val();
                     $(".append_here").html('');
-                    if(key){
+                    if (key) {
                         $.ajax({
                             type: "post",
                             url: "{!! url('/admin/console/functions/filtered') !!}",
@@ -188,17 +199,19 @@
                 },
                 revert: function () {
                     this.revertFiltered();
-                    this.revertSpecific()
+                    this.revertSpecific();
+                    $(".table-div").empty();
+                    $(".code-here").empty();
                 }
             };
 
-            $("body").on( "change",".custom_row", function () {
+            $("body").on("change", ".custom_row", function () {
                 var table_name = $(".custom_table").val();
                 if (table_name !== '') {
                     var row = $(this).val();
-                    if($.isFunction(fn_events[row])){
+                    if ($.isFunction(fn_events[row])) {
                         fn_events[row]();
-                    }else{
+                    } else {
                         fn_events.revert();
                     }
                 }
@@ -206,11 +219,13 @@
 
             $("body").on("change", ".custom_table", function () {
                 var table_name = $(this).val();
+                $(".table-div").empty();
+                $(".code-here").empty();
                 if (table_name !== '') {
                     var row = $(".custom_row").val();
-                    if($.isFunction(fn_events[row])){
+                    if ($.isFunction(fn_events[row])) {
                         fn_events[row]();
-                    }else{
+                    } else {
                         fn_events.revert();
                     }
                 } else {
@@ -274,16 +289,16 @@
             $("body").delegate(".remove_this_field", "click", function () {
                 return $(this).closest(".removable_parent").remove();
             });
-            $("body").on("click",".custom_general_remove",function(){
+            $("body").on("click", ".custom_general_remove", function () {
                 return $(this).closest(".custom_removable_general_parent").remove();
             });
 
             var row_value = $('.custom_row').val();
-            if($.isFunction(fn_events[row_value])){
+            if ($.isFunction(fn_events[row_value])) {
                 fn_events[row_value]();
             }
 
-            $('body').on('click','.get-result',function () {
+            $('body').on('click', '.get-result', function () {
                 var data = $("form").serialize();
                 $.ajax({
                     type: "post",
@@ -297,6 +312,22 @@
                     success: function (data) {
                         if (!data.error) {
                             $(".code-here").html(data.query);
+                            $(".table-div").empty();
+
+                            var tableHeaders;
+                            $.each(data.columns, function(i, val){
+                                tableHeaders += "<th>" + val + "</th>";
+                            });
+                            $(".table-div").append('<table id="result-table" class="display table table-striped table-bordered" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
+                            //$("#tableDiv").find("table thead tr").append(tableHeaders);
+
+                            $('#result-table').dataTable({
+                                columns: data.columns,
+                                data: data.data
+                            });
+                        }else{
+                            $(".code-here").html(data.query);
+                            $(".table-div").empty();
                         }
                     }
                 });

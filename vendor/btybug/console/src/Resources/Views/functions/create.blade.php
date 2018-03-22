@@ -203,6 +203,10 @@
                     });
                 }
             });
+
+            $("body").delegate(".remove_this_field", "click", function () {
+                return $(this).parent().parent().remove();
+            });
         }
     </script>
 @stop

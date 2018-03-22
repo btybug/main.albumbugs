@@ -54,12 +54,12 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="form-group number-box">
-                    <label>
-                        How Many number of row you want ?
-                    </label>
-                    {!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}
-                </div>
+                {{--<div class="form-group number-box">--}}
+                    {{--<label>--}}
+                        {{--How Many number of row you want ?--}}
+                    {{--</label>--}}
+                    {{--{!! Form::number('count',null,['class' => 'form-control','min' => 1]) !!}--}}
+                {{--</div>--}}
             </div>
             <div class="specific hide">
 

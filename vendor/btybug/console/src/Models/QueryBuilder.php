@@ -16,6 +16,7 @@ class QueryBuilder
     public $operators = [
         'equal' => '=',
         'not_equal' => '!=',
+        'contains' => 'LIKE',
     ];
     public function make(array $array)
     {

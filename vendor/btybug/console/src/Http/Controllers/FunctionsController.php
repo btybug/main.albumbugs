@@ -3,6 +3,7 @@
 namespace Btybug\Console\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Btybug\Console\Models\QueryBuilder;
 use Illuminate\Http\Request;
 
 class FunctionsController extends Controller
@@ -38,7 +39,8 @@ class FunctionsController extends Controller
         if(\File::exists($path)){
             $functions = json_decode(\File::get($path),true);
         }
-
+        $queryBuilder = new QueryBuilder();
+        $data['query'] = $queryBuilder->make($data);
         $functions[str_slug($data['name'])] = $data;
         \File::put($path, json_encode($functions, true));
 
@@ -71,6 +73,8 @@ class FunctionsController extends Controller
 
         if(! isset($functions[$key])) return redirect()->route('fn_list');
 
+        $queryBuilder = new QueryBuilder();
+        $data['query'] = $queryBuilder->make($data);
         $functions[$key] = $data;
         \File::put($path, json_encode($functions, true));
 

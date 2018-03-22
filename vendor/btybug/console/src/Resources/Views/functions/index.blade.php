@@ -22,7 +22,7 @@
                         <tr class="field-row">
                             <td>{!! $entry['name'] !!}</td>
                             <td>{!! $entry['description'] !!}</td>
-                            <td>Coming soon</td>
+                            <td>{!! (isset($entry['query'])) ? $entry['query'] : 'No Query' !!}</td>
                             <td>
                                 <a href="{!! url("admin/console/functions/edit/$key") !!}"
                                    class="btn btn-warning"><i class="fa fa-pencil"></i></a>

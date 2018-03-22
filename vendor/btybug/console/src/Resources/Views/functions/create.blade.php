@@ -140,6 +140,7 @@
                 filtered: function () {
                     var key = $('#fn-key').val();
                     var table_name = $(".custom_table").val();
+                    $(".append_here").html('');
                     if(key){
                         $.ajax({
                             type: "post",

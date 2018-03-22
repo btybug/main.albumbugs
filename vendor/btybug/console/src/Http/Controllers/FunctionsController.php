@@ -60,6 +60,23 @@ class FunctionsController extends Controller
         return view('console::functions.create',compact('model','key'));
     }
 
+    public function postEdit($key,Request $request)
+    {
+        $data = $request->except('_token');
+        $path = storage_path('app'.DS.'generated_functions.json');
+        $functions = [];
+        if(\File::exists($path)){
+            $functions = json_decode(\File::get($path),true);
+        }
+
+        if(! isset($functions[$key])) return redirect()->route('fn_list');
+
+        $functions[$key] = $data;
+        \File::put($path, json_encode($functions, true));
+
+        return redirect()->route('fn_list')->with('message','Function updated');
+    }
+
     public function postOptions(Request $request)
     {
         $table = $request->get('table_name');
@@ -135,7 +152,9 @@ class FunctionsController extends Controller
             }
         }
 
-        $html = \View('console::functions._partials.options',compact('table','data','model'))->render();
+        $slug = uniqid();
+        $new_slug = uniqid('inside');
+        $html = \View('console::functions._partials.options',compact('table','data','model','slug','new_slug'))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }

@@ -169,6 +169,7 @@ Route::group(['prefix' => 'functions'], function () {
     Route::post('/specific', 'FunctionsController@postSpecific');
     Route::post('/inside', 'FunctionsController@postInside');
     Route::post('/filtered', 'FunctionsController@postFiltered');
+    Route::post('/get-result', 'FunctionsController@postGetResult');
     Route::group(['prefix' => 'edit'], function () {
         Route::get('/', 'FunctionsController@getEdit',true);
         Route::get('/{key}', 'FunctionsController@getEdit',true);

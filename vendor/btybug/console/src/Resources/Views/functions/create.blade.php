@@ -17,9 +17,12 @@
     </div>
     <div class="bb-form-sub-header">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label>Function description</label>
                 {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Fn Description']) !!}
+            </div>
+            <div class="col-md-6 code-here">
+               code here
             </div>
         </div>
     </div>
@@ -61,6 +64,9 @@
             <div class="specific hide">
 
             </div>
+            <div class="form-group">
+               <a href="javascript:void(0)" class="btn btn-primary pull-right get-result">Get Result</a>
+            </div>
         </div>
     </div>
     {!! Form::close() !!}
@@ -95,6 +101,12 @@
             color: #fff !important;
             background-color: #e4d700 !important;;
             border-color: #e4d700 !important;;
+        }
+        .code-here{
+            height: 60px;
+            margin-top: 5px;
+            border: 1px solid;
+            padding: 5px;
         }
     </style>
 @stop
@@ -270,6 +282,27 @@
             if($.isFunction(fn_events[row_value])){
                 fn_events[row_value]();
             }
+
+            $('body').on('click','.get-result',function () {
+                var data = $("form").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "{!! url('/admin/console/functions/get-result') !!}",
+                    cache: false,
+                    datatype: "json",
+                    data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("[name=_token]").val()
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $(".code-here").html(data.query);
+                        }
+                    }
+                });
+            });
+
+
         }
     </script>
 @stop

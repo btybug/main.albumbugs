@@ -180,4 +180,21 @@ class FunctionsController extends Controller
 
         return \Response::json(['success' => true, 'url' => url('/admin/console/functions')]);
     }
+
+    public function postGetResult (
+        Request $request
+    )
+    {
+        $data = $request->except('_token');
+
+        $queryBuilder = new QueryBuilder();
+        try{
+            $query = $queryBuilder->make($data);
+        }catch (\Exception $exception){
+            return \Response::json(['error' => false,'query' => 'Something wrong in query, try again ']);
+        }
+
+
+        return \Response::json(['error' => false,'query' => $query]);
+    }
 }

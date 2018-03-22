@@ -1,6 +1,9 @@
 @extends('btybug::layouts.admin')
 @section('content')
-    {!! Form::model(null,[]) !!}
+    {!! Form::model($model,[]) !!}
+    @if($model)
+        {!! Form::hidden('key',$key,['id' => 'fn-key']) !!}
+    @endif
     <div class="bb-form-header">
         <div class="row">
             <div class="col-md-4">
@@ -100,8 +103,6 @@
 
     <script>
         window.onload = function () {
-
-
             function Generator() {}
             Generator.prototype.rand = Math.floor(Math.random() * 26) + Date.now();
             Generator.prototype.getId = function () {
@@ -112,13 +113,15 @@
             var fn_events = {
                 specific: function () {
                     var table_name = $(".custom_table").val();
+                    var key = $('#fn-key').val();
                     $.ajax({
                         type: "post",
                         url: "{!! url('/admin/console/functions/specific') !!}",
                         cache: false,
                         datatype: "json",
                         data: {
-                            table_name: table_name
+                            table_name: table_name,
+                            key: key
                         },
                         headers: {
                             'X-CSRF-TOKEN': $("[name=_token]").val()
@@ -135,6 +138,29 @@
                     this.revertFiltered();
                 },
                 filtered: function () {
+                    var key = $('#fn-key').val();
+                    var table_name = $(".custom_table").val();
+                    if(key){
+                        $.ajax({
+                            type: "post",
+                            url: "{!! url('/admin/console/functions/filtered') !!}",
+                            cache: false,
+                            datatype: "json",
+                            data: {
+                                table_name: table_name,
+                                key: key
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $("[name=_token]").val()
+                            },
+                            success: function (data) {
+                                if (!data.error) {
+                                    $(".append_here").html(data.html);
+                                }
+                            }
+                        });
+                    }
+
                     $(".filtered").removeClass("hide");
                     $(".filtered").addClass("show");
                     this.revertSpecific()
@@ -238,6 +264,11 @@
             $("body").on("click",".custom_general_remove",function(){
                 return $(this).closest(".custom_removable_general_parent").remove();
             });
+
+            var row_value = $('.custom_row').val();
+            if($.isFunction(fn_events[row_value])){
+                fn_events[row_value]();
+            }
         }
     </script>
 @stop

@@ -10,18 +10,54 @@ class FunctionsController extends Controller
 
     public function getIndex()
     {
-        return view('console::functions.index');
+        $path = storage_path('app'.DS.'generated_functions.json');
+        $functions = [];
+        if(\File::exists($path)){
+            $functions = json_decode(\File::get($path),true);
+        }
+
+        return view('console::functions.index',compact('functions'));
     }
 
 
     public function getCreate()
     {
-        return view('console::functions.create');
+        $model = null;
+        return view('console::functions.create',compact('model'));
     }
 
     public function postCreate (Request $request)
     {
-        dd($request->all());
+        $data = $request->except('_token');
+        if($data['name'] == ''){
+            return redirect()->back()->with('message','Function name required');
+        }
+
+        $path = storage_path('app'.DS.'generated_functions.json');
+        $functions = [];
+        if(\File::exists($path)){
+            $functions = json_decode(\File::get($path),true);
+        }
+
+        $functions[str_slug($data['name'])] = $data;
+        \File::put($path, json_encode($functions, true));
+
+        return redirect()->route('fn_list')->with('message','Function created');
+    }
+
+    public function getEdit($key,Request $request)
+    {
+        $path = storage_path('app'.DS.'generated_functions.json');
+        $functions = [];
+        if(\File::exists($path)){
+            $functions = json_decode(\File::get($path),true);
+        }
+
+        if(! isset($functions[$key])) return redirect()->route('fn_list');
+
+        $model = $functions[$key];
+
+        return view('console::functions.create',compact('model','key'));
     }
 
     public function postOptions(Request $request)
@@ -48,6 +84,7 @@ class FunctionsController extends Controller
 
     public function postSpecific (Request $request)
     {
+        $model = null;
         $table = $request->get('table_name');
         $columns = BBGetTableColumn($table);
         $show_name = 'id';
@@ -65,8 +102,59 @@ class FunctionsController extends Controller
             \DB::raw("CONCAT($table.id,'-',$table.$show_name) AS show_name")
         )->pluck('show_name','id');
         $data = array_filter( $data->toArray());
-        $html = \View('console::functions._partials.specific',compact('data'))->render();
+
+        if($request->get('key')){
+            $path = storage_path('app'.DS.'generated_functions.json');
+            $functions = [];
+            if(\File::exists($path)){
+                $functions = json_decode(\File::get($path),true);
+                if(isset($functions[$request->get('key')])){
+                    $model = $functions[$request->get('key')];
+                }
+            }
+        }
+
+        $html = \View('console::functions._partials.specific',compact('data','model'))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function postFiltered (Request $request)
+    {
+        $model = null;
+        $table = $request->get('table_name');
+        $columns = BBGetTableColumn($table);
+        $key = $request->get('key');
+
+        $path = storage_path('app'.DS.'generated_functions.json');
+        $functions = [];
+        if(\File::exists($path)){
+            $functions = json_decode(\File::get($path),true);
+            if(isset($functions[$key])){
+                $model = $functions[$key];
+            }
+        }
+
+        $html = \View('console::functions._partials.options',compact('table','data','model'))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function delete(
+        Request $request
+    )
+    {
+        $path = storage_path('app'.DS.'generated_functions.json');
+        $functions = [];
+        if(\File::exists($path)){
+            $functions = json_decode(\File::get($path),true);
+
+            if(isset($functions[$request->get('slug')])){
+                unset($functions[$request->get('slug')]);
+                \File::put($path, json_encode($functions,true));
+            }
+        }
+
+        return \Response::json(['success' => true, 'url' => url('/admin/console/functions')]);
     }
 }

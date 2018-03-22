@@ -162,12 +162,19 @@ Route::group(['prefix' => 'config'], function () {
 });
 
 Route::group(['prefix' => 'functions'], function () {
-    Route::get('/', 'FunctionsController@getIndex',true);
+    Route::get('/', 'FunctionsController@getIndex',true)->name('fn_list');
     Route::get('/create', 'FunctionsController@getCreate',true);
     Route::post('/create', 'FunctionsController@postCreate');
     Route::post('/options', 'FunctionsController@postOptions');
     Route::post('/specific', 'FunctionsController@postSpecific');
     Route::post('/inside', 'FunctionsController@postInside');
+    Route::post('/filtered', 'FunctionsController@postFiltered');
+    Route::group(['prefix' => 'edit'], function () {
+        Route::get('/', 'FunctionsController@getEdit',true);
+        Route::get('/{key}', 'FunctionsController@getEdit',true);
+        Route::post('/{key}', 'FunctionsController@postEdit',true);
+    });
+    Route::post('/delete', 'FunctionsController@delete');
 });
 
 Route::group(['prefix' => 'api'], function () {

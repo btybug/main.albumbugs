@@ -12,6 +12,14 @@
             </div>
         </div>
     </div>
+    <div class="bb-form-sub-header">
+        <div class="row">
+            <div class="col-md-12">
+                <label>Function description</label>
+                {!! Form::textarea('description',null,['class' => 'form-description', 'placeholder' => 'Fn Description']) !!}
+            </div>
+        </div>
+    </div>
 
     <div class="row m-b-10">
         <h3>Create Function</h3>
@@ -182,7 +190,8 @@
                         datatype: "json",
                         data: {
                             table_name: table_name,
-                            slug: idGen.getId()
+                            slug: idGen.getId(),
+                            new_slug: idGen.getId()
                         },
                         headers: {
                             'X-CSRF-TOKEN': $("[name=_token]").val()
@@ -208,7 +217,8 @@
                         datatype: "json",
                         data: {
                             table_name: table_name,
-                            slug: slug
+                            slug: slug,
+                            new_slug: idGen.getId()
                         },
                         headers: {
                             'X-CSRF-TOKEN': $("[name=_token]").val()

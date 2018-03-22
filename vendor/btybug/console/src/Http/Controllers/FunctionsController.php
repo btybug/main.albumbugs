@@ -28,8 +28,9 @@ class FunctionsController extends Controller
     {
         $table = $request->get('table_name');
         $slug = $request->get('slug');
+        $new_slug = $request->get('new_slug');
 
-        $html = \View('console::functions._partials.options',compact('table','slug'))->render();
+        $html = \View('console::functions._partials.options',compact('table','slug','new_slug'))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
@@ -38,8 +39,9 @@ class FunctionsController extends Controller
     {
         $table = $request->get('table_name');
         $slug = $request->get('slug');
+        $new_slug = $request->get('new_slug');
 
-        $html = \View('console::functions._partials.inside',compact('table','slug'))->render();
+        $html = \View('console::functions._partials.inside',compact('table','slug','new_slug'))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }

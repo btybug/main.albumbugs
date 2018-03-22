@@ -36,7 +36,7 @@
                         <div class="cust-group append_here">
 
                         </div>
-                        <a href="javascript:void(0)" class="btn btn-md btn-info pull-right add_new_field"><i class=" fa fa-plus"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-md btn-info cust-btn pull-right add_new_field"><i class=" fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -60,12 +60,30 @@
     {!! HTML::style("public/css/select2/select2.min.css") !!}
 
     <style>
-        .cust-group > .form-group {
+        .cust-group .custom_removable_general_parent>.form-group {
             box-shadow: 0 0 4px #ccc;
             padding: 20px 0;
+            background-color: #5b737f;
+            color: white;
         }
         .select2 {
             width: 100% !important;
+        }
+        .m-10{
+            margin:10px 0;
+        }
+        .m-b-10{
+            margin-bottom: 10px;
+        }
+        .cust-group .form-control{
+            background-color: #78909c;
+            border-color: #78909c;
+            color: #ffffff;
+        }
+        .cust-btn{
+            color: #fff !important;
+            background-color: #e4d700 !important;;
+            border-color: #e4d700 !important;;
         }
     </style>
 @stop
@@ -205,7 +223,10 @@
             });
 
             $("body").delegate(".remove_this_field", "click", function () {
-                return $(this).parent().parent().remove();
+                return $(this).closest(".removable_parent").remove();
+            });
+            $("body").on("click",".custom_general_remove",function(){
+                return $(this).closest(".custom_removable_general_parent").remove();
             });
         }
     </script>

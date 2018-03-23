@@ -39,7 +39,12 @@ class QueryBuilder
     public function into($data)
     {
         $column=$data['column'];
-        $expression= implode(",",$data['expression']);
+        $array=$data['expression'];
+        $expression='';
+        foreach ($array as $item) {
+            $expression .= "'".$item."',";
+        }
+        $expression = rtrim($expression, ', ');
         return " `$column`  IN ( $expression )";
     }
     public function not_between($data)
@@ -52,7 +57,12 @@ class QueryBuilder
     public function not_in($data)
     {
         $column=$data['column'];
-        $expression= implode(",",$data['expression']);
+        $array=$data['expression'];
+        $expression='';
+        foreach ($array as $item) {
+            $expression .= "'".$item."',";
+        }
+        $expression = rtrim($expression, ', ');
         return " `$column` NOT IN ( $expression )";
     }
 

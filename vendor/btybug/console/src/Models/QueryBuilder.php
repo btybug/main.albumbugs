@@ -15,6 +15,7 @@ class QueryBuilder
     protected $i = 1;
     public $operators = [
         'equal' => '=',
+        'single_date' => '=',
         'not_equal' => '!=',
         'more'=>'>',
         'less'=>'<',

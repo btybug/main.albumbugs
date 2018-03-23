@@ -16,8 +16,36 @@ class QueryBuilder
     public $operators = [
         'equal' => '=',
         'not_equal' => '!=',
+        'more'=>'>',
+        'less'=>'<',
+        'more_and_equal'=>'>=',
+        'less_and_equal'=>'<=',
+        'in'=> ['function','in'],
+        'not_in'=>['function','not_in'],
+        'between' => ['function','between'],
+        'not_between' =>  ['function','not_between'],
+        'is_null' => 'IS NULL',
+        'not_is_null' => 'IS NOT NULL',
         'contains' => 'LIKE',
     ];
+
+    public function between($data)
+    {
+        return $data['column'].' BETWEEN '. $data['expression_from'].$this->and().$data['expression_to'];
+    }
+    public function in($data)
+    {
+        return $data['column'].' IN '. $data['expression'];
+    }
+    public function not_between($data)
+    {
+        return  $data['column'].' NOT BETWEEN '. $data['expression_from'].$this->and().$data['expression_to'];
+    }
+    public function not_in($data)
+    {
+        return $data['column'].' NOT IN '. $data['expression'];
+    }
+
     public function make(array $array)
     {
         $this->query = $this->select($array['table']);
@@ -59,12 +87,12 @@ class QueryBuilder
 
     public function and ()
     {
-        return ' and ';
+        return ' AND ';
     }
 
     public function or ()
     {
-        return ' or ';
+        return ' OR ';
     }
 
     public function scope()
@@ -94,7 +122,13 @@ class QueryBuilder
             foreach ($conditions as $key => $condition) {
                 $i++;
                 if (is_array($condition)) {
-                    $this->query .= $this->condition($condition['column'], $this->operators[$condition['operator']], $condition['expression']);
+                    if(is_array($this->operators[$condition['operator']]) && $this->operators[$condition['operator']][0]==='function'){
+                        $function=$this->operators[$condition['operator']][1];
+
+                        $this->query .= $this->$function($condition);
+                    }else{
+                        $this->query .= $this->condition($condition['column'], $this->operators[$condition['operator']], $condition['expression']);
+                    }
                     if (count($conditions) > $i) {
                         $condition = $condition['condition'];
                         $this->query .= $this->$condition();

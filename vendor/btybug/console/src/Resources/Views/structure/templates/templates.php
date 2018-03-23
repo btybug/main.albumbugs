@@ -1,11 +1,3 @@
-<?php
-Html::style("public/libs/easyui/easyui.css");
-HTML::style("public/libs/minicolors/jquery.minicolors.css");
-HTML::style("public/libs/toggle/jquery.toggleinput.css");
-HTML::style("public/libs/tagsinput/bootstrap-tagsinput.css");
-
-?>
-
 <script type="text/x-handlebars-template" id="bbt-editor-list">
     <ul class="bbs-field-selectors">
         {{#selectors}}

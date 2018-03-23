@@ -1,3 +1,15 @@
+html, body{
+  height: 100%;
+}
+
+.grow {
+  flex: 1;
+}
+
+.main {
+  overflow-y: auto;
+}
+
 header {
   background-color: black;
   padding: 15px 0;
@@ -33,10 +45,6 @@ section.main .preview, section.main .settings {
   background: #e7e7e7;
 }
 
-.full-height {
-  height: calc(100vh - 61px);
-}
-
 .tree-area {
   background: #3d3d3d;
   overflow-y: auto;
@@ -47,8 +55,6 @@ section.main .preview, section.main .settings {
   height: 100%;
   padding: 10px;
   background: #fff;
-  border-bottom: 10px solid #e7e7e7;
-  border-top: 10px solid #e7e7e7;
   position: relative;
   overflow: scroll;
 }
@@ -146,6 +152,10 @@ a.outline-btn:hover {
   }
 }
 
+div#php-node-code-editor {
+  height: calc(100% - 41px);
+}
+
 .code-editor-bar input, .node-code-editor-bar input {
   border: none;
   width: 100%;
@@ -202,4 +212,18 @@ a.outline-btn:hover {
 
 div#php-code-editor {
   height: calc(100% - 63px);
+}
+
+.style-studio h4 {
+  background: #000;
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: #fff;
+  user-select: none;
+}
+
+.style-studio-container {
+  height: 200px;
+  display: flex;
 }

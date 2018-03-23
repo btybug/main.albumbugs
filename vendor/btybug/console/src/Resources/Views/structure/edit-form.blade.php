@@ -1,20 +1,10 @@
 @extends( 'btybug::layouts.admin' )
 
 @section( 'CSS' )
-    <script>
-        var ajaxLinks = {
-            baseUrl: "{!! url('/') !!}"
-        };
-    </script>
-
     {!! HTML::style("public/libs/jspanel/jspanel.min.css") !!}
     {!! Html::style("public/css/form-builder/form-builder.css?m=m") !!}
-    {!! Html::style("public/libs/easyui/easyui.css") !!}
-    {!! HTML::style("public/libs/minicolors/jquery.minicolors.css") !!}
-    {!! HTML::style("public/libs/toggle/jquery.toggleinput.css") !!}
-    {!! HTML::style("public/css/bty.css") !!}
 
-    {!! HTML::style("public/libs/tagsinput/bootstrap-tagsinput.css") !!}
+    {!! HTML::style("public/css/bty.css") !!}
     <style>
         .modal-header .nav.nav-pills {
             display: inline-block;
@@ -77,19 +67,9 @@
 @stop
 
 @section( 'JS' )
-    {!! HTML::script("public/libs/easyui/easyloader.js") !!}
-    <script>
-        easyloader.base = '<?php echo url("public/libs/easyui/") ?>/';
-        easyloader.css = false;
-    </script>
-    {!! HTML::script("public/libs/tagsinput/bootstrap-tagsinput.min.js") !!}
     {!! HTML::script("public/libs/jspanel/jspanel.min.js") !!}
-    {!! HTML::script("public/libs/toggle/jquery.toggleinput.js") !!}
-    {!! HTML::script("public/libs/minicolors/jquery.minicolors.min.js") !!}
-    {!! Html::script("public/js/form-builder/css-studio.js") !!}
     {!! Html::script("public/js/form-builder/form-builder.js?m=m") !!}
     {!! Html::script("public/js/form-builder/form-logic.js?m=m") !!}
-    {!! Html::script("public/js/form-builder/handlebars.js?m=m") !!}
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
     <script>
         tinymce.init({
@@ -487,47 +467,6 @@
     </script>
 
     @include('console::structure.templates.studio')
-
-    <script type="template" id="bbt-properties-container">
-        <li class="bbs-property-group">
-            <h3 bbs-click="toggleOpen">
-                {title}
-                <i class="fa fa-chevron-right"></i>
-            </h3>
-            <div class="bbs-properties-list">{properties}</div>
-        </li>
-    </script>
-
-    <script type="template" id="bbt-property-container">
-        <div class="bbs-property-container">
-            <label for="bbs-{id}">{label}</label>
-            <div class="bbs-property-field">{field}</div>
-        </div>
-    </script>
-
-    <script type="template" id="bbt-dropdown">
-        <div class="bbs-dropdown-box">
-            <select class="bbs-combobox" id="bbs-{id}" name="{name}">{options}</select>
-        </div>
-    </script>
-
-    <script type="template" id="bbt-color">
-        <div class="bbs-color-box">
-            <input class="bbs-input bbs-color" id="bbs-{id}" name="{name}">
-        </div>
-    </script>
-
-    <script type="template" id="bbt-number">
-        <div class="bbs-number-spinner">
-            <input class="bbs-input bbs-number" id="bbs-{id}" name="{name}">
-        </div>
-    </script>
-
-    <script type="template" id="bbt-toggle">
-        <div class="bbs-toggle">
-            {options}
-        </div>
-    </script>
 
     <script type="template" id="condition-row">
         <div class="group-row">

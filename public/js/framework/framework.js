@@ -339,4 +339,7 @@ $(function () {
 
         theme: "square"
     });
+
+    // Init CSS Studio
+    cssStudio.init('body', []);
 });

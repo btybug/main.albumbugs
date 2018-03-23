@@ -23,6 +23,9 @@
                         'not_in' => 'Not in',
                         'between' => 'Between',
                         'not_between' => 'Not between',
+                        'single_date' => 'Single Date',
+                        'between_date' => 'Between Date',
+                        'not_between_date' => 'Not between Date',
                         'is_null' => 'Is NULL',
                         'not_is_null' => 'Is not NULL',
                     ]

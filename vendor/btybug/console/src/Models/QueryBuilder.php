@@ -31,19 +31,29 @@ class QueryBuilder
 
     public function between($data)
     {
-        return $data['column'].' BETWEEN '. $data['expression_from'].$this->and().$data['expression_to'];
+        $column=$data['column'];
+        $expression_from=$data['expression_from'];
+        $expression_to=$data['expression_to'];
+        return  " `$column`  BETWEEN  $expression_from AND $expression_to";
     }
     public function into($data)
     {
-        return $data['column'].' IN ('. $data['expression'].')';
+        $column=$data['column'];
+        $expression=$data['expression'];
+        return " `$column`  IN ( $expression )";
     }
     public function not_between($data)
     {
-        return  $data['column'].' NOT BETWEEN '. $data['expression_from'].$this->and().$data['expression_to'];
+        $column=$data['column'];
+        $expression_from=$data['expression_from'];
+        $expression_to=$data['expression_to'];
+        return  " `$column` NOT BETWEEN  $expression_from AND $expression_to";
     }
     public function not_in($data)
     {
-        return $data['column'].' NOT IN ('. $data['expression'].')';
+        $column=$data['column'];
+        $expression=$data['expression'];
+        return " `$column` NOT IN ( $expression )";
     }
 
     public function make(array $array)

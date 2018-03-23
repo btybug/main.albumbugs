@@ -2,11 +2,15 @@
 @section('content')
     <div class="bb-form-header">
         <div class="row">
-            <div class="col-md-4">
+            <div  class="col-md-3">
+                <label>Name</label>
+                {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'name']) !!}
+            </div>
+            <div class="col-md-3">
                 <label>Description</label>
                 {!! Form::text('description',null,['class' => 'form-name', 'placeholder' => 'description']) !!}
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <button type="submit" class="form-save pull-right">Save</button>
             </div>
         </div>
@@ -66,6 +70,9 @@
         .box{
             box-shadow: 0 0 4px #555555;
             padding:15px;
+        }
+        .append_here{
+            margin-top: 15px;
         }
     </style>
 @stop

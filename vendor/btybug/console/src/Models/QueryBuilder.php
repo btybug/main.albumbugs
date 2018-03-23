@@ -20,7 +20,7 @@ class QueryBuilder
         'less'=>'<',
         'more_and_equal'=>'>=',
         'less_and_equal'=>'<=',
-        'in'=> ['function','in'],
+        'in'=> ['function','into'],
         'not_in'=>['function','not_in'],
         'between' => ['function','between'],
         'not_between' =>  ['function','not_between'],
@@ -33,7 +33,7 @@ class QueryBuilder
     {
         return $data['column'].' BETWEEN '. $data['expression_from'].$this->and().$data['expression_to'];
     }
-    public function in($data)
+    public function into($data)
     {
         return $data['column'].' IN '. $data['expression'];
     }

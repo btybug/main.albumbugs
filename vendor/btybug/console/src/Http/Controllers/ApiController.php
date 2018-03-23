@@ -23,7 +23,8 @@ class ApiController extends Controller
     {
         return view('console::api.index');
     }
-
-
+    public function create(){
+        return view("console::api.create");
+    }
 
 }

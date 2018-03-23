@@ -1,7 +1,7 @@
 @extends('btybug::layouts.admin')
 @section('content')
     <div class="text-right head-btn">
-        <button class="btn btn-sm btn-info">Create</button>
+        <a href="{{route('api_create')}}" class="btn btn-sm btn-info">Create</a>
     </div>
     <table class="bty-table bty-table-hover">
         <thead>

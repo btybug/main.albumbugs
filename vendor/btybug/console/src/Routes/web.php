@@ -180,6 +180,7 @@ Route::group(['prefix' => 'functions'], function () {
 
 Route::group(['prefix' => 'api'], function () {
     Route::get('/', 'ApiController@getIndex',true);
+    Route::get('/create', 'ApiController@create',true)->name("api_create");
 });
 
 

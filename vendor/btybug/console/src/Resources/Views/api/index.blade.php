@@ -6,7 +6,6 @@
     <table class="bty-table bty-table-hover">
         <thead>
         <tr>
-            <th>#</th>
             <th>url</th>
             <th>access</th>
             <th>actions</th>
@@ -16,14 +15,17 @@
         <tr>
             <td>Lorem 1</td>
             <td>Lorem 2</td>
-            <td>Lorem 3</td>
-            <td>Lorem 4</td>
+            <td>
+                <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
+                <button class="btn btn-xs btn-default"><i class="fa fa-ban"></i></button>
+
+            </td>
         </tr>
         <tr>
             <td>Lorem 7</td>
             <td>Lorem 8</td>
             <td>Lorem 9</td>
-            <td>Lorem 10</td>
         </tr>
         </tbody>
     </table>
@@ -32,6 +34,9 @@
     <style>
         .head-btn{
             margin: 20px 0;
+        }
+        .bty-table > tbody > tr > td:first-child, .bty-table > thead > tr > th:first-child {
+            text-align: left;
         }
     </style>
 @stop

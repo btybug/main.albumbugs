@@ -30,6 +30,7 @@ class QueryBuilder
         'is_null' => 'IS NULL',
         'not_is_null' => 'IS NOT NULL',
         'contains' => 'LIKE',
+        'not_contains' => 'NOT LIKE',
     ];
 
     public function between($data)

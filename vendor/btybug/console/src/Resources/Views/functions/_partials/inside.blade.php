@@ -10,7 +10,22 @@
             <label class="col-md-2 control-label">Value</label>
             <div class="col-md-5">
                 {!! Form::select("conditions[$slug][$new_slug][operator]",
-                    ['equal' => 'equal','not_equal' => 'not equal','contains' => 'contains']
+                    [
+                        'equal' => 'Equal',
+                        'not_equal' => 'Not equal',
+                        'more' => '>',
+                        'less' => '<',
+                        'more_and_equal' => '>=',
+                        'less_and_equal' => '<=',
+                        'contains' => 'Contains',
+                        'not_contains' => 'Not contains',
+                        'in' => 'In',
+                        'not_in' => 'Not in',
+                        'between' => 'Between',
+                        'not_between' => 'Not between',
+                        'is_null' => 'Is NULL',
+                        'not_is_null' => 'Is not NULL',
+                    ]
                     ,(isset($inside["operator"])) ? $inside['operator'] : null,['class' => 'form-control']) !!}
             </div>
             <div class="col-md-5">

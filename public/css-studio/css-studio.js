@@ -9,7 +9,7 @@ var cssStudio = {
     properties: {},
 
     // Load template
-    loadTemplate: function loadTemplate(template) {
+    loadTemplate: function (template) {
         return $('#bbt-' + template).html();
     },
 

@@ -668,6 +668,20 @@ function BBGetTableColumn($table = null)
     return $data;
 }
 
+function BBGetTableColumnData($table = null,$column = null)
+{
+    $data = [];
+    if ($table && \Schema::hasTable($table)) {
+        $colums = \DB::select('SELECT '.$column . ' FROM ' . $table);
+        if (count($colums)) {
+            foreach ($colums as $v){
+                $data[$v->$column] = $v->$column;
+            }
+        }
+    }
+    return $data;
+}
+
 function BBbutton($action, $key, $text, array $array = [])
 {
     $route = Request::route();

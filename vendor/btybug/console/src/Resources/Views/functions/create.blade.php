@@ -123,7 +123,29 @@
     {!! HTML::script("public/js/select2/select2.full.min.js") !!}
     {!! Html::script('public/js/DataTables/datatables.js') !!}
     <script>
-        window.onload = function () {
+        $('document').ready(function () {
+            function initdatepicker(){
+                // $( ".datepickerRange" ).datepicker({
+                //     dateFormat: 'dd-mm-yy',
+                //     prevText:'',
+                //     nextText:'',
+                //     minDate: 0,
+                //     maxDate: "+1M",
+                //     showOn: "button",
+                //     buttonImage: divadatepicker.image_url+"/calendar.jpeg",
+                //     buttonImageOnly: true
+                // });
+                $( ".date-expression" ).datepicker({
+                    dateFormat: 'dd-mm-yy',
+                    prevText:'',
+                    nextText:'',
+                    changeMonth: true,
+                    changeYear: true
+                });
+            }
+
+            initdatepicker();
+
             function Generator() {
             }
 
@@ -132,6 +154,95 @@
                 return this.rand++;
             };
             var idGen = new Generator();
+
+            var sendAjax = function sendAjax(at, type) {
+                $.ajax({
+                    type: "post",
+                    url: "{!! url('/admin/console/functions/get-by-operator') !!}",
+                    cache: false,
+                    datatype: "json",
+                    data: {
+                        table_name: $('.custom_table').val(),
+                        type: type,
+                        slug: $(at).data('slug'),
+                        new_slug: $(at).data('new-slug'),
+                        column: $(at).closest(".removable_parent").find(".column-field").val()
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $("[name=_token]").val()
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $(at).closest(".removable_parent").find(".expression-place").html(data.html);
+                            initdatepicker();
+                            if(type == 'in'){
+                                $(".select2-box").select2();
+                            }
+                        }
+                    }
+                });
+            }
+
+            var operators = {
+                equal: function (at) {
+                    sendAjax(at, 'equal');
+                },
+                not_equal: function (at) {
+                    this.equal(at);
+                },
+                more: function (at) {
+                    this.equal(at);
+                },
+                less: function (at) {
+                    this.equal(at);
+                },
+                more_and_equal: function (at) {
+                    this.equal(at);
+                },
+                less_and_equal: function (at) {
+                    this.equal(at);
+                },
+                contains: function (at) {
+                    this.equal(at);
+                },
+                not_contains: function (at) {
+                    this.equal(at);
+                },
+                in: function (at) {
+                    sendAjax(at, 'in');
+                },
+                not_in: function (at) {
+                    this.in(at);
+                },
+                between: function (at) {
+                    sendAjax(at, 'between');
+                },
+                not_between: function (at) {
+                    this.between(at);
+                },
+                between_date: function (at) {
+                    sendAjax(at, 'between_date');
+                },
+                not_between_date: function (at) {
+                    this.between_date(at);
+                },
+                single_date: function (at) {
+                    sendAjax(at, 'single_date');
+                },
+                is_null: function (at) {
+                    $(at).closest(".removable_parent").find(".expression-place").html('');
+                },
+                not_is_null: function (at) {
+                    this.is_null(at);
+                }
+            };
+
+            $("body").on('change', '.select-operator', function () {
+                var value = $(this).val();
+                if ($.isFunction(operators[value])) {
+                    operators[value](this);
+                }
+            });
 
             var fn_events = {
                 specific: function () {
@@ -180,6 +291,8 @@
                             success: function (data) {
                                 if (!data.error) {
                                     $(".append_here").html(data.html);
+                                    $(".select2-box").select2();
+                                    initdatepicker();
                                 }
                             }
                         });
@@ -315,7 +428,7 @@
                             $(".table-div").empty();
 
                             var tableHeaders;
-                            $.each(data.columns, function(i, val){
+                            $.each(data.columns, function (i, val) {
                                 tableHeaders += "<th>" + val + "</th>";
                             });
                             $(".table-div").append('<table id="result-table" class="display table table-striped table-bordered" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
@@ -325,7 +438,7 @@
                                 columns: data.columns,
                                 data: data.data
                             });
-                        }else{
+                        } else {
                             $(".code-here").html(data.query);
                             $(".table-div").empty();
                         }
@@ -334,7 +447,7 @@
             });
 
 
-        }
+        });
     </script>
 @stop
 

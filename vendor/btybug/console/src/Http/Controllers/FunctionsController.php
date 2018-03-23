@@ -208,4 +208,17 @@ class FunctionsController extends Controller
 
         return \Response::json(['error' => false,'query' => $query, 'columns' => $columns,'data' => $result]);
     }
+
+    public function postOperator(Request $request)
+    {
+        $type = $request->get('type');
+        $table = $request->get('table_name');
+        $slug = $request->get('slug');
+        $new_slug = $request->get('new_slug');
+        $column = $request->get('column');
+
+        $html = \View("console::functions._partials.operators.$type",compact('table','slug','new_slug','column'))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
 }

@@ -25,6 +25,7 @@ class QueryBuilder
         'not_in'=>['function','not_in'],
         'between' => ['function','between'],
         'not_between' =>  ['function','not_between'],
+        'not_between_date' =>  ['function','not_between'],
         'between_date' =>  ['function','between'],
         'is_null' => 'IS NULL',
         'not_is_null' => 'IS NOT NULL',

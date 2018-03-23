@@ -1,5 +1,16 @@
 @extends('btybug::layouts.admin')
 @section('content')
+    <div class="bb-form-header">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Description</label>
+                {!! Form::text('description',null,['class' => 'form-name', 'placeholder' => 'description']) !!}
+            </div>
+            <div class="col-md-8">
+                <button type="submit" class="form-save pull-right">Save</button>
+            </div>
+        </div>
+    </div>
     <div class="append_here">
         <div class="parent">
             <div class="form-group box col-md-11">
@@ -49,6 +60,7 @@
     </div>
 </script>
 @section('CSS')
+    {!! Html::style("public/css/form-builder/form-builder.css") !!}
     {!! HTML::style("public/css/select2/select2.min.css") !!}
     <style>
         .box{

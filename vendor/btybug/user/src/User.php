@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Btybug\User\Models\Roles;
 use Btybug\User\Models\UsersProfile;
 use Btybug\User\Traits\ShinobiTrait;
-//use Laravel\Passport\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * Class User
@@ -18,8 +18,7 @@ use Btybug\User\Traits\ShinobiTrait;
 class User extends Authenticatable
 {
 
-    use CanResetPassword, ShinobiTrait;
-//        HasApiTokens;
+    use CanResetPassword, ShinobiTrait,HasApiTokens;
     /**
      *
      */

@@ -59,6 +59,12 @@ composer.lock
 /vendor/filp
 /vendor/fildeloper
 /vendor/fideloper
+/vendor/defuse
+/vendor/firebase
+/vendor/guzzlehttp
+/vendor/lcobucci
+/vendor/phpseclib
+/vendor/zendframework
 /public/app
 /app/Events/Generator/*.php
 /app/Listeners/Generator/*.php

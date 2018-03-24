@@ -11,16 +11,17 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "btybug/btybug": "dev-master",
         "caffeinated/shinobi": "^3.0@dev",
         "chumper/zipper": "1.0.x",
         "doctrine/dbal": "2.5.x",
-        "barryvdh/laravel-ide-helper": "^2.4",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "yajra/laravel-datatables-oracle":"^8.0"
+        "yajra/laravel-datatables-oracle": "^8.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

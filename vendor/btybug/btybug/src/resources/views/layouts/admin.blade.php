@@ -17,12 +17,14 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 {{--{!! HTML::style("public/css/bootstrap/css/bootstrap.css") !!}--}}
 
 {!! BBCss("backend")  !!}
 {!! HTML::style("public/css/cms.css?v=".rand(1111,99999)) !!}
 {!! HTML::style("public/css/admin.css?v=".rand(1111,99999)) !!}
 {!! HTML::style("public/js/DataTables/datatables.css") !!}
+{!! HTML::style("public/css/app.css") !!}
 {!! HTML::style("public/js/DataTables/Buttons-1.5.1/css/buttons.bootstrap.css") !!}
 {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$page->slug).'.css') !!}
 @yield('CSS')
@@ -57,6 +59,7 @@
 {!! HTML::script("public/js/admin.js?v=6.0") !!}
 {!! HTML::script("public/js/BB.js") !!}
 {!! HTML::script("public/js/DataTables/datatables.js") !!}
+{!! HTML::script("public/js/app.js") !!}
 {!! HTML::script("public/js/DataTables/Buttons-1.5.1/js/buttons.bootstrap.js") !!}
 {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->slug).'.js') !!}
 <script>

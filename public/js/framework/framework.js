@@ -232,6 +232,29 @@ var framework = {
                 framework.showElement($('.tree-list'));
                 framework.hideElement($('.code-editor-area'));
             });
+        },
+        openCSSEditor: function ($this) {
+            $('.style-studio-container').animate({
+                height: 200
+            }, 300, function () {
+                $('.bb-css-studio').addClass('no-active');
+                framework.showElement($('.closeCSSEditor'));
+                framework.hideElement($('.openCSSEditor'));
+
+                var index = $this.closest('li').data('index');
+                if(index){
+                    $( ".bbs-field-selectors li:eq( " + index + " )" ).trigger('click');
+                }
+            });
+        },
+        closeCSSEditor: function ($this) {
+            $('.bb-css-studio').removeClass('no-active');
+            $('.style-studio-container').animate({
+                height: 0
+            }, 300, function () {
+                framework.showElement($('.openCSSEditor'));
+                framework.hideElement($('.closeCSSEditor'));
+            });
         }
     },
 
@@ -303,6 +326,20 @@ $(function () {
             success: function (data) {
                 if (!data.error) {
                     $('.preview-area').html(data.html);
+
+                    // Init CSS Studio
+                    $('#bb-css-studio').html('');
+
+                    cssStudio.init(data.html, {
+                        cssOutputSelector: '#bbcc-custom-style',
+                        parentSelector: '.preview-area'
+                    });
+
+                    $('.closeCSSEditor').trigger('click');
+                    setTimeout(function () {
+                        framework.showElement($('.openCSSEditor'));
+                    }, 300);
+
                 }
             }
         });
@@ -314,6 +351,15 @@ $(function () {
 
         var clickEvent = $(this).attr("bb-click");
         framework.clickEvents[clickEvent]($(this));
+    });
+
+    // Node code position change event
+    $('.node-code-position').change(function () {
+        if($(this).val() === "Attribute"){
+            framework.showElement($('.custom-attribute'));
+        }else{
+            framework.hideElement($('.custom-attribute'));
+        }
     });
 
     // Search code API
@@ -339,7 +385,4 @@ $(function () {
 
         theme: "square"
     });
-
-    // Init CSS Studio
-    cssStudio.init('body', []);
 });

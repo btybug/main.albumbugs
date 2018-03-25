@@ -140,15 +140,14 @@ a.outline-btn:hover {
   width: 100%;
 
   select{
-    width: 90px;
+    width: 100%;
     height: 31px;
     font-size: 13px;
     padding-left: 7px;
   }
 
-  .node-code-select{
-    width: calc(100% - 265px);
-    margin-left: 10px;
+  input{
+    width: 100%;
   }
 }
 
@@ -171,13 +170,12 @@ div#php-node-code-editor {
 }
 
 .node-code-editor-area .node-code-editor-bar input {
-  margin-left: 10px;
   font-size: 13px;
   line-height: 24px;
+  border-radius: 5px;
 }
 
 .add-code {
-  margin-left: 7px;
   padding: 4px 10px;
 }
 
@@ -221,9 +219,14 @@ div#php-code-editor {
   font-size: 15px;
   color: #fff;
   user-select: none;
+
+  a{
+    color: #fff;
+  }
 }
 
 .style-studio-container {
-  height: 200px;
+  height: 0;
   display: flex;
+  overflow: hidden;
 }

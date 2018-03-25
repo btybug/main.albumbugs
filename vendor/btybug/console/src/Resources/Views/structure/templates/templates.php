@@ -1,7 +1,7 @@
 <script type="text/x-handlebars-template" id="bbt-editor-list">
     <ul class="bbs-field-selectors">
         {{#selectors}}
-        <li data-selector="#form-builder-rows {{nodeSelector}}" bbs-click="setActiveSelector">{{nodeSelector}}</li>
+        <li data-selector="{selectorParent} {{nodeSelector}}" bbs-click="setActiveSelector">{{nodeSelector}}</li>
         {{/selectors}}
     </ul>
 	<div class="container-fluid" style="float: left; width: calc(100% - 200px);height: 100%;">

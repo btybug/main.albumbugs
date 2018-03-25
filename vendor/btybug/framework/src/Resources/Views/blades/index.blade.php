@@ -6,12 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {!! HTML::style('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css') !!}
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
-            integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
-            crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
-            integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
-            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
 
     {!! HTML::script('public/js/jquery-3.2.1.min.js') !!}
 
@@ -33,6 +30,9 @@
     </script>
 </head>
 <body class="container-fluid d-flex flex-column h-100 align-items-center px-0">
+
+<!-- CSS Output style -->
+<style id="bbcc-custom-style"></style>
 
 <header class="w-100">
     <div class="container-fluid">
@@ -86,26 +86,35 @@
             <!-- Node PHP Editor -->
             <div class="node-code-editor-area h-100" hidden>
                 <div class="node-code-editor-bar">
-                    <select class="node-code-position custom-select float-left">
-                        <option>Content</option>
-                        <option>title</option>
-                        <option>alt</option>
-                        <option>src</option>
-                        <option>Attribute</option>
-                    </select>
-
-                    <input type="text" id="custom-attribute" placeholder="attribute" class="float-left"
-                           style="width: 110px">
-
-                    <select class="node-code-select custom-select float-left">
-                        <option value="$user->id">id</option>
-                        <option value="$user->username">username</option>
-                        <option value="$user->email">email</option>
-                        <option value="$user->address">address</option>
-                    </select>
-
-                    <a href="#" class="btn btn-warning btn-sm add-code" bb-click="addCode"><i
-                                class="fas fa-plus"></i></a>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col px-0 pr-1" style="max-width: 100px;">
+                                <select class="node-code-position custom-select float-left">
+                                    <option>Content</option>
+                                    <option>title</option>
+                                    <option>alt</option>
+                                    <option>src</option>
+                                    <option>Attribute</option>
+                                </select>
+                            </div>
+                            <div class="col px-0 pr-1 custom-attribute" style="max-width: 110px;" hidden>
+                                <input type="text" id="custom-attribute" placeholder="attribute" class="float-left">
+                            </div>
+                            <div class="col px-0 pr-1">
+                                <select class="node-code-select custom-select float-left">
+                                    <option value="$user->id">id</option>
+                                    <option value="$user->username">username</option>
+                                    <option value="$user->email">email</option>
+                                    <option value="$user->address">address</option>
+                                </select>
+                            </div>
+                            <div class="col px-0" style="max-width: 35px;">
+                                <a href="#" class="btn btn-warning btn-sm add-code" bb-click="addCode">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="php-node-code-editor"></div>
             </div>
@@ -117,9 +126,13 @@
 <div class="row w-100">
     <div class="col-12 p-0">
         <div class="style-studio">
-            <h4>Styling</h4>
+            <h4>
+                Styling
+                <a href="#" class="float-right closeCSSEditor" bb-click="closeCSSEditor" hidden><i class="fa fa-arrow-down"></i></a>
+                <a href="#" class="float-right openCSSEditor" bb-click="openCSSEditor" hidden><i class="fa fa-arrow-up"></i></a>
+            </h4>
             <div class="style-studio-container">
-                <div id="bb-css-studio" class="bb-css-studio no-active"></div>
+                <div id="bb-css-studio" class="bb-css-studio"></div>
             </div>
         </div>
     </div>
@@ -133,7 +146,7 @@
 <script type="template" id="bbt-controls">
     <div class="controls">
         <a href="#" bb-click="editPHPCode"><i class="fas fa-code"></i></a>
-        <a href="#" bb-click="editPHPCode"><i class="fas fa-edit"></i></a>
+        <a href="#" bb-click="openCSSEditor"><i class="fas fa-paint-brush"></i></a>
     </div>
 </script>
 

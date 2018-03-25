@@ -116,13 +116,12 @@ a.outline-btn:hover {
   display: table;
   width: 100%; }
   .node-code-editor-bar select {
-    width: 90px;
+    width: 100%;
     height: 31px;
     font-size: 13px;
     padding-left: 7px; }
-  .node-code-editor-bar .node-code-select {
-    width: calc(100% - 265px);
-    margin-left: 10px; }
+  .node-code-editor-bar input {
+    width: 100%; }
 
 div#php-node-code-editor {
   height: calc(100% - 41px); }
@@ -140,12 +139,11 @@ div#php-node-code-editor {
   z-index: 999999999; }
 
 .node-code-editor-area .node-code-editor-bar input {
-  margin-left: 10px;
   font-size: 13px;
-  line-height: 24px; }
+  line-height: 24px;
+  border-radius: 5px; }
 
 .add-code {
-  margin-left: 7px;
   padding: 4px 10px; }
 
 .node-code-editor-area {
@@ -182,9 +180,12 @@ div#php-code-editor {
   font-size: 15px;
   color: #fff;
   user-select: none; }
+  .style-studio h4 a {
+    color: #fff; }
 
 .style-studio-container {
-  height: 200px;
-  display: flex; }
+  height: 0;
+  display: flex;
+  overflow: hidden; }
 
 /*# sourceMappingURL=framework.css.map */

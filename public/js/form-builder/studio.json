@@ -166,7 +166,7 @@
         "hasUnit": { "type": "dropdown", "options": "unitArray" }
       },
       {
-        "title": "Bottom Right Radius", "css": "border-right-left-radius", "type": "number",
+        "title": "Bottom Right Radius", "css": "border-bottom-right-radius", "type": "number",
         "hasUnit": { "type": "dropdown", "options": "unitArray" }
       }
     ]

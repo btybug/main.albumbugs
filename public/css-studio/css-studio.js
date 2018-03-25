@@ -8,6 +8,12 @@ var cssStudio = {
 
     properties: {},
 
+    // Where to output css
+    cssOutputSelector: '',
+
+    // Parent selector
+    parentSelector: '',
+
     // Load template
     loadTemplate: function (template) {
         return $('#bbt-' + template).html();
@@ -120,7 +126,8 @@ var cssStudio = {
 
         var listTemplate = this.parseTemplate('editor-list', {
             element: activeElement.text().trim(),
-            selector: activeSelector
+            selector: activeSelector,
+            selectorParent: cssStudio.parentSelector
         });
 
         // Get unique selectors
@@ -231,8 +238,7 @@ var cssStudio = {
             cssString += "}\n";
         });
 
-
-        $('#bbcc-form-style').text(cssString);
+        $(cssStudio.cssOutputSelector).text(cssString);
     },
 
     // Assign default values
@@ -243,7 +249,7 @@ var cssStudio = {
         $.each(cssJSON, function (index, group) {
             $.each(group.fields, function (index, field) {
                 var cssValue = $(activeSelector).css(field.css);
-                $('.bbs-editor-list').find('[name='+field.css+']').val(cssValue);
+                // $('.bbs-editor-list').find('[name='+field.css+']').val(cssValue);
             });
         });
     },
@@ -329,12 +335,27 @@ var cssStudio = {
     },
 
     // Init CSS Studio
-    init: function (selector, exclude) {
+    init: function (selector, options) {
         var $this = this;
+
+        var defaultOptions = {
+            exclude: [],
+            cssOutputSelector: '',
+            parentSelector: ''
+        };
+
+        var settings = $.extend({}, defaultOptions, options);
+
+        // Set css output selectors
+        this.cssOutputSelector = settings.cssOutputSelector;
+
+        // Set parent selector
+        this.parentSelector = settings.parentSelector;
+
         this.getProperties();
 
         // Extract selectors
-        this.extractSelectors($(selector), exclude);
+        this.extractSelectors($(selector), settings.exclude);
 
         // Events
         $('#bb-css-studio')

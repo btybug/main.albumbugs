@@ -45,7 +45,10 @@ $(document).ready(function () {
 
             if ($('#studio-panel').length !== 0) {
                 // Init CSS studio
-                cssStudio.init(selector, exclude);
+                cssStudio.init(selector, {
+                    cssOutputSelector: '#bbcc-form-style',
+                    parentSelector: '#form-builder-rows'
+                });
                 return;
             }
 
@@ -63,7 +66,10 @@ $(document).ready(function () {
                 content: '<div id="bb-css-studio" class="bb-css-studio no-active"></div>',
                 callback: function () {
                     // Init CSS studio
-                    cssStudio.init(selector, exclude);
+                    cssStudio.init(selector, {
+                        cssOutputSelector: '#bbcc-form-style',
+                        parentSelector: '#form-builder-rows'
+                    });
                 },
                 onclosed: function () {}
             });

@@ -59,8 +59,8 @@
 
                             <!-- Edit Button -->
                             <td style="vertical-align: middle;">
-                                <a class="action-link" @click="edit(client)">
-                                    Edit
+                                <a class="action-link" v-bind:href="'/my-account/developers/connections/'+ client.id">
+                                    Settings
                                 </a>
                             </td>
 

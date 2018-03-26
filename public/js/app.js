@@ -33226,7 +33226,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\albumbugs\\main.albumbugs\\resources\\assets\\js\\components\\Example.vue"
+Component.options.__file = "C:\\xampp\\htdocs\\albombugs\\main.albumbugs\\resources\\assets\\js\\components\\Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33264,7 +33264,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\albumbugs\\main.albumbugs\\resources\\assets\\js\\components\\passport\\AuthorizedClients.vue"
+Component.options.__file = "C:\\xampp\\htdocs\\albombugs\\main.albumbugs\\resources\\assets\\js\\components\\passport\\AuthorizedClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AuthorizedClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33302,7 +33302,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\albumbugs\\main.albumbugs\\resources\\assets\\js\\components\\passport\\Clients.vue"
+Component.options.__file = "C:\\xampp\\htdocs\\albombugs\\main.albumbugs\\resources\\assets\\js\\components\\passport\\Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33340,7 +33340,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\albumbugs\\main.albumbugs\\resources\\assets\\js\\components\\passport\\PersonalAccessTokens.vue"
+Component.options.__file = "C:\\xampp\\htdocs\\albombugs\\main.albumbugs\\resources\\assets\\js\\components\\passport\\PersonalAccessTokens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalAccessTokens.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33451,12 +33451,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('a', {
       staticClass: "action-link",
-      on: {
-        "click": function($event) {
-          _vm.edit(client)
-        }
+      attrs: {
+        "href": '/my-account/developers/connections/' + client.id
       }
-    }, [_vm._v("\n                                Edit\n                            ")])]), _vm._v(" "), _c('td', {
+    }, [_vm._v("\n                                Settings\n                            ")])]), _vm._v(" "), _c('td', {
       staticStyle: {
         "vertical-align": "middle"
       }

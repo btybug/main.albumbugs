@@ -50,7 +50,7 @@
             <div class="preview-area"></div>
         </div>
         <div class="h-50 pt-1">
-            <div id="code-editor"></div>
+            {{--<div id="code-editor"></div>--}}
         </div>
     </div>
     <div class="col-5 h-100 px-0 d-flex flex-column">
@@ -65,6 +65,9 @@
 
         <div class="node-php-code-item" hidden>
             <span id="current-node-text">H2</span>
+            <a href="#" class="outline-btn" bb-click="nodePHPCodeLoop">
+                <i class="fa fa-plus"></i>  Loop
+            </a>
             <div class="controls">
                 <a href="#" class="outline-btn" bb-click="nodePHPCodeDiscard">Discard</a>
                 <a href="#" class="outline-btn" data-to-index="0" bb-click="nodePHPCodeSave">Save</a>
@@ -72,8 +75,15 @@
         </div>
 
         <div class="tree-area h-100">
-            <!-- Tree List -->
-            <ul class="tree-list"></ul>
+
+            <div class="h-50 pt-1"><!-- Tree List -->
+                <ul class="tree-list"></ul>
+            </div>
+
+            <div class="h-50 pt-1">
+                <div id="code-editor"></div>
+            </div>
+
 
             <!-- Main PHP Editor -->
             <div class="code-editor-area h-100" hidden>
@@ -132,7 +142,16 @@
                 <a href="#" class="float-right openCSSEditor" bb-click="openCSSEditor" hidden><i class="fa fa-arrow-up"></i></a>
             </h4>
             <div class="style-studio-container">
-                <div id="bb-css-studio" class="bb-css-studio"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col" style="max-width: 200px;">
+                            <div class="inserted-code" hidden></div>
+                        </div>
+                        <div class="col d-flex">
+                            <div id="bb-css-studio" class="bb-css-studio"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

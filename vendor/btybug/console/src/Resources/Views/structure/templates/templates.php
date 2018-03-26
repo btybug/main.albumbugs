@@ -4,7 +4,7 @@
         <li data-selector="{selectorParent} {{nodeSelector}}" bbs-click="setActiveSelector">{{nodeSelector}}</li>
         {{/selectors}}
     </ul>
-	<div class="container-fluid" style="float: left; width: calc(100% - 200px);height: 100%;">
+	<div class="container-fluid" style="float: left; width: calc(100% - 200px);height: 100%;position: relative;">
         <ul class="bbs-editor-list">{groups}</ul>
         <div class="bb-add-class-panel">
             <div class="p-2" id="element-edit-panel">

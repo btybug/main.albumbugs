@@ -71,15 +71,25 @@ var framework = {
     generateInsertedList: function () {
         var nodeCode = phpNodeCodeEditor.getValue(),
             nodeCodeEl = $(nodeCode),
-            list = '';
+            list = '', firstContainerEl;
 
         if(nodeCodeEl.text()){
-            list += '<div class="content-item"> Content <div class="controls"> <a href="#" bb-click="removeNodeContent"><i class="fas fa-trash"></i></a> </div> </div>';
+            list += '<div class="inserted-item content-item"> Content <div class="controls"> <a href="#" bb-click="removeNodeContent"><i class="fas fa-trash"></i></a> </div> </div>';
         }
 
-        $.each(nodeCodeEl[0].attributes, function() {
-            list += '<div class="attribute-item"> Attribute: ' + this.name + '<div class="controls"> <a href="#" bb-click="removeNodeAttr" data-attr="' + this.name + '"><i class="fas fa-trash"></i></a> </div> </div>';
+        if(nodeCode.indexOf("@foreach") !== -1){
+            list += '<div class="inserted-item loop-item"> Loop: foreach <div class="controls"> <a href="#" bb-click="removeNodeLoop"><i class="fas fa-trash"></i></a> </div> </div>';
+        }
+
+        nodeCodeEl.each(function (i, containerNodeElCode) {
+            if(containerNodeElCode.tagName) return firstContainerEl = nodeCodeEl[i];
         });
+
+        if(firstContainerEl){
+            $.each(firstContainerEl.attributes, function() {
+                list += '<div class="inserted-item attribute-item"> Attribute: ' + this.name + '<div class="controls"> <a href="#" bb-click="removeNodeAttr" data-attr="' + this.name + '"><i class="fas fa-trash"></i></a> </div> </div>';
+            });
+        }
 
         $('.inserted-code').html(list);
     },
@@ -133,6 +143,19 @@ var framework = {
             framework.showElement($('.php-code-item'));
 
             framework.hideElement($('.inserted-code'));
+        },
+        nodePHPCodeLoop: function () {
+            var currentNodeCode = phpNodeCodeEditor.getValue(),
+                modifiedCode;
+
+            modifiedCode  = '<!--|@foreach([""] as $item)|-->\n';
+            modifiedCode += currentNodeCode + '\n';
+            modifiedCode += '<!--|@endforeach|-->';
+
+            phpNodeCodeEditor.setValue(modifiedCode);
+            phpNodeCodeEditor.clearSelection();
+
+            framework.generateInsertedList();
         },
         addCode: function () {
             var codeToInsert = '{!! ' + $('.node-code-select').val() + ' !!}',
@@ -305,43 +328,49 @@ $(function () {
 
     // Listen to code change
     codeEditor.session.on('change', function () {
-        // Reset code wallet & global index
-        framework.codeWallet = [];
-        framework.globalIndex = 0;
+        setTimeout(function () {
+            // Reset code wallet & global index
+            framework.codeWallet = [];
+            framework.globalIndex = 0;
 
-        var codeContent = codeEditor.getValue();
-        var treeList = framework.nodeTreeGenerator($('<wrap>' + codeContent + '</wrap>'));
+            var codeContent = codeEditor.getValue();
+            var treeList = framework.nodeTreeGenerator($('<wrap>' + codeContent + '</wrap>'));
 
-        $('.tree-list').html(treeList);
+            $('.tree-list').html(treeList);
 
-        // Live render
-        var data = {'html': phpCodeEditor.getValue().toString() + codeContent.toString()};
-        $.ajax({
-            url: $('#renderUrl').val(),
-            type: 'POST',
-            data: data,
-            headers: {
-                'X-CSRF-TOKEN': $("input[name='_token']").val()
-            },
-            success: function (data) {
-                if (!data.error) {
-                    $('.preview-area').html(data.html);
+            // Live render
+            var codeValue = phpCodeEditor.getValue().toString() + codeContent.toString();
+            codeValue = codeValue.replace(/<!--\|/g, '');
+            codeValue = codeValue.replace(/\|-->/g, '');
 
-                    // Init CSS Studio
-                    $('#bb-css-studio').html('');
+            var data = {'html': codeValue};
+            $.ajax({
+                url: $('#renderUrl').val(),
+                type: 'POST',
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $("input[name='_token']").val()
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $('.preview-area').html(data.html);
 
-                    cssStudio.init(data.html, {
-                        cssOutputSelector: '#bbcc-custom-style',
-                        parentSelector: '.preview-area'
-                    });
+                        // Init CSS Studio
+                        $('#bb-css-studio').html('');
 
-                    $('.closeCSSEditor').trigger('click');
-                    setTimeout(function () {
-                        framework.showElement($('.openCSSEditor'));
-                    }, 300);
+                        cssStudio.init(data.html, {
+                            cssOutputSelector: '#bbcc-custom-style',
+                            parentSelector: '.preview-area'
+                        });
 
+                        $('.closeCSSEditor').trigger('click');
+                        setTimeout(function () {
+                            framework.showElement($('.openCSSEditor'));
+                        }, 300);
+
+                    }
                 }
-            }
+            });
         });
     });
 

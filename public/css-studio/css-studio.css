@@ -2,7 +2,7 @@ input, textarea, select, button, meter, progress {
   color: inherit; }
 
 ul.bbs-editor-list {
-  margin: 0 0 0 -15px;
+  margin: 0 0 0 190px;
   width: 150px;
   list-style: none;
   height: 100%;
@@ -132,7 +132,7 @@ ul.bbs-editor-list {
 .bb-add-class-panel {
   position: absolute;
   width: 200px;
-  right: 0;
+  left: 0;
   background: #1b1b1b;
   height: 100%;
   padding: 2px;

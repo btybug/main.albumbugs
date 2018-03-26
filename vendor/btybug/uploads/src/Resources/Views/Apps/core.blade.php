@@ -15,7 +15,10 @@
                     </li>
                 @endforeach
                     <li class="active">
-                        <a href="#"> <span class="module_icon"></span> ANY App</a>
+                        <a href="#"> <span class="module_icon"></span> Get Logged User</a>
+                    </li>
+                    <li class="">
+                        <a href="#"> <span class="module_icon"></span>Get all Users</a>
                     </li>
             </ul>
         </div>
@@ -48,7 +51,7 @@
                                      class="img-rounded img-responsive"/>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <div class="module-title"> name: ANY</div>
+                                <div class="module-title"> name: Get Logged User</div>
                                 <div class="module-title"> version: V1</div>
                                 <div class="module-desc">
                                    Here is description
@@ -101,7 +104,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content m-t-15">
                             <div role="tabpanel" class="tab-pane active" id="installed_add_ons">
-                                
+
                             </div>
                             <div role="tabpanel" class="tab-pane" id="related_add_ons">
                                 <table class="table addon-list table-bordered">

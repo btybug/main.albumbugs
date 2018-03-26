@@ -14,9 +14,6 @@
                                     class="module_icon"></span> {!! $plugin['name'] !!}</a>
                     </li>
                 @endforeach
-                    <li class="active">
-                        <a href="#"> <span class="module_icon"></span> ANY App</a>
-                    </li>
             </ul>
         </div>
 
@@ -31,37 +28,46 @@
 
                             </a>
                         </div>
-                        <div class="col-md-7">
-                            <p>
-                                <a href="#" namespace="#" data-action="off"
-                                   class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate"><i
-                                            class="fa fa-power-off f-s-14 m-r-10"></i> Deactivate</a>
-
-                            </p>
-                        </div>
+                        @if($selected)
+                            <div class="col-md-7">
+                                <p>
+                                    @if($enabled)
+                                        <a href="#" namespace="{!! $selected->name or null !!}" data-action="off"
+                                           class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate"><i
+                                                    class="fa fa-power-off f-s-14 m-r-10"></i> Deactivate</a>
+                                    @else
+                                        <a href="#" namespace="{!! $selected->name or null !!}" data-action="on"
+                                           style="background: #7fff00;color: #000000"
+                                           class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left  enb-disb"><i
+                                                    class="fa fa-plug f-s-14 m-r-10"></i>Activate</a>
+                                    @endif
+                                </p>
+                            </div>
+                        @endif
                         <div class="col-xs-6">
                         </div>
                     </div>
+                    @if($selected)
                         <div class="row module_detail">
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <img src="{!! url('images/module.jpg') !!}" alt=""
                                      class="img-rounded img-responsive"/>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <div class="module-title"> name: ANY</div>
-                                <div class="module-title"> version: V1</div>
+                                <div class="module-title"> name:{!! $selected->name or null !!}</div>
+                                <div class="module-title"> version:{!! $selected->version or null !!}</div>
                                 <div class="module-desc">
-                                   Here is description
+                                    {!! $selected->description or null !!}
                                 </div>
 
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pull-right text-right m-t-20">
                                 {{--@if(isset($module->have_setting) and $module->have_setting==1)--}}
-                                <a href="#"
+                                <a href="{!! url('#/setting','id') !!}"
                                    class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left settings"><i
                                             class="fa fa-pencil f-s-14 m-r-10"></i> Settings</a>
                                 {{--@endif--}}
-                                <a href="#"
+                                <a href="{!! url('admin/avatar/plugins/'.$selected->name.'/explore') !!}"
                                    class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left"><i
                                             class="fa fa-cogs f-s-14 m-r-10"></i>Explore</a>
                             </div>
@@ -83,9 +89,12 @@
                                 </div>
                             </div>
                         </div>
+                    @endif
+
                 </div>
 
             </div>
+            @if($selected)
                 <div class="row">
                     <div class="m-t-15 col-xs-12">
                         <!-- Nav tabs -->
@@ -115,7 +124,32 @@
                                     </thead>
                                     <tbody>
 
+                                    @foreach($selected->children() as $k=> $child)
 
+                                        <tr>
+                                            <td>{!! $k+1 !!}</td>
+                                            <td>{!! $child->name !!}</td>
+                                            <td>{!! $child->version !!}</td>
+                                            <td>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($child->authors as $author)
+                                                        <tr>
+                                                            <td>{!! $author['name'] !!}</td>
+                                                            <td>{!! $author['email'] !!}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
 
@@ -126,6 +160,7 @@
 
                     </div>
                 </div>
+            @endif
         </div>
 
     </div>

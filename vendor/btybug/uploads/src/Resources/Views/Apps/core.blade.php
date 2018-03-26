@@ -15,13 +15,10 @@
                     </li>
                 @endforeach
                     <li class="active">
-                        <a href="#"> <span class="module_icon"></span> Basic Logged User</a>
+                        <a href="#"> <span class="module_icon"></span> Logged User</a>
                     </li>
                     <li class="">
-                        <a href="#"> <span class="module_icon"></span> Addvanced Logged User</a>
-                    </li>
-                    <li class="">
-                        <a href="#"> <span class="module_icon"></span>Get all Users</a>
+                        <a href="#"> <span class="module_icon"></span> All Users</a>
                     </li>
             </ul>
         </div>
@@ -38,12 +35,22 @@
                             </a>
                         </div>
                         <div class="col-md-7">
-                            <p>
-                                <a href="#" namespace="#" data-action="off"
-                                   class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate"><i
-                                            class="fa fa-power-off f-s-14 m-r-10"></i> Deactivate</a>
+                            <div class="col-md-6">
+                                <p>
+                                    <a href="#" namespace="#" data-action="off"
+                                       class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate"><i
+                                                class="fa fa-power-off f-s-14 m-r-10"></i> Deactivate</a>
 
-                            </p>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <a href="#" namespace="#"
+                                       class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate"><i
+                                                class="fa fa-plus f-s-14 m-r-10"></i> Create product app</a>
+
+                                </p>
+                            </div>
                         </div>
                         <div class="col-xs-6">
                         </div>
@@ -110,6 +117,15 @@
                         <!-- Tab panes -->
                         <div class="tab-content m-t-15">
                             <div role="tabpanel" class="tab-pane active" id="conf">
+                                <div class="col-md-12">
+                                    <h3>Type: </h3>
+                                    {!! Form::select('method',[
+                                        'get' => 'GET',
+                                        'insert' => 'Insert',
+                                        'update' => 'update',
+                                        'delete' => 'Delete'
+                                    ],null,['class' => 'form-control']) !!}
+                                </div>
                                 @php
                                     $columns = BBGetTableColumn('users')
                                 @endphp

@@ -110,8 +110,17 @@
                         <!-- Tab panes -->
                         <div class="tab-content m-t-15">
                             <div role="tabpanel" class="tab-pane active" id="conf">
-
-                            </div><div role="tabpanel" class="tab-pane" id="installed_add_ons">
+                                @php
+                                    $columns = BBGetTableColumn('users')
+                                @endphp
+                                <div class="col-md-12">
+                                    <h3>Select User Columns</h3>
+                                    @foreach($columns as $col)
+                                        {{ $col }} {!! Form::checkbox("columns[$col]",null) !!}
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="installed_add_ons">
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="related_add_ons">

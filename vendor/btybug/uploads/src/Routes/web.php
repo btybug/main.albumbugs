@@ -46,6 +46,7 @@ Route::group(['prefix' => 'apps'], function ($router) {
     Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
 
     Route::group(['prefix' => 'core-apps'], function () {
+        Route::get('/', 'AppsController@getCoreApps', true);
         Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
         Route::group(['prefix' => 'edit'], function () {
             Route::get('/', 'AppsController@getEditCore', true);

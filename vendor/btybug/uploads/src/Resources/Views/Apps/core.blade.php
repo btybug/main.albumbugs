@@ -92,16 +92,16 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#installed_add_ons"
                                                                       aria-controls="installed_add_ons" role="tab"
-                                                                      data-toggle="tab">Installed Plugins</a></li>
+                                                                      data-toggle="tab">Permissions</a></li>
                             <li role="presentation"><a href="#related_add_ons" aria-controls="related_add_ons"
                                                        role="tab"
-                                                       data-toggle="tab">Related Add-Ons</a></li>
+                                                       data-toggle="tab">Documentation</a></li>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content m-t-15">
                             <div role="tabpanel" class="tab-pane active" id="installed_add_ons">
-                                {{--@include("console::modules.plugins")--}}
+                                
                             </div>
                             <div role="tabpanel" class="tab-pane" id="related_add_ons">
                                 <table class="table addon-list table-bordered">

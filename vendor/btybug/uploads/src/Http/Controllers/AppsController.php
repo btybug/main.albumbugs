@@ -44,6 +44,11 @@ class AppsController extends Controller
         }
         return view('uploads::Apps.core', compact('plugins', 'selected', 'enabled'));
     }
+
+    public function getEditCore($param)
+    {
+        return view('uploads::Apps.edit', compact(''));
+    }
     public function getIndex()
     {
         return view('uploads::Apps.index');

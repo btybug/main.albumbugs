@@ -15,7 +15,10 @@
                     </li>
                 @endforeach
                     <li class="active">
-                        <a href="#"> <span class="module_icon"></span> Get Logged User</a>
+                        <a href="#"> <span class="module_icon"></span> Basic Logged User</a>
+                    </li>
+                    <li class="">
+                        <a href="#"> <span class="module_icon"></span> Addvanced Logged User</a>
                     </li>
                     <li class="">
                         <a href="#"> <span class="module_icon"></span>Get all Users</a>
@@ -93,7 +96,10 @@
                     <div class="m-t-15 col-xs-12">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#installed_add_ons"
+                            <li role="presentation" class="active"><a href="#conf"
+                                                                      aria-controls="conf" role="tab"
+                                                                      data-toggle="tab">Config</a></li>
+                            <li role="presentation" class=""><a href="#installed_add_ons"
                                                                       aria-controls="installed_add_ons" role="tab"
                                                                       data-toggle="tab">Permissions</a></li>
                             <li role="presentation"><a href="#related_add_ons" aria-controls="related_add_ons"
@@ -103,7 +109,9 @@
 
                         <!-- Tab panes -->
                         <div class="tab-content m-t-15">
-                            <div role="tabpanel" class="tab-pane active" id="installed_add_ons">
+                            <div role="tabpanel" class="tab-pane active" id="conf">
+
+                            </div><div role="tabpanel" class="tab-pane" id="installed_add_ons">
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="related_add_ons">

@@ -33421,12 +33421,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "justify-content": "space-between",
       "align-items": "center"
     }
-  }, [_c('span', [_vm._v("\n                    OAuth Clients\n                ")]), _vm._v(" "), _c('a', {
+  }, [_c('span', [_vm._v("\n                    My Connections\n                ")]), _vm._v(" "), _c('a', {
     staticClass: "action-link",
     on: {
       "click": _vm.showCreateClientForm
     }
-  }, [_vm._v("\n                    Create New Client\n                ")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                    Create New Connection\n                ")])])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [(_vm.clients.length === 0) ? _c('p', {
     staticClass: "m-b-none"

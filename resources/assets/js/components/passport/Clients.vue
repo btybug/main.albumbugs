@@ -14,11 +14,11 @@
             <div class="panel-heading">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>
-                        OAuth Clients
+                        My Connections
                     </span>
 
                     <a class="action-link" @click="showCreateClientForm">
-                        Create New Client
+                        Create New Connection
                     </a>
                 </div>
             </div>

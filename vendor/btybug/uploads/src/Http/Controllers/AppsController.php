@@ -13,8 +13,8 @@
 namespace Btybug\Uploads\Http\Controllers;
 
 
+use Btybug\Uploads\Repository\AppRepository;
 use Btybug\Uploads\Repository\Plugins;
-use BtyBugHook\Payments\Repository\AppRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Symfony\Component\Console\Tests\Input\StringInput;

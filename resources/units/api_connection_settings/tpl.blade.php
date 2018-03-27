@@ -22,11 +22,11 @@ $client=\Laravel\Passport\Client::find($clientId);
                 <div class="form-group">
                     <div class="col-md-6">
                         <label>App ID</label>
-                        {!! Form::text('id',null,['readonly']) !!}
+                        {!! Form::text('id',null,['readonly','class'=>'form-control']) !!}
                     </div>
                     <div class="col-md-6">
                         <label>App Secret</label>
-                        {!! Form::text('secret',null,['readonly']) !!}
+                        {!! Form::text('secret',null,['readonly','class'=>'form-control']) !!}
                     </div>
                     <div class="clearfix"></div>
                 </div>

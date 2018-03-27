@@ -53,7 +53,10 @@
                                         <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                                     </a>
                                     <div class="custom_btn">
-                                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a data-href="{!! route('app_product_delete') !!}"
+                                           data-key="{!! $product->id !!}" data-type="Product {{ $product->name }}"
+                                           class="delete-button btn btn-danger"><i
+                                                    class="fa fa-trash-o"></i></a>
                                         <a href="{!! route('app_edit_product',['param'=>$product->id]) !!}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                     </div>
                                 </div>
@@ -97,6 +100,7 @@
             </div>
         </div>
     @endif
+    @include('btybug::_partials.delete_modal')
 
 @stop
 @section('CSS')

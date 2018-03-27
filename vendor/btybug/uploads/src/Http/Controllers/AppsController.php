@@ -93,4 +93,14 @@ class AppsController extends Controller
         }
         return view('uploads::Apps.core', compact('plugins', 'selected', 'enabled'));
     }
+
+    public function delete(
+        Request $request,
+        AppProductRepository $appProductRepository
+    )
+    {
+        $data = $appProductRepository->findOrFail($request->get('slug'));
+        $response = $appProductRepository->delete($request->get('slug'));
+        return \Response::json(['success' => true, 'url' => url(route('core_apps'))]);
+    }
 }

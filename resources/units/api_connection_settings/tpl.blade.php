@@ -2,7 +2,8 @@
 {!! BBstyle('public/libs/tagsinput/bootstrap-tagsinput.css') !!}
 @php
     $params = \Request::route()->parameters();
-dd($params);
+    $clientId=$params['param'];
+$client=\Laravel\Passport\Client::find($clientId);
 @endphp
 
 <div id="exTab1" class="container custom_tabs">
@@ -66,7 +67,7 @@ dd($params);
                 </div>
                 <div class="form-group">
                     <div class="col-md-6">
-                            <label>App Icon</label>
+                        <label>App Icon</label>
                         <div class="d-flex">
                             <input type="text" class="form-control">
                             <button class="btn btn-md btn-info">Upload</button>
@@ -95,8 +96,6 @@ dd($params);
 </div>
 
 {!! BBscript('public/libs/tagsinput/bootstrap-tagsinput.min.js') !!}
-
-
 
 
 <script>

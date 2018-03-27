@@ -3,8 +3,10 @@
 @php
     $params = \Request::route()->parameters();
     $client=null;
+    $url='javascript::void(0)';
     if(isset($params['param'])){
         $clientId=$params['param'];
+        $url=url('/oauth/clients/',$clientId);
         $client=\Laravel\Passport\Client::find($clientId);
     }
 @endphp
@@ -20,7 +22,7 @@
 
     <div class="tab-content clearfix">
         <div class="tab-pane active" id="general">
-            {!! Form::model($client) !!}
+            {!! Form::model($client,['url'=>$clientId]) !!}
             <div class="custom_general_content">
                 <div class="form-group">
                     <div class="col-md-6">
@@ -46,11 +48,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-6">
-                        <label>App Domains</label>
-                        <select multiple data-role="tagsinput" class="app_domain_custom">
-                            <option value="Amsterdam">Amsterdam</option>
-                            <option value="Washington">Washington</option>
-                        </select>
+                        <label>Redirect Url</label>
+                        {!! Form::text('redirect',null,['class'=>'form-control']) !!}
                     </div>
                     <div class="col-md-6">
                         <label>Contact Email</label>

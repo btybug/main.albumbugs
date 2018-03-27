@@ -33,7 +33,7 @@ $client=\Laravel\Passport\Client::find($clientId);
                 <div class="form-group">
                     <div class="col-md-6">
                         <label>Displae Name</label>
-                        <input type="text" class="form-control">
+                        {!! Form::text('name',null,['readonly','class'=>'form-control']) !!}
                     </div>
                     <div class="col-md-6">
                         <label>Namespace</label>

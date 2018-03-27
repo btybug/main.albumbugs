@@ -17,15 +17,16 @@ $client=\Laravel\Passport\Client::find($clientId);
 
     <div class="tab-content clearfix">
         <div class="tab-pane active" id="general">
+            {!! Form::model($client) !!}
             <div class="custom_general_content">
                 <div class="form-group">
                     <div class="col-md-6">
                         <label>App ID</label>
-                        <input type="text" class="form-control">
+                        {!! Form::text('id',null,['readonly']) !!}
                     </div>
                     <div class="col-md-6">
                         <label>App Secret</label>
-                        <input type="password" class="form-control">
+                        {!! Form::text('secret',null,['readonly']) !!}
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -87,7 +88,7 @@ $client=\Laravel\Passport\Client::find($clientId);
                     <div class="clearfix"></div>
                 </div>
             </div>
-
+            {!! Form::close() !!}
         </div>
         <div class="tab-pane " id="panel">
             <h3>Panel</h3>

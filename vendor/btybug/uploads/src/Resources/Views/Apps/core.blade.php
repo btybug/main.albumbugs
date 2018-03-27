@@ -10,7 +10,7 @@
             <ul class="list-unstyled menuList" id="components-list">
                 @foreach($apps as $app)
                     <li class=" @if($selected->id== $app->id) active @endif ">
-                        <a href="{!! route('app_core',['p'=>$app->id]) !!}"> <span
+                        <a href="{!! route('core_apps',['p'=>$app->id]) !!}"> <span
                                     class="module_icon"></span> {!! $app->name !!}</a>
                     </li>
                 @endforeach

@@ -22,4 +22,14 @@ class AppProduct extends Model
         'inactive'  => 0,
         'active' => 1
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('Btybug\User\User', 'user_id', 'id');
+    }
+
+    public function app()
+    {
+        return $this->belongsTo('Btybug\Uploads\Models\App', 'app_id', 'id');
+    }
 }

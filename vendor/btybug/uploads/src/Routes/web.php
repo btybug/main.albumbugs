@@ -47,10 +47,11 @@ Route::group(['prefix' => 'apps'], function ($router) {
 
     Route::group(['prefix' => 'core-apps'], function () {
         Route::get('/', 'AppsController@getCoreApps', true)->name('core_apps');
+        Route::post('/create-product', 'AppsController@postCreateProduct', true)->name('apps_create_product');
         Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
         Route::group(['prefix' => 'edit'], function () {
             Route::get('/', 'AppsController@getEditCore', true);
-            Route::get('/{param}', 'AppsController@getEditCore', true);
+            Route::get('/{param}', 'AppsController@getEditCore', true)->name('app_edit_product');
         });
     });
 

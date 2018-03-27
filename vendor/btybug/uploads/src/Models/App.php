@@ -18,4 +18,9 @@ class App extends Model
         'inactive'  => 0,
         'active' => 1
     ];
+
+    public function products()
+    {
+        return $this->hasMany(AppProduct::class,'app_id');
+    }
 }

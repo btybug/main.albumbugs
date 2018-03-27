@@ -13,40 +13,62 @@
 namespace Btybug\Uploads\Http\Controllers;
 
 
+use Btybug\Uploads\Repository\AppProductRepository;
 use Btybug\Uploads\Repository\AppRepository;
 use Btybug\Uploads\Repository\Plugins;
+use Btybug\Uploads\Services\AppsService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Symfony\Component\Console\Tests\Input\StringInput;
 
 class AppsController extends Controller
 {
+    public function getIndex()
+    {
+        return view('uploads::Apps.index');
+    }
+
     public function getCoreApps(
         Request $request,
         AppRepository $appRepository
     )
     {
         $selected = null;
+        $products = [];
         $apps = $appRepository->getAll();
         if ($request->p) {
             $selected = $appRepository->find($request->p);
+            $products = $selected->products;
         }
 
-        if(!$selected){
+        if (!$selected) {
             $selected = $appRepository->first();
+            $products = $selected->products;
         }
 
-        return view('uploads::Apps.core', compact('apps', 'selected'));
+        return view('uploads::Apps.core', compact('apps', 'selected', 'products'));
     }
 
-    public function getEditCore($param)
+    public function postCreateProduct(
+        Request $request,
+        AppsService $appsService
+    )
     {
-        return view('uploads::Apps.edit', compact(''));
+        $appsService->createProduct($request->get('id'), $request->get('name'));
+
+        return redirect()->back();
     }
-    public function getIndex()
+
+    public function getEditCore(
+        AppProductRepository $appProductRepository,
+        $param = null
+    )
     {
-        return view('uploads::Apps.index');
+        $product = $appProductRepository->findOrFail($param);
+
+        return view('uploads::Apps.edit', compact('product'));
     }
+
     public function getExtra(Request $request)
     {
 
@@ -70,14 +92,5 @@ class AppsController extends Controller
             $enabled = false;
         }
         return view('uploads::Apps.core', compact('plugins', 'selected', 'enabled'));
-    }
-
-    public function getExplore($repository, $package)
-    {
-        $plugins = new Plugins();
-        $plugins->plugins();
-        $plugin = $plugins->find($repository . '/' . $package);
-        $units = $plugin->units();
-        return view('uploads::Explores.index', compact('plugin', 'units'));
     }
 }

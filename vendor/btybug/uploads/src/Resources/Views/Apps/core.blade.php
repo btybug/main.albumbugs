@@ -45,59 +45,58 @@
             <div class="row">
                 <div class="main_lay_cont">
                     <div class="layouts_row">
-
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
-                            <a href="{!! url('#') !!}" class="ly_items">
-                                <h3>Product1</h3>
-                                <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
-                            </a>
-                            <div class="custom_btn">
-                                <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
-                            <a href="{!! url('#') !!}" class="ly_items">
-                                <h3>Product2</h3>
-                                <h2><i class="fa fa-television" aria-hidden="true"></i></h2>
-                            </a>
-                            <div class="custom_btn">
-                                <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                            </div>
-                        </div>
+                        @if(count($products))
+                            @foreach($products as $product)
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
+                                    <a href="javascript:void(0)" class="ly_items">
+                                        <h3>{{ $product->name }}</h3>
+                                        <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
+                                    </a>
+                                    <div class="custom_btn">
+                                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{!! route('app_edit_product',['param'=>$product->id]) !!}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                         @if($selected)
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
-                            <a href="javascript:void(0)" data-id="{{ $selected->id }}" class="ly_items add-product" data-toggle="modal" data-target="#addModal">
-                                <h3>Add New</h3>
-                                <h2><i class="fa fa-plus" aria-hidden="true"></i></h2>
-                            </a>
-                        </div>
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
+                                <a href="javascript:void(0)" class="ly_items add-product"
+                                   data-toggle="modal" data-target="#addModal">
+                                    <h3>Add New</h3>
+                                    <h2><i class="fa fa-plus" aria-hidden="true"></i></h2>
+                                </a>
+                            </div>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addModal" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+    @if($selected)
+        <div class="modal fade" id="addModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create Product</h4>
+                    </div>
+                    {!! Form::open(['route' => 'apps_create_product']) !!}
+                    <div class="modal-body">
+                        {!! Form::hidden('id',$selected->id) !!}
+                        {!! Form::text('name',null,['class' => 'form-control','placeholder' => 'Enter Name ...']) !!}
+                    </div>
+                    <div class="modal-footer">
+                        {!! Form::submit('Add',['class' => 'btn btn-info']) !!}
+                    </div>
+                    {!! Form::close() !!}
                 </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info">Add</button>
-                </div>
+
             </div>
-
         </div>
-    </div>
+    @endif
 
 @stop
 @section('CSS')
@@ -117,23 +116,26 @@
             font-family: fantasy;
         }
 
-        .add-product{
+        .add-product {
             background: black !important;
             color: white !important;
             border: 0;
         }
 
-        .add-product h3, .add-product h2{
+        .add-product h3, .add-product h2 {
             color: #ffffff !important;
         }
-        .custom_btn{
+
+        .custom_btn {
             display: flex;
         }
-        .custom_btn a{
+
+        .custom_btn a {
             width: 50%;
             border-radius: 0;
         }
-        .layouts_row .ly_items{
+
+        .layouts_row .ly_items {
             width: 100%;
             border-radius: 0;
             margin: 0 !important;

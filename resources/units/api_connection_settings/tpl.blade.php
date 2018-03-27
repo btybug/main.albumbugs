@@ -1,5 +1,9 @@
 {!! BBstyle($_this->path.DS.'css/style.css') !!}
 {!! BBstyle('public/libs/tagsinput/bootstrap-tagsinput.css') !!}
+@php
+dd($page);
+@endphp
+
 <div id="exTab1" class="container custom_tabs">
     <ul class="nav nav-pills">
         <li class="active">

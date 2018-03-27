@@ -341,7 +341,8 @@ var cssStudio = {
         var defaultOptions = {
             exclude: [],
             cssOutputSelector: '',
-            parentSelector: ''
+            parentSelector: '',
+            hideSelectorPanel: false
         };
 
         var settings = $.extend({}, defaultOptions, options);
@@ -356,6 +357,14 @@ var cssStudio = {
 
         // Extract selectors
         this.extractSelectors($(selector), settings.exclude);
+
+        // Selector panel state
+        if(settings.hideSelectorPanel){
+            setTimeout(function () {
+                $('.bbs-field-selectors').attr("hidden", true);
+                $('.bbs-properties-list').css("width", 'calc(100% - 150px)');
+            });
+        }
 
         // Events
         $('#bb-css-studio')

@@ -1,6 +1,7 @@
 var codeEditor,
     phpCodeEditor,
-    phpNodeCodeEditor;
+    phpNodeCodeEditor,
+    phpFullCodeEditor;
 
 var framework = {
 
@@ -74,11 +75,11 @@ var framework = {
             list = '', firstContainerEl;
 
         if(nodeCodeEl.text()){
-            list += '<div class="inserted-item content-item"> Content <div class="controls"> <a href="#" bb-click="removeNodeContent"><i class="fas fa-trash"></i></a> </div> </div>';
+            list += '<div class="inserted-item" data-item="content" bb-click="handleNodeItemClick"> Content <div class="controls"> <a href="#" bb-click="removeNodeContent"><i class="fas fa-trash"></i></a> </div> </div>';
         }
 
         if(nodeCode.indexOf("@foreach") !== -1){
-            list += '<div class="inserted-item loop-item"> Loop: foreach <div class="controls"> <a href="#" bb-click="removeNodeLoop"><i class="fas fa-trash"></i></a> </div> </div>';
+            list += '<div class="inserted-item" data-item="loop" bb-click="handleNodeItemClick"> Loop: foreach <div class="controls"> <a href="#" bb-click="removeNodeLoop"><i class="fas fa-trash"></i></a> </div> </div>';
         }
 
         nodeCodeEl.each(function (i, containerNodeElCode) {
@@ -87,7 +88,7 @@ var framework = {
 
         if(firstContainerEl){
             $.each(firstContainerEl.attributes, function() {
-                list += '<div class="inserted-item attribute-item"> Attribute: ' + this.name + '<div class="controls"> <a href="#" bb-click="removeNodeAttr" data-attr="' + this.name + '"><i class="fas fa-trash"></i></a> </div> </div>';
+                list += '<div class="inserted-item" data-item="attribute" data-attr="' + this.name + '" bb-click="handleNodeItemClick"> Attribute: ' + this.name + '<div class="controls"> <a href="#" bb-click="removeNodeAttr" data-attr="' + this.name + '"><i class="fas fa-trash"></i></a> </div> </div>';
             });
         }
 
@@ -102,29 +103,13 @@ var framework = {
             phpNodeCodeEditor.setValue(nodeCode);
             phpNodeCodeEditor.clearSelection();
 
-            $('#current-node-text').text($this.closest('.node-content').text().trim());
-            $('[bb-click="nodePHPCodeSave"]').attr("data-to-index", $this.closest('li').data("index"));
+            $('#current-node-text').text($this.closest('.node-content').text().trim())
+                .attr("data-selected-index", $this.closest('li').data("index"));
 
             framework.currentNodeCode = nodeCode;
 
-            framework.hideElement($('.tree-list'));
-            framework.showElement($('.node-code-editor-area'));
-
             framework.showElement($('.inserted-code'));
-
-            framework.showElement($('.node-php-code-item'));
-            framework.hideElement($('.php-code-item'));
-
             framework.generateInsertedList();
-        },
-        nodePHPCodeDiscard: function () {
-            framework.showElement($('.tree-list'));
-            framework.hideElement($('.node-code-editor-area'));
-
-            framework.hideElement($('.node-php-code-item'));
-            framework.showElement($('.php-code-item'));
-
-            framework.hideElement($('.inserted-code'));
         },
         nodePHPCodeSave: function () {
             var nodeCode = framework.currentNodeCode,
@@ -133,7 +118,7 @@ var framework = {
                 newCode;
 
             newCode = mainCode.replace(nodeCode, modifiedCode);
-            codeEditor.setValue(newCode);
+            codeEditor.setValue(style_html(newCode));
             codeEditor.clearSelection();
 
             framework.showElement($('.tree-list'));
@@ -144,7 +129,7 @@ var framework = {
 
             framework.hideElement($('.inserted-code'));
         },
-        nodePHPCodeLoop: function () {
+        nodePHPCodeLoop: function ($this) {
             var currentNodeCode = phpNodeCodeEditor.getValue(),
                 modifiedCode;
 
@@ -152,10 +137,14 @@ var framework = {
             modifiedCode += currentNodeCode + '\n';
             modifiedCode += '<!--|@endforeach|-->';
 
-            phpNodeCodeEditor.setValue(modifiedCode);
+            phpNodeCodeEditor.setValue(style_html(modifiedCode));
             phpNodeCodeEditor.clearSelection();
 
             framework.generateInsertedList();
+
+            $('[data-item="loop"]').trigger("click");
+
+            framework.hideElement($this);
         },
         addCode: function () {
             var codeToInsert = '{!! ' + $('.node-code-select').val() + ' !!}',
@@ -210,6 +199,29 @@ var framework = {
 
             framework.generateInsertedList();
         },
+        handleNodeItemClick: function ($this) {
+            $('.inserted-item').removeClass("active");
+            $this.addClass("active");
+
+            var itemType = $this.data("item"),
+                itemAttr = $this.data("attr");
+
+            // Hide all panels
+            framework.hideElement($('.hidable-panel'));
+
+            // Content & non class attribute
+            if(itemAttr !== "class"){
+                framework.showElement($('#php-node-code-editor'));
+            }else{
+                framework.showElement($('#bb-css-studio'));
+
+                cssStudio.init($('.preview-area').html(), {
+                    cssOutputSelector: '#bbcc-custom-style',
+                    parentSelector: '.preview-area',
+                    hideSelectorPanel: true
+                });
+            }
+        },
         mainPHPCodeEdit: function ($this) {
             // Get last saved code
             var lastSavedCode  = framework.localGet("mainPHPCode");
@@ -217,7 +229,7 @@ var framework = {
             phpCodeEditor.clearSelection();
 
             framework.hideElement($this);
-            framework.hideElement($('.tree-list'));
+            framework.hideElement($('.tree-container'));
             framework.showElement($('.code-editor-area'));
             framework.showElement($('[bb-click=mainPHPCodeDiscard]'));
             framework.showElement($('[bb-click=mainPHPCodeSave]'));
@@ -237,13 +249,16 @@ var framework = {
 
             // Show tree & Hide Editor
             setTimeout(function () {
-                framework.showElement($('.tree-list'));
+                framework.showElement($('.tree-container'));
                 framework.hideElement($('.code-editor-area'));
             });
         },
         mainPHPCodeSave: function ($this) {
             // Save code
-            framework.localSave("mainPHPCode", phpCodeEditor.getValue());
+            var currentCode = phpCodeEditor.getValue();
+            framework.localSave("mainPHPCode", currentCode);
+
+            codeEditor.getSession()._emit('change', {start:{row:0,column:0},end:{row:0,column:0},action:'insert',lines: []});
 
             // Show/Hide Buttons
             framework.showElement($('[bb-click=mainPHPCodeEdit]'));
@@ -252,7 +267,7 @@ var framework = {
 
             // Show tree & Hide Editor
             setTimeout(function () {
-                framework.showElement($('.tree-list'));
+                framework.showElement($('.tree-container'));
                 framework.hideElement($('.code-editor-area'));
             });
         },
@@ -326,6 +341,13 @@ $(function () {
     phpNodeCodeEditor.getSession().setUseWrapMode(true);
     phpNodeCodeEditor.$blockScrolling = Infinity;
 
+    phpFullCodeEditor = ace.edit("full-code-editor");
+    phpFullCodeEditor.setTheme("ace/theme/monokai");
+    phpFullCodeEditor.session.setMode("ace/mode/php");
+    phpFullCodeEditor.setReadOnly(true);
+    phpFullCodeEditor.getSession().setUseWrapMode(true);
+    phpFullCodeEditor.$blockScrolling = Infinity;
+
     // Listen to code change
     codeEditor.session.on('change', function () {
         setTimeout(function () {
@@ -339,9 +361,12 @@ $(function () {
             $('.tree-list').html(treeList);
 
             // Live render
-            var codeValue = phpCodeEditor.getValue().toString() + codeContent.toString();
+            var codeValue = phpCodeEditor.getValue().toString() + '\n' + codeContent.toString();
             codeValue = codeValue.replace(/<!--\|/g, '');
             codeValue = codeValue.replace(/\|-->/g, '');
+
+            phpFullCodeEditor.setValue(codeValue);
+            phpFullCodeEditor.clearSelection();
 
             var data = {'html': codeValue};
             $.ajax({
@@ -358,12 +383,7 @@ $(function () {
                         // Init CSS Studio
                         $('#bb-css-studio').html('');
 
-                        cssStudio.init(data.html, {
-                            cssOutputSelector: '#bbcc-custom-style',
-                            parentSelector: '.preview-area'
-                        });
-
-                        $('.closeCSSEditor').trigger('click');
+                        // $('.closeCSSEditor').trigger('click');
                         setTimeout(function () {
                             framework.showElement($('.openCSSEditor'));
                         }, 300);
@@ -373,6 +393,10 @@ $(function () {
             });
         });
     });
+
+    // Apply demo code
+    codeEditor.setValue(style_html($('#demo-html').html()));
+    codeEditor.clearSelection();
 
     // Listen to click events
     $('body').on('click', '[bb-click]', function (e) {

@@ -7,6 +7,9 @@ html, body {
 .main {
   overflow-y: auto; }
 
+[bb-click] {
+  cursor: pointer; }
+
 header {
   background-color: black;
   padding: 15px 0; }
@@ -64,7 +67,9 @@ section.main .preview, section.main .settings {
 .tree-list {
   list-style: none;
   margin: 0;
-  padding: 10px; }
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto; }
 
 .node-content {
   background: #4b9bc7;
@@ -83,10 +88,11 @@ section.main .preview, section.main .settings {
   margin-left: 10px; }
 
 .php-code-item, .node-php-code-item {
-  padding: 10px;
+  padding: 0 8px;
   background: #b98e00;
   color: #fff;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  line-height: 39px; }
 
 .node-php-code-item {
   background: #4b9bc7; }
@@ -113,7 +119,7 @@ a.outline-btn:hover {
   padding: 5px; }
 
 .node-code-editor-bar {
-  background: #4a81ad;
+  background: #282729;
   padding: 5px;
   display: table;
   width: 100%; }
@@ -124,9 +130,6 @@ a.outline-btn:hover {
     padding-left: 7px; }
   .node-code-editor-bar input {
     width: 100%; }
-
-div#php-node-code-editor {
-  height: calc(100% - 41px); }
 
 .code-editor-bar input, .node-code-editor-bar input {
   border: none;
@@ -146,34 +149,27 @@ div#php-node-code-editor {
   border-radius: 5px; }
 
 .add-code {
-  padding: 4px 10px; }
+  padding: 4px 10px;
+  outline: none !important;
+  box-shadow: none !important; }
 
 .node-code-editor-area {
   height: calc(100% - 80px); }
 
 .inserted-code {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  z-index: 999; }
+  flex: 1;
+  overflow-y: auto; }
 
 .inserted-item {
   color: #fff;
   font-size: 13px;
   padding: 2px 10px;
-  margin-bottom: 1px; }
-
-.loop-item {
-  background: #28a745; }
-
-.content-item {
-  background: #dd3545; }
-
-.attribute-item {
-  background: #33a2b8;
-  color: #fff;
-  font-size: 13px;
-  padding: 2px 10px; }
+  margin-bottom: 1px;
+  cursor: pointer;
+  user-select: none;
+  background: #282729; }
+  .inserted-item.active {
+    background: #dd3545; }
 
 div#php-code-editor {
   height: calc(100% - 63px); }
@@ -192,5 +188,13 @@ div#php-code-editor {
   height: 0;
   display: flex;
   overflow: hidden; }
+
+.preview-tabs {
+  background: #3d3d3d; }
+
+.preview-tabs a {
+  color: #fff;
+  border-radius: 0 !important;
+  border: none !important; }
 
 /*# sourceMappingURL=framework.css.map */

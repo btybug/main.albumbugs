@@ -38,24 +38,20 @@
                                     </p>
                                 </div>
                             @endif
-
-                            <a href="#" namespace="#"
-                               class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate pull-right"><i
-                                        class="fa fa-plus f-s-14 m-r-10"></i> Create product app</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="main_lay_cont">
-                    <div class="row layouts_row">
+                    <div class="layouts_row">
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
                             <a href="{!! url('#') !!}" class="ly_items">
                                 <h3>Product1</h3>
                                 <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                             </a>
-                            <div class="col-md-12">
+                            <div class="custom_btn">
                                 <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             </div>
@@ -65,14 +61,14 @@
                                 <h3>Product2</h3>
                                 <h2><i class="fa fa-television" aria-hidden="true"></i></h2>
                             </a>
-                            <div class="col-md-12">
+                            <div class="custom_btn">
                                 <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             </div>
                         </div>
                         @if($selected)
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
-                            <a href="javascript:void(0)" data-id="{{ $selected->id }}" class="ly_items add-product">
+                            <a href="javascript:void(0)" data-id="{{ $selected->id }}" class="ly_items add-product" data-toggle="modal" data-target="#addModal">
                                 <h3>Add New</h3>
                                 <h2><i class="fa fa-plus" aria-hidden="true"></i></h2>
                             </a>
@@ -81,6 +77,25 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Add</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -110,6 +125,18 @@
 
         .add-product h3, .add-product h2{
             color: #ffffff !important;
+        }
+        .custom_btn{
+            display: flex;
+        }
+        .custom_btn a{
+            width: 50%;
+            border-radius: 0;
+        }
+        .layouts_row .ly_items{
+            width: 100%;
+            border-radius: 0;
+            margin: 0 !important;
         }
     </style>
 @stop

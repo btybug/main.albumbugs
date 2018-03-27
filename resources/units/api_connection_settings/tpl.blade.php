@@ -2,8 +2,11 @@
 {!! BBstyle('public/libs/tagsinput/bootstrap-tagsinput.css') !!}
 @php
     $params = \Request::route()->parameters();
-    $clientId=$params['param'];
-$client=\Laravel\Passport\Client::find($clientId);
+    $client=null;
+    if(isset($params['param'])){
+        $clientId=$params['param'];
+        $client=\Laravel\Passport\Client::find($clientId);
+    }
 @endphp
 
 <div id="exTab1" class="container custom_tabs">

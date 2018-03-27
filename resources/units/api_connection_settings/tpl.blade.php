@@ -90,6 +90,11 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
+                <div class="text-right col-md-12">
+                    <button class="btn btn-success">Save</button>
+                </div>
+                <div class="clearfix"></div>
+
             </div>
             {!! Form::close() !!}
         </div>

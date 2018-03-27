@@ -22,7 +22,7 @@
 
     <div class="tab-content clearfix">
         <div class="tab-pane active" id="general">
-            {!! Form::model($client,['url'=>$clientId]) !!}
+            {!! Form::model($client,['url'=>$url]) !!}
             <div class="custom_general_content">
                 <div class="form-group">
                     <div class="col-md-6">

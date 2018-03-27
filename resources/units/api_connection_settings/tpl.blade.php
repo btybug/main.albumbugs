@@ -1,7 +1,8 @@
 {!! BBstyle($_this->path.DS.'css/style.css') !!}
 {!! BBstyle('public/libs/tagsinput/bootstrap-tagsinput.css') !!}
 @php
-dd($page);
+    $params = \Request::route()->parameters();
+dd($params);
 @endphp
 
 <div id="exTab1" class="container custom_tabs">

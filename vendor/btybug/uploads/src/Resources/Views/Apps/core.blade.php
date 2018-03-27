@@ -8,18 +8,12 @@
             </h3>
             <hr>
             <ul class="list-unstyled menuList" id="components-list">
-                @foreach($plugins as $plugin)
-                    <li class=" @if($selected->name==$plugin['name']) active @endif ">
-                        <a href="{!! route('plugins_index',['p'=>$plugin['name']]) !!}"> <span
-                                    class="module_icon"></span> {!! $plugin['name'] !!}</a>
+                @foreach($apps as $app)
+                    <li class=" @if($selected->id== $app->id) active @endif ">
+                        <a href="{!! route('app_core',['p'=>$app->id]) !!}"> <span
+                                    class="module_icon"></span> {!! $app->name !!}</a>
                     </li>
                 @endforeach
-                <li class="active">
-                    <a href="#"> <span class="module_icon"></span> Logged User</a>
-                </li>
-                <li class="">
-                    <a href="#"> <span class="module_icon"></span> All Users</a>
-                </li>
             </ul>
         </div>
 
@@ -28,9 +22,22 @@
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" namespace="#" data-action="off"
-                               class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate pull-right"><i
-                                        class="fa fa-power-off f-s-14 m-r-10"></i> Deactivate</a>
+                            @if($selected)
+                                <div class="col-md-7">
+                                    <p>
+                                        @if($selected->status)
+                                            <a href="#" namespace="{!! $selected->id or null !!}" data-action="off"
+                                               class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate"><i
+                                                        class="fa fa-power-off f-s-14 m-r-10"></i> Deactivate</a>
+                                        @else
+                                            <a href="#" namespace="{!! $selected->id or null !!}" data-action="on"
+                                               style="background: #7fff00;color: #000000"
+                                               class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left  enb-disb"><i
+                                                        class="fa fa-plug f-s-14 m-r-10"></i>Activate</a>
+                                        @endif
+                                    </p>
+                                </div>
+                            @endif
 
                             <a href="#" namespace="#"
                                class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left enb-disb deactivate pull-right"><i
@@ -42,6 +49,7 @@
             <div class="row">
                 <div class="main_lay_cont">
                     <div class="row layouts_row">
+
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
                             <a href="{!! url('#') !!}" class="ly_items">
                                 <h3>Product1</h3>
@@ -62,6 +70,14 @@
                                 <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             </div>
                         </div>
+                        @if($selected)
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
+                            <a href="javascript:void(0)" data-id="{{ $selected->id }}" class="ly_items add-product">
+                                <h3>Add New</h3>
+                                <h2><i class="fa fa-plus" aria-hidden="true"></i></h2>
+                            </a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -84,6 +100,16 @@
             margin: 7px;
             font-size: xx-large;
             font-family: fantasy;
+        }
+
+        .add-product{
+            background: black !important;
+            color: white !important;
+            border: 0;
+        }
+
+        .add-product h3, .add-product h2{
+            color: #ffffff !important;
         }
     </style>
 @stop

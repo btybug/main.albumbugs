@@ -2,6 +2,7 @@
 
 namespace Btybug\Uploads\Providers;
 
+use BtyBugHook\Payments\Repository\AppRepository;
 use Illuminate\Support\ServiceProvider;
 
 class ModuleServiceProvider extends ServiceProvider
@@ -255,6 +256,14 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        \Eventy::addAction('apps.register', function ($what) {
+            if(isset($what['name']) && isset($what['api_url'])
+                && isset($what['config_tab']) && isset($what['permissions_tab']) && isset($what['documantation_tab	'])){
+                $appRepository = new AppRepository();
+                $appRepository->create($what);
+            }
+        });
+
         $this->app->register(RouteServiceProvider::class);
     }
 }

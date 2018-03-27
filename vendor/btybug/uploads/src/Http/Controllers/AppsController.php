@@ -14,35 +14,29 @@ namespace Btybug\Uploads\Http\Controllers;
 
 
 use Btybug\Uploads\Repository\Plugins;
+use BtyBugHook\Payments\Repository\AppRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Symfony\Component\Console\Tests\Input\StringInput;
 
 class AppsController extends Controller
 {
-    public function getCoreApps(Request $request)
+    public function getCoreApps(
+        Request $request,
+        AppRepository $appRepository
+    )
     {
-
         $selected = null;
-        $packages = new Plugins();
-        $packages->appPlugins();
-        $plugins = $packages->getPlugins();
-        if ($request->p && isset($plugins[$request->p])) {
-            $selected = $packages->find($plugins[$request->p]['name']);
-        } elseif ($request->p && !isset($plugins[$request->p])) {
-            abort('404');
-        } elseif (!$request->p && !isset($plugins[$request->p])) {
-            foreach ($plugins as $key => $plugin) {
-                $selected = $packages->find($key);
-                continue;
-            }
+        $apps = $appRepository->getAll();
+        if ($request->p) {
+            $selected = $appRepository->find($request->p);
         }
-        $storage = $packages->getStorage();
-        $enabled = true;
-        if (isset($selected->name) && isset($storage[$selected->name])) {
-            $enabled = false;
+
+        if(!$selected){
+            $selected = $appRepository->first();
         }
-        return view('uploads::Apps.core', compact('plugins', 'selected', 'enabled'));
+
+        return view('uploads::Apps.core', compact('apps', 'selected'));
     }
 
     public function getEditCore($param)

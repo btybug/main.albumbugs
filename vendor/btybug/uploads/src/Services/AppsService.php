@@ -63,6 +63,6 @@ class AppsService extends GeneralService
     {
         $data = $model->json_data;
         $model = $model->toArray();
-        return array_merge($model,$data);
+        return (is_array($data)) ? array_merge($model,$data) : $model;
     }
 }

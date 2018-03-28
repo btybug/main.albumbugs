@@ -52,42 +52,6 @@
 
             </div>
 
-            <div class="row">
-                <div class="m-t-15 col-xs-12">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#config_tab" aria-controls="config_tab" role="tab" data-toggle="tab">Config</a>
-                        </li>
-                        <li role="presentation" class="">
-                            <a href="#permissions_tab" aria-controls="permissions_tab" role="tab" data-toggle="tab">Permissions</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#docs_tab" aria-controls="docs_tab" role="tab" data-toggle="tab">Documentation</a>
-                        </li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content m-t-15">
-                        <div role="tabpanel" class="tab-pane active" id="config_tab">
-                            @if(\view::exists($model->app->config_tab))
-                                @include($model->app->config_tab)
-                            @endif
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="permissions_tab">
-                            @if(\view::exists($model->app->permissions_tab))
-                                @include($model->app->permissions_tab)
-                            @endif
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="docs_tab">
-                            @if(\view::exists($model->app->documantation_tab))
-                                @include($model->app->documantation_tab)
-                            @endif
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
         <div class="col-md-3">
             <div class="panel panel-default custompanel m-t-20">
@@ -96,6 +60,41 @@
                     {{ Form::submit('Save', array('class' => 'btn btn-info','style' => "width:100%;")) }}
                 </div>
             </div>
+        </div>
+
+        <div class="m-t-15 col-md-12">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#config_tab" aria-controls="config_tab" role="tab" data-toggle="tab">Config</a>
+                </li>
+                <li role="presentation" class="">
+                    <a href="#permissions_tab" aria-controls="permissions_tab" role="tab" data-toggle="tab">Permissions</a>
+                </li>
+                <li role="presentation">
+                    <a href="#docs_tab" aria-controls="docs_tab" role="tab" data-toggle="tab">Documentation</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content m-t-15">
+                <div role="tabpanel" class="tab-pane active" id="config_tab">
+                    @if(\view::exists($model->app->config_tab))
+                        @include($model->app->config_tab)
+                    @endif
+                </div>
+                <div role="tabpanel" class="tab-pane" id="permissions_tab">
+                    @if(\view::exists($model->app->permissions_tab))
+                        @include($model->app->permissions_tab)
+                    @endif
+                </div>
+                <div role="tabpanel" class="tab-pane" id="docs_tab">
+                    @if(\view::exists($model->app->documantation_tab))
+                        @include($model->app->documantation_tab)
+                    @endif
+                </div>
+            </div>
+
         </div>
         {!! Form::close() !!}
     </div>

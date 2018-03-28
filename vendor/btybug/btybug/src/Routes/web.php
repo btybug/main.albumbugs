@@ -55,7 +55,7 @@ Route::group(
         });
 //        Route::get('/', 'HomeController@pages');
         //deletable
-        Route::get('login', '\Btybug\User\Http\Controllers\Auth\AuthController@getLogin')->middleware('guest');
+        Route::get('login', '\Btybug\User\Http\Controllers\Auth\AuthController@getLogin')->middleware('guest')->name('login');
         Route::post('login', '\Btybug\User\Http\Controllers\Auth\AuthController@postLogin')->middleware('guest');
         //        Route::get(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@getAdminLogin')->middleware('guest');
         //        Route::post(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@postAdminLogin')->middleware('guest');

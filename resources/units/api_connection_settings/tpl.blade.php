@@ -16,7 +16,14 @@
         <li class="active">
             <a href="#general" data-toggle="tab" aria-expanded="true">General</a>
         </li>
-        <li><a href="#panel" data-toggle="tab">Panel</a>
+        <li>
+            <a href="#modal" data-toggle="tab">Modal</a>
+        </li>
+        <li>
+            <a href="#products" data-toggle="tab">Products</a>
+        </li>
+        <li>
+            <a href="#code" data-toggle="tab">Code</a>
         </li>
     </ul>
 
@@ -40,6 +47,22 @@
                         <label>Displae Name</label>
                         {!! Form::text('name',null,['class'=>'form-control']) !!}
                     </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="text-right col-md-12">
+                    <button class="btn btn-success">Save</button>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+            {!! Form::close() !!}
+        </div>
+        <div class="tab-pane " id="modal">
+            {!! Form::model($client,['url'=>$url]) !!}
+            <div class="custom_general_content">
+
+                <div class="form-group">
+
                     <div class="col-md-6">
                         <label>Namespace</label>
                         <input type="text" class="form-control">
@@ -97,8 +120,11 @@
             </div>
             {!! Form::close() !!}
         </div>
-        <div class="tab-pane " id="panel">
-            <h3>Panel</h3>
+        <div class="tab-pane " id="products">
+            <h3>Products</h3>
+        </div>
+        <div class="tab-pane " id="code">
+            <h3>Code</h3>
         </div>
     </div>
 </div>

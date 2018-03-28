@@ -47,7 +47,17 @@
                         <label>Displae Name</label>
                         {!! Form::text('name',null,['class'=>'form-control']) !!}
                     </div>
+                    <div class="col-md-6">
+                        <label>Redirect Url</label>
+                        {!! Form::text('redirect',null,['class'=>'form-control']) !!}
+                    </div>
                     <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label>Terms of Service URl</label>
+                        <input type="url" class="form-control">
+                    </div>
                 </div>
                 <div class="text-right col-md-12">
                     <button class="btn btn-success">Save</button>
@@ -70,10 +80,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-6">
-                        <label>Redirect Url</label>
-                        {!! Form::text('redirect',null,['class'=>'form-control']) !!}
-                    </div>
+
                     <div class="col-md-6">
                         <label>Contact Email</label>
                         <input type="email" class="form-control">
@@ -85,10 +92,7 @@
                         <label>Private Police URL</label>
                         <input type="url" class="form-control">
                     </div>
-                    <div class="col-md-6">
-                        <label>Terms of Service URl</label>
-                        <input type="url" class="form-control">
-                    </div>
+
                     <div class="clearfix"></div>
                 </div>
                 <div class="form-group">

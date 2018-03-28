@@ -64,7 +64,7 @@
                                 class="fa fa-plus"></i></a>
                 </div>
                 <div class="column">
-                    @if(count($page->css))
+                    @if(is_array($page->css) && count($page->css))
                         @foreach($page->css as $css)
                             <div class="col-md-12 portlet">
                                 <div class="col-md-2 portlet-handle">
@@ -102,7 +102,7 @@
                                 class="fa fa-plus"></i></a>
                 </div>
                 <div class="column-js">
-                    @if(count($page->js))
+                    @if(is_array($page->css) && count($page->js))
                         @foreach($page->js as $js)
                             <div class="col-md-12 portlet-js">
                                 <div class="col-md-2 portlet-handle-js">

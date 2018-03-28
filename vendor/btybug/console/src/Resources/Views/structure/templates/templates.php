@@ -1,5 +1,5 @@
 <script type="text/x-handlebars-template" id="bbt-editor-list">
-    <ul class="bbs-field-selectors">
+    <ul class="bbs-field-selectors" hidden>
         {{#selectors}}
         <li data-selector="{selectorParent} {{nodeSelector}}" bbs-click="setActiveSelector">{{nodeSelector}}</li>
         {{/selectors}}

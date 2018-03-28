@@ -109,6 +109,13 @@ var framework = {
             framework.currentNodeCode = nodeCode;
 
             framework.showElement($('.inserted-code'));
+
+            // Hide all panels
+            framework.hideElement($('.hidable-panel'));
+            framework.hideElement($('[bb-click="nodePHPCodeSave"]'));
+
+            $('.openCSSEditor').trigger("click");
+
             framework.generateInsertedList();
         },
         nodePHPCodeSave: function () {
@@ -120,14 +127,6 @@ var framework = {
             newCode = mainCode.replace(nodeCode, modifiedCode);
             codeEditor.setValue(style_html(newCode));
             codeEditor.clearSelection();
-
-            framework.showElement($('.tree-list'));
-            framework.hideElement($('.node-code-editor-area'));
-
-            framework.hideElement($('.node-php-code-item'));
-            framework.showElement($('.php-code-item'));
-
-            framework.hideElement($('.inserted-code'));
         },
         nodePHPCodeLoop: function ($this) {
             var currentNodeCode = phpNodeCodeEditor.getValue(),
@@ -147,7 +146,7 @@ var framework = {
             framework.hideElement($this);
         },
         addCode: function () {
-            var codeToInsert = '{!! ' + $('.node-code-select').val() + ' !!}',
+            var codeToInsert = '',
                 whereToInsert = $('.node-code-position').val(),
                 nodeCode = phpNodeCodeEditor.getValue(),
                 modifiedCode,
@@ -208,17 +207,19 @@ var framework = {
 
             // Hide all panels
             framework.hideElement($('.hidable-panel'));
+            framework.hideElement($('[bb-click="nodePHPCodeSave"]'));
 
             // Content & non class attribute
             if(itemAttr !== "class"){
                 framework.showElement($('#php-node-code-editor'));
+                framework.showElement($('[bb-click="nodePHPCodeSave"]'));
             }else{
                 framework.showElement($('#bb-css-studio'));
 
-                cssStudio.init($('.preview-area').html(), {
+                cssStudio.init(framework.currentNodeCode, {
                     cssOutputSelector: '#bbcc-custom-style',
                     parentSelector: '.preview-area',
-                    hideSelectorPanel: true
+                    singleNode: true
                 });
             }
         },

@@ -1,7 +1,7 @@
 var unitArray = [
-    { value: 'px', title: 'px' },
-    { value: 'em', title: 'em' },
-    { value: '%', title: '%' }
+    {value: 'px', title: 'px'},
+    {value: 'em', title: 'em'},
+    {value: '%', title: '%'}
 ];
 
 var cssStudio = {
@@ -44,7 +44,7 @@ var cssStudio = {
         var fieldTemplate = this.loadTemplate(field.type),
             buildOptions = '';
 
-        if(field.options === "unitArray") field.options = unitArray;
+        if (field.options === "unitArray") field.options = unitArray;
 
         if (field.type === "dropdown") {
             buildOptions = '';
@@ -62,7 +62,7 @@ var cssStudio = {
             buildOptions = '';
             if (field.options && field.options.length > 0) {
                 $.each(field.options, function (i, option) {
-                    if(option.icon) option.title = '<i class="'+option.title+'"></i>';
+                    if (option.icon) option.title = '<i class="' + option.title + '"></i>';
                     buildOptions += '<label class="form-check-label">' + '<input class="form-check-input" type="radio" name="' + field.css + '" value="' + option.value + '">' + option.title + '</label>';
                 });
 
@@ -70,7 +70,7 @@ var cssStudio = {
             }
         }
 
-        if(field.hasUnit){
+        if (field.hasUnit) {
             field.hasUnit.css = field.css + "-unit";
             var unitTemplate = cssStudio.renderField(field.hasUnit);
             unitTemplate = unitTemplate.replace(/{name}/g, field.css + "-unit");
@@ -202,8 +202,8 @@ var cssStudio = {
         var unit = false;
         $.each(cssStudio.properties, function (index, group) {
             $.each(group.fields, function (index, rule) {
-                if(cssPropertyName === rule.css){
-                    unit = $('[textboxname="'+cssPropertyName+'-unit"]').val();
+                if (cssPropertyName === rule.css) {
+                    unit = $('[textboxname="' + cssPropertyName + '-unit"]').val();
                 }
             });
         });
@@ -215,22 +215,22 @@ var cssStudio = {
     updateCSS: function (property, value) {
         var activeSelector = $('.bbs-field-selectors>.active').data("selector");
 
-        if(! cssStudio.CSSJSON[activeSelector]) cssStudio.CSSJSON[activeSelector] = {};
+        if (!cssStudio.CSSJSON[activeSelector]) cssStudio.CSSJSON[activeSelector] = {};
 
         cssStudio.CSSJSON[activeSelector][property] = value;
 
         var cssString = "";
 
-        $.each(cssStudio.CSSJSON, function (selector, cssJSON){
+        $.each(cssStudio.CSSJSON, function (selector, cssJSON) {
             cssString += selector + " {\n";
 
             for (var cssPropertyName in cssJSON) {
                 var ruleValue = cssJSON[cssPropertyName];
 
                 var unitValue = cssStudio.hasUnit(cssPropertyName);
-                if(unitValue) ruleValue = ruleValue + unitValue;
+                if (unitValue) ruleValue = ruleValue + unitValue;
 
-                if(cssPropertyName.indexOf("-unit") === -1){
+                if (cssPropertyName.indexOf("-unit") === -1) {
                     cssString += "\t" + cssPropertyName + ": " + ruleValue + ";\n";
                 }
             }
@@ -299,50 +299,67 @@ var cssStudio = {
 
     // Extract selectors
     selectors: [],
-    extractSelectors: function (selector, exclude) {
+    extractSelectors: function (selector, exclude, singleNode) {
         var $this = this;
-        selector.children().each(function () {
-            var node = $(this)[0],
-                nodeSelector = node.tagName.toLowerCase();
 
-            if($(this).attr("id")){
-                nodeSelector += '#' + $(this).attr("id")
-            }else{
-                if($(this).attr("class")){
-                    var classes = $(this).attr("class"),
-                        ignoredClasses = ["ui-droppable", "ui-sortable-handle", "ui-sortable"];
-
-                    $.each(ignoredClasses, function (i, ignoredClass) {
-                        classes = classes.replace(ignoredClass, "");
-                    });
-
-                    classes = classes.trim();
-                    classes = classes.split(" ");
-                    classes = classes.join(".");
-
-                    nodeSelector += '.' + classes;
-                }
-            }
-
+        if (singleNode) {
+            var nodeSelector = $this.generateSelector(selector.get(0));
             $this.selectors.push(nodeSelector);
+        } else {
+            selector.children().each(function () {
+                var node = $(this)[0];
+                var nodeSelector = $this.generateSelector(node);
 
-            if($(this).children().length > 0){
-                $this.extractSelectors($(this));
-            }
-        });
+                $this.selectors.push(nodeSelector);
+
+                if ($(this).children().length > 0) {
+                    $this.extractSelectors($(this));
+                }
+            });
+        }
 
         return this.selectors;
+    },
+
+    // Generate selector
+    generateSelector: function (node) {
+        var nodeSelector = node.tagName.toLowerCase();
+
+        if ($(this).attr("id")) {
+            nodeSelector += '#' + $(this).attr("id");
+        } else {
+            if ($(this).attr("class")) {
+                var classes = $(this).attr("class"),
+                    ignoredClasses = ["ui-droppable", "ui-sortable-handle", "ui-sortable"];
+
+                $.each(ignoredClasses, function (i, ignoredClass) {
+                    classes = classes.replace(ignoredClass, "");
+                });
+
+                classes = classes.trim();
+                classes = classes.split(" ");
+                classes = classes.join(".");
+
+                nodeSelector += '.' + classes;
+            }
+        }
+
+        return nodeSelector;
     },
 
     // Init CSS Studio
     init: function (selector, options) {
         var $this = this;
 
+        // Reset
+        cssStudio.selectors = [];
+
         var defaultOptions = {
             exclude: [],
             cssOutputSelector: '',
             parentSelector: '',
-            hideSelectorPanel: false
+            showSelectorPanel: false,
+            singleNode: false
         };
 
         var settings = $.extend({}, defaultOptions, options);
@@ -356,14 +373,20 @@ var cssStudio = {
         this.getProperties();
 
         // Extract selectors
-        this.extractSelectors($(selector), settings.exclude);
+        this.extractSelectors($(selector), settings.exclude, settings.singleNode);
 
         // Selector panel state
-        if(settings.hideSelectorPanel){
+        if (settings.showSelectorPanel) {
             setTimeout(function () {
-                $('.bbs-field-selectors').attr("hidden", true);
-                $('.bbs-properties-list').css("width", 'calc(100% - 150px)');
+                $('.bbs-field-selectors').removeAttr("hidden");
+                $('.bbs-properties-list').css("width", 'calc(100% - 560px)');
             });
+        }
+
+        if (settings.singleNode) {
+            setTimeout(function () {
+                $('.bbs-field-selectors li').first().trigger("click");
+            }, 200);
         }
 
         // Events

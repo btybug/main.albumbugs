@@ -116,7 +116,7 @@
                     <i class="fa fa-plus"></i>  Loop
                 </a>
 
-                <a href="#" class="outline-btn" data-to-index="0" bb-click="nodePHPCodeSave">Save</a>
+                <a href="#" class="outline-btn" data-to-index="0" bb-click="nodePHPCodeSave" hidden>Save</a>
 
                 <a href="#" class="float-right closeCSSEditor" bb-click="closeCSSEditor" hidden><i class="fa fa-arrow-down"></i></a>
                 <a href="#" class="float-right openCSSEditor" bb-click="openCSSEditor" hidden><i class="fa fa-arrow-up"></i></a>
@@ -141,9 +141,7 @@
                                             <input type="text" id="custom-attribute" placeholder="attribute" class="float-left">
                                         </div>
                                         <div class="col px-0" style="max-width: 35px;">
-                                            <a href="#" class="btn btn-warning btn-sm add-code" bb-click="addCode">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
+                                            <i class="fas fa-plus btn btn-warning btn-sm add-code" bb-click="addCode"></i>
                                         </div>
                                     </div>
                                 </div>

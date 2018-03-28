@@ -58,4 +58,11 @@ class AppsService extends GeneralService
 
         return true;
     }
+
+    public function getForEdit($model)
+    {
+        $data = $model->json_data;
+        $model = $model->toArray();
+        return array_merge($model,$data);
+    }
 }

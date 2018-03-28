@@ -1,8 +1,9 @@
 @extends('btybug::layouts.admin')
 @section('content')
     <div class="col-md-12">
-        <h3>Edit {{ $product->name }} product</h3>
+        <h3>Edit {{ $model->name }} product</h3>
         {!! Form::model($product) !!}
+        {!! Form::hidden('id',null) !!}
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             <div class="row">
                 <div class="col-xs-12">
@@ -34,16 +35,16 @@
 
                     <div class="row module_detail_link">
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 m-t-10 m-b-10">
-                            {{ $product->token }}
+                            {{ $model->token }}
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 module_author_detail m-t-10 m-b-10">
                             <div class="pull-left">
                                 <i class="fa fa-bars f-s-15" aria-hidden="true"></i>
-                                Version {{ $product->app->name }}
+                                Version {{ $model->app->name }}
                             </div>
                             <div class="pull-right">
                                 <i class="fa fa-user f-s-15" aria-hidden="true"></i>
-                                {!! $product->user->username !!}
+                                {!! $model->user->username !!}
                             </div>
                         </div>
                     </div>
@@ -69,18 +70,18 @@
                     <!-- Tab panes -->
                     <div class="tab-content m-t-15">
                         <div role="tabpanel" class="tab-pane active" id="config_tab">
-                            @if(\view::exists($product->app->config_tab))
-                                @include($product->app->config_tab)
+                            @if(\view::exists($model->app->config_tab))
+                                @include($model->app->config_tab)
                             @endif
                         </div>
                         <div role="tabpanel" class="tab-pane" id="permissions_tab">
-                            @if(\view::exists($product->app->permissions_tab))
-                                @include($product->app->permissions_tab)
+                            @if(\view::exists($model->app->permissions_tab))
+                                @include($model->app->permissions_tab)
                             @endif
                         </div>
                         <div role="tabpanel" class="tab-pane" id="docs_tab">
-                            @if(\view::exists($product->app->documantation_tab))
-                                @include($product->app->documantation_tab)
+                            @if(\view::exists($model->app->documantation_tab))
+                                @include($model->app->documantation_tab)
                             @endif
                         </div>
                     </div>

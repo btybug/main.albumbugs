@@ -61,12 +61,28 @@ class AppsController extends Controller
 
     public function getEditCore(
         AppProductRepository $appProductRepository,
+        AppsService $appsService,
+        $param = null
+    )
+    {
+        $model = $appProductRepository->findOrFail($param);
+        $product = $appsService->getForEdit($model);
+        return view('uploads::Apps.edit', compact('product','model'));
+    }
+
+    public function postEditCore(
+        Request $request,
+        AppProductRepository $appProductRepository,
         $param = null
     )
     {
         $product = $appProductRepository->findOrFail($param);
 
-        return view('uploads::Apps.edit', compact('product'));
+        $appProductRepository->update($param,$request->only('name','status','description') + [
+            'json_data' => $request->except('name','status','description','_token')
+        ]);
+
+        return redirect()->back();
     }
 
     public function getExtra(Request $request)

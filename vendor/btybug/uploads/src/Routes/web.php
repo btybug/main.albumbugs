@@ -53,6 +53,7 @@ Route::group(['prefix' => 'apps'], function ($router) {
         Route::group(['prefix' => 'edit'], function () {
             Route::get('/', 'AppsController@getEditCore', true);
             Route::get('/{param}', 'AppsController@getEditCore', true)->name('app_edit_product');
+            Route::post('/{param}', 'AppsController@postEditCore', true)->name('app_edit_product_post');
         });
     });
 

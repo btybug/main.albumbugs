@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::get('/uploads', function (Request $request) {
     // return $request->uploads();
 })->middleware('auth:api');
+
+
+Route::post('/general-app', 'GeneralApiController@getCustomized');

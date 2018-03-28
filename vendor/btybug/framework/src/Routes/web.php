@@ -81,6 +81,11 @@ Route::group(['prefix'=>'blade'],function (){
     Route::post('/live-render','BladeController@getLiveRender')->name('blades_live_render');
 });
 
+Route::group(['prefix'=>'sql_builder'],function (){
+    Route::get('/','SqlBuilderController@getIndex',true);
+    Route::post('/live-render','BladeController@getLiveRender')->name('blades_live_render');
+});
+
 Route::group(['prefix'=>'bb-functions'],function (){
     Route::get('/','BBController@getIndex',true);
     Route::post('/get-bb-fn-options','BBController@getOptions')->name('get_bb_fn_options');

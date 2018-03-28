@@ -91,6 +91,11 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/framework/blade",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],[
+                    "title" => "Sql Studio",
+                    "custom-link" => "/admin/framework/sql_builder",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ],
                 [
                     "title" => "BB Functions",

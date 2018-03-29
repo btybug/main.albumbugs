@@ -1,5 +1,5 @@
 	$(function(){
-		var json = {}
+		var json = {};
 		function tinymceeditor(){
 			var gettynimc = $('[data-bbfutarget][data-editor="tinymce"]').data('editor');
 				if(gettynimc){

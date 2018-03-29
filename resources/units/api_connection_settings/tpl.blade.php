@@ -9,6 +9,8 @@
         $url=url('/oauth/clients/',$clientId);
         $client=\Laravel\Passport\Client::find($clientId);
     }
+    $appProductsRepository=new \Btybug\Uploads\Repository\AppProductRepository();
+$products=$appProductsRepository->getAll();
 @endphp
 
 <div id="exTab1" class="container custom_tabs">
@@ -125,13 +127,73 @@
             {!! Form::close() !!}
         </div>
         <div class="tab-pane " id="products">
-            <h3>Products</h3>
+            <div class="row">
+
+                <div class="main_lay_cont">
+                    <div class="layouts_row">
+                        @if(count($products))
+                            @foreach($products as $product)
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
+                                    <a href="javascript:void(0)" class="ly_items">
+                                        <h3>{{ $product->name }}</h3>
+                                        <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
+                                    </a>
+                                    <div class="custom_btn">
+                                        <a href="#" class="btn btn-warning"><i>Settings</i></a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="tab-pane " id="code">
             <h3>Code</h3>
         </div>
     </div>
 </div>
+{!! HTML::style('public/css/new-store.css') !!}
+{!! HTML::style('public/css/backend_layouts_style.css') !!}
+<style>
+    .pages.col-md-5 {
+        border: 1px solid black;
+        border-radius: 8px;
+        text-align: center;
+        height: 200px;
+        background: antiquewhite;
+        padding-top: 72px;
+        margin: 7px;
+        font-size: xx-large;
+        font-family: fantasy;
+    }
+
+    .add-product {
+        background: black !important;
+        color: white !important;
+        border: 0;
+    }
+
+    .add-product h3, .add-product h2 {
+        color: #ffffff !important;
+    }
+
+    .custom_btn {
+        display: flex;
+    }
+
+    .custom_btn a {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .layouts_row .ly_items {
+        width: 100%;
+        border-radius: 0;
+        margin: 0 !important;
+    }
+</style>
 
 {!! BBscript('public/libs/tagsinput/bootstrap-tagsinput.min.js') !!}
 

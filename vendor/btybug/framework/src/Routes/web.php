@@ -83,7 +83,7 @@ Route::group(['prefix'=>'blade'],function (){
 
 Route::group(['prefix'=>'sql_builder'],function (){
     Route::get('/','SqlBuilderController@getIndex',true);
-    Route::post('/live-render','BladeController@getLiveRender')->name('blades_live_render');
+    Route::post('/render','SqlBuilderController@renderSql')->name('sql_render');
 });
 
 Route::group(['prefix'=>'bb-functions'],function (){

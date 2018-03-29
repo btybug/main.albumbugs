@@ -19,4 +19,22 @@ class SqlBuilderController extends Controller
         return view('framework::sql_builder.index');
     }
 
+    public function renderSql(Request $request)
+    {
+        try{
+            $result = \Db::query($request->query);
+        }catch (\Exception $exception){
+            return response()->json([
+                'error' => true,
+                'message' =>  $exception->getMessage()
+            ],$exception->getCode());
+        }
+
+        return response()->json([
+            'error' => false,
+            'data' =>  $result
+        ],200);
+    }
+
+
 }

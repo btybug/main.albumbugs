@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::get('/manage', function (Request $request) {
     // return $request->manage();
 })->middleware('auth:api');
+
+Route::any('/sql-render','SqlBuilderController@renderSql')->name('sql_render');

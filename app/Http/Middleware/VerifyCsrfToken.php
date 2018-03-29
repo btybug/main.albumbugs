@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '/admin/manage/frontend/pages/live-settings'
+        '/admin/manage/frontend/pages/live-settings',
+        '/admin/framework/sql_builder/render',
     ];
 }

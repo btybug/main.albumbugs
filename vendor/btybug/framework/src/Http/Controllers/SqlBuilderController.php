@@ -27,7 +27,7 @@ class SqlBuilderController extends Controller
             return response()->json([
                 'error' => true,
                 'message' =>  $exception->getMessage()
-            ],$exception->getCode());
+            ],500);
         }
 
         return response()->json([

@@ -22,7 +22,7 @@ class SqlBuilderController extends Controller
     public function renderSql(Request $request)
     {
         try{
-            $result = \Db::query($request->query);
+            $result = \DB::select($request->query);
         }catch (\Exception $exception){
             return response()->json([
                 'error' => true,

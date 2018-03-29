@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/console', function (Request $request) {
-    // return $request->console();
-})->middleware('auth:api');
+Route::group(['prefix' => 'console'], function () {
+    Route::post('app/products/on-off','API\OauthClientProductsController@onOff');
+});

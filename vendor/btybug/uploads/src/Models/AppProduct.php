@@ -32,4 +32,9 @@ class AppProduct extends Model
     {
         return $this->belongsTo('Btybug\Uploads\Models\App', 'app_id', 'id');
     }
+
+    public function oAuthClientProducts()
+    {
+        
+    }
 }

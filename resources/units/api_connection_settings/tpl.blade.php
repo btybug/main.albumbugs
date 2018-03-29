@@ -10,7 +10,7 @@
         $client=\Laravel\Passport\Client::find($clientId);
     }
     $appProductsRepository=new \Btybug\Uploads\Repository\AppProductRepository();
-$products=$appProductsRepository->getAll();
+$products=$appProductsRepository->allConnectedToClient($clientId);
 @endphp
 
 <div id="exTab1" class="container custom_tabs">
@@ -134,10 +134,15 @@ $products=$appProductsRepository->getAll();
                         @if(count($products))
                             @foreach($products as $product)
                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 items_links">
-                                    <a href="javascript:void(0)" class="ly_items">
+
+
+                                    <div  class="ly_items">
+                                        <div class="col-md-12">
+                                            <span>On/off</span> <input type="checkbox" @if($product->connection_status) checked @endif data-role="on_off" value="{!! $product->id !!}">
+                                        </div>
                                         <h3>{{ $product->name }}</h3>
                                         <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
-                                    </a>
+                                    </div>
                                     <div class="custom_btn">
                                         <a href="#" class="btn btn-warning"><i>Settings</i></a>
                                     </div>
@@ -154,6 +159,7 @@ $products=$appProductsRepository->getAll();
         </div>
     </div>
 </div>
+<input type="hidden" name="client_id" id="client_id" value="{!! $clientId !!}">
 {!! HTML::style('public/css/new-store.css') !!}
 {!! HTML::style('public/css/backend_layouts_style.css') !!}
 <style>
@@ -196,6 +202,7 @@ $products=$appProductsRepository->getAll();
 </style>
 
 {!! BBscript('public/libs/tagsinput/bootstrap-tagsinput.min.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
 
 
 <script>

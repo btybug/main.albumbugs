@@ -138,13 +138,13 @@ $products=$appProductsRepository->allConnectedToClient($clientId);
 
                                     <div  class="ly_items">
                                         <div class="col-md-12">
-                                            <span>On/off</span> <input type="checkbox" @if($product->connection_status) checked @endif data-role="on_off" value="{!! $product->id !!}">
+                                            <span>ON/OFF</span> <input type="checkbox" @if($product->connection_status) checked @endif data-role="on_off" value="{!! $product->id !!}">
                                         </div>
                                         <h3>{{ $product->name }}</h3>
                                         <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                                     </div>
                                     <div class="custom_btn">
-                                        <a href="#" data-settings="{!! $product->id !!}" class="btn btn-settings  @if(!$product->connection_status) not-active @endif"><i>Settings</i></a>
+                                        <a href="#" data-settings="{!! $product->id !!}" class="btn btn-settings  @if(!$product->connection_status) not-active @endif"><i class="fa fa-edit"></i></a>
                                     </div>
                                 </div>
                             @endforeach

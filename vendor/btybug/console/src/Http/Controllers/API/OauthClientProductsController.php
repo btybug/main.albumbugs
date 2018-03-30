@@ -9,13 +9,15 @@
 namespace Btybug\Console\Http\Controllers\API;
 
 
+use Btybug\Console\Repository\OauthClientProductsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class OauthClientProductsController extends Controller
 {
-    public function onOff(Request $request)
+    public function onOff(Request $request,OauthClientProductsRepository $repository)
     {
-        return response()->json($request->all());
+        $result= $repository->onOff($request->get('client_id'),$request->get('product_id'));
+        return response()->json(['error'=>(bool)$result,'data'=>$result]);
     }
 }

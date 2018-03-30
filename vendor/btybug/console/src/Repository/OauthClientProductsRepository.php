@@ -27,4 +27,11 @@ class OauthClientProductsRepository extends GeneralRepository
         return new OauthClientProducts();
     }
 
+    public function onOff($client_id, $product_id)
+    {
+        $is_defined = $this->findOneByMultiple(['oauth_client_id' => $client_id, 'app_product_id' => $product_id, 'status' => 1]);
+        ($is_defined) ? $i = 0 : $i = 1;
+        return $this->updateOrCreate(['oauth_client_id' => $client_id, 'app_product_id' => $product_id], ['status' => $i]);
+    }
+
 }

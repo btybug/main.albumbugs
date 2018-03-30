@@ -1,7 +1,6 @@
 @extends('btybug::layouts.mTabs',['index'=>'upload_apps'])
 @section('tab')
     <div class="row">
-
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 cms_module_list">
             <h3 class="menuText f-s-17">
                 <span class="module_icon_main"></span>
@@ -16,7 +15,6 @@
                 @endforeach
             </ul>
         </div>
-
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             <div class="row">
                 <div class="col-xs-12">
@@ -57,7 +55,8 @@
                                            data-key="{!! $product->id !!}" data-type="Product {{ $product->name }}"
                                            class="delete-button btn btn-danger"><i
                                                     class="fa fa-trash-o"></i></a>
-                                        <a href="{!! route('app_edit_product',['param'=>$product->id]) !!}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                        <a href="{!! route('app_edit_product',['param'=>$product->id]) !!}"
+                                           class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                     </div>
                                 </div>
                             @endforeach

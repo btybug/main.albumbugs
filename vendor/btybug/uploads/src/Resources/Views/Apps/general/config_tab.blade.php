@@ -37,7 +37,6 @@
     @endif
 
 
-
 </div>
 
 {!! BBstyle("public/css/select2/select2.min.css") !!}

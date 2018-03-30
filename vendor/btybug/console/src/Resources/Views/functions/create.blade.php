@@ -124,7 +124,7 @@
     {!! Html::script('public/js/DataTables/datatables.js') !!}
     <script>
         $('document').ready(function () {
-            function initdatepicker(){
+            function initdatepicker() {
                 // $( ".datepickerRange" ).datepicker({
                 //     dateFormat: 'dd-mm-yy',
                 //     prevText:'',
@@ -135,10 +135,10 @@
                 //     buttonImage: divadatepicker.image_url+"/calendar.jpeg",
                 //     buttonImageOnly: true
                 // });
-                $( ".date-expression" ).datepicker({
+                $(".date-expression").datepicker({
                     dateFormat: 'dd-mm-yy',
-                    prevText:'',
-                    nextText:'',
+                    prevText: '',
+                    nextText: '',
                     changeMonth: true,
                     changeYear: true
                 });
@@ -175,7 +175,7 @@
                         if (!data.error) {
                             $(at).closest(".removable_parent").find(".expression-place").html(data.html);
                             initdatepicker();
-                            if(type == 'in'){
+                            if (type == 'in') {
                                 $(".select2-box").select2();
                             }
                         }

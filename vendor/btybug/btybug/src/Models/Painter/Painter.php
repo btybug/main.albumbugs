@@ -33,6 +33,10 @@ class Painter extends BasePainter
         return storage_path(config('painter.CONFIG'));
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function scopeFindByVariation($id)
     {
         $slug = explode('.', $id);
@@ -41,6 +45,10 @@ class Painter extends BasePainter
         return $tpl;
     }
 
+    /**
+     * @param string $slug
+     * @return bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     */
     public function scopeRenderLivePreview(string $slug)
     {
         $ui = $model = $this->findByVariation($slug);
@@ -63,6 +71,10 @@ class Painter extends BasePainter
         return view('uploads::gears.units.preview', compact(['model', "ui", 'data', 'settings', 'variation']));
     }
 
+    /**
+     * @param null $variables
+     * @return bool|mixed|string
+     */
     public function scopeRenderSettings($variables = null)
     {
         $path = $this->getPath();
@@ -82,6 +94,12 @@ class Painter extends BasePainter
         return View::make("$slug::settings")->with($variables)->render();
     }
 
+    /**
+     * @param array $variables
+     * @return mixed|string
+     * @throws \Error
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
     public function scopeRenderLive(array $variables = [])
     {
 
@@ -107,11 +125,17 @@ class Painter extends BasePainter
         return View::make("$slug::$tpl")->with($variables)->with(['tplPath' => $path, '_this' => $this])->render();
     }
 
+    /**
+     * @return string
+     */
     public function getPath()
     {
         return base_path($this->path);
     }
 
+    /**
+     * @return bool
+     */
     public function scopeRemovePainterJson()
     {
         $path = $this->getConfigPath();

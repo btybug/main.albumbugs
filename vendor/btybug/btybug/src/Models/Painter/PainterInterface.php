@@ -47,9 +47,20 @@ interface PainterInterface extends Arrayable
      */
     public function scopeGet();
 
+    /**
+     * @param array $settings
+     * @return mixed
+     */
     public function scopeRender(array $settings);
 
+    /**
+     * @return mixed
+     */
     public function scopeFirst();
 
+    /**
+     * @param string $tag
+     * @return mixed
+     */
     public function scopeSortByTag(string $tag);
 }

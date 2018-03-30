@@ -2,7 +2,7 @@
 @section('content')
     <div class="bb-form-header">
         <div class="row">
-            <div  class="col-md-3">
+            <div class="col-md-3">
                 <label>Name</label>
                 {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'name']) !!}
             </div>
@@ -67,11 +67,12 @@
     {!! Html::style("public/css/form-builder/form-builder.css") !!}
     {!! HTML::style("public/css/select2/select2.min.css") !!}
     <style>
-        .box{
+        .box {
             box-shadow: 0 0 4px #555555;
-            padding:15px;
+            padding: 15px;
         }
-        .append_here{
+
+        .append_here {
             margin-top: 15px;
         }
     </style>
@@ -79,7 +80,7 @@
 @section('JS')
     {!! HTML::script("public/js/select2/select2.full.min.js") !!}
     <script>
-        window.onload = function(){
+        window.onload = function () {
             $(".select2").select2();
 
             function IDGenerator() {
@@ -87,17 +88,17 @@
                 this.length = 8;
                 this.timestamp = +new Date;
 
-                var _getRandomInt = function( min, max ) {
-                    return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+                var _getRandomInt = function (min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
                 };
 
-                this.generate = function() {
+                this.generate = function () {
                     var ts = this.timestamp.toString();
-                    var parts = ts.split( "" ).reverse();
+                    var parts = ts.split("").reverse();
                     var id = "";
 
-                    for( var i = 0; i < this.length; ++i ) {
-                        var index = _getRandomInt( 0, parts.length - 1 );
+                    for (var i = 0; i < this.length; ++i) {
+                        var index = _getRandomInt(0, parts.length - 1);
                         id += parts[index];
                     }
 
@@ -106,18 +107,19 @@
 
 
             }
+
             var idGen = new IDGenerator();
 
-            $("body").delegate(".add_new","click",function(){
+            $("body").delegate(".add_new", "click", function () {
                 var uniq = idGen.generate();
                 var html = $("#get_for_append").html();
-                html = html.replace("{repl}",uniq);
+                html = html.replace("{repl}", uniq);
 
                 $(".append_here").append(html);
-                return $(".select2_"+uniq).select2();
+                return $(".select2_" + uniq).select2();
             });
-            $("body").on("click",".remove_item",function(){
-               return $(this).parent().parent().remove();
+            $("body").on("click", ".remove_item", function () {
+                return $(this).parent().parent().remove();
             });
         };
     </script>

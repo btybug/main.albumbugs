@@ -18,6 +18,6 @@ class OauthClientProductsController extends Controller
     public function onOff(Request $request,OauthClientProductsRepository $repository)
     {
         $result= $repository->onOff($request->get('client_id'),$request->get('product_id'));
-        return response()->json(['error'=>(bool)$result,'data'=>$result]);
+        return response()->json(['error'=>!(bool)$result,'data'=>$result]);
     }
 }

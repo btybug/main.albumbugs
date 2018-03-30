@@ -144,7 +144,7 @@ $products=$appProductsRepository->allConnectedToClient($clientId);
                                         <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                                     </div>
                                     <div class="custom_btn">
-                                        <a href="#" class="btn btn-warning"><i>Settings</i></a>
+                                        <a href="#" data-settings="{!! $product->id !!}" class="btn btn-settings  @if(!$product->connection_status) not-active @endif"><i>Settings</i></a>
                                     </div>
                                 </div>
                             @endforeach
@@ -174,7 +174,17 @@ $products=$appProductsRepository->allConnectedToClient($clientId);
         font-size: xx-large;
         font-family: fantasy;
     }
-
+    .btn-settings{
+        background: #0a6640;
+        color: white;
+    }
+    .not-active {
+        pointer-events: none;
+        cursor: default;
+        text-decoration:none;
+        color:black;
+        background: #a9a8a8;
+    }
     .add-product {
         background: black !important;
         color: white !important;

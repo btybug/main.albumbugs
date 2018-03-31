@@ -1,18 +1,18 @@
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-html, body, #app{
+html, body, #app {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-#app{
+#app {
   display: flex;
 }
 
-:focus{
-  outline: none;
+:focus, .pt-control input:focus ~ .pt-control-indicator{
+  outline: none!important;
 }
 
 .Resizer {
@@ -58,9 +58,20 @@ html, body, #app{
   border-left: 5px solid rgba(0, 0, 0, 0.5);
   border-right: 5px solid rgba(0, 0, 0, 0.5);
 }
+
 .Resizer.disabled {
   cursor: not-allowed;
 }
+
 .Resizer.disabled:hover {
   border-color: transparent;
+}
+
+.visual-editor {
+  height: 100%;
+  overflow: scroll;
+}
+
+.panel-checkbox {
+  margin-top: 12px;
 }

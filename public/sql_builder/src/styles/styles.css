@@ -8,8 +8,8 @@ html, body, #app {
 #app {
   display: flex; }
 
-:focus {
-  outline: none; }
+:focus, .pt-control input:focus ~ .pt-control-indicator {
+  outline: none !important; }
 
 .Resizer {
   background: #000;
@@ -54,5 +54,12 @@ html, body, #app {
 
 .Resizer.disabled:hover {
   border-color: transparent; }
+
+.visual-editor {
+  height: 100%;
+  overflow: scroll; }
+
+.panel-checkbox {
+  margin-top: 12px; }
 
 /*# sourceMappingURL=styles.css.map */

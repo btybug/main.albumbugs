@@ -144,7 +144,7 @@ $products=$appProductsRepository->allConnectedToClient($clientId);
                                         <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                                     </div>
                                     <div class="custom_btn">
-                                        <a href="#" data-settings="{!! $product->id !!}" class="btn btn-settings  @if(!$product->connection_status) not-active @endif"><i class="fa fa-edit"></i></a>
+                                        <a href="{!! url("/my-account/developers/connections/$clientId/edit-product/$product->id") !!}" data-settings="{!! $product->id !!}" class="btn btn-settings  @if(!$product->connection_status) not-active @endif"><i class="fa fa-edit"></i></a>
                                     </div>
                                 </div>
                             @endforeach

@@ -1,42 +1,25 @@
 <div class="col-md-12">
     <div class="form-group">
         <label>
-            Select Table
+            Table: <b>users</b>
         </label>
-        {!! Form::select('table',['' => 'Select'] + BBGetTables(),null,['class' => 'form-control select-table']) !!}
+
     </div>
     <div class="col-md-12">
-        <label>Type: </label>
-        {!! Form::select('method',[
-            'get' => 'GET',
-            'insert' => 'Insert',
-            'update' => 'update',
-            'delete' => 'Delete'
-        ],null,['class' => 'form-control']) !!}
+        <label>Type: <b>GET</b></label>
+
     </div>
-
-    @if(isset($product['columns']) && isset($product['table']))
-        @php
-            $columns = BBGetTableColumn($product['table'])
-        @endphp
-        <div class="col-md-12 cols-box">
-            <label>Select Columns</label>
-            <div class="columns">
-                @foreach($columns as $col)
-                    {{ $col }} {!! Form::checkbox("columns[$col]",null) !!}
-                @endforeach
-            </div>
+    @php
+        $columns = BBGetTableColumn('users')
+    @endphp
+    <div class="col-md-12 cols-box">
+        <label>Select Columns For Return</label>
+        <div class="columns">
+            @foreach($columns as $col)
+                {{ $col }} {!! Form::checkbox("columns[$col]",null) !!}
+            @endforeach
         </div>
-    @else
-        <div class="col-md-12 cols-box hide">
-            <label>Select Columns</label>
-            <div class="columns">
-
-            </div>
-        </div>
-    @endif
-
-
+    </div>
 </div>
 
 {!! BBstyle("public/css/select2/select2.min.css") !!}

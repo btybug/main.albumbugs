@@ -84,9 +84,7 @@
                     @endif
                 </div>
                 <div role="tabpanel" class="tab-pane" id="permissions_tab">
-                    @if(\view::exists($model->app->permissions_tab))
-                        @include($model->app->permissions_tab)
-                    @endif
+                   
                 </div>
                 <div role="tabpanel" class="tab-pane" id="docs_tab">
                     @if(\view::exists($model->app->documantation_tab))

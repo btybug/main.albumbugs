@@ -13,7 +13,7 @@ const GLOBALS = {
 
 export default {
     resolve: {
-        extensions: ['*', '.js', '.jsx', '.json']
+        extensions: ['*', '.js', '.jsx', '.json', '.less']
     },
     devtool: 'source-map', // more info:https://webpack.js.org/guides/production/#source-mapping and https://webpack.js.org/configuration/devtool/
     entry: [
@@ -23,7 +23,7 @@ export default {
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: '/public/sql_builder/dist/',
         filename: '[name].[chunkhash].js'
     },
     plugins: [
@@ -156,6 +156,19 @@ export default {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.less$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "less-loader",
+                    options: {
+                        javascriptEnabled: true
+                    }
+                }]
             }
         ]
     }

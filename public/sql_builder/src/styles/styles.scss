@@ -75,3 +75,8 @@ html, body, #app {
 .panel-checkbox {
   margin-top: 12px;
 }
+
+.pt-tab-panel {
+  overflow-y: scroll;
+  height: 260px;
+}

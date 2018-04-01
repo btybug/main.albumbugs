@@ -1,11 +1,19 @@
 import React from 'react';
 import {Flex, Box} from 'reflexbox'
 import Colors from '../utils/colors'
-import {Tabs, Tab, TabId, Classes, ITreeNode, Tree, Checkbox} from "@blueprintjs/core";
+import {Tabs, Tab, TabId, Classes, ITreeNode, Tree, Checkbox} from "@blueprintjs/core"
 import SplitPane from 'react-split-pane'
 import API from '../utils/api'
 import {BeatLoader} from 'halogenium'
 import Draggable from 'react-draggable'
+import 'react-table/react-table.css'
+import ReactTable from 'react-table'
+
+import {Query, Builder, Utils as QbUtils} from 'react-awesome-query-builder';
+import config from '../utils/queryConfig'; //see below 'Config format'
+import 'react-awesome-query-builder/css/styles.scss';
+import 'react-awesome-query-builder/css/compact_styles.scss';
+import 'react-awesome-query-builder/css/denormalize.scss';
 
 const api = API.create()
 
@@ -23,6 +31,7 @@ export default class MainStudio extends React.Component {
             )
         }],
         selectedTables: [],
+        columnsData: [],
     }
 
     componentDidMount() {
@@ -62,9 +71,10 @@ export default class MainStudio extends React.Component {
 
             columns.map((column, index) => {
                 childNodes.push({
-                    id: lastID + index,
+                    id: nodeData.id + "." +lastID + index,
                     label: column.COLUMN_NAME,
                     icon: 'pause',
+                    table: nodeData.label
                 })
             })
 
@@ -105,7 +115,19 @@ export default class MainStudio extends React.Component {
         this.setState({nodes})
     }
 
+    getChildren(props) {
+        return (
+            <div>
+                <div className="query-builder">
+                    <Builder {...props} />
+                </div>
+                <div>Query string: {QbUtils.queryString(props.tree, props.config)}</div>
+            </div>
+        )
+    }
+
     render() {
+
         return (
             <Flex column style={{flex: 1}}>
                 <Box px={2} style={{backgroundColor: Colors.black, height: 80}}>Header</Box>
@@ -140,7 +162,26 @@ export default class MainStudio extends React.Component {
                                                 {table.childNodes.map((column) => (
                                                     <li className="pt-tree-node" key={column.id}>
                                                         <div className="pt-tree-node-content" style={{paddingLeft: 10}}>
-                                                            <Checkbox checked={this.state.isEnabled} onChange={this.handleEnabledChange} className="panel-checkbox" />
+                                                            <Checkbox onChange={(e) => {
+                                                                const isChecked = e.target.checked
+
+                                                                let columnsData = this.state.columnsData
+
+                                                                if(isChecked){
+                                                                    columnsData.push({
+                                                                        id: column.id,
+                                                                        expression: column.table + "." + column.label,
+                                                                        name: column.label
+                                                                    })
+                                                                }else{
+                                                                    columnsData = columnsData.filter((columnData) => {
+                                                                        return columnData.id !== column.id
+                                                                    })
+                                                                }
+
+                                                                this.setState({ columnsData })
+
+                                                            }} className="panel-checkbox" />
 
                                                             <span className="pt-tree-node-icon pt-icon-standard pt-icon-pause"/>
                                                             <span className="pt-tree-node-label">{column.label}</span>
@@ -156,7 +197,7 @@ export default class MainStudio extends React.Component {
                         </div>
                     </SplitPane>
                 </Box>
-                <Box px={2} style={{backgroundColor: '#f6f6f6', height: 300}}>
+                <Box px={2} style={{backgroundColor: '#f6f6f6', height: 400}}>
                     <Tabs
                         animate={this.state.animate}
                         id="navbar"
@@ -164,10 +205,24 @@ export default class MainStudio extends React.Component {
                         selectedTabId={this.state.navbarTabId}
                     >
                         <Tab id="Columns" title="Columns" panel={(
-                            <div></div>
+                            <ReactTable
+                                data={this.state.columnsData}
+                                columns={[{
+                                    Header: 'Column Expression',
+                                    accessor: 'expression'
+                                }, {
+                                    Header: 'Column Name',
+                                    accessor: 'name'
+                                }]}
+                                defaultPageSize={10}
+                                style={{height: 200}}
+                            />
                         )}/>
                         <Tab id="Files" title="Filters" panel={(
-                            <div>Text</div>
+                            <Query
+                                {...config}
+                                get_children={this.getChildren}
+                            />
                         )}/>
                         <Tab id="Builds" title="Limits & Sorting"/>
                     </Tabs>

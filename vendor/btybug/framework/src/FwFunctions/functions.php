@@ -28,10 +28,9 @@ function BBCss($section = 'frontend')
             foreach ($model['css_version'] as $id){
                 $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
                 $version = $versionRepo->find($id);
-                if($version){
+                if($version && \File::exists("public/" .$version->hint_path)){
                     return Html::style("public/" .$version->hint_path);
                 }
-//                $path = ($version->env =='local') ? "public/css/versions/" . $version->file_name : $version->file_name;
             }
         }
     }
@@ -47,12 +46,15 @@ function BBJs($section = 'frontend')
             foreach ($model['js_data'] as $id){
                 $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
                 $version = $versionRepo->find($id);
-                if($version){
+                if($version && \File::exists("public/" .$version->hint_path)){
                     return Html::script("public/" .$version->hint_path);
                 }
             }
         }
     }
+
+    return '<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>';
 }
 
 function BBJquery($section = 'frontend')

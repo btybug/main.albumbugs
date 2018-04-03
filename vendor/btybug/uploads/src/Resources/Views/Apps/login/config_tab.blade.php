@@ -1,25 +1,40 @@
 <div class="col-md-12">
-    <div class="form-group">
-        <label>
-            Table: <b>users</b>
-        </label>
-
-    </div>
-    <div class="col-md-12">
-        <label>Type: <b>GET</b></label>
-
-    </div>
     @php
         $columns = BBGetTableColumn('users')
     @endphp
-    <div class="col-md-12 cols-box">
-        <label>Select Columns For Return</label>
-        <div class="columns">
-            @foreach($columns as $col)
-                {{ $col }} {!! Form::checkbox("columns[$col]",null) !!}
-            @endforeach
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Select Columns For Return
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="columns">
+                @foreach($columns as $col)
+                    {{ $col }} {!! Form::checkbox("columns[$col]",null) !!}
+                @endforeach
+            </div>
         </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+               Modal settings
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <label>Site Name</label>
+                {!! Form::text("site_name",null,['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-12">
+                <label>Site logo</label>
+                {!! Form::text("site_logo",null,['class' => 'form-control','placeholder' => 'Enter URL']) !!}
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 {!! BBstyle("public/css/select2/select2.min.css") !!}

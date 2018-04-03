@@ -22,7 +22,7 @@ use Validator;
  *
  * @package App\Modules\Users\Http\Controllers\Auth
  */
-class AuthController extends Controller
+class AuthController_old extends Controller
 {
 
     /**
@@ -409,6 +409,7 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+        $this->redirectPath();
         $redirectUrl=$request->get('redirect_to',null);
         $field = filter_var($request->input('usernameOremail'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $request->merge([$field => $request->input('usernameOremail')]);

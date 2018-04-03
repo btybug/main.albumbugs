@@ -32,6 +32,26 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    public function username()
+    {
+        return 'usernameOremail';
+    }
+    public function authenticate()
+    {
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->intended('dashboard');
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $field = filter_var($request->input('usernameOremail'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $request->merge([$field => $request->input('usernameOremail')]);
+        $this->validateLogin($request);
+
+    }
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);

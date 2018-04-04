@@ -1993,3 +1993,13 @@ function useDinamicStyleByPath($path,$main)
     $foldername = $arr[count($arr) - 2];
     return '<link href="' .asset($main.DS.$foldername.DS.$filename.'?v='.rand(111,999)). '" rel="stylesheet">';
 }
+function BBregistreApi($name,$edit_url,$data=[])
+{
+    $data['edit_url']=$edit_url;
+    $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
+    return $setting->createOrUpdateToJson($data, 'out_side_api', md5($name));
+}
+function BBgetAllAegistreApi(){
+    $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
+    return $setting->getSettingsBySection('out_side_api');
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Flex, Box} from 'reflexbox'
 import Colors from '../utils/colors'
-import {Tabs, Tab, TabId, Classes, ITreeNode, Tree, Checkbox} from "@blueprintjs/core"
+import { Classes, ITreeNode, Tree, Checkbox, Navbar, NavbarGroup, NavbarDivider, Button, NavbarHeading} from "@blueprintjs/core"
 import SplitPane from 'react-split-pane'
 import API from '../utils/api'
 import {BeatLoader} from 'halogenium'
@@ -20,6 +20,7 @@ import AceEditor from 'react-ace'
 
 import 'brace/mode/mysql'
 import 'brace/theme/monokai'
+import {Tab, Tabs} from "react-bootstrap";
 
 const api = API.create()
 
@@ -38,6 +39,8 @@ export default class MainStudio extends React.Component {
         }],
         selectedTables: [],
         columnsData: [],
+        queryResults: [],
+        resultsColumns: [],
         fields: {},
         generatedQuery: '',
         queryString: '',
@@ -152,7 +155,14 @@ export default class MainStudio extends React.Component {
             fieldsQuery = fieldsQuery.replace(new RegExp(tables[0] + ".", "g"), "")
         }
 
-        generatedQuery += fieldsQuery + ' FROM ' + tables.join(', ') + ' WHERE ' + this.state.queryString
+        generatedQuery += fieldsQuery + ' FROM ' + tables.join(', ')
+
+        if(this.state.queryString){
+            generatedQuery += ' WHERE ' + this.state.queryString
+        }
+
+        // Limits
+        generatedQuery += ' LIMIT 20'
 
         this.setState({ generatedQuery })
     }
@@ -162,6 +172,7 @@ export default class MainStudio extends React.Component {
         let queryString = QbUtils.queryString(tree, config)
         if(queryString){
             queryString = queryString.replace(/___/g, '.')
+            queryString = queryString.replace(/_"/g, '"')
         }
 
         if(queryString){
@@ -177,6 +188,25 @@ export default class MainStudio extends React.Component {
                 <Builder {...props} />
             </div>
         )
+    }
+
+    executeQuery(){
+        api.executeQuery(this.state.generatedQuery).then((results) => {
+            let resultsColumns = [],
+                queryResults = results.data.data
+
+            console.log(queryResults)
+
+            let columns = Object.keys(queryResults[0])
+            columns.map((column) => {
+                resultsColumns.push({
+                    Header: column,
+                    accessor: column,
+                })
+            })
+
+            this.setState({ queryResults, resultsColumns })
+        })
     }
 
     render() {
@@ -196,121 +226,129 @@ export default class MainStudio extends React.Component {
                             />
                         </div>
                         <div className="visual-editor">
-                            {this.state.selectedTables.map((table) => (
-                                <Draggable
-                                    key={table.id}
-                                    bounds='.visual-editor'
-                                    onStart={this.handleStart}
-                                    onDrag={this.handleDrag}
-                                    onStop={this.handleStop}>
+                            <Tabs defaultActiveKey={1} id="visual-results-tabs">
+                                <Tab eventKey={1} title="Visual Editor">
+                                    {this.state.selectedTables.map((table) => (
+                                        <Draggable
+                                            key={table.id}
+                                            bounds='.tab-pane'
+                                            onStart={this.handleStart}
+                                            onDrag={this.handleDrag}
+                                            onStop={this.handleStop}>
 
-                                    <div className="pt-dialog" style={{padding: 0, margin: 0, width: 300}}>
-                                        <div className="pt-dialog-header">
-                                            <span className="pt-icon-large pt-icon-th" />
-                                            <h4 className="pt-dialog-header-title">{table.label}</h4>
-                                            <button className="pt-dialog-close-button pt-icon-small-cross" />
-                                        </div>
-                                        <div style={{padding: 10, maxHeight: 200, overflowY: 'auto'}}>
-                                            <ul className="pt-tree-node-list pt-tree-root">
-                                                {table.childNodes.map((column) => (
-                                                    <li className="pt-tree-node" key={column.id}>
-                                                        <div className="pt-tree-node-content" style={{paddingLeft: 10}}>
-                                                            <Checkbox onChange={(e) => {
-                                                                const isChecked = e.target.checked
+                                            <div className="pt-dialog" style={{padding: 0, margin: 0, width: 300}}>
+                                                <div className="pt-dialog-header">
+                                                    <span className="pt-icon-large pt-icon-th" />
+                                                    <h4 className="pt-dialog-header-title">{table.label}</h4>
+                                                    <button className="pt-dialog-close-button pt-icon-small-cross" />
+                                                </div>
+                                                <div style={{padding: 10, maxHeight: 200, overflowY: 'auto'}}>
+                                                    <ul className="pt-tree-node-list pt-tree-root">
+                                                        {table.childNodes.map((column) => (
+                                                            <li className="pt-tree-node" key={column.id}>
+                                                                <div className="pt-tree-node-content" style={{paddingLeft: 10}}>
+                                                                    <Checkbox onChange={(e) => {
+                                                                        const isChecked = e.target.checked
 
-                                                                let columnsData = this.state.columnsData
+                                                                        let columnsData = this.state.columnsData
 
-                                                                if(isChecked){
-                                                                    columnsData.push({
-                                                                        id: column.id,
-                                                                        expression: column.table + "." + column.label,
-                                                                        name: column.label,
-                                                                        columnType: column.columnType
-                                                                    })
+                                                                        if(isChecked){
+                                                                            columnsData.push({
+                                                                                id: column.id,
+                                                                                expression: column.table + "." + column.label,
+                                                                                name: column.label,
+                                                                                columnType: column.columnType
+                                                                            })
 
-                                                                    // Query builder fields
-                                                                    let field = {};
-                                                                    switch (column.columnType){
-                                                                        // Number
-                                                                        case 'smallint':
-                                                                        case 'bigint':
-                                                                        case 'decimal':
-                                                                        case 'float':
-                                                                        case 'double':
-                                                                        case 'int':
-                                                                            field.type='number'
-                                                                            break
+                                                                            // Query builder fields
+                                                                            let field = {};
+                                                                            switch (column.columnType){
+                                                                                // Number
+                                                                                case 'smallint':
+                                                                                case 'bigint':
+                                                                                case 'decimal':
+                                                                                case 'float':
+                                                                                case 'double':
+                                                                                case 'int':
+                                                                                    field.type='number'
+                                                                                    break
 
-                                                                        // Date
-                                                                        case 'date':
-                                                                        case 'year':
-                                                                            field.type = 'date'
-                                                                            break
+                                                                                // Date
+                                                                                case 'date':
+                                                                                case 'year':
+                                                                                    field.type = 'date'
+                                                                                    break
 
-                                                                        case 'datetime':
-                                                                        case 'timestamp':
-                                                                            field.type = 'datetime'
-                                                                            break
+                                                                                case 'datetime':
+                                                                                case 'timestamp':
+                                                                                    field.type = 'datetime'
+                                                                                    break
 
-                                                                        case 'time':
-                                                                            field.type = 'time'
-                                                                            break
+                                                                                case 'time':
+                                                                                    field.type = 'time'
+                                                                                    break
 
-                                                                        case 'tinyint':
-                                                                            field.type = 'boolean'
-                                                                            break
+                                                                                case 'tinyint':
+                                                                                    field.type = 'boolean'
+                                                                                    break
 
-                                                                        default:
-                                                                            field.type='text'
-                                                                    }
+                                                                                default:
+                                                                                    field.type='text'
+                                                                            }
 
-                                                                    let fields = this.state.fields,
-                                                                        fieldID = column.table + "___" + column.label
+                                                                            let fields = this.state.fields,
+                                                                                fieldID = column.table + "___" + column.label
 
-                                                                    fields[fieldID] = field
-                                                                    fields[fieldID].label =  column.table + "." + column.label
+                                                                            fields[fieldID] = field
+                                                                            fields[fieldID].label =  column.table + "." + column.label
 
-                                                                    this.setState({ fields }, () => {
-                                                                        this.buildSQLQuery()
-                                                                    })
-                                                                }else{
-                                                                    columnsData = columnsData.filter((columnData) => {
-                                                                        return columnData.id !== column.id
-                                                                    })
+                                                                            this.setState({ fields }, () => {
+                                                                                this.buildSQLQuery()
+                                                                            })
+                                                                        }else{
+                                                                            columnsData = columnsData.filter((columnData) => {
+                                                                                return columnData.id !== column.id
+                                                                            })
 
-                                                                    delete this.state.fields[column.id]
-                                                                    this.buildSQLQuery()
-                                                                }
+                                                                            let fieldID = column.table + "___" + column.label
+                                                                            delete this.state.fields[fieldID]
+                                                                            this.buildSQLQuery()
+                                                                        }
 
-                                                                this.setState({ columnsData })
+                                                                        this.setState({ columnsData })
 
-                                                            }} className="panel-checkbox" />
+                                                                    }} className="panel-checkbox" />
 
-                                                            <span className="pt-tree-node-icon pt-icon-standard pt-icon-pause"/>
-                                                            <span className="pt-tree-node-label">{column.label}</span>
-                                                            <span className="pt-tree-node-secondary-label" style={{color: '#a4a9ad'}}>{column.columnType}</span>
-                                                        </div>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
+                                                                    <span className="pt-tree-node-icon pt-icon-standard pt-icon-pause"/>
+                                                                    <span className="pt-tree-node-label">{column.label}</span>
+                                                                    <span className="pt-tree-node-secondary-label" style={{color: '#a4a9ad'}}>{column.columnType}</span>
+                                                                </div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
 
-                                </Draggable>
-                            ))}
+                                        </Draggable>
+                                    ))}
+                                </Tab>
+                                <Tab eventKey={2} title="Executed Results">
+                                    <ReactTable
+                                        data={this.state.queryResults}
+                                        columns={this.state.resultsColumns}
+                                        defaultPageSize={10}
+                                        style={{height: '100%'}}
+                                    />
+                                </Tab>
+                            </Tabs>
                         </div>
                     </SplitPane>
                 </Box>
-                <Box style={{backgroundColor: '#f6f6f6', height: 400}}>
-                    <Flex style={{flex: 1}}>
+                <Box style={{backgroundColor: '#f6f6f6'}}>
+                    <Flex style={{flex: 1, height: 300}}>
                         <Box px={2} style={{flex: 3}}>
-                            <Tabs
-                                animate={this.state.animate}
-                                id="navbar"
-                                onChange={this.handleNavbarTabChange}
-                                selectedTabId={this.state.navbarTabId}
-                            >
-                                <Tab id="Columns" title="Columns" panel={(
+                            <Tabs defaultActiveKey={1} id="column-filters-tabs">
+                                <Tab eventKey={1} title="Columns">
                                     <ReactTable
                                         data={this.state.columnsData}
                                         columns={[{
@@ -324,10 +362,10 @@ export default class MainStudio extends React.Component {
                                             accessor: 'columnType'
                                         }]}
                                         defaultPageSize={10}
-                                        style={{height: 250}}
+                                        style={{height: 240}}
                                     />
-                                )}/>
-                                <Tab id="Files" title="Filters" panel={(
+                                </Tab>
+                                <Tab eventKey={2} title="Filters">
                                     <Query
                                         {...config}
                                         fields={this.state.fields}
@@ -336,16 +374,31 @@ export default class MainStudio extends React.Component {
                                             this.builderUpdate(tree)
                                         }}
                                     />
-                                )}/>
-                                <Tab id="Builds" title="Limits & Sorting"/>
+                                </Tab>
+                                <Tab eventKey={3} title="Limit & Order" disabled>
+                                    Tab 3 content
+                                </Tab>
                             </Tabs>
                         </Box>
-                        <Box px={2} style={{flex: 2, maxHeight: '100%'}}>
+                        <Box px={2} style={{flex: 2, maxHeight: '100%', display: 'flex', flexDirection: 'column'}}>
+                            <Navbar>
+                                <NavbarGroup>
+                                    <NavbarHeading>Live Generated Query</NavbarHeading>
+                                </NavbarGroup>
+                                <NavbarGroup align='right'>
+                                    <Button className={Classes.MINIMAL} icon="console" text="Execute Query" onClick={() => {
+                                        this.executeQuery()
+                                    }} />
+                                </NavbarGroup>
+                            </Navbar>
+
                             <AceEditor
+                                style={{flex: 1}}
                                 fontSize={16}
                                 wrapEnabled={true}
-                                height='100%'
+                                showGutter={false}
                                 width='100%'
+                                height='0'
                                 value={this.state.generatedQuery}
                                 mode="mysql"
                                 theme="monokai"

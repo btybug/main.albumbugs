@@ -80,3 +80,17 @@ html, body, #app {
   overflow-y: scroll;
   height: 260px;
 }
+
+ul.nav.nav-tabs {
+  background: #f6f6f6;
+  margin: 0;
+}
+
+div#uncontrolled-tab-example {
+  display: flex;
+  flex-direction: column;
+}
+
+.ReactTable {
+  background: #f6f6f6;
+}

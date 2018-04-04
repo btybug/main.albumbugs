@@ -36,6 +36,7 @@
     "halogenium": "2.2.3",
     "object-assign": "4.1.0",
     "react": "16.2.0",
+    "react-bootstrap": "0.32.1",
     "react-dom": "16.2.0",
     "react-flexbox-grid": "2.0.0",
     "react-redux": "5.0.5",

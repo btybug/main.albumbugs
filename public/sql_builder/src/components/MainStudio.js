@@ -9,11 +9,17 @@ import Draggable from 'react-draggable'
 import 'react-table/react-table.css'
 import ReactTable from 'react-table'
 
-import {Query, Builder, Utils as QbUtils} from 'react-awesome-query-builder';
-import config from '../utils/queryConfig'; //see below 'Config format'
-import 'react-awesome-query-builder/css/styles.scss';
-import 'react-awesome-query-builder/css/compact_styles.scss';
-import 'react-awesome-query-builder/css/denormalize.scss';
+import {Query, Builder, Utils as QbUtils} from 'react-awesome-query-builder'
+import config from '../utils/queryConfig'
+import 'react-awesome-query-builder/css/styles.scss'
+import 'react-awesome-query-builder/css/compact_styles.scss'
+import 'react-awesome-query-builder/css/denormalize.scss'
+
+import brace from 'brace'
+import AceEditor from 'react-ace'
+
+import 'brace/mode/mysql'
+import 'brace/theme/monokai'
 
 const api = API.create()
 
@@ -32,6 +38,9 @@ export default class MainStudio extends React.Component {
         }],
         selectedTables: [],
         columnsData: [],
+        fields: {},
+        generatedQuery: '',
+        queryString: '',
     }
 
     componentDidMount() {
@@ -69,10 +78,19 @@ export default class MainStudio extends React.Component {
 
             delete currentNode.secondaryLabel
 
+            childNodes.push({
+                id: nodeData.id + "__" +lastID,
+                label: "*",
+                columnType: "all",
+                icon: 'pause',
+                table: nodeData.label
+            })
+
             columns.map((column, index) => {
                 childNodes.push({
-                    id: nodeData.id + "." +lastID + index,
+                    id: nodeData.id + "_" +lastID + index,
                     label: column.COLUMN_NAME,
+                    columnType: column.DATA_TYPE,
                     icon: 'pause',
                     table: nodeData.label
                 })
@@ -115,13 +133,48 @@ export default class MainStudio extends React.Component {
         this.setState({nodes})
     }
 
-    getChildren(props) {
+    buildSQLQuery(){
+        let generatedQuery = 'SELECT ',
+            fields = [],
+            tables = [],
+            fieldsQuery
+
+        Object.keys(this.state.fields).map((key) => {
+            fields.push(this.state.fields[key].label)
+        })
+
+        this.state.selectedTables.map((table) => {
+            tables.push(table.label)
+        })
+
+        fieldsQuery = fields.join(', ')
+        if(tables.length === 1){
+            fieldsQuery = fieldsQuery.replace(new RegExp(tables[0] + ".", "g"), "")
+        }
+
+        generatedQuery += fieldsQuery + ' FROM ' + tables.join(', ') + ' WHERE ' + this.state.queryString
+
+        this.setState({ generatedQuery })
+    }
+
+    builderUpdate(tree) {
+        config.fields = this.state.fields
+        let queryString = QbUtils.queryString(tree, config)
+        if(queryString){
+            queryString = queryString.replace(/___/g, '.')
+        }
+
+        if(queryString){
+            this.setState({ queryString }, () => {
+                this.buildSQLQuery()
+            })
+        }
+    }
+
+    getChildren = (props) => {
         return (
-            <div>
-                <div className="query-builder">
-                    <Builder {...props} />
-                </div>
-                <div>Query string: {QbUtils.queryString(props.tree, props.config)}</div>
+            <div className="query-builder">
+                <Builder {...props} />
             </div>
         )
     }
@@ -151,7 +204,7 @@ export default class MainStudio extends React.Component {
                                     onDrag={this.handleDrag}
                                     onStop={this.handleStop}>
 
-                                    <div className="pt-dialog" style={{padding: 0, margin: 0, width: 250}}>
+                                    <div className="pt-dialog" style={{padding: 0, margin: 0, width: 300}}>
                                         <div className="pt-dialog-header">
                                             <span className="pt-icon-large pt-icon-th" />
                                             <h4 className="pt-dialog-header-title">{table.label}</h4>
@@ -171,12 +224,62 @@ export default class MainStudio extends React.Component {
                                                                     columnsData.push({
                                                                         id: column.id,
                                                                         expression: column.table + "." + column.label,
-                                                                        name: column.label
+                                                                        name: column.label,
+                                                                        columnType: column.columnType
+                                                                    })
+
+                                                                    // Query builder fields
+                                                                    let field = {};
+                                                                    switch (column.columnType){
+                                                                        // Number
+                                                                        case 'smallint':
+                                                                        case 'bigint':
+                                                                        case 'decimal':
+                                                                        case 'float':
+                                                                        case 'double':
+                                                                        case 'int':
+                                                                            field.type='number'
+                                                                            break
+
+                                                                        // Date
+                                                                        case 'date':
+                                                                        case 'year':
+                                                                            field.type = 'date'
+                                                                            break
+
+                                                                        case 'datetime':
+                                                                        case 'timestamp':
+                                                                            field.type = 'datetime'
+                                                                            break
+
+                                                                        case 'time':
+                                                                            field.type = 'time'
+                                                                            break
+
+                                                                        case 'tinyint':
+                                                                            field.type = 'boolean'
+                                                                            break
+
+                                                                        default:
+                                                                            field.type='text'
+                                                                    }
+
+                                                                    let fields = this.state.fields,
+                                                                        fieldID = column.table + "___" + column.label
+
+                                                                    fields[fieldID] = field
+                                                                    fields[fieldID].label =  column.table + "." + column.label
+
+                                                                    this.setState({ fields }, () => {
+                                                                        this.buildSQLQuery()
                                                                     })
                                                                 }else{
                                                                     columnsData = columnsData.filter((columnData) => {
                                                                         return columnData.id !== column.id
                                                                     })
+
+                                                                    delete this.state.fields[column.id]
+                                                                    this.buildSQLQuery()
                                                                 }
 
                                                                 this.setState({ columnsData })
@@ -185,6 +288,7 @@ export default class MainStudio extends React.Component {
 
                                                             <span className="pt-tree-node-icon pt-icon-standard pt-icon-pause"/>
                                                             <span className="pt-tree-node-label">{column.label}</span>
+                                                            <span className="pt-tree-node-secondary-label" style={{color: '#a4a9ad'}}>{column.columnType}</span>
                                                         </div>
                                                     </li>
                                                 ))}
@@ -197,35 +301,60 @@ export default class MainStudio extends React.Component {
                         </div>
                     </SplitPane>
                 </Box>
-                <Box px={2} style={{backgroundColor: '#f6f6f6', height: 400}}>
-                    <Tabs
-                        animate={this.state.animate}
-                        id="navbar"
-                        onChange={this.handleNavbarTabChange}
-                        selectedTabId={this.state.navbarTabId}
-                    >
-                        <Tab id="Columns" title="Columns" panel={(
-                            <ReactTable
-                                data={this.state.columnsData}
-                                columns={[{
-                                    Header: 'Column Expression',
-                                    accessor: 'expression'
-                                }, {
-                                    Header: 'Column Name',
-                                    accessor: 'name'
-                                }]}
-                                defaultPageSize={10}
-                                style={{height: 200}}
+                <Box style={{backgroundColor: '#f6f6f6', height: 400}}>
+                    <Flex style={{flex: 1}}>
+                        <Box px={2} style={{flex: 3}}>
+                            <Tabs
+                                animate={this.state.animate}
+                                id="navbar"
+                                onChange={this.handleNavbarTabChange}
+                                selectedTabId={this.state.navbarTabId}
+                            >
+                                <Tab id="Columns" title="Columns" panel={(
+                                    <ReactTable
+                                        data={this.state.columnsData}
+                                        columns={[{
+                                            Header: 'Column Expression',
+                                            accessor: 'expression'
+                                        }, {
+                                            Header: 'Column Name',
+                                            accessor: 'name'
+                                        }, {
+                                            Header: 'Column Type',
+                                            accessor: 'columnType'
+                                        }]}
+                                        defaultPageSize={10}
+                                        style={{height: 250}}
+                                    />
+                                )}/>
+                                <Tab id="Files" title="Filters" panel={(
+                                    <Query
+                                        {...config}
+                                        fields={this.state.fields}
+                                        get_children={this.getChildren}
+                                        onChange={(tree) => {
+                                            this.builderUpdate(tree)
+                                        }}
+                                    />
+                                )}/>
+                                <Tab id="Builds" title="Limits & Sorting"/>
+                            </Tabs>
+                        </Box>
+                        <Box px={2} style={{flex: 2, maxHeight: '100%'}}>
+                            <AceEditor
+                                fontSize={16}
+                                wrapEnabled={true}
+                                height='100%'
+                                width='100%'
+                                value={this.state.generatedQuery}
+                                mode="mysql"
+                                theme="monokai"
+                                name="UNIQUE_ID_OF_DIV"
+                                readOnly={true}
+                                editorProps={{$blockScrolling: true}}
                             />
-                        )}/>
-                        <Tab id="Files" title="Filters" panel={(
-                            <Query
-                                {...config}
-                                get_children={this.getChildren}
-                            />
-                        )}/>
-                        <Tab id="Builds" title="Limits & Sorting"/>
-                    </Tabs>
+                        </Box>
+                    </Flex>
                 </Box>
             </Flex>
         )

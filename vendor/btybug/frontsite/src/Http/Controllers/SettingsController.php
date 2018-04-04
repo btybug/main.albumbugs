@@ -249,7 +249,10 @@ class SettingsController extends Controller
 
     public function getApi()
     {
-        return view('manage::system.api');
+        $settings=BBgetAllAegistreApi();
+
+        $html=\View::make('manage::_partials.api_settings',compact('settings'));
+        return view('manage::system.api',compact('html'));
     }
 
     public function getFrontSettings(

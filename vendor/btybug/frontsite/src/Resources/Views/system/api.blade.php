@@ -1,6 +1,6 @@
 @extends('btybug::layouts.mTabs',['index'=>'manage_settings'])
 @section('tab')
-    api
+    {!! $html !!}
 @stop
 @section('CSS')
 @stop

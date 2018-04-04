@@ -1996,10 +1996,11 @@ function useDinamicStyleByPath($path,$main)
 function BBregistreApi($name,$edit_url,$data=[])
 {
     $data['edit_url']=$edit_url;
+    $data['name']=$name;
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
     return $setting->createOrUpdateToJson($data, 'out_side_api', md5($name));
 }
 function BBgetAllAegistreApi(){
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
-    return $setting->getSettingsBySection('out_side_api');
+    return $setting->getAllSettingsBySection('out_side_api');
 }

@@ -249,6 +249,7 @@ class SettingsController extends Controller
 
     public function getApi()
     {
+
         $settings=BBgetAllAegistreApi();
 
         $html=\View::make('manage::_partials.api_settings',compact('settings'));

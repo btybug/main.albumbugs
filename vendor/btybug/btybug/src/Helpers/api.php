@@ -2004,3 +2004,19 @@ function BBgetAllAegistreApi(){
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
     return $setting->getAllSettingsBySection('out_side_api');
 }
+function BBeditApisettings($name,array $data){
+    $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
+    $setting=$settingRepository->getSettings('out_side_api',md5($name));
+    if($setting){
+        $settingData=json_decode($setting->val,true);
+        $data['name']=$settingData['name'];
+        $data['edit_url']=$settingData['edit_url'];
+        $setting->val=json_encode($data,true);
+        return $setting->save();
+    }
+    return false;
+}
+function BBgetApiSettings($name){
+    $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
+    return $settingRepository->getSettings('out_side_api',md5($name));
+}

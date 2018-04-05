@@ -1002,19 +1002,7 @@ function BBGetUser($id = null, $column = 'username')
 
 function BBGetUserAvatar($id = null)
 {
-    if ($id) {
-        $userRepo = new \Btybug\User\Repository\UserRepository();
-        $user = $userRepo->find($id);
-        if ($user) {
-            return ($user->profile->avatar) ? url($user->profile->avatar) : url('public/images/avatar.png');
-        }
-    } else {
-        if (Auth::check()) {
-            return (Auth::user()->profile->avatar) ? url(Auth::user()->profile->avatar) : url('public/images/avatar.png');
-        }
-    }
-
-    return null;
+    return url('public/images/avatar.png');
 }
 
 //TODO transver in Console

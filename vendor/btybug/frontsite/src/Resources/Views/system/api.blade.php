@@ -24,6 +24,22 @@
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="form-group">
+                                    <label class="col-md-4 control-label" for="name">Name</label>
+                                    <div class="col-md-5">
+                                        <input id="name" name="name" type="text" placeholder=""
+                                               class="form-control input-md">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="provider">Provider</label>
+                                    <div class="col-md-5">
+                                        <input id="provider" name="provider" type="text" placeholder=""
+                                               class="form-control input-md">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-4 control-label" for="client_id">Client ID</label>
                                     <div class="col-md-5">
                                         <input id="client_id" name="client_id" type="text" placeholder=""

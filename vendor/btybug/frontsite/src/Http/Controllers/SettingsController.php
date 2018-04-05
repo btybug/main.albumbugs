@@ -16,7 +16,7 @@ use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Helpers\MainHelper as Helper;
 use Btybug\btybug\Repositories\AdminsettingRepository;
 use Btybug\btybug\Repositories\AdminsettingRepository as Settings;
-use Btybug\FrontSite\Repository\VersionsRepository;
+use Btybug\FrontSite\Repository\CmsConnectionsRepository;
 use Btybug\FrontSite\Services\SettingsService;
 use Btybug\Uploads\Repository\VersionProfilesRepository;
 use File;
@@ -247,12 +247,31 @@ class SettingsController extends Controller
         return view('manage::system.lang');
     }
 
-    public function getApi()
+    public function getApi(CmsConnectionsRepository $repository)
     {
-        $settings=BBgetAllAegistreApi();
-        $html=\View::make('manage::_partials.api_settings',compact('settings'));
-        return view('manage::system.api',compact('html'));
+        $connections = $repository->getAll();
+//        $settings = BBgetAllAegistreApi();
+//        $html = \View::make('manage::_partials.api_settings', compact('settings'));
+//        return view('manage::system.api', compact('html'));
+
+        return view('manage::system.api', compact('connections'));
     }
+
+    public function postApi(Request $request, CmsConnectionsRepository $repository)
+    {
+        $data = $request->except('_token');
+        $v = Validator::make($data, [
+            'name' => 'required|unique:cms_connections,name|min:3',
+            'provider' => 'required',
+            'client_id' => 'required',
+            'client_secret' => 'required',
+        ]);
+        if ($v->fails()) return \Response::json(['error' => true, 'messages' => $v->messages()]);
+        $repository->create($data);
+        return \Response::json(['error' => false]);
+
+    }
+
     public function getApiProducts()
     {
 

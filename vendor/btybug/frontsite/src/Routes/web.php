@@ -145,6 +145,7 @@ Route::group(['prefix' => 'settings'], function () {
     Route::get('/adminemails', 'SettingsController@getAdminemails',true)->name('frontsite_adminemails');
     Route::get('/lang', 'SettingsController@getLang',true)->name('frontsite_lang');
     Route::get('/api-settings', 'SettingsController@getApi',true)->name('frontsite_api_settings');
+    Route::post('/api-settings', 'SettingsController@postApi')->name('frontsite_api_settings_save');
     Route::get('/api-products', 'SettingsController@getApiProducts',true)->name('frontsite_api_products');
     Route::post('/page-settings', 'GeneralController@postSettings')->name('front_pages_general_settings');
     Route::get('/frontend', 'SettingsController@getFrontSettings',true)->name('font_site_settings_frontrnd');

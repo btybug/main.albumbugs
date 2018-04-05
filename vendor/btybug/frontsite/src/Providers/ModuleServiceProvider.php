@@ -45,6 +45,9 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     'title' => 'Api settings',
                     'url' => '/admin/front-site/settings/api-settings',
+                ], [
+                    'title' => 'Api Products',
+                    'url' => '/admin/front-site/settings/api-products',
                 ],
                 [
                     'title' => 'Language',

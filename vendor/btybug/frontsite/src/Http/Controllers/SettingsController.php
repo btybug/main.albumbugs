@@ -253,6 +253,11 @@ class SettingsController extends Controller
         $html=\View::make('manage::_partials.api_settings',compact('settings'));
         return view('manage::system.api',compact('html'));
     }
+    public function getApiProducts()
+    {
+
+        return view('manage::system.api_products');
+    }
 
     public function getFrontSettings(
         VersionProfilesRepository $versionsRepository,

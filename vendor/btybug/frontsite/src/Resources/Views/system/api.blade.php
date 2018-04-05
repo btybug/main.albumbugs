@@ -66,10 +66,11 @@
                     <div class="modal-footer">
                         <button type="button" data-form="create_connection_form" class="btn btn-success create_connection" data-url="{!! route('frontsite_api_settings_save') !!}">Save</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <div class="messages-area"></div>
+
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
     <div class="modal fade" id="myModalEdit" role="dialog">
@@ -172,6 +173,18 @@
     @include('btybug::_partials.delete_modal')
 @stop
 @section('CSS')
+    <style>
+        .messages-area{
+            text-align: left;
+            background: #f1bcbc;
+            font-size: 16px;
+        }
+        .messages-area p{
+            margin: 0;
+            padding: 0;
+
+        }
+    </style>
 @stop
 
 @section('JS')
@@ -188,7 +201,14 @@
                     dataType: 'json',
                     success: function (data) {
                         if (data.error) {
-                            alert(data.messages);
+                            var message='';
+                            $.each(data.messages,function (field,messages) {
+                                $.each(messages,function (k,v) {
+                                    message+='<p>'+v+'</p>';
+                                });
+                            });
+                            $('.messages-area').empty();
+                            $('.messages-area').html(message);
                         } else {
                             location.reload();
                         }

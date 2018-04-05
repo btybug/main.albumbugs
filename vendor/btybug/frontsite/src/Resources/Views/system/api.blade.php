@@ -3,8 +3,8 @@
 
 
 
-    <div class="container">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>Create
+
+        <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>Create
             New Connection
         </button>
 
@@ -55,9 +55,6 @@
 
             </div>
         </div>
-
-    </div>
-
 
 
 

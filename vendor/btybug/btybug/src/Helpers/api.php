@@ -2008,3 +2008,8 @@ function BBgetApiSettings($name){
     $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
     return $settingRepository->getSettings('out_side_api',md5($name));
 }
+
+function getCmsConnectionByID($id){
+    $repository = new \Btybug\FrontSite\Repository\CmsConnectionsRepository();
+    return ($id) ? $repository->find($id) : null;
+}

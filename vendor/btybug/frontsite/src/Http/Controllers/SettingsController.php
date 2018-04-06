@@ -271,6 +271,21 @@ class SettingsController extends Controller
         return \Response::json(['error' => false]);
 
     }
+    public function editConnection(Request $request, CmsConnectionsRepository $repository)
+    {
+        $data = $request->except('_token','id');
+        $id=$request->get('id');
+        $v = Validator::make($data, [
+            'name' => 'required|unique:cms_connections,name,'.$id.'|min:3',
+            'provider' => 'required',
+            'client_id' => 'required',
+            'client_secret' => 'required',
+        ]);
+        if ($v->fails()) return \Response::json(['error' => true, 'messages' => $v->messages()]);
+        $repository->update($id,$data);
+        return \Response::json(['error' => false]);
+
+    }
 
     public function deleteConnection(Request $request, CmsConnectionsRepository $repository)
     {

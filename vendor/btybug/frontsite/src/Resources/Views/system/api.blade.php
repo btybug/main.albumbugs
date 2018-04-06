@@ -92,7 +92,13 @@
                 <td>{!! $connection->provider !!}</td>
                 <td>{!! $connection->client_id !!}</td>
                 <td>{!! $connection->client_secret !!}</td>
-                <td><a href="javascript::void(0)" class="btn btn-info"><i class="fa fa-edit"></i></a></td>
+                <td>
+                    <a href="javascript:void(0)" class="btn btn-info"><i class="fa fa-edit"></i></a>
+                    <a data-href="{!! route('frontsite_api_settings_delete_connection') !!}"
+                       data-key="{!! $connection->id !!}" data-type="{!! $connection->name !!} connection ?"
+                       class="delete-button btn btn-danger"><i
+                                class="fa fa-trash-o f-s-14 "></i></a>
+                </td>
             </tr>
         @endforeach
 
@@ -100,6 +106,7 @@
     </table>
 
     {{--{!! $html !!}--}}
+    @include('btybug::_partials.delete_modal')
 @stop
 @section('CSS')
 @stop

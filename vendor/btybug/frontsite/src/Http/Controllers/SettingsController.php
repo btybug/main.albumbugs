@@ -272,6 +272,15 @@ class SettingsController extends Controller
 
     }
 
+    public function deleteConnection(Request $request, CmsConnectionsRepository $repository)
+    {
+        $id=$request->slug;
+        if($repository->delete($id)){
+            return \Response::json(['success'=>true]);
+        }
+        return \Response::json(['success'=>false,'message'=>'Wrong Request!!!']);
+    }
+
     public function getApiProducts()
     {
 

@@ -91,8 +91,4 @@ $(function () {
             });
         }
     }
-
-    $('body').on('click', '.oauth-login', function () {
-        grand.callwindow();
-    });
 });

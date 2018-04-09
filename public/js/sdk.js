@@ -15,8 +15,8 @@ $(function () {
         result: null,
         tmp: [],
         init: function (client_id, client_secret) {
-            this.client_id = client_id;
             this.client_secret = client_secret;
+            this.client_id = client_id;
             if (this.findGetParameter('code')) {
                 my_window.clone();
             }
@@ -38,8 +38,8 @@ $(function () {
         access_token: {
             url: 'http://albumbugs.bty/oauth/token',
             grant_type: 'client_credentials',
-            client_id: passport.client_id,
-            client_secret: passport.client_secret,
+            client_id: this.client_id,
+            client_secret: this.client_secret,
             scope: '',
         },
         login: {
@@ -55,8 +55,8 @@ $(function () {
         refreshToken: {
             'grant_type': 'refresh_token',
             'refresh_token': 'the-refresh-token',
-            client_id: passport.client_id,
-            client_secret: passport.client_secret,
+            client_id: this.client_id,
+            client_secret: this.client_secret,
             'scope': '',
         },
         get_access_token: {

@@ -34,7 +34,7 @@ var BtyBug = {
     login: {
         url: 'http://forms.albumbugs.com/oauth/authorize',
         data: {
-            'client_id': BtyBug.client_id,
+            'client_id':this.client_id,
             'redirect_uri': 'http://www.albumbugs.com/callback',
             // 'access_token':null,
             'response_type': 'code',

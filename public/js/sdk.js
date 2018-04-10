@@ -26,14 +26,14 @@ var BtyBug = {
     access_token: {
         url: 'http://forms.albumbugs.com/oauth/token',
         grant_type: 'client_credentials',
-        client_id: this.client_id,
+        client_id:  BtyBug.client_id,
         client_secret: this.client_secret,
         scope: '',
     },
     login: {
         url: 'http://forms.albumbugs.com/oauth/authorize',
         data: {
-            'client_id': this.client_id,
+            'client_id': BtyBug.client_id,
             'redirect_uri': 'http://www.albumbugs.com/callback',
             // 'access_token':null,
             'response_type': 'code',

@@ -71,22 +71,19 @@
 <input name="token" type="hidden" value="{{ csrf_token() }}" id="token"/>
 <script>
     $(document).ready(function () {
-
-        window.fbAsyncInit = function () {
-            BtyBug.init(8, '3veI8Gaa3xDKvH3Lb2GPqJ0IkaZdKqOuSsHXtUDd');
+        window.onload = function () {
+            BtyBug.init(8);
         }
-
         $('body').on('click', '.oauth-login', function () {
             BtyBug.callwindow();
         });
     });
-
     (function (d, s, id) {
         var js, bjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=1';
+        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=88';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

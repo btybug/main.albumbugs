@@ -1,6 +1,7 @@
 var BtyBug = {
     my_window: null,
     result: null,
+    client_id:null,
     tmp: [],
     init: function (client_id, client_secret) {
         this.client_secret = client_secret;
@@ -26,7 +27,7 @@ var BtyBug = {
     access_token: {
         url: 'http://forms.albumbugs.com/oauth/token',
         grant_type: 'client_credentials',
-        client_id:  BtyBug.client_id,
+        client_id:  this.client_id,
         client_secret: this.client_secret,
         scope: '',
     },

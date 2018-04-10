@@ -24,14 +24,14 @@ var BtyBug = {
         return this.result;
     },
     access_token: {
-        url: 'http://albumbugs.bty/oauth/token',
+        url: 'http://forms.albumbugs.com/oauth/token',
         grant_type: 'client_credentials',
         client_id: this.client_id,
         client_secret: this.client_secret,
         scope: '',
     },
     login: {
-        url: 'http://albumbugs.bty/oauth/authorize',
+        url: 'http://forms.albumbugs.com/oauth/authorize',
         data: {
             'client_id': this.client_id,
             'redirect_uri': 'http://apiexample.loc/callback.php',

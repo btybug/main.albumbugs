@@ -18,6 +18,7 @@ var BtyBug = {
     callwindow: function () {
         this.login.data.client_id = this.client_id;
         this.my_window = window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", "width=600,height=600,scrollbars=yes");
+        this.my_window.close();
     },
     postSendAjax: function (url, data, success, error) {
         $.ajax({

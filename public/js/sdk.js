@@ -55,6 +55,7 @@ var BtyBug = {
         'code': null,
     },
     callwindow: function () {
+        console.log(this.login.data);
         this.my_window = window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", "width=600,height=600,scrollbars=yes");
     },
     postSendAjax: function (url, data, success, error) {

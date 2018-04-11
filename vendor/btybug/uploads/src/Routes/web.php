@@ -41,27 +41,27 @@ Route::group(['prefix' => 'modules'], function () {
 });
 
 
-Route::group(['prefix' => 'apps'], function ($router) {
-    Route::get('/', 'AppsController@getIndex', true)->name('app_plugins');
-    Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
-
-    Route::group(['prefix' => 'core-apps'], function () {
-        Route::get('/', 'AppsController@getCoreApps', true)->name('core_apps');
-        Route::post('/create-product', 'AppsController@postCreateProduct', true)->name('apps_create_product');
-        Route::post('/delete', 'AppsController@delete', true)->name('app_product_delete');
-        Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
-        Route::group(['prefix' => 'edit'], function () {
-            Route::get('/', 'AppsController@getEditCore', true);
-            Route::get('/{param}', 'AppsController@getEditCore', true)->name('app_edit_product');
-            Route::post('/{param}', 'AppsController@postEditCore', true)->name('app_edit_product_post');
-        });
-    });
-
-    Route::group(['prefix' => 'extra-apps'], function () {
-        Route::get('/', 'AppsController@getExtra', true)->name('app_extra');
-        Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
-    });
-});
+//Route::group(['prefix' => 'apps'], function ($router) {
+//    Route::get('/', 'AppsController@getIndex', true)->name('app_plugins');
+//    Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
+//
+//    Route::group(['prefix' => 'core-apps'], function () {
+//        Route::get('/', 'AppsController@getCoreApps', true)->name('core_apps');
+//        Route::post('/create-product', 'AppsController@postCreateProduct', true)->name('apps_create_product');
+//        Route::post('/delete', 'AppsController@delete', true)->name('app_product_delete');
+//        Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
+//        Route::group(['prefix' => 'edit'], function () {
+//            Route::get('/', 'AppsController@getEditCore', true);
+//            Route::get('/{param}', 'AppsController@getEditCore', true)->name('app_edit_product');
+//            Route::post('/{param}', 'AppsController@postEditCore', true)->name('app_edit_product_post');
+//        });
+//    });
+//
+//    Route::group(['prefix' => 'extra-apps'], function () {
+//        Route::get('/', 'AppsController@getExtra', true)->name('app_extra');
+//        Route::get('/{repository}/{package}/explore', 'AppsController@getExplore', true);
+//    });
+//});
 Route::group(['prefix' => 'gears'], function () {
     Route::get('/', function () {
         return view("uploads::gears.units.list");

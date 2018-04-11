@@ -134,22 +134,22 @@ class ModuleServiceProvider extends ServiceProvider
                         ]
                     ]
                 ],
-                [
-                    "title" => "Apps",
-                    "custom-link" => "/admin/uploads/apps",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
-                        [
-                            "title" => "Core apps",
-                            "icon" => "fa fa-angle-right",
-                            'custom-link' => '/admin/uploads/apps/core-apps'
-                        ], [
-                            "title" => "Extra apps",
-                            "icon" => "fa fa-angle-right",
-                            'custom-link' => '/admin/uploads/apps/extra-apps'
-                        ]
-                    ]
-                ],
+//                [
+//                    "title" => "Apps",
+//                    "custom-link" => "/admin/uploads/apps",
+//                    "icon" => "fa fa-angle-right",
+//                    'children' => [
+//                        [
+//                            "title" => "Core apps",
+//                            "icon" => "fa fa-angle-right",
+//                            'custom-link' => '/admin/uploads/apps/core-apps'
+//                        ], [
+//                            "title" => "Extra apps",
+//                            "icon" => "fa fa-angle-right",
+//                            'custom-link' => '/admin/uploads/apps/extra-apps'
+//                        ]
+//                    ]
+//                ],
                 [
                     "title" => "Layouts",
                     "custom-link" => "/admin/uploads/layouts",

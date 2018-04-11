@@ -6,7 +6,6 @@
                 <tr>
                     <th>#</th>
                     <th>Title</th>
-                    <th>User</th>
                     <th>Studio Type</th>
                     <th>Css Data</th>
                     <th>Html Data</th>
@@ -19,7 +18,6 @@
                 <tr>
                     <td>1</td>
                     <td>Nice button</td>
-                    <td>Abokamal</td>
                     <td>Button Studio</td>
                     <td>.nice-button{nice:100%}</td>
                     <td>{!! "<button class='nice-button'></button>" !!}</td>

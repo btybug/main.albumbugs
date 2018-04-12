@@ -52,7 +52,7 @@
     @yield('content')
     @include('modal')
 </div>
-{!! BBfb() !!}
+{!! BBRenderUnits('fblogin.default') !!}
 <button class="customBtn_loginBtn_facebook oauth-login">
     Login with icon
 </button>

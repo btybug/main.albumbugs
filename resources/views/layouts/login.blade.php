@@ -74,7 +74,7 @@
 <script>
     var win =  window;
     function openWindow(){
-        win.open('http://main.albumbugs.loc/login?a=qaq', "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
+        win.open('{!! url('login?a=qaq') !!}', "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
            var url_string = this.document.location.href;
             var url = new URL(url_string);
             var c = url.searchParams.get('a');

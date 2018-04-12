@@ -52,6 +52,7 @@
     @yield('content')
     @include('modal')
 </div>
+{!! BBfb() !!}
 <button class="customBtn_loginBtn_facebook oauth-login">
     Login with icon
 </button>
@@ -72,7 +73,7 @@
 <script>
     $(document).ready(function () {
         window.onload = function () {
-            BtyBug.init(8);
+            BtyBug.init(9);
         }
         $('body').on('click', '.oauth-login', function () {
             BtyBug.callwindow();
@@ -83,7 +84,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=88';
+        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=5.7';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

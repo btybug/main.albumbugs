@@ -6,6 +6,7 @@ namespace App\Http;
 use Btybug\btybug\Middleware\FormSettingsMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Btybug\User\Http\Middleware\UserHasPermission;
+use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
 class Kernel extends HttpKernel
 {
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
         'system' =>\Btybug\btybug\Middleware\SystemSettings::class,
         'frontPermissions'=> \Btybug\btybug\Middleware\FrontendPermissions::class,
         'cors' => \App\Http\Middleware\Cors::class,
-        'form' =>   FormSettingsMiddleware::class
+        'form' =>   FormSettingsMiddleware::class,
+        'client' => CheckClientCredentials::class,
     ];
 }

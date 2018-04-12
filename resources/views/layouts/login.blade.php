@@ -75,10 +75,9 @@
     var win =  window;
     function openWindow(){
         win.open('http://main.albumbugs.loc/login?a=qaq', "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
-           var url_string =win.document.URL
-            var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5"; //window.location.href
+           var url_string = this.document.location.href;
             var url = new URL(url_string);
-            var c = url.searchParams.get("c");
+            var c = url.searchParams.get('a');
             console.log(c);
         };
     }
@@ -100,7 +99,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=44';
+        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=474';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

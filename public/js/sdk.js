@@ -14,7 +14,8 @@ var BtyBug = {
             'scope': '*'
         }
     },
-    callwindow: function () {
+    callwindow: function (callback) {
+        console.log(callback(123));
         this.login.data.client_id = this.client_id;
         this.my_window = window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", "width=600,height=600,scrollbars=yes");
     },

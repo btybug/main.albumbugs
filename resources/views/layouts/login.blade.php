@@ -69,14 +69,30 @@
 {{--});--}}
 {{--</script>--}}
 {{--@endif--}}
+<button id="test" onclick="openWindow()">Test</button>
 <input name="token" type="hidden" value="{{ csrf_token() }}" id="token"/>
 <script>
+    var win =  window;
+    function openWindow(){
+        win.open('http://main.albumbugs.loc/login?a=qaq', "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
+           var url_string =win.document.URL
+            var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5"; //window.location.href
+            var url = new URL(url_string);
+            var c = url.searchParams.get("c");
+            console.log(c);
+        };
+    }
     $(document).ready(function () {
+
+
+
         window.onload = function () {
             BtyBug.init(9);
         }
         $('body').on('click', '.oauth-login', function () {
-            BtyBug.callwindow();
+            BtyBug.callwindow(function (response) {
+                alert(response)
+            });
         });
     });
     (function (d, s, id) {
@@ -84,7 +100,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=5.7';
+        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=44';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

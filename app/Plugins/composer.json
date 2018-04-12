@@ -8,6 +8,8 @@
     "gloudemans/shoppingcart": "2.4.0",
     "cartalyst/stripe-laravel": "7.0.*",
     "btybug.hook/newstudio": "dev-master",
-    "btybug.hook/api": "dev-master"
+    "btybug.hook/api": "dev-master",
+    "btybug.hook/cmslogin": "dev-master",
+    "btybug.hook/apiuser": "dev-master"
   }
 }

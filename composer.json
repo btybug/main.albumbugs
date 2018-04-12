@@ -17,6 +17,7 @@
         "chumper/zipper": "1.0.x",
         "doctrine/dbal": "2.5.x",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.3@dev",
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",

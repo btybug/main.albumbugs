@@ -99,7 +99,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=474';
+        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=5545';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

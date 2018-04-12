@@ -9,7 +9,7 @@ var BtyBug = {
         url: 'http://forms.albumbugs.com/oauth/authorize',
         data: {
             'client_id': null,
-            'redirect_uri': 'http://www.albumbugs.com/callback',
+            'redirect_uri': 'http://main.albumbugs.loc/cms-callback',
             'response_type': 'code',
             'scope': '*'
         }

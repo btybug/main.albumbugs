@@ -86,7 +86,7 @@
 
 
         window.onload = function () {
-            BtyBug.init(9);
+            BtyBug.init(11);
         }
         $('body').on('click', '.oauth-login', function () {
             BtyBug.callwindow(function (response) {
@@ -99,7 +99,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=5545';
+        js.src = 'http://main.albumbugs.loc/public/js/sdk.js?v=46';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

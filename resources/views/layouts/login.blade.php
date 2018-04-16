@@ -56,6 +56,7 @@
 <button class="customBtn_loginBtn_facebook oauth-login">
     Login with icon
 </button>
+<a href="javascript:openWindow();" id="qaq">Click to open popup</a>
 <script src="{{ url("public/js/jquery-3.2.1.min.js") }}" type="text/javascript"></script>
 <script src="{{ url("public/js/jquery-ui/jquery-ui.min.js") }}" type="text/javascript"></script>
 <script src="{{ url("public/css/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
@@ -74,7 +75,7 @@
 <script>
     var win =  window;
     function openWindow(){
-        win.open('{!! url('login?a=qaq') !!}', "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
+        win.open('{!! url('login') !!}', "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
            var url_string = this.document.location.href;
             var url = new URL(url_string);
             var c = url.searchParams.get('a');
@@ -86,11 +87,11 @@
 
 
         window.onload = function () {
-            BtyBug.init(11);
+            BtyBug.init(9);
         }
         $('body').on('click', '.oauth-login', function () {
             BtyBug.callwindow(function (response) {
-                alert(response)
+                window.location.href='/bty-api/cms-callback?code='+response;
             });
         });
     });
@@ -99,7 +100,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = 'http://main.albumbugs.loc/public/js/sdk.js?v=46';
+        js.src = 'http://forms.albumbugs.com/public/js/sdk.js?v=293';
         bjs.parentNode.insertBefore(js, bjs);
     })(document, 'script', 'BtyBug-jssdk');
 

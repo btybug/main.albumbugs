@@ -18,11 +18,14 @@ var BtyBug = {
         // console.log(callback(123));
         this.login.data.client_id = this.client_id;
         var strWindowFeatures = "location=yes,resizable=yes,scrollbars=yes,status=yes";
-        this.my_window = window;
-        this.my_window.cms = {
-            callback: callback
+       var my_window = window;
+        my_window.cms = {
+            callback: callback,
+            done:function () {
+                my_window.close();
+            }
         };
-        this.my_window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", strWindowFeatures);
+        my_window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", strWindowFeatures);
         // this.my_window.proto
     },
     postSendAjax: function (url, data, success, error) {

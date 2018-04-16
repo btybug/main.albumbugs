@@ -6,10 +6,10 @@ var BtyBug = {
         this.client_id = client_id;
     },
     login: {
-        url: 'http://main.albumbugs.loc/bty-api/authorize',
+        url: 'http://forms.albumbugs.com/bty-api/authorize',
         data: {
             'client_id': null,
-            'redirect_uri': 'http://main.albumbugs.loc/bty-login/cms-callback',
+            'redirect_uri': null,
             'response_type': 'code',
             'scope': '*'
         }
@@ -17,12 +17,13 @@ var BtyBug = {
     callwindow: function (callback) {
         // console.log(callback(123));
         this.login.data.client_id = this.client_id;
-        this.my_window = window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", "width=600,height=600,scrollbars=yes").onbeforeunload =function (ev) {
-            var url_string = this.location.href;
-            var url = new URL(url_string);
-            var c = url.searchParams.get('code');
-            callback(c);
+        var strWindowFeatures = "location=yes,resizable=yes,scrollbars=yes,status=yes";
+        this.my_window = window;
+        this.my_window.cms = {
+            callback: callback
         };
+        this.my_window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", strWindowFeatures);
+        // this.my_window.proto
     },
     postSendAjax: function (url, data, success, error) {
         $.ajax({

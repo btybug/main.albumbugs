@@ -25,7 +25,7 @@ var BtyBug = {
                 my_window.close();
             }
         };
-        my_window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow", strWindowFeatures);
+        my_window.open(this.login.url + '?' + $.param(this.login.data), "popupWindow");
         // this.my_window.proto
     },
     postSendAjax: function (url, data, success, error) {

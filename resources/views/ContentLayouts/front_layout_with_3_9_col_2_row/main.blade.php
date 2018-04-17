@@ -1,20 +1,67 @@
 <div class="container-fluid">
     <div class="row div-flex">
         <div class="col-md-3 col-sm-3 col-xs-12">
-            <div class="left-bar {{isset($settings['left_bar_style']) ? $settings['left_bar_style'] : ''}}">
-                @if(has_setting($settings,"left_bar",false))
-                    {!! BBRenderUnits($settings['left_bar'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-                @endif
+            <div class="left-bar ">
+                @switch(issetReturn($settings,'ls_content_type'))
+                    @case('unit')
+                    @if(has_setting($settings,'ls_unit'))
+                        {!! BBRenderUnits($settings['ls_unit'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                    @endif
+                    @break
+
+                    @case('hook')
+                    @if(has_setting($settings,'hooks') && is_array($settings['hooks']['ls_hook']))
+                        @foreach($settings['hooks']['ls_hook'] as $unit)
+                            {!! BBRenderUnits($unit,isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                        @endforeach
+                    @endif
+                    @break
+
+                    @default
+                    <span>Something went wrong, please try again</span>
+                @endswitch
             </div>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
-            <div class="top-bar {{isset($settings['top_content_style']) ? $settings['top_content_style'] : ''}}">
-                @if(has_setting($settings,"top_content",false))
-                    {!! BBRenderUnits($settings['top_content'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-                @endif
+            <div class="top-bar">
+                @switch(issetReturn($settings,'tr_content_type'))
+                    @case('unit')
+                    @if(has_setting($settings,'tr_unit'))
+                        {!! BBRenderUnits($settings['tr_unit'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                    @endif
+                    @break
+
+                    @case('hook')
+                    @if(has_setting($settings,'hooks') && is_array($settings['hooks']['tr_hook']))
+                        @foreach($settings['hooks']['tr_hook'] as $unit)
+                            {!! BBRenderUnits($unit,isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                        @endforeach
+                    @endif
+                    @break
+
+                    @default
+                    <span>Something went wrong, please try again</span>
+                @endswitch
             </div>
-            <div class="main-cont {{isset($settings['main_content_style']) ? $settings['main_content_style'] : ''}}">
-                {!! main_content() !!}
+            <div class="main-cont ">
+                @switch(issetReturn($settings,'main_content_type'))
+                    @case('unit')
+                    @if(has_setting($settings,'main_unit'))
+                        {!! BBRenderUnits($settings['main_unit'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                    @endif
+                    @break
+
+                    @case('hook')
+                    @if(has_setting($settings,'hooks') && is_array($settings['hooks']['main_hook']))
+                        @foreach($settings['hooks']['main_hook'] as $unit)
+                            {!! BBRenderUnits($unit,isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
+                        @endforeach
+                    @endif
+                    @break
+
+                    @default
+                    <span>Something went wrong, please try again</span>
+                @endswitch
             </div>
         </div>
     </div>

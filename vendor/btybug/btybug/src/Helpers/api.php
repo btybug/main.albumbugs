@@ -606,9 +606,9 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             if (isset($settings['edit_url'])) {
                 $output .= '<a href="' . url($settings['edit_url']) . '" class="btn"><i class="fa fa-cog fa-spin pull-right"></i></a>';
             } else {
-                if($item->type == 'a_special'){
+                if ($item->type == 'a_special') {
                     $output .= '<a href="' . url('/admin/front-site/structure/front-pages/special-settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';
-                }else{
+                } else {
                     $output .= '<a href="' . url('/admin/front-site/structure/front-pages/settings', $item->id) . '" class="pull-right"><i class="fa fa-pencil"></i></a>';
                 }
             }
@@ -668,13 +668,13 @@ function BBGetTableColumn($table = null)
     return $data;
 }
 
-function BBGetTableColumnData($table = null,$column = null)
+function BBGetTableColumnData($table = null, $column = null)
 {
     $data = [];
     if ($table && \Schema::hasTable($table)) {
-        $colums = \DB::select('SELECT '.$column . ' FROM ' . $table);
+        $colums = \DB::select('SELECT ' . $column . ' FROM ' . $table);
         if (count($colums)) {
-            foreach ($colums as $v){
+            foreach ($colums as $v) {
                 $data[$v->$column] = $v->$column;
             }
         }
@@ -766,7 +766,7 @@ function BBcustomize($type, $key, $tag, $text, $structure, $array = [])
     return $html;
 }
 
-function BBbutton2($type, $key, $tag, $text, $array = [],$getData=[])
+function BBbutton2($type, $key, $tag, $text, $array = [], $getData = [])
 {
     $atributes = ' ';
     $value = '';
@@ -799,7 +799,14 @@ function BBbutton2($type, $key, $tag, $text, $array = [],$getData=[])
         $array = 'data-array="true"';
     }
     $data_key = str_replace('[]', '', $key);
-    $html = View::make('btybug::bbbutton', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName','getData'))->render();
+    $html = View::make('btybug::bbbutton', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName', 'getData'))->render();
+    return $html;
+}
+
+function BBstyles()
+{
+
+    $html = View::make('btybug::bbstyles')->render();
     return $html;
 }
 
@@ -1177,9 +1184,9 @@ function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $
             if ($module && $module != $item->module_id) return false;
             $children = $item->childs;
 
-            if($parent){
+            if ($parent) {
                 $output .= ' <ol class="pagelisting">';
-            }else{
+            } else {
                 $output .= ' <ol class="pagelisting" style="display: none;">';
             }
             $output .= '<li data-id="' . $item->id . '">';
@@ -1968,9 +1975,9 @@ function getDinamicStyleDemo($filename)
     return $styles;
 }
 
-function getDinamicStyleForCssFileDemo($filename,$table_name)
+function getDinamicStyleForCssFileDemo($filename, $table_name)
 {
-    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename,$table_name);
+    $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename, $table_name);
     return $styles;
 }
 
@@ -1978,42 +1985,51 @@ function useDinamicStyle($filename)
 {
     return '<link href="' . asset('public/dinamiccss/' . $filename . '.css') . '" rel="stylesheet">';
 }
-function useDinamicStyleByPath($path,$main)
+
+function useDinamicStyleByPath($path, $main)
 {
-    $arr = explode(DS,$path);
+    $arr = explode(DS, $path);
     $filename = $arr[count($arr) - 1];
     $foldername = $arr[count($arr) - 2];
-    return '<link href="' .asset($main.DS.$foldername.DS.$filename.'?v='.rand(111,999)). '" rel="stylesheet">';
+    return '<link href="' . asset($main . DS . $foldername . DS . $filename . '?v=' . rand(111, 999)) . '" rel="stylesheet">';
 }
-function BBregistreApi($name,$edit_url,$data=[])
+
+function BBregistreApi($name, $edit_url, $data = [])
 {
-    $data['edit_url']=$edit_url;
-    $data['name']=$name;
+    $data['edit_url'] = $edit_url;
+    $data['name'] = $name;
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
     return $setting->createOrUpdateToJson($data, 'out_side_api', md5($name));
 }
-function BBgetAllAegistreApi(){
+
+function BBgetAllAegistreApi()
+{
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
     return $setting->getAllSettingsBySection('out_side_api');
 }
-function BBeditApisettings($name,array $data){
+
+function BBeditApisettings($name, array $data)
+{
     $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
-    $setting=$settingRepository->getSettings('out_side_api',md5($name));
-    if($setting){
-        $settingData=json_decode($setting->val,true);
-        $data['name']=$settingData['name'];
-        $data['edit_url']=$settingData['edit_url'];
-        $setting->val=json_encode($data,true);
+    $setting = $settingRepository->getSettings('out_side_api', md5($name));
+    if ($setting) {
+        $settingData = json_decode($setting->val, true);
+        $data['name'] = $settingData['name'];
+        $data['edit_url'] = $settingData['edit_url'];
+        $setting->val = json_encode($data, true);
         return $setting->save();
     }
     return false;
 }
-function BBgetApiSettings($name){
+
+function BBgetApiSettings($name)
+{
     $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
-    return $settingRepository->getSettings('out_side_api',md5($name));
+    return $settingRepository->getSettings('out_side_api', md5($name));
 }
 
-function getCmsConnectionByID($id){
+function getCmsConnectionByID($id)
+{
     $repository = new \Btybug\FrontSite\Repository\CmsConnectionsRepository();
     return ($id) ? $repository->find($id) : null;
 }

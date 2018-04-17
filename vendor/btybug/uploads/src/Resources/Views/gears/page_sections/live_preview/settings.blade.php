@@ -37,6 +37,7 @@
     </div>
 
     @include('resources::assests.magicModal')
+    @include('resources::assests.stylesModal')
 
 @stop
 @section('CSS')

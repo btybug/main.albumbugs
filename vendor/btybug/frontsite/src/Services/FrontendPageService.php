@@ -186,6 +186,7 @@ class FrontendPageService extends GeneralService
         $this->frontPagesRepository->update($page->id, [
             'title' => $request->get('title'),
             'url' => $request->get('url'),
+            'status' => $request->get('status'),
             'page_access' => $request->get('page_access'),
             'memberships' => $request->get('memberships',null),
             'special_access' => $request->get('special_access',null)

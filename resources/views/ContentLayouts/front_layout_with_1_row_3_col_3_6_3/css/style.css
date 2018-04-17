@@ -1,0 +1,21 @@
+.left-bar, .main-cont, .right-bar{
+    border: 1px solid #000;
+}
+.left-bar ,.right-bar{
+    height: 100%;
+}
+.top-bar{
+    min-height: 100px;
+    margin-bottom: 20px;
+}
+.main-cont {
+    min-height: 680px;
+}
+.div-flex{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+}

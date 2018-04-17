@@ -1,5 +1,6 @@
 <?php
 $container_styles = getDinamicStyle('containers');
+$container_styles='<option value="0">Select Class</option>'.$container_styles;
 ?>
 <div class="col-md-12">
     <div class="bty-panel-collapse">

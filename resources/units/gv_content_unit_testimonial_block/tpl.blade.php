@@ -1,5 +1,4 @@
 <section class="bty-testimonials">
-    <div class="container">
         <div class="row">
             <h2>Testimonials</h2>
             <div class="col-md-2 col-md-offset-5"></div>
@@ -45,7 +44,6 @@
                 @endif
             </div>
         </div>
-    </div>
 </section>
 <style>
     .custom_margin_top_8{

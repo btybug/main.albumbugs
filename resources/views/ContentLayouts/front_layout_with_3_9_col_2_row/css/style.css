@@ -1,5 +1,6 @@
 .left-bar, .top-bar, .main-cont{
     border: 1px solid #000;
+    overflow: hidden;
 }
 .left-bar{
 
@@ -19,4 +20,8 @@
     display: -webkit-flex;
     display: flex;
     flex-wrap: wrap;
+}
+.row-no-gutter>[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
 }

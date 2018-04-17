@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row div-flex">
-        <div class="col-md-3 col-sm-3 col-xs-12">
+    <div class="row div-flex {{isset($settings['main_page_style']) ? $settings['main_page_style'] : ''}}">
+        <div class="col-md-3 col-sm-3 col-xs-12 ">
             <div class="left-bar ">
                 @switch(issetReturn($settings,'ls_content_type'))
                     @case('unit')
@@ -22,7 +22,7 @@
                 @endswitch
             </div>
         </div>
-        <div class="col-md-9 col-sm-9 col-xs-12">
+        <div class="col-md-9 col-sm-9 col-xs-12 {{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
             <div class="top-bar">
                 @switch(issetReturn($settings,'tr_content_type'))
                     @case('unit')

@@ -4,9 +4,9 @@
         if($value){
             switch ($type){
                 case 'layouts':
-                $obj=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
+                $obj=   \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
                 if($obj){
-                    $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
+                    $variation= \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
                 }
                 break;
                 case 'unit':

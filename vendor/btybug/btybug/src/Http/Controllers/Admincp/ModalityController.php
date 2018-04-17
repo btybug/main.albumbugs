@@ -200,7 +200,7 @@ class ModalityController extends Controller
     {
         $slug = $request->get('value');
         $key = $request->get('key');
-        $variationName = $slug . '.' . str_slug($key);
+        $variationName = $slug . '.' . $key;
 
         $layout = ContentLayouts::find($slug);
         if (! $layout) return \Response::json(['error' => true]);
@@ -208,7 +208,7 @@ class ModalityController extends Controller
         $variation = $layout->variations()->find($variationName);
 
         if (!$variation) {
-            $layout->variations()->createVariation(['title' => $key], str_slug($key), false);
+            $layout->variations()->createVariation(['title' => $key], $key, false);
             $variation = $layout->variations()->find($variationName);
         }
 

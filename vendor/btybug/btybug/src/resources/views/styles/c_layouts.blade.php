@@ -30,11 +30,10 @@
                                     </div>
                                     <div>
                                         <p>
-                                            <a
-                                                    data-key="{!! $data['structure'] !!}"
+                                            <a data-key="{!! $data['structure'] !!}"
                                                     data-action="layouts"
                                                     class="btn text-center customize-item custom_color_white"
-                                                    data-value="{!! $item->slug !!}">
+                                                    data-value="{!! $item->slug !!}" >
                                                 <input type="hidden" data-action="layouts"
                                                        data-value="{!! $item->slug !!}"/>
                                                 {!! $item->title?$item->title:"no title" !!}
@@ -49,15 +48,15 @@
                     <li class="col-md-3 col-sm-3 col-xs-12">
                         <figure>
                             <a class="btn text-center item item-unit" data-key="{!! $key !!}"
-                               data-value="{!! $item->slug !!}">
-                                data-action="layouts"
+                               data-action="layouts" data-value="{!! $item->slug !!}">
+
                                 <input type="hidden" data-action="layouts" data-value="{!! $item->slug !!}"/>
                                 <img src="{!! url('public/images/default.jpg') !!}">
                             </a>
                             <p>
                                 <a data-key="{!! $key !!}"
                                    class="btn text-center item item-unit custom_color_white"
-                                   data-value="{!! $item->slug !!}">
+                                   data-action="layouts" data-value="{!! $item->slug !!}">
                                     <input type="hidden" data-action="layouts" data-value="{!! $item->slug !!}"/>
                                     {!! $item->title?$item->title:"no title" !!}
                                 </a>

@@ -236,6 +236,53 @@ $container_styles = getDinamicStyle('containers');
             </div>
         </div>
     </div>
+
+    <div class="bty-panel-collapse">
+        <div>
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#left_bar"
+               aria-expanded="true">
+                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <span class="title">General</span>
+            </a>
+        </div>
+        <div  class="collapse in" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Main page style</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-addon">Change</div>
+                                <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control" title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!" data-original-title="info">
+                                <div class="input-group-addon">
+                                    <button type="button" class="BBbuttons" data-type="frontend">Change</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Right area style</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-addon">Change</div>
+                                <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control" title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!" data-original-title="info">
+                                <div class="input-group-addon">
+                                    <button type="button" class="BBbuttons" data-type="frontend">Change</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 {!!BBstyle($model->path.DS.'css/settings.css') !!}
 <script>

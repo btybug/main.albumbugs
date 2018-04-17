@@ -19,7 +19,7 @@ $container_styles = getDinamicStyle('containers');
                             <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            {!! Form::select('content_type',[null=>'Select Content Type',
+                            {!! Form::select('ls_content_type',[null=>'Select Content Type',
                             'unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content']
                             ,null,['class'=>'form-control content_type','data-value'=>'left_side_bar']) !!}
                         </div>
@@ -38,7 +38,7 @@ $container_styles = getDinamicStyle('containers');
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit','content_type[selected]',"sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','ls_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ $container_styles = getDinamicStyle('containers');
                                             <label for="">Select {!! $placeholder['title'] !!}</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! BBbutton2('unit','content_type[hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                            {!! BBbutton2('unit','hooks[ls_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@ $container_styles = getDinamicStyle('containers');
                             <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            {!! Form::select('content_type',
+                            {!! Form::select('tr_content_type',
                             [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
                             null,['class'=>'form-control content_type','data-value'=>'top_right']) !!}
                         </div>
@@ -110,7 +110,7 @@ $container_styles = getDinamicStyle('containers');
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit','content_type[selected]',"sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','tr_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@ $container_styles = getDinamicStyle('containers');
                                             <label for="">Select {!! $placeholder['title'] !!}</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! BBbutton2('unit','content_type[hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                            {!! BBbutton2('unit','hooks[tr_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@ $container_styles = getDinamicStyle('containers');
                             <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            {!! Form::select('content_type',
+                            {!! Form::select('main_content_type',
                             [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
                             null,['class'=>'form-control content_type','data-value'=>'main_right']) !!}
                         </div>
@@ -173,7 +173,7 @@ $container_styles = getDinamicStyle('containers');
             </div>
         </div>
         <div id="main_content_select_main_right_unit"
-             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'main_unit') !=='unit') hide   @endif"
              data-type="unit" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -182,7 +182,7 @@ $container_styles = getDinamicStyle('containers');
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit','content_type[selected]',"sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','main_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                         </div>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ $container_styles = getDinamicStyle('containers');
                                             <label for="">Select {!! $placeholder['title'] !!}</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! BBbutton2('unit','content_type[hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                            {!! BBbutton2('unit','hooks[main_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -227,7 +227,6 @@ $container_styles = getDinamicStyle('containers');
             var panel=$(this).data('value');
             $('.main_content_type_'+panel).addClass('hide');
             var id='#main_content_select_'+panel+'_' + $(this).val();
-            console.log(id);
             $(id).removeClass('hide');
         });
     });

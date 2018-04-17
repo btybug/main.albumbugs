@@ -1,5 +1,5 @@
-@extends('btybug::layouts.mTabs',['index'=>'upload_layouts'])
-@section('tab')
+@extends('btybug::layouts.admin')
+@section('content')
     <div class="row">
         @if(Session::has('success'))
             <div class="alert alert-success">

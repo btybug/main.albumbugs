@@ -89,14 +89,9 @@ Route::group(['prefix' => 'gears'], function () {
 
 
 Route::group(['prefix' => 'layouts'], function () {
-    Route::get('/', function () {
-        return view("uploads::gears.page_sections.list");
-    }, true)->name('uploads_layout_index');
-    Route::get('/back-end', 'PageSectionsController@getIndex', true)->name('uploads_layouts_back_end');
-    Route::post('/back-end', 'PageSectionsController@getIndexFromPost')->name('uploads_layouts_back_end_from_post');
-    Route::get('/front-end', 'PageSectionsController@getFrontend', true)->name('uploads_layouts_front_end');
+    Route::get('/', 'PageSectionsController@getIndex', true)->name('uploads_layouts_back_end');
+    Route::post('/', 'PageSectionsController@getIndexFromPost')->name('uploads_layouts_back_end_from_post');
     Route::get('/remove-layout', 'PageSectionsController@removeLayout', true)->name('remove-layout');
-    Route::post('/front-end', 'PageSectionsController@getFrontendFromPost')->name('uploads_layouts_front_end_from_post');
     Route::get('/settings/{slug}', 'PageSectionsController@getSettings', true)->name('uploads_layouts_settings');
     Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout', true)->name('create_variation_for_layout');
     Route::get('/variations/{slug}', 'PageSectionsController@getVariations', true)->name('uploads_layouts_variations');

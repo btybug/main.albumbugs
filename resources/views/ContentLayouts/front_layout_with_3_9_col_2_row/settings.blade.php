@@ -1,5 +1,6 @@
 <?php
-$container_styles = getDinamicStyle('containers')
+$container_styles = getDinamicStyle('containers');
+
 ?>
 <div class="col-md-12">
     <div class="bty-panel-collapse">
@@ -10,7 +11,7 @@ $container_styles = getDinamicStyle('containers')
                 <span class="title" content>Left Side Bar</span>
             </a>
         </div>
-        <div id="main_content" class="collapse in" aria-expanded="true" style="">
+        <div  class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -18,14 +19,18 @@ $container_styles = getDinamicStyle('containers')
                             <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            {!! Form::select('content_type',[null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],null,['class'=>'form-control','id'=>'content_type']) !!}
+                            {!! Form::select('content_type',[null=>'Select Content Type',
+                            'unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content']
+                            ,null,['class'=>'form-control content_type','data-value'=>'left_side_bar']) !!}
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div id="main_content_select_unit" class=" main_content_type collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif" data-type="unit" aria-expanded="true" style="">
+        <div id="main_content_select_left_side_bar_unit"
+             class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             data-type="unit" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -33,14 +38,16 @@ $container_styles = getDinamicStyle('containers')
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('content_type[selected]',"left_side_bar","sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','content_type[selected]',"sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div id="main_content_select_hook" class=" main_content_type collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif" data-type="hook" aria-expanded="true" style="">
+        <div id="main_content_select_left_side_bar_hook"
+             class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             data-type="hook" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -49,6 +56,18 @@ $container_styles = getDinamicStyle('containers')
                         </div>
                         <div class="col-md-8">
 
+                            @foreach($model->placeholders as $key=>$placeholder)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label for="">Select {!! $placeholder['title'] !!}</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            {!! BBbutton2('unit','content_type[hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -64,27 +83,63 @@ $container_styles = getDinamicStyle('containers')
                 <span class="title">Top Right</span>
             </a>
         </div>
-        <div id="top_content" class="collapse in" aria-expanded="true" style="">
+        <div  class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label for="">Select menu</label>
+                            <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit',"top_content","slider","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! Form::select('content_type',
+                            [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
+                            null,['class'=>'form-control content_type','data-value'=>'top_right']) !!}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+
+            </div>
+        </div>
+        <div id="main_content_select_top_right_unit"
+             class=" main_content_type_top_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             data-type="unit" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label for="">Container style</label>
+                            <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            <select name="top_content_style" id="" class="form-control">
-                                {!! $container_styles !!}
-                            </select>
+                            {!! BBbutton2('unit','content_type[selected]',"sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="main_content_select_top_right_hook"
+             class=" main_content_type_top_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             data-type="hook" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select Hook</label>
+                        </div>
+                        <div class="col-md-8">
+
+                            @foreach($model->placeholders as $key=>$placeholder)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label for="">Select {!! $placeholder['title'] !!}</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            {!! BBbutton2('unit','content_type[hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -100,27 +155,63 @@ $container_styles = getDinamicStyle('containers')
                 <span class="title">Main Right</span>
             </a>
         </div>
-        <div id="left_bar" class="collapse in" aria-expanded="true" style="">
+        <div  class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label for="">Select unit</label>
+                            <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit',"left_bar","frontend_sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>null]) !!}
+                            {!! Form::select('content_type',
+                            [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
+                            null,['class'=>'form-control content_type','data-value'=>'main_right']) !!}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+
+            </div>
+        </div>
+        <div id="main_content_select_main_right_unit"
+             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             data-type="unit" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label for="">Container style</label>
+                            <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            <select name="left_bar_style" id="" class="form-control">
-                                {!! $container_styles !!}
-                            </select>
+                            {!! BBbutton2('unit','content_type[selected]',"sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="main_content_select_main_right_hook"
+             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             data-type="hook" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select Hook</label>
+                        </div>
+                        <div class="col-md-8">
+
+                            @foreach($model->placeholders as $key=>$placeholder)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label for="">Select {!! $placeholder['title'] !!}</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            {!! BBbutton2('unit','content_type[hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -132,10 +223,12 @@ $container_styles = getDinamicStyle('containers')
 {!!BBstyle($model->path.DS.'css/settings.css') !!}
 <script>
     $(function () {
-        $('#content_type').on('change',function () {
-            $('.main_content_type').addClass('hide');
-            $('#main_content_select_'+$(this).val()).removeClass('hide');
-            console.log($(this).val())
+        $('.content_type').on('change', function () {
+            var panel=$(this).data('value');
+            $('.main_content_type_'+panel).addClass('hide');
+            var id='#main_content_select_'+panel+'_' + $(this).val();
+            console.log(id);
+            $(id).removeClass('hide');
         });
     });
 </script>

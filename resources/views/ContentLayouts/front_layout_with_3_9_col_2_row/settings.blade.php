@@ -92,7 +92,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                                             <label for="">Select {!! $placeholder['title'] !!}</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! BBbutton2('unit','hooks[ls_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                            {!! BBbutton2('hook','hooks[ls_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                                             <label for="">Select {!! $placeholder['title'] !!}</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! BBbutton2('unit','hooks[tr_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                            {!! BBbutton2('hook','hooks[tr_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -236,7 +236,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                                             <label for="">Select {!! $placeholder['title'] !!}</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! BBbutton2('unit','hooks[main_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                                            {!! BBbutton2('hook','hooks[main_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                                         </div>
                                     </div>
                                 </div>

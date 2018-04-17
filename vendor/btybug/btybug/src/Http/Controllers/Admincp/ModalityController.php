@@ -13,6 +13,7 @@ namespace Btybug\btybug\Http\Controllers\Admincp;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
+use Btybug\btybug\Repositories\HookRepository;
 use Btybug\Console\Repository\FieldsRepository;
 use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
@@ -66,6 +67,7 @@ class ModalityController extends Controller
             'templates' => 'getTpls',
             'theme' => 'getTheme',
             'unit' => 'getUnit',//working with tags
+            'hook' => 'getHook',//working with tags
             'units' => 'getUnits',
             'files' => 'getFiles',
             'page_sections' => 'getPageSections',
@@ -160,6 +162,18 @@ class ModalityController extends Controller
         } else {
             $html = View::make('btybug::styles.units', compact('units', 'data'))->render();
         }
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function getHook($data)
+    {
+        $hooksRepo = new HookRepository();
+        $hooks = $hooksRepo->getAll();
+
+        if (!count($hooks)) return \Response::json(['error' => true]);
+
+        $html = View::make('btybug::styles.hooks', compact('hooks', 'data'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

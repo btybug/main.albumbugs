@@ -1177,7 +1177,11 @@ function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $
             if ($module && $module != $item->module_id) return false;
             $children = $item->childs;
 
-            $output .= ' <ol class="pagelisting">';
+            if($parent){
+                $output .= ' <ol class="pagelisting">';
+            }else{
+                $output .= ' <ol class="pagelisting" style="display: none;">';
+            }
             $output .= '<li data-id="' . $item->id . '">';
             $output .= '<div class="listinginfo">';
             $output .= '<div class="lsitingbutton">';
@@ -1192,7 +1196,7 @@ function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $
             $output .= '</div>';
             $output .= '<button class="btn btn-collapse" type="button" data-caction="collapse">';
             if (count($children)) {
-                $output .= '<i class="fa fa-minus" data-collapse="' . $item->id . '" aria-hidden="true"></i>';
+                $output .= '<i class="fa fa-plus" data-collapse="' . $item->id . '" aria-hidden="true"></i>';
             }
             $output .= '</button>';
 

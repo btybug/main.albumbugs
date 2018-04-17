@@ -38,7 +38,7 @@ class RoleService extends GeneralService
 
     public function getRolesSeperetedWith($seperator = ',', $access = 0)
     {
-        $data = $this->roleRepository->model()->where('access', $access)->pluck('slug', 'slug')->toArray();
+        $data = $this->roleRepository->model()->pluck('slug', 'slug')->toArray();
         return implode($seperator, $data);
     }
 

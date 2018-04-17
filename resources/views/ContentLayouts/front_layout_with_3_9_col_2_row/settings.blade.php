@@ -25,9 +25,22 @@ $container_styles = getDinamicStyle('containers');
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select  style</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="main_content_style" id="" class="form-control">
+                                {!! $container_styles !!}
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
+
         <div id="main_content_select_left_side_bar_unit"
              class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
              data-type="unit" aria-expanded="true" style="">

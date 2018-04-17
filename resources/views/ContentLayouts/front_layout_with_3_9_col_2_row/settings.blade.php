@@ -7,7 +7,7 @@ $container_styles = getDinamicStyle('containers')
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#main_content"
                aria-expanded="true">
                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Main content</span>
+                <span class="title" content>Left Side Bar</span>
             </a>
         </div>
         <div id="main_content" class="collapse in" aria-expanded="true" style="">
@@ -15,12 +15,40 @@ $container_styles = getDinamicStyle('containers')
                 <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label for="">Select container style</label>
+                            <label for="">Content</label>
                         </div>
                         <div class="col-md-8">
-                            <select name="main_content_style" id="" class="form-control">
-                                {!! $container_styles !!}
-                            </select>
+                            {!! Form::select('content_type',[null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],null,['class'=>'form-control','id'=>'content_type']) !!}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="main_content_select_unit" class=" main_content_type collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif" data-type="unit" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select Unit</label>
+                        </div>
+                        <div class="col-md-8">
+                            {!! BBbutton2('unit',"left_side_bar","sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="main_content_select_hook" class=" main_content_type collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif" data-type="hook" aria-expanded="true" style="">
+            <div class="content bty-settings-panel">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select Hook</label>
+                        </div>
+                        <div class="col-md-8">
+
                         </div>
                     </div>
                 </div>
@@ -33,7 +61,7 @@ $container_styles = getDinamicStyle('containers')
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#top_content"
                aria-expanded="true">
                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Top content</span>
+                <span class="title">Top Right</span>
             </a>
         </div>
         <div id="top_content" class="collapse in" aria-expanded="true" style="">
@@ -69,7 +97,7 @@ $container_styles = getDinamicStyle('containers')
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#left_bar"
                aria-expanded="true">
                 <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Left Areas Unit</span>
+                <span class="title">Main Right</span>
             </a>
         </div>
         <div id="left_bar" class="collapse in" aria-expanded="true" style="">
@@ -102,3 +130,12 @@ $container_styles = getDinamicStyle('containers')
     </div>
 </div>
 {!!BBstyle($model->path.DS.'css/settings.css') !!}
+<script>
+    $(function () {
+        $('#content_type').on('change',function () {
+            $('.main_content_type').addClass('hide');
+            $('#main_content_select_'+$(this).val()).removeClass('hide');
+            console.log($(this).val())
+        });
+    });
+</script>

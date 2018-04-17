@@ -40,6 +40,18 @@ $container_styles = getDinamicStyle('containers');
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="ls_style" id="" class="form-control">
+                                {!! $container_styles !!}
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

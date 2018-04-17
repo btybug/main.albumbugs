@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row div-flex {{isset($settings['main_page_style']) ? $settings['main_page_style'] : ''}}">
         <div class="col-md-3 col-sm-3 col-xs-12 ">
-            <div class="left-bar ">
+            <div class="left-bar {{isset($settings['ls_style']) ? $settings['ls_style'] : ''}}">
                 @switch(issetReturn($settings,'ls_content_type'))
                     @case('unit')
                     @if(has_setting($settings,'ls_unit'))

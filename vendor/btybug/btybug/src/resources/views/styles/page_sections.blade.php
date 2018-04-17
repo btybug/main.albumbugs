@@ -36,7 +36,7 @@
                         {{--</li>--}}
                         <li class="col-md-3 col-sm-3 col-xs-12">
                             <figure>
-                                <a class="btn text-center item item-unit zzzzz" data-value="{!! $item->id !!}" href="javascript:void(0)">
+                                <a class="text-center item item-unit zzzzz" data-value="{!! $item->id !!}" href="javascript:void(0)">
                                     <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
                                     <img src="{!! asset('public/images/default.jpg') !!}">
 
@@ -84,7 +84,7 @@
                                 {{--</li>--}}
                                 <li class="col-md-3 col-sm-3 col-xs-12">
                                     <figure>
-                                        <a class="btn text-center item item-unit zzzzz" data-value="{!! $item->id !!}" href="javascript:void(0)">
+                                        <a class="text-center item item-unit zzzzz" data-value="{!! $item->id !!}" href="javascript:void(0)">
                                             <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
                                             <img src="{!! asset('public/images/default.jpg') !!}">
 

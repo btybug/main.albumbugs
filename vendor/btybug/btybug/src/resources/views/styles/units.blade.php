@@ -27,7 +27,7 @@
                         <li class="col-md-3 col-sm-3 col-xs-12">
                             <figure>
                                 <a href="javascript:void(0)" data-key="{!! $data['key'] !!}"
-                                   class="btn text-center item item-unit zzzzz" data-value="{!! $item->id !!}">
+                                   class="text-center item item-unit zzzzz" data-value="{!! $item->id !!}">
                                     <input type="hidden" data-action="units" data-input-type="{!! $tpl->input_type !!}"
                                            data-value="{!! $item->id !!}"/>
                                     <img src="{!! asset('public/images/default.jpg') !!}">
@@ -72,7 +72,7 @@
                     @foreach($items as $item)
                         <li class="col-md-3 col-sm-3 col-xs-12">
                             <figure>
-                                <a class="btn text-center item item-unit oooo" data-key="{!! $key !!}"
+                                <a class="text-center item item-unit oooo" data-key="{!! $key !!}"
                                    data-value="{!! $item->id !!}">
                                     <input type="hidden" data-action="units" data-value="{!! $item->id !!}"/>
                                     <img src="{!! url('public/images/default.jpg') !!}">

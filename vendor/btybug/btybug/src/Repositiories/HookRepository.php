@@ -45,13 +45,12 @@ class HookRepository extends GeneralRepository
         $html = '';
         if (is_array($data)) {
             foreach ($data as $unit) {
-                $variation = Painter::findVariation($unit);
+                $variation = Painter::find($unit['variation']);
                 if ($variation) {
                     $html .= $variation->variations()->render();
                 } else {
                     $html .= '<p>Wrong Unit</p>';
                 }
-
             }
             return $html;
         }

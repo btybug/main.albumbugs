@@ -10,11 +10,9 @@
                     @break
 
                     @case('hook')
-                    @if(has_setting($settings,'hooks') && is_array($settings['hooks']['ls_hook']))
-                    @foreach($settings['hooks']['ls_hook'] as $unit)
-                        {!! BBRenderUnits($unit,isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-                    @endforeach
-                    @endif
+                        @if(has_setting($settings,'hooks') && is_array($settings['hooks']['ls_hook']))
+                            {!! BBrenderHook($settings['hooks']['ls_hook']) !!}
+                        @endif
                     @break
 
                     @default
@@ -32,13 +30,10 @@
                     @break
 
                     @case('hook')
-                    @if(has_setting($settings,'hooks') && is_array($settings['hooks']['tr_hook']))
-                        @foreach($settings['hooks']['tr_hook'] as $unit)
-                            {!! BBRenderUnits($unit,isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-                        @endforeach
-                    @endif
+                        @if(has_setting($settings,'hooks') && isset($settings['hooks']['tr_hook']))
+                                {!! BBrenderHook($settings['hooks']['tr_hook']) !!}
+                        @endif
                     @break
-
                     @default
                     <span>Something went wrong, please try again</span>
                 @endswitch
@@ -52,11 +47,9 @@
                     @break
 
                     @case('hook')
-                    @if(has_setting($settings,'hooks') && is_array($settings['hooks']['main_hook']))
-                        @foreach($settings['hooks']['main_hook'] as $unit)
-                            {!! BBRenderUnits($unit,isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-                        @endforeach
-                    @endif
+                        @if(has_setting($settings,'hooks') && is_array($settings['hooks']['main_hook']))
+                            {!! BBrenderHook($settings['hooks']['main_hook']) !!}
+                        @endif
                     @break
 
                     @default

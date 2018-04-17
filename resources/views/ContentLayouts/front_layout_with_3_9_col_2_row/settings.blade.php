@@ -58,7 +58,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
         </div>
 
         <div id="main_content_select_left_side_bar_unit"
-             class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'ls_content_type') !=='unit') hide   @endif"
              data-type="unit" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -75,7 +75,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
             </div>
         </div>
         <div id="main_content_select_left_side_bar_hook"
-             class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'ls_content_type') !=='hook') hide   @endif"
              data-type="hook" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -84,19 +84,9 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             <label for="">Select Hook</label>
                         </div>
                         <div class="col-md-8">
-
-                            @foreach($model->placeholders as $key=>$placeholder)
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="">Select {!! $placeholder['title'] !!}</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            {!! BBbutton2('hook','hooks[ls_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                            {!! BBbutton2('hook','ls_hook','hook',"Change",
+                          ['class'=>'btn btn-default change-layout','data-name-prefix' => 'hooks','data-type'=>'frontend_sidebar',
+                          'model'=>(isset($settings['hooks']) && isset($settings['hooks']['ls_hook'])) ? $settings['hooks']['ls_hook'] : null]) !!}
                         </div>
                     </div>
                 </div>
@@ -104,6 +94,8 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
             </div>
         </div>
     </div>
+
+
     <div class="bty-panel-collapse">
         <div>
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#top_content"
@@ -130,7 +122,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
             </div>
         </div>
         <div id="main_content_select_top_right_unit"
-             class=" main_content_type_top_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             class=" main_content_type_top_right collapse in @if(issetReturn($settings,'tr_content_type') !=='unit') hide   @endif"
              data-type="unit" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -147,7 +139,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
             </div>
         </div>
         <div id="main_content_select_top_right_hook"
-             class=" main_content_type_top_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             class=" main_content_type_top_right collapse in @if(issetReturn($settings,'tr_content_type') !=='hook') hide   @endif"
              data-type="hook" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -156,19 +148,9 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             <label for="">Select Hook</label>
                         </div>
                         <div class="col-md-8">
-
-                            @foreach($model->placeholders as $key=>$placeholder)
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="">Select {!! $placeholder['title'] !!}</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            {!! BBbutton2('hook','hooks[tr_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                            {!! BBbutton2('hook','tr_hook','hook',"Change",
+                            ['class'=>'btn btn-default change-layout','data-name-prefix' => 'hooks','data-type'=>'frontend_sidebar',
+                            'model'=>(isset($settings['hooks']) && isset($settings['hooks']['tr_hook'])) ? $settings['hooks']['tr_hook'] : null]) !!}
                         </div>
                     </div>
                 </div>
@@ -202,7 +184,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
             </div>
         </div>
         <div id="main_content_select_main_right_unit"
-             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'main_unit') !=='unit') hide   @endif"
+             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'main_content_type') !=='unit') hide   @endif"
              data-type="unit" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -219,7 +201,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
             </div>
         </div>
         <div id="main_content_select_main_right_hook"
-             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'content_type') !=='unit') hide   @endif"
+             class=" main_content_type_main_right collapse in @if(issetReturn($settings,'main_content_type') !=='hook') hide   @endif"
              data-type="hook" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
@@ -228,19 +210,9 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             <label for="">Select Hook</label>
                         </div>
                         <div class="col-md-8">
-
-                            @foreach($model->placeholders as $key=>$placeholder)
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="">Select {!! $placeholder['title'] !!}</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            {!! BBbutton2('hook','hooks[main_hook]['.$key.']',$placeholder['tag'],"Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                            {!! BBbutton2('hook','main_hook','hook',"Change",
+                           ['class'=>'btn btn-default change-layout','data-name-prefix' => 'hooks','data-type'=>'frontend_sidebar',
+                           'model'=>(isset($settings['hooks']) && isset($settings['hooks']['main_hook'])) ? $settings['hooks']['main_hook'] : null]) !!}
                         </div>
                     </div>
                 </div>

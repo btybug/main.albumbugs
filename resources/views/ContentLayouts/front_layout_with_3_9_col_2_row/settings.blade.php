@@ -33,7 +33,7 @@ $container_styles = getDinamicStyle('containers')
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit',"left_side_bar","sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('content_type[selected]',"left_side_bar","sidebar","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
                         </div>
                     </div>
                 </div>

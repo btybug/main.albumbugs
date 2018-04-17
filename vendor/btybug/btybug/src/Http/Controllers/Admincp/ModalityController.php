@@ -180,6 +180,41 @@ class ModalityController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function postCustomizeLayout(Request $request)
+    {
+        $data = $request->all();
+        $key = $data['type'];
+        $layouts = ContentLayouts::all()->get();
+        $selected = null;
+
+        if (isset($data['value'])) $selected = ContentLayouts::findByVariation($data['value']);
+
+        if (!count($layouts)) return \Response::json(['error' => true]);
+
+        $html = View::make('btybug::styles.c_layouts', compact('layouts', 'data', 'selected'))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function postCustomizeLayoutSave(Request $request)
+    {
+        $slug = $request->get('value');
+        $key = $request->get('key');
+        $variationName = $slug . '.' . str_slug($key);
+
+        $layout = ContentLayouts::find($slug);
+        if (! $layout) return \Response::json(['error' => true]);
+
+        $variation = $layout->variations()->find($variationName);
+
+        if (!$variation) {
+            $layout->variations()->createVariation(['title' => $key], str_slug($key), false);
+            $variation = $layout->variations()->find($variationName);
+        }
+
+        return \Response::json(['error' => false, 'unit' => $layout->toArray(), 'variation' => $variation->toArray()]);
+    }
+
     public function postCustomizeUnitSave(Request $request)
     {
         $slug = $request->get('value');

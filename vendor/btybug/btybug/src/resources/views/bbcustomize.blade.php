@@ -1,10 +1,13 @@
 @php
     $indentificator=uniqid();
+    $variation = null;
         if($value){
             switch ($type){
                 case 'layouts':
                 $obj=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($value);
-                $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
+                if($obj){
+                    $variation=Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($value);
+                }
                 break;
                 case 'unit':
                 $obj=\Btybug\btybug\Models\Painter\Painter::findByVariation($value);
@@ -48,7 +51,12 @@
                 data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
-    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation)) {{ "/admin/uploads/gears/settings/".$variation->id }} @endif"
+    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
+                @if($type == 'units')  {{ "/admin/uploads/gears/settings/".$variation->id }}
+                @else {{ "/admin/uploads/layouts/settings/".$variation->id }} @endif
+            @else
+                javascript:void(0)
+            @endif"
        data-strcuture="{!! $structure !!}"
        class="btn btn-info customize-button pull-left" style="border-radius: 0px;">Customize
     </a>

@@ -63,6 +63,10 @@ Route::group(
         Route::post('/modality/settings-live', 'Admincp\ModalityController@postSettingsLive');
         Route::post('/modality/settings-customize', 'Admincp\ModalityController@postCustomizeUnit');
         Route::post('/modality/settings-customize-save', 'Admincp\ModalityController@postCustomizeUnitSave');
+
+        Route::post('/modality/settings-customize-layouts', 'Admincp\ModalityController@postCustomizeLayout');
+        Route::post('/modality/settings-customize-layouts-save', 'Admincp\ModalityController@postCustomizeLayoutSave');
+
         Route::post('/modality/styles/options', 'Admincp\ModalityController@psotStylesOptions');
         Route::post('/modality/widgets/options', 'Admincp\ModalityController@psotWidgetsOptions');
         Route::post('/modality/templates/options', 'Admincp\ModalityController@postTplOptions');

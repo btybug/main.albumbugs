@@ -1,29 +1,29 @@
 <div class="row modal-data">
     <div class="col-md-9 modal-list-content builder-modalright modal-data-items">
         <ul class="formlisting">
-            @foreach($units as $key => $item)
+            @foreach($layouts as $key => $item)
                 @if($selected)
                     @if($selected->slug != $item->slug)
                         <li class="col-md-3 col-sm-3 col-xs-12">
                             <figure>
-                                <a class="btn text-center item item-unit oooo" data-key="{!! $key !!}" data-action="units"
+                                <a class="btn text-center item item-unit" data-key="{!! $key !!}"
                                    data-value="{!! $item->slug !!}">
-                                    <input type="hidden" data-action="units" data-value="{!! $item->slug !!}"/>
+                                    <input type="hidden" data-action="layouts" data-value="{!! $item->slug !!}"/>
                                     <img src="{!! url('public/images/default.jpg') !!}">
                                 </a>
                                 <p>
                                     <a data-key="{!! $key !!}"
-                                       data-action="units"
-                                       class="btn text-center item item-unit zzzzz custom_color_white"
+                                       data-action="layouts"
+                                       class="btn text-center item item-unit custom_color_white"
                                        data-value="{!! $item->slug !!}">
-                                        <input type="hidden" data-action="units" data-value="{!! $item->slug !!}"/>
+                                        <input type="hidden" data-action="layouts" data-value="{!! $item->slug !!}"/>
                                         {!! $item->title?$item->title:"no title" !!}
                                     </a>
                                 </p>
 
                                 <figcaption>
                                     <div>
-                                        <a href="{!! url('admin/resources/units/live-settings',$item->slug) !!}"
+                                        <a href="{!! url('admin/resources/layouts/live-settings',$item->slug) !!}"
                                            target="_blank">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
@@ -31,11 +31,11 @@
                                     <div>
                                         <p>
                                             <a
-                                                    data-action="units"
                                                     data-key="{!! $data['structure'] !!}"
-                                                    class="btn text-center customize-item zzzzz custom_color_white"
+                                                    data-action="layouts"
+                                                    class="btn text-center customize-item custom_color_white"
                                                     data-value="{!! $item->slug !!}">
-                                                <input type="hidden" data-action="units"
+                                                <input type="hidden" data-action="layouts"
                                                        data-value="{!! $item->slug !!}"/>
                                                 {!! $item->title?$item->title:"no title" !!}
                                             </a>
@@ -48,23 +48,24 @@
                 @else
                     <li class="col-md-3 col-sm-3 col-xs-12">
                         <figure>
-                            <a class="btn text-center item item-unit oooo" data-key="{!! $key !!}" data-action="units"
+                            <a class="btn text-center item item-unit" data-key="{!! $key !!}"
                                data-value="{!! $item->slug !!}">
-                                <input type="hidden" data-action="units" data-value="{!! $item->slug !!}"/>
+                                data-action="layouts"
+                                <input type="hidden" data-action="layouts" data-value="{!! $item->slug !!}"/>
                                 <img src="{!! url('public/images/default.jpg') !!}">
                             </a>
                             <p>
                                 <a data-key="{!! $key !!}"
-                                   class="btn text-center item item-unit zzzzz custom_color_white"
+                                   class="btn text-center item item-unit custom_color_white"
                                    data-value="{!! $item->slug !!}">
-                                    <input type="hidden" data-action="units" data-value="{!! $item->slug !!}"/>
+                                    <input type="hidden" data-action="layouts" data-value="{!! $item->slug !!}"/>
                                     {!! $item->title?$item->title:"no title" !!}
                                 </a>
                             </p>
 
                             <figcaption>
                                 <div>
-                                    <a href="{!! url('admin/resources/units/live-settings',$item->slug) !!}"
+                                    <a href="{!! url('admin/resources/layouts/live-settings',$item->slug) !!}"
                                        target="_blank">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
@@ -73,10 +74,10 @@
                                     <p>
                                         <a
                                                 data-key="{!! $data['structure'] !!}"
-                                                data-action="units"
-                                                class="btn text-center customize-item zzzzz custom_color_white"
+                                                data-action="layouts"
+                                                class="btn text-center customize-item custom_color_white"
                                                 data-value="{!! $item->slug !!}">
-                                            <input type="hidden" data-action="units"
+                                            <input type="hidden" data-action="layouts"
                                                    data-value="{!! $item->slug !!}"/>
                                             {!! $item->title?$item->title:"no title" !!}
                                         </a>

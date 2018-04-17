@@ -4,12 +4,14 @@
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Page Info</div>
             <div class="panel-body">
-
-                {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getPageLayout($page) !!}
+                {!! BBcustomize('layouts','page_layout','frontend',
+                                                        (isset($page->page_layout) && $page->page_layout)?'Change':'Select',
+                                                        'page_layout_'.$id,['class'=>'btn btn-default change-layout','model' =>$page]) !!}
             </div>
         </div>
 
-        {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getChildrenPageLayout($page) !!}
+        {{--TODO: need to implement for child pages--}}
+        {{--{!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getChildrenPageLayout($page) !!}--}}
 
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">All Hooks</div>

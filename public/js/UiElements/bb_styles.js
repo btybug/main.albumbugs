@@ -73,11 +73,14 @@ $(document).ready(function () {
         var group = $(this).attr('data-group');
         var multiple = $(this).attr('data-multiple');
         BBcustomize = $(this);
+
+        var url = '/modality/settings-customize';
+        if(action == 'layouts') url = '/modality/settings-customize-layouts'
         $('#magic-body').empty();
         $.ajax({
             type: "post",
             datatype: "json",
-            url: '/modality/settings-customize',
+            url: url,
             data: {
                 key: key,
                 value: value,
@@ -177,13 +180,18 @@ $(document).ready(function () {
 
     $('body').on('click', '.customize-item', function () {
         if (BBcustomize) {
+            console.log($(this));
             var key = $(this).data('key');
             var value = $(this).data('value');
+            var action = $(this).data('action');
+
+            var url = '/modality/settings-customize-save';
+            if(action == 'layouts') url = '/modality/settings-customize-layouts-save'
 
             $.ajax({
                 type: "post",
                 datatype: "json",
-                url: '/modality/settings-customize-save',
+                url: url,
                 data: {
                     key: key,
                     value: value
@@ -194,8 +202,11 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if(! data.error){
+                        var customize_url = '/admin/uploads/gears/settings/'+value+'.'+key;
+                        if(action == 'layouts') customize_url = '/admin/uploads/layouts/settings/'+value+'.'+key;
+
                         $('body').find('a[data-strcuture="'+key+'"]')
-                            .attr('href','/admin/uploads/gears/settings/'+value+'.'+key);
+                            .attr('href',customize_url);
 
                         $('body').find('input[data-name="'+BBcustomize.data('key')+'"]').attr('value',value+'.'+key).trigger('change');
                         $('body').find('button[data-key="'+BBcustomize.data('key')+'"]').attr('data-value',value+'.'+key);

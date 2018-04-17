@@ -1,6 +1,6 @@
 <div class="form-group">
     <div class="col-md-12">
-        <label>Select Page Layout</label>
+        <label>Default Page Layout</label>
     </div>
     <div class="col-md-12">
         <div class="col-md-12 m-b-10">

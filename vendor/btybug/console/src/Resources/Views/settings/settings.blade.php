@@ -41,7 +41,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($site_settings) !!}
+
+                                        {!! BBcustomize('layouts','backend_page_section','layouts',
+                                        (isset($site_settings['backend_page_section']) && $site_settings['backend_page_section'])?'Change':'Select',
+                                        'cms-login',['class'=>'btn btn-default change-layout','model' =>$site_settings]) !!}
+                                        {{--{!!Btybug\btybug\Models\ContentLayouts\ContentLayouts::getBackendDefaultLayoutPlaceholders($site_settings) !!}--}}
                                     </div>
                                     <!-- Button -->
                                     <div class="form-group">

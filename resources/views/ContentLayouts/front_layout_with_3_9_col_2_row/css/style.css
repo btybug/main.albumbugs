@@ -1,8 +1,8 @@
 .left-bar, .top-bar, .main-cont{
-    /*border: 1px solid #000;*/
+    border: 1px solid #000;
 }
 .left-bar{
-    min-height: calc(100vh - 60px);
+
     height: 100%;
 }
 .top-bar{
@@ -10,7 +10,7 @@
     margin-bottom: 20px;
 }
 .main-cont {
-    min-height: 680px;
+    min-height: 600px;
 }
 .div-flex{
     display: -webkit-box;

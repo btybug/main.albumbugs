@@ -35,8 +35,7 @@ $container_styles = getDinamicStyle('containers');
                                 <div class="input-group-addon">Change</div>
                                 <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control" title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!" data-original-title="info">
                                 <div class="input-group-addon">
-                                    <button type="button" data-action="unit" data-key="" class="BBbuttons" data-type="frontend">Change
-                                    </button>
+                                    <button type="button" class="BBbuttons" data-type="frontend">Change</button>
                                 </div>
                             </div>
                         </div>

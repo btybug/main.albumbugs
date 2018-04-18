@@ -129,7 +129,7 @@
 @stop
 
 @section('JS')
-    {!! HTML::script("public/js/UiElements/bb_styles.js?v.6") !!}
+    {!! HTML::script("public/js/UiElements/bb_styles.js?v.8") !!}
     <script>
         $('#new-variation').click(function () {
             $('.new-variation').removeClass('hide');

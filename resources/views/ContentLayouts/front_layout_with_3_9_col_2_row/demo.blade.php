@@ -20,7 +20,8 @@
                 @endswitch
             </div>
         </div>
-        <div class="col-md-9 col-sm-9 col-xs-12 default-column {{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
+        <div class="col-md-9 col-sm-9 col-xs-12 default-column ">
+            <div class="{{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
             <div class="{{(isset($settings['right_area_style'])&& $settings['right_area_style']) ? '' : 'demo-column'}} ">
                 @switch(issetReturn($settings,'tr_content_type'))
                     @case('unit')
@@ -55,6 +56,7 @@
                     @default
                     <span>Something went wrong, please try again</span>
                 @endswitch
+            </div>
             </div>
         </div>
     </div>

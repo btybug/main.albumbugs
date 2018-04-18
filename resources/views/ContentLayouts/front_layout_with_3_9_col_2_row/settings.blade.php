@@ -67,7 +67,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit','ls_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','ls_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit','tr_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','tr_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             <label for="">Select Unit</label>
                         </div>
                         <div class="col-md-8">
-                            {!! BBbutton2('unit','main_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$model]) !!}
+                            {!! BBbutton2('unit','main_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
                         </div>
                     </div>
                 </div>

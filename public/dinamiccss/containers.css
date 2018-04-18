@@ -2023,3 +2023,13 @@
 .bty-div-m-b-20 {
     margin: 20px;
     background-color: green; }
+/*center,bg-gray*/
+.bty-div-center-bg-gray {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: grey;
+}

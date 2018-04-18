@@ -22,8 +22,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9 col-sm-9 col-xs-12 default-column ">
-            <div class="{{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
+        <div class="col-md-9 col-sm-9 col-xs-12 ">
+            <div class="default-column  {{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
                 <div>
                     <div class="{{(isset($settings['tr_style'])&& $settings['tr_style']) ? $settings['tr_style'] : 'demo-column'}} ">
                         @switch(issetReturn($settings,'tr_content_type'))

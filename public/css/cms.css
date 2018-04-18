@@ -15619,4 +15619,13 @@ div.d4{
 
 }
 
+
+.default-column {
+    min-height : 100vh;
+
+}
+.demo-column {
+    border:1px solid black;
+}
+
 /***responsive***/

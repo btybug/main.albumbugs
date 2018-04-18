@@ -108,7 +108,6 @@ $(document).ready(function () {
 
         var data = $('form').serialize();
         var url = $('#add_custome_page').attr('action');
-        console(data);
         $.ajax({
             type: "post",
             datatype: "json",

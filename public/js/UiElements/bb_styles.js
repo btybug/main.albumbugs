@@ -303,7 +303,11 @@ $(document).ready(function () {
             }
         });
     }
-
+$('body').on('click','.clean-bb-button',function () {
+   var slug= $(this).data('id');
+   $('body').find('input[data-name='+slug+']').val('');
+   $('body').find('input[data-id='+slug+']').val('Nothing Selected !!!');
+});
 
     $('body').on('click', '.BBLive', function (e) {
         e.preventDefault();

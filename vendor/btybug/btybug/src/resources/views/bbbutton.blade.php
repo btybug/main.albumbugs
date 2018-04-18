@@ -46,6 +46,9 @@
         <button type="button" data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
+    <div class="input-group-addon">
+        <button class="clean-bb-button" data-id="{!! $indentificator !!}" type="button" >Clean</button>
+    </div>
     <input
             class="bb-button-realted-hidden-input"
             type="hidden" {!! $array !!}

@@ -1,6 +1,11 @@
 <?php
 $container_styles = getDinamicStyle('containers');
-$container_styles='<option value="0">Select Class</option>'.$container_styles;
+$container_styles = '<option value="0">Select Class</option>' . $container_styles;
+$placeholdersData = $model->placeholders;
+$placeholders = [];
+foreach ($placeholdersData as $key => $datum) {
+    $placeholders[$key] = $datum['title'];
+}
 ?>
 <div class="col-md-12">
     <div class="bty-panel-collapse">
@@ -11,7 +16,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                 <span class="title" content>Left Side Bar</span>
             </a>
         </div>
-        <div  class="collapse in" aria-expanded="true" style="">
+        <div class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -28,12 +33,14 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                 <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label for="">Select  style</label>
+                            <label for="">Select style</label>
                         </div>
                         <div class="col-md-8">
                             <div class="input-group">
                                 <div class="input-group-addon">Change</div>
-                                <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control" title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!" data-original-title="info">
+                                <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control"
+                                       title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!"
+                                       data-original-title="info">
                                 <div class="input-group-addon">
                                     <button type="button" class="BBbuttons" data-type="frontend">Change</button>
                                 </div>
@@ -104,7 +111,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                 <span class="title">Top Right</span>
             </a>
         </div>
-        <div  class="collapse in" aria-expanded="true" style="">
+        <div class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -178,7 +185,7 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                 <span class="title">Main Right</span>
             </a>
         </div>
-        <div  class="collapse in" aria-expanded="true" style="">
+        <div class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -253,8 +260,18 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                 <span class="title">General</span>
             </a>
         </div>
-        <div  class="collapse in" aria-expanded="true" style="">
+        <div class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Main place holder</label>
+                        </div>
+                        <div class="col-md-8">
+                            {!! Form::select('main_placeholder',[null=>'Select Main Plaeholder']+$placeholders,null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <div class="col-md-4">
@@ -263,7 +280,9 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                         <div class="col-md-8">
                             <div class="input-group">
                                 <div class="input-group-addon">Change</div>
-                                <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control" title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!" data-original-title="info">
+                                <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control"
+                                       title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!"
+                                       data-original-title="info">
                                 <div class="input-group-addon">
                                     <button type="button" class="BBbuttons" data-type="frontend">Change</button>
                                 </div>
@@ -315,9 +334,9 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
 <script>
     $(function () {
         $('.content_type').on('change', function () {
-            var panel=$(this).data('value');
-            $('.main_content_type_'+panel).addClass('hide');
-            var id='#main_content_select_'+panel+'_' + $(this).val();
+            var panel = $(this).data('value');
+            $('.main_content_type_' + panel).addClass('hide');
+            var id = '#main_content_select_' + panel + '_' + $(this).val();
             $(id).removeClass('hide');
         });
     });

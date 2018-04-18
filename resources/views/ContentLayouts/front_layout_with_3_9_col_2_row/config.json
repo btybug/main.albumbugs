@@ -30,10 +30,15 @@
       "tag": "left_bar",
       "title": "Left Sidebar"
     },
-    "top_content": {
+    "top_right": {
       "type": "unit",
       "tag": "breadcrumb",
-      "title": "Top content"
+      "title": "Top Right"
+    } ,
+    "main_right": {
+      "type": "unit",
+      "tag": "breadcrumb",
+      "title": "Main Right"
     }
   },
   "folder": "front_layout_with_3_9_col_2_row",

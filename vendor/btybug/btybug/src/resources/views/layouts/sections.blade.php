@@ -19,7 +19,7 @@
     {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
     {!! HTML::style('public/js/jquery-ui/jquery-ui.min.css') !!}
     {!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
-    {!! HTML::style('public/css/cms.css') !!}
+    {!! HTML::style('public/css/cms.css?v=1') !!}
 
 
     {!! HTML::style('public-x/custom/css/'.uniqid().'.css') !!}

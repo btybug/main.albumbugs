@@ -15622,6 +15622,7 @@ div.d4{
 
 .default-column {
     min-height : 100vh;
+    overflow: hidden;
 
 }
 .demo-column {

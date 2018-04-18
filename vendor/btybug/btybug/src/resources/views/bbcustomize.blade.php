@@ -51,12 +51,13 @@
                 data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
-    <a href="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
-                @if($type == 'units')  {{ "/admin/uploads/gears/settings/".$variation->id }}
-                @else {{ "/admin/uploads/layouts/settings/".$variation->id }} @endif
-            @else
-                javascript:void(0)
-            @endif"
+    <a @if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
+                @if($type == 'units')  href='{{ "/admin/uploads/gears/settings/".$variation->id }}'
+                @else href='{{ "/admin/uploads/layouts/settings/".$variation->id }}' @endif
+                target="_blank"
+       @else
+                href="javascript:void(0)"
+            @endif
        data-strcuture="{!! $structure !!}"
        class="btn btn-info customize-button pull-left" style="border-radius: 0px;">Customize
     </a>

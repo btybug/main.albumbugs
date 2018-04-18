@@ -79,7 +79,7 @@
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js") !!}
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js") !!}
     {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
-    {!! HTML::script('public/js/UiElements/content-layout-settings.js') !!}
+    {!! HTML::script('public/js/UiElements/content-layout-settings.js?v=1') !!}
     @yield('JS')
     @stack('javascript')
 @stop

@@ -1968,6 +1968,12 @@ function getDinamicStyle($filename)
     $styles = \App\Http\Controllers\PhpJsonParser::getClasses(base_path('public/dinamiccss/' . $filename . '.css'));
     return $styles;
 }
+function BBmakeCssClasses($filename)
+{
+    $parser =new \App\Http\Controllers\PhpJsonParser();
+    $parser->makeCssClasses(base_path('public/dinamiccss/' . $filename . '.css'));
+    return $parser;
+}
 
 function getDinamicStyleDemo($filename)
 {

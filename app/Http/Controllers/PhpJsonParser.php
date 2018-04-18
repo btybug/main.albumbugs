@@ -35,7 +35,7 @@ class PhpJsonParser
         return $html;
     }
 
-    public function makeClasses($path)
+    public function makeCssClasses($path)
     {
         $file = \File::get($path);
         preg_match_all('/(?<=\.)((?!:hover).)*(?=.{)/', $file, $matches);
@@ -63,7 +63,7 @@ class PhpJsonParser
     {
         $array = [];
         foreach ($this->data as $key => $item) {
-            $array[] = ['class' => $item, 'title' => isset($desc[$key]) ? $this->desc[$key] : $item];
+            $array[$item] = isset($desc[$key]) ? $this->desc[$key] : $item;
         }
         return collect($array);
     }

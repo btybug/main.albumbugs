@@ -84,9 +84,11 @@
     {{--{!! Form::close() !!}--}}
 </div>
 
-
+@include('resources::assests.stylesModal')
+@include('resources::assests.magicModal')
 <div class="previewlivesetting">
     <div data-loadifram="preview">
+
         @yield('content')
     </div>
     <div>

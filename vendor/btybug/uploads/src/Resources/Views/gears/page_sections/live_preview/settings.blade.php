@@ -1,5 +1,6 @@
 @extends('btybug::layouts.sections')
 @section('content')
+
     <div class="center-block" id="widget_container">
         {!! $html !!}
     </div>
@@ -10,6 +11,7 @@
 @stop
 
 @section('settings')
+
     <div class="withoutifreamsetting animated bounceInRight hide" data-settinglive="settings">
         {!! Form::model($model,['id'=>'add_custome_page']) !!}
             @include($settingsHtml)
@@ -35,10 +37,6 @@
         </div>
         {{--{!! Form::close() !!}--}}
     </div>
-
-    @include('resources::assests.magicModal')
-    @include('resources::assests.stylesModal')
-
 @stop
 @section('CSS')
     {!! HTML::style("https://jqueryvalidation.org/files/demo/site-demos.css") !!}

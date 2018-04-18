@@ -57,6 +57,35 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#save-us').on('click', function () {
+        console.log(5555555)
+        $("#save-as-variation").modal();
+    });
+
+    // $('[data-settingaction="save-as"]').on('click', function () {
+    //     var data = $('form').serialize();
+    //     data += '&itemname=' + $('#itemname').val();
+    //     var url = $('#add_custome_page').attr('action');
+    //     $.ajax({
+    //         type: "post",
+    //         datatype: "json",
+    //         url: url + '/save',
+    //         data: data,
+    //         headers: {
+    //             'X-CSRF-TOKEN': $("#token").val()
+    //         },
+    //         success: function (data) {
+    //             if (!data.error) {
+    //                 if(data.url.length != 0) {
+    //                     window.location.replace(data.url);
+    //                 } else if(data.html.length) {
+    //                     $('#widget_container').html(data.html)
+    //                 }
+    //             }
+    //         }
+    //     });
+    // });
 	
 		
 	function tinymceeditor(){
@@ -112,7 +141,7 @@ $(document).ready(function () {
     $('button[data-settingaction=console]').on('click',function () {
         $( "#output-content" ).slideToggle('slow');
     });
-	function console(data) {
+	function consoleS(data) {
         $.ajax({
             type: "post",
             datatype: "json",

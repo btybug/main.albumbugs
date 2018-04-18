@@ -35,10 +35,10 @@
                                        data-title="Template Variation Title">{{$variation_data->title}}</a></td>
                                 </td>
                                 <td>
-                                    <a href="{{ route('uploads_layouts_settings', $variation_data->id) }}"
-                                       class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
-                                    <a href="#"
-                                       class="btn btn-info btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;hooks</a>
+                                    <a href="javascript:void(0)" data-type="layouts" data-variation="{{  $variation_data->id }}"
+                                       class="btn btn-default btn-warning btn-xs BBLive"><i class="fa fa-cog"></i>
+                                    </a>
+
                                     <a href="/admin/uploads/layouts/delete-variation/{{$variation_data->id}}"
                                        class="btn btn-danger btn-xs"
                                        onclick="return confirm('Are you sure to delete')"> &nbsp;<i
@@ -85,6 +85,7 @@
 
 
     </div>
+    @include('resources::assests.magicModal')
 
 @stop
 
@@ -94,6 +95,8 @@
 
 @section('JS')
     {!! HTML::script('public/js/bootstrap-editable/js/bootstrap-editable.min.js') !!}
+    {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
+
     <script>
         $('#new-variation').click(function () {
             $('.new-variation').removeClass('hide');

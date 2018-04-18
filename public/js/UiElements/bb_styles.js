@@ -304,4 +304,29 @@ $(document).ready(function () {
         });
     }
 
+
+    $('body').on('click', '.BBLive', function (e) {
+        e.preventDefault();
+        var LiveButton = $(this);
+        var variation = LiveButton.data('variation');
+        var type = LiveButton.data('type');
+        $.ajax({
+            type: "post",
+            datatype: "json",
+            url: '/modality/live-preview',
+            data: {
+                variation: variation
+            },
+            headers: {
+                'X-CSRF-TOKEN': $("input[name='_token']").val()
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $('#magic-settings .modal-title').html("Live Preview");
+                    $('#magic-body').html(data.html);
+                    $('#magic-settings').modal();
+                }
+            }
+        });
+    });
 });

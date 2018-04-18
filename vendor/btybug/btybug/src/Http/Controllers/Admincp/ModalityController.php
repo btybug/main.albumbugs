@@ -587,4 +587,22 @@ class ModalityController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+
+    public function postLivePreview(Request $request)
+    {
+        $variation = $request->get('variation');
+        if (! $variation) {
+            return \Response::json(['error' => true]);
+        }
+
+        $type = $request->get('type');
+        if($type == 'layouts'){
+            $url = route('uploads_layouts_settings', $variation);
+        }else{
+            $url = route('uploads_settings', $variation);
+        }
+        $html = '<iframe style="width: 100%;height: 100vh;" src="'.$url.'" ></iframe>';
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }

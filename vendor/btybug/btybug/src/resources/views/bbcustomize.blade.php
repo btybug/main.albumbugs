@@ -51,15 +51,16 @@
                 data-action={!! $type !!}  data-key="{!! $indentificator !!}" {!! $atributes !!} >Change
         </button>
     </div>
-    <a @if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
-                @if($type == 'units')  href='{{ "/admin/uploads/gears/settings/".$variation->id }}'
-                @else href='{{ "/admin/uploads/layouts/settings/".$variation->id }}' @endif
-                target="_blank"
-       @else
-                href="javascript:void(0)"
-            @endif
+    {{--@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))--}}
+        {{--@if($type == 'units')  href='{{ "/admin/uploads/gears/settings/".$variation->id }}'--}}
+        {{--@else href='{{ "/admin/uploads/layouts/settings/".$variation->id }}' @endif--}}
+        {{--target="_blank"--}}
+    {{--@else--}}
+        {{--href="javascript:void(0)"--}}
+    {{--@endif--}}
+    <a href="javascript:void(0)" data-type="{{ $type }}" data-variation="@if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation)) {{ $variation->id }} @endif"
        data-strcuture="{!! $structure !!}"
-       class="btn btn-info customize-button pull-left" style="border-radius: 0px;">Customize
+       class="btn btn-info customize-button pull-left BBLive" style="border-radius: 0px;">Customize
     </a>
     <input
             class="bb-button-realted-hidden-input"

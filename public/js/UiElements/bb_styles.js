@@ -307,6 +307,7 @@ $('body').on('click','.clean-bb-button',function () {
    var slug= $(this).data('id');
    $('body').find('input[data-name='+slug+']').val('');
    $('body').find('input[data-id='+slug+']').val('Nothing Selected !!!');
+    $('body').find('input[data-id='+slug+']').trigger('input');
 });
 
     $('body').on('click', '.BBLive', function (e) {

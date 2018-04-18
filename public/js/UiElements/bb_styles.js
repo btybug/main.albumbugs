@@ -315,7 +315,8 @@ $(document).ready(function () {
             datatype: "json",
             url: '/modality/live-preview',
             data: {
-                variation: variation
+                variation: variation,
+                type:type
             },
             headers: {
                 'X-CSRF-TOKEN': $("input[name='_token']").val()

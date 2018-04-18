@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row  {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : 'div-flex'}}">
+    <div class="row row-no-gutter {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : 'div-flex'}}">
         <div class="col-md-3 col-sm-3 col-xs-12 ">
             <div class="{{(isset($settings['ls_style'])&& $settings['ls_style'] ) ? $settings['ls_style'] : 'left-bar'}}">
                 @switch(issetReturn($settings,'ls_content_type'))

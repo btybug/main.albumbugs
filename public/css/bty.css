@@ -20438,3 +20438,10 @@ form.bty-form-3 {
 .input-checkbox-without-lab-4-bty input[type="checkbox"]:focus, .input-checkbox-without-lab-4-bty input[type="checkbox"]:active {
     outline: none !important;
 }
+.default-column {
+    min-height : 100vh;
+
+}
+.demo-column {
+    border:1px solid black;
+}

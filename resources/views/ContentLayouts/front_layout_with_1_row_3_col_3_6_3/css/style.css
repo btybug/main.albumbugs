@@ -4,10 +4,7 @@
 .left-bar ,.right-bar{
     height: 100%;
 }
-.top-bar{
-    min-height: 100px;
-    margin-bottom: 20px;
-}
+
 .main-cont {
     min-height: 680px;
 }
@@ -18,4 +15,8 @@
     display: -webkit-flex;
     display: flex;
     flex-wrap: wrap;
+}
+.row-no-gutter>[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
 }

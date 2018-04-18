@@ -8,7 +8,7 @@
 }
 .top-bar{
     min-height: 100px;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 .main-cont {
     min-height: 680px;

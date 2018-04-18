@@ -6,7 +6,7 @@
 }
 .top-bar{
     min-height: 100px;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 .main-cont {
     min-height: 680px;
@@ -21,5 +21,9 @@
 }
 .top{
     min-height: 100px;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
+}
+.row-no-gutter>[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
 }

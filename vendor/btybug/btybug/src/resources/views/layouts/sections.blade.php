@@ -49,7 +49,8 @@
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-danger" data-settingaction="console">Console</button>
             <button class="btn btn-info" data-settingaction="setting"> Setting</button>
-            <button class="btn btn-success" data-settingaction="save"> save</button>
+            <button class="btn btn-success" data-settingaction="save"> Save</button>
+            <button class="btn btn-primary" data-settingaction="save-as"> Save as</button>
             @if($model->self_type == "page_sections")
                 <a href="{!! url("/admin/uploads/gears/page-sections/variations/$model->slug") !!}"
                    class="btn btn-warning">Close</a>

@@ -220,13 +220,13 @@ class ModalityController extends Controller
         if (! $layout) return \Response::json(['error' => true]);
 
         $variation = $layout->variations()->find($variationName);
+//
+//        if (!$variation) {
+//            $layout->variations()->createVariation(['title' => $key], $key, false);
+//            $variation = $layout->variations()->find($variationName);
+//        }
 
-        if (!$variation) {
-            $layout->variations()->createVariation(['title' => $key], $key, false);
-            $variation = $layout->variations()->find($variationName);
-        }
-
-        return \Response::json(['error' => false, 'unit' => $layout->toArray(), 'variation' => $variation->toArray()]);
+        return \Response::json(['error' => false, 'unit' => $layout->toArray()]);
     }
 
     public function postCustomizeUnitSave(Request $request)

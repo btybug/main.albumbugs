@@ -89,14 +89,8 @@
 
 @stop
 
-@section('CSS')
-    {!! HTML::style('public/js/bootstrap-editable/css/bootstrap-editable.css') !!}
-@stop
-
 @section('JS')
-    {!! HTML::script('public/js/bootstrap-editable/js/bootstrap-editable.min.js') !!}
-    {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
-
+    {!! HTML::script("public/js/UiElements/bb_styles.js?v.6") !!}
     <script>
         $('#new-variation').click(function () {
             $('.new-variation').removeClass('hide');

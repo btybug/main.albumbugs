@@ -52,8 +52,7 @@
             <button class="btn btn-success" data-settingaction="save"> Save</button>
             <button class="btn btn-primary" id="save-us" data-settingaction="save-as"> Save as</button>
             @if($model->self_type == "page_sections")
-                <a href="{!! url("/admin/uploads/gears/page-sections/variations/$model->slug") !!}"
-                   class="btn btn-warning">Close</a>
+                <a href="{!! url("/admin/uploads/gears/page-sections/variations/$model->slug") !!}" class="btn btn-warning">Close</a>
             @else
                 <a href="{!! url("/admin/uploads/units/units-variations/$model->slug") !!}" class="btn btn-warning">Close</a>
             @endif

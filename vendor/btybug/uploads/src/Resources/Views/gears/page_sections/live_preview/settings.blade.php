@@ -14,7 +14,7 @@
 
     <div class="withoutifreamsetting animated bounceInRight hide" data-settinglive="settings">
         {!! Form::model($model,['id'=>'add_custome_page']) !!}
-            @include($settingsHtml)
+        @include($settingsHtml)
         {!! Form::close() !!}
     </div>
     <div class="modal fade" id="magic-settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -42,7 +42,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Save as</h4>
                 </div>
                 <div class="modal-body">

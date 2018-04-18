@@ -35,9 +35,8 @@
                                        data-title="Template Variation Title">{{$variation_data->title}}</a></td>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" data-type="layouts" data-variation="{{  $variation_data->id }}"
-                                       class="btn btn-default btn-warning btn-xs BBLive"><i class="fa fa-cog"></i>
-                                    </a>
+                                    <a target="_blank" href="{{ route('uploads_layouts_settings', $variation_data->id) }}"
+                                       class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
 
                                     <a href="/admin/uploads/layouts/delete-variation/{{$variation_data->id}}"
                                        class="btn btn-danger btn-xs"

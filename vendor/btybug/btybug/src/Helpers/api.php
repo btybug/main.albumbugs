@@ -2039,3 +2039,14 @@ function getCmsConnectionByID($id)
     $repository = new \Btybug\FrontSite\Repository\CmsConnectionsRepository();
     return ($id) ? $repository->find($id) : null;
 }
+
+function BBgetContentLayoutVariationsPluck($layout){
+    $variations = $layout->variations()->all();
+    $data = [];
+    if(count($variations)){
+        foreach ($variations as $variation){
+           $data[$variation->id] = $variation->title;
+        }
+    }
+    return $data;
+}

@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-xs-4  p-t-10">
-
+            {!! Form::select('copy_data',['' =>'Select Variation'] + BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-danger" data-settingaction="console">Console</button>

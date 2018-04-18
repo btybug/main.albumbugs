@@ -5,7 +5,7 @@
   "type": "general",
   "version": 1,
   "example":"demo",
-  "descrition": "Frontend layout 3-9 areas",
+  "descrition": "Base Layout",
   "layout": "main",
   "panel": "panel",
   "css": [

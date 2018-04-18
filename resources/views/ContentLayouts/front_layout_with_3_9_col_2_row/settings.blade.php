@@ -118,20 +118,20 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label for="">Select</label>
-                    </div>
-                    <div class="col-md-8">
-                        <select name="tr_style" id="" class="form-control">
-                            {!! $container_styles !!}
-                        </select>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="tr_style" id="" class="form-control">
+                                {!! $container_styles !!}
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div id="main_content_select_top_right_unit"
              class=" main_content_type_top_right collapse in @if(issetReturn($settings,'tr_content_type') !=='unit') hide   @endif"

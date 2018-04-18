@@ -1989,7 +1989,7 @@ function getDinamicStyleForCssFileDemo($filename, $table_name)
 
 function useDinamicStyle($filename)
 {
-    return '<link href="' . asset('public/dinamiccss/' . $filename . '.css') . '" rel="stylesheet">';
+    return '<link href="' . asset('public/dinamiccss/' . $filename . '.css?v=1') . '" rel="stylesheet">';
 }
 
 function useDinamicStyleByPath($path, $main)

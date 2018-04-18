@@ -50,6 +50,46 @@
                     </table>
                 </div>
             </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Used variation
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <table width="100%" class="table table-bordered m-0">
+                        <thead>
+                        <tr class="bg-black-darker text-white">
+                            <th>Variation Name</th>
+                            <th>Used In</th>
+                            <th width="150">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    title
+                                </td>
+                                <td>
+                                    here
+                                </td>
+                                <td>
+                                    <a target="_blank" href="#"
+                                       class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
+
+                                    <a href="#"
+                                       class="btn btn-danger btn-xs"
+                                       onclick="return confirm('Are you sure to delete')"> &nbsp;<i
+                                                class="fa fa-trash"></i> &nbsp;</a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         {{--<div class="col-md-4 new-variation @if(empty($variation)) hide @endif">--}}

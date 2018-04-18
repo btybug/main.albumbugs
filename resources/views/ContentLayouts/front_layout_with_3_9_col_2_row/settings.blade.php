@@ -120,6 +120,18 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                 </div>
 
             </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label for="">Select</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select name="tr_style" id="" class="form-control">
+                            {!! $container_styles !!}
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="main_content_select_top_right_unit"
              class=" main_content_type_top_right collapse in @if(issetReturn($settings,'tr_content_type') !=='unit') hide   @endif"
@@ -177,6 +189,18 @@ $container_styles='<option value="0">Select Class</option>'.$container_styles;
                             {!! Form::select('main_content_type',
                             [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
                             null,['class'=>'form-control content_type','data-value'=>'main_right']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="">Select</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="mr_style" id="" class="form-control">
+                                {!! $container_styles !!}
+                            </select>
                         </div>
                     </div>
                 </div>

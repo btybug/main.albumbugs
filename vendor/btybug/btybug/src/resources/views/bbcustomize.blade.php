@@ -30,20 +30,16 @@
            class="page-layout-title form-control"
            title="info"
            style="width: 100%; background: #fff;"
-           @if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
-           value="{!! $obj->title !!}"
-           data-content="
-                   Type:{!! $type !!}
-                   Name:{!! $obj->title !!}
-                   Author:{!! $obj->author !!}
-                   Uploaded:{!! BBgetDateFormat($obj->created_at) !!}
-                   Variation:{!! $variation->title !!}
-           @if(isset($variation->updated_at))
-                   Last Modification:{!!BBgetDateFormat($variation->updated_at) !!}
-           @endif
-                   "
-           @else
-           value="Nothing Selected!!!"
+           @if(isset($obj) && is_object($obj))
+                value="{!! $obj->title !!}"
+               data-content="
+                       Type:{!! $type !!}
+                       Name:{!! $obj->title !!}
+                       Author:{!! $obj->author !!}
+                       Uploaded:{!! BBgetDateFormat($obj->created_at) !!}
+                "
+            @else
+                value="Nothing Selected!!!"
             @endif
     >
     <div class="input-group-addon">
@@ -53,9 +49,11 @@
     </div>
 
     <a
-        @if(isset($obj) && isset($variation)&& is_object($obj) && is_object($variation))
+        @if(isset($obj) && is_object($obj))
            @if($type == 'units')
-                href='{{ "/admin/uploads/gears/settings/".$variation->id }}'
+                @if(isset($variation)&& is_object($variation))
+                    href='{{ "/admin/uploads/gears/settings/".$variation->id }}'
+                @endif
            @else
                 href='{{ "/admin/uploads/layouts/settings/".$obj->slug.'.'.$structure }}'
            @endif

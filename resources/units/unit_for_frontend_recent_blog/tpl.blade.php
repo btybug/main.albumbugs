@@ -16,7 +16,7 @@
                             </div>
                             <div class="blog-meta">
                                 <ul class="meta">
-                                    <li>26 April 2016 <span>/</span></li>
+                                    <li>19 April 2018 <span>/</span></li>
                                     <li class="blog-by">by<a class="blog-admin" href="#">Admin</a></li>
                                 </ul>
                             </div>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="blog-meta">
                                 <ul class="meta">
-                                    <li>26 April 2016 <span>/</span></li>
+                                    <li>19 April 2018 <span>/</span></li>
                                     <li class="blog-by">by<a class="blog-admin" href="#">Admin</a></li>
                                 </ul>
                             </div>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="blog-meta">
                                 <ul class="meta">
-                                    <li>26 April 2016 <span>/</span></li>
+                                    <li>19 April 2018 <span>/</span></li>
                                     <li class="blog-by">by<a class="blog-admin" href="#">Admin</a></li>
                                 </ul>
                             </div>

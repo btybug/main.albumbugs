@@ -26,6 +26,9 @@
 {!! HTML::style("public/js/DataTables/datatables.css") !!}
 {!! HTML::style("public/js/DataTables/Buttons-1.5.1/css/buttons.bootstrap.css") !!}
 {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$page->slug).'.css') !!}
+{{--{!! BBMainJS() !!}--}}
+{!! BBJs("backend") !!}
+{!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
 @yield('CSS')
 @stack('css')
 
@@ -51,10 +54,10 @@
 </div>
 @include('modal')
 {{ csrf_field() }}
-{!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
+
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-{!! BBMainJS() !!}
-{!! BBJs("backend") !!}
+
+
 {!! HTML::script("public/js/admin.js?v=6.0") !!}
 {!! HTML::script("public/js/BB.js") !!}
 {!! HTML::script("public/js/DataTables/datatables.js") !!}

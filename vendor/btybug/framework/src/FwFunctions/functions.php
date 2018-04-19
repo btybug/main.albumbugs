@@ -53,7 +53,7 @@ function BBJs($section = 'frontend')
         }
     }
 
-    return '<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    return '<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
             <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>';
 }
 
@@ -70,7 +70,7 @@ function BBJquery($section = 'frontend')
 
     }
 
-    return '<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>';
+   // return '<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>';
 }
 
 function BBMainJS()

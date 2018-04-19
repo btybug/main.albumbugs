@@ -39,6 +39,7 @@ class BtybugServiceProvider extends ServiceProvider
         include __DIR__ . '/../standards/constants.php';
         $this->app->register(EventyServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(DirectivesServiceProvider::class);
     }
 
 }

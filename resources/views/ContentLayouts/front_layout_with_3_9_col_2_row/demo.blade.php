@@ -55,7 +55,10 @@
                                 {!! BBrenderHook($settings['hooks']['main_hook']) !!}
                             @endif
                             @break
+                            @case('main_content')
 
+                           {!! BBeditor() !!}
+                            @break
                             @default
                             <span>Something went wrong, please try again</span>
                         @endswitch
@@ -68,3 +71,4 @@
 
 {!! BBstyle($_this->path.DS.'css/style.css') !!}
 {!! useDinamicStyle('containers') !!}
+{{--<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>--}}

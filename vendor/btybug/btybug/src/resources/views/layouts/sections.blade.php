@@ -23,7 +23,7 @@
 
 
     {!! HTML::style('public-x/custom/css/'.uniqid().'.css') !!}
-
+{!! BBJs() !!}
     @yield('CSS')
     @stack('css')
 </head>
@@ -126,11 +126,7 @@
 <input name="token" type="hidden" value="{{ csrf_token() }}" id="token"/>
 
 </body>
-{{--{!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}--}}
-{{--{!! HTML::script("public/js/UiElements/ui-preview-setting.js") !!}--}}
 {!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
-{!! HTML::script("public/css/bootstrap/js/bootstrap.min.js") !!}
-{!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
 {!! HTML::script('public-x/custom/js/'.uniqid().'.js') !!}
 
 @yield('JS')

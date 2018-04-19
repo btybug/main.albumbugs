@@ -46,14 +46,15 @@
     @stack('css')
 @stop
 @section('JS')
-    {!! HTML::script("public/js/bootstrap.min.js") !!}
     {!! HTML::script("public/js/UiElements/bb_styles.js?v=1") !!}
     {!! HTML::script("public/js/UiElements/bb_div.js") !!}
     {!! HTML::script("public/js/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js") !!}
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js") !!}
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js") !!}
     {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
-    {!! HTML::script('public/js/UiElements/content-layout-settings.js?v=5') !!}
-    @yield('JS')
-    @stack('javascript')
+    <script>
+        tinymce.init({
+            selector: 'textarea#test'});
+    </script>
+    {!! HTML::script('public/js/UiElements/content-layout-settings.js?v=8') !!}
 @stop

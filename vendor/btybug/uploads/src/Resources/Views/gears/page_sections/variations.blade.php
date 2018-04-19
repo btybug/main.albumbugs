@@ -68,24 +68,32 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($used_in_variations as $used_in)
                             <tr>
                                 <td>
-                                    title
+                                    <a href="#" class="editable" data-type="text" data-pk="{{$used_in->id}}"
+                                       data-title="Template Variation Title">{{$used_in->title}}</a>
                                 </td>
                                 <td>
-                                    here
+                                    @if($used_in->used_in)
+                                        @php
+                                            $page = BBgetFrontPage($used_in->used_in);
+                                        @endphp
+                                        <p>{!! $page->title !!}</p>
+                                        <p><a href="{!! route('frontsite_settings',$page->id) !!}" target="_blank">Go To Page</a></p>
+                                    @endif
                                 </td>
                                 <td>
-                                    <a target="_blank" href="#"
+                                    <a target="_blank" href="{{ route('uploads_layouts_settings', $used_in->id) }}"
                                        class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
 
-                                    <a href="#"
+                                    <a href="/admin/uploads/layouts/delete-variation/{{$used_in->id}}"
                                        class="btn btn-danger btn-xs"
                                        onclick="return confirm('Are you sure to delete')"> &nbsp;<i
                                                 class="fa fa-trash"></i> &nbsp;</a>
-
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

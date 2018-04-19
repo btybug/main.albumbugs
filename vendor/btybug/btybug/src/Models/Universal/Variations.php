@@ -123,6 +123,9 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         $arr['title'] = $array['title'];
         $arr['settings'] = $settings;
 
+        if (isset($array["used_in"])) {
+            $arr['used_in'] = $array["used_in"];
+        }
         $this->attributes = collect($arr);
 
         return $this;

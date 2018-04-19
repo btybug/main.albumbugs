@@ -64,7 +64,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         if (!$ui) {
             return false;
         }
-        $variation = $ui->variations()->find($slug);
+        $variation = $ui->variations(false)->find($slug);
 
         $settings = [];
         if (count($variation->settings) > 0) {
@@ -155,6 +155,9 @@ class ContentLayouts extends BasePainter implements VariationAccess
             $data['variation'] = $variation;
             return self::findByVariation($slug)->renderSettings($data);
         } else if (self::find($slug)) {
+            if(! $variation){
+                $variation = self::find($slug)->variations(false)->find($slug);
+            }
             $data['variation'] = $variation;
             return self::find($slug)->renderSettings($data);
         }
@@ -167,7 +170,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
     public static function findVariation($id)
     {
         $layout = new self();
-        return $layout->findByVariation($id)->variations()->find($id);
+        return $layout->findByVariation($id)->variations(false)->find($id);
     }
 
     /**
@@ -194,7 +197,11 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
                 } else {
                     $variationID = explode('.', $slug);
-                    $variation = $variation->createVariation($dataToInsert,issetReturn($variationID,1,null));
+                    if(isset($variationID[1])){
+                        $pageID = explode('_', $variationID[1]);
+                        $dataToInsert['used_in'] = end($pageID);
+                    }
+                    $variation = $variation->createVariation($dataToInsert,issetReturn($variationID,1,null),(isset($variationID[1]))?true:false);
                 }
             } else {
                 $existingVariation->setAttributes('title', $title);
@@ -221,7 +228,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public static function deleteVariation($id)
     {
-        self::findByVariation($id)->variations()->deleteVariation($id);
+        self::findByVariation($id)->variations(false)->deleteVariation($id);
         $slug = explode('.', $id);
         $tpl = self::find($slug[0]);
         return ContentLayoutVariations::delete($id, $tpl);
@@ -498,12 +505,26 @@ class ContentLayouts extends BasePainter implements VariationAccess
         if (!$slug) {
             $slug = $this->slug;
         }
-        foreach (self::findByVariation($slug)->variations() as $variation) {
+        foreach (self::findByVariation($slug)->variations(false) as $variation) {
             if ($variation->active) {
                 return $variation;
             }
         }
         return null;
+    }
+
+    public function scopeUsedInVariations($slug = null)
+    {
+        if (!$slug) {
+            $slug = $this->slug;
+        }
+        $data = array();
+        foreach (self::find($slug)->variations(false)->all() as $variation) {
+            if ($variation->used_in) {
+                $data[] = $variation;
+            }
+        }
+        return $data;
     }
 
     public function scopeGetPageLayout($page, $hide_top = false)

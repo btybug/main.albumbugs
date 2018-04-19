@@ -65,33 +65,38 @@ $(document).ready(function () {
     });
 
     $('#save-us').on('click', function () {
-        console.log(5555555)
         $("#save-as-variation").modal();
     });
 
-    // $('[data-settingaction="save-as"]').on('click', function () {
-    //     var data = $('form').serialize();
-    //     data += '&itemname=' + $('#itemname').val();
-    //     var url = $('#add_custome_page').attr('action');
-    //     $.ajax({
-    //         type: "post",
-    //         datatype: "json",
-    //         url: url + '/save',
-    //         data: data,
-    //         headers: {
-    //             'X-CSRF-TOKEN': $("#token").val()
-    //         },
-    //         success: function (data) {
-    //             if (!data.error) {
-    //                 if(data.url.length != 0) {
-    //                     window.location.replace(data.url);
-    //                 } else if(data.html.length) {
-    //                     $('#widget_container').html(data.html)
-    //                 }
-    //             }
-    //         }
-    //     });
-    // });
+    $('.save-as-submit').on('click', function () {
+        var new_name = $('#new_name').val();
+
+        if(new_name.length > 0){
+            var data = $('form').serialize();
+            data += '&itemname=' + new_name + '&save_us=' + true;
+            var url = $('#add_custome_page').attr('action');
+            $.ajax({
+                type: "post",
+                datatype: "json",
+                url: url + '/save',
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $("#token").val()
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        if(data.url.length != 0) {
+                            window.location.replace(data.url);
+                        } else if(data.html.length) {
+                            $('#widget_container').html(data.html)
+                        }
+                    }
+                }
+            });
+        }else{
+            alert("enter name !!!");
+        }
+    });
 	
 		
 	function tinymceeditor(){

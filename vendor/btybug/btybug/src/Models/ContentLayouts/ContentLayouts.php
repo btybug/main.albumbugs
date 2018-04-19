@@ -185,7 +185,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         if ($isSave && $isSave == 'save') {
             // $variation = new static();
             $tpl = self::findByVariation($slug);
-            $existingVariation = $variation = $tpl->variations()->find($slug);
+            $existingVariation = $variation = $tpl->variations(false)->find($slug);
             $dataToInsert = [
                 'title' => $title,
                 'settings' => $data
@@ -208,6 +208,15 @@ class ContentLayouts extends BasePainter implements VariationAccess
                 $existingVariation->setAttributes('settings', $dataToInsert['settings']);
                 $variation = $existingVariation;
             }
+
+            if(isset($data['save_us'])){
+                $variation->removeAttributes('hidden');
+                $variation->removeAttributes('used_in');
+                if ($new = $variation->copy()) {
+                    return ['id' => $new->id];
+                }
+            }
+
             if ($variation->save()) {
                 return ['id' => $variation->id];
             }
@@ -219,10 +228,12 @@ class ContentLayouts extends BasePainter implements VariationAccess
                 if($tpl && $variation){
                     return ['data' => $tpl->renderLive($variation->settings)];
                 }
-            }else{
+            } else{
+
                 return ['data' => self::findByVariation($slug)->renderLive($data)];
             }
         }
+
         return false;
     }
 

@@ -142,6 +142,12 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return $this;
     }
 
+    public function removeAttributes($key)
+    {
+        unset($this->attributes[$key]);
+        return $this;
+    }
+
     /**
      * @param mixed $key
      * @return bool
@@ -199,8 +205,8 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     {
         $dublicate = $this->attributes->toArray();
         return $this->model
-            ->variations(false)
-            ->makeVariation($dublicate, null, true)
+            ->variations()
+            ->makeVariation($dublicate, null)
             ->save();
     }
 

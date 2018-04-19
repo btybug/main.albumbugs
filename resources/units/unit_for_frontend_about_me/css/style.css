@@ -4,8 +4,8 @@ section.about-me {
 }
 
 section.about-me .section-content {
-    padding-top: 65px;
-    padding-bottom: 75px;
+    /*padding-top: 65px;*/
+    /*padding-bottom: 75px;*/
 }
 
 section.about-me .head-title {
@@ -99,7 +99,7 @@ section.about-me .pro-pic {
 }
 
 section.about-me .pro-pic img {
-    width: 350px;
+    width: 100%;
     height: 450px;
     object-fit: cover;
 }

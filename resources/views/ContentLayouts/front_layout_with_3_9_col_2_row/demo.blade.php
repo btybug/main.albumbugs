@@ -56,8 +56,13 @@
                             @endif
                             @break
                             @case('main_content')
+                            <div class="text-right">
+                                <div class="cl-editor">
+                                    <button type="submit" class="btn btn-sm btn-info">Save</button>
+                                    {!! BBeditor() !!}
+                                </div>
+                            </div>
 
-                           {!! BBeditor() !!}
                             @break
                             @default
                             <span>Something went wrong, please try again</span>

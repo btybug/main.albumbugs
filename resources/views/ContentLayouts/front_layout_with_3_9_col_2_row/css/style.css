@@ -25,3 +25,9 @@
     padding-right: 0;
     padding-left: 0;
 }
+.cl-editor{
+    border: 2px solid #5bc0de;
+}
+.cl-editor>button{
+    border-radius: 0;
+}

@@ -18,8 +18,14 @@ $(document).ready(function () {
         evens($(this));
     });
     
-  $('select').on('change', function () {
-        evens($(this));
+    $('select').on('change', function () {
+        if($(this).attr('id') != 'copy_data'){
+            evens($(this));
+        }else{
+            if($(this).val() != '' && $(this).val() != undefined){
+                load_variation({"variation_id" : $(this).val(),"copy_data":true});
+            }
+        }
     });
     $('input[type="radio"]').on('click', function () {
         evens($(this));
@@ -122,6 +128,27 @@ $(document).ready(function () {
                     $('#output-content').html(data.request);
 					$('.fullheight').addClass('editplaceholders');
 					tinymceeditor()
+                }
+            }
+        });
+    }
+
+    function load_variation(data) {
+        var url = $('#add_custome_page').attr('action');
+        $.ajax({
+            type: "post",
+            datatype: "json",
+            url: url,
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $("#token").val()
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $('#widget_container').html(data.html);
+                    $('#output-content').html(data.request);
+                    $('.fullheight').addClass('editplaceholders');
+                    tinymceeditor()
                 }
             }
         });

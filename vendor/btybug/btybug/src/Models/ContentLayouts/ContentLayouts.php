@@ -182,18 +182,19 @@ class ContentLayouts extends BasePainter implements VariationAccess
         if ($isSave && $isSave == 'save') {
             // $variation = new static();
             $tpl = self::findByVariation($slug);
-            $existingVariation = $variation = self::findByVariation($slug)->variations()->find($slug);
+            $existingVariation = $variation = $tpl->variations()->find($slug);
             $dataToInsert = [
                 'title' => $title,
                 'settings' => $data
             ];
             if (!$existingVariation) {
-                $variation = new ContentLayoutVariations();
+                $variation = new ContentLayoutVariations($tpl);
                 if ($tpl->autoinclude) {
                     $variation = $tpl->makeAutoIncludeVariation(null, $dataToInsert);
 
                 } else {
-                    $variation = $variation->createVariation($dataToInsert);
+                    $variationID = explode('.', $slug);
+                    $variation = $variation->createVariation($dataToInsert,issetReturn($variationID,1,null));
                 }
             } else {
                 $existingVariation->setAttributes('title', $title);
@@ -204,7 +205,16 @@ class ContentLayouts extends BasePainter implements VariationAccess
                 return ['id' => $variation->id];
             }
         } else {
-            return ['data' => self::findByVariation($slug)->renderLive($data)];
+            if(isset($data['copy_data'])){
+                $tpl = self::findByVariation($data['variation_id']);
+                $variation = $tpl->variations()->find($data['variation_id']);
+
+                if($tpl && $variation){
+                    return ['data' => $tpl->renderLive($variation->settings)];
+                }
+            }else{
+                return ['data' => self::findByVariation($slug)->renderLive($data)];
+            }
         }
         return false;
     }

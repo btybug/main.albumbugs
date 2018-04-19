@@ -1,17 +1,16 @@
 <div class="sidebar">
-    <div class="about-me">
+    <div class="side-bar-search">
         <div class="head">
-            <h3>About Me!</h3>
+            <h3>Search</h3>
         </div>
-        <div class="about-pic">
-            <img src="https://cdn-s3.si.com/s3fs-public/images/Tiffani-Thiessen--getty14.jpg" alt="image">
-        </div>
-        <div class="about-text">
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, at, cupiditate dicta earum eum ex
-                explicabo labore laboriosam laborum molestias obcaecati officiis perferendis quam quas sed tenetur unde
-                veniam, vitae.</p>
+        <div class="serach-bar">
+            <form action="#" method="get">
+                <input type="text" class="" placeholder="Type Your Word">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </div>
+
     <div class="categories">
         <div class="head">
             <h3>Categories</h3>
@@ -26,15 +25,15 @@
             </ul>
         </div>
     </div>
-    <div class="side-bar-search">
+    <div class="about-me">
         <div class="head">
-            <h3>Search</h3>
+            <h3>Info</h3>
         </div>
-        <div class="serach-bar">
-            <form action="#" method="get">
-                <input type="text" class="" placeholder="Type Your Word">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+        <div class="about-pic">
+            <img src="https://cdn-s3.si.com/s3fs-public/images/Tiffani-Thiessen--getty14.jpg" alt="image">
+        </div>
+        <div class="about-text">
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, at, cupiditate dicta earum eum ex explicabo labore laboriosam laborum molestias obcaecati officiis perferendis quam quas sed tenetur unde veniam, vitae.</p>
         </div>
     </div>
     <div class="newsletter">

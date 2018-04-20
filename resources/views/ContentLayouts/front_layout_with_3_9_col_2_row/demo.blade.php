@@ -15,7 +15,15 @@
                             {!! BBrenderHook($settings['hooks']['ls_hook']) !!}
                         @endif
                         @break
+                        @case('editor')
+                        <div class="text-right">
+                            <div class="cl-editor">
+                                <button type="submit" class="btn btn-sm btn-info">Save</button>
+                                {!! BBeditor() !!}
+                            </div>
+                        </div>
 
+                        @break
                         @default
                         <span>Something went wrong, please try again</span>
                     @endswitch
@@ -55,7 +63,7 @@
                                 {!! BBrenderHook($settings['hooks']['main_hook']) !!}
                             @endif
                             @break
-                            @case('main_content')
+                            @case('editor')
                             <div class="text-right">
                                 <div class="cl-editor">
                                     <button type="submit" class="btn btn-sm btn-info">Save</button>
@@ -73,7 +81,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    tinymce.init({
+        selector: 'textarea.cms_editor'});
+</script>
 {!! BBstyle($_this->path.DS.'css/style.css') !!}
 {!! useDinamicStyle('containers') !!}
 {{--<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>--}}

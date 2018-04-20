@@ -24,6 +24,7 @@
 
     {!! HTML::style('public-x/custom/css/'.uniqid().'.css') !!}
 {!! BBJs() !!}
+    {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
     @yield('CSS')
     @stack('css')
 </head>

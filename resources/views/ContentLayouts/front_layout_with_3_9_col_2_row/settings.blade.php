@@ -25,7 +25,7 @@ foreach ($placeholdersData as $key => $datum) {
                         </div>
                         <div class="col-md-8">
                             {!! Form::select('ls_content_type',[null=>'Select Content Type',
-                            'unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content']
+                            'unit'=>'Unit','hook'=>'HooK','editor'=>'Editor']
                             ,null,['class'=>'form-control content_type','data-value'=>'left_side_bar']) !!}
                         </div>
                     </div>
@@ -194,7 +194,7 @@ foreach ($placeholdersData as $key => $datum) {
                         </div>
                         <div class="col-md-8">
                             {!! Form::select('main_content_type',
-                            [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
+                            [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','editor'=>'Editor'],
                             null,['class'=>'form-control content_type','data-value'=>'main_right']) !!}
                         </div>
                     </div>

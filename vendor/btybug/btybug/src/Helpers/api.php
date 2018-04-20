@@ -2053,5 +2053,5 @@ function BBgetContentLayoutVariationsPluck($layout){
 function BBeditor(){
 //    BBscript(public_path('js/tinymice/tinymce.min.js'));
 //    BBscript(public_path('js/editor.js'));
-    return '<textarea name=\'test\' id=\'test\'></textarea>';
+    return '<textarea name=\'test\' class=\'cms_editor\'></textarea>';
 }

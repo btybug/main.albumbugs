@@ -1,20 +1,7 @@
 @if($page)
     {!! Form::model($page,['id' => 'page_settings_form']) !!}
-    {{--<div class="row">--}}
-        {{--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
-            {{--<div class="pull-right">--}}
-                {{--<a data-href="{!! url('/admin/console/structure/pages/page-test-preview/'.--}}
-                {{--$page->id."?pl_live_settings=page_live&pl=" . $page->page_layout . '&' . $placeholders) !!}"--}}
-                   {{--class="live-preview-btn"><i class="fa fa-eye" aria-hidden="true"></i> View--}}
-                {{--</a>--}}
-                {{--{{ Form::button('<i class="fa fa-check" aria-hidden="true"></i> Save', array('type' => 'submit', 'class' => 'save_btn')) }}--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
     <div class="row">
         <div class="col-xs-12 col-sm-9 connected" data-bbsortable="target">
-            {{--{!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getAdminPageLayoutPlaceholders($page) !!}--}}
-
             <div class="panel panel-default custompanel m-t-20">
                 <div class="panel-heading"> Page Info</div>
                 <div class="panel-body published_1">
@@ -53,8 +40,41 @@
                     </div>
                 </div>
             </div>
-            {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getAdminPageLayout($page) !!}
-            {!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getAdminPageLayoutPlaceholders($page) !!}
+
+            <div class="panel panel-default custompanel m-t-20">
+                <div class="panel-heading">
+                    Header & Footer
+                </div>
+                <div class="panel-body template_body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            {{Form::hidden('header',0)}}
+                            {{Form::hidden('footer',0)}}
+                            <label class="bd_layout pull-left m-r-15">{!! Form::checkbox('header',1,null,['style' => 'position:initial;z-index:1;']) !!}
+                                <span class="labls">Header</span>
+
+                            </label>
+                            <label class="bd_layout"> {!! Form::checkbox('footer',1,null,['style' => 'position:initial;z-index:1;']) !!}
+                                <span class="labls">Footer</span>
+
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default custompanel m-t-20">
+                <div class="panel-heading">
+                    Layout
+                </div>
+                <div class="panel-body template_body">
+                    <div class="form-group">
+                        {!! BBcustomize('layouts','layout_id','frontend',
+                                                       (isset($page->layout_id) && $page->layout_id)?'Change':'Select',
+                                                       'admin_page_layout_'.$id,['class'=>'btn btn-default change-layout','model' =>$page]) !!}
+                    </div>
+                </div>
+            </div>
 
             <div class="panel panel-default custompanel m-t-20">
                 <div class="panel-heading">Main Content
@@ -63,38 +83,11 @@
                     Main content
                 </div>
             </div>
-
-            <div class="panel panel-default custompanel m-t-20">
-                <div class="panel-heading"> General Info</div>
-                <div class="panel-body published_1">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 right_part_publ">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 author_name_div m-t-10">
-                                    <p style="text-align: left"><b>Created
-                                            :</b> {!! BBgetTimeFormat($page->created_at) !!} {!! BBgetDateFormat($page->created_at) !!}
-                                    </p>
-                                    <p style="text-align: left">
-                                        <b>Edited :</b>
-                                        @if($page->edited_by)
-                                            By {{ @$page->editor->username }} {!! BBgetTimeFormat($page->updated_at) !!} {!! BBgetDateFormat($page->updated_at) !!}
-                                        @else
-                                            Not Edited Yet
-                                        @endif
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
         <div class="col-xs-12 col-sm-3 create connected" data-bbsortable="source">
             <div class="panel panel-default custompanel m-t-20">
                 <div class="panel-heading">General</div>
                 <div class="panel-body">
-                    <a href="javascript:void(0)" class="btn btn-info btn-block full-page-view m-b-5">Full Preview</a>
                     {{ Form::submit('Save', array('class' => 'save_btn m-b-5 btn-block','style' => "width:100%;")) }}
                 </div>
             </div>

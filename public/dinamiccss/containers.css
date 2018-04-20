@@ -11,35 +11,35 @@
     padding: 20px;
     border: 1px solid #e8e7e7; }
 /*pad-15,mar-15,bg-light,shadow*/
-.bty-div-p15-m15-bg-light-shadow-bg{
+.bty-div-p15-m15-bg-light-shad-bg{
     margin: 15px;
     background-color: whitesmoke;
     padding: 15px;
     box-shadow: 0 0 6px #adadad; }
 /*pad-20,mar-15,bg-light,shadow*/
-.bty-div-p20-m15-bg-light-shadow-bg{
+.bty-div-p20-m15-bg-light-shad-bg{
     margin: 15px;
     background-color: whitesmoke;
     padding: 20px;
     box-shadow: 0 0 6px #adadad; }
 /*pad-20,mar-15,shadow*/
-.bty-div-p20-m15-shadow{
+.bty-div-p20-m15-shad{
     margin: 15px;
     padding: 20px;
     box-shadow: 0 0 6px #adadad; }
 /*pad-70-15,mar-15,shadow,bg-light*/
-.bty-div-p-70-15-m15-shadow-bg{
+.bty-div-p-70-15-m15-shad-bg{
     margin: 15px;
     background-color: whitesmoke;
     padding: 70px 15px;
     box-shadow: 0 0 6px #adadad; }
 /*pad-70-20,mar-15,shadow*/
-.bty-div-p-70-20-m15-shadow{
+.bty-div-p-70-20-m15-shad{
     margin: 15px;
     padding: 70px 20px;
     box-shadow: 0 0 6px #adadad; }
 /*pad-60-15,mar-15,shadow,radius*/
-.bty-div-p-60-15-m15-shadow-radious{
+.bty-div-p-60-15-m15-shad-rad{
     margin: 15px;
     padding: 60px 15px;
     box-shadow: 0 0 6px #adadad;
@@ -47,7 +47,7 @@
     -moz-border-radius: 5px;
     border-radius: 5px; }
 /*pad-60-20,mar-15,shadow,radius*/
-.bty-div-p-60-20-m15-shadow-radious{
+.bty-div-p-60-20-m15-shad-rad{
     margin: 15px;
     padding: 60px 20px;
     box-shadow: 0 0 6px #adadad;
@@ -59,12 +59,12 @@
     margin: 15px;
     padding: 60px 15px; }
 /*pad-60-20,mar-15*/
-.bty-div-p-60-15-m15{
+.bty-div-p-60-15-m20{
     margin: 15px;
     padding: 60px 20px; }
 
 /*center,bg-light*/
-.bty-div-center-bg-gray {
+.bty-div-center-bg-light {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

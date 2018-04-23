@@ -2064,17 +2064,45 @@ function BBgetFrontPagesPanels($page)
 {
     $panels = Config::get('front_page_edit_widget', []);
     foreach ($panels as $panel) {
-        foreach ($panel as $key => $value) {
-            echo ' <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
- <div class="panel panel-default custompanel m-t-20"><div class="panel-heading">' . $key . '</div>
+        foreach ($panel as $key => $data) {
+            switch ($data['id']){
+                case "panel_info":
+                    if($page->panel_info){
+                        BBrenderPanel($data['view'],$key,$page);
+                    }
+                    break;
+                case "panel_header_footer":
+                    if($page->panel_header_footer){
+                        BBrenderPanel($data['view'],$key,$page);
+                    }
+                    break;
+                case "panel_main_content":
+                    if($page->panel_main_content){
+                        BBrenderPanel($data['view'],$key,$page);
+                    }
+                    break;
+                case "panel_assets":
+                    if($page->panel_assets){
+                        BBrenderPanel($data['view'],$key,$page);
+                    }
+                    break;
+                default:
+                    if(! in_array($data['id'],array('panel_info','panel_header_footer','panel_main_content','panel_assets'))){
+                        BBrenderPanel($data['view'],$key,$page);
+                    }
+                    break;
+            }
+        }
+    }
+}
+
+function BBrenderPanel($view,$title,$page){
+    echo ' <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 page-data p-20">
+ <div class="panel panel-default custompanel m-t-20"><div class="panel-heading">' . $title . '</div>
  <div class="panel-body">' .
-                View::make($value, compact('page'))->render()
-                . '
+        View::make($view, compact('page'))->render()
+        . '
             </div>
             </div>
             </div>';
-        }
-
-    }
-
 }

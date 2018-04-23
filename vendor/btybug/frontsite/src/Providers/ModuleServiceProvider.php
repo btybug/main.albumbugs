@@ -145,10 +145,32 @@ class ModuleServiceProvider extends ServiceProvider
         ]);
 
           \Btybug\btybug\Models\Routes::registerPages('btybug/frontsite');
-        \Eventy::action('front_page_edit_widget', ['Page Info'=>'manage::panels.page_info']);
-        \Eventy::action('front_page_edit_widget', ['Header & footer'=>'manage::panels.header_footer']);
-        \Eventy::action('front_page_edit_widget', ['Main Content'=>'manage::panels.header_footer']);
-        \Eventy::action('front_page_edit_widget', ['Assets '=>'manage::panels.assets']);
+        \Eventy::action('front_page_edit_widget', ['Page Info'=> [
+            'view' => 'manage::panels.page_info',
+            'id' => 'panel_info',
+        ]]);
+        \Eventy::action('front_page_edit_widget', ['Header & footer'=>
+            [
+                'view' => 'manage::panels.header_footer',
+                'id' => 'panel_header_footer',
+            ]]);
+        \Eventy::action('front_page_edit_widget', ['Main Content'=>
+            [
+                'view' => 'manage::panels.main_content',
+                'id' => 'panel_main_content',
+            ]]);
+        \Eventy::action('front_page_edit_widget', ['Assets '=>
+            [
+                'view' => 'manage::panels.assets',
+                'id' => 'panel_assets',
+            ]]);
+
+
+        \Eventy::action('front_page_edit_widget', ['Test Pane; '=>
+        [
+            'view' => 'manage::panels.test',
+            'id' => 'test_panel',
+        ]]);
 
     }
 

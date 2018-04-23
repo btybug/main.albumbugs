@@ -2075,6 +2075,7 @@ function BBgetFrontPagesPanels($page)
                 View::make($value, compact('page'))->render()
                 . '
         </div>
+    </div>
     </div>';
         }
 

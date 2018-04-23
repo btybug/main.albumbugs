@@ -56,7 +56,7 @@ class ModuleServiceProvider extends ServiceProvider
 
         \Eventy::action('my.tab', $tabs);
 
-        \Eventy::action('front_page_edit_widget', ['Panel Name'=>'framework::front_page_edit_widget']);
+       
 
         \Eventy::action('admin.menus', [
             "title" => "Framework",

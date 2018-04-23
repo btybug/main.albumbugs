@@ -1,58 +1,14 @@
 @if($page)
     {!! Form::model($page,['url' => route('frontsite_settings',$id), 'id' => 'page_settings_form','files' => true]) !!}
-    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
-        <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">Page Info</div>
-            <div class="panel-body">
-                {!! BBcustomize('layouts','page_layout','frontend',
-                                                        (isset($page->page_layout) && $page->page_layout)?'Change':'Select',
-                                                        'page_layout_'.$id,['class'=>'btn btn-default change-layout','model' =>$page]) !!}
-            </div>
-        </div>
+
+    {!! BBgetFrontPagesPanels($page) !!}
+
+
 
         {{--TODO: need to implement for child pages--}}
         {{--{!! Btybug\btybug\Models\ContentLayouts\ContentLayouts::getChildrenPageLayout($page) !!}--}}
 
-        <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">Header & footer</div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        {{Form::hidden('header',0)}}
-                        {{Form::hidden('footer',0)}}
-                        <label class="bd_layout pull-left m-r-15">{!! Form::checkbox('header',1,null,['style' => 'position:initial;z-index:1;']) !!}
-                            <span class="labls">Header</span>
 
-                        </label>
-                        <label class="bd_layout"> {!! Form::checkbox('footer',1,null,['style' => 'position:initial;z-index:1;']) !!}
-                            <span class="labls">Footer</span>
-
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">Main Content
-                <div class="pull-right">
-                    Editor{!! Form::radio('content_type','editor',null,['data-role'=>'editor']) !!}
-                    Template{!! Form::radio('content_type','template',null,['data-role'=>'template']) !!}</div>
-            </div>
-            <div class="panel-body editor_body @if($page->content_type!='editor') hide @endif">
-                {!! Form::textarea('main_content',null,['id' => 'main_content']) !!}
-            </div>
-
-            <div class="panel-body template_body @if($page->content_type!='template') hide @endif">
-                <div class="col-sm-5 p-l-0 p-r-10">
-                <input name="selcteunit" data-key="title" readonly="readonly" data-id="template"
-                class="page-layout-title form-control"
-                value="{!! BBgetUnitAttr(($page->template)??null,'title') !!}"
-                >
-                </div>
-                {!! BBbutton2('unit','template','front_page_content',"Change",['class'=>'btn btn-default change-layout','data-action'=>'main_content','model'=>($page->content_type=='editor')?null:$page]) !!}
-            </div>
-        </div>
-    </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-20">
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">General</div>
@@ -138,7 +94,7 @@
                             ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
             </div>
         </div>
-        {!! BBgetFrontPagesPanels($page) !!}
+
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Fonts
                 <div class="pull-right">

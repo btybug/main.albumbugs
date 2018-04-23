@@ -104,6 +104,8 @@ class PagesController extends Controller
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
         $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
         $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
+        $page->setAttribute('cssData',$cssData);
+        $page->setAttribute('jsData',$jsData);
 
         return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','cssData','jsData']));
     }

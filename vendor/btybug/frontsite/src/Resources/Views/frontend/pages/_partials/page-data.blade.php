@@ -138,7 +138,7 @@
                             ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
             </div>
         </div>
-
+        {!! BBgetFrontPagesPanels($page) !!}
         <div class="panel panel-default custompanel m-t-20">
             <div class="panel-heading">Fonts
                 <div class="pull-right">

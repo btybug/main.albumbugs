@@ -1968,9 +1968,10 @@ function getDinamicStyle($filename)
     $styles = \App\Http\Controllers\PhpJsonParser::getClasses(base_path('public/dinamiccss/' . $filename . '.css'));
     return $styles;
 }
+
 function BBmakeCssClasses($filename)
 {
-    $parser =new \App\Http\Controllers\PhpJsonParser();
+    $parser = new \App\Http\Controllers\PhpJsonParser();
     $parser->makeCssClasses(base_path('public/dinamiccss/' . $filename . '.css'));
     return $parser;
 }
@@ -2040,18 +2041,43 @@ function getCmsConnectionByID($id)
     return ($id) ? $repository->find($id) : null;
 }
 
-function BBgetContentLayoutVariationsPluck($layout){
+function BBgetContentLayoutVariationsPluck($layout)
+{
     $variations = $layout->variations()->all();
     $data = [];
-    if(count($variations)){
-        foreach ($variations as $variation){
-           $data[$variation->id] = $variation->title;
+    if (count($variations)) {
+        foreach ($variations as $variation) {
+            $data[$variation->id] = $variation->title;
         }
     }
     return $data;
 }
-function BBeditor(){
+
+function BBeditor()
+{
 //    BBscript(public_path('js/tinymice/tinymce.min.js'));
 //    BBscript(public_path('js/editor.js'));
     return '<textarea name=\'test\' class=\'cms_editor\'></textarea>';
+}
+
+function BBgetFrontPagesPanels($page)
+{
+    $panels = Config::get('front_page_edit_widget', []);
+    foreach ($panels as $panel) {
+        foreach ($panel as $key => $value) {
+            echo ' <div class="panel panel-default custompanel m-t-20">
+            <div class="panel-heading">' . $key . '
+                <div class="pull-right">
+                   <div class="pull-right">
+                </div>
+            </div>
+            <div class="panel-body">' .
+                View::make($value, compact('page'))->render()
+                . '
+        </div>
+    </div>';
+        }
+
+    }
+
 }

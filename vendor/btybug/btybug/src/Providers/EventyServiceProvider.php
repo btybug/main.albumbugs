@@ -157,6 +157,14 @@ class EventyServiceProvider extends ServiceProvider
             return (\Config::get('tabs'));
         });
 
+        \Eventy::addAction('front_page_edit_widget', function ($what) {
+            $codes = \Config::get('front_page_edit_widget');
+            $codes[] = $what;
+            \Config::set('front_page_edit_widget', $codes);
+            return (\Config::get('front_page_edit_widget'));
+        });
+
+
         \Eventy::addAction('user.options', function ($what) {
             $options = \Config::get('user_options');
             $options[] = $what;

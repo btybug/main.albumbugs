@@ -2065,18 +2065,14 @@ function BBgetFrontPagesPanels($page)
     $panels = Config::get('front_page_edit_widget', []);
     foreach ($panels as $panel) {
         foreach ($panel as $key => $value) {
-            echo ' <div class="panel panel-default custompanel m-t-20">
-            <div class="panel-heading">' . $key . '
-                <div class="pull-right">
-                   <div class="pull-right">
-                </div>
-            </div>
-            <div class="panel-body">' .
+            echo ' <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 page-data p-20">
+ <div class="panel panel-default custompanel m-t-20"><div class="panel-heading">' . $key . '</div>
+ <div class="panel-body">' .
                 View::make($value, compact('page'))->render()
                 . '
-        </div>
-    </div>
-    </div>';
+            </div>
+            </div>
+            </div>';
         }
 
     }

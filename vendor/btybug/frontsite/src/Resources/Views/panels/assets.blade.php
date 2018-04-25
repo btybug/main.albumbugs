@@ -70,7 +70,7 @@
 
     </div>
     <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
-        {!! Form::select('js_cms[]',$page->jsData,null,
+        {!! Form::select('js_cms[]',$page->````jsData,null,
                     ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
     </div>
 </div>

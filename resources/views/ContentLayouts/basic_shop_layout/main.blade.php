@@ -1,3 +1,1 @@
-<div class="container">
-    {!! main_content() !!}
-</div>
+{!! main_content() !!}

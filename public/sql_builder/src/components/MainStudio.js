@@ -8,14 +8,12 @@ import {
     Checkbox,
     Navbar,
     NavbarGroup,
-    NavbarDivider,
     Button,
     NavbarHeading
 } from "@blueprintjs/core"
 import SplitPane from 'react-split-pane'
 import API from '../utils/api'
 import {BeatLoader} from 'halogenium'
-import Draggable from 'react-draggable'
 import 'react-table/react-table.css'
 import ReactTable from 'react-table'
 
@@ -25,7 +23,6 @@ import 'react-awesome-query-builder/css/styles.scss'
 import 'react-awesome-query-builder/css/compact_styles.scss'
 import 'react-awesome-query-builder/css/denormalize.scss'
 
-import brace from 'brace'
 import AceEditor from 'react-ace'
 
 import 'brace/mode/mysql'

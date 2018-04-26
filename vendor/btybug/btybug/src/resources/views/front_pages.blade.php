@@ -20,9 +20,9 @@
     @if($page->header)
         {!! BBheader() !!}
     @endif
-    <div class="main_content">
-        {!! BBRenderFrontLayout($page,$settings) !!}
-    </div>
+
+    {!! BBRenderFrontLayout($page,$settings) !!}
+
     @if($page->footer)
         {!! BBfooter() !!}
     @endif

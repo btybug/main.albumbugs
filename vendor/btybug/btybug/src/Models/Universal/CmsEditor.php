@@ -9,28 +9,23 @@
 namespace Btybug\btybug\Models\Universal;
 
 
-class CmsEditor
+use Illuminate\Database\Eloquent\Model;
+
+class CmsEditor extends Model
 {
+    protected $table = 'cms_editor';
+
     public static $instance;
 
     public function __construct()
     {
 
     }
-    public static function __callStatic($name, $arguments)
-    {
-        $method = 'scope' . ucfirst($name);
-        $_this = new static;
-        if (method_exists($_this, $method)
-            && is_callable(array($_this, $method))
-        ) {
-            return call_user_func_array([$_this, 'scope' . ucfirst($name)], $arguments);
-        }
-    }
+
     public function scopeShowEditor()
     {
-        $settings=[];
-        $html = \View::make('btybug::editor.show_editor',compact('settings'))->render();
+        $settings = [];
+        $html = \View::make('btybug::editor.show_editor', compact('settings'))->render();
         return $html;
     }
 
@@ -38,6 +33,4 @@ class CmsEditor
     {
 
     }
-
-
 }

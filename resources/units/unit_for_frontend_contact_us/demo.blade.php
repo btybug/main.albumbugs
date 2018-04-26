@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="contact_us">
-            <h3>Testimonials</h3>
+            <h3>Contact Us</h3>
             <h4>Details</h4>
             <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci autem commodi dicta enim
                 eum exercitationem.</p>

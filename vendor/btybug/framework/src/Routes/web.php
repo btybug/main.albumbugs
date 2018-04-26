@@ -86,6 +86,11 @@ Route::group(['prefix'=>'sql_builder'],function (){
 
 });
 
+Route::group(['prefix'=>'all-studios'],function (){
+    Route::get('/','AllStudiosController@getIndex',true);
+
+});
+
 Route::group(['prefix'=>'bb-functions'],function (){
     Route::get('/','BBController@getIndex',true);
     Route::post('/get-bb-fn-options','BBController@getOptions')->name('get_bb_fn_options');

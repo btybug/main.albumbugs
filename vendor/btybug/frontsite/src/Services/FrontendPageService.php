@@ -27,7 +27,7 @@ class FrontendPageService extends GeneralService
         'blade.php',
     ];
 
-    public function __construct (
+    public function __construct(
         FrontPagesRepository $frontPagesRepository,
         AdminsettingRepository $settingsRepository,
         PermissionRoleRepository $permissionRoleRepository
@@ -38,14 +38,14 @@ class FrontendPageService extends GeneralService
         $this->permissionRoleRepository = $permissionRoleRepository;
     }
 
-    public static function checkAccess ($page_id, $user)
+    public static function checkAccess($page_id, $user)
     {
         $frontPages = new FrontPagesRepository();
         $page = $frontPages->find($page_id);
         $memberships = $user->memberships;
 
         if ($page && $memberships) {
-            if (! $page->memberships) return true;
+            if (!$page->memberships) return true;
 
             $checkMembership = array_diff($page->memberships, $memberships);
             if (count($checkMembership) == 0) return true;
@@ -54,7 +54,7 @@ class FrontendPageService extends GeneralService
         return false;
     }
 
-    public static function FrontPagesParentPermissionWithRole ($page_id, $role_id)
+    public static function FrontPagesParentPermissionWithRole($page_id, $role_id)
     {
         $page = new FrontPagesRepository();
         $result = $page->find($page_id);
@@ -63,7 +63,7 @@ class FrontendPageService extends GeneralService
 
     }
 
-    public static function register (array $data)
+    public static function register(array $data)
     {
         if (
             isset($data['module_id'])
@@ -89,26 +89,26 @@ class FrontendPageService extends GeneralService
             $frontPageRepo = new FrontPagesRepository();
 
             return $frontPageRepo->create([
-                'user_id'              => \Auth::id(),
-                'module_id'              =>(isset($data['module_id'])) ? $data['module_id'] : null,
-                'title'                => (isset($data['title'])) ? $data['title'] : "New Page",
-                'slug'                 => (isset($data['slug'])) ? $data['slug'] : uniqid(),
-                'header'               => (isset($data['header'])) ? $data['header'] : 0,
-                'footer'               => (isset($data['footer'])) ? $data['footer'] : 0,
-                'status'               => (isset($data['status'])) ? $data['status'] : "published",
-                'page_access'          => (isset($data['page_access'])) ? $data['page_access'] : 1,
-                'page_layout'          => null,
+                'user_id' => \Auth::id(),
+                'module_id' => (isset($data['module_id'])) ? $data['module_id'] : null,
+                'title' => (isset($data['title'])) ? $data['title'] : "New Page",
+                'slug' => (isset($data['slug'])) ? $data['slug'] : uniqid(),
+                'header' => (isset($data['header'])) ? $data['header'] : 0,
+                'footer' => (isset($data['footer'])) ? $data['footer'] : 0,
+                'status' => (isset($data['status'])) ? $data['status'] : "published",
+                'page_access' => (isset($data['page_access'])) ? $data['page_access'] : 1,
+                'page_layout' => null,
                 'page_layout_settings' => null,
-                'url'                  => (isset($data['prefix'])) ? $data['prefix'] . '/' . $data['url'] : $data['url'],
-                'parent_id'            => (isset($data['parent_id'])) ? $data['parent_id'] : null,
-                'type'                 => 'plugin',
-                'content_type'         => (isset($data['content_type'])) ? $data['content_type'] : 'editor',
-                'settings'             => (isset($data['settings'])) ? json_encode($data['settings'], true) : null
+                'url' => (isset($data['prefix'])) ? $data['prefix'] . '/' . $data['url'] : $data['url'],
+                'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
+                'type' => 'plugin',
+                'content_type' => (isset($data['content_type'])) ? $data['content_type'] : 'editor',
+                'settings' => (isset($data['settings'])) ? json_encode($data['settings'], true) : null
             ]);
         }
     }
 
-    public function saveSettings (
+    public function saveSettings(
         Request $request
     )
     {
@@ -129,16 +129,16 @@ class FrontendPageService extends GeneralService
         if ($request->get('page_access') && $request->roles)
             $this->permissionRoleRepository->optimizePageRoles($page, explode(',', $request->roles), 'front');
 
-        if($request->file('main_content')){
+        if ($request->file('main_content')) {
             $extension = $request->file('main_content')->getClientOriginalExtension(); // getting image extension
-            if(in_array($extension,$this->ext)){
+            if (in_array($extension, $this->ext)) {
                 $full_name = $request->file('main_content')->getClientOriginalName();
                 $name = str_replace("." . $extension, "", $full_name);
-                \File::cleanDirectory(config('paths.samples').'/'.$page->id);
-                $request->file('main_content')->move(config('paths.samples').'/'.$page->id.'/', $full_name);
+                \File::cleanDirectory(config('paths.samples') . '/' . $page->id);
+                $request->file('main_content')->move(config('paths.samples') . '/' . $page->id . '/', $full_name);
 
                 $this->frontPagesRepository->update($page->id, [
-                    'main_content' => config('paths.samples').'/'.$page->id.'/'.$full_name
+                    'main_content' => config('paths.samples') . '/' . $page->id . '/' . $full_name
                 ]);
             }
         }
@@ -146,7 +146,7 @@ class FrontendPageService extends GeneralService
         return $page;
     }
 
-    public function saveSpecialSettings (
+    public function saveSpecialSettings(
         Request $request
     )
     {
@@ -161,16 +161,16 @@ class FrontendPageService extends GeneralService
         }
 
         $this->frontPagesRepository->update($page->id, $data);
-        if($request->file('main_content')){
+        if ($request->file('main_content')) {
             $extension = $request->file('main_content')->getClientOriginalExtension(); // getting image extension
-            if(in_array($extension,$this->ext)){
+            if (in_array($extension, $this->ext)) {
                 $full_name = $request->file('main_content')->getClientOriginalName();
                 $name = str_replace("." . $extension, "", $full_name);
-                \File::cleanDirectory(config('paths.samples').'/'.$page->id);
-                $request->file('main_content')->move(config('paths.samples').'/'.$page->id.'/', $full_name);
+                \File::cleanDirectory(config('paths.samples') . '/' . $page->id);
+                $request->file('main_content')->move(config('paths.samples') . '/' . $page->id . '/', $full_name);
 
                 $this->frontPagesRepository->update($page->id, [
-                    'main_content' => config('paths.samples').'/'.$page->id.'/'.$full_name
+                    'main_content' => config('paths.samples') . '/' . $page->id . '/' . $full_name
                 ]);
             }
         }
@@ -178,7 +178,7 @@ class FrontendPageService extends GeneralService
         return $page;
     }
 
-    public function saveGeneralSettings (
+    public function saveGeneralSettings(
         Request $request
     )
     {
@@ -188,19 +188,19 @@ class FrontendPageService extends GeneralService
             'url' => $request->get('url'),
             'status' => $request->get('status'),
             'page_access' => $request->get('page_access'),
-            'memberships' => $request->get('memberships',null),
-            'special_access' => $request->get('special_access',null)
+            'memberships' => $request->get('memberships', null),
+            'special_access' => $request->get('special_access', null)
         ]);
 
         return $page;
     }
 
-    public function addNewPage (int $parentID = null, $type = 'custom')
+    public function addNewPage(int $parentID = null, $type = 'custom')
     {
         $parent = null;
         if ($parentID) {
             $parent = $this->frontPagesRepository->find($parentID);
-            if (! $parent) {
+            if (!$parent) {
                 return false;
             }
         }
@@ -210,15 +210,15 @@ class FrontendPageService extends GeneralService
 //        $defaultPageLayoutSettings = $this->settingsRepository->findBy('settingkey', 'placeholders');
         $slug = uniqid();
         $new = $this->frontPagesRepository->create([
-            'user_id'              => \Auth::id(),
-            'title'                => 'New Page',
-            'slug'                 => $slug,
-            'header'               => ($header_enabled) ? $header_enabled->val : 0,
-            'footer'               => ($footer_enabled) ? $footer_enabled->val : 0,
-            'url'                  => '',
-            'page_access'          => ZERO,
-            'parent_id'            => ($parent) ? $parent->id : null,
-            'type'                 => $type
+            'user_id' => \Auth::id(),
+            'title' => 'New Page',
+            'slug' => $slug,
+            'header' => ($header_enabled) ? $header_enabled->val : 0,
+            'footer' => ($footer_enabled) ? $footer_enabled->val : 0,
+            'url' => '',
+            'page_access' => ZERO,
+            'parent_id' => ($parent) ? $parent->id : null,
+            'type' => $type
         ]);
         $this->frontPagesRepository->update($new->id, [
             'url' => '/new-page(' . $new->id . ')',
@@ -227,14 +227,14 @@ class FrontendPageService extends GeneralService
         return $new;
     }
 
-    public function getPlaceholdersInUrl ($pageLayoutSettings = [])
+    public function getPlaceholdersInUrl($pageLayoutSettings = [])
     {
         if ($pageLayoutSettings) {
             return http_build_query($pageLayoutSettings);
         }
     }
 
-    public function sort (array $data)
+    public function sort(array $data)
     {
         $child = $this->frontPagesRepository->find($data['item']);
 
@@ -250,7 +250,8 @@ class FrontendPageService extends GeneralService
         return false;
     }
 
-    public static function getFirstParent($page){
+    public static function getFirstParent($page)
+    {
         if ($page) {
             return \DB::select('SELECT T2.* FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM frontend_pages WHERE id = _id) AS parent_id, @l := @l + 1 AS lvl FROM (SELECT @r := ' . $page->id . ', @l := 0) vars, frontend_pages m WHERE @r <> 0) T1 JOIN frontend_pages T2 ON T1._id = T2.id ORDER BY T1.lvl DESC;');
         }

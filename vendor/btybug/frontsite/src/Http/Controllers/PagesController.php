@@ -104,10 +104,10 @@ class PagesController extends Controller
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
         $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
         $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
-        $page->setAttribute('cssData',$cssData);
-        $page->setAttribute('jsData',$jsData);
+        $page->setAttribute('cssData', $cssData);
+        $page->setAttribute('jsData', $jsData);
 
-        return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','cssData','jsData']));
+        return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'cssData', 'jsData']));
     }
 
     public function getSpecialSettings(
@@ -128,7 +128,7 @@ class PagesController extends Controller
         $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
         $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
 
-        return view('manage::frontend.pages.special_settings', compact(['page', 'admins', 'tags', 'id', 'placeholders','cssData','jsData']));
+        return view('manage::frontend.pages.special_settings', compact(['page', 'admins', 'tags', 'id', 'placeholders', 'cssData', 'jsData']));
     }
 
     public function getGeneral(
@@ -150,9 +150,9 @@ class PagesController extends Controller
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
-        $memberships = $membershipRepository->pluck('name','id')->toArray();
-        $specials = $specialAccessRepository->pluck('name','id')->toArray();
-        return view('manage::frontend.pages.general', compact(['page', 'admins','specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
+        $memberships = $membershipRepository->pluck('name', 'id')->toArray();
+        $specials = $specialAccessRepository->pluck('name', 'id')->toArray();
+        return view('manage::frontend.pages.general', compact(['page', 'admins', 'specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'memberships']));
     }
 
     public function getSpecialGeneral(
@@ -174,10 +174,10 @@ class PagesController extends Controller
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
-        $memberships = $membershipRepository->pluck('name','id')->toArray();
-        $specials = $specialAccessRepository->pluck('name','id')->toArray();
+        $memberships = $membershipRepository->pluck('name', 'id')->toArray();
+        $specials = $specialAccessRepository->pluck('name', 'id')->toArray();
 
-        return view('manage::frontend.pages.special-general', compact(['page', 'admins','specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders','memberships']));
+        return view('manage::frontend.pages.special-general', compact(['page', 'admins', 'specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'memberships']));
     }
 
     public function postSettings(
@@ -263,7 +263,7 @@ class PagesController extends Controller
         Request $request
     )
     {
-        $new = $frontendPageService->addNewPage(null,$request->get('type'));
+        $new = $frontendPageService->addNewPage(null, $request->get('type'));
         event(new PageCreateEvent($new, $request->all()));
         return redirect()->back();
     }
@@ -470,7 +470,7 @@ class PagesController extends Controller
         return Response::json(['error' => $result]);
     }
 
-    public function getExtra ($id)
+    public function getExtra($id)
     {
         return view('manage::frontend.pages.extra', compact('id'));
     }

@@ -283,6 +283,7 @@
 @stop
 
 @section('JS')
+    {!! HTML::script('public/js/jquery-ui/jquery-ui.js') !!}
     {!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}
     {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}

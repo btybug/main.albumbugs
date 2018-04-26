@@ -11,27 +11,42 @@
                             <div class="row left_part_publ">
                                 <div>
                                     <div class="row rows">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs">
-                                            <i class="fa fa-file-text" aria-hidden="true"></i><span
-                                                    class="labls">Page Name</span>
-                                            {!! Form::text('title',null,['class' => 'page_name']) !!}
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs page-name">
+                                            <div class="col-sm-4 col-xs-12 left">
+                                                <i class="fa fa-file-text" aria-hidden="true"></i><span
+                                                        class="labls">Page Name</span>
+                                            </div>
+                                            <div class="col-sm-8 col-xs-12 right">
+                                                {!! Form::text('title',null,['class' => 'page_name']) !!}
+                                            </div>
+
+
                                         </div>
 
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs">
-                                            <i class="fa fa-file-text" aria-hidden="true"></i><span
-                                                    class="labls">Page URL</span>
-                                            <div class="page_address page_labels">{!! $page->url !!}</div>
-                                            {!! Form::hidden('url',null) !!}
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs page-url">
+                                            <div class="col-sm-4 col-xs-12 left">
+                                                <i class="fa fa-file-text" aria-hidden="true"></i><span
+                                                        class="labls">Page URL</span>
+                                            </div>
+                                            <div class="col-sm-8 col-xs-12 right">
+                                                <div class="page_address page_labels">{!! $page->url !!}</div>
+                                                {!! Form::hidden('url',null) !!}
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="row rows">
                                         <div class="form-group">
-                                            <label>Page Icon</label>
-
-                                            <div class="input-group">
-                                                {!! Form::text('page_icon',null,['class' => 'form-control icp icp-auto','data-placement' => 'bottomRight']) !!}
-                                                <span style="height: 34px;width: 60px;" class="pull-left input-group-addon"></span>
+                                            <label class="col-xs-12">Page Icon</label>
+                                            <div class="col-sm-4 page-icon">
+                                                <div class="input-group">
+                                                    {!! Form::text('page_icon',null,['class' => 'form-control icp icp-auto','data-placement' => 'bottomRight']) !!}
+                                                    <span style="height: 34px;width: 60px;"
+                                                          class="input-group-addon"></span>
+                                                </div>
                                             </div>
+                                            <div class="clearfix"></div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -50,11 +65,13 @@
                         <div class="col-md-12">
                             {{Form::hidden('header',0)}}
                             {{Form::hidden('footer',0)}}
-                            <label class="bd_layout pull-left m-r-15">{!! Form::checkbox('header',1,null,['style' => 'position:initial;z-index:1;']) !!}
+                            <label class="bd_layout pull-left m-r-15">
+                                {!! Form::checkbox('header',1,null,['style' => 'position:initial;z-index:1;']) !!}
                                 <span class="labls">Header</span>
 
                             </label>
-                            <label class="bd_layout"> {!! Form::checkbox('footer',1,null,['style' => 'position:initial;z-index:1;']) !!}
+                            <label class="bd_layout">
+                                {!! Form::checkbox('footer',1,null,['style' => 'position:initial;z-index:1;']) !!}
                                 <span class="labls">Footer</span>
 
                             </label>
@@ -131,21 +148,54 @@
             box-shadow: 2px 1px 6px #888888;
             cursor: pointer;
         }
+
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .m-t-20 {
+            margin-top: 20px;
+        }
+        .page-icon .popover-title input{
+            float: none;
+            width: 100%;
+        }
+        .page-url .page_labels{
+            margin: 0;
+        }
+        .right{
+            background: transparent;
+        }
+        .page-name input{
+            float: none;
+            width:100%;
+        }
+        .page-name .fa-file-text,.page-url .fa-file-text{
+            margin-left:0;
+        }
+        .m-r-15{
+            margin-right: 15px;
+        }
     </style>
 @stop
 @section('JS')
+    {!! HTML::script("public/js/jquery-ui/jquery-ui.js?v.5") !!}
     {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
+    {!! HTML::script("public/js/jquery.mjs.nestedSortable.js?v.4") !!}
     {!! HTML::script('public/js/page-setting.js') !!}
+
     {!! HTML::script("public/js/UiElements/bb_div.js?v.5") !!}
     {!! HTML::script('public/js/tinymice/tinymce.min.js') !!}
     {!! HTML::script('public/js/fontawesome-iconpicker.min.js') !!}
 
     <script>
 
-        $(function (){
+        $(function () {
+
             $('.icp-auto').iconpicker();
 
-            $('.icp').on('iconpickerSelected', function(e) {
+            $('.icp').on('iconpickerSelected', function (e) {
                 $(this).attr("value", e.iconpickerValue);
             });
         });

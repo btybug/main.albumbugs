@@ -50,7 +50,7 @@
                         class="fa fa-plus"></i></a>
         </div>
         <div class="column-js">
-            @if(is_array($page->css) && count($page->js))
+        @if(is_array($page->js) && count($page->js))
                 @foreach($page->js as $js)
                     <div class="col-md-12 portlet-js">
                         <div class="col-md-2 portlet-handle-js">
@@ -70,7 +70,7 @@
 
     </div>
     <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
-        {!! Form::select('js_cms[]',$page->````jsData,null,
+        {!! Form::select('js_cms[]',$page->jsData,null,
                     ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
     </div>
 </div>

@@ -98,6 +98,11 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/framework/sql_builder",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],[
+                    "title" => "All Studios",
+                    "custom-link" => "/admin/framework/all-studios",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ],
                 [
                     "title" => "BB Functions",

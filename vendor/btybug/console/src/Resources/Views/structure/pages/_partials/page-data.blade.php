@@ -25,7 +25,7 @@
 
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 row_inputs page-url">
                                             <div class="col-sm-4 col-xs-12 left">
-                                                <i class="fa fa-file-text" aria-hidden="true"></i><span
+                                                <i class="fa fa-link" aria-hidden="true"></i><span
                                                         class="labls">Page URL</span>
                                             </div>
                                             <div class="col-sm-8 col-xs-12 right">
@@ -36,18 +36,20 @@
                                         </div>
                                     </div>
                                     <div class="row rows">
-                                        <div class="form-group">
-                                            <label class="col-xs-12">Page Icon</label>
-                                            <div class="col-sm-4 page-icon">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                            <div class="col-sm-4 col-xs-12 left">
+                                                <i class="fa fa-table" aria-hidden="true"></i><span
+                                                        class="labls">Page Icon</span>
+                                            </div>
+                                            <div class="col-sm-8 col-xs-12 page-icon">
                                                 <div class="input-group">
                                                     {!! Form::text('page_icon',null,['class' => 'form-control icp icp-auto','data-placement' => 'bottomRight']) !!}
-                                                    <span style="height: 34px;width: 60px;"
+                                                    <span style="height: 34px;min-width: 60px;"
                                                           class="input-group-addon"></span>
                                                 </div>
                                             </div>
-                                            <div class="clearfix"></div>
-
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -171,11 +173,16 @@
             float: none;
             width:100%;
         }
-        .page-name .fa-file-text,.page-url .fa-file-text{
+        .left i{
             margin-left:0;
+            color: #499bc7;
+            margin-right:10px;
         }
         .m-r-15{
             margin-right: 15px;
+        }
+        .page-icon .icp-auto{
+            border-radius: 0;
         }
     </style>
 @stop

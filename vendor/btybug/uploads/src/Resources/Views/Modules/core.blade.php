@@ -32,9 +32,9 @@
                         </div>
                     </div>
                     @if($selected)
-                        <div class="row module_detail">
+                        <div class="module_detail">
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <img src="{!! url('images/module.jpg') !!}" alt=""
+                                <img src="{!! url('public/images/module.jpg') !!}" alt=""
                                      class="img-rounded img-responsive"/>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -55,9 +55,10 @@
                                    class="btn  btn-sm  m-b-5 p-l-20 p-r-20 width-150 text-left"><i
                                             class="fa fa-cogs f-s-14 m-r-10"></i>Explore</a>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
 
-                        <div class="row module_detail_link">
+                        <div class="module_detail_link">
                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 m-t-10 m-b-10">
                                 <a href="{!! 'Author' !!}"
                                    class="module_detail_author_link">{!!'Site Url' !!}</a>
@@ -72,6 +73,7 @@
                                     {!! 'Author'!!}
                                 </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     @endif
 

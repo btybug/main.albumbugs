@@ -32,8 +32,8 @@
     </div>
 
     <div class="panel-body css_cms {!! ($page->css_type != 'cms') ? 'hide' : ''  !!}">
-        {!! Form::select('css_cms[]',$page->cssData,null,
-                   ['class' => 'form-control select-dropdowns pull-right','multiple' => 'multiple']) !!}
+        {!! Form::select('css_cms',['' => 'Select'] + $page->cssData,null,
+                   ['class' => 'form-control pull-right']) !!}
     </div>
 </div>
 
@@ -70,8 +70,8 @@
 
     </div>
     <div class="panel-body js_cms {!! ($page->js_type != 'cms') ? 'hide' : ''  !!}">
-        {!! Form::select('js_cms[]',$page->jsData,null,
-                    ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
+        {!! Form::select('js_cms',['' => 'Select'] + $page->jsData,null,
+                    ['class' => 'form-control pull-right']) !!}
     </div>
 </div>
 

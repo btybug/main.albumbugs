@@ -26,6 +26,7 @@ use Btybug\FrontSite\Repository\VersionsRepository;
 use Btybug\FrontSite\Services\ClassifierService;
 use Btybug\FrontSite\Services\FrontendPageService;
 use Btybug\Modules\Models\Fields;
+use Btybug\Uploads\Repository\VersionProfilesRepository;
 use Btybug\User\Repository\MembershipRepository;
 use Btybug\User\Repository\SpecialAccessRepository;
 use Btybug\User\Services\RoleService;
@@ -91,7 +92,7 @@ class PagesController extends Controller
         ClassifierRepository $classifierRepository,
         ClassifierService $classifierService,
         FrontendPageService $frontendPageService,
-        VersionsRepository $versionsRepository,
+        VersionProfilesRepository $profilesRepository,
         AdminsettingRepository $adminsettingRepository
     )
     {
@@ -102,8 +103,8 @@ class PagesController extends Controller
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
-        $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
-        $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
+        $cssData = $profilesRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
+        $jsData = $profilesRepository->wherePluck('type', 'js', 'name', 'id')->toArray();
         $page->setAttribute('cssData', $cssData);
         $page->setAttribute('jsData', $jsData);
 
@@ -127,7 +128,6 @@ class PagesController extends Controller
         $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
         $cssData = $versionsRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
         $jsData = $versionsRepository->getJSLiveLinks(true)->toArray();
-
         return view('manage::frontend.pages.special_settings', compact(['page', 'admins', 'tags', 'id', 'placeholders', 'cssData', 'jsData']));
     }
 

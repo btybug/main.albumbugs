@@ -2106,3 +2106,36 @@ function BBrenderPanel($view,$title,$page){
             </div>
             </div>';
 }
+
+function BBgetProfile($id, $type = 'js', $render = false){
+    $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
+    $profile = $profileRepository->findOneByMultiple(['id' => $id,'type'=>$type]);
+    if($profile){
+        if($render){
+            if(\File::exists("public/" .$profile->hint_path)){
+                if($type == 'js'){
+                    return Html::script("public/" .$profile->hint_path);
+                }else{
+                    return Html::style("public/" .$profile->hint_path);
+                }
+            }
+        }else{
+            return $profile;
+        }
+    }
+}
+
+function BBlinkAssets($data,$type = 'js'){
+    $assets = '';
+    if(count($data)){
+        foreach ($data as $url){
+            if($type =='js'){
+                $assets .= Html::script($url);
+            }else{
+                $assets .= Html::style($url);
+            }
+        }
+    }
+
+    return $assets;
+}

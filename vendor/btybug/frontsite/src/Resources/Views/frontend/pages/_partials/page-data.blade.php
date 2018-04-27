@@ -164,6 +164,7 @@
     </style>
 @stop
 @section('JS')
+    {!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
     {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
     {!! HTML::script('public/js/page-setting.js') !!}
     {!! HTML::script("public/js/UiElements/ui-preview-setting.js") !!}

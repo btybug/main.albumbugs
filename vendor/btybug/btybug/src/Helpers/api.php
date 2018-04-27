@@ -2060,9 +2060,9 @@ function BBeditor()
     return '<textarea name=\'test\' class=\'cms_editor\'></textarea>';
 }
 
-function BBgetFrontPagesPanels($page)
+function BBgetFrontPagesPanels($page,$poss='front')
 {
-    $panels = Config::get('front_page_edit_widget', []);
+    $panels = Config::get($poss.'_page_edit_widget', []);
     foreach ($panels as $panel) {
         foreach ($panel as $key => $data) {
             switch ($data['id']){

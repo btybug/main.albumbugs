@@ -87,6 +87,8 @@ class StructureController extends Controller
         $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
         $tags = $page->tags;
         $placeholders = '';
+        $page->setAttribute('cssData', []);
+        $page->setAttribute('jsData', []);
         return view('console::structure.pages.settings', compact(['page', 'admins', 'tags', 'id', 'placeholders']));
     }
 

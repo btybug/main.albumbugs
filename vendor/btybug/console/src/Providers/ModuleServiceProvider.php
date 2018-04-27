@@ -162,6 +162,34 @@ class ModuleServiceProvider extends ServiceProvider
                     "is_core" => "yes"]
             ]]);
 
+
+        \Eventy::action('backend_page_edit_widget', ['Page Info'=> [
+            'view' => 'console::structure.panels.page_info',
+            'id' => 'panel_info',
+        ]]);
+
+        \Eventy::action('backend_page_edit_widget', ['Header & footer'=>
+            [
+                'view' => 'console::structure.panels.header_footer',
+                'id' => 'panel_header_footer',
+            ]]);
+        \Eventy::action('backend_page_edit_widget', ['Main Content'=>
+            [
+                'view' => 'console::structure.panels.main_content',
+                'id' => 'panel_main_content',
+            ]]);
+        \Eventy::action('backend_page_edit_widget', ['Layout'=>
+            [
+                'view' => 'console::structure.panels.layout',
+                'id' => 'layout',
+            ]]);
+        \Eventy::action('backend_page_edit_widget', ['Assets '=>
+            [
+                'view' => 'console::structure.panels.assets',
+                'id' => 'panel_assets',
+            ]]);
+
+
         //TODO; remove when finish all
         \Btybug\btybug\Models\Routes::registerPages('btybug/console');
     }

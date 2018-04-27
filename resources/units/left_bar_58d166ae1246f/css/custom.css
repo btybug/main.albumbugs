@@ -31,15 +31,16 @@
     vertical-align: top;
     width: 100%;
     z-index: 101;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 .aside-left ul.main-menu {
     font-size: 14px;
     list-style: outside none none;
     margin: 0;
     padding: 0;
-    height: calc(100% - 500px);
+    height: 70%;
     overflow-y: auto;
+    border-bottom: 1px solid #666;
 }
 .aside-left ul.main-menu li {
     position: relative;

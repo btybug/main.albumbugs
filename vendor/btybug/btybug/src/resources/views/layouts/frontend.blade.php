@@ -71,7 +71,9 @@
             {!! Session::get('message') !!}
         </div>
     @endif
-    @yield('content')
+    <div>
+        @yield('content')
+    </div>
 <!-- jQuery first, then Bootstrap JS. -->
     {{--{!! BBJquery() !!}--}}
     {{--{!! BBMainFrontJS() !!}--}}

@@ -38,6 +38,8 @@
     list-style: outside none none;
     margin: 0;
     padding: 0;
+    height: calc(100% - 500px);
+    overflow-y: auto;
 }
 .aside-left ul.main-menu li {
     position: relative;
@@ -228,23 +230,23 @@
     text-decoration: none;
     font-weight: 700;
 }
-.aside-left .page-sidebar::-webkit-scrollbar {
+.aside-left ul.main-menu::-webkit-scrollbar {
     width: 5px;
 }
-.aside-left .page-sidebar::-webkit-scrollbar-thumb {
+.aside-left ul.main-menu::-webkit-scrollbar-thumb {
     background: #499bc7;
     border-radius: 5px;
 }
-.aside-left .page-sidebar::-webkit-scrollbar-thumb:hover {
+.aside-left ul.main-menu::-webkit-scrollbar-thumb:hover {
     background: #ccc;
 }
-.aside-left .page-sidebar::-webkit-scrollbar-thumb:active {
+.aside-left ul.main-menu::-webkit-scrollbar-thumb:active {
     background: #336d8c;
 }
-.aside-left .page-sidebar::-webkit-scrollbar-track {
+.aside-left ul.main-menu::-webkit-scrollbar-track {
     background: #666666;
     border: 25px none #ffffff;
 }
-.aside-left .page-sidebar::-webkit-scrollbar-track:active {
+.aside-left ul.main-menu::-webkit-scrollbar-track:active {
     background: #ccc;
 }

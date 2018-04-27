@@ -45,7 +45,11 @@
             {!! BBheaderBack() !!}
         </div>
         <div class="adm-top">
+            @if($page->panel_main_content)
             @include(BBgetPageLayout(),['settings'=>BBgetPageLayoutSettings()])
+            @else
+                @yield('content')
+            @endif
         </div>
         <div class="bty-footer-fix">
             {!! BBfooterBack() !!}

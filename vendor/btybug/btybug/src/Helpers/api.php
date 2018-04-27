@@ -2139,3 +2139,16 @@ function BBlinkAssets($data,$type = 'js'){
 
     return $assets;
 }
+
+function BBRegisterProfile($name,$file_path,$type){
+    $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
+    $profile = $profileRepository->create([
+       'name' => $name,
+       'hint_path' => $file_path,
+       'type' => $type,
+       'structured_by' => true,
+       'user_id' => Auth::id(),
+    ]);
+
+    return $profile;
+}

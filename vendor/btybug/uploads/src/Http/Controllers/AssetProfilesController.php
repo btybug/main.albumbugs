@@ -128,6 +128,7 @@ class AssetProfilesController extends Controller
     )
     {
        $model = $profilesRepository->findOrFail($id);
+       if($model->structured_by) abort(404);
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJQuery();
 
@@ -142,6 +143,7 @@ class AssetProfilesController extends Controller
     )
     {
         $model = $profilesRepository->findOrFail($id);
+        if($model->structured_by) abort(404);
         $plugins = $versionsRepository->getCss();
         $mains = $versionsRepository->getFrameworks();
 
@@ -162,6 +164,7 @@ class AssetProfilesController extends Controller
             $data['files'][] = $request->get('main');
         }
         $model = $profilesRepository->findOrFail($id);
+        if($model->structured_by) abort(404);
         $profilesService->removeFile($model->hint_path);
         $updated = $profilesRepository->update($id,$data);
         $profilesService->generateCSS($updated);
@@ -183,6 +186,7 @@ class AssetProfilesController extends Controller
             $data['files'][] = $request->get('main');
         }
         $model = $profilesRepository->findOrFail($id);
+        if($model->structured_by) abort(404);
         $profilesService->removeFile($model->hint_path);
         $updated = $profilesRepository->update($id,$data);
         $profilesService->generateJS($updated);
@@ -197,6 +201,7 @@ class AssetProfilesController extends Controller
     )
     {
         $data = $profilesRepository->findOrFail($request->get('slug'));
+        if($data->structured_by) abort(404);
         $profilesService->removeFile($data->hint_path);
         $profilesRepository->delete($request->get('slug'));
         return \Response::json(['success' => true, 'url' => url('/admin/uploads/profiles/'.$data->type)]);

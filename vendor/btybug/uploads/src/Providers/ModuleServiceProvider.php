@@ -68,6 +68,10 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     'title' => 'Fonts',
                     'url' => '/admin/uploads/assets/fonts',
+                ],
+                [
+                    'title' => 'Pages JS',
+                    'url' => '/admin/uploads/assets/pages-js',
                 ]
             ],
             'upload_profile' => [

@@ -12,14 +12,9 @@
 </head>
 <body>
 <div class="full_page">
-
     <div>
         @yield('content')
     </div>
-<!-- jQuery first, then Bootstrap JS. -->
-    {{--{!! BBJquery() !!}--}}
-    {{--{!! BBMainFrontJS() !!}--}}
-    {{--{!! BBJs() !!}--}}
     {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$page->title).'.js') !!}
     @yield('js')
 </div>

@@ -11,6 +11,7 @@ npm-debug.log
 .env
 composer.lock
 /vendor/bin
+/vendor/composer/*
 /vendor/composer/autoload_classmap.php
 /vendor/composer/autoload_files.php
 /vendor/composer/autoload_namespaces.php

@@ -242,5 +242,15 @@ class AssetsController extends Controller
 
         return redirect()->back();
     }
+
+    public function getGeneratedCss()
+    {
+        return view('uploads::assets.generated_css', compact(['']));
+    }
+
+    public function getGeneratedJs()
+    {
+        return view('uploads::assets.generated_js', compact(['']));
+    }
 }
 

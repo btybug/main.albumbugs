@@ -72,6 +72,14 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     'title' => 'Pages JS',
                     'url' => '/admin/uploads/assets/pages-js',
+                ],
+                [
+                    'title' => 'Generated Css',
+                    'url' => '/admin/uploads/assets/generated-css',
+                ],
+                [
+                    'title' => 'Generated JS',
+                    'url' => '/admin/uploads/assets/generated-js',
                 ]
             ],
             'upload_profile' => [

@@ -110,6 +110,8 @@ Route::group(['prefix' => 'assets'], function () {
     Route::get('/css', 'AssetsController@getCss', true)->name('uploads_assets_css');
     Route::get('/fonts', 'AssetsController@getFonts', true)->name('uploads_assets_fonts');
     Route::get('/pages-js', 'AssetsController@getPagesJs', true)->name('uploads_assets_pages_js');
+    Route::get('/generated-css', 'AssetsController@getGeneratedCss', true)->name('uploads_assets_generated_css');
+    Route::get('/generated-js', 'AssetsController@getGeneratedJs', true)->name('uploads_assets_generated_js');
 
     Route::post('/', 'AssetsController@postUploadJs');
     Route::post('/change-version', 'AssetsController@postChangeVersion');

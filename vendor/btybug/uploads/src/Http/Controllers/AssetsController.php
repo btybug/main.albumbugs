@@ -67,6 +67,12 @@ class AssetsController extends Controller
         return view('uploads::assets.js', compact(['plugins','mains']));
     }
 
+    public function getPagesCss(
+    ){
+
+        return view('uploads::assets.pages_css', compact(''));
+    }
+
     public function getPagesJs(
         VersionsRepository $versionsRepository,
         VersionsService $versionsService

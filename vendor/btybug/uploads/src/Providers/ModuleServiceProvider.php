@@ -70,7 +70,10 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/uploads/assets/fonts',
                 ],
                 [
-                    'title' => 'Pages JS',
+                    'title' => 'Pages css',
+                    'url' => '/admin/uploads/assets/pages-css',
+                ],[
+                    'title' => 'Pages js',
                     'url' => '/admin/uploads/assets/pages-js',
                 ],
                 [

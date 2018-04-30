@@ -186,6 +186,7 @@ class PagesController extends Controller
     )
     {
         $updatedPage = $frontendPageService->saveSettings($request);
+
         if (isset($request->redirect_type) && $request->redirect_type == 'view') {
             return redirect('/admin/manage/structure/front-pages/page-test-preview/'
                 . $updatedPage->id . "?pl_live_settings=page_live&pl="
@@ -194,7 +195,20 @@ class PagesController extends Controller
                 . $frontendPageService->getPlaceholdersInUrl($updatedPage->page_layout_settings)
                 . '&content_type=' . $request->get('content_type') . '&template=' . $request->get('template'));
         }
-        return redirect()->back()->with('message', 'Page settings has been saved successfully.');
+        $extraMessage='';
+        try{
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, url($updatedPage->url));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            $data = curl_exec($ch);
+            curl_close($ch);
+        }catch (\Exception $e){
+            $extraMessage=$e->getMessage();
+        }
+
+
+        return redirect()->back()->with('message', 'Page settings has been saved successfully.'." $extraMessage");
     }
 
     public function postSpecialSettings(

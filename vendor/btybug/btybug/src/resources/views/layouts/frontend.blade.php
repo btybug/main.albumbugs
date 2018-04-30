@@ -12,6 +12,8 @@
 </head>
 <body>
 <div class="full_page">
+    @include("btybug::layouts._partials.frontend.notifications")
+
     <div>
         @yield('content')
     </div>

@@ -137,7 +137,7 @@
 }
 
 .bty-user-card-1 > ul > li:last-child > a i {
-    border-right: none;
+    border-right: 1px;
 }
 
 .external{

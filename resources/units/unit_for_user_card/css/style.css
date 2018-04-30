@@ -139,3 +139,7 @@
 .bty-user-card-1 > ul > li:last-child > a i {
     border-right: none;
 }
+
+.external{
+    color: red;
+}

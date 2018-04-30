@@ -8,3 +8,6 @@
         {!! BBfooter() !!}
     @endif
 @stop
+<?php
+BBmakePabeCss($page);
+?>

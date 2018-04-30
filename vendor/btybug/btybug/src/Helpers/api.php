@@ -2152,3 +2152,23 @@ function BBRegisterProfile($name,$file_path,$type){
 
     return $profile;
 }
+function BBmakePabeCss($page){
+    $stylePaths = session()->get('custom.styles', []);
+    $contentArray = [];
+    $content = '';
+    foreach ($stylePaths as $path) {
+        if (\File::exists($path)) {
+            $file = \File::get($path);
+            $contentArray[md5($file)] = $file;
+        }
+    }
+    foreach ($contentArray as $style) {
+        $content .= "\r\n" . $style;
+    }
+    session()->forget('custom.styles');
+    if(File::exists(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'))){
+       $old=File::get(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'));
+       if(md5($old)==md5($content)) return;
+    }
+    File::put(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'),$content);
+}

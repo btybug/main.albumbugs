@@ -171,7 +171,7 @@ class ModuleServiceProvider extends ServiceProvider
             'view' => 'manage::panels.test',
             'id' => 'test_panel',
         ]]);
-        \Eventy::action('front_page_css', ['CSS Panel'=>
+        \Eventy::action('front_page_edit_widget', ['CSS Panel'=>
         [
             'view' => 'manage::panels.css',
             'id' => 'css_panel',

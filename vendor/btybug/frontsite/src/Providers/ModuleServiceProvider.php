@@ -177,6 +177,12 @@ class ModuleServiceProvider extends ServiceProvider
             'id' => 'css_panel',
         ]]);
 
+        \Eventy::action('front_page_edit_widget', ['Page Units'=>
+            [
+                'view' => 'manage::panels.units',
+                'id' => 'units_panel',
+            ]]);
+
     }
 
     /**

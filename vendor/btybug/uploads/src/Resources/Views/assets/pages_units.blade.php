@@ -12,7 +12,8 @@
             <tr>
                 <th colspan="2">{!! $page->title !!}</th>
                 @php
-                    BBRenderFrontLayout($page,[]);
+
+                   $html= BBRenderFrontLayout($page,[]);
                     $units = \Config::get('units',[]);
                 @endphp
             </tr>
@@ -28,7 +29,11 @@
                         </td>
                     </tr>
                 @endforeach
+
             @endif
+            @php
+                \Config::set('units',[]);
+            @endphp
         @endforeach
         </tbody>
     </table>

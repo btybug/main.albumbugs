@@ -1,5 +1,5 @@
 @extends('btybug::layouts.frontend')
-@section('content')
+@section('contents')
     @if($page->header)
         {!! BBheader() !!}
     @endif
@@ -10,4 +10,6 @@
 @stop
 <?php
 BBmakePabeCss($page);
+
+
 ?>

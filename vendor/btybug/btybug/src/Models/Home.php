@@ -84,7 +84,7 @@ class Home
             }
 
             $html = View::make('btybug::front_pages', compact('page', 'settings'))->render();
-            return '';
+            return $html;
         }
 
         abort(404);

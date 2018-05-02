@@ -13,6 +13,7 @@ namespace Btybug\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\helpers;
+use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\Framework\Http\Requests\ChangeVersionRequest;
 use Btybug\Framework\Http\Requests\GenerateJSRequest;
 use Btybug\Framework\Http\Requests\MakeActiveVersionRequest;
@@ -257,6 +258,13 @@ class AssetsController extends Controller
     public function getGeneratedJs()
     {
         return view('uploads::assets.generated_js', compact(['']));
+    }
+
+    public function getPagesUnits(FrontPagesRepository $frontPagesRepository)
+    {
+        $pages = $frontPagesRepository->getAll();
+
+        return view('uploads::assets.pages_units', compact(['pages']));
     }
 }
 

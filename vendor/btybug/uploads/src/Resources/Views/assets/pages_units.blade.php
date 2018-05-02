@@ -11,8 +11,8 @@
         <tbody>
         @foreach($pages as $page)
             @php
-              $a=$home->render($page->url,[],true,$page);
-                 $units = \Config::get('units',[]);
+                $a=$home->render($page->url,[],true,$page);
+                   $units = \Config::get('units',[]);
             @endphp
 
             <tr>

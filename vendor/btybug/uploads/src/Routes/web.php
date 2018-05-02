@@ -78,9 +78,9 @@ Route::group(['prefix' => 'gears'], function () {
     Route::get('/live-settings/{slug}', 'UnitsController@unitPreview', true)->name('uploads_live_settings');
     Route::get('/settings/{slug?}', 'UnitsController@getSettings', true)->name('uploads_settings');
     Route::get('/settings/create/{slug?}', 'UnitsController@createVariationForUnit', true)->name('create_variation_for_unit');
-	Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsController@unitPreviewIframe', true)->name('uploads_settings_iframe');
+    Route::get('/settings-iframe/{slug}/{settings?}', 'UnitsController@unitPreviewIframe', true)->name('uploads_settings_iframe');
 
-	Route::get('/html-iframe/{slug}/{settings?}', 'UnitsController@htmlPreviewIframe', true)->name('uploads_settings_iframe');
+    Route::get('/html-iframe/{slug}/{settings?}', 'UnitsController@htmlPreviewIframe', true)->name('uploads_settings_iframe');
 
     Route::post('/settings/{id}/{save?}', 'UnitsController@postSettings');
     Route::post('/delete', 'UnitsController@postDelete');

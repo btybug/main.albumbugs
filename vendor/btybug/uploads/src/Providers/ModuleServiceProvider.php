@@ -72,7 +72,7 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     'title' => 'Pages css',
                     'url' => '/admin/uploads/assets/pages-css',
-                ],[
+                ], [
                     'title' => 'Pages js',
                     'url' => '/admin/uploads/assets/pages-js',
                 ],
@@ -231,7 +231,7 @@ class ModuleServiceProvider extends ServiceProvider
                             "title" => "CSS",
                             "icon" => "fa fa-css3",
                             'custom-link' => '/admin/uploads/assets/css'
-                        ],[
+                        ], [
                             "title" => "FONTS",
                             "icon" => "fa fa-font",
                             'custom-link' => '/admin/uploads/assets/fonts'
@@ -265,7 +265,7 @@ class ModuleServiceProvider extends ServiceProvider
             }
         }
         //TODO; remove when finish all
-           \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/uploads');
+        \Btybug\btybug\Models\Routes::registerPages('sahak.avatar/uploads');
     }
 
     /**
@@ -276,8 +276,8 @@ class ModuleServiceProvider extends ServiceProvider
     public function register()
     {
         \Eventy::addAction('apps.register', function ($what) {
-            if(isset($what['name']) && isset($what['api_url'])
-                && isset($what['config_tab']) && isset($what['permissions_tab']) && isset($what['documantation_tab	'])){
+            if (isset($what['name']) && isset($what['api_url'])
+                && isset($what['config_tab']) && isset($what['permissions_tab']) && isset($what['documantation_tab	'])) {
                 $appRepository = new AppRepository();
                 $appRepository->create($what);
             }

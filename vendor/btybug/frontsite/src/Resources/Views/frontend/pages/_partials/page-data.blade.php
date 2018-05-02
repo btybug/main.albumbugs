@@ -2,7 +2,7 @@
     {!! Form::model($page,['url' => route('frontsite_settings',$id), 'id' => 'page_settings_form','files' => true]) !!}
 
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 p-20">
-    {!! BBgetFrontPagesPanels($page) !!}
+        {!! BBgetFrontPagesPanels($page) !!}
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-20">
         <div class="panel panel-default custompanel m-t-20">

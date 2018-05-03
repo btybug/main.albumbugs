@@ -25,11 +25,11 @@
                             <tr>
                                 <td>
                                     <p><b>Unit :</b>  {{ $unit }} </p>
-                                    <p><b>JS :</b> {!! get_filename_from_path($item) !!}</p>
+                                    <p><b>JS :</b> {!! get_filename_from_path($item,DS) !!}</p>
                                 </td>
                                 <td>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Keep Inside
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" selected="selected" value="option1"> Keep Inside
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update

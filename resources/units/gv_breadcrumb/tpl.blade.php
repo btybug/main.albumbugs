@@ -17,4 +17,4 @@ $parentsArray = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($
     </div>
 </div>
 
-{!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'styles.css',$_this) !!}

@@ -26,4 +26,4 @@
     </div>
     <!-- header -->
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'style.css',$_this) !!}

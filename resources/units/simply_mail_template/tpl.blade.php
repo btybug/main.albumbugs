@@ -1,4 +1,4 @@
-{!! BBstyle($_this->path.DS.'css/main.css') !!}
+{!! BBstyle($_this->path.DS.'css/main.css',$_this) !!}
 <table>
     <tbody>
     <tr>

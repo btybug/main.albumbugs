@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css',$_this) !!}
 {{--<div class="col-md-12  m-t-20">--}}
 {{--<div class="row" style="color: black">--}}
 

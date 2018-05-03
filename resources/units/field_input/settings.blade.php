@@ -108,4 +108,4 @@ $validations=\Sahak\Validator\Models\Validations::pluck('title','code');
     </div>
 
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css',$_this) !!}

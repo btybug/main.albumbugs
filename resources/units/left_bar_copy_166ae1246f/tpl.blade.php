@@ -58,5 +58,5 @@
     }
 </style>
     @endif
-{!! BBstyle($_this->path.DS.'css'.DS.'custom.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'custom.css',$_this) !!}
 {!! BBscript($_this->path.DS.'js'.DS.'script.js',$_this) !!}

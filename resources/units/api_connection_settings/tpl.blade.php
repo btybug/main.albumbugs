@@ -1,5 +1,5 @@
-{!! BBstyle($_this->path.DS.'css/style.css') !!}
-{!! BBstyle('public/libs/tagsinput/bootstrap-tagsinput.css') !!}
+{!! BBstyle($_this->path.DS.'css/style.css',$_this) !!}
+{!! BBstyle('public/libs/tagsinput/bootstrap-tagsinput.css',$_this) !!}
 @php
     $params = \Request::route()->parameters();
     $client=null;

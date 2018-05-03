@@ -215,5 +215,5 @@
         </div>
     </div>
 </div>--}}
-{!! BBstyle($_this->path.DS.'css'.DS.'header.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'header.css',$_this) !!}
 {!! BBscript($_this->path.DS.'js'.DS.'main.js',$_this) !!}

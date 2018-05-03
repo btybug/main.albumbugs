@@ -1,6 +1,6 @@
-{!! BBstyle($_this->path.DS.'css/main.css') !!}
-{!! BBstyle($_this->path.DS.'css/star-rating.css') !!}
-{!! BBstyle($_this->path.DS.'css/theme.css') !!}
+{!! BBstyle($_this->path.DS.'css/main.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css/star-rating.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css/theme.css',$_this) !!}
 <div class="form-group">
     <div class="{!! issetReturn($settings,'radio_inp',null) !!}">
         <h4>

@@ -101,8 +101,8 @@ $data_for_select_list = [
         </div>
     </div>
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'select2.min.css') !!}
-{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'select2.min.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css',$_this) !!}
 
 {!! BBscript($_this->path.DS.'js'.DS.'select2.min.js') !!}
 <script>

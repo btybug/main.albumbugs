@@ -94,7 +94,7 @@
     </div>
 
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css',$_this) !!}
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script>

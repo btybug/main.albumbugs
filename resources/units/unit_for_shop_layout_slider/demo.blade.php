@@ -32,9 +32,9 @@
 
 
 
-{!! BBstyle($_this->path.DS.'css'.DS.'slick.css') !!}
-{!! BBstyle($_this->path.DS.'css'.DS.'slick-theme.css') !!}
-{!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'slick.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'slick-theme.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'styles.css',$_this) !!}
 
 {!! BBscript($_this->path.DS.'js'.DS.'slick.min.js',$_this) !!}
 {!! BBscript($_this->path.DS.'js'.DS.'script.js',$_this) !!}

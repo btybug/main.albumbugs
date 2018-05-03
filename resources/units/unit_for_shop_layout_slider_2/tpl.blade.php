@@ -17,7 +17,7 @@
 
 {!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}
 
-{!! BBstyle($_this->path.DS.'css'.DS.'jquery.tosrus.all.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'jquery.tosrus.all.css',$_this) !!}
 
 
-{!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'styles.css',$_this) !!}

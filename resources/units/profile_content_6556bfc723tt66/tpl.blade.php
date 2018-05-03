@@ -1,4 +1,4 @@
-{!! BBstyle($_this->path.DS.'css/main.css') !!}
+{!! BBstyle($_this->path.DS.'css/main.css',$_this) !!}
 <div class="col-md-12">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">

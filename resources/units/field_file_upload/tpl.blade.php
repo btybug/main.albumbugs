@@ -1,5 +1,5 @@
-{!! BBstyle($_this->path.DS.'css/main.css') !!}
-{!! BBstyle($_this->path.DS.'css/fileinput.css') !!}
+{!! BBstyle($_this->path.DS.'css/main.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css/fileinput.css',$_this) !!}
 <div class="form-group">
     <div class="{!! issetReturn($settings,'radio_inp',null) !!}">
         <h4>

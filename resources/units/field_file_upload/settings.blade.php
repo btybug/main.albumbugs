@@ -465,8 +465,8 @@ $data_for_select = [
         </div>
     </div>
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
-{!! BBstyle($_this->path.DS.'css'.DS.'select2.min.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'select2.min.css',$_this) !!}
 {!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 {!! BBscript($_this->path.DS.'js'.DS.'select2.min.js') !!}

@@ -32,5 +32,5 @@
 </section>
 
 
-{!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'styles.css',$_this) !!}
 {!! BBscript($_this->path.DS.'js'.DS.'popper'.DS.'popper.min.js',$_this) !!}

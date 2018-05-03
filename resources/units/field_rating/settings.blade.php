@@ -258,8 +258,8 @@
         </div>
     </div>
  </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
-{!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'settings.css',$_this) !!}
+{!! HTML::style('public/css/font-awesome/css/fontawesome-iconpicker.min.css',$_this) !!}
 {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
 <script type="template" id="get_template">
     <div class="col-md-12 children_div" data-key="{repl2}">

@@ -1333,8 +1333,15 @@ function BBrenderPageContent($settings)
     return 'Main Content';
 }
 
-function BBstyle($path)
+function BBstyle($path,$unit=null)
 {
+    if($unit){
+        $actives= \Config::get('units_css',[]);
+        $key = $unit->getSlug();
+        if(! isset($actives[$key])) $actives[$key] = [];
+        $actives[$key][]= $path;
+        \Config::set('units_css',$actives);
+    }
     $styles = [];
     if (\Session::has('custom.styles')) {
         $styles = \Session::get('custom.styles', []);

@@ -37,9 +37,6 @@
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions[{{$page->id}}][{{$unit}}][{{ $key }}]" id="inlineRadio3" value="option3"> Ignore
                                     </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions[{{$page->id}}][{{$unit}}][{{ $key }}]" id="inlineRadio4" value="option4"> Keep Outside
-                                    </label>
                                 </td>
                             </tr>
                         @endforeach

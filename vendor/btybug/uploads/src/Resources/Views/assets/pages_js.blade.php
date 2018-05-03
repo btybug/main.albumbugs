@@ -21,7 +21,7 @@
             @if(count($actives))
                 @foreach($actives as $unit => $assets)
                     @if(count($assets))
-                        @foreach($assets as $item)
+                        @foreach($assets as $key=> $item)
                             <tr>
                                 <td>
                                     <p><b>Unit :</b>  {{ $unit }} </p>
@@ -29,16 +29,16 @@
                                 </td>
                                 <td>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" selected="selected" value="option1"> Keep Inside
+                                        <input type="radio" name="inlineRadioOptions[{{$page->id}}][{{$unit}}][{{ $key }}]" id="inlineRadio1" checked value="option1"> Keep Inside
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update
+                                        <input type="radio" name="inlineRadioOptions[{{$page->id}}][{{$unit}}][{{ $key }}]" id="inlineRadio2" value="option2"> Update
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Ignore
+                                        <input type="radio" name="inlineRadioOptions[{{$page->id}}][{{$unit}}][{{ $key }}]" id="inlineRadio3" value="option3"> Ignore
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> Keep Outside
+                                        <input type="radio" name="inlineRadioOptions[{{$page->id}}][{{$unit}}][{{ $key }}]" id="inlineRadio4" value="option4"> Keep Outside
                                     </label>
                                 </td>
                             </tr>

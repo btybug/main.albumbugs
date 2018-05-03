@@ -15,8 +15,8 @@
                 $actives= \Config::get('units_js',[]);
             @endphp
 
-            <tr>
-                <th colspan="2">{!! $page->title !!}</th>
+            <tr style="background-color: cadetblue;">
+                <th colspan="2">{!! $page->title !!} page</th>
             </tr>
             @if(count($actives))
                 @foreach($actives as $unit => $assets)
@@ -49,6 +49,10 @@
                 @php
                     \Config::set('units_js',[]);
                 @endphp
+            @else
+                <tr>
+                    <th colspan="2">NO assets</th>
+                </tr>
             @endif
 
         @endforeach

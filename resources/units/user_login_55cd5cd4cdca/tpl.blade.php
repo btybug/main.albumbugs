@@ -91,6 +91,6 @@
 
     {!! BBstyle($_this->path.DS.'/css/styles.css') !!}
 @section("js")
-    {{--{!! BBscript($_this->path.DS.'/js/boostrap.min.js') !!}--}}
-    {!! BBscript($_this->path.DS.'/js/script.js') !!}
+    {{--{!! BBscript($_this->path.DS.'/js/boostrap.min.js',$_this) !!}--}}
+    {!! BBscript($_this->path.DS.'/js/script.js',$_this) !!}
 @stop

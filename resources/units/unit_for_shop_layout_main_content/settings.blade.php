@@ -66,7 +66,7 @@
 
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 
-{!! BBscript($_this->path.DS.'js'.DS.'settings.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'settings.js',$_this) !!}
 
 
 

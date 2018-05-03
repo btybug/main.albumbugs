@@ -95,4 +95,4 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP5WutMrM_j9ubit8CT9xocuxTvULEXSI&callback=initMap">
 </script>
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}

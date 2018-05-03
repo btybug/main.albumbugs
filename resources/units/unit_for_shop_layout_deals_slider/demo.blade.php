@@ -176,5 +176,5 @@
 {!! BBstyle($_this->path.DS.'css'.DS.'slick-theme.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
 
-{!! BBscript($_this->path.DS.'js'.DS.'slick.min.js') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'slick.min.js',$_this) !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}

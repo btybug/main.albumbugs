@@ -219,7 +219,7 @@ $hours=[
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'select2.min.css') !!}
 
-{!! BBscript($_this->path.DS.'js'.DS.'select2.min.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'select2.min.js',$_this) !!}
 <script>
     var selectValues=[];
     $(document).ready(function() {

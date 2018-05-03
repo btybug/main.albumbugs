@@ -1344,8 +1344,16 @@ function BBstyle($path)
     \Session::put('custom.styles', $styles);
 }
 
-function BBscript($path)
+function BBscript($path,$unit=null)
 {
+    if($unit){
+        $actives= \Config::get('units_js',[]);
+        $actives[$unit->getSlug()][]= $path;
+        \Config::set('units_js',collect($actives));
+
+    }
+
+
     $scripts = [];
     if (\Session::has('custom.scripts')) {
         $scripts = \Session::get('custom.scripts', []);

@@ -20,7 +20,7 @@
     </div>
 </div>
 <textarea id="datepicker_setting" class="hidden">{{isset($settings["datepicker_setting"]) ? json_encode($settings["datepicker_setting"],true) : ''}}</textarea>
-{!! BBscript($_this->path.DS.'js/bootstrap-datepicker.min.js') !!}
+{!! BBscript($_this->path.DS.'js/bootstrap-datepicker.min.js',$_this) !!}
 
 <script>
 

@@ -212,5 +212,5 @@
 {{--</footer>--}}
 
 {!! BBstyle($_this->path.DS.'css'.DS.'main.css') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'main.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'main.js',$_this) !!}
 {{--{!! useDinamicStyle('images') !!}--}}

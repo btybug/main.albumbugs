@@ -7,4 +7,4 @@ $front_pages = \Btybug\FrontSite\Models\FrontendPage::getMenus();
     </ul>
 </div>
 {!! BBstyle($_this->path.DS.'css'.DS.'styles.css') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'script.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'script.js',$_this) !!}

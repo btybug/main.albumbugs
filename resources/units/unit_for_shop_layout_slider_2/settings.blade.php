@@ -32,7 +32,7 @@
     </div>
 </div>
 
-{!! BBscript($_this->path.DS.'js'.DS.'script.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'script.js',$_this) !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 
 

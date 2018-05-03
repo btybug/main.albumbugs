@@ -378,7 +378,7 @@ abstract class BasePainter implements PainterInterface, VariationAccess
         View::addNamespace("$slug", $path);
         $actives= \Config::get('units',[]);
         $actives[]=['unit'=>$this,'variation'=>$settings['variation']];
-        \Config::set('units',$actives);
+        \Config::set('units',collect($actives));
         if ($this->main_file) {
             $tpl = str_replace(".blade.php", "", $this->main_file);
             if (isset($settings['view_name'])) {

@@ -59,4 +59,4 @@
 </style>
     @endif
 {!! BBstyle($_this->path.DS.'css'.DS.'custom.css') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'script.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'script.js',$_this) !!}

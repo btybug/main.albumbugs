@@ -211,8 +211,8 @@ $products=$appProductsRepository->allConnectedToClient($clientId);
     }
 </style>
 
-{!! BBscript('public/libs/tagsinput/bootstrap-tagsinput.min.js') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! BBscript('public/libs/tagsinput/bootstrap-tagsinput.min.js',$_this) !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}
 
 
 <script>

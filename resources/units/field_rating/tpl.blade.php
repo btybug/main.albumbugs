@@ -29,8 +29,8 @@
         </div>
     </div>
 @endif
-{!! BBscript($_this->path.DS.'js/star-rating.js') !!}
-{!! BBscript($_this->path.DS.'js/theme.js') !!}
+{!! BBscript($_this->path.DS.'js/star-rating.js',$_this) !!}
+{!! BBscript($_this->path.DS.'js/theme.js',$_this) !!}
 <script>
 
     window.frameElement.contentWindow.targetFunction(1);

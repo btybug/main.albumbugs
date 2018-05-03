@@ -70,5 +70,5 @@
     </ul>
 
 </div>
-{!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'style.css',$_this) !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}

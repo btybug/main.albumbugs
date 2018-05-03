@@ -43,5 +43,5 @@
 </div>
 
 {!! BBstyle($_this->path.DS.'css/style.css') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}
 

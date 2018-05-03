@@ -24,4 +24,4 @@
                 </div>
  
 {!! $_this->style('css/styles.css') !!} 
-{!! $_this->script('js/main.js') !!}
+{!! $_this->script('js/main.js',$_this) !!}

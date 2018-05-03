@@ -12,10 +12,10 @@
 
 <script type="text/javascript" src="http://cdn.jsdelivr.net/hammerjs/2.0.3/hammer.min.js"></script>
 
-{!! BBscript($_this->path.DS.'js'.DS.'FlameViewportScale.js') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'jquery.tosrus.all.min.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'FlameViewportScale.js',$_this) !!}
+{!! BBscript($_this->path.DS.'js'.DS.'jquery.tosrus.all.min.js',$_this) !!}
 
-{!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}
+{!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'jquery.tosrus.all.css') !!}
 
 

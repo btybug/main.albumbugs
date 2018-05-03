@@ -5,8 +5,8 @@
         <input  id="basicExample" type="text" class="timepic {{isset($settings["input_style"])?$settings["input_style"]:""}}">
     </div>
 
-{!! BBscript($_this->path.DS.'js/bootstrap-datepicker.min.js') !!}
-{!! BBscript($_this->path.DS.'js/jquery.timepicker.min.js') !!}
+{!! BBscript($_this->path.DS.'js/bootstrap-datepicker.min.js',$_this) !!}
+{!! BBscript($_this->path.DS.'js/jquery.timepicker.min.js',$_this) !!}
 
 <script>
     $(function() {

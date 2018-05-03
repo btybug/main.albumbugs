@@ -68,21 +68,6 @@ class AssetsController extends Controller
         return view('uploads::assets.js', compact(['plugins','mains']));
     }
 
-    public function getPagesCss(
-    ){
-
-        return view('uploads::assets.pages_css', compact(''));
-    }
-
-    public function getPagesJs(
-        VersionsRepository $versionsRepository,
-        VersionsService $versionsService
-    )
-    {
-        return view('uploads::assets.pages_js', compact(''));
-    }
-
-
     public function postUploadJs(
         UploadJsRequest $request,
         VersionsService $versionsService
@@ -248,6 +233,20 @@ class AssetsController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function getPagesCss(){
+
+        return view('uploads::assets.pages_css', compact(''));
+    }
+
+    public function getPagesJs(
+        FrontPagesRepository $frontPagesRepository
+    )
+    {
+        $pages = $frontPagesRepository->getAll();
+
+        return view('uploads::assets.pages_js', compact(['pages']));
     }
 
     public function getGeneratedCss()

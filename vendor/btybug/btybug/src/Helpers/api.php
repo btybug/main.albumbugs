@@ -1348,9 +1348,10 @@ function BBscript($path,$unit=null)
 {
     if($unit){
         $actives= \Config::get('units_js',[]);
-        $actives[$unit->getSlug()][]= $path;
-        \Config::set('units_js',collect($actives));
-
+        $key = $unit->getSlug();
+        if(! isset($actives[$key])) $actives[$key] = [];
+        $actives[$key][]= $path;
+        \Config::set('units_js',$actives);
     }
 
 
@@ -2179,4 +2180,9 @@ function BBmakePabeCss($page){
        if(md5($old)==md5($content)) return;
     }
     File::put(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'),$content);
+}
+
+function get_filename_from_path($path,$delimiter = '\\'){
+    $exploded = explode($delimiter,$path);
+    return end($exploded);
 }

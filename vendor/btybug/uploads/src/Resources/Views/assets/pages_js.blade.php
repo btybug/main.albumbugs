@@ -1,6 +1,6 @@
 @extends('btybug::layouts.mTabs',['index'=>'upload_assets'])
 @section('tab')
-
+    @inject('home','Btybug\btybug\Models\Home')
     <table class="table table-striped">
         <thead>
         <tr>
@@ -9,79 +9,51 @@
         </tr>
         </thead>
         <tbody>
-        <tr><th colspan="2">Page 1 Title</th></tr>
-        <tr>
-            <td>bootstrap.css</td>
-            <td>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Keep Inside
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Ignore
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> Keep Outside
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>fontawsome.css</td>
-            <td>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Keep Inside
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Ignore
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> Keep Outside
-                </label>
-            </td>
-        </tr>
-        <tr><th colspan="2">Page 2 Title</th></tr>
-        <tr>
-            <td>bootstrap.css</td>
-            <td>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Keep Inside
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Ignore
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> Keep Outside
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>fontawsome.css</td>
-            <td>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Keep Inside
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Ignore
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> Keep Outside
-                </label>
-            </td>
-        </tr>
+        @foreach($pages as $page)
+            @php
+                $a = $home->render($page->url,[],true,$page);
+                $actives= \Config::get('units_js',[]);
+            @endphp
+
+            <tr>
+                <th colspan="2">{!! $page->title !!}</th>
+            </tr>
+            @if(count($actives))
+                @foreach($actives as $unit => $assets)
+                    @if(count($assets))
+                        @foreach($assets as $item)
+                            <tr>
+                                <td>
+                                    <p><b>Unit :</b>  {{ $unit }} </p>
+                                    <p><b>JS :</b> {!! get_filename_from_path($item) !!}</p>
+                                </td>
+                                <td>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Keep Inside
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Update
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Ignore
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> Keep Outside
+                                    </label>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    @endif
+                @endforeach
+                @php
+                    \Config::set('units_js',[]);
+                @endphp
+            @endif
+
+        @endforeach
         </tbody>
     </table>
-
 @stop
 @section('CSS')
 @stop

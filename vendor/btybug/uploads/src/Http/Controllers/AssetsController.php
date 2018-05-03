@@ -235,9 +235,12 @@ class AssetsController extends Controller
         return redirect()->back();
     }
 
-    public function getPagesCss(){
+    public function getPagesCss(
+        FrontPagesRepository $frontPagesRepository
+    ){
+        $pages = $frontPagesRepository->getAll();
 
-        return view('uploads::assets.pages_css', compact(''));
+        return view('uploads::assets.pages_css', compact(['pages']));
     }
 
     public function getPagesJs(

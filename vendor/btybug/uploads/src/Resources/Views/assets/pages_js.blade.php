@@ -60,7 +60,6 @@
                                 </td>
                             </tr>
                         @endforeach
-
                     @endif
                 @endforeach
                 @php

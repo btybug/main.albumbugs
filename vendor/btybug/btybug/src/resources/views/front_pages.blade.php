@@ -10,4 +10,5 @@
 @stop
 <?php
 BBmakePabeCss($page);
+BBmakePabeJs($page);
 ?>

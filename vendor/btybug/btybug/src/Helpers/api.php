@@ -2188,6 +2188,26 @@ function BBmakePabeCss($page){
     }
     File::put(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'),$content);
 }
+function BBmakePabeJs($page){
+    $stylePaths = session()->get('custom.scripts', []);
+    $contentArray = [];
+    $content = '';
+    foreach ($stylePaths as $path) {
+        if (\File::exists($path)) {
+            $file = \File::get($path);
+            $contentArray[md5($file)] = $file;
+        }
+    }
+    foreach ($contentArray as $style) {
+        $content .= "\r\n" . $style;
+    }
+    session()->forget('custom.scripts');
+    if(File::exists(public_path('js'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.js'))){
+       $old=File::get(public_path('js'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.js'));
+       if(md5($old)==md5($content)) return;
+    }
+    File::put(public_path('js'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.js'),$content);
+}
 
 function get_filename_from_path($path,$delimiter = '\\'){
     $exploded = explode($delimiter,$path);

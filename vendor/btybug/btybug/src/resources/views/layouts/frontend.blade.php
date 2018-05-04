@@ -13,7 +13,7 @@
 @include("btybug::layouts._partials.frontend.notifications")
 
 @yield('contents')
-{!! HTML::style('public/css/pages/'.str_replace(' ','-',$page->title).'.css') !!}
+{!! HTML::script('public/js/pages/'.str_replace(' ','-',$page->title).'.js') !!}
 @yield('js')
 </body>
 </html>

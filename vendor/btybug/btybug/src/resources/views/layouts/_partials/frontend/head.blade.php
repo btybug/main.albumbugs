@@ -19,8 +19,9 @@
     {!! BBlinkAssets($page->css) !!}
 @endif
 {{--end CSS--}}
-{!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$page->title).'.css') !!}
+{!! HTML::style('public/css/pages/'.str_replace(' ','-',$page->title).'.css') !!}
 @yield('css')
+
 @stack('CSS')
 
 {{--start JS--}}

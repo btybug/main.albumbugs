@@ -13,6 +13,7 @@ namespace Btybug\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\helpers;
+use Btybug\btybug\Repositories\AdminsettingRepository;
 use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\Framework\Http\Requests\ChangeVersionRequest;
 use Btybug\Framework\Http\Requests\GenerateJSRequest;
@@ -236,20 +237,23 @@ class AssetsController extends Controller
     }
 
     public function getPagesCss(
-        FrontPagesRepository $frontPagesRepository
+        FrontPagesRepository $frontPagesRepository,
+        AdminsettingRepository $adminsettingRepository
     ){
         $pages = $frontPagesRepository->getAll();
-
-        return view('uploads::assets.pages_css', compact(['pages']));
+        $profiles = $adminsettingRepository->getVersionsSettings('versions', 'frontend');
+        return view('uploads::assets.pages_css', compact(['pages','profiles']));
     }
 
     public function getPagesJs(
-        FrontPagesRepository $frontPagesRepository
+        FrontPagesRepository $frontPagesRepository,
+        AdminsettingRepository $adminsettingRepository
     )
     {
         $pages = $frontPagesRepository->getAll();
+        $profiles = $adminsettingRepository->getVersionsSettings('versions', 'frontend');
 
-        return view('uploads::assets.pages_js', compact(['pages']));
+        return view('uploads::assets.pages_js', compact(['pages','profiles']));
     }
 
     public function getGeneratedCss()

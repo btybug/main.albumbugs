@@ -9,6 +9,25 @@
         </tr>
         </thead>
         <tbody>
+        <tr style="background-color: #a0746e;">
+            <th colspan="2">Profile</th>
+        </tr>
+        @if(isset($profiles['css_version']) && count($profiles['css_version']))
+            @foreach($profiles['css_version'] as $item)
+                @php
+                    $p = BBgetProfile($item,'css');
+                @endphp
+                <tr>
+                    <td colspan="2">
+                        {!! $p->name or 'wrong profile' !!}
+                    </td>
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <th colspan="2">NO Default Profile</th>
+            </tr>
+        @endif
         @foreach($pages as $page)
             @php
                 $a = $home->render($page->url,[],true,$page);

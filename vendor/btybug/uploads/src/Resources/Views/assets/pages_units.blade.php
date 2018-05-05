@@ -1,11 +1,11 @@
 @extends('btybug::layouts.mTabs',['index'=>'upload_assets'])
 @section('tab')
     @inject('home','Btybug\btybug\Models\Home')
-    <table class="table table-striped">
+    <table class="table table-borderd m-t-20">
         <thead>
         <tr>
-            <th>Pages / units</th>
-            <th>Actions</th>
+            <th>Pages</th>
+            <th>Unit</th>
         </tr>
         </thead>
         <tbody>
@@ -15,18 +15,13 @@
                    $units = \Config::get('units',[]);
             @endphp
 
-            <tr>
-                <th colspan="2">{!! $page->title !!}</th>
-            </tr>
             @if(count($units))
                 @foreach($units as $unit)
                     <tr>
+                        <td>{!! $page->title !!}</td>
                         <td>
                             <p>Unit: {!! $unit['unit']->title !!}</p>
                             <p>Variation: {!!$unit['variation']->title !!}</p>
-                        </td>
-                        <td>
-
                         </td>
                     </tr>
                 @endforeach

@@ -2213,3 +2213,13 @@ function get_filename_from_path($path,$delimiter = '\\'){
     $exploded = explode($delimiter,$path);
     return end($exploded);
 }
+ function BBmargeJs(){
+    $path=public_path('js'.DS.'pages');
+    $files=File::allFiles($path);
+    $content='';
+    foreach($files as $file){
+        $content .= "\r\n";
+        $content.=(File::get($file));
+    };
+     File::put(public_path('js'.DS.'cms_main.js'),$content);
+ }

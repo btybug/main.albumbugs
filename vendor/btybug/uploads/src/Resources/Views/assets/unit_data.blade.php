@@ -7,6 +7,7 @@
             <th>Unit</th>
             <th>Js Path</th>
             <th>Page</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,9 @@
                 <p>Page 7</p>
                 <p>Page 10</p>
             </td>
+            <td>
+                action
+            </td>
         </tr><tr>
             <td>Unit2</td>
             <td>
@@ -31,6 +35,9 @@
                 <p>Page 8</p>
                 <p>Page 11</p>
             </td>
+            <td>
+                action
+            </td>
         </tr><tr>
             <td>Unit3</td>
             <td>
@@ -39,6 +46,9 @@
             <td>
                 <p>Page 3</p>
                 <p>Page 2</p>
+            </td>
+            <td>
+                action
             </td>
         </tr>
 

@@ -272,5 +272,12 @@ class AssetsController extends Controller
 
         return view('uploads::assets.pages_units', compact(['pages']));
     }
+
+    public function getUnitData(FrontPagesRepository $frontPagesRepository)
+    {
+        $pages = $frontPagesRepository->getAll();
+
+        return view('uploads::assets.unit_data', compact(['pages']));
+    }
 }
 

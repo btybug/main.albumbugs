@@ -87,6 +87,10 @@ class ModuleServiceProvider extends ServiceProvider
                 [
                     'title' => 'Pages Units',
                     'url' => '/admin/uploads/assets/pages-units',
+                ],
+                [
+                    'title' => 'Unit Data',
+                    'url' => '/admin/uploads/assets/unit-data',
                 ]
             ],
             'upload_profile' => [

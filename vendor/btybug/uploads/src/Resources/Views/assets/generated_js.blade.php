@@ -8,7 +8,15 @@
                 </h4>
             </div>
             <div class="panel-body">
-                
+                <ul data-nav-drag="" id="menus-list" class="sortable ui-sortable ui-droppable dvmin-height">
+                    <li class="list-group-item" data-id="xxx"
+                            data-name="xx" data-link="xx"
+                            data-type="corepage">xxx</li>
+
+                    <li class="list-group-item" data-id="xxx"
+                            data-name="xx" data-link="xx"
+                            data-type="corepage">xxx</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -28,7 +36,11 @@
 @stop
 
 @section('CSS')
+    {!! HTML::style('public/js/jquery-ui/jquery-ui.css') !!}
 @stop
 
 @section('JS')
+    {!! HTML::script('public/js/jquery-ui/jquery-ui.js') !!}
+    {!! HTML::script('public/js/bootbox/js/bootbox.min.js') !!}
+    {!! HTML::script('public/js/nestedSortable/jquery.mjs.nestedSortable.js') !!}
 @stop

@@ -21,6 +21,8 @@ use Btybug\Framework\Http\Requests\MakeActiveVersionRequest;
 use Btybug\Framework\Http\Requests\UpdateJsRequest;
 use Btybug\Framework\Http\Requests\UploadCssRequest;
 use Btybug\Framework\Http\Requests\UploadJsRequest;
+use Btybug\Uploads\Models\Units;
+use Btybug\Uploads\Repository\UnitsRepository;
 use Btybug\Uploads\Repository\VersionsRepository;
 use Btybug\Uploads\Services\VersionsService;
 use Illuminate\Http\Request;
@@ -273,11 +275,16 @@ class AssetsController extends Controller
         return view('uploads::assets.pages_units', compact(['pages']));
     }
 
-    public function getUnitData(FrontPagesRepository $frontPagesRepository)
+    public function getUnitData(
+        FrontPagesRepository $frontPagesRepository,
+        UnitsRepository $unitsRepository
+    )
     {
         $pages = $frontPagesRepository->getAll();
-
-        return view('uploads::assets.unit_data', compact(['pages']));
+        $units = $unitsRepository->getWithGroupBy();
+//        BBpageAssetsOptimise();
+//        dd($units);
+        return view('uploads::assets.unit_data', compact(['pages','units']));
     }
 }
 

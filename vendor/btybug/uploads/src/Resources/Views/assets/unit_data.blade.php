@@ -8,51 +8,26 @@
                 <th>Unit</th>
                 <th>Js Path</th>
                 <th>Page</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Unit1</td>
-                <td>
-                    path
-                </td>
-                <td>
-                    <p>Page 1</p>
-                    <p>Page 7</p>
-                    <p>Page 10</p>
-                </td>
-                <td>
-                    action
-                </td>
-            </tr><tr>
-                <td>Unit2</td>
-                <td>
-                    path
-                </td>
-                <td>
-                    <p>Page 1</p>
-                    <p>Page 2</p>
-                    <p>Page 8</p>
-                    <p>Page 11</p>
-                </td>
-                <td>
-                    action
-                </td>
-            </tr><tr>
-                <td>Unit3</td>
-                <td>
-                    path
-                </td>
-                <td>
-                    <p>Page 3</p>
-                    <p>Page 2</p>
-                </td>
-                <td>
-                    action
-                </td>
-            </tr>
-
+            @if(count($units))
+                @foreach($units as $name => $unit)
+                    <tr>
+                        <td>{{ $name }}</td>
+                        <td>
+                            path
+                        </td>
+                        <td>
+                           {!! count($unit) !!}
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="3">No Results</td>
+                </tr>
+            @endif
             {{--@foreach($pages as $page)--}}
             {{--@php--}}
             {{--$a=$home->render($page->url,[],true,$page);--}}

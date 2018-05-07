@@ -5,43 +5,31 @@
             <a href="{!! url(route('uploads_assets_profiles_js')) !!}" class="btn btn-info pull-right">Back</a>
         </div>
         <div class="col-md-12">
-            <h2>Generate Js</h2>
-            {!! Form::model($model) !!}
-            {!! Form::hidden('type','js') !!}
-            <div class="form-group">
-                {!! Form::label('name','Name') !!}
-                {!! Form::text('name',null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('fi','Main Files') !!}
-                <div class="col-md-12">
-                    @if(count($mains))
-                        @foreach( $mains as $item)
-                            {{ $item->name }}
-                            @if($model && count($model->files))
-                                {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
-                            @else
-                                {!! Form::radio('main',$item->id,null) !!}
-                            @endif
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Header JS
+                    </h4>
+                </div>
+                <div class="panel-body">
 
-                        @endforeach
-                    @endif
+
+
                 </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('files','Files') !!}
-                <div class="col-md-12">
-                    @if(count($plugins))
-                        @foreach( $plugins as $plugin)
-                           {{ $plugin->name }} {!! Form::checkbox('files[]',$plugin->id,null) !!}
-                        @endforeach
-                    @endif
+        </div>
+
+        <div class="col-md-12 m-t-15">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Footer JS
+                    </h4>
+                </div>
+                <div class="panel-body">
+
                 </div>
             </div>
-            <div class="form-group">
-                {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
-            </div>
-            {!! Form::close() !!}
         </div>
     </div>
 @stop

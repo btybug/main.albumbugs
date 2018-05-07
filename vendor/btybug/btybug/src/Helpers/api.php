@@ -2245,20 +2245,26 @@ function BBpageAssetsOptimise()
     $collection = [];
     foreach ($pages as $page) {
         $a = $home->render($page->url, [], true, $page);
+        $units = \Config::get('units', []);
         $activesJs = \Config::get('units_js', []);
         $activesCss = \Config::get('units_css', []);
-        foreach ($activesJs as $key => $jses) {
-            $unitsRepository->updateOrCreate(['page_id' => $page->id, 'slug' => $key], []);
-            foreach ($jses as $js) {
-                $unit = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $key]);
-                $assetRepository->updateOrCreate(['unit_id' => $unit->id, 'path' => $js], ['type' => 'js']);
+
+        foreach ($units as $unit) {
+            $slug = $unit['unit']->slug;
+            $variation_id = $unit['variation']->id;
+            $unitsRepository->updateOrCreate(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id], []);
+            if(isset($activesJs[$slug]) && is_array($activesJs[$slug])){
+                foreach ($activesJs[$slug] as $js) {
+                    $unitModel = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id]);
+                   
+                    $assetRepository->updateOrCreate(['unit_id' => $unitModel->id, 'path' => $js], ['type' => 'js']);
+                }
             }
-        }
-        foreach ($activesCss as $key => $styles) {
-            $unitsRepository->updateOrCreate(['page_id' => $page->id, 'slug' => $key], []);
-            foreach ($styles as $css) {
-                $unit = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $key]);
-                $assetRepository->updateOrCreate(['unit_id' => $unit->id, 'path' => $css], ['type' => 'css']);
+            if(isset($activesCss[$slug]) && is_array($activesCss[$slug])){
+                foreach ($activesCss[$slug] as $css) {
+                    $unitModel = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id]);
+                    $assetRepository->updateOrCreate(['unit_id' => $unitModel->id, 'path' => $css], ['type' => 'css']);
+                }
             }
         }
 

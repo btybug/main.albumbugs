@@ -1,6 +1,9 @@
 @extends('btybug::layouts.mTabs',['index'=>'upload_assets'])
 @section('tab')
     <div class="col-md-12">
+        <a href="javascript:void(0);" class="btn btn-primary pull-right">Save</a>
+    </div>
+    <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -13,7 +16,20 @@
                         @foreach($assets as $item)
                             <li class="list-group-item" data-id="{{$item->path}}"
                                 data-name="{{ get_filename_from_path($item->path,DS) }}" data-link="{{ $item->path }}"
-                                data-type="{{$item->type}}">{{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})</li>
+                                data-type="{{$item->type}}">
+
+                                {{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio1" checked value="option1"> Keep Inside
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio2" value="option2"> Update
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio3" value="option3"> Ignore
+                                </label>
+                            </li>
                         @endforeach
                     @endif
                 </ul>

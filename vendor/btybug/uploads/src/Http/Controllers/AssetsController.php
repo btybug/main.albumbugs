@@ -276,7 +276,6 @@ class AssetsController extends Controller
     public function getUnitData(FrontPagesRepository $frontPagesRepository)
     {
         $pages = $frontPagesRepository->getAll();
-        BBpageAssetsOptimise();
         return view('uploads::assets.unit_data', compact(['pages']));
     }
 }

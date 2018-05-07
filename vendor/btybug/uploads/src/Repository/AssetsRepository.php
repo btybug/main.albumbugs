@@ -3,9 +3,9 @@
 namespace Btybug\Uploads\Repository;
 
 use Btybug\btybug\Repositories\GeneralRepository;
-use Btybug\Uploads\Models\App;
+use Btybug\Uploads\Models\Assets;
 
-class AppRepository extends GeneralRepository
+class AssetsRepository extends GeneralRepository
 {
     /**
      * @return mixed
@@ -13,6 +13,6 @@ class AppRepository extends GeneralRepository
 
     public function model ()
     {
-        return new App();
+        return new Assets();
     }
 }

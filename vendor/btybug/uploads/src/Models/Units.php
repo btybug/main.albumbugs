@@ -3,7 +3,7 @@
  * Copyright (c) 2017.
  * *
  *  * Created by PhpStorm.
- *  * User: Edo
+ *  * User: Sahak
  *  * Date: 10/3/2016
  *  * Time: 10:44 PM
  *
@@ -11,51 +11,25 @@
 
 namespace Btybug\Uploads\Models;
 
+use Btybug\FrontSite\Models\FrontendPage;
 use Illuminate\Database\Eloquent\Model;
 
-class Profiles extends Model
+class Units extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'profiles';
+    protected $table = 'units';
     /**
      * @var array
      */
     protected $guarded = ['id'];
+
     /**
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at'];
-
-    protected static function boot()
+    public function page()
     {
-        parent::boot();
-        static::created(function ($model) {
-            self::assignDefaultStyles($model);
-            return $model;
-        });
-    }
-
-    public static function assignDefaultStyles($model)
-    {
-        $items = StyleItems::defaults()->pluck('id', 'id')->toArray();
-
-        $model->styles()->attach($items);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-
-    public function styles()
-    {
-        return $this->belongsToMany('Btybug\Uploads\Models\StyleItems', 'profile_styles',
-            'profile_id', 'style_item_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('Btybug\User\User', 'user_id', 'id');
+        return $this->belongsTo(FrontendPage::class, 'page_id');
     }
 }

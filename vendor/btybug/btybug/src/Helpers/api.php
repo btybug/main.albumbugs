@@ -1333,14 +1333,14 @@ function BBrenderPageContent($settings)
     return 'Main Content';
 }
 
-function BBstyle($path,$unit=null)
+function BBstyle($path, $unit = null)
 {
-    if($unit){
-        $actives= \Config::get('units_css',[]);
+    if ($unit) {
+        $actives = \Config::get('units_css', []);
         $key = $unit->getSlug();
-        if(! isset($actives[$key])) $actives[$key] = [];
-        $actives[$key][]= $path;
-        \Config::set('units_css',$actives);
+        if (!isset($actives[$key])) $actives[$key] = [];
+        $actives[$key][] = $path;
+        \Config::set('units_css', $actives);
     }
     $styles = [];
     if (\Session::has('custom.styles')) {
@@ -1351,14 +1351,14 @@ function BBstyle($path,$unit=null)
     \Session::put('custom.styles', $styles);
 }
 
-function BBscript($path,$unit=null)
+function BBscript($path, $unit = null)
 {
-    if($unit){
-        $actives= \Config::get('units_js',[]);
+    if ($unit) {
+        $actives = \Config::get('units_js', []);
         $key = $unit->getSlug();
-        if(! isset($actives[$key])) $actives[$key] = [];
-        $actives[$key][]= $path;
-        \Config::set('units_js',$actives);
+        if (!isset($actives[$key])) $actives[$key] = [];
+        $actives[$key][] = $path;
+        \Config::set('units_js', $actives);
     }
 
 
@@ -2076,35 +2076,35 @@ function BBeditor()
     return '<textarea name=\'test\' class=\'cms_editor\'></textarea>';
 }
 
-function BBgetFrontPagesPanels($page,$poss='front')
+function BBgetFrontPagesPanels($page, $poss = 'front')
 {
-    $panels = Config::get($poss.'_page_edit_widget', []);
+    $panels = Config::get($poss . '_page_edit_widget', []);
     foreach ($panels as $panel) {
         foreach ($panel as $key => $data) {
-            switch ($data['id']){
+            switch ($data['id']) {
                 case "panel_info":
-                    if($page->panel_info){
-                        BBrenderPanel($data['view'],$key,$page);
+                    if ($page->panel_info) {
+                        BBrenderPanel($data['view'], $key, $page);
                     }
                     break;
                 case "panel_header_footer":
-                    if($page->panel_header_footer){
-                        BBrenderPanel($data['view'],$key,$page);
+                    if ($page->panel_header_footer) {
+                        BBrenderPanel($data['view'], $key, $page);
                     }
                     break;
                 case "panel_main_content":
-                    if($page->panel_main_content){
-                        BBrenderPanel($data['view'],$key,$page);
+                    if ($page->panel_main_content) {
+                        BBrenderPanel($data['view'], $key, $page);
                     }
                     break;
                 case "panel_assets":
-                    if($page->panel_assets){
-                        BBrenderPanel($data['view'],$key,$page);
+                    if ($page->panel_assets) {
+                        BBrenderPanel($data['view'], $key, $page);
                     }
                     break;
                 default:
-                    if(! in_array($data['id'],array('panel_info','panel_header_footer','panel_main_content','panel_assets'))){
-                        BBrenderPanel($data['view'],$key,$page);
+                    if (!in_array($data['id'], array('panel_info', 'panel_header_footer', 'panel_main_content', 'panel_assets'))) {
+                        BBrenderPanel($data['view'], $key, $page);
                     }
                     break;
             }
@@ -2112,7 +2112,8 @@ function BBgetFrontPagesPanels($page,$poss='front')
     }
 }
 
-function BBrenderPanel($view,$title,$page){
+function BBrenderPanel($view, $title, $page)
+{
     echo ' <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 page-data p-20">
  <div class="panel panel-default custompanel m-t-20"><div class="panel-heading">' . $title . '</div>
  <div class="panel-body">' .
@@ -2123,31 +2124,33 @@ function BBrenderPanel($view,$title,$page){
             </div>';
 }
 
-function BBgetProfile($id, $type = 'js', $render = false){
+function BBgetProfile($id, $type = 'js', $render = false)
+{
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
-    $profile = $profileRepository->findOneByMultiple(['id' => $id,'type'=>$type]);
-    if($profile){
-        if($render){
-            if(\File::exists("public/" .$profile->hint_path)){
-                if($type == 'js'){
-                    return Html::script("public/" .$profile->hint_path);
-                }else{
-                    return Html::style("public/" .$profile->hint_path);
+    $profile = $profileRepository->findOneByMultiple(['id' => $id, 'type' => $type]);
+    if ($profile) {
+        if ($render) {
+            if (\File::exists("public/" . $profile->hint_path)) {
+                if ($type == 'js') {
+                    return Html::script("public/" . $profile->hint_path);
+                } else {
+                    return Html::style("public/" . $profile->hint_path);
                 }
             }
-        }else{
+        } else {
             return $profile;
         }
     }
 }
 
-function BBlinkAssets($data,$type = 'js'){
+function BBlinkAssets($data, $type = 'js')
+{
     $assets = '';
-    if(count($data)){
-        foreach ($data as $url){
-            if($type =='js'){
+    if (count($data)) {
+        foreach ($data as $url) {
+            if ($type == 'js') {
                 $assets .= Html::script($url);
-            }else{
+            } else {
                 $assets .= Html::style($url);
             }
         }
@@ -2156,19 +2159,22 @@ function BBlinkAssets($data,$type = 'js'){
     return $assets;
 }
 
-function BBRegisterProfile($name,$file_path,$type){
+function BBRegisterProfile($name, $file_path, $type)
+{
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
     $profile = $profileRepository->create([
-       'name' => $name,
-       'hint_path' => $file_path,
-       'type' => $type,
-       'structured_by' => true,
-       'user_id' => Auth::id(),
+        'name' => $name,
+        'hint_path' => $file_path,
+        'type' => $type,
+        'structured_by' => true,
+        'user_id' => Auth::id(),
     ]);
 
     return $profile;
 }
-function BBmakePabeCss($page){
+
+function BBmakePabeCss($page)
+{
     $stylePaths = session()->get('custom.styles', []);
     $contentArray = [];
     $content = '';
@@ -2182,13 +2188,15 @@ function BBmakePabeCss($page){
         $content .= "\r\n" . $style;
     }
     session()->forget('custom.styles');
-    if(File::exists(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'))){
-       $old=File::get(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'));
-       if(md5($old)==md5($content)) return;
+    if (File::exists(public_path('css' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.css'))) {
+        $old = File::get(public_path('css' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.css'));
+        if (md5($old) == md5($content)) return;
     }
-    File::put(public_path('css'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.css'),$content);
+    File::put(public_path('css' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.css'), $content);
 }
-function BBmakePabeJs($page){
+
+function BBmakePabeJs($page)
+{
     $stylePaths = session()->get('custom.scripts', []);
     $contentArray = [];
     $content = '';
@@ -2202,24 +2210,57 @@ function BBmakePabeJs($page){
         $content .= "\r\n" . $style;
     }
     session()->forget('custom.scripts');
-    if(File::exists(public_path('js'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.js'))){
-       $old=File::get(public_path('js'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.js'));
-       if(md5($old)==md5($content)) return;
+    if (File::exists(public_path('js' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.js'))) {
+        $old = File::get(public_path('js' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.js'));
+        if (md5($old) == md5($content)) return;
     }
-    File::put(public_path('js'.DS.'pages'.DS.str_replace(' ','-',$page->title).'.js'),$content);
+    File::put(public_path('js' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.js'), $content);
 }
 
-function get_filename_from_path($path,$delimiter = '\\'){
-    $exploded = explode($delimiter,$path);
+function get_filename_from_path($path, $delimiter = '\\')
+{
+    $exploded = explode($delimiter, $path);
     return end($exploded);
 }
- function BBmargeJs(){
-    $path=public_path('js'.DS.'pages');
-    $files=File::allFiles($path);
-    $content='';
-    foreach($files as $file){
+
+function BBmargeJs()
+{
+    $path = public_path('js' . DS . 'pages');
+    $files = File::allFiles($path);
+    $content = '';
+    foreach ($files as $file) {
         $content .= "\r\n";
-        $content.=(File::get($file));
+        $content .= (File::get($file));
     };
-     File::put(public_path('js'.DS.'cms_main.js'),$content);
- }
+    File::put(public_path('js' . DS . 'cms_main.js'), $content);
+}
+
+function BBpageAssetsOptimise()
+{
+    $home = new \Btybug\btybug\Models\Home();
+    $frontPagesRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+    $unitsRepository = new \Btybug\Uploads\Repository\UnitsRepository();
+    $assetRepository = new \Btybug\Uploads\Repository\AssetsRepository();
+    $pages = $frontPagesRepository->getAll();
+    $collection = [];
+    foreach ($pages as $page) {
+        $a = $home->render($page->url, [], true, $page);
+        $activesJs = \Config::get('units_js', []);
+        $activesCss = \Config::get('units_css', []);
+        foreach ($activesJs as $key => $jses) {
+            $unitsRepository->updateOrCreate(['page_id' => $page->id, 'slug' => $key], []);
+            foreach ($jses as $js) {
+                $unit = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $key]);
+                $assetRepository->updateOrCreate(['unit_id' => $unit->id, 'path' => $js], ['type' => 'js']);
+            }
+        }
+        foreach ($activesCss as $key => $styles) {
+            $unitsRepository->updateOrCreate(['page_id' => $page->id, 'slug' => $key], []);
+            foreach ($styles as $css) {
+                $unit = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $key]);
+                $assetRepository->updateOrCreate(['unit_id' => $unit->id, 'path' => $css], ['type' => 'css']);
+            }
+        }
+
+    }
+}

@@ -250,7 +250,6 @@ class AssetsController extends Controller
         AdminsettingRepository $adminsettingRepository
     )
     {
-        BBpageAssetsOptimise();
         $pages = $frontPagesRepository->getAll();
         $profiles = $adminsettingRepository->getVersionsSettings('versions', 'frontend');
 

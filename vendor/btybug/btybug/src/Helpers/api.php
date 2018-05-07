@@ -2256,7 +2256,6 @@ function BBpageAssetsOptimise()
             if(isset($activesJs[$slug]) && is_array($activesJs[$slug])){
                 foreach ($activesJs[$slug] as $js) {
                     $unitModel = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id]);
-                   
                     $assetRepository->updateOrCreate(['unit_id' => $unitModel->id, 'path' => $js], ['type' => 'js']);
                 }
             }

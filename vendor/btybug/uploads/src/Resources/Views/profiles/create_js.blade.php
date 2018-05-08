@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Header JS
+                        Header JS <a class="btn btn-danger btn-sm pull-right add-assets">Add</a>
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -33,10 +33,25 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Footer JS
+                        Footer JS <a class="btn btn-danger btn-sm pull-right add-assets">Add</a>
                     </h4>
                 </div>
                 <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="uploadAssets" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add assets</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
 
                 </div>
             </div>
@@ -50,6 +65,9 @@
 @section('JS')
     <script>
         $(document).ready(function () {
+            $("body").on('click','.add-assets',function () {
+                $("#uploadAssets").modal();
+            });
             $("body").on("change", ".generate", function () {
                 var id = $(this).data('id');
                 var name = $(this).attr("name");

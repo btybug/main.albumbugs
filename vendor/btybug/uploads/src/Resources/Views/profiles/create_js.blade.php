@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Header JS <a class="btn btn-danger btn-sm pull-right add-assets">Add</a>
+                        Header JS <a href="javascript:void(0);" class="btn btn-danger btn-sm pull-right add-assets">Add</a>
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -33,7 +33,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Footer JS <a class="btn btn-danger btn-sm pull-right add-assets">Add</a>
+                        Footer JS <a href="javascript:void(0);" class="btn btn-danger btn-sm pull-right add-assets">Add</a>
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -52,7 +52,35 @@
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group">
+                        {!! Form::label('fi','Main Files') !!}
+                        <div class="col-md-12">
+                            @if(count($mains))
+                                @foreach( $mains as $item)
+                                    {{ $item->name }}
+                                    @if($model && count($model->files))
+                                        {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
+                                    @else
+                                        {!! Form::radio('main',$item->id,null) !!}
+                                    @endif
 
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('files','Files') !!}
+                        <div class="col-md-12">
+                            @if(count($plugins))
+                                @foreach( $plugins as $plugin)
+                                    {{ $plugin->name }} {!! Form::checkbox('files[]',$plugin->id,null) !!}
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group">
+                       <a href="javascript:void(0);" class="btn btn-primary pull-right">Add</a>
+                    </div>
                 </div>
             </div>
         </div>

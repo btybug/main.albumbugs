@@ -23,11 +23,21 @@
                             <ul data-nav-drag="" id="menus-list" class="sortable ui-sortable ui-droppable dvmin-height">
                                 @if(count($assets))
                                     @foreach($assets as $item)
-                                        <li class="list-group-item" data-id="{{$item->path}}"
+                                        <li style="margin-top: 5px;" class="list-group-item" data-id="{{$item->path}}"
                                             data-name="{{ get_filename_from_path($item->path,DS) }}" data-link="{{ $item->path }}"
                                             data-type="{{$item->type}}">
 
                                             {{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})
+
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio1" checked value="option1"> Keep Inside
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio2" value="option2"> Update
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio3" value="option3"> Ignore
+                                            </label>
                                         </li>
                                     @endforeach
                                 @endif
@@ -45,6 +55,19 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Footer JS <a href="javascript:void(0);" class="btn btn-danger btn-sm pull-right add-assets">Add</a>
+                    </h4>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 m-t-15">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Ignored Units Js
                     </h4>
                 </div>
                 <div class="panel-body">

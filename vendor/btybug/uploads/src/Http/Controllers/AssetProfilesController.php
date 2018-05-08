@@ -13,6 +13,7 @@ namespace Btybug\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Helpers\helpers;
+use Btybug\Uploads\Repository\AssetsRepository;
 use Btybug\Uploads\Repository\VersionProfilesRepository;
 use Btybug\Uploads\Services\VersionProfilesService;
 use Illuminate\Http\Request;
@@ -124,15 +125,17 @@ class AssetProfilesController extends Controller
         $id,
         Request $request,
         VersionProfilesRepository $profilesRepository,
-        VersionsRepository $versionsRepository
+        VersionsRepository $versionsRepository,
+        AssetsRepository $assetsRepository
     )
     {
        $model = $profilesRepository->findOrFail($id);
        if($model->structured_by) abort(404);
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJQuery();
+        $assets = $assetsRepository->getWithGroupBy();
 
-        return view('uploads::profiles.create_js', compact(['plugins','model','mains']));
+        return view('uploads::profiles.create_js', compact(['plugins','model','mains','assets']));
     }
 
     public function getCssEdit(

@@ -238,25 +238,6 @@ class AssetsController extends Controller
         return redirect()->back();
     }
 
-    public function getGeneratedCss()
-    {
-        return view('uploads::assets.generated_css', compact(['']));
-    }
-
-    public function getGeneratedJs(AssetsRepository $assetsRepository)
-    {
-        $assets = $assetsRepository->getWithGroupBy();
-//        $profiles = $adminsettingRepository->getVersionsSettings('versions', 'frontend');
-        return view('uploads::assets.generated_js', compact(['assets']));
-    }
-
-    public function getPagesUnits(FrontPagesRepository $frontPagesRepository)
-    {
-        $pages = $frontPagesRepository->getAll();
-
-        return view('uploads::assets.pages_units', compact(['pages']));
-    }
-
     public function getUnitData(
         FrontPagesRepository $frontPagesRepository,
         UnitsRepository $unitsRepository

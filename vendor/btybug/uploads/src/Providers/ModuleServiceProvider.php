@@ -70,18 +70,6 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/uploads/assets/fonts',
                 ],
                 [
-                    'title' => 'Generated Css',
-                    'url' => '/admin/uploads/assets/generated-css',
-                ],
-                [
-                    'title' => 'Generated JS',
-                    'url' => '/admin/uploads/assets/generated-js',
-                ],
-                [
-                    'title' => 'Pages Units',
-                    'url' => '/admin/uploads/assets/pages-units',
-                ],
-                [
                     'title' => 'Unit Data',
                     'url' => '/admin/uploads/assets/unit-data',
                 ]

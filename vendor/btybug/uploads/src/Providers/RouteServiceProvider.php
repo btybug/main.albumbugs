@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot ()
     {
         //
 
@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map ()
     {
         $this->mapWebRoutes();
 
@@ -49,16 +49,16 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes ()
     {
         Route::group([
-            'domain' => (string)env('DOMAIN'),
+            'domain'     => (string)env('DOMAIN'),
             'middleware' => 'web',
         ], function ($router) {
             Route::group([
                 'middleware' => ['admin:Users'],
-                'prefix' => 'admin/uploads',
-                'namespace' => $this->namespace,
+                'prefix'     => 'admin/uploads',
+                'namespace'  => $this->namespace,
             ], function ($router) {
                 require __DIR__ . '/../Routes/web.php';
             });
@@ -72,14 +72,14 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes ()
     {
         Route::group([
-            'domain' => (string)env('DOMAIN'),
+            'domain'     => (string)env('DOMAIN'),
             'middleware' => 'api',
         ], function ($router) {
             Route::group([
-                'prefix' => 'uploads/api',
+                'prefix'    => 'uploads/api',
                 'namespace' => $this->namespace,
             ], function ($router) {
                 require __DIR__ . '/../Routes/api.php';

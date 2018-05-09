@@ -34,9 +34,9 @@
             $('body').on('click', '.update-js', function () {
                 var id = $(this).data('id');
                 console.log($(this).attr("data-jquery"))
-                if($(this).attr("data-jquery")){
+                if ($(this).attr("data-jquery")) {
                     $("#version-data-type").val('jquery');
-                }else{
+                } else {
                     $("#version-data-type").val('js');
                 }
                 $('#parentVersionID').val(id);

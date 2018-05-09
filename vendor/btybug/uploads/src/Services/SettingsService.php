@@ -31,19 +31,20 @@ class SettingsService extends GeneralService
      */
     private $result;
 
-    public function __construct(VersionsRepository $versionsRepository, AdminsettingRepository $adminsettingRepository)
+    public function __construct (VersionsRepository $versionsRepository, AdminsettingRepository $adminsettingRepository)
     {
         $this->versionsRepository = $versionsRepository;
         $this->adminsettingRepository = $adminsettingRepository;
     }
 
-    public function makeJquery($request, $section)
+    public function makeJquery ($request, $section)
     {
         if ($request->file('jquery_version')) {
             $this->exstension = $request->file('jquery_version')->getClientOriginalExtension(); // getting image extension
             $oname = $request->file('jquery_version')->getClientOriginalName(); // getting image extension
             $fname = 'Jquery' . ucfirst($section) . "." . $this->exstension;
             $request->file('jquery_version')->move(public_path('js/versions'), $fname);
+
             return '/js/versions/' . $fname;
         } else {
             return $request->get('jquery_version');
@@ -51,7 +52,7 @@ class SettingsService extends GeneralService
 
     }
 
-    public function MakeMainJS($section, $data)
+    public function MakeMainJS ($section, $data)
     {
         \File::put(public_path("js/" . $section . ".js"), $data);
     }

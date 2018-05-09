@@ -48,7 +48,7 @@ class AssetsController extends Controller
      * @param Upload $upload
      * @param validateUpl $v
      */
-    public function __construct()
+    public function __construct ()
     {
         $this->helper = new helpers();
     }
@@ -56,11 +56,12 @@ class AssetsController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getIndex()
+    public function getIndex ()
     {
         return view('uploads::assets.index');
     }
-    public function getJs(
+
+    public function getJs (
         VersionsRepository $versionsRepository,
         VersionsService $versionsService
     )
@@ -68,10 +69,10 @@ class AssetsController extends Controller
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJquery();
 
-        return view('uploads::assets.js', compact(['plugins','mains']));
+        return view('uploads::assets.js', compact(['plugins', 'mains']));
     }
 
-    public function postUploadJs(
+    public function postUploadJs (
         UploadJsRequest $request,
         VersionsService $versionsService
     )
@@ -81,7 +82,7 @@ class AssetsController extends Controller
         return redirect()->back()->with('message', 'File uploaded successfully');
     }
 
-    public function postCss(
+    public function postCss (
         UploadCssRequest $request,
         VersionsService $versionsService
     )
@@ -91,27 +92,28 @@ class AssetsController extends Controller
         return redirect()->back()->with('message', 'File uploaded successfully');
     }
 
-    public function postUploadVersion(
+    public function postUploadVersion (
         UpdateJsRequest $request,
         VersionsService $versionsService
     )
     {
-        if($request->get('type') == 'jquery'){
+        if ($request->get('type') == 'jquery') {
             $versionsService->updateJQueryVersion($request);
-        }else{
+        } else {
             $versionsService->updateVersion($request);
         }
+
         return redirect()->back()->with('message', 'File uploaded successfully');
     }
 
-    public function getVersions(
+    public function getVersions (
         Request $request,
         VersionsRepository $versionsRepository
     )
     {
-        if(gettype($request->get("id")) == "string"){
+        if (gettype($request->get("id")) == "string") {
             $data = $versionsRepository->getBy('name', $request->get('name'));
-        }else{
+        } else {
             $data = $versionsRepository->getByExcept('name', $request->get('name'), 'id', $request->get('id'));
         }
 
@@ -120,7 +122,7 @@ class AssetsController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getActiveVersions(
+    public function getActiveVersions (
         Request $request,
         VersionsRepository $versionsRepository
     )
@@ -132,16 +134,17 @@ class AssetsController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function postChangeVersion(
+    public function postChangeVersion (
         ChangeVersionRequest $request,
         VersionsService $versionsService
     )
     {
         $versionsService->changeVersion($request->id);
+
         return redirect()->back()->with('message', 'version activated');
     }
 
-    public function postMakeActive(
+    public function postMakeActive (
         MakeActiveVersionRequest $request,
         VersionsService $versionsService
     )
@@ -151,32 +154,35 @@ class AssetsController extends Controller
         return redirect()->back()->with('message', 'version activated');
     }
 
-    public function getCss(
+    public function getCss (
         VersionsRepository $versionsRepository
     )
     {
         $frameworks = $versionsRepository->getFrameworks();
         $plugins = $versionsRepository->getCss();
-        return view('uploads::assets.css', compact(['plugins','frameworks']));
+
+        return view('uploads::assets.css', compact(['plugins', 'frameworks']));
     }
 
-    public function getProfiles(
+    public function getProfiles (
         VersionsRepository $versionsRepository
     )
     {
         $plugins = $versionsRepository->getBy('type', 'js');
+
         return view('uploads::assets.profiles', compact(['plugins']));
     }
 
-    public function getFonts(
+    public function getFonts (
         VersionsRepository $versionsRepository
     )
     {
         $plugins = $versionsRepository->getBy('type', 'js');
+
         return view('uploads::assets.fonts', compact(['plugins']));
     }
 
-    public function postGenerateMainJs(
+    public function postGenerateMainJs (
         GenerateJSRequest $request,
         VersionsService $versionsService
     )
@@ -187,7 +193,7 @@ class AssetsController extends Controller
         return back()->with('message', 'JS generated successfully');
     }
 
-    public function postUpdateLink(
+    public function postUpdateLink (
         MakeActiveVersionRequest $request,
         VersionsService $versionsService
     )
@@ -198,7 +204,7 @@ class AssetsController extends Controller
         return back()->with('message', 'Link updated successfully');
     }
 
-    public function delete(
+    public function delete (
         Request $request,
         VersionsRepository $versionsRepository,
         VersionsService $versionsService
@@ -206,39 +212,41 @@ class AssetsController extends Controller
     {
         $data = $versionsRepository->findOrFail($request->get('slug'));
         $response = $versionsService->delete($data);
+
         return \Response::json(['success' => true, 'url' => url('/admin/uploads/assets/js')]);
     }
 
-    public function getCode(
+    public function getCode (
         Request $request,
         VersionsRepository $versionsRepository,
         VersionsService $versionsService
     )
     {
         $version = $versionsRepository->find($request->get('id'));
-        if($version){
+        if ($version) {
             $code = $versionsService->getContent($version);
+
             return \Response::json(['success' => true, 'code' => $code]);
         }
 
         return \Response::json(['success' => false, 'message' => 'Not Found']);
     }
 
-    public function postSaveCode(
+    public function postSaveCode (
         Request $request,
         VersionsRepository $versionsRepository,
         VersionsService $versionsService
     )
     {
         $version = $versionsRepository->find($request->get('id'));
-        if($version){
-            $code = $versionsService->updateContent($version,$request->get('code'));
+        if ($version) {
+            $code = $versionsService->updateContent($version, $request->get('code'));
         }
 
         return redirect()->back();
     }
 
-    public function getUnitData(
+    public function getUnitData (
         FrontPagesRepository $frontPagesRepository,
         UnitsRepository $unitsRepository
     )
@@ -247,7 +255,7 @@ class AssetsController extends Controller
         $units = $unitsRepository->getWithGroupBy();
 //        BBpageAssetsOptimise();
 //        dd(array_first($units)[0]);
-        return view('uploads::assets.unit_data', compact(['pages','units']));
+        return view('uploads::assets.unit_data', compact(['pages', 'units']));
     }
 }
 

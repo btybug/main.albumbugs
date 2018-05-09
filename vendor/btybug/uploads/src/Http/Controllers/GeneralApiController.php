@@ -1,4 +1,5 @@
 <?php
+
 namespace Btybug\Uploads\Http\Controllers;
 
 use Btybug\Console\Models\QueryBuilder;
@@ -9,28 +10,28 @@ use Symfony\Component\Console\Tests\Input\StringInput;
 
 class GeneralApiController extends Controller
 {
-    public function getCustomized(
+    public function getCustomized (
         Request $request,
         AppProductRepository $appProductRepository,
         QueryBuilder $builder
     )
     {
         $token = $request->get('token');
-        $product = $appProductRepository->findBy('token',$token);
+        $product = $appProductRepository->findBy('token', $token);
 
-        try{
+        try {
             $query = $builder->make($product->json_data);
             $result = \DB::select($query);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Something wrong in query, try again',
-                'error'=> true
-            ],200);
+                'error'   => true
+            ], 200);
         }
 
         return response()->json([
-            'data' => $result,
-            'error'=> false
-        ],200);
+            'data'  => $result,
+            'error' => false
+        ], 200);
     }
 }

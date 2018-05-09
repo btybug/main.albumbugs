@@ -12,128 +12,128 @@ class ModuleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot ()
     {
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Lang', 'uploads');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'uploads');
         $tubs = [
-            'upload_gears' => [
+            'upload_gears'      => [
                 [
                     'title' => 'Backend',
-                    'url' => '/admin/uploads/gears/back-end',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/gears/back-end',
+                    'icon'  => 'fa fa-cub'
                 ],
                 [
                     'title' => 'Frontend',
-                    'url' => '/admin/uploads/gears/front-end',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/gears/front-end',
+                    'icon'  => 'fa fa-cub'
                 ],
             ], 'upload_layouts' => [
                 [
                     'title' => 'Backend',
-                    'url' => '/admin/uploads/layouts/back-end',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/layouts/back-end',
+                    'icon'  => 'fa fa-cub'
                 ],
                 [
                     'title' => 'Frontend',
-                    'url' => '/admin/uploads/layouts/front-end',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/layouts/front-end',
+                    'icon'  => 'fa fa-cub'
                 ],
             ], 'uploads_assets' => [
                 [
                     'title' => 'Profiles',
-                    'url' => '/admin/uploads/assets/profiles',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/assets/profiles',
+                    'icon'  => 'fa fa-cub'
                 ],
                 [
                     'title' => 'Styles',
-                    'url' => '/admin/uploads/assets/styles',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/assets/styles',
+                    'icon'  => 'fa fa-cub'
                 ],
                 [
                     'title' => 'Files',
-                    'url' => '/admin/uploads/assets/files',
-                    'icon' => 'fa fa-cub'
+                    'url'   => '/admin/uploads/assets/files',
+                    'icon'  => 'fa fa-cub'
                 ],
             ],
-            'upload_assets' => [
+            'upload_assets'     => [
                 [
                     'title' => 'Js',
-                    'url' => '/admin/uploads/assets/js',
+                    'url'   => '/admin/uploads/assets/js',
                 ],
                 [
                     'title' => 'Css',
-                    'url' => '/admin/uploads/assets/css',
+                    'url'   => '/admin/uploads/assets/css',
                 ],
                 [
                     'title' => 'Fonts',
-                    'url' => '/admin/uploads/assets/fonts',
+                    'url'   => '/admin/uploads/assets/fonts',
                 ],
                 [
                     'title' => 'Unit Data',
-                    'url' => '/admin/uploads/assets/unit-data',
+                    'url'   => '/admin/uploads/assets/unit-data',
                 ]
             ],
-            'upload_profile' => [
+            'upload_profile'    => [
                 [
                     'title' => 'Js',
-                    'url' => '/admin/uploads/profiles/js',
+                    'url'   => '/admin/uploads/profiles/js',
                 ],
                 [
                     'title' => 'Css',
-                    'url' => '/admin/uploads/profiles/css',
+                    'url'   => '/admin/uploads/profiles/css',
                 ]
             ],
-            'upload_modules' => [
+            'upload_modules'    => [
                 [
                     'title' => 'Core Packages',
-                    'url' => '/admin/uploads/modules/core-packages',
+                    'url'   => '/admin/uploads/modules/core-packages',
                 ],
                 [
                     'title' => 'Extra Packages',
-                    'url' => '/admin/uploads/modules/extra-packages',
+                    'url'   => '/admin/uploads/modules/extra-packages',
                 ]
             ],
-            'upload_apps' => [
+            'upload_apps'       => [
                 [
                     'title' => 'Core Apps',
-                    'url' => '/admin/uploads/apps/core-apps',
+                    'url'   => '/admin/uploads/apps/core-apps',
                 ],
                 [
                     'title' => 'Extra Apps',
-                    'url' => '/admin/uploads/apps/extra-apps',
+                    'url'   => '/admin/uploads/apps/extra-apps',
                 ]
             ],
-            'upload_market' => [
+            'upload_market'     => [
                 [
                     'title' => 'Market',
-                    'url' => '/admin/uploads/market/packages',
+                    'url'   => '/admin/uploads/market/packages',
                 ],
                 [
                     'title' => 'Composer',
-                    'url' => '/admin/uploads/market/composer',
+                    'url'   => '/admin/uploads/market/composer',
                 ]
             ]
         ];
 
         \Eventy::action('my.tab', $tubs);
         \Eventy::action('admin.menus', [
-            "title" => "Uploads",
+            "title"       => "Uploads",
             "custom-link" => "#",
-            "icon" => "fa fa-smile-o",
-            "children" => [
+            "icon"        => "fa fa-smile-o",
+            "children"    => [
                 [
-                    "title" => "Modules",
+                    "title"       => "Modules",
                     "custom-link" => "/admin/uploads/modules/core-packages",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
+                    "icon"        => "fa fa-angle-right",
+                    'children'    => [
                         [
-                            "title" => "Core packages",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Core packages",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/modules/core-packages'
                         ], [
-                            "title" => "Extra packages",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Extra packages",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/modules/extra-packages'
                         ]
                     ]
@@ -155,86 +155,86 @@ class ModuleServiceProvider extends ServiceProvider
 //                    ]
 //                ],
                 [
-                    "title" => "Layouts",
+                    "title"       => "Layouts",
                     "custom-link" => "/admin/uploads/layouts",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
+                    "icon"        => "fa fa-angle-right",
+                    'children'    => [
                         [
-                            "title" => "Backend",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Backend",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/layouts/back-end'
                         ], [
-                            "title" => "Frontend",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Frontend",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/layouts/front-end'
                         ]
 
                     ]
                 ],
                 [
-                    "title" => "Market",
+                    "title"       => "Market",
                     "custom-link" => "/admin/uploads/market",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
+                    "icon"        => "fa fa-angle-right",
+                    'children'    => [
                         [
-                            "title" => "Packages",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Packages",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/market/packages'
                         ], [
-                            "title" => "Composer",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Composer",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/market/composer'
                         ]
                     ]
                 ],
                 [
-                    "title" => "Gears",
+                    "title"       => "Gears",
                     "custom-link" => "/admin/uploads/gears",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
+                    "icon"        => "fa fa-angle-right",
+                    'children'    => [
                         [
-                            "title" => "Backend",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Backend",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/gears/back-end'
                         ], [
-                            "title" => "Frontend",
-                            "icon" => "fa fa-angle-right",
+                            "title"       => "Frontend",
+                            "icon"        => "fa fa-angle-right",
                             'custom-link' => '/admin/uploads/gears/front-end'
                         ]
                     ]
                 ],
                 [
-                    "title" => "Assets",
+                    "title"       => "Assets",
                     "custom-link" => "/admin/uploads/assets",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
+                    "icon"        => "fa fa-angle-right",
+                    'children'    => [
                         [
-                            "title" => "JS",
-                            "icon" => "fa fa-code",
+                            "title"       => "JS",
+                            "icon"        => "fa fa-code",
                             'custom-link' => '/admin/uploads/assets/js'
                         ], [
-                            "title" => "CSS",
-                            "icon" => "fa fa-css3",
+                            "title"       => "CSS",
+                            "icon"        => "fa fa-css3",
                             'custom-link' => '/admin/uploads/assets/css'
                         ], [
-                            "title" => "FONTS",
-                            "icon" => "fa fa-font",
+                            "title"       => "FONTS",
+                            "icon"        => "fa fa-font",
                             'custom-link' => '/admin/uploads/assets/fonts'
                         ]
                     ]
                 ],
                 [
-                    "title" => "Profiles",
+                    "title"       => "Profiles",
                     "custom-link" => "/admin/uploads/profiles",
-                    "icon" => "fa fa-angle-right",
-                    'children' => [
+                    "icon"        => "fa fa-angle-right",
+                    'children'    => [
                         [
-                            "title" => "JS",
-                            "icon" => "fa fa-code",
+                            "title"       => "JS",
+                            "icon"        => "fa fa-code",
                             'custom-link' => '/admin/uploads/profiles/js'
                         ], [
-                            "title" => "CSS",
-                            "icon" => "fa fa-css3",
+                            "title"       => "CSS",
+                            "icon"        => "fa fa-css3",
                             'custom-link' => '/admin/uploads/profiles/css'
                         ]
                     ]
@@ -258,7 +258,7 @@ class ModuleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register ()
     {
         \Eventy::addAction('apps.register', function ($what) {
             if (isset($what['name']) && isset($what['api_url'])

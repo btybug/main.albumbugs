@@ -18,18 +18,18 @@ class CmsModules
     private $cmsPath;
     private $installedPath;
 
-    public function __construct()
+    public function __construct ()
     {
         $this->cmsPath = base_path('vendor' . DS . 'sahak.avatar' . DS . 'cms');
         $this->installedPath = base_path('vendor' . DS . 'composer' . DS . 'installed.json');
     }
 
-    public function modules()
+    public function modules ()
     {
         return $this->sortModules();
     }
 
-    private function sortModules()
+    private function sortModules ()
     {
         $installed = $this->getInstalled();
         $modules = $this->packages();
@@ -41,21 +41,23 @@ class CmsModules
                 }
             }
         }
+
         return collect($result);
     }
 
-    private function getInstalled()
+    private function getInstalled ()
     {
         $installed = json_decode(\File::get($this->installedPath), true);
+
         return $installed;
     }
 
-    private function packages()
+    private function packages ()
     {
         return $this->cmsComposer()['require'];
     }
 
-    private function cmsComposer()
+    private function cmsComposer ()
     {
         $path = $this->cmsPath . DS . 'composer.json';
         if (\File::exists($path)) {
@@ -64,9 +66,10 @@ class CmsModules
         throw new Exception('file ' . $path . ' does not exist ');
     }
 
-    public function find($index)
+    public function find ($index)
     {
         $modules = $this->sortModules();
+
         return $modules[$index];
     }
 }

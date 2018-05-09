@@ -19,22 +19,22 @@ class AppProduct extends Model
     ];
 
     const statuses = [
-        'inactive'  => 0,
-        'active' => 1
+        'inactive' => 0,
+        'active'   => 1
     ];
 
-    public function user()
+    public function user ()
     {
         return $this->belongsTo('Btybug\User\User', 'user_id', 'id');
     }
 
-    public function app()
+    public function app ()
     {
         return $this->belongsTo('Btybug\Uploads\Models\App', 'app_id', 'id');
     }
 
-    public function oAuthClientProducts()
+    public function oAuthClientProducts ()
     {
-        
+
     }
 }

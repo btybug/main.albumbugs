@@ -56,7 +56,7 @@ class StyleUpload
     /**
      * TplUpload constructor.
      */
-    public function __construct()
+    public function __construct ()
     {
         $this->helpers = new helpers;
         $this->uf = config('paths.styles_upl');
@@ -66,7 +66,7 @@ class StyleUpload
      * @param Request $request
      * @return array
      */
-    public function upload(Request $request)
+    public function upload (Request $request)
     {
 
         if ($request->hasFile('file')) {
@@ -90,7 +90,7 @@ class StyleUpload
     /**
      *
      */
-    public function extract()
+    public function extract ()
     {
         $fileName = $this->fileNmae;
         $this->generatedName = $fileName . '_' . uniqid();
@@ -101,7 +101,7 @@ class StyleUpload
     /**
      * @param $fileName
      */
-    public function deleteFolderZip($fileName)
+    public function deleteFolderZip ($fileName)
     {
         File::deleteDirectory($this->uf . $fileName);
         File::delete($this->uf . $fileName . self::ZIP);
@@ -112,11 +112,12 @@ class StyleUpload
      * @param $name
      * @return array|string
      */
-    public function validateAndreturnData($folder, $name)
+    public function validateAndreturnData ($folder, $name)
     {
         if (File::exists($this->uf . $folder . '/' . 'config.json')) {
             $file = $this->uf . $folder . '/' . 'config.json';
             $response = $this->validate($file, $folder);
+
             return $response;
         } else {
             if (File::exists($this->uf . $folder . '/' . $name . '/' . 'config.json')) {
@@ -137,34 +138,35 @@ class StyleUpload
      * @param $key
      * @return array
      */
-    private function validate($file, $key)
+    private function validate ($file, $key)
     {
         $conf = File::get($file);
         if ($conf) {
 
             $conf = json_decode($conf, true);
-            if (!isset($conf['type']))
+            if (! isset($conf['type']))
                 return ['message' => 'Type is required', 'code' => '404', 'error' => true];
 
-            if (!isset($conf['style']))
+            if (! isset($conf['style']))
                 return ['message' => 'Style is required', 'code' => '404', 'error' => true];
 
-            if (!isset($conf['slug']))
+            if (! isset($conf['slug']))
                 return ['message' => 'slug is required', 'code' => '404', 'error' => true];
 
-            if (!isset($conf['css_data']))
+            if (! isset($conf['css_data']))
                 return ['message' => 'Css data is required', 'code' => '404', 'error' => true];
 
             $conf['created_at'] = time('now');
             $json = json_encode($conf, true);
             File::put($file, $json);
+
             return ['data' => $conf, 'code' => '200', 'error' => false];
         }
 
         return ['message' => 'Json file is empty !!!', 'code' => '404', 'error' => true];
     }
 
-    public function isCompress($file)
+    public function isCompress ($file)
     {
         $ext = $file->getClientOriginalExtension();
         if ($file->getSize() < self::MIN_SIZE) {
@@ -173,6 +175,7 @@ class StyleUpload
         if ($ext == 'zip') {
             return 'zip';
         }
+
         return 0;
     }
 }

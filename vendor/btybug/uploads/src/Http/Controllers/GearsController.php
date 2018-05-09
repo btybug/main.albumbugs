@@ -56,7 +56,7 @@ class GearsController extends Controller
      * @param UiUpload $uiUpload
      * @param validateUpl $validateUpl
      */
-    public function __construct()
+    public function __construct ()
     {
 //        $this->upload = new $uiUpload;
 //        $this->validateUpl = new $validateUpl;
@@ -68,29 +68,31 @@ class GearsController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getIndex()
+    public function getIndex ()
     {
         return view('uploads::gears');
     }
 
-    public function getBackend()
+    public function getBackend ()
     {
         $type = 'backend';
         $ui_elemements = Widgets::getAllWidgets()->where('main_type', 'panels')->where('type', $type)->run();
+
         return view('uploads::gears', compact(['ui_elemements', 'type',]));
     }
 
-    public function getFrontend()
+    public function getFrontend ()
     {
         $type = 'frontend';
         $ui_elemements = Widgets::getAllWidgets()->where('main_type', 'panels')->where('type', $type)->run();
+
         return view('uploads::gears', compact(['ui_elemements', 'type']));
     }
 
-    public function getUiVariations($slug)
+    public function getUiVariations ($slug)
     {
         $ui = Widgets::find($slug);
-        if (!$ui) return redirect()->back();
+        if (! $ui) return redirect()->back();
         $variation = [];
         $variations = $ui->variations();
 
@@ -100,10 +102,10 @@ class GearsController extends Controller
         );
     }
 
-    public function postUiVariations(Request $request, $slug)
+    public function postUiVariations (Request $request, $slug)
     {
         $ui = Widgets::find($slug);
-        if (!$ui) return redirect()->back();
+        if (! $ui) return redirect()->back();
         $ui->makeVariation($request->except('_token', 'ui_slug'))->save();
 
         return redirect()->back();
@@ -121,9 +123,10 @@ class GearsController extends Controller
      * @param $type
      * @return View
      */
-    public function getUi($type)
+    public function getUi ($type)
     {
         $ui_elemements = Widgets::getAllWidgets()->where('main_type', 'panels')->run();
+
         return view('resources::ui', compact(['ui_elemements']));
     }
 
@@ -131,7 +134,7 @@ class GearsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postUiWithType(Request $request)
+    public function postUiWithType (Request $request)
     {
         $main_type = $request->get('main_type');
         $general_type = $request->get('type', null);
@@ -148,18 +151,19 @@ class GearsController extends Controller
         return \Response::json(['html' => $html, 'error' => false]);
     }
 
-    public function getDeleteVariation($id)
+    public function getDeleteVariation ($id)
     {
         $variation = Widgets::deleteVariation($id);
 
         return redirect()->back();
     }
 
-    public function postDelete(Request $request)
+    public function postDelete (Request $request)
     {
         $slug = $request->get('slug');
         $tpl = Widgets::find($slug)->delete();
-        return \Response::json(['message' => 'Please try again', 'error' => !$tpl]);
+
+        return \Response::json(['message' => 'Please try again', 'error' => ! $tpl]);
     }
 
 
@@ -167,31 +171,34 @@ class GearsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function postUploadUi(Request $request)
+    public function postUploadUi (Request $request)
     {
         $isValid = $this->validateUpl->isCompress($request->file('file'));
 
-        if (!$isValid) return $this->upload->ResponseError('Uploaded data is InValid!!!', 500);
+        if (! $isValid) return $this->upload->ResponseError('Uploaded data is InValid!!!', 500);
 
         $response = $this->upload->upload($request);
-        if (!$response['error']) {
+        if (! $response['error']) {
             $result = $this->upload->validatConfAndMoveToMain($response['folder'], $response['data']);
-            if (!$result['error']) {
+            if (! $result['error']) {
                 File::deleteDirectory($this->up, true);
                 $this->upload->makeVariations($result['data']);
+
                 return $result;
             } else {
                 File::deleteDirectory($this->up, true);
+
                 return $result;
             }
         } else {
             File::deleteDirectory($this->up, true);
+
             return $response;
         }
 
     }
 
-    public function postGetVariations(Request $request)
+    public function postGetVariations (Request $request)
     {
         $id = $request->get('id');
         $variation = Widgets::findVariation($id);
@@ -202,25 +209,26 @@ class GearsController extends Controller
         return \Response::json(['html' => $html]);
     }
 
-    public function postEditVariation(Request $request)
+    public function postEditVariation (Request $request)
     {
         $variation = Widgets::findVariation($request->get('id'));
         $variation->title = $request->get('title');
         $variation->section_id = $request->get('section_id');
-        if (!isset($variation->section_id)) {
+        if (! isset($variation->section_id)) {
             $variation->setAttributes('section_id', $request->get('section_id'));
         }
 
         $variation->save();
+
         return redirect()->back();
     }
 
-    public function getSettings($id)
+    public function getSettings ($id)
     {
         $slug = explode('.', $id);
         $ui = Widgets::find($slug[0]);
         $variation = Widgets::findVariation($id);
-        if (!$variation) return redirect()->back();
+        if (! $variation) return redirect()->back();
 
         $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
 
@@ -230,39 +238,41 @@ class GearsController extends Controller
         );
     }
 
-    public function widgetPerview($id)
+    public function widgetPerview ($id)
     {
         $slug = explode('.', $id);
         $ui = Widgets::find($slug[0]);
         $variation = Widgets::findVariation($id);
-        if (!$variation) return redirect()->back();
-        $ifrem = array();
+        if (! $variation) return redirect()->back();
+        $ifrem = [];
         $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
         $ifrem['body'] = url('/admin/uploads/gears/settings-iframe', $id);
         $ifrem['settings'] = url('/admin/uploads/gears/settings-iframe', $id) . '/settings';
+
         return view('uploads::gears.preview', compact(['ui', 'id', 'ifrem', 'settings']));
     }
 
-    public function widgetPerviewIframe($id, $type = null)
+    public function widgetPerviewIframe ($id, $type = null)
     {
         $slug = explode('.', $id);
         $ui = Widgets::find($slug[0]);
         $variation = Widgets::findVariation($id);
-        if (!$variation) return redirect()->back();
+        if (! $variation) return redirect()->back();
         $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
         $htmlBody = $ui->render(['settings' => $settings]);
         $htmlSettings = $ui->renderMainSettings(compact('settings'));
         $settings_json = json_encode($settings, true);
+
         return view('uploads::gears._partials.wifpreview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
 
 
-    public function postSettings(Request $request, $id, $save = false)
+    public function postSettings (Request $request, $id, $save = false)
     {
         $data = $request->except(['_token']);
         $variation = Widgets::findVariation($id);
 
-        if (!empty($data) && $variation) {
+        if (! empty($data) && $variation) {
 
             $variation->setAttributes('settings', $data);
             if ($save) {
@@ -273,6 +283,7 @@ class GearsController extends Controller
         $slug = explode('.', $id);
         $ui = Widgets::find($slug[0]);
         $html = $ui->render(['settings' => $settings]);
+
         return \Response::json(['html' => $html, 'error' => false]);
     }
 
@@ -282,9 +293,10 @@ class GearsController extends Controller
      * @param $type
      * @return View
      */
-    public function getUiOldAction($type)
+    public function getUiOldAction ($type)
     {
         $components_list = $this->componentsList($type);
+
         return view('resources::ui', compact(['components_list', 'type']));
     }
 
@@ -296,15 +308,15 @@ class GearsController extends Controller
      * @param $type
      * @return array
      */
-    private function componentsList($type)
+    private function componentsList ($type)
     {
-        $frontend = array(
+        $frontend = [
             'widget'
-        );
+        ];
 
-        $backend = array(
+        $backend = [
             'admin_widget'
-        );
+        ];
 
         $components = $frontend;
         if ($type == 'admin') {
@@ -320,12 +332,12 @@ class GearsController extends Controller
      * @param $component_name
      * @return View
      */
-    public function getPreview($ui_type, $type, $component_name)
+    public function getPreview ($ui_type, $type, $component_name)
     {
 
         $resources = [
             'header' => [
-                'adminjs' => [
+                'adminjs'    => [
                     'bootstrap',
                     'jquery-ui',
                     URL("public/js/admin.js")
@@ -384,7 +396,7 @@ class GearsController extends Controller
      * @param $id
      * @return array
      */
-    public function getClassVariations($id)
+    public function getClassVariations ($id)
     {
         return BBGetClassVariations($id);
     }
@@ -395,7 +407,7 @@ class GearsController extends Controller
      * @param $type
      * @param Request $request
      */
-    public function postUpload($type, Request $request)
+    public function postUpload ($type, Request $request)
     {
         ini_set('upload_max_filesize', '100M');
         ini_set('post_max_size', '100M');
@@ -421,7 +433,7 @@ class GearsController extends Controller
                 File::makeDirectory($destinationPath . "/" . $tpl_name, 0755, true);
                 Zipper::make($destinationPath . "/" . $name)->extractTo($destinationPath . "/" . $tpl_name);
 
-                if (!File::exists($destinationPath . "/" . $tpl_name . "/conf.json")) {
+                if (! File::exists($destinationPath . "/" . $tpl_name . "/conf.json")) {
                     File::copyDirectory(
                         $destinationPath . "/" . $tpl_name . "/" . $tpl_name,
                         $destinationPath . "/" . $tpl_name
@@ -434,7 +446,7 @@ class GearsController extends Controller
                 File::delete($destinationPath . "/" . $tpl_name . "/conf.json");
 
                 $obj = Template::where('slug', $conf_arr['slug'])->first();
-                if (!$obj) {
+                if (! $obj) {
                     $obj = new Template;
                 }
                 $obj->title = $conf_arr['title'];
@@ -479,20 +491,21 @@ class GearsController extends Controller
         }
     }
 
-    public function postAjaxbb(Request $request)
+    public function postAjaxbb (Request $request)
     {
         $fun = $request->input('fun');
         $params = $request->input('vals');
         $params = explode(",", $params);
+
         return call_user_func_array($fun, $params);
     }
 
-    public function getDefaultVariation($id)
+    public function getDefaultVariation ($id)
     {
         $data = explode('.', $id);
         $widget = Widgets::find($data[0]);
 
-        if (!empty($data) && $widget) {
+        if (! empty($data) && $widget) {
             foreach ($widget->variations() as $variation) {
                 $variation->setAttributes('default', 0);
                 $variation->save();
@@ -508,7 +521,7 @@ class GearsController extends Controller
         return redirect()->back();
     }
 
-    public function getMakeDefault($slug)
+    public function getMakeDefault ($slug)
     {
         $widgets = Widgets::getAllWidgets()->where('main_type', 'fields')->run();
         if ($widgets) {
@@ -532,15 +545,16 @@ class GearsController extends Controller
      * @param $dir
      * @return array
      */
-    private function readDirectory($dir)
+    private function readDirectory ($dir)
     {
-        $result = array();
+        $result = [];
         $cdir = scandir($dir);
         foreach ($cdir as $key => $value) {
-            if (!in_array($value, array(".", ".."))) {
+            if (! in_array($value, [".", ".."])) {
                 $result[] = $value;
             }
         }
+
         return $result;
     }
 }

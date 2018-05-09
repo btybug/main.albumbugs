@@ -55,7 +55,7 @@ class Upload
     /**
      * Upload constructor.
      */
-    public function __construct()
+    public function __construct ()
     {
         $modules = json_decode(File::get(storage_path('app/modules.json')));
         $this->helpers = new helpers;
@@ -70,7 +70,7 @@ class Upload
      * @param null $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ResponseSuccess($data, $code, $links = null, $id = null)
+    public function ResponseSuccess ($data, $code, $links = null, $id = null)
     {
         return \Response::json(['data' => $data, 'invalid' => false, 'id' => $id, 'links' => $links, 'code' => $code, 'error' => false], $code);
     }
@@ -81,7 +81,7 @@ class Upload
      * @param $messages
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ResponseInvalid($data, $code, $messages)
+    public function ResponseInvalid ($data, $code, $messages)
     {
         return \Response::json(['data' => $data, 'invalid' => true, 'messages' => $messages, 'code' => $code, 'error' => false], $code);
     }
@@ -91,7 +91,7 @@ class Upload
      * @param $code
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ResponseError($message, $code)
+    public function ResponseError ($message, $code)
     {
         return \Response::json(['message' => $message, 'code' => $code, 'error' => true], $code);
     }
@@ -100,7 +100,7 @@ class Upload
      * @param Request $request
      * @return array
      */
-    public function upload(Request $request)
+    public function upload (Request $request)
     {
 
         if ($request->hasFile('file')) {
@@ -123,7 +123,7 @@ class Upload
     /**
      *
      */
-    public function extract()
+    public function extract ()
     {
         $fileName = $this->fileNmae;
         $this->generatedName = uniqid();
@@ -136,7 +136,7 @@ class Upload
      * @param $name
      * @return array|string
      */
-    public function validatConfAndMoveToMain($folder, $name)
+    public function validatConfAndMoveToMain ($folder, $name)
     {
         if (File::exists($this->uf . $folder . '/' . 'module.json')) {
             $file = $this->uf . $folder . '/' . 'module.json';
@@ -158,7 +158,7 @@ class Upload
                             $dir_transfer = config('paths.extra_modules') . '/' . ucfirst($response['data']['module']) . '/Plugins/' . $response['data']['namespace'];
                         }
 
-                        if (!File::isDirectory($dir)) {
+                        if (! File::isDirectory($dir)) {
                             File::makeDirectory($dir);
                         }
 
@@ -176,6 +176,7 @@ class Upload
             }
 
             $response['data']['path'] = $path;
+
             return $response;
         } else {
             if (File::exists($this->uf . $folder . '/' . $name . '/' . 'module.json')) {
@@ -200,7 +201,7 @@ class Upload
                                 $dir_transfer = config('paths.extra_modules') . '/' . ucfirst($response['data']['module']) . '/Plugins/' . $response['data']['namespace'];
                             }
 
-                            if (!File::isDirectory($dir)) {
+                            if (! File::isDirectory($dir)) {
                                 File::makeDirectory($dir);
                             }
 
@@ -217,6 +218,7 @@ class Upload
                 }
 
                 $response['data']['path'] = $path;
+
                 return $response;
             }
         }
@@ -229,18 +231,18 @@ class Upload
      * @param $key
      * @return array
      */
-    private function validateModule($file, $key)
+    private function validateModule ($file, $key)
     {
         $conf = File::get($file);
         if ($conf) {
             $conf = json_decode($conf, true);
-            if (!isset($conf['namespace']) && !isset($conf['type']))
+            if (! isset($conf['namespace']) && ! isset($conf['type']))
                 return ['message' => 'Namespace and type are required', 'code' => '404', 'error' => true];
             if ($conf['type'] == 'plugin') {
-                if (!isset($conf['module'])) return ['message' => 'Module key is required', 'code' => '404', 'error' => true];
+                if (! isset($conf['module'])) return ['message' => 'Module key is required', 'code' => '404', 'error' => true];
 
-                if (!Structures::find($conf['module']) &&
-                    !isset($this->coreModule->{$conf['module']}))
+                if (! Structures::find($conf['module']) &&
+                    ! isset($this->coreModule->{$conf['module']}))
                     return ['message' => $conf['module'] . ' Module is not exists, check your json file', 'code' => '404', 'error' => true];
 
                 if ($m = Structures::find($conf['module'])) {
@@ -263,6 +265,7 @@ class Upload
             $conf['created_at'] = time('now');
             $json = json_encode($conf, true);
             File::put($file, $json);
+
             return ['data' => $conf, 'code' => '200', 'error' => false];
         }
 
@@ -273,7 +276,7 @@ class Upload
      * @param $path
      * @return array
      */
-    public function validateForms($path)
+    public function validateForms ($path)
     {
         $forms = File::files($path . '\forms');
         $form_error = ['error' => false];
@@ -293,7 +296,7 @@ class Upload
     /**
      * @param $fileName
      */
-    public function deleteFolderZip($fileName)
+    public function deleteFolderZip ($fileName)
     {
         File::deleteDirectory($this->uf . $fileName);
         File::delete($this->uf . $fileName . self::ZIP);
@@ -302,7 +305,7 @@ class Upload
     /**
      * @param $id
      */
-    public function removeLinks($id)
+    public function removeLinks ($id)
     {
         $menu = MenuData::where('plugin_id', $id)->first();
         if ($menu) {
@@ -315,7 +318,7 @@ class Upload
      * @param $plugin_id
      * @param $module_id
      */
-    public function removeAddonLinks($admin_links, $plugin_id, $module_id)
+    public function removeAddonLinks ($admin_links, $plugin_id, $module_id)
     {
         $menu = MenuData::where('id', $module_id)->first();
         if ($menu->sub_items) {
@@ -337,7 +340,7 @@ class Upload
      * @param $conf
      * @return array
      */
-    public function returnLinks($conf)
+    public function returnLinks ($conf)
     {
         if (isset($conf['admin_link']['children'])) {
             $children = [];
@@ -355,7 +358,7 @@ class Upload
      * @param $conf
      * @return array
      */
-    public function returnAddonLinks($conf)
+    public function returnAddonLinks ($conf)
     {
         if (isset($conf['admin_link'])) {
             $children = [];

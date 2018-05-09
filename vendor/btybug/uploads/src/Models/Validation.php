@@ -43,7 +43,7 @@ class Validation implements vInterfase
     /**
      * Validation constructor.
      */
-    public function __construct()
+    public function __construct ()
     {
 
     }
@@ -52,7 +52,7 @@ class Validation implements vInterfase
      * @param $file
      * @return bool|int|string
      */
-    public function isCompress($file)
+    public function isCompress ($file)
     {
         $ext = $file->getClientOriginalExtension();
         if ($file->getSize() < self::MIN_SIZE) {
@@ -61,33 +61,35 @@ class Validation implements vInterfase
         if ($ext == 'zip') {
             return 'zip';
         }
+
         return 0;
     }
 
     /**
      * @return array
      */
-    public function admin_link_rules()
+    public function admin_link_rules ()
     {
-        return array(
-            'type' => 'required',
+        return [
+            'type'  => 'required',
             'title' => 'required',
-            'link' => 'required',
-        );
+            'link'  => 'required',
+        ];
     }
 
     /**
      * @param $path
      * @return array
      */
-    public function json($path)
+    public function json ($path)
     {
         $path = $path . '/module.json';
-        $result = array();
+        $result = [];
 
         //if the plug-in structure correct
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             $result[] = 'Uploaded File is not a plugin.';
+
             return $result;
         }
 
@@ -100,6 +102,7 @@ class Validation implements vInterfase
         $error = json_last_error_msg();
         if ($json_data == null) {
             $result[] = $error . ": in module.json file";
+
             return $result;
         }
 
@@ -111,6 +114,7 @@ class Validation implements vInterfase
             if ($json_data['name'] != $folder) {
                 $result[] = 'The name value from module.json must be same as folder name.';
             }
+
             return $result;
         }
 
@@ -129,6 +133,7 @@ class Validation implements vInterfase
         if (strtolower($json_data['name']) != $json_data['slug']) {
             $result[] = 'The slug value from module.json must be same as name just in lowercase.';
         }
+
         return $result;
     }
 
@@ -136,11 +141,12 @@ class Validation implements vInterfase
      * @param array $data
      * @return array|int
      */
-    public function check(array $data)
+    public function check (array $data)
     {
         $v = Validator::make($data, $this->rules());
         if ($v->fails()) {
             $messages = $v->errors()->all();
+
             return $messages;
         }
 
@@ -148,6 +154,7 @@ class Validation implements vInterfase
             $v = Validator::make($data, $this->addon_rules(), $this->addon_rules_messages($data));
             if ($v->fails()) {
                 $messages = $v->errors()->all();
+
                 return $messages;
             }
         }
@@ -158,48 +165,49 @@ class Validation implements vInterfase
     /**
      * @return array
      */
-    public function rules()
+    public function rules ()
     {
-        return array(
-            'name' => 'required|between:2,20',
-            'type' => 'required',
-            'slug' => 'required',
-            'enabled' => 'required',
+        return [
+            'name'      => 'required|between:2,20',
+            'type'      => 'required',
+            'slug'      => 'required',
+            'enabled'   => 'required',
             'namespace' => 'required'
-        );
+        ];
     }
 
     /**
      * @return array
      */
-    public function addon_rules()
+    public function addon_rules ()
     {
-        return array(
+        return [
             'module' => 'required|exists:modules,slug',
-        );
+        ];
     }
 
     /**
      * @param $data
      * @return array
      */
-    public function addon_rules_messages($data)
+    public function addon_rules_messages ($data)
     {
-        return array(
+        return [
             'module.exists' => 'We have no module with ' . $data['module'] . ' name',
-        );
+        ];
     }
 
     /**
      * @param $path
      * @return array|int
      */
-    public function check_addon_file($path)
+    public function check_addon_file ($path)
     {
-        $result = array();
-        $scanned_directory = array_diff(scandir($path), array('..', '.', 'module.json'));
+        $result = [];
+        $scanned_directory = array_diff(scandir($path), ['..', '.', 'module.json']);
         if (empty($scanned_directory)) {
             $result[] = 'This add on is empty and not usable';
+
             return $result;
         }
 

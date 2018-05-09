@@ -17,11 +17,12 @@ use Illuminate\Routing\Controller;
 
 class MarketController extends Controller
 {
-    public function getIndex()
+    public function getIndex ()
     {
         return view('uploads::Composer.index');
     }
-    public function getPackages()
+
+    public function getPackages ()
     {
         // create curl resource
         $ch = curl_init();
@@ -53,8 +54,8 @@ class MarketController extends Controller
         // close curl resource to free up system resources
         curl_close($ch);
         $output = (json_decode($output, true));
-        if(isset($output['results']) && isset($sahak['results']))
-            $output['results'] = array_merge($output['results'],$sahak['results']);
+        if (isset($output['results']) && isset($sahak['results']))
+            $output['results'] = array_merge($output['results'], $sahak['results']);
 
         return view('uploads::Composer.market', compact('output'));
     }

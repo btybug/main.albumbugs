@@ -15,12 +15,12 @@ class App extends Model
     protected $guarded = ['id'];
 
     const statuses = [
-        'inactive'  => 0,
-        'active' => 1
+        'inactive' => 0,
+        'active'   => 1
     ];
 
-    public function products()
+    public function products ()
     {
-        return $this->hasMany(AppProduct::class,'app_id');
+        return $this->hasMany(AppProduct::class, 'app_id');
     }
 }

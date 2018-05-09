@@ -23,12 +23,12 @@ use Symfony\Component\Console\Tests\Input\StringInput;
 
 class AppsController extends Controller
 {
-    public function getIndex()
+    public function getIndex ()
     {
         return view('uploads::Apps.index');
     }
 
-    public function getCoreApps(
+    public function getCoreApps (
         Request $request,
         AppRepository $appRepository
     )
@@ -41,7 +41,7 @@ class AppsController extends Controller
             $products = $selected->products;
         }
 
-        if (!$selected) {
+        if (! $selected) {
             $selected = $appRepository->first();
             $products = $selected->products;
         }
@@ -49,7 +49,7 @@ class AppsController extends Controller
         return view('uploads::Apps.core', compact('apps', 'selected', 'products'));
     }
 
-    public function postCreateProduct(
+    public function postCreateProduct (
         Request $request,
         AppsService $appsService
     )
@@ -59,7 +59,7 @@ class AppsController extends Controller
         return redirect()->back();
     }
 
-    public function getEditCore(
+    public function getEditCore (
         AppProductRepository $appProductRepository,
         AppsService $appsService,
         $param = null
@@ -67,10 +67,11 @@ class AppsController extends Controller
     {
         $model = $appProductRepository->findOrFail($param);
         $product = $appsService->getForEdit($model);
-        return view('uploads::Apps.edit', compact('product','model'));
+
+        return view('uploads::Apps.edit', compact('product', 'model'));
     }
 
-    public function postEditCore(
+    public function postEditCore (
         Request $request,
         AppProductRepository $appProductRepository,
         $param = null
@@ -78,14 +79,14 @@ class AppsController extends Controller
     {
         $product = $appProductRepository->findOrFail($param);
 
-        $appProductRepository->update($param,$request->only('name','status','description') + [
-            'json_data' => $request->except('name','status','description','_token')
-        ]);
+        $appProductRepository->update($param, $request->only('name', 'status', 'description') + [
+                'json_data' => $request->except('name', 'status', 'description', '_token')
+            ]);
 
         return redirect()->back();
     }
 
-    public function getExtra(Request $request)
+    public function getExtra (Request $request)
     {
 
         $selected = null;
@@ -94,9 +95,9 @@ class AppsController extends Controller
         $plugins = $packages->getPlugins();
         if ($request->p && isset($plugins[$request->p])) {
             $selected = $packages->find($plugins[$request->p]['name']);
-        } elseif ($request->p && !isset($plugins[$request->p])) {
+        } elseif ($request->p && ! isset($plugins[$request->p])) {
             abort('404');
-        } elseif (!$request->p && !isset($plugins[$request->p])) {
+        } elseif (! $request->p && ! isset($plugins[$request->p])) {
             foreach ($plugins as $key => $plugin) {
                 $selected = $packages->find($key);
                 continue;
@@ -107,16 +108,18 @@ class AppsController extends Controller
         if (isset($selected->name) && isset($storage[$selected->name])) {
             $enabled = false;
         }
+
         return view('uploads::Apps.core', compact('plugins', 'selected', 'enabled'));
     }
 
-    public function delete(
+    public function delete (
         Request $request,
         AppProductRepository $appProductRepository
     )
     {
         $data = $appProductRepository->findOrFail($request->get('slug'));
         $response = $appProductRepository->delete($request->get('slug'));
+
         return \Response::json(['success' => true, 'url' => url(route('core_apps'))]);
     }
 }

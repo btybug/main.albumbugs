@@ -38,13 +38,13 @@ class LayoutController extends Controller
      * @param Upload $upload
      * @param validateUpl $v
      */
-    public function __construct()
+    public function __construct ()
     {
         $this->helper = new helpers();
     }
 
 
-    public function getIndex(Request $request)
+    public function getIndex (Request $request)
     {
         $p = $request->get('p', null);
         $type = 'main_body';
@@ -56,6 +56,7 @@ class LayoutController extends Controller
             $curentLayout = $contentLayouts[0];
         }
         $variations = $curentLayout->variations();
+
         return view('uploads::gears.layouts.index', compact(['contentLayouts', 'curentLayout', 'variations']));
     }
 

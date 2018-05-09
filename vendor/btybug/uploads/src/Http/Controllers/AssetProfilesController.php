@@ -31,7 +31,7 @@ class AssetProfilesController extends Controller
      */
     public $helper;
 
-    public function __construct()
+    public function __construct ()
     {
         $this->helper = new helpers();
     }
@@ -39,30 +39,32 @@ class AssetProfilesController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getIndex()
+    public function getIndex ()
     {
         return view('uploads::profiles.index');
     }
 
-    public function getJs(
+    public function getJs (
         VersionProfilesRepository $versionsRepository,
         VersionProfilesService $versionsService
     )
     {
-        $plugins = $versionsRepository->getBy('type','js');
+        $plugins = $versionsRepository->getBy('type', 'js');
+
         return view('uploads::profiles.js', compact(['plugins']));
     }
 
-    public function getCss(
+    public function getCss (
         VersionProfilesRepository $versionsRepository,
         VersionProfilesService $versionsService
     )
     {
-        $plugins = $versionsRepository->getBy('type','css');
+        $plugins = $versionsRepository->getBy('type', 'css');
+
         return view('uploads::profiles.css', compact(['plugins']));
     }
 
-    public function getJsCreate(
+    public function getJsCreate (
         VersionsRepository $versionsRepository,
         VersionsService $versionsService
     )
@@ -70,7 +72,8 @@ class AssetProfilesController extends Controller
         $model = null;
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJQuery();
-        return view('uploads::profiles.create_js', compact(['plugins','model','mains']));
+
+        return view('uploads::profiles.create_js', compact(['plugins', 'model', 'mains']));
     }
 
     public function postJsCreate (
@@ -79,10 +82,10 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token','main','files');
-        if($request->get('files')){
-            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
-        }else{
+        $data = $request->except('_token', 'main', 'files');
+        if ($request->get('files')) {
+            $data['files'] = array_prepend($request->get('files'), $request->get('main'));
+        } else {
             $data['files'][] = $request->get('main');
         }
         $data['user_id'] = \Auth::id();
@@ -98,19 +101,20 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token','main','files');
-        if($request->get('files')){
-            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
-        }else{
+        $data = $request->except('_token', 'main', 'files');
+        if ($request->get('files')) {
+            $data['files'] = array_prepend($request->get('files'), $request->get('main'));
+        } else {
             $data['files'] = $request->get('main');
         }
         $data['user_id'] = \Auth::id();
         $profile = $profilesRepository->create($data);
         $profilesService->generateCSS($profile);
+
         return redirect()->route('uploads_assets_profiles_css');
     }
 
-    public function getCssCreate(
+    public function getCssCreate (
         VersionsRepository $versionsRepository,
         VersionsService $versionsService
     )
@@ -118,10 +122,11 @@ class AssetProfilesController extends Controller
         $model = null;
         $plugins = $versionsRepository->getCss();
         $mains = $versionsRepository->getFrameworks();
-        return view('uploads::profiles.create_css', compact(['plugins','model','mains']));
+
+        return view('uploads::profiles.create_css', compact(['plugins', 'model', 'mains']));
     }
 
-    public function getJsEdit(
+    public function getJsEdit (
         $id,
         Request $request,
         VersionProfilesRepository $profilesRepository,
@@ -129,16 +134,16 @@ class AssetProfilesController extends Controller
         AssetsRepository $assetsRepository
     )
     {
-       $model = $profilesRepository->findOrFail($id);
-       if($model->structured_by) abort(404);
+        $model = $profilesRepository->findOrFail($id);
+        if ($model->structured_by) abort(404);
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJQuery();
         $assets = $assetsRepository->getWithGroupBy();
 
-        return view('uploads::profiles.create_js', compact(['plugins','model','mains','assets']));
+        return view('uploads::profiles.create_js', compact(['plugins', 'model', 'mains', 'assets']));
     }
 
-    public function getCssEdit(
+    public function getCssEdit (
         $id,
         Request $request,
         VersionProfilesRepository $profilesRepository,
@@ -146,68 +151,69 @@ class AssetProfilesController extends Controller
     )
     {
         $model = $profilesRepository->findOrFail($id);
-        if($model->structured_by) abort(404);
+        if ($model->structured_by) abort(404);
         $plugins = $versionsRepository->getCss();
         $mains = $versionsRepository->getFrameworks();
 
-        return view('uploads::profiles.create_css', compact(['plugins','model','mains']));
+        return view('uploads::profiles.create_css', compact(['plugins', 'model', 'mains']));
     }
 
-    public function postCssEdit(
+    public function postCssEdit (
         $id,
         Request $request,
         VersionProfilesRepository $profilesRepository,
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token','main','files');
-        if($request->get('files')){
-            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
-        }else{
+        $data = $request->except('_token', 'main', 'files');
+        if ($request->get('files')) {
+            $data['files'] = array_prepend($request->get('files'), $request->get('main'));
+        } else {
             $data['files'][] = $request->get('main');
         }
         $model = $profilesRepository->findOrFail($id);
-        if($model->structured_by) abort(404);
+        if ($model->structured_by) abort(404);
         $profilesService->removeFile($model->hint_path);
-        $updated = $profilesRepository->update($id,$data);
+        $updated = $profilesRepository->update($id, $data);
         $profilesService->generateCSS($updated);
 
         return redirect()->route('uploads_assets_profiles_css');
     }
 
-    public function postJsEdit(
+    public function postJsEdit (
         $id,
         Request $request,
         VersionProfilesRepository $profilesRepository,
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token','main','files');
-        if($request->get('files')){
-            $data['files'] = array_prepend($request->get('files'),$request->get('main'));
-        }else{
+        $data = $request->except('_token', 'main', 'files');
+        if ($request->get('files')) {
+            $data['files'] = array_prepend($request->get('files'), $request->get('main'));
+        } else {
             $data['files'][] = $request->get('main');
         }
         $model = $profilesRepository->findOrFail($id);
-        if($model->structured_by) abort(404);
+        if ($model->structured_by) abort(404);
         $profilesService->removeFile($model->hint_path);
-        $updated = $profilesRepository->update($id,$data);
+        $updated = $profilesRepository->update($id, $data);
         $profilesService->generateJS($updated);
 
         return redirect()->route('uploads_assets_profiles_js');
     }
 
-    public function delete(
+    public function delete (
         Request $request,
         VersionProfilesRepository $profilesRepository,
         VersionProfilesService $profilesService
     )
     {
         $data = $profilesRepository->findOrFail($request->get('slug'));
-        if($data->structured_by) abort(404);
+        if ($data->structured_by) abort(404);
         $profilesService->removeFile($data->hint_path);
         $profilesRepository->delete($request->get('slug'));
-        return \Response::json(['success' => true, 'url' => url('/admin/uploads/profiles/'.$data->type)]);
+
+        return \Response::json(['success' => true, 'url' => url('/admin/uploads/profiles/' . $data->type)]);
     }
 }
 

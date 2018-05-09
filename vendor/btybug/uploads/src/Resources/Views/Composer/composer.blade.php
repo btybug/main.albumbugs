@@ -346,6 +346,7 @@
                 }
             );
         }
+
         function autoloadUp() {
             $.post('{!! route('composer_main') !!}',
                 {

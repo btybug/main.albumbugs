@@ -11,9 +11,9 @@
             @foreach($columns as $index=>$comumn)
 
                 <tr>
-            @foreach($comumn as $prop)
-                    <td>{{$prop}}</td>
-            @endforeach
+                    @foreach($comumn as $prop)
+                        <td>{{$prop}}</td>
+                    @endforeach
                 </tr>
             @endforeach
             </tbody>

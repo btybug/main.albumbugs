@@ -28,7 +28,7 @@ class Units extends Model
     /**
      * @var array
      */
-    public function page()
+    public function page ()
     {
         return $this->belongsTo(FrontendPage::class, 'page_id');
     }

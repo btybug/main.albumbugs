@@ -16,8 +16,8 @@ class UnitsRepository extends GeneralRepository
         return new Units();
     }
 
-    public function getWithGroupBy($column = 'slug')
+    public function getWithGroupBy ($column = 'slug')
     {
-       return $this->model()->get()->groupBy($column);
+        return $this->model()->get()->groupBy($column);
     }
 }

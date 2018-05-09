@@ -22,16 +22,18 @@
     </div>
 </div>
 <style>
-    .ace_editor{
-        height:400px;
-        width:900px;
+    .ace_editor {
+        height: 400px;
+        width: 900px;
         flex: 1;
     }
-    .set_border{
+
+    .set_border {
         border: 2px solid #FF0000;
     }
-    .custom_inline_block{
-        display:inline-block;
+
+    .custom_inline_block {
+        display: inline-block;
     }
 </style>
 @push('javascript')
@@ -48,7 +50,7 @@
                 space.val(editor_html.getSession().getValue());
 
                 var annot = editor_html.getSession().getAnnotations();
-                for (var key in annot){
+                for (var key in annot) {
                     if (annot.hasOwnProperty(key) && annot[key].type === 'error') {
                         return editor_html.setStyle("set_border");
                     }
@@ -75,9 +77,9 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-                            if(type == 'css' || type == 'framework'){
+                            if (type == 'css' || type == 'framework') {
                                 editor_html.session.setMode("ace/mode/css");
-                            }else{
+                            } else {
                                 editor_html.session.setMode("ace/mode/javascript");
                             }
                             editor_html.setValue(data.code);

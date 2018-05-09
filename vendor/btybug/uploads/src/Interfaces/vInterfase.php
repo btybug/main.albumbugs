@@ -22,17 +22,17 @@ interface vInterfase
      * @param array $data
      * @return mixed
      */
-    public function check(array $data);
+    public function check (array $data);
 
     /**
      * @param $path
      * @return mixed
      */
-    public function json($path);
+    public function json ($path);
 
     /**
      * @param $file
      * @return mixed
      */
-    public function isCompress($file);
+    public function isCompress ($file);
 }

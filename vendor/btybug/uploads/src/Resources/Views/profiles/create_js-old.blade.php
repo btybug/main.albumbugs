@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     @if(count($plugins))
                         @foreach( $plugins as $plugin)
-                           {{ $plugin->name }} {!! Form::checkbox('files[]',$plugin->id,null) !!}
+                            {{ $plugin->name }} {!! Form::checkbox('files[]',$plugin->id,null) !!}
                         @endforeach
                     @endif
                 </div>

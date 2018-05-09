@@ -14,22 +14,22 @@ namespace Btybug\Uploads\illustrator;
 
 class CmsPlugins
 {
-    public function modules()
+    public function modules ()
     {
         // TODO: Implement modules() method.
     }
 
-    public function plugins()
+    public function plugins ()
     {
         // TODO: Implement plugins() method.
     }
 
-    private function pluginsReader()
+    private function pluginsReader ()
     {
 
     }
 
-    private function modulesReader()
+    private function modulesReader ()
     {
 
     }

@@ -56,7 +56,7 @@ class Style extends Model
      * @param $file
      * @return array|bool
      */
-    public static function uplaodStyle($file)
+    public static function uplaodStyle ($file)
     {
         self::$uf = config('paths.styles_upl');
         $originalFileName = $file->getClientOriginalName();
@@ -76,7 +76,7 @@ class Style extends Model
     /**
      *
      */
-    protected static function boot()
+    protected static function boot ()
     {
         parent::boot();
         static::created(function ($model) {
@@ -101,7 +101,7 @@ class Style extends Model
     /**
      *
      */
-    public static function makeCss()
+    public static function makeCss ()
     {
         $css_file = config('paths.css') . '/' . self::$main_css;
 
@@ -119,41 +119,42 @@ class Style extends Model
     /**
      * @param $query
      */
-    public function scopeDefaults($query)
+    public function scopeDefaults ($query)
     {
         $query->where('is_default', 1);
     }
 
-    public function getHtmlAttribute()
+    public function getHtmlAttribute ()
     {
 
         return self::getDemoHtml($this->type, $this->slug);
     }
 
-    public static function getDemoHtml($key, $class)
+    public static function getDemoHtml ($key, $class)
     {
 
         $demoHtml = [
-            'text' => "<span  class='$class item-to-change'>Demo text</span>",
-            'image' => "<img src='public/img/ajax-loader5.gif' alt='demoimg' class='$class'>",
-            'container' => "<div class='$class'></div>",
-            'buttons' => "<button class='$class'></button>",
-            'fields' => "<form class='$class'></form>",
-            'breadcrumb' => "<ul class='$class'>
+            'text'         => "<span  class='$class item-to-change'>Demo text</span>",
+            'image'        => "<img src='public/img/ajax-loader5.gif' alt='demoimg' class='$class'>",
+            'container'    => "<div class='$class'></div>",
+            'buttons'      => "<button class='$class'></button>",
+            'fields'       => "<form class='$class'></form>",
+            'breadcrumb'   => "<ul class='$class'>
                                 <li><a href=\"#\">Home</a></li>
                                 <li><a href=\"#\">Pictures</a></li>
                                 <li><a href=\"#\">Summer</a></li>
                                 <li>Italy</li>
                             </ul>",
-            'menu' => "<ul class='$class'>
+            'menu'         => "<ul class='$class'>
                             <li>Home</li>
                             <li>About</li>
                             <li>Contact us</li>
                         </ul>",
-            'animation' => "<div class='$class'></div>",
+            'animation'    => "<div class='$class'></div>",
             'notification' => "<span class='$class'>Demo Text</span>"
 
         ];
+
         return $demoHtml[$key];
 
     }
@@ -161,7 +162,7 @@ class Style extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function classe()
+    public function classe ()
     {
         return $this->belongsTo('Btybug\Uploads\Models\Styles', 'style_id');
     }

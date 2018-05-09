@@ -25,7 +25,7 @@ class UnitsController extends Controller
 
     private $upload;
 
-    public function __construct(validateUpl $validateUpl)
+    public function __construct (validateUpl $validateUpl)
     {
         $this->upload = new CmsItemUploader('units');
         $this->validateUpl = new $validateUpl;
@@ -34,47 +34,54 @@ class UnitsController extends Controller
         //$this->unitTypes = $this->types = @json_decode(File::get(config('paths.unit_path') . 'configTypes.json'), 1)['types'];
     }
 
-    public function getIndex(Request $request)
+    public function getIndex (Request $request)
     {
         $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
         $all_unit = Painter::all()->get();
-        return view("uploads::gears.units.index", compact(['units', 'test','all_unit']));
+
+        return view("uploads::gears.units.index", compact(['units', 'test', 'all_unit']));
     }
 
-    public function getIndexFromPost(Request $request){
-        $units = json_decode($request->arr,true);
-        if(!count($units)){
+    public function getIndexFromPost (Request $request)
+    {
+        $units = json_decode($request->arr, true);
+        if (! count($units)) {
             $all_unit = Painter::all()->get();
             $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
-        }else{
+        } else {
             $units = Painter::makeUnits($units);
             $all_unit = $units->get();
             $units = $units->paginate(4, 4, 'bty-pagination-2');
         }
-        return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
+
+        return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units", "all_unit"]))->render());
     }
 
-    public function getFrontend(Request $request)
+    public function getFrontend (Request $request)
     {
         $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
         $all_unit = Painter::all()->get();
-        return view("uploads::gears.units.index", compact(['units', 'test','all_unit']));
+
+        return view("uploads::gears.units.index", compact(['units', 'test', 'all_unit']));
     }
 
-    public function getFrontendFromPost(Request $request){
-        $units = json_decode($request->arr,true);
-        if(!count($units)){
+    public function getFrontendFromPost (Request $request)
+    {
+        $units = json_decode($request->arr, true);
+        if (! count($units)) {
             $all_unit = Painter::all()->get();
             $units = Painter::all()->paginate(4, 4, 'bty-pagination-2');
-        }else{
+        } else {
             $units = Painter::makeUnits($units);
             $all_unit = $units->get();
             $units = $units->paginate(4, 4, 'bty-pagination-2');
         }
-        return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units","all_unit"]))->render());
+
+        return \Response::json(View::make('uploads::gears.units._partials.unit_variations', compact(["units", "all_unit"]))->render());
     }
 
-    public function filterUnits(Request $request){
+    public function filterUnits (Request $request)
+    {
         $date_from = $request->date_from;
         $date_to = $request->date_to;
 
@@ -82,31 +89,32 @@ class UnitsController extends Controller
         $tag = $request->tag;
 
         $units = Painter::all();
-        if($date_from || $date_to){
-            $units = $units->whereDate($date_from,$date_to);
+        if ($date_from || $date_to) {
+            $units = $units->whereDate($date_from, $date_to);
         }
-        if($author){
-            $units = $units->where("author","like",$author);
+        if ($author) {
+            $units = $units->where("author", "like", $author);
         }
-        if($tag){
+        if ($tag) {
             $units = $units->whereTag($tag);
         }
         $all_unit = $units->get();
-        $units = $units->paginate(4,4,'bty-pagination-2');
-        $html= View::make('uploads::gears.units._partials.unit_variations',compact(['units','all_unit']))->render();
+        $units = $units->paginate(4, 4, 'bty-pagination-2');
+        $html = View::make('uploads::gears.units._partials.unit_variations', compact(['units', 'all_unit']))->render();
 
         return \Response::json(['html' => $html, 'error' => false]);
     }
 
-    public function getUnitVariations($slug)
+    public function getUnitVariations ($slug)
     {
         $variations = Painter::find($slug)->variations()->all();
         $unit = $variations->getModel();
-        if (!count($variations)) return redirect()->back();
-        return view('uploads::gears.units.variations', compact(['variations','unit']));
+        if (! count($variations)) return redirect()->back();
+
+        return view('uploads::gears.units.variations', compact(['variations', 'unit']));
     }
 
-    public function postUnitWithType(Request $request)
+    public function postUnitWithType (Request $request)
     {
         $main_type = $request->get('main_type');
         $general_type = $request->get('type', null);
@@ -122,16 +130,16 @@ class UnitsController extends Controller
         return \Response::json(['html' => $html, 'error' => false]);
     }
 
-    public function postUnitVariations(Request $request, $slug)
+    public function postUnitVariations (Request $request, $slug)
     {
         $ui = Painter::find($slug);
-        if (!$ui) return redirect()->back();
+        if (! $ui) return redirect()->back();
         $ui->variations()->makeVariation($request->except('_token', 'ui_slug'))->save();
 
         return redirect()->back();
     }
 
-    public function postUploadUnit(Request $request)
+    public function postUploadUnit (Request $request)
     {
         return $this->upload->run($request, 'frontend');
     }
@@ -140,44 +148,52 @@ class UnitsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postDeleteVariation(Request $request)
+    public function postDeleteVariation (Request $request)
     {
         $result = false;
         if ($request->slug) {
             $result = Painter::find($request->slug)->variations()->deleteVariation($request->slug);
         }
+
         return redirect()->back()->with("message", "Variation was deleted");
     }
-    public function postDelete(Request $request)
+
+    public function postDelete (Request $request)
     {
         $slug = $request->get('slug');
         $unit = Painter::find($slug);
         if ($unit) {
             $deleted = $unit->delete();
+
             return \Response::json(['success' => $deleted, 'url' => url('/admin/uploads/gears/units')]);
         }
     }
-    public function createVariationForUnit($slug){
+
+    public function createVariationForUnit ($slug)
+    {
         $unit = Painter::find($slug);
         $variation = $unit->variations()->createVariation([]);
 
-        return redirect()->route('uploads_settings',$variation->id);
+        return redirect()->route('uploads_settings', $variation->id);
     }
-    public function getSettings($slug)
+
+    public function getSettings ($slug)
     {
         if ($slug) {
             $view = Painter::renderLivePreview($slug, 'frontend');
+
             return $view ? $view : abort('404');
         } else {
             abort('404');
         }
     }
-    public function unitPreview($id)
+
+    public function unitPreview ($id)
     {
         $slug = explode('.', $id);
         $ui = Painter::find($slug[0]);
         $variation = $ui->variations()->findVariation($id);
-        if (!$variation) return redirect()->back();
+        if (! $variation) return redirect()->back();
 
         $ifrem = [];
         $settings = (isset($variation->settings) && $variation->settings) ? $variation->settings : [];
@@ -189,14 +205,14 @@ class UnitsController extends Controller
 
     }
 
-    public function unitPreviewIframe($id, $type = null)
+    public function unitPreviewIframe ($id, $type = null)
     {
         $slug = explode('.', $id);
         $ui = Painter::find($slug[0]);
         $variation = $ui->variations(false)->find($id);
         $settings = [];
         $extra_data = 'some string';
-        if(count($variation->settings) > 0){
+        if (count($variation->settings) > 0) {
             $settings = $variation->settings;
         }
         if ($ui->main_type == 'data_source') {
@@ -205,17 +221,18 @@ class UnitsController extends Controller
         $htmlBody = $ui->renderLive(['settings' => $settings, 'source' => $extra_data, 'cheked' => 1, 'field' => null]);
         $htmlSettings = $ui->renderSettings(compact('settings'));
         $settings_json = json_encode($settings, true);
+
         return view('uploads::gears.units._partials.unit_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
 
-    public function htmlPreviewIframe($id, $type = null)
+    public function htmlPreviewIframe ($id, $type = null)
     {
         $slug = explode('.', $id);
         $ui = Painter::find($slug[0]);
         $variation = $ui->variations(false)->find($id);
         $settings = [];
         $extra_data = 'some string';
-        if(count($variation->settings) > 0){
+        if (count($variation->settings) > 0) {
             $settings = $variation->settings;
         }
         if ($ui->main_type == 'data_source') {
@@ -224,26 +241,28 @@ class UnitsController extends Controller
         $htmlBody = $ui->renderLive(['settings' => $settings, 'source' => $extra_data, 'cheked' => 1, 'field' => null]);
         $htmlSettings = $ui->renderSettings(compact('settings'));
         $settings_json = json_encode($settings, true);
+
         return view('uploads::gears.units._partials.html_preview', compact(['htmlBody', 'htmlSettings', 'settings', 'settings_json', 'id', 'ui']));
     }
 
-    public function postSettings(Request $request)
+    public function postSettings (Request $request)
     {
         $output = Painter::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
+
         return response()->json([
             'error' => $output ? false : true,
-            'url' => $output ? url('/admin/uploads/gears/settings/' . $output['slug']) : false,
-            'html' => $output ? $output['html'] : false,
-            'slug' => $output['slug']
+            'url'   => $output ? url('/admin/uploads/gears/settings/' . $output['slug']) : false,
+            'html'  => $output ? $output['html'] : false,
+            'slug'  => $output['slug']
         ]);
     }
 
-    public function getDefaultVariation($id)
+    public function getDefaultVariation ($id)
     {
         $data = explode('.', $id);
         $unit = Painter::find($data[0]);
 
-        if (!empty($data) && $unit) {
+        if (! empty($data) && $unit) {
             foreach ($unit->variations()->all() as $variation) {
                 $variation->setAttributes('default', 0);
                 $variation->save();
@@ -259,7 +278,7 @@ class UnitsController extends Controller
         return redirect()->back();
     }
 
-    public function getMakeDefault($slug)
+    public function getMakeDefault ($slug)
     {
         $units = Painter::all()->where('type', '=', 'fields')->get();
         if (count($units)) {
@@ -272,14 +291,17 @@ class UnitsController extends Controller
                 }
                 $unit->save();
             }
+
             return redirect()->back()->with('message', 'New Default Unit is ' . $default);
         }
 
         return redirect()->back();
     }
 
-    public function removePainter(){
+    public function removePainter ()
+    {
         Painter::removePainterJson();
+
         return redirect()->back()->with("success", "Units was optimized successfully");
     }
 }

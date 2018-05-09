@@ -69,7 +69,8 @@
                     <a href="#config_tab" aria-controls="config_tab" role="tab" data-toggle="tab">Config</a>
                 </li>
                 <li role="presentation" class="">
-                    <a href="#permissions_tab" aria-controls="permissions_tab" role="tab" data-toggle="tab">Permissions</a>
+                    <a href="#permissions_tab" aria-controls="permissions_tab" role="tab"
+                       data-toggle="tab">Permissions</a>
                 </li>
                 <li role="presentation">
                     <a href="#docs_tab" aria-controls="docs_tab" role="tab" data-toggle="tab">Documentation</a>

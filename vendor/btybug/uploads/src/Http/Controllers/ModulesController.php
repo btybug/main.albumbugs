@@ -20,17 +20,17 @@ use Symfony\Component\Console\Tests\Input\StringInput;
 
 class ModulesController extends Controller
 {
-    public function getChilds()
+    public function getChilds ()
     {
         return view('uploads::index');
     }
 
-    public function getIndex()
+    public function getIndex ()
     {
         return view('uploads::Modules.index');
     }
 
-    public function getCoreModules(Request $request)
+    public function getCoreModules (Request $request)
     {
 
         $selected = null;
@@ -39,9 +39,9 @@ class ModulesController extends Controller
         $plugins = $packages->getPlugins();
         if ($request->p && isset($plugins[$request->p])) {
             $selected = $packages->find($plugins[$request->p]['name']);
-        } elseif ($request->p && !isset($plugins[$request->p])) {
+        } elseif ($request->p && ! isset($plugins[$request->p])) {
             abort('404');
-        } elseif (!$request->p && !isset($plugins[$request->p])) {
+        } elseif (! $request->p && ! isset($plugins[$request->p])) {
             foreach ($plugins as $key => $plugin) {
                 $selected = $packages->find($key);
                 continue;
@@ -53,10 +53,11 @@ class ModulesController extends Controller
         if (isset($selected->name) && isset($storage[$selected->name])) {
             $enabled = false;
         }
+
         return view('uploads::Modules.core', compact('plugins', 'selected', 'enabled'));
     }
 
-    public function getExplore(
+    public function getExplore (
         $repository,
         $package,
         AdminPagesRepository $adminPagesRepository
@@ -69,10 +70,11 @@ class ModulesController extends Controller
         $units = $plugin->units();
 
         $units = $adminPagesRepository->PagesByModulesParent($plugin);
+
         return view('uploads::Explores.index', compact('plugin', 'units', 'pages', 'tables'));
     }
 
-    public function getExplorePlugins(
+    public function getExplorePlugins (
         $repository,
         $package,
         AdminPagesRepository $adminPagesRepository
@@ -84,19 +86,20 @@ class ModulesController extends Controller
         $tables = $plugin->tablse();
         $units = $plugin->units();
         $pages = $adminPagesRepository->PagesByModulesParent($plugin);
+
 //        dd($plugin, $tables,$pages);
 
         return view('uploads::Explores.index', compact('plugin', 'units', 'pages', 'tables'));
     }
 
-    public function getUpdateCms()
+    public function getUpdateCms ()
     {
         $url = url();
         self::rrmdir(__DIR__ . '/../../../../../../vendor');
         header("Location:$url");
     }
 
-    public static function rrmdir($dir)
+    public static function rrmdir ($dir)
     {
         if (is_dir($dir)) {
             $objects = scandir($dir);

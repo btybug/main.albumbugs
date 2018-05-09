@@ -8,7 +8,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Header JS <a href="javascript:void(0);" class="btn btn-danger btn-sm pull-right add-assets">Add</a>
+                        Header JS <a href="javascript:void(0);"
+                                     class="btn btn-danger btn-sm pull-right add-assets">Add</a>
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -24,19 +25,23 @@
                                 @if(count($assets))
                                     @foreach($assets as $item)
                                         <li style="margin-top: 5px;" class="list-group-item" data-id="{{$item->path}}"
-                                            data-name="{{ get_filename_from_path($item->path,DS) }}" data-link="{{ $item->path }}"
+                                            data-name="{{ get_filename_from_path($item->path,DS) }}"
+                                            data-link="{{ $item->path }}"
                                             data-type="{{$item->type}}">
 
                                             {{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})
 
                                             <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio1" checked value="option1"> Keep Inside
+                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]"
+                                                       id="inlineRadio1" checked value="option1"> Keep Inside
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio2" value="option2"> Update
+                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]"
+                                                       id="inlineRadio2" value="option2"> Update
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]" id="inlineRadio3" value="option3"> Ignore
+                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]"
+                                                       id="inlineRadio3" value="option3"> Ignore
                                             </label>
                                         </li>
                                     @endforeach
@@ -54,7 +59,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Footer JS <a href="javascript:void(0);" class="btn btn-danger btn-sm pull-right add-assets">Add</a>
+                        Footer JS <a href="javascript:void(0);"
+                                     class="btn btn-danger btn-sm pull-right add-assets">Add</a>
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -113,7 +119,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                       <a href="javascript:void(0);" class="btn btn-primary pull-right">Add</a>
+                        <a href="javascript:void(0);" class="btn btn-primary pull-right">Add</a>
                     </div>
                 </div>
             </div>
@@ -127,7 +133,7 @@
 @section('JS')
     <script>
         $(document).ready(function () {
-            $("body").on('click','.add-assets',function () {
+            $("body").on('click', '.add-assets', function () {
                 $("#uploadAssets").modal();
             });
             $("body").on("change", ".generate", function () {

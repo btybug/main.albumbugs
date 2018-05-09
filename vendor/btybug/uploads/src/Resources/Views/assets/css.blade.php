@@ -26,7 +26,8 @@
                             <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
                             <td>
                                 @if($item->env)
-                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
+                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}"
+                                       data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
                                 @else
                                     <a href="javascript:void(0)"
                                        data-name="edit"
@@ -34,10 +35,10 @@
                                        data-type="{!! $item->type !!}"
                                        class="btn btn-warning edit-version"> Edit </a>
                                 @endif
-                                    <a data-href="{!! url('admin/uploads/assets/delete') !!}"
-                                       data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
-                                       class="delete-button btn btn-danger"><i
-                                                class="fa fa-trash-o f-s-14 "></i></a>
+                                <a data-href="{!! url('admin/uploads/assets/delete') !!}"
+                                   data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
+                                   class="delete-button btn btn-danger"><i
+                                            class="fa fa-trash-o f-s-14 "></i></a>
 
                             </td>
                         </tr>
@@ -79,7 +80,8 @@
                             <td>{!! ($item->env) ? "Live" : "Local" !!}</td>
                             <td>
                                 @if($item->env)
-                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}" data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
+                                    <a href="javascript:void(0)" data-link="{!! $item->file_name !!}"
+                                       data-id="{!! $item->id !!}" class="btn btn-warning update-live">Edit</a>
                                 @else
                                     <a href="javascript:void(0)"
                                        data-name="edit"
@@ -92,7 +94,7 @@
                                    data-key="{!! $item->id !!}" data-type="{{ $item->type.' '.$item->name }}"
                                    class="delete-button btn btn-danger"><i
                                             class="fa fa-trash-o f-s-14 "></i></a>
-                                    {{--ace editor--}}
+                                {{--ace editor--}}
                             </td>
                         </tr>
                     @endforeach

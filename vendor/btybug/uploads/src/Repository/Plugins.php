@@ -37,31 +37,33 @@ class Plugins
      * Plugins constructor.
      * @throws \Exception
      */
-    public function __construct()
+    public function __construct ()
     {
         $this->plugins();
 
     }
 
-    public function plugins()
+    public function plugins ()
     {
         $this->path = base_path(config('avatar.plugins.path') . DS . 'composer.json');
         $this->dir = config('avatar.plugins.path');
         $this->type = 'plugin';
         $this->separator();
+
         return $this;
     }
 
-    public function appPlugins()
+    public function appPlugins ()
     {
         $this->path = base_path(config('avatar.plugins.path') . DS . 'composer.json');
         $this->dir = config('avatar.plugins.path');
         $this->type = 'app-plugin';
         $this->separator();
+
         return $this;
     }
 
-    protected function separator()
+    protected function separator ()
     {
         composer:
         if (\File::exists(base_path())) {
@@ -81,19 +83,21 @@ class Plugins
     /**
      * @return array
      */
-    private function sortPlugins()
+    private function sortPlugins ()
     {
         $plugins = $this->mainComposer['require'] ?? [];
         unset($plugins['php']);
+
         return $plugins;
     }
 
-    public function modules()
+    public function modules ()
     {
         $this->path = base_path('vendor' . DS . 'btybug' . DS . 'btybug' . DS . 'composer.json');
         $this->dir = config('avatar.modules.path');
         $this->type = 'module';
         $this->separator();
+
         return $this;
     }
 
@@ -101,7 +105,7 @@ class Plugins
      * @param array $data
      * @return bool
      */
-    public function onOff(array $data)
+    public function onOff (array $data)
     {
         $result = false;
         switch ($data['action']) {
@@ -112,6 +116,7 @@ class Plugins
                 $result = $this->disable($data['namespace']);
                 break;
         }
+
         return $result;
     }
 
@@ -119,7 +124,7 @@ class Plugins
      * @param $pluginPath
      * @return bool
      */
-    public function enable($pluginPath)
+    public function enable ($pluginPath)
     {
         $plugins = $this->getInstaleds();
         foreach ($plugins as $key => $plugin) {
@@ -134,6 +139,7 @@ class Plugins
 
             }
         }
+
         return $this->command('dump-autoload');
 
     }
@@ -141,7 +147,7 @@ class Plugins
     /**
      * @return mixed
      */
-    public function getInstaleds()
+    public function getInstaleds ()
     {
         if (\File::exists(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json'))) {
             return json_decode(\File::get(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json')), true);
@@ -152,7 +158,7 @@ class Plugins
     /**
      * @return mixed
      */
-    public function getStorage()
+    public function getStorage ()
     {
         if (\File::exists(storage_path('packagis.txt'))) {
             return json_decode(\File::get(storage_path('packagis.txt')), true);
@@ -162,7 +168,7 @@ class Plugins
     /**
      * @param array $data
      */
-    public function addStorage(array $data)
+    public function addStorage (array $data)
     {
         \File::put(storage_path('packagis.txt'), json_encode($data, true));
     }
@@ -171,7 +177,7 @@ class Plugins
      * @param $data
      * @return int
      */
-    public function setInstaleds($data)
+    public function setInstaleds ($data)
     {
         if (\File::exists(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json'))) {
             return \File::put(base_path($this->dir . DS . 'vendor' . DS . 'composer' . DS . 'installed.json'), json_encode($data, true));
@@ -183,12 +189,12 @@ class Plugins
      * @param $command
      * @return bool
      */
-    public function command($command)
+    public function command ($command)
     {
         $path = str_replace('\\', '\\\\', base_path());
         set_time_limit(-1);
         putenv('COMPOSER_HOME=' . __DIR__ . '/../../extracted/bin/composer');
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             return false;
         }
         if (file_exists(__DIR__ . '/../../composer/extracted')) {
@@ -197,8 +203,10 @@ class Plugins
             $output = new \Symfony\Component\Console\Output\StreamOutput(fopen('php://output', 'w'));
             $app = new \Composer\Console\Application();
             $app->run($input, $output);
+
             return true;
         }
+
         return false;
     }
 
@@ -206,7 +214,7 @@ class Plugins
      * @param $pluginPath
      * @return bool
      */
-    public function disable($pluginPath)
+    public function disable ($pluginPath)
     {
         $plugins = $this->getInstaleds();
         if ($plugins && count($plugins)) {
@@ -231,11 +239,12 @@ class Plugins
      * @param $package
      * @return bool
      */
-    public function composerRequireDev($package)
+    public function composerRequireDev ($package)
     {
         $plugin = explode(':', $package);
         $this->mainComposer['require'][$plugin[0]] = $plugin[1];
         \File::put($this->path, json_encode($this->mainComposer, true));
+
         return $this->command('update --dev --no-interaction');
     }
 
@@ -243,21 +252,22 @@ class Plugins
      * @param $package
      * @return bool
      */
-    public function composerRemoveDev($package)
+    public function composerRemoveDev ($package)
     {
-        if (!isset($this->mainComposer['require-dev'][$package])) {
+        if (! isset($this->mainComposer['require-dev'][$package])) {
             echo 'Warning wrong package name!!!';
             exit;
         }
         unset($this->mainComposer['require-dev'][$package]);
         \File::put(base_path('composer.json'), json_encode($this->mainComposer));
+
         return $this->command('update --dev --no-interaction');
     }
 
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function units()
+    public function units ()
     {
         $config = $this->config;
         if ($config && isset($config['units']) && is_array($config['units'])) {
@@ -265,6 +275,7 @@ class Plugins
             foreach ($config['units'] as $slug) {
                 $units[] = Painter::find($slug);
             }
+
             return collect($units);
         }
     }
@@ -273,7 +284,7 @@ class Plugins
      * @param $name
      * @return bool
      */
-    public function __get($name)
+    public function __get ($name)
     {
         return $this->attributes[$name] ?? false;
     }
@@ -282,12 +293,12 @@ class Plugins
      * @param $name
      * @return bool
      */
-    public function __isset($name)
+    public function __isset ($name)
     {
         return isset($this->attributes[$name]);
     }
 
-    public function children()
+    public function children ()
     {
         $children = [];
 
@@ -303,14 +314,14 @@ class Plugins
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function getPlugins($all = false)
+    public function getPlugins ($all = false)
     {
         $plugins = [];
 
         foreach ($this->plugins as $pluginPath => $version) {
             if (\File::exists($this->pluginPath($pluginPath))) {
                 $plugin = json_decode(\File::get($this->pluginPath($pluginPath)), true);
-                if (isset($plugin['type'])&& $plugin['type'] == $this->type || $all) {
+                if (isset($plugin['type']) && $plugin['type'] == $this->type || $all) {
                     $plugins[$pluginPath] = $plugin;
                     $plugins[$pluginPath]['path'] = $this->path;
                     $plugins[$pluginPath]['version'] = $version;
@@ -318,6 +329,7 @@ class Plugins
                 }
             }
         }
+
         return collect($plugins);
     }
 
@@ -325,7 +337,7 @@ class Plugins
      * @param $plugin
      * @return string
      */
-    private function pluginPath($plugin)
+    private function pluginPath ($plugin)
     {
         return base_path($this->dir . DS . 'vendor' . DS . $plugin . DS . 'composer.json');
     }
@@ -334,27 +346,29 @@ class Plugins
      * @param $package
      * @return $this|null
      */
-    public function find($package)
+    public function find ($package)
     {
         $plugins = $this->getPlugins(true);
         if (isset($plugins[$package])) {
             $this->attributes = $plugins[$package];
+
             return $this;
         }
+
         return null;
     }
 
-    public function getPath($path = null)
+    public function getPath ($path = null)
     {
         return base_path($this->dir . DS . $this->name . $path);
     }
 
-    public function parent()
+    public function parent ()
     {
         return $this->find($this->parent);
     }
 
-    public function up()
+    public function up ()
     {
         $namespace = $this->getNamespace();
         $class = $namespace . 'Autoload';
@@ -366,7 +380,7 @@ class Plugins
         }
     }
 
-    public function down()
+    public function down ()
     {
         $namespace = $this->getNamespace();
         $class = $namespace . 'Autoload';
@@ -379,17 +393,18 @@ class Plugins
     }
 
 
-    public function getNamespace()
+    public function getNamespace ()
     {
         $psr = $this->autoload;
         if (isset($psr['psr-4'])) {
             $array = array_keys($psr['psr-4']);
+
             return $array[0];
         }
     }
 
-    public function tablse()
+    public function tablse ()
     {
-        return $this->tables??[];
+        return $this->tables ?? [];
     }
 }

@@ -14,7 +14,8 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Variations for [{{ $pageSection->title }}] unit
-                        <a href="{{ route('create_variation_for_layout', $pageSection->slug) }}" class="btn btn-xs btn-success pull-right" id="new-variation"
+                        <a href="{{ route('create_variation_for_layout', $pageSection->slug) }}"
+                           class="btn btn-xs btn-success pull-right" id="new-variation"
                            style="color:#fff;">New Variation</a>
                         <a href="#" class="btn btn-xs btn-primary pull-right">Primary hooks settings</a>
                     </h4>
@@ -35,7 +36,8 @@
                                        data-title="Template Variation Title">{{$variation_data->title}}</a></td>
                                 </td>
                                 <td>
-                                    <a target="_blank" href="{{ route('uploads_layouts_settings', $variation_data->id) }}"
+                                    <a target="_blank"
+                                       href="{{ route('uploads_layouts_settings', $variation_data->id) }}"
                                        class="btn btn-default btn-warning btn-xs">&nbsp;<i class="fa fa-cog"></i>&nbsp;</a>
 
                                     <a href="/admin/uploads/layouts/delete-variation/{{$variation_data->id}}"
@@ -80,7 +82,8 @@
                                             $page = BBgetFrontPage($used_in->used_in);
                                         @endphp
                                         <p>{!! $page->title !!}</p>
-                                        <p><a href="{!! route('frontsite_settings',$page->id) !!}" target="_blank">Go To Page</a></p>
+                                        <p><a href="{!! route('frontsite_settings',$page->id) !!}" target="_blank">Go To
+                                                Page</a></p>
                                     @endif
                                 </td>
                                 <td>

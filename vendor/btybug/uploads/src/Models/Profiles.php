@@ -28,16 +28,17 @@ class Profiles extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    protected static function boot()
+    protected static function boot ()
     {
         parent::boot();
         static::created(function ($model) {
             self::assignDefaultStyles($model);
+
             return $model;
         });
     }
 
-    public static function assignDefaultStyles($model)
+    public static function assignDefaultStyles ($model)
     {
         $items = StyleItems::defaults()->pluck('id', 'id')->toArray();
 
@@ -48,13 +49,13 @@ class Profiles extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
-    public function styles()
+    public function styles ()
     {
         return $this->belongsToMany('Btybug\Uploads\Models\StyleItems', 'profile_styles',
             'profile_id', 'style_item_id');
     }
 
-    public function user()
+    public function user ()
     {
         return $this->belongsTo('Btybug\User\User', 'user_id', 'id');
     }

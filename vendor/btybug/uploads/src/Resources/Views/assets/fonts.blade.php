@@ -20,23 +20,23 @@
                 <tbody>
                 @if(count($plugins) && isset($plugins))
                     {{--@foreach($plugins as $item)--}}
-                        {{--<tr>--}}
-                            {{--<td>--}}
-                            {{--<input name="assets[{!! $item->id !!}]" value="0" type="hidden" />--}}
-                            {{--<input name="assets[{!! $item->id !!}]" value="1" @if($item->is_generated) checked="checked" @endif type="checkbox" />--}}
-                            {{--</td>--}}
-                            {{--<td>{!! $item->name !!}</td>--}}
-                            {{--<td>{!! BBGetUserName($item->author_id) !!}</td>--}}
-                            {{--<td>{!! $item->version !!}</td>--}}
-                            {{--<td>{!! Form::checkbox('front') !!}:frontend {!! Form::checkbox('back')!!}:backend </td>--}}
-                            {{--<td>local</td>--}}
-                            {{--<td>--}}
-                                {{--<a href="javascript:void(0)" data-id="{!! $item->id !!}" class="btn btn-info update-js">--}}
-                                    {{--Update </a>--}}
-                                {{--<a href="javascript:void(0)" data-name="{!! $item->name !!}" data-id="{!! $item->id !!}"--}}
-                                   {{--class="btn btn-primary change-version"> Change Version </a>--}}
-                            {{--</td>--}}
-                        {{--</tr>--}}
+                    {{--<tr>--}}
+                    {{--<td>--}}
+                    {{--<input name="assets[{!! $item->id !!}]" value="0" type="hidden" />--}}
+                    {{--<input name="assets[{!! $item->id !!}]" value="1" @if($item->is_generated) checked="checked" @endif type="checkbox" />--}}
+                    {{--</td>--}}
+                    {{--<td>{!! $item->name !!}</td>--}}
+                    {{--<td>{!! BBGetUserName($item->author_id) !!}</td>--}}
+                    {{--<td>{!! $item->version !!}</td>--}}
+                    {{--<td>{!! Form::checkbox('front') !!}:frontend {!! Form::checkbox('back')!!}:backend </td>--}}
+                    {{--<td>local</td>--}}
+                    {{--<td>--}}
+                    {{--<a href="javascript:void(0)" data-id="{!! $item->id !!}" class="btn btn-info update-js">--}}
+                    {{--Update </a>--}}
+                    {{--<a href="javascript:void(0)" data-name="{!! $item->name !!}" data-id="{!! $item->id !!}"--}}
+                    {{--class="btn btn-primary change-version"> Change Version </a>--}}
+                    {{--</td>--}}
+                    {{--</tr>--}}
                     {{--@endforeach--}}
                 @else
                     <tr>

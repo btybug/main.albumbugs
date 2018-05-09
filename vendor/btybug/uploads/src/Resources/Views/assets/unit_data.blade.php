@@ -19,7 +19,7 @@
                             path
                         </td>
                         <td>
-                           {!! count($unit) !!}
+                            {!! count($unit) !!}
                         </td>
                     </tr>
                 @endforeach

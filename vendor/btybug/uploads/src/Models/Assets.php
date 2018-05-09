@@ -27,7 +27,7 @@ class Assets extends Model
     /**
      * @var array
      */
-    public function page()
+    public function page ()
     {
         return $this->belongsTo(Units::class, 'unit_id');
     }

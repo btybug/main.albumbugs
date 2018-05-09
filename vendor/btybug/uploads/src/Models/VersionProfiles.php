@@ -32,7 +32,7 @@ class VersionProfiles extends Model
         'files' => 'json'
     ];
 
-    public function user()
+    public function user ()
     {
         return $this->belongsTo('Btybug\User\User', 'user_id', 'id');
     }

@@ -16,48 +16,51 @@ class ComposerController extends Controller
 {
     protected $path;
 
-    public function __construct()
+    public function __construct ()
     {
         $this->path = config('avatar.pluginsDir');
     }
 
-    public function getIndex(Request $request)
+    public function getIndex (Request $request)
     {
         $plugin = $request->get('p');
         $path = $this->path;
+
         return view('uploads::Composer.composer', compact('plugin', 'path'));
     }
 
 
-    public function getStatus()
+    public function getStatus ()
     {
-        $output = array(
-            'composer' => file_exists(__DIR__ . '/../../composer.phar'),
+        $output = [
+            'composer'           => file_exists(__DIR__ . '/../../composer.phar'),
             'composer_extracted' => file_exists(__DIR__ . '/../../composer/extracted'),
-            'installer' => file_exists(__DIR__ . '/../../installer.php'),
-        );
+            'installer'          => file_exists(__DIR__ . '/../../installer.php'),
+        ];
+
         return \Response::json($output);
 
     }
 
-    public function getMain(Request $request)
+    public function getMain (Request $request)
     {
         $function = $request->get('function');
+
         return call_user_func_array([$this, $function], $request->all());
     }
 
-    public function downloadComposer()
+    public function downloadComposer ()
     {
         $installerURL = 'https://getcomposer.org/installer';
         $installerFile = __DIR__ . '/../../installer.php';
         putenv('COMPOSER_HOME=' . __DIR__ . '/../../composer/extracted/bin/composer');
-        if (!file_exists($installerFile)) {
+        if (! file_exists($installerFile)) {
 
             echo 'Downloading ' . $installerURL . PHP_EOL;
             flush();
             $ch = curl_init($installerURL);
             curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/../../composer/cacert.pem');
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($ch, CURLOPT_FILE, fopen($installerFile, 'w+'));
             if (curl_exec($ch)) {
 
@@ -70,12 +73,12 @@ class ComposerController extends Controller
         }
         echo 'Installer found : ' . $installerFile . PHP_EOL . '\r\n' . 'Starting installation...' . PHP_EOL;
         flush();
-        $argv = array();
+        $argv = [];
         include $installerFile;
         flush();
     }
 
-    public function command($path, $package, $command)
+    public function command ($path, $package, $command)
     {
         $responce = [];
         $path = str_replace('\\', '\\\\', $path);
@@ -83,7 +86,7 @@ class ComposerController extends Controller
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
         putenv('COMPOSER_HOME=' . __DIR__ . '/../../composer/extracted/bin/composer');
-        if (!file_exists($_POST['path'])) {
+        if (! file_exists($_POST['path'])) {
             echo $_POST['path'];
             die();
         }
@@ -103,29 +106,33 @@ class ComposerController extends Controller
         }
     }
 
-    public function extractComposer()
+    public function extractComposer ()
     {
         if (file_exists(__DIR__ . '/../../composer.phar')) {
             echo 'Extracting composer.phar ...' . PHP_EOL;
             flush();
             $composer = new Phar(__DIR__ . '/../../composer.phar');
             $composer->extractTo(__DIR__ . '/../../composer/extracted');
+
             return 'Extraction complete.' . PHP_EOL;
         }
+
         return 'composer.phar does not exist';
     }
 
-    public function getOnOff(Request $request)
+    public function getOnOff (Request $request)
     {
         $plugin = new Plugins();
-        return \Response::json(['error' => !$plugin->onOff($request->all())]);
+
+        return \Response::json(['error' => ! $plugin->onOff($request->all())]);
     }
 
-    public function autoloadUp($data)
+    public function autoloadUp ($data)
     {
         $data = explode(':', $data);
         $plugins = new Plugins();
-        $plugin=$plugins->find($data[0]);
+        $plugin = $plugins->find($data[0]);
+
         return $plugin->up();
     }
 }

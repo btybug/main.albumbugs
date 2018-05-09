@@ -3,7 +3,8 @@
     <div class="row">
         @if(Session::has('success'))
             <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
                 {{ Session::get('success') }}
             </div>
         @endif
@@ -13,7 +14,8 @@
                     data-target="#uploadfile">
                 <i class="fa fa-cloud-upload module_upload_icon"></i> <span class="upload_module_text">Upload</span>
             </button>
-            <a href="{{route('remove-layout')}}" class="btn btn-warning pull-right custom_button_styles">Optimize layouts</a>
+            <a href="{{route('remove-layout')}}" class="btn btn-warning pull-right custom_button_styles">Optimize
+                layouts</a>
         </div>
     </div>
     <div class="col-md-4 ">
@@ -29,9 +31,11 @@
                         <div>
                             <div class="calendar">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input type="text" placeholder="From" class="date date_from custom_input_for_datepicker" name="date_from">
+                                <input type="text" placeholder="From" class="date date_from custom_input_for_datepicker"
+                                       name="date_from">
                                 <span> - </span>
-                                <input type="text" placeholder="To" class="date date_to custom_input_for_datepicker" name="date_to">
+                                <input type="text" placeholder="To" class="date date_to custom_input_for_datepicker"
+                                       name="date_to">
                                 <span><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
 
@@ -105,7 +109,7 @@
         Dropzone.options.myAwesomeDropzone = {
             init: function () {
                 this.on("success", function (file) {
-                        location.reload();
+                    location.reload();
                 });
             }
         };
@@ -164,22 +168,22 @@
             }
 
             // function for filters
-            $('.custom_filter-tables :input').doFilter(function(){
+            $('.custom_filter-tables :input').doFilter(function () {
                 var that = $('.custom_filter-tables');
 
-                if($(this).attr('type') == 'checkbox'){
+                if ($(this).attr('type') == 'checkbox') {
                     return false;
                 }
                 $('.custom_html_for_filter').addClass('custom_style_for_loading').html('<img src="{{url("public/images/load.gif")}}" alt="" class="custom_hidden_loading">');
                 $.ajax({
-                    type : 'POST',
-                    url : "{{ route('filter-layouts') }}",
-                    data : that.serialize(),
-                    success: function(data){
+                    type: 'POST',
+                    url: "{{ route('filter-layouts') }}",
+                    data: that.serialize(),
+                    success: function (data) {
                         $('.custom_html_for_filter').removeClass('custom_style_for_loading').html(data.html);
                     }
                 });
-            },500);
+            }, 500);
         });
     </script>
 @stop

@@ -2,7 +2,8 @@
 @section('tab')
     <div class="col-md-12">
         <div class="col-md-12">
-            <a href="{!! url(route('uploads_assets_profiles_create_css')) !!}" class="btn btn-warning pull-right">add new</a>
+            <a href="{!! url(route('uploads_assets_profiles_create_css')) !!}" class="btn btn-warning pull-right">add
+                new</a>
         </div>
         <h2>Css</h2>
 
@@ -25,7 +26,8 @@
                             <td>No Files</td>
                             <td>
                                 @if(! $item->structured_by)
-                                    <a href="{!! url(route('uploads_assets_profiles_edit_css',['id' => $item->id])) !!}" class="btn btn-info">Update</a>
+                                    <a href="{!! url(route('uploads_assets_profiles_edit_css',['id' => $item->id])) !!}"
+                                       class="btn btn-info">Update</a>
                                     <a data-href="{!! route('uploads_assets_profiles_delete') !!}"
                                        data-key="{!! $item->id !!}" data-type="{{ $item->name }}"
                                        class="delete-button btn btn-danger"><i
@@ -53,7 +55,7 @@
 @section('JS')
     <script>
         $(document).ready(function () {
-            $("body").on("change",".generate",function () {
+            $("body").on("change", ".generate", function () {
                 var id = $(this).data('id');
                 var name = $(this).attr("name");
                 var value = this.checked ? 1 : 0;

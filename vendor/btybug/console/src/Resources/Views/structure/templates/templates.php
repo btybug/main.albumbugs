@@ -13,6 +13,9 @@
                     <input type="text" class="search-classes" placeholder="Search Available Classes"/>
                 </div>
 
+                <button class="btn btn-danger">Add Class</button>
+                <button class="btn btn-danger">Custom Class</button>
+
                 <input type="text" class="element-classes"/>
             </div>
         </div>

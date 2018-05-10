@@ -4,10 +4,8 @@
     <div class="center-block" id="widget_container">
         {!! $html !!}
     </div>
-    <textarea type="hidden" class="hide" id="hidden_data">{!! $json !!}</textarea>
-    <div id="output-content" style="display: none">
-
-    </div>
+    <textarea type="hidden" class="hide" id="hidden_data" hidden>{!! $json !!}</textarea>
+    <div id="output-content" style="display: none"></div>
 @stop
 
 @section('settings')

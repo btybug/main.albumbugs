@@ -24,6 +24,11 @@ class SqlBuilderController extends Controller
         return view('framework::react.index');
     }
 
+    public function getStudio()
+    {
+        return view('framework::studio.index');
+    }
+
     public function renderSql(Request $request)
     {
         try{

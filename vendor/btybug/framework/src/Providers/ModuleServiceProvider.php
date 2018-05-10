@@ -115,6 +115,12 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/framework/react",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],
+                [
+                    "title" => "Studio test",
+                    "custom-link" => "/admin/framework/studio-test",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ]
             ]
         ]);

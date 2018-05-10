@@ -110,7 +110,6 @@ class AssetProfilesController extends Controller
         $data['user_id'] = \Auth::id();
         $profile = $profilesRepository->create($data);
         $profilesService->generateCSS($profile);
-
         return redirect()->route('uploads_assets_profiles_css');
     }
 

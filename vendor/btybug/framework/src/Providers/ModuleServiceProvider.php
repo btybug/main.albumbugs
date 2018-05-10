@@ -109,6 +109,12 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/framework/bb-functions",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],
+                [
+                    "title" => "React",
+                    "custom-link" => "/admin/framework/react",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ]
             ]
         ]);

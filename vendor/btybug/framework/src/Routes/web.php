@@ -91,6 +91,11 @@ Route::group(['prefix'=>'react'],function (){
 
 });
 
+Route::group(['prefix'=>'studio-test'],function (){
+    Route::get('/','SqlBuilderController@getStudio',true);
+
+});
+
 Route::group(['prefix'=>'bb-functions'],function (){
     Route::get('/','BBController@getIndex',true);
     Route::post('/get-bb-fn-options','BBController@getOptions')->name('get_bb_fn_options');

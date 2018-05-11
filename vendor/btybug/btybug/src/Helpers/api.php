@@ -1409,7 +1409,7 @@ function recursiveItems($menus, $i = 0, $data = [])
 
         $i = $i + 1;
         if ($i != count($menus)) {
-            recursiveItems($menus, $i);
+            $data = recursiveItems($menus, $i,$data);
         }
 
         return $data;

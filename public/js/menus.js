@@ -94,7 +94,8 @@ jQuery(function ($){
                 id : $(item).attr('data-id'),
                 icon : $(item).attr('data-icon'),
                 title : $(item).attr('data-title'),
-                url : $(item).attr('data-url')
+                url : $(item).attr('data-url'),
+                dynamic : $(item).attr('data-dynamic')
             };
 
             if (id) {
@@ -150,6 +151,7 @@ jQuery(function ($){
         $this.attr("data-title",$this.data('title'));
         $this.attr("data-icon", $this.data('icon'));
         $this.attr("data-url", $this.data('url'));
+        $this.attr("data-dynamic", $this.data('dynamic'));
 
         $this.find('.menu-item-title').val(title);
     });
@@ -176,6 +178,13 @@ jQuery(function ($){
             $(this).closest('li').attr('data-title', value);
 
             repositionMenu();
+        })
+        .on('change', '.menu-item-dynamic', function () {
+            var value = 0;
+            if (this.checked){
+                value = 1;
+            }
+            $(this).closest('li').attr('data-dynamic', value);
         })
         .on('click', '.bb-menu-collapse', function () {
             var $this = $(this);

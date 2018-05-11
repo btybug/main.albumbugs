@@ -41,6 +41,7 @@
 @stop
 
 @section('JS')
+    {!! HTML::script('public/js/jquery-ui/jquery-ui.js') !!}
     {!! HTML::script('public/js/create_pages.js') !!}
     {!! HTML::script("public/js/UiElements/bb_styles.js?v.5") !!}
     {!! HTML::script('public/js/admin_pages.js') !!}

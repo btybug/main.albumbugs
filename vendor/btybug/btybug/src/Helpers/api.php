@@ -1389,12 +1389,67 @@ function BBGiveMe($type, $data = null, $index = null)
     }
 }
 
+function recursiveItems($menus, $i = 0, $data = [])
+{
+    if (count($menus)) {
+        $menu = $menus[$i];
+        $data[$i] = $menu;
+
+        if(isset($menu['dynamic']) && $menu['dynamic']){
+            $pageRepositroy = new \Btybug\Console\Repository\FrontPagesRepository();
+            $page = $pageRepositroy->find($menu['id']);
+            if($page && count($page->childs)) {
+                $data[$i]['children'] = recursivePageChild($page->childs,0,$page->childs->toArray());
+            }
+        }else{
+            if (isset($menu['children']) && count($menu['children'])) {
+                $data[$i]['children'] = recursiveItems($menu['children'], 0,$data[$i]['children']);
+            }
+        }
+
+        $i = $i + 1;
+        if ($i != count($menus)) {
+            recursiveItems($menus, $i);
+        }
+
+        return $data;
+    }
+}
+
+function recursivePageChild($data, $i = 0, $result = []){
+    if(count($data)){
+        $item = $data[$i];
+        $result[$i] = [
+            'id' => $item->id,
+            'title' => $item->title,
+            'url' => $item->url,
+            'icon' => null,
+            'children' => $item->childs->toArray()
+        ];
+
+        if(count($item->childs)){
+            $result[$i]['children'] = recursivePageChild($item->childs, 0,     $result[$i]['children']);
+        }
+
+        $i = $i + 1;
+        if ($i != count($data)) {
+            $result = recursivePageChild($data, $i, $result);
+        }
+
+        return $result;
+    }
+}
+
 function BBGetMenu($id)
 {
     $menuRepo = new \Btybug\btybug\Repositories\MenuRepository();
     $menu = $menuRepo->find($id);
-    if ($menu) return json_decode($menu->json_data);
+    $data = json_decode($menu->json_data,true);
+    $result = recursiveItems($data);
+    return $result;
 }
+
+
 
 function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon = true, $membershipSlug = null, $checkbox = false)
 {
@@ -1767,7 +1822,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
         } else {
 //            if($item->parent->parent == null) $i = 0;
 
-            $output .= '<li data-id="' . $item['id'] . '" data-title="' . $item['title'] . '" data-icon="' . $item['icon'] . '" data-url="' . $item['url'] . '">';
+            $output .= '<li data-id="' . $item['id'] . '" data-title="' . $item['title'] . '" data-icon="' . $item['icon'] . '" data-url="' . $item['url'] . '" data-dynamic="' . (isset($item['dynamic'])??null) . '">';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i><span>' . $item['title'] . '</span>';
@@ -1792,6 +1847,21 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '</div>';
             $output .= '</div>';
             $output .= '</div>';
+
+            $output .= '<div class="row">';
+            $output .= '<div class="col-md-12">';
+            $output .= '<div class="form-group">';
+            $output .= '<label>* make this dynamic</label>';
+
+            if(isset($item["dynamic"]) && $item["dynamic"]){
+                $output .= '<input type="checkbox" value="1" checked="checked" class="input-sm menu-item-dynamic">';
+            }else{
+                $output .= '<input type="checkbox" value="1"  class="input-sm menu-item-dynamic">';
+            }
+            $output .= '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
+
             $output .= '<div class="row">';
             $output .= '<div class="col-md-6">';
             $output .= '<div class="form-group">';

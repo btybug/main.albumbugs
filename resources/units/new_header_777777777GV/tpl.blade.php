@@ -35,7 +35,7 @@
                         <ul class="dropdown-menu">
                             @if(isset($settings['user_menu']))
                                 @php
-                                    $items = BBGetMenu($settings['user_menu'])
+                                    $items = BBGetMenu($settings['user_menu']);
                                 @endphp
                                 @if(count($items))
                                     @foreach($items as $item)
@@ -56,13 +56,13 @@
 
                 @if(isset($settings['menu_area']))
                     @php
-                        $items = BBGetMenu($settings['menu_area'])
+                        $items = BBGetMenu($settings['menu_area']);
                     @endphp
                     @if(count($items))
                         <ul class="nav navbar-nav  navbar-right header-menu">
                             @foreach($items as $item)
-                                <li><a href="{!! url($item->url) !!}"><i
-                                                class="fa {!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
+                                <li><a href="{!! url($item['url']) !!}"><i
+                                                class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>
                             @endforeach
                         </ul>
                     @endif

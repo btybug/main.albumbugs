@@ -69,3 +69,7 @@ composer.lock
 /public/app
 /app/Events/Generator/*.php
 /app/Listeners/Generator/*.php
+/vendor/justinrainbow
+/vendor/seld
+/vendor/composer
+/vendor/ralouphie

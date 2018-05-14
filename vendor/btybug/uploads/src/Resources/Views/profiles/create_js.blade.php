@@ -2,47 +2,52 @@
 @section('content')
     <div class="col-md-12">
         <div class="col-md-12">
-            <a href="{!! url(route('uploads_assets_profiles_js')) !!}" class="btn btn-info pull-right">Back</a>
+            <a href="{!! url(route('uploads_assets_profiles_js')) !!}" class="btn btn-active btn-lg pull-right">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </a>
         </div>
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Header JS <a href="javascript:void(0);"
-                                     class="btn btn-danger btn-sm pull-right add-assets">Add</a>
-                    </h4>
+                    <h3 class="panel-title">
+                        Header JS
+                        <button type="button" class="btn btn-xs btn-default pull-right add-assets">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                        </button>
+                    </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body connectedSortable" id="header-js">
+
+
+                    <li class="list-group-item added-item">
+
+                        dummy_file.js
+
+                        <button type="button" class="btn btn-xs btn-default pull-right">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </li>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading draggable">
                             <h4 class="panel-title">
                                 front-header.js
                             </h4>
                         </div>
                         <div class="panel-body">
-                            <ul data-nav-drag="" id="menus-list" class="sortable ui-sortable ui-droppable dvmin-height">
+                            <ul id="menus-list" class="connectedSortable">
                                 @if(count($assets))
                                     @foreach($assets as $item)
-                                        <li style="margin-top: 5px;" class="list-group-item" data-id="{{$item->path}}"
+                                        <li class="list-group-item auto-item" data-id="{{$item->path}}"
                                             data-name="{{ get_filename_from_path($item->path,DS) }}"
                                             data-link="{{ $item->path }}"
                                             data-type="{{$item->type}}">
 
                                             {{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})
 
-                                            <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]"
-                                                       id="inlineRadio1" checked value="option1"> Keep Inside
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]"
-                                                       id="inlineRadio2" value="option2"> Update
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions[{{$item->id}}]"
-                                                       id="inlineRadio3" value="option3"> Ignore
-                                            </label>
+                                            <button type="button" class="btn btn-xs btn-danger pull-right">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </button>
                                         </li>
                                     @endforeach
                                 @endif
@@ -56,27 +61,29 @@
         </div>
 
         <div class="col-md-12 m-t-15">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Footer JS <a href="javascript:void(0);"
-                                     class="btn btn-danger btn-sm pull-right add-assets">Add</a>
-                    </h4>
+                    <h3 class="panel-title">
+                        Footer JS
+                        <button type="button" class="btn btn-xs btn-default pull-right add-assets">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                        </button>
+                    </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body connectedSortable" id="footer-js">
 
                 </div>
             </div>
         </div>
 
         <div class="col-md-12 m-t-15">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
+                    <h3 class="panel-title">
                         Ignored Units Js
-                    </h4>
+                    </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body connectedSortable" id="ignored-units-js">
 
                 </div>
             </div>
@@ -87,9 +94,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Add assets</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add assets</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -97,30 +103,35 @@
                         <div class="col-md-12">
                             @if(count($mains))
                                 @foreach( $mains as $item)
-                                    {{ $item->name }}
+                                    <label class="radio-inline">
                                     @if($model && count($model->files))
                                         {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
                                     @else
                                         {!! Form::radio('main',$item->id,null) !!}
                                     @endif
-
+                                    {{ $item->name }}
+                                    </label>
                                 @endforeach
                             @endif
                         </div>
                     </div>
+                    </br>
                     <div class="form-group">
                         {!! Form::label('files','Files') !!}
                         <div class="col-md-12">
                             @if(count($plugins))
                                 @foreach( $plugins as $plugin)
-                                    {{ $plugin->name }} {!! Form::checkbox('files[]',$plugin->id,null) !!}
+                                    <label class="checkbox-inline">
+                                    {!! Form::checkbox('files[]',$plugin->id,null) !!} {{ $plugin->name }}
+                                    </label>
                                 @endforeach
                             @endif
                         </div>
                     </div>
-                    <div class="form-group">
-                        <a href="javascript:void(0);" class="btn btn-primary pull-right">Add</a>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add asset</button>
                 </div>
             </div>
         </div>
@@ -128,9 +139,41 @@
 @stop
 
 @section('CSS')
+    <style>
+        #menus-list {
+            min-height: 10px;
+        }
+        .list-group-item {
+            margin-bottom: 5px;
+            cursor: pointer;
+            padding-left: 48px;
+        }
+        .list-group-item:before {
+            content: "\e068";
+            font-size: 19px;
+            cursor: move;
+            text-align: center;
+            line-height: 43px;
+            color: white;
+            position: absolute;
+            font-family: 'Glyphicons Halflings';
+            left: -1px;
+            top: -1px;
+            width: 42px;
+            height: 42px;
+            background-color: #484848;
+        } 
+        #uploadAssets .form-group > label{
+            font-weight: bold !important;
+        }
+        .draggable{
+            cursor: move;
+        }
+    </style>
 @stop
 
 @section('JS')
+    <script src="/public/js/jquery-ui/jquery-ui.min.js"></script>
     <script>
         $(document).ready(function () {
             $("body").on('click', '.add-assets', function () {
@@ -158,7 +201,10 @@
                         }
                     }
                 });
-            })
+            });
+            $( "#header-js, #menus-list, #footer-js, #ignored-units-js" ).sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
         });
     </script>
 @stop

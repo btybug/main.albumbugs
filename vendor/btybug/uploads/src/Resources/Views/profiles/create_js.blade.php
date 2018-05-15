@@ -45,7 +45,7 @@
                         </div>
                         <div class="panel-body">
                             <ul id="menus-list" class="connectedSortable">
-                                @if(count($assets))
+                                @if(count($assets) && @$model->structured_by)
                                     @foreach($assets as $item)
                                         <li class="list-group-item auto-item" data-id="{{$item->path}}"
                                             data-name="{{ get_filename_from_path($item->path,DS) }}"

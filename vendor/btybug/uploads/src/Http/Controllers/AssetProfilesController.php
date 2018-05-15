@@ -151,7 +151,6 @@ class AssetProfilesController extends Controller
     )
     {
         $model = $profilesRepository->findOrFail($id);
-        if ($model->structured_by) abort(404);
         $plugins = $versionsRepository->getCss();
         $mains = $versionsRepository->getFrameworks();
 
@@ -172,7 +171,6 @@ class AssetProfilesController extends Controller
             $data['files'][] = $request->get('main');
         }
         $model = $profilesRepository->findOrFail($id);
-        if ($model->structured_by) abort(404);
         $profilesService->removeFile($model->hint_path);
         $updated = $profilesRepository->update($id, $data);
         $profilesService->generateCSS($updated);
@@ -194,7 +192,6 @@ class AssetProfilesController extends Controller
             $data['files'][] = $request->get('main');
         }
         $model = $profilesRepository->findOrFail($id);
-        if ($model->structured_by) abort(404);
         $profilesService->removeFile($model->hint_path);
         $updated = $profilesRepository->update($id, $data);
         $profilesService->generateJS($updated);

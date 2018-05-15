@@ -136,7 +136,6 @@ class AssetProfilesController extends Controller
     )
     {
         $model = $profilesRepository->findOrFail($id);
-        if ($model->structured_by) abort(404);
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJQuery();
         $assets = $assetsRepository->getWithGroupBy();

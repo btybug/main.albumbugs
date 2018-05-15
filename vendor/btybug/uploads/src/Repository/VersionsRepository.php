@@ -68,4 +68,9 @@ class VersionsRepository extends GeneralRepository
 
         return $query->get();
     }
+
+    public function getByWhereInId($ids = [])
+    {
+        return $this->model->whereIn('id',$ids)->get();
+    }
 }

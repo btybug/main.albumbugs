@@ -214,5 +214,15 @@ class AssetProfilesController extends Controller
 
         return \Response::json(['success' => true, 'url' => url('/admin/uploads/profiles/' . $data->type)]);
     }
+
+    public function postGetAssets(
+        Request $request,
+        VersionsRepository $versionsRepository
+    )
+    {
+        $result = $versionsRepository->getByWhereInId($request->get('files'));
+
+        return $result;
+    }
 }
 

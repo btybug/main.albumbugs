@@ -132,6 +132,7 @@ Route::group(['prefix' => 'profiles'], function () {
         Route::get('/', 'AssetProfilesController@getJs', true)->name('uploads_assets_profiles_js');
         Route::get('/create', 'AssetProfilesController@getJsCreate', true)->name('uploads_assets_profiles_create_js');
         Route::post('/create', 'AssetProfilesController@postJsCreate')->name('uploads_assets_profiles_create_js_post');
+        Route::post('/get-assets', 'AssetProfilesController@postGetAssets')->name('uploads_assets_profiles_get_assets');
         Route::group(['prefix' => '{id}'], function () {
             Route::get('/', 'AssetProfilesController@getJsEdit', true);
             Route::get('/edit', 'AssetProfilesController@getJsEdit', true)->name('uploads_assets_profiles_edit_js');

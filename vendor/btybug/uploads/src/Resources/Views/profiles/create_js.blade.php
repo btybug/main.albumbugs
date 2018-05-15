@@ -94,35 +94,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Add assets</h4>
                 </div>
                 <div class="modal-body">
+                    {!! Form::open(['id' => 'assetsForm']) !!}
                     <div class="form-group">
-                        {!! Form::label('fi','Main Files') !!}
+                        {!! Form::label('files','Files') !!}
                         <div class="col-md-12">
                             @if(count($mains))
                                 @foreach( $mains as $item)
-                                    <label class="radio-inline">
-                                    @if($model && count($model->files))
-                                        {!! Form::radio('main',$item->id,(in_array($item->id,$model->files)) ? true : null) !!}
-                                    @else
-                                        {!! Form::radio('main',$item->id,null) !!}
-                                    @endif
-                                    {{ $item->name }}
+                                    <label class="checkbox-inline">
+                                        {!! Form::checkbox('files[]',$item->id,null) !!} {{ $item->name }}
                                     </label>
                                 @endforeach
                             @endif
                         </div>
-                    </div>
-                    </br>
-                    <div class="form-group">
-                        {!! Form::label('files','Files') !!}
                         <div class="col-md-12">
                             @if(count($plugins))
                                 @foreach( $plugins as $plugin)
                                     <label class="checkbox-inline">
-                                    {!! Form::checkbox('files[]',$plugin->id,null) !!} {{ $plugin->name }}
+                                        {!! Form::checkbox('files[]',$plugin->id,null) !!} {{ $plugin->name }}
                                     </label>
                                 @endforeach
                             @endif
@@ -131,8 +124,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add asset</button>
+                    <button type="button" class="btn btn-primary get-assets">Add asset</button>
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -143,11 +137,13 @@
         #menus-list {
             min-height: 10px;
         }
+
         .list-group-item {
             margin-bottom: 5px;
             cursor: pointer;
             padding-left: 48px;
         }
+
         .list-group-item:before {
             content: "\e068";
             font-size: 19px;
@@ -162,11 +158,13 @@
             width: 42px;
             height: 42px;
             background-color: #484848;
-        } 
-        #uploadAssets .form-group > label{
+        }
+
+        #uploadAssets .form-group > label {
             font-weight: bold !important;
         }
-        .draggable{
+
+        .draggable {
             cursor: move;
         }
     </style>
@@ -179,6 +177,25 @@
             $("body").on('click', '.add-assets', function () {
                 $("#uploadAssets").modal();
             });
+
+            $("body").on('click', '.get-assets', function () {
+                var data = $("#assetsForm").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "{!! route('uploads_assets_profiles_get_assets') !!}",
+                    cache: false,
+                    datatype: "json",
+                    data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("[name=_token]").val()
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        $("#uploadAssets").modal('hide');
+                    }
+                });
+            });
+
             $("body").on("change", ".generate", function () {
                 var id = $(this).data('id');
                 var name = $(this).attr("name");
@@ -202,7 +219,7 @@
                     }
                 });
             });
-            $( "#header-js, #menus-list, #footer-js, #ignored-units-js" ).sortable({
+            $("#header-js, #menus-list, #footer-js, #ignored-units-js").sortable({
                 connectWith: ".connectedSortable"
             }).disableSelection();
         });

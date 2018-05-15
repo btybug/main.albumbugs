@@ -2,9 +2,17 @@
 @section('content')
     <div class="col-md-12">
         <div class="col-md-12">
-            <a href="{!! url(route('uploads_assets_profiles_js')) !!}" class="btn btn-active btn-lg pull-right">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            </a>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-form navbar-left">
+                        <h5>Profile name</h5>
+                    </div>
+
+                    <div class="navbar-form navbar-right">
+                        <button type="submit" class="btn btn-default js-btn-save">Save</button>
+                    </div>
+                </div>
+            </nav>
         </div>
         <div class="col-md-12">
             <div class="panel panel-primary">
@@ -13,7 +21,7 @@
                         Header JS
                         <button 
                             type="button" 
-                            class="btn btn-xs btn-default pull-right add-assets">
+                            class="btn btn-xs btn-default pull-right js-add-assets">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
                         </button>
                     </h3>
@@ -52,7 +60,7 @@
         </div>
 
         <div class="col-md-12 m-t-15">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary"js->
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Footer JS
@@ -117,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary get-assets">Add asset</button>
+                    <button type="button" class="btn btn-primary js-get-assets">Add asset</button>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -160,20 +168,24 @@
         .draggable {
             cursor: move;
         }
+
+        .navbar.navbar-default{
+            margin-top: 20px;
+        }
     </style>
 @stop
 
 @section('JS')
     <script src="/public/js/jquery-ui/jquery-ui.min.js"></script>
     <script>
-        var sectionOfaddedItem, submitJSON;
+        var sectionOfaddedItem;
         $(document).ready(function () {
-            $("body").on('click', '.add-assets', function () {
+            $("body").on('click', '.js-add-assets', function () {
                 sectionOfaddedItem = $(this).parent().parent().next().attr('id');
                 $("#uploadAssets").modal();
             });
 
-            $("body").on('click', '.get-assets', function () {
+            $("body").on('click', '.js-get-assets', function () {
                 var data = $("#assetsForm").serialize();
                 $.ajax({
                     type: "post",
@@ -191,6 +203,32 @@
                         $("#uploadAssets").modal('hide');
                     }
                 });
+            });
+
+            $("body").on('click', '.js-btn-save', function () {
+                var headerJs = $('#header-js > li.list-group-item').map(function() {
+                    return {
+                        path: $(this).attr('data-link')
+                    };
+                }).get();
+                var frontHeaderJs = $('#menus-list > li.list-group-item').map(function() {
+                    return {
+                        path: $(this).attr('data-link')
+                    };
+                }).get();
+                var footerJs = $('#footer-js > li.list-group-item').map(function() {
+                    return {
+                        path: $(this).attr('data-link')
+                    };
+                }).get();
+                var ignoreUnitsJs = $('#ignored-units-js > li.list-group-item').map(function() {
+                    return {
+                        path: $(this).attr('data-link')
+                    };
+                }).get();
+                var json = JSON.stringify({ headerJs, frontHeaderJs, footerJs, ignoreUnitsJs });
+
+                alert(json);
             });
 
             $("body").on("change", ".generate", function () {
@@ -216,17 +254,9 @@
                     }
                 });
             });
+
             $("#header-js, #menus-list, #footer-js, #ignored-units-js").sortable({
-                connectWith: ".connectedSortable",
-                change: function() {
-                    clearTimeout(submitJSON);
-                },
-                sort: function() {
-                    clearTimeout(submitJSON);
-                },
-                stop: function( event, ui ) {
-                    submitAssets();
-                }
+                connectWith: ".connectedSortable"
             }).disableSelection();
         });
 
@@ -236,7 +266,6 @@
                 "type": "button"
             }).append('</span>').addClass('glyphicon glyphicon-trash').click(function() {
                 $(this).parent().remove();
-                submitAssets();
             });
 
             var $div = $("<li>", {
@@ -246,38 +275,6 @@
                 "data-link": item.path,
                 "data-id": item.path
             }).text(item.file_name).append($buttonDelete).prependTo('#'+sectionOfaddedItem);
-
-            submitAssets();
-        }
-
-        function submitAssets() {
-            var headerJs = $('#header-js > li.list-group-item').map(function() {
-                return {
-                    path: $(this).attr('data-link')
-                };
-            }).get();
-            var frontHeaderJs = $('#menus-list > li.list-group-item').map(function() {
-                return {
-                    path: $(this).attr('data-link')
-                };
-            }).get();
-            var footerJs = $('#footer-js > li.list-group-item').map(function() {
-                return {
-                    path: $(this).attr('data-link')
-                };
-            }).get();
-            var ignoreUnitsJs = $('#ignored-units-js > li.list-group-item').map(function() {
-                return {
-                    path: $(this).attr('data-link')
-                };
-            }).get();
-            var json = JSON.stringify({ headerJs, frontHeaderJs, footerJs, ignoreUnitsJs });
-
-            clearTimeout(submitJSON);
-
-            submitJSON = setTimeout(function (){
-                alert(json);
-            }, 3000);
         }
     </script>
 @stop

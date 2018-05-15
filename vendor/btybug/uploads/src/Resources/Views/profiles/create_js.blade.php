@@ -5,7 +5,11 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-form navbar-left">
-                        <h5>Profile name</h5>
+                        @if($model && $model->structured_by)
+                            <h5>{!! $model->name !!}</h5>
+                        @else
+                           {!! Form::text('name',@$model->name,['class' => 'form-control profile-name','placeholder' => 'Enter profile name ..']) !!}
+                        @endif
                     </div>
 
                     <div class="navbar-form navbar-right">
@@ -31,7 +35,12 @@
                     <div class="panel panel-default">
                         <div class="panel-heading draggable">
                             <h4 class="panel-title">
-                                front-header.js
+                               @if($model)
+                                    {!! $model->name !!}-profile.js
+                                @else
+                                   <span id="js-name-change">new</span>-profle.js
+                                @endif
+
                             </h4>
                         </div>
                         <div class="panel-body">
@@ -180,6 +189,14 @@
     <script>
         var sectionOfaddedItem;
         $(document).ready(function () {
+            $("body").on('input','.profile-name',function () {
+                var value = $(this).val();
+                if(value != '' && value != undefined){
+                    $("#js-name-change").html(value);
+                }else{
+                    $("#js-name-change").html('new');
+                }
+            })
             $("body").on('click', '.js-add-assets', function () {
                 sectionOfaddedItem = $(this).parent().parent().next().attr('id');
                 $("#uploadAssets").modal();

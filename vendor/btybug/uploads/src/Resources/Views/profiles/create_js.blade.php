@@ -11,22 +11,14 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Header JS
-                        <button type="button" class="btn btn-xs btn-default pull-right add-assets">
+                        <button 
+                            type="button" 
+                            class="btn btn-xs btn-default pull-right add-assets">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
                         </button>
                     </h3>
                 </div>
                 <div class="panel-body connectedSortable" id="header-js">
-
-
-                    <li class="list-group-item added-item">
-
-                        dummy_file.js
-
-                        <button type="button" class="btn btn-xs btn-default pull-right">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                    </li>
 
                     <div class="panel panel-default">
                         <div class="panel-heading draggable">
@@ -64,7 +56,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Footer JS
-                        <button type="button" class="btn btn-xs btn-default pull-right add-assets">
+                        <button 
+                            type="button" 
+                            class="btn btn-xs btn-default pull-right add-assets">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
                         </button>
                     </h3>
@@ -101,7 +95,7 @@
                     {!! Form::open(['id' => 'assetsForm']) !!}
                     <div class="form-group">
                         {!! Form::label('files','Files') !!}
-                        <div class="col-md-12">
+                        <div>
                             @if(count($mains))
                                 @foreach( $mains as $item)
                                     <label class="checkbox-inline" data-path="{{ $item->path }}">
@@ -110,7 +104,7 @@
                                 @endforeach
                             @endif
                         </div>
-                        <div class="col-md-12">
+                        <div>
                             @if(count($plugins))
                                 @foreach( $plugins as $plugin)
                                     <label class="checkbox-inline" data-path="{{ $item->path }}">
@@ -172,8 +166,10 @@
 @section('JS')
     <script src="/public/js/jquery-ui/jquery-ui.min.js"></script>
     <script>
+        var sectionOfaddedItem, submitJSON;
         $(document).ready(function () {
             $("body").on('click', '.add-assets', function () {
+                sectionOfaddedItem = $(this).parent().parent().next().attr('id');
                 $("#uploadAssets").modal();
             });
 
@@ -189,7 +185,9 @@
                         'X-CSRF-TOKEN': $("[name=_token]").val()
                     },
                     success: function (data) {
-                        console.log(data)
+                        for (let item of data){
+                            addAssetToDOM(item, sectionOfaddedItem);
+                        }
                         $("#uploadAssets").modal('hide');
                     }
                 });
@@ -219,8 +217,67 @@
                 });
             });
             $("#header-js, #menus-list, #footer-js, #ignored-units-js").sortable({
-                connectWith: ".connectedSortable"
+                connectWith: ".connectedSortable",
+                change: function() {
+                    clearTimeout(submitJSON);
+                },
+                sort: function() {
+                    clearTimeout(submitJSON);
+                },
+                stop: function( event, ui ) {
+                    submitAssets();
+                }
             }).disableSelection();
         });
+
+        function addAssetToDOM( item, sectionOfaddedItem ){
+            var $buttonDelete = $("<button>", {
+                "class": "btn btn-xs btn-default pull-right",
+                "type": "button"
+            }).append('</span>').addClass('glyphicon glyphicon-trash').click(function() {
+                $(this).parent().remove();
+                submitAssets();
+            });
+
+            var $div = $("<li>", {
+                "class": "list-group-item added-item",
+                "data-name": item.file_name,
+                "data-type": item.type,
+                "data-link": item.path,
+                "data-id": item.path
+            }).text(item.file_name).append($buttonDelete).prependTo('#'+sectionOfaddedItem);
+
+            submitAssets();
+        }
+
+        function submitAssets() {
+            var headerJs = $('#header-js > li.list-group-item').map(function() {
+                return {
+                    path: $(this).attr('data-link')
+                };
+            }).get();
+            var frontHeaderJs = $('#menus-list > li.list-group-item').map(function() {
+                return {
+                    path: $(this).attr('data-link')
+                };
+            }).get();
+            var footerJs = $('#footer-js > li.list-group-item').map(function() {
+                return {
+                    path: $(this).attr('data-link')
+                };
+            }).get();
+            var ignoreUnitsJs = $('#ignored-units-js > li.list-group-item').map(function() {
+                return {
+                    path: $(this).attr('data-link')
+                };
+            }).get();
+            var json = JSON.stringify({ headerJs, frontHeaderJs, footerJs, ignoreUnitsJs });
+
+            clearTimeout(submitJSON);
+
+            submitJSON = setTimeout(function (){
+                alert(json);
+            }, 3000);
+        }
     </script>
 @stop

@@ -66,14 +66,16 @@ class AssetProfilesController extends Controller
 
     public function getJsCreate (
         VersionsRepository $versionsRepository,
-        VersionsService $versionsService
+        VersionsService $versionsService,
+        AssetsRepository $assetsRepository
     )
     {
         $model = null;
         $plugins = $versionsRepository->getJS();
         $mains = $versionsRepository->getJQuery();
+        $assets = $assetsRepository->getWithGroupBy();
 
-        return view('uploads::profiles.create_js', compact(['plugins', 'model', 'mains']));
+        return view('uploads::profiles.create_js', compact(['plugins', 'model', 'mains', 'assets']));
     }
 
     public function postJsCreate (

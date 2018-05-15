@@ -42,7 +42,6 @@
                                             data-name="{{ get_filename_from_path($item->path,DS) }}"
                                             data-link="{{ $item->path }}"
                                             data-type="{{$item->type}}">
-
                                             {{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})
 
                                             <button type="button" class="btn btn-xs btn-danger pull-right">
@@ -105,7 +104,7 @@
                         <div class="col-md-12">
                             @if(count($mains))
                                 @foreach( $mains as $item)
-                                    <label class="checkbox-inline">
+                                    <label class="checkbox-inline" data-path="{{ $item->path }}">
                                         {!! Form::checkbox('files[]',$item->id,null) !!} {{ $item->name }}
                                     </label>
                                 @endforeach
@@ -114,7 +113,7 @@
                         <div class="col-md-12">
                             @if(count($plugins))
                                 @foreach( $plugins as $plugin)
-                                    <label class="checkbox-inline">
+                                    <label class="checkbox-inline" data-path="{{ $item->path }}">
                                         {!! Form::checkbox('files[]',$plugin->id,null) !!} {{ $plugin->name }}
                                     </label>
                                 @endforeach

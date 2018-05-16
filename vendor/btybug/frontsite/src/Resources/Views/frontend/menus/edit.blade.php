@@ -287,5 +287,5 @@
     {!! HTML::script('public/js/jquery.mjs.nestedSortable.js') !!}
     {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
-    {!! HTML::script('public/js/menus.js') !!}
+    {!! HTML::script('public/js/menus.js'.rand(1111,9999)) !!}
 @stop

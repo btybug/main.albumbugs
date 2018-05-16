@@ -35,12 +35,12 @@
                     <div class="panel panel-default">
                         <div class="panel-heading draggable">
                             <h4 class="panel-title">
-                               @if($model)
+                                @if($model)
                                     {!! $model->name !!}-profile.js
                                 @else
                                    <span id="js-name-change">new</span>-profle.js
                                 @endif
-
+                                (Grouped file)
                             </h4>
                         </div>
                         <div class="panel-body">
@@ -196,7 +196,8 @@
                 }else{
                     $("#js-name-change").html('new');
                 }
-            })
+            });
+            
             $("body").on('click', '.js-add-assets', function () {
                 sectionOfaddedItem = $(this).parent().parent().next().attr('id');
                 $("#uploadAssets").modal();
@@ -273,7 +274,12 @@
             });
 
             $("#header-js, #menus-list, #footer-js, #ignored-units-js").sortable({
-                connectWith: ".connectedSortable"
+                connectWith: ".connectedSortable",
+                receive: function(event, ui) {
+                    if (ui.item.hasClass("panel")) {
+                        ui.sender.sortable("cancel");
+                    }
+                }
             }).disableSelection();
         });
 

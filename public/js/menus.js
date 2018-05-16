@@ -2,6 +2,11 @@ jQuery(function ($){
 
     // Icon picker
     var $focusedIconInput;
+
+    register_draggable();
+
+    cleanLevelClasses();
+
     $('.icp-auto').iconpicker();
 
     $(window).scroll(function() {
@@ -10,29 +15,6 @@ jQuery(function ($){
         }
     });
 
-    function repositionMenu(){
-        var elementTop = $focusedIconInput.offset().top,
-            elementLeft = $focusedIconInput.offset().left,
-            windowTop = $(window).scrollTop(),
-            actualTop = elementTop - windowTop,
-            checker = $(window).height() - actualTop,
-
-            iconContainer = $('.iconpicker-container'),
-            iconContainerHeight = iconContainer.height(),
-            cssTop = actualTop + 30;
-
-        if(checker < actualTop){
-            cssTop = actualTop - iconContainerHeight;
-        }
-
-        iconContainer.css({
-            top: cssTop,
-            left: elementLeft
-        });
-
-        iconContainer.show();
-    }
-
     // Switch button
     $(".bb-switch").bootstrapSwitch({
         onText: "Show",
@@ -40,21 +22,6 @@ jQuery(function ($){
         size: "mini",
         onColor: "success",
         offColor: "danger"
-    });
-
-    // Draggable items
-    $('.bb-sortable-static li').draggable({
-        revert: "invalid",
-        connectToSortable: '.bb-menu-area',
-        helper: "clone",
-        start: function (event, ui) {
-            var $newItem = $(ui.helper).find('> .menu-item-children').remove();
-
-            return $newItem;
-        },
-        stop: function (event, ui) {
-            $(ui.helper).css({'height': 'auto'});
-        }
     });
 
     // Sortable menu area
@@ -76,55 +43,6 @@ jQuery(function ($){
         }
     });
 
-    cleanLevelClasses();
-
-    function cleanLevelClasses(){
-        $('ol.bb-menu-area li').removeClass (function (index, className) {
-            return (className.match (/(^|\s)level-\S+/g) || []).join(' ');
-        });
-    }
-
-    function autoSave(){
-        var ret = [];
-
-        $('ol.bb-menu-area').children('li').each(function() {
-            var level = _recursiveItems(this);
-            ret.push(level);
-        });
-
-        $("#log").text(JSON.stringify(ret));
-
-        function _recursiveItems(item) {
-            var id = $(item).attr("data-id"),
-                currentItem;
-
-            var data = {
-                id : $(item).attr('data-id'),
-                icon : $(item).attr('data-icon'),
-                title : $(item).attr('data-title'),
-                url : $(item).attr('data-url'),
-                dynamic : $(item).attr('data-dynamic')
-            };
-
-            if (id) {
-                currentItem = {
-                    "id": id[2]
-                };
-
-                currentItem = $.extend({}, currentItem, data);
-
-                if ($(item).children('ol').children('li').length > 0) {
-                    currentItem.children = [];
-                    $(item).children('ol').children('li').each(function() {
-                        var level = _recursiveItems(this);
-                        currentItem.children.push(level);
-                    });
-                }
-                return currentItem;
-            }
-        }
-    }
-
     $('.bb-menu-save').click(function (){
         autoSave();
     });
@@ -140,16 +58,6 @@ jQuery(function ($){
             body.slideDown();
             $this.addClass("expand");
         }
-    });
-
-    $('.bb-sortable-static .bb-menu-item-title').each(function (){
-        var $this = $(this);
-
-        $this.append(
-            '<a href="javascript:" class="bb-add-to-menu pull-right">\n' +
-            ' <i class="fa fa-plus"></i>\n' +
-            '</a>'
-        );
     });
 
     $('.bb-sortable-static:not(.bb-sortable-group)>li').each(function (){
@@ -221,13 +129,87 @@ jQuery(function ($){
                 autoSave();
             });
         })
-        .on('click', '.bb-add-to-menu', function (){
+        .on('click', '#add-frontend-page', function (){
             var $this = $(this);
             var item = $this.closest('li[data-id]').clone();
             $('.bb-menu-area').append(item).ready(function () {
                 cleanLevelClasses();
                 autoSave();
             });
+        })
+        .on('click', '#add-custom-link', function () {
+            var linkCount = $('#menu-item-link .bb-sortable-static li').length + 1;
+            var $newItem = $('<li>', {
+                'id': 'menu-item-' + linkCount,
+                'class': 'level-' + linkCount + 'ui-draggable ui-draggable-handle',
+                'data-id': linkCount,
+                'data-title': 'customlink' + linkCount,
+                'data-icon': 'fa-align-justify',
+                'data-url': '/'
+            }).append(
+                "<div class='bb-menu-item'>\
+                    <div class='bb-menu-item-title'>\
+                        <i></i>\
+                        <span>" + "custonlink" + linkCount + "</span>\
+                        <div class='bb-menu-actions pull-right'>\
+                            <a href='javascript:' class='bb-menu-delete'>\
+                                <i class='fa fa-close'></i>\
+                            </a>\
+                            <a href='javascript:' class='bb-menu-collapse'>\
+                                <i class='fa fa-caret-down'></i>\
+                            </a>\
+                        </div>\
+                    </div>\
+                    <div class='bb-menu-item-body'>\
+                        <div class='bb-menu-form'>\
+                            <div class='row'>\
+                                <div class='col-md-4'>\
+                                    <div class='form-group'>\
+                                        <label>Icon</label>\
+                                        <input type='text' data-placement='right' class='form-control input-sm icp'>\
+                                    </div>\
+                                </div>\
+                                <div class='col-md-8'>\
+                                    <div class='form-group'><label>Item Title</label>\
+                                        <input type='text' value='"+ "custonlink" + linkCount +"' class='form-control input-sm menu-item-title'>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                            <div class='row'>\
+                                <div class='col-md-6'>\
+                                    <div class='form-group'>\
+                                        <label>Item URL</label>\
+                                        <input type='text' value='/' class='form-control input-sm item-url'>\
+                                    </div>\
+                                </div>\
+                                <div class='col-md-6'>\
+                                    <div class='form-group'>\
+                                        <label>Display Roles</label>\
+                                        <select name='display_roles' class='form-control input-sm'>\
+                                            <option value>All Visitors</option>\
+                                            <option value>Members Only</option>\
+                                            <option value>Guests Only</option>\
+                                            <option value='specific'>Specific Roles</option>\
+                                        </select>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                            <div class='form-group specific hide'>\
+                                <label>Select Roles</label>\
+                                <select multiple=' class='form-control input-sm' name='roles[]'>\
+                                    <option value='superadmin'>superadmin</option>\
+                                    <option value='admin'>administrator</option>\
+                                    <option value='Staff'>staff</option>\
+                                    <option value='sdgr'>drth</option>\
+                                    <option value='xxxxxxxx'>xxxxxxxxxxx</option>\
+                                </select>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>"
+            );
+            $('#menu-item-link .panel-body ol').append($newItem);
+            register_draggable();
         })
         .on('change', '[name=display_roles]', function (){
             var specific = $(this).closest('.bb-menu-form').find('.specific');
@@ -349,4 +331,94 @@ jQuery(function ($){
             }
 
         });
+    
+
+
+    
+    function cleanLevelClasses() {
+        $('ol.bb-menu-area li').removeClass(function (index, className) {
+            return (className.match(/(^|\s)level-\S+/g) || []).join(' ');
+        });
+    }
+
+    function autoSave() {
+        var ret = [];
+
+        $('ol.bb-menu-area').children('li').each(function () {
+            var level = _recursiveItems(this);
+            ret.push(level);
+        });
+
+        $("#log").text(JSON.stringify(ret));
+
+        function _recursiveItems(item) {
+            var id = $(item).attr("data-id"),
+                currentItem;
+
+            var data = {
+                id: $(item).attr('data-id'),
+                icon: $(item).attr('data-icon'),
+                title: $(item).attr('data-title'),
+                url: $(item).attr('data-url'),
+                dynamic: $(item).attr('data-dynamic')
+            };
+
+            if (id) {
+                currentItem = {
+                    "id": id[2]
+                };
+
+                currentItem = $.extend({}, currentItem, data);
+
+                if ($(item).children('ol').children('li').length > 0) {
+                    currentItem.children = [];
+                    $(item).children('ol').children('li').each(function () {
+                        var level = _recursiveItems(this);
+                        currentItem.children.push(level);
+                    });
+                }
+                return currentItem;
+            }
+        }
+    }
+
+    // Draggable items
+    function register_draggable() {
+        $('.bb-sortable-static > li .bb-menu-group-body li').draggable({
+            revert: "invalid",
+            connectToSortable: '.bb-menu-area',
+            helper: "clone",
+            start: function (event, ui) {
+                var $newItem = $(ui.helper).find('> .menu-item-children').remove();
+
+                return $newItem;
+            },
+            stop: function (event, ui) {
+                $(ui.helper).css({ 'height': 'auto' });
+            }
+        });
+    }
+
+    function repositionMenu() {
+        var elementTop = $focusedIconInput.offset().top,
+            elementLeft = $focusedIconInput.offset().left,
+            windowTop = $(window).scrollTop(),
+            actualTop = elementTop - windowTop,
+            checker = $(window).height() - actualTop,
+
+            iconContainer = $('.iconpicker-container'),
+            iconContainerHeight = iconContainer.height(),
+            cssTop = actualTop + 30;
+
+        if (checker < actualTop) {
+            cssTop = actualTop - iconContainerHeight;
+        }
+
+        iconContainer.css({
+            top: cssTop,
+            left: elementLeft
+        });
+
+        iconContainer.show();
+    }
 });

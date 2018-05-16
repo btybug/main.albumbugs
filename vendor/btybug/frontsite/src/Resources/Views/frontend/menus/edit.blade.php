@@ -233,6 +233,31 @@
                 <div class="col-md-4">
                     <div data-placement="inline" class="icp icp-auto"></div>
                     <ol class="bb-sortable-static bb-sortable-group">
+                        <li data-id="custom-links" id="menu-item-link" class="no-nest">
+                            <div class="panel panel-default">
+                                <div class="bb-menu-item-title">
+                                    <i></i>
+                                    <strong>Custom links</strong>
+                                    <div class="bb-menu-actions pull-right">
+                                        <a href="javascript:" class="bb-menu-delete">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                        <a href="javascript:" class="bb-menu-collapse expand group-expander">
+                                            <i class="fa fa-caret-up"></i>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:" class="bb-add-to-menu pull-right" id="add-custom-link">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                                <div class="panel-body bb-menu-group-body">
+                                    <ol class="bb-sortable-static">
+                                        
+                                    </ol>
+                                </div>
+                            </div>
+                        </li>
+
                         <li data-id="frontend-pages" id="menu-item-front" class="no-nest">
                             <div class="panel panel-default">
                                 <div class="bb-menu-item-title">
@@ -247,6 +272,9 @@
                                             <i class="fa fa-caret-up"></i>
                                         </a>
                                     </div>
+                                    <a href="javascript:" class="bb-add-to-menu pull-right" id="add-frontend-page">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
                                 </div>
                                 <div class="panel-body bb-menu-group-body">
                                     <ol class="bb-sortable-static">

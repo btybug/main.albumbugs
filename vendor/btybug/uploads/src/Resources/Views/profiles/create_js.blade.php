@@ -227,27 +227,20 @@
             });
 
             $("body").on('click', '.js-btn-save', function () {
-                var headerJs = $('#header-js > li.list-group-item').map(function() {
+                var json_object = function() {
                     return {
-                        path: $(this).attr('data-link')
+                        path: $(this).attr('data-link'),
+                        id: $(this).attr('data-id'),
+                        type: $(this).attr('data-type')
                     };
-                }).get();
-                var frontHeaderJs = $('#menus-list > li.list-group-item').map(function() {
-                    return {
-                        path: $(this).attr('data-link')
-                    };
-                }).get();
-                var footerJs = $('#footer-js > li.list-group-item').map(function() {
-                    return {
-                        path: $(this).attr('data-link')
-                    };
-                }).get();
-                var ignoreUnitsJs = $('#ignored-units-js > li.list-group-item').map(function() {
-                    return {
-                        path: $(this).attr('data-link')
-                    };
-                }).get();
-                var json = JSON.stringify({ headerJs, frontHeaderJs, footerJs, ignoreUnitsJs });
+                }
+                
+                var json = JSON.stringify({
+                    headerJs:        $('#header-js > li.list-group-item').map(json_object).get(),
+                    frontHeaderJs:   $('#menus-list > li.list-group-item').map(json_object).get(),
+                    footerJs:        $('#footer-js > li.list-group-item').map(json_object).get(),
+                    ignoreUnitsJs:   $('#ignored-units-js > li.list-group-item').map(json_object).get()
+                });
 
                 $.ajax({
                     type: "post",
@@ -314,10 +307,10 @@
             var $div = $("<li>", {
                 "class": "list-group-item added-item",
                 "data-name": item.file_name,
-                "data-type": item.type,
+                "data-type": item.env ? 'link' : 'path',
                 "data-link": item.path,
-                "data-id": item.path
-            }).text(item.name + ".js").append($buttonDelete).prependTo('#'+sectionOfaddedItem);
+                "data-id": item.id
+            }).text(item.name + '.js' + ' (asset: '+ (item.env ? 'link' : 'path') + ')').append($buttonDelete).prependTo('#'+sectionOfaddedItem);
         }
     </script>
 @stop

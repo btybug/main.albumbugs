@@ -87,6 +87,7 @@ class AssetProfilesController extends Controller
         $data = $request->except('_token');
         $data['user_id'] = \Auth::id();
         $data['type'] = 'js';
+        $data['files'] = json_decode($data['files'],true);
         $profile = $profilesRepository->create($data);
         $profilesService->generateJS($profile);
 

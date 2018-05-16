@@ -186,7 +186,6 @@ class AssetProfilesController extends Controller
     )
     {
         $data = $request->except('_token');
-
         $model = $profilesRepository->findOrFail($id);
         $profilesService->removeFile($model->hint_path);
         $data['files'] = json_decode($data['files'],true);

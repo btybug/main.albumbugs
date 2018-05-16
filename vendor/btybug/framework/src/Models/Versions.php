@@ -21,13 +21,18 @@ class Versions extends Model
 
     public function getPathAttribute()
     {
-        if (\File::exists(public_path($this->type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name))) {
-            return public_path($this->type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name);
-        } else {
-            if (\File::exists(public_path($this->type . "/versions/" . $this->file_name))) {
-                return public_path($this->type . "/versions/" . $this->file_name);
+        if($this->env){
+            return $this->file_name;
+        }else{
+            if (\File::exists(public_path($this->type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name))) {
+                return public_path($this->type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name);
+            } else {
+                if (\File::exists(public_path($this->type . "/versions/" . $this->file_name))) {
+                    return public_path($this->type . "/versions/" . $this->file_name);
+                }
             }
         }
+
 
         return null;
     }

@@ -49,10 +49,11 @@
                             <ul id="menus-list" class="connectedSortable">
                                 @if(count($assets) && @$model->structured_by)
                                     @foreach($assets as $item)
-                                        <li class="list-group-item auto-item" data-id="{{$item->path}}"
+
+                                        <li class="list-group-item auto-item" data-id="{{$item->id}}"
                                             data-name="{{ get_filename_from_path($item->path,DS) }}"
                                             data-link="{{ $item->path }}"
-                                            data-type="{{$item->type}}">
+                                            data-type="unit">
                                             {{ get_filename_from_path($item->path,DS) }} (unit: {{ $item->page->slug }})
 
                                             <button type="button" class="btn btn-xs btn-danger pull-right">

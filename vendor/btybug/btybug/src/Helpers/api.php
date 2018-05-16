@@ -1930,13 +1930,13 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '<div class="col-md-4">';
         $output .= '<div class="form-group">';
         $output .= '<label>Icon</label>';
-        $output .= '<input type="text" data-placement="right" class="form-control input-sm icp" readonly>';
+        $output .= '<input type="text" data-placement="right" class="form-control input-sm icp">';
         $output .= '</div>';
         $output .= '</div>';
         $output .= '<div class="col-md-8">';
         $output .= '<div class="form-group">';
         $output .= '<label>Item Title</label>';
-        $output .= '<input type="text" value="' . $item->title . '" class="form-control input-sm menu-item-title" readonly>';
+        $output .= '<input type="text" value="' . $item->title . '" class="form-control input-sm menu-item-title">';
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';

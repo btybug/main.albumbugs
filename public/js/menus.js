@@ -48,10 +48,12 @@ jQuery(function ($){
         connectToSortable: '.bb-menu-area',
         helper: "clone",
         start: function (event, ui) {
-            console.log(ui)
             var $newItem = $(ui.helper).find('> .menu-item-children').remove();
 
             return $newItem;
+        },
+        stop: function (event, ui) {
+            $(ui.helper).css({'height': 'auto'});
         }
     });
 
@@ -182,8 +184,6 @@ jQuery(function ($){
             var value = $(this).val();
             $(this).closest('.bb-menu-item').find('.bb-menu-item-title>span').text(value);
             $(this).closest('li').attr('data-title', value);
-
-            repositionMenu();
         })
         .on('change', '.menu-item-dynamic', function () {
             var value = 0;

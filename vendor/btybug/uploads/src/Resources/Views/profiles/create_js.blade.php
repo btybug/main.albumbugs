@@ -6,6 +6,8 @@
                 <div class="container-fluid">
                     <div class="navbar-form navbar-left">
                         @if($model && $model->structured_by)
+                            {!! Form::hidden('name',@$model->name,['class' => 'profile-name']) !!}
+                            {!! Form::hidden('id',@$model->id,['class' => 'profile-id']) !!}
                             <h5>{!! $model->name !!}</h5>
                         @else
                            {!! Form::text('name',@$model->name,['class' => 'form-control profile-name','placeholder' => 'Enter profile name ..']) !!}
@@ -246,7 +248,24 @@
                 }).get();
                 var json = JSON.stringify({ headerJs, frontHeaderJs, footerJs, ignoreUnitsJs });
 
-                alert(json);
+                $.ajax({
+                    type: "post",
+                    url: window.location.pathname,
+                    cache: false,
+                    datatype: "json",
+                    data: {
+                        name: $(".profile-name").val(),
+                        files: json
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $("[name=_token]").val()
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            window.location.href = data.url;
+                        }
+                    }
+                });
             });
 
             $("body").on("change", ".generate", function () {

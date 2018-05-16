@@ -185,18 +185,15 @@ class AssetProfilesController extends Controller
         VersionProfilesService $profilesService
     )
     {
-        $data = $request->except('_token', 'main', 'files');
-        if ($request->get('files')) {
-            $data['files'] = array_prepend($request->get('files'), $request->get('main'));
-        } else {
-            $data['files'][] = $request->get('main');
-        }
+        $data = $request->except('_token');
+
         $model = $profilesRepository->findOrFail($id);
         $profilesService->removeFile($model->hint_path);
+        $data['files'] = json_decode($data['files'],true);
         $updated = $profilesRepository->update($id, $data);
         $profilesService->generateJS($updated);
 
-        return redirect()->route('uploads_assets_profiles_js');
+        return \Response::json(['error' => false,'url' => route('uploads_assets_profiles_js')]);
     }
 
     public function delete (

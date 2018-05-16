@@ -47,20 +47,14 @@ class VersionProfilesService extends GeneralService
     {
         $generatingData = $profile->files;
         $file_data = "";
-        if (count($generatingData)) {
-            foreach ($generatingData as $key => $id) {
-                $val = $this->versionsRepository->find($id);
-                if ($val) {
-                    if (\File::exists(public_path($type . "/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
-                        $file_data .= \File::get(public_path($type . "/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
-                    } else {
-                        if (\File::exists(public_path($type . "/versions/" . $val->file_name))) {
-                            $file_data .= \File::get(public_path($type . "/versions/" . $val->file_name));
-                        }
-                    }
+        if (isset($generatingData['frontHeaderJs']) && count($generatingData['frontHeaderJs'])) {
+            foreach ($generatingData['frontHeaderJs'] as $key => $item) {
+                if (\File::exists($item['path'])) {
+                    $file_data .= \File::get($item['path']);
                 }
             }
         }
+
         $file = $type . "/profiles/" . str_slug($profile->name) . "." . $type;
         $this->versionServiceRepository->update($profile->id, ['hint_path' => $file]);
         $this->MakeFile($file, $file_data, $type);

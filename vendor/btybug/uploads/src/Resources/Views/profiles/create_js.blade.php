@@ -316,7 +316,7 @@
                 "data-type": item.type,
                 "data-link": item.path,
                 "data-id": item.path
-            }).text(item.file_name).append($buttonDelete).prependTo('#'+sectionOfaddedItem);
+            }).text(item.name + ".js").append($buttonDelete).prependTo('#'+sectionOfaddedItem);
         }
     </script>
 @stop

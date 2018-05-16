@@ -149,6 +149,7 @@ class AdminsettingRepository extends GeneralRepository
 
         return $system;
     }
+
     public function getAllSettingsBySection($section)
     {
         $system = $this->model->where('section', $section)->get();

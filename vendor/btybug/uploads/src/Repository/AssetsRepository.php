@@ -18,6 +18,7 @@ class AssetsRepository extends GeneralRepository
 
     public function getWithGroupBy ($type = 'js', $column = 'path')
     {
+        
         return $this->model()->where('type', $type)->groupBy($column)->get();
     }
 }

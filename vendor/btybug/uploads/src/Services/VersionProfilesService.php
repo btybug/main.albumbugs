@@ -50,7 +50,7 @@ class VersionProfilesService extends GeneralService
         if (isset($generatingData['frontHeaderJs']) && count($generatingData['frontHeaderJs'])) {
             foreach ($generatingData['frontHeaderJs'] as $key => $item) {
                 if($item['type'] == 'path' or $item['type'] == 'unit'){
-                    if (\File::exists($item['path']) && 1 == 2) {
+                    if (\File::exists($item['path'])) {
                         $file_data .= \File::get($item['path']);
                     }
                 }else{

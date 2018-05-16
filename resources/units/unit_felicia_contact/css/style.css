@@ -82,5 +82,13 @@
     outline: none;
     border-color: #fb1616;
     background: #fb1616;
-
+}
+@media (max-width: 568px){
+    .section-felic-contact .section-title .title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .section-felic-contact .section-title{
+        margin-bottom: 50px;
+    }
 }

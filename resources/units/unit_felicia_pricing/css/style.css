@@ -108,3 +108,12 @@
     color: #414141;
     background: #e8e8e8;
 }
+@media (max-width: 568px){
+    .section-felic-price .section-title .title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .section-felic-price .section-title{
+        margin-bottom: 50px;
+    }
+}

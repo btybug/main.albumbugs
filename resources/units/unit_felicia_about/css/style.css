@@ -80,3 +80,12 @@
 .section-felic-about .text-success {
     color: #6bbb30;
 }
+@media (max-width: 568px){
+    .section-felic-about .section-title .title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .section-felic-about .section-title{
+        margin-bottom: 50px;
+    }
+}

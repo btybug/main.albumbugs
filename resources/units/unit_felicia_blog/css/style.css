@@ -130,3 +130,12 @@
     -webkit-transition: all .3s;
     transition: all .3s;
 }
+@media (max-width: 568px){
+    .section-felic-blog .section-title .title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .section-felic-blog .section-title{
+        margin-bottom: 50px;
+    }
+}

@@ -124,3 +124,12 @@
 .section-felic-team .team-member .team-socail-links a:hover {
     color: #fc4848;
 }
+@media (max-width: 568px){
+    .section-felic-team .section-title .title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .section-felic-team .section-title{
+        margin-bottom: 50px;
+    }
+}

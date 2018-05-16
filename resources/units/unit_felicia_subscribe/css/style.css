@@ -80,3 +80,12 @@
 .section-felic-subscribe .subscribe-from {
     margin-bottom: 0;
 }
+@media (max-width: 568px){
+    .section-felic-subscribe .section-title .title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .section-felic-subscribe .section-title{
+        margin-bottom: 50px;
+    }
+}

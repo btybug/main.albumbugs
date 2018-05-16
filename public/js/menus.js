@@ -44,9 +44,15 @@ jQuery(function ($){
 
     // Draggable items
     $('.bb-sortable-static li').draggable({
-        helper: "clone",
         revert: "invalid",
-        connectToSortable: '.bb-menu-area'
+        connectToSortable: '.bb-menu-area',
+        helper: "clone",
+        start: function (event, ui) {
+            console.log(ui)
+            var $newItem = $(ui.helper).find('> .menu-item-children').remove();
+
+            return $newItem;
+        }
     });
 
     // Sortable menu area

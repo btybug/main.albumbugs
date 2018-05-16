@@ -1940,6 +1940,21 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
+        
+        $output .= '<div class="row">';
+        $output .= '<div class="col-md-12">';
+        $output .= '<div class="form-group">';
+        $output .= '<label>* make this dynamic</label>';
+
+        if(isset($item["dynamic"]) && $item["dynamic"]){
+            $output .= '<input type="checkbox" value="1" checked="checked" class="input-sm menu-item-dynamic">';
+        }else{
+            $output .= '<input type="checkbox" value="1"  class="input-sm menu-item-dynamic">';
+        }
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</div>';
+
         $output .= '<div class="row">';
         $output .= '<div class="col-md-6">';
         $output .= '<div class="form-group">';

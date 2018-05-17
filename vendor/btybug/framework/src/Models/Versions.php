@@ -24,15 +24,19 @@ class Versions extends Model
         if($this->env){
             return $this->file_name;
         }else{
-            if (\File::exists(public_path($this->type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name))) {
-                return public_path($this->type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name);
+            if ($this->type == 'css' || $this->type == 'framework') {
+                $type = 'css';
+            }else{
+                $type = 'js';
+            }
+            if (\File::exists(public_path($type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name))) {
+                return public_path($type . "/versions/" . $this->name . "/" . $this->version . "/" . $this->file_name);
             } else {
-                if (\File::exists(public_path($this->type . "/versions/" . $this->file_name))) {
-                    return public_path($this->type . "/versions/" . $this->file_name);
+                if (\File::exists(public_path($type . "/versions/" . $this->file_name))) {
+                    return public_path($type . "/versions/" . $this->file_name);
                 }
             }
         }
-
 
         return null;
     }

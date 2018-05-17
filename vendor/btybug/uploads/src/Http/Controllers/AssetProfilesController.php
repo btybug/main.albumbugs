@@ -137,6 +137,7 @@ class AssetProfilesController extends Controller
         $mains = $versionsRepository->getJQuery();
         $assets = $assetsRepository->getWithGroupBy();
 
+//        dd($model->files);
         return view('uploads::profiles.create_js', compact(['plugins', 'model', 'mains', 'assets']));
     }
 

@@ -2354,3 +2354,9 @@ function BBpageAssetsOptimise()
 
     }
 }
+
+function BBgetVersion($id,$col = "name"){
+    $versionRepositroy = new \Btybug\Uploads\Repository\VersionsRepository();
+    $v = $versionRepositroy->find($id);
+    return ($v) ? $v->$col : null;
+}

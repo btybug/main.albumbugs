@@ -269,14 +269,8 @@ class VersionsService extends GeneralService
     public function getContent ($val)
     {
         $code = '';
-        if ($val->type == 'css' || $val->type == 'framework') {
-            if (\File::exists(public_path("css/versions/" . $val->file_name))) {
-                $code = \File::get(public_path("css/versions/" . $val->file_name));
-            }
-        } else {
-            if (\File::exists(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name))) {
-                $code = \File::get(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name));
-            }
+        if ($val->path && \File::exists($val->path)) {
+            $code = \File::get($val->path);
         }
 
         return $code;
@@ -290,7 +284,7 @@ class VersionsService extends GeneralService
             if (! \File::isDirectory(public_path("js/versions/" . $val->name . "/" . $val->version))) {
                 \File::makeDirectory(public_path("js/versions/" . $val->name . "/" . $val->version));
             }
-            \File::put(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name), $code);
+            $a = \File::put(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name), $code);
         }
     }
 }

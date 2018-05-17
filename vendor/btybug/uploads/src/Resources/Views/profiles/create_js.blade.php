@@ -33,7 +33,15 @@
                     </h3>
                 </div>
                 <div class="panel-body connectedSortable" id="header-js">
-
+                    @if($model && isset($model->files['headerJs']) && count($model->files['headerJs']))
+                        @foreach($model->files['headerJs'] as $headerItem)
+                            <li class="list-group-item added-item" data-name="https://buttons.github.io/buttons.js"
+                                data-type="{{ $headerItem['type'] }}" data-link="{{ $headerItem['path'] }}" data-id="{{ $headerItem['id'] }}">
+                                {{ (($headerItem['type'] != 'unit') ? BBgetVersion($headerItem['id']) : get_filename_from_path($headerItem['path'],DS)) }} (asset: {{ $headerItem['type'] }})
+                                <button class="btn btn-xs btn-default pull-right glyphicon glyphicon-trash" type="button"></button>
+                            </li>
+                        @endforeach
+                    @endif
                     <div class="panel panel-default">
                         <div class="panel-heading draggable">
                             <h4 class="panel-title">
@@ -84,7 +92,15 @@
                     </h3>
                 </div>
                 <div class="panel-body connectedSortable" id="footer-js">
-
+                    @if($model && isset($model->files['footerJs']) && count($model->files['footerJs']))
+                        @foreach($model->files['footerJs'] as $footerItem)
+                            <li class="list-group-item added-item" data-name=""
+                                data-type="{{ $footerItem['type'] }}" data-link="{{ $footerItem['path'] }}" data-id="{{ $footerItem['id'] }}">
+                                {{ (($footerItem['type'] != 'unit') ? BBgetVersion($footerItem['id']) : get_filename_from_path($footerItem['path'],DS)) }} (asset: {{ $footerItem['type'] }})
+                                <button class="btn btn-xs btn-default pull-right glyphicon glyphicon-trash" type="button"></button>
+                            </li>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -97,7 +113,15 @@
                     </h3>
                 </div>
                 <div class="panel-body connectedSortable" id="ignored-units-js">
-
+                    @if($model && isset($model->files['ignoreUnitsJs']) && count($model->files['ignoreUnitsJs']))
+                        @foreach($model->files['ignoreUnitsJs'] as $ignoreUnitsJs)
+                            <li class="list-group-item added-item" data-name=""
+                                data-type="{{ $ignoreUnitsJs['type'] }}" data-link="{{ $ignoreUnitsJs['path'] }}" data-id="{{ $ignoreUnitsJs['id'] }}">
+                                {{ (($ignoreUnitsJs['type'] != 'unit') ? BBgetVersion($ignoreUnitsJs['id']) : get_filename_from_path($ignoreUnitsJs['path'],DS)) }} (asset: {{ $ignoreUnitsJs['type'] }})
+                                <button class="btn btn-xs btn-default pull-right glyphicon glyphicon-trash" type="button"></button>
+                            </li>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -118,9 +142,16 @@
                         <div>
                             @if(count($mains))
                                 @foreach( $mains as $item)
-                                    <label class="checkbox-inline" data-path="{{ $item->path }}">
-                                        {!! Form::checkbox('files[]',$item->id,null) !!} {{ $item->name }}
-                                    </label>
+                                    @if($item->path)
+                                        <label class="checkbox-inline" data-path="{{ $item->path }}">
+                                            {!! Form::checkbox('files[]',$item->id,null) !!} {{ $item->name }}
+                                        </label>
+                                    @else
+                                        <label class="checkbox-inline">
+                                            <a href="{!! route('uploads_assets_js') !!}">Broken assets</a> {{ $item->name }}
+                                        </label>
+                                    @endif
+
                                 @endforeach
                             @endif
                         </div>

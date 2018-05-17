@@ -57,7 +57,6 @@
                             <ul id="menus-list" class="connectedSortable">
                                 @if(count($assets) && @$model->structured_by)
                                     @foreach($assets as $item)
-
                                         <li class="list-group-item auto-item" data-id="{{$item->id}}"
                                             data-name="{{ get_filename_from_path($item->path,DS) }}"
                                             data-link="{{ $item->path }}"
@@ -69,6 +68,16 @@
                                             </button>
                                         </li>
                                     @endforeach
+                                @else
+                                    @if($model && isset($model->files['frontHeaderJs']) && count($model->files['frontHeaderJs']))
+                                        @foreach($model->files['frontHeaderJs'] as $frontHeaderJs)
+                                            <li class="list-group-item added-item" data-name=""
+                                                data-type="{{ $frontHeaderJs['type'] }}" data-link="{{ $frontHeaderJs['path'] }}" data-id="{{ $frontHeaderJs['id'] }}">
+                                                {{ (($frontHeaderJs['type'] != 'unit') ? BBgetVersion($frontHeaderJs['id']) : get_filename_from_path($frontHeaderJs['path'],DS)) }} (asset: {{ $frontHeaderJs['type'] }})
+                                                <button class="btn btn-xs btn-default pull-right glyphicon glyphicon-trash" type="button"></button>
+                                            </li>
+                                        @endforeach
+                                    @endif
                                 @endif
                             </ul>
                         </div>

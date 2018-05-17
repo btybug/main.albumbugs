@@ -26,13 +26,17 @@
 
 {{--start JS--}}
 @if($page->js_type == 'default')
-    {!! BBJs() !!}
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
-    {!! HTML::script("public/js/UiElements/bb_iframejs.js") !!}
+     {{--TODO: need fix when know from where get default profile --}}
+     {!! BBgetProfileAssets(1) !!}
+     {!! BBgetProfile(1,'js',true) !!}
+    {{--{!! BBJs() !!}--}}
+    {{--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>--}}
+    {{--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--}}
+    {{--<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>--}}
+    {{--{!! HTML::script("public/js/tinymice/tinymce.min.js") !!}--}}
+    {{--{!! HTML::script("public/js/UiElements/bb_iframejs.js") !!}--}}
 @elseif($page->js_type == 'cms')
+    {!! BBgetProfileAssets($page->js_cms) !!}
     {!! BBgetProfile($page->js_cms,'js',true) !!}
 @elseif($page->js_type == 'external')
     {!! BBlinkAssets($page->js) !!}

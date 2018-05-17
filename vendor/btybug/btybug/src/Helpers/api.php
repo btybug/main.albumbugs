@@ -2360,3 +2360,38 @@ function BBgetVersion($id,$col = "name"){
     $v = $versionRepositroy->find($id);
     return ($v) ? $v->$col : null;
 }
+
+function BBgetProfileAssets($id,$type = 'js', $section = 'headerJs'){
+    $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
+    $profile = $profileRepository->findOneByMultiple(['id' => $id, 'type' => $type]);
+    $result = '';
+    if ($profile) {
+        $assets = $profile->files;
+        if(isset($assets[$section]) && count($assets[$section])){
+            foreach ($assets[$section] as $item){
+                if($type == 'js'){
+                    if($item['type'] == 'link'){
+                        $result .= Html::script($item['path']) . "\r\n";
+                    }else{
+                        if (\File::exists($item['path'])) {
+                           try{
+                               $result .= "<script>" . \File::get($item['path']) ."</script> \r\n";
+                           }catch (\Exception $e){
+//                               dd($item,$e->getMessage());
+                            }
+                        }
+                    }
+                }else{
+                    if($item['type'] == 'link'){
+                        $result .= Html::style($item['path']) . "\r\n";
+                    }else{
+                        if (\File::exists($item['path'])) {
+                            $result .= "<style>" . \File::get($item['path']) ."</style> \r\n";
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+}

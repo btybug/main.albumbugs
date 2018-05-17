@@ -51,10 +51,10 @@ class VersionProfilesService extends GeneralService
             foreach ($generatingData['frontHeaderJs'] as $key => $item) {
                 if($item['type'] == 'path' or $item['type'] == 'unit'){
                     if (\File::exists($item['path'])) {
-                        $file_data .= \File::get($item['path']);
+                        $file_data .= \File::get($item['path']) . "\r\n";
                     }
                 }else{
-                    $file_data .= file_get_contents($item['path']);
+                    $file_data .= file_get_contents($item['path']). "\r\n";
                 }
             }
         }

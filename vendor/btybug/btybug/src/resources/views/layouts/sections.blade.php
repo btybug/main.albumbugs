@@ -25,6 +25,7 @@
     {!! HTML::style('public-x/custom/css/'.uniqid().'.css') !!}
 {!! BBJs() !!}
     {!! HTML::script("public/js/tinymice/tinymce.min.js") !!}
+    {!! HTML::script("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js") !!}
     @yield('CSS')
     @stack('css')
 </head>

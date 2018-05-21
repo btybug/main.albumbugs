@@ -152,7 +152,6 @@ class PageSectionsController extends Controller
         $settings = $request->all();
         if ($slug) {
             $view = ContentLayouts::renderLivePreview($slug, $settings);
-
             return $view ? $view : abort('404');
         } else {
             abort('404');

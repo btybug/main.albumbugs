@@ -75,7 +75,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         $dataSettings = url('/admin/uploads/gears/settings-iframe', $slug) . '/settings';
         $data['body'] = $body;
         $data['settings'] = $dataSettings;
-
+dd(1);
         return view('uploads::gears.units.preview', compact(['model', "ui", 'data', 'settings', 'variation']));
     }
 

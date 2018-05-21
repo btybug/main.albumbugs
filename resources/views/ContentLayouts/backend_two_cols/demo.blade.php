@@ -5,6 +5,7 @@
         @endif
     </div>
     <div class="col-md-9">
-        Main View
+        {!! isset($settings['test'])?$settings['test']:'qaq' !!}
+
     </div>
 </div>

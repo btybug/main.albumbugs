@@ -1395,29 +1395,30 @@ function recursiveItems($menus, $i = 0, $data = [])
         $menu = $menus[$i];
         $data[$i] = $menu;
 
-        if(isset($menu['dynamic']) && $menu['dynamic']){
+        if (isset($menu['dynamic']) && $menu['dynamic']) {
             $pageRepositroy = new \Btybug\Console\Repository\FrontPagesRepository();
             $page = $pageRepositroy->find($menu['id']);
-            if($page && count($page->childs)) {
-                $data[$i]['children'] = recursivePageChild($page->childs,0,$page->childs->toArray());
+            if ($page && count($page->childs)) {
+                $data[$i]['children'] = recursivePageChild($page->childs, 0, $page->childs->toArray());
             }
-        }else{
+        } else {
             if (isset($menu['children']) && count($menu['children'])) {
-                $data[$i]['children'] = recursiveItems($menu['children'], 0,$data[$i]['children']);
+                $data[$i]['children'] = recursiveItems($menu['children'], 0, $data[$i]['children']);
             }
         }
 
         $i = $i + 1;
         if ($i != count($menus)) {
-            $data = recursiveItems($menus, $i,$data);
+            $data = recursiveItems($menus, $i, $data);
         }
 
         return $data;
     }
 }
 
-function recursivePageChild($data, $i = 0, $result = []){
-    if(count($data)){
+function recursivePageChild($data, $i = 0, $result = [])
+{
+    if (count($data)) {
         $item = $data[$i];
         $result[$i] = [
             'id' => $item->id,
@@ -1427,8 +1428,8 @@ function recursivePageChild($data, $i = 0, $result = []){
             'children' => $item->childs->toArray()
         ];
 
-        if(count($item->childs)){
-            $result[$i]['children'] = recursivePageChild($item->childs, 0,     $result[$i]['children']);
+        if (count($item->childs)) {
+            $result[$i]['children'] = recursivePageChild($item->childs, 0, $result[$i]['children']);
         }
 
         $i = $i + 1;
@@ -1444,11 +1445,10 @@ function BBGetMenu($id)
 {
     $menuRepo = new \Btybug\btybug\Repositories\MenuRepository();
     $menu = $menuRepo->find($id);
-    $data = json_decode($menu->json_data,true);
+    $data = json_decode($menu->json_data, true);
     $result = recursiveItems($data);
     return $result;
 }
-
 
 
 function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon = true, $membershipSlug = null, $checkbox = false)
@@ -1822,7 +1822,7 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
         } else {
 //            if($item->parent->parent == null) $i = 0;
 
-            $output .= '<li data-id="' . $item['id'] . '" data-title="' . $item['title'] . '" data-icon="' . $item['icon'] . '" data-url="' . $item['url'] . '" data-dynamic="' . (isset($item['dynamic'])??null) . '">';
+            $output .= '<li data-id="' . $item['id'] . '" data-title="' . $item['title'] . '" data-icon="' . $item['icon'] . '" data-url="' . $item['url'] . '" data-dynamic="' . (isset($item['dynamic']) ?? null) . '">';
             $output .= '<div class="bb-menu-item">';
             $output .= '<div class="bb-menu-item-title">';
             $output .= '<i></i><span>' . $item['title'] . '</span>';
@@ -1853,9 +1853,9 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '<div class="form-group">';
             $output .= '<label>* make this dynamic</label>';
 
-            if(isset($item["dynamic"]) && $item["dynamic"]){
+            if (isset($item["dynamic"]) && $item["dynamic"]) {
                 $output .= '<input type="checkbox" value="1" checked="checked" class="input-sm menu-item-dynamic">';
-            }else{
+            } else {
                 $output .= '<input type="checkbox" value="1"  class="input-sm menu-item-dynamic">';
             }
             $output .= '</div>';
@@ -1940,15 +1940,15 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
-        
+
         $output .= '<div class="row">';
         $output .= '<div class="col-md-12">';
         $output .= '<div class="form-group">';
         $output .= '<label>* make this dynamic</label>';
 
-        if(isset($item["dynamic"]) && $item["dynamic"]){
+        if (isset($item["dynamic"]) && $item["dynamic"]) {
             $output .= '<input type="checkbox" value="1" checked="checked" class="input-sm menu-item-dynamic">';
-        }else{
+        } else {
             $output .= '<input type="checkbox" value="1"  class="input-sm menu-item-dynamic">';
         }
         $output .= '</div>';
@@ -2338,13 +2338,13 @@ function BBpageAssetsOptimise()
             $slug = $unit['unit']->slug;
             $variation_id = $unit['variation']->id;
             $unitsRepository->updateOrCreate(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id], []);
-            if(isset($activesJs[$slug]) && is_array($activesJs[$slug])){
+            if (isset($activesJs[$slug]) && is_array($activesJs[$slug])) {
                 foreach ($activesJs[$slug] as $js) {
                     $unitModel = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id]);
                     $assetRepository->updateOrCreate(['unit_id' => $unitModel->id, 'path' => $js], ['type' => 'js']);
                 }
             }
-            if(isset($activesCss[$slug]) && is_array($activesCss[$slug])){
+            if (isset($activesCss[$slug]) && is_array($activesCss[$slug])) {
                 foreach ($activesCss[$slug] as $css) {
                     $unitModel = $unitsRepository->findOneByMultiple(['page_id' => $page->id, 'slug' => $slug, 'variation_id' => $variation_id]);
                     $assetRepository->updateOrCreate(['unit_id' => $unitModel->id, 'path' => $css], ['type' => 'css']);
@@ -2355,38 +2355,40 @@ function BBpageAssetsOptimise()
     }
 }
 
-function BBgetVersion($id,$col = "name"){
+function BBgetVersion($id, $col = "name")
+{
     $versionRepositroy = new \Btybug\Uploads\Repository\VersionsRepository();
     $v = $versionRepositroy->find($id);
     return ($v) ? $v->$col : null;
 }
 
-function BBgetProfileAssets($id,$type = 'js', $section = 'headerJs'){
+function BBgetProfileAssets($id, $type = 'js', $section = 'headerJs')
+{
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
     $profile = $profileRepository->findOneByMultiple(['id' => $id, 'type' => $type]);
     $result = '';
     if ($profile) {
         $assets = $profile->files;
-        if(isset($assets[$section]) && count($assets[$section])){
-            foreach ($assets[$section] as $item){
-                if($type == 'js'){
-                    if($item['type'] == 'link'){
+        if (isset($assets[$section]) && count($assets[$section])) {
+            foreach ($assets[$section] as $item) {
+                if ($type == 'js') {
+                    if ($item['type'] == 'link') {
                         $result .= Html::script($item['path']) . "\r\n";
-                    }else{
+                    } else {
                         if (\File::exists($item['path'])) {
-                           try{
-                               $result .= "<script>" . \File::get($item['path']) ."</script> \r\n";
-                           }catch (\Exception $e){
+                            try {
+                                $result .= "<script>" . \File::get($item['path']) . "</script> \r\n";
+                            } catch (\Exception $e) {
 //                               dd($item,$e->getMessage());
                             }
                         }
                     }
-                }else{
-                    if($item['type'] == 'link'){
+                } else {
+                    if ($item['type'] == 'link') {
                         $result .= Html::style($item['path']) . "\r\n";
-                    }else{
+                    } else {
                         if (\File::exists($item['path'])) {
-                            $result .= "<style>" . \File::get($item['path']) ."</style> \r\n";
+                            $result .= "<style>" . \File::get($item['path']) . "</style> \r\n";
                         }
                     }
                 }

@@ -48,7 +48,7 @@
     "main_right": {
       "type": "unit",
       "tag": "breadcrumb",
-      "title": "Main Right"
+      "title": "Main Right",
       "f" : true,
       "s" : true
     }

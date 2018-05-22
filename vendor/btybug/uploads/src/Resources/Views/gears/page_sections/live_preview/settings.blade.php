@@ -5,6 +5,8 @@
         {!! $html !!}
     </div>
     <textarea type="hidden" class="hide" id="hidden_data" hidden>{!! $json !!}</textarea>
+
+    <input type="hidden" id="layout_slug" value="{!! $model->slug !!}">
     <div id="output-content" style="display: none"></div>
 @stop
 
@@ -46,7 +48,9 @@
                     <div class="col-xs-9">
                         <div class="right">
                             {!! Form::model($model,['id'=>'add_custome_page']) !!}
-                                @include($settingsHtml)
+                                <div class="settings-place">
+                                    @include($settingsHtml)
+                                </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -181,7 +185,7 @@
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js") !!}
 
 
-    {!! HTML::script('public/js/UiElements/content-layout-settings.js?v=8') !!}
+    {!! HTML::script('public/js/UiElements/content-layout-settings.js?v='.rand(1111,9999)) !!}
     <script>
         $(document).ready(function () {
             $('.closeCSSEditor').on('click', function () {

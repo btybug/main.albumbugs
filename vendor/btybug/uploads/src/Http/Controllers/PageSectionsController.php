@@ -181,6 +181,26 @@ class PageSectionsController extends Controller
         ]);
     }
 
+    public function postOptions(Request $request)
+    {
+        $model = ContentLayouts::find($request->slug);
+        if($model) {
+            $settingsHtml = "ContentLayouts.$model->folder.settings";
+            $html = \view($settingsHtml)->with([
+                'model'=>$model,
+                'settings' => $request->except('key', 'type'),
+                'data' => $request->only('key', 'type')])->render();
+            return response()->json([
+                'html' => $html,
+                'error' => false
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
+        ]);
+    }
+
     public function getConsole (Request $request)
     {
         return dd($request->except('_token'));

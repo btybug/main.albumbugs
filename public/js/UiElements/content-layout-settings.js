@@ -14,11 +14,11 @@ $(document).ready(function () {
 				}
 			});
 		}
-    $('input').on('input', function () {
+    $('body').on('input','input',function () {
         evens($(this));
     });
     
-    $('select').on('change', function () {
+    $('body').on('change', 'select', function () {
         if($(this).attr('id') != 'copy_data'){
             evens($(this));
         }else{
@@ -27,14 +27,14 @@ $(document).ready(function () {
             }
         }
     });
-    $('input[type="radio"]').on('click', function () {
+    $('body').on('click', 'input[type="radio"]', function () {
         evens($(this));
     });
-    $('input[type="checkbox"]').on('click', function () {
+    $('body').on('click','input[type="checkbox"]', function () {
         evens($(this));
     });
 
-    $('textarea').on('keyup', function () {
+    $('body').on('keyup','textarea' ,function () {
         evens($(this));
     });
     $('body').on('click', '.item', function () {
@@ -221,5 +221,28 @@ $(document).ready(function () {
 	tinymceeditor();
 
 	$('.fullheight').addClass('editplaceholders');
-	
+
+
+    $('body').on('click','.action-placeholder',  function(){
+        var key = $(this).data('key');
+        var type = $(this).data('type');
+        var data = $('form').serialize();
+        data += '&key=' + key + '&type=' + type + '&slug=' + $("#layout_slug").val();
+        $.ajax({
+            type: "post",
+            datatype: "json",
+            url: "/admin/uploads/layouts/settings/options",
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $("#token").val()
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $('.settings-place').html(data.html);
+                    $('.fullheight').addClass('editplaceholders');
+                    tinymceeditor()
+                }
+            }
+        });
+    });
 });

@@ -15296,7 +15296,7 @@ div.d4{
     /*min-height: 100vh;*/
     background-color: #3e81a5;
     padding-top: 20px !important;
-    height: 100vh;
+    height: calc(100vh - 65px);
     overflow-x: auto;
 }
 .bigfullModal .modal-list-menu ul::-webkit-scrollbar-track

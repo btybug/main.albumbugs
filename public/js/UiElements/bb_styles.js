@@ -313,6 +313,10 @@ console.log(1);
             }
         });
     }
+    $('body').on('change','.magic-modal-select-variations',function () {
+       var id=$(this).val();
+       $('body').find('.magic-modal-iframe').attr('src','/admin/uploads/gears/settings-iframe/'+id).contentWindow.location.reload(true);
+    });
 $('body').on('click','.clean-bb-button',function () {
    var slug= $(this).data('id');
    $('body').find('input[data-name='+slug+']').val('');

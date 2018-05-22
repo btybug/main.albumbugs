@@ -20,19 +20,21 @@
         </div>
         @endif
         <div class="col-md-9 modal-list-content builder-modalright modal-data-items">
-            <h5>Select Variation</h5>
-            <script type="template" class="magic-modal-options">
-                @if(!isset($items))
+            <iframe class="magic-modal-iframe"  style="width: 100%; height: 100%;" src="javascrip:void(0)"></iframe>
+        <script type="template" id="magic-modal-options">
+            <option> Select Variation</option>
+            @if(!isset($items))
                 @foreach($tpl->variations()->all() as $item)
                 <option value="{!! $item->id !!}"> {!! $item->title?$item->title:"no title" !!}</option>
                 @endforeach
-                @else
+            @else
                 @foreach($items as $item)
                 <option value="{!! $item->id !!}"> {!! $item->title?$item->title:"no title" !!}</option>
                 @endforeach
-                @endif
-            </script>
+            @endif
+        </script>
         </div>
-        @if(!isset($ajax))
+
+    @if(!isset($ajax))
     </div>
 @endif

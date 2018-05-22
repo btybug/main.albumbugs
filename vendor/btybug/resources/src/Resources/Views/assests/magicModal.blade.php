@@ -15,11 +15,7 @@
                     <div class="col-md-9">
                         <div class="mod-head-right">
                             <div>
-                                <select name="" id="" class="form-control">
-                                    <option value="">Default Variation</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                </select>
+                                <select   class="form-control magic-modal-select-variations"></select>
                                 <button class="btn btn-default">Select</button>
                             </div>
 

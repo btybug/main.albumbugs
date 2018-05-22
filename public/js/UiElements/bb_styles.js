@@ -49,8 +49,13 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (!data.error) {
+
+console.log(1);
                     $('#magic-settings .modal-title').html("Select " + action);
-                    $('#magic-body').html(data.html);
+                    var html=$(data.html);
+                    var script=html.find('script').html();
+                    $('body').find('.magic-modal-select-variations').html(script)
+                    $('#magic-body').html(html);
                     $('#magic-settings').modal();
                 }
             }
@@ -101,6 +106,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (!data.error) {
+                    console.log(2);
                     $('#magic-settings .modal-title').html("Select " + action);
                     $('#magic-body').html(data.html);
                     $('#magic-settings').modal();
@@ -145,6 +151,10 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (!data.error) {
+                    console.log(3);
+                    var html=$(data.html);
+                    var script=html.find('script').html();
+                    $('body').find('.magic-modal-select-variations').html(script)
                     $('#magic-settings').find('.modal-data-items').remove();
                     $('#magic-settings .modal-data').append(data.html);
                 }
@@ -328,6 +338,7 @@ $('body').on('click','.clean-bb-button',function () {
             },
             success: function (data) {
                 if (!data.error) {
+                    console.log(4);
                     $('#magic-settings .modal-title').html("Live Preview");
                     $('#magic-body').html(data.html);
                     $('#magic-settings').modal();

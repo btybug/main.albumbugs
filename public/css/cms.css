@@ -15282,7 +15282,7 @@ div.d4{
 
 .bigfullModal .modal-header .close {
     opacity: 0.7;
-    font-size: 26px;
+    font-size: 34px;
 }
 
 .bigfullModal .modal-list-menu {
@@ -15327,10 +15327,32 @@ div.d4{
     color-stop(.5, transparent), to(transparent));
 }
 
-.bigfullModal .modal-list-menu ul li {
-
+.bigfullModal .modal-header .mod-head-right {
+    display: flex;
+    justify-content: flex-end;
 }
-
+.bigfullModal .modal-header .mod-head-right>div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.bigfullModal .modal-header .mod-head-right .form-control {
+    border-radius: 0;
+    flex: 0 0 25%;
+}
+.bigfullModal .modal-header .mod-head-right>div .btn{
+    border-radius: 0;
+    margin: 0 25px 0 10px;
+    background-color: chocolate;
+    border-color: #d2681f;
+    color: white;
+}
+.bigfullModal .modal-header .mod-head-left input{
+    border-radius: 0;
+    width: 85%;
+    float: right;
+    margin-right: 15px;
+}
 .bigfullModal .modal-list-menu ul li a {
     color: white;
 }

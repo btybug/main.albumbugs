@@ -174,14 +174,14 @@ console.log(1);
                 .addClass('btn-info');
             $(this).removeClass('btn-info')
             $(this).addClass('btn-primary').addClass('active');
-            $("input[data-name='" + BBbutton.attr("data-key") + "']").val($(this).find('input').attr('data-value')).trigger('change');
+            $("input[data-name='" + BBbutton.attr("data-key") + "']").val($(this).attr('data-value')).trigger('change');
             $('#magic-settings span[aria-hidden=true]').click();
 
             $('[data-bbplace="' + BBbutton.attr('data-key') + '"]')
                 .removeClass($('[data-bbplace="' + BBbutton.attr('data-key') + '"]')
                     .attr('data-style-old'))
-                .attr('data-style-old', $(this).find('input').attr('data-value'))
-                .addClass($(this).find('input').attr('data-value'));
+                .attr('data-style-old', $(this).attr('data-value'))
+                .addClass($(this).attr('data-value'));
 
             // var input= $(this).find('input')
             // input.attr('name',input.attr('data-key')).val(input.attr('data-value'));
@@ -315,6 +315,7 @@ console.log(1);
     }
     $('body').on('change','.magic-modal-select-variations',function () {
        var id=$(this).val();
+        $('#select-unit-item-button').attr('data-value',id);
        $('body').find('.magic-modal-iframe').attr('src','/admin/uploads/gears/settings-iframe/'+id).contentWindow.location.reload(true);
     });
 $('body').on('click','.clean-bb-button',function () {

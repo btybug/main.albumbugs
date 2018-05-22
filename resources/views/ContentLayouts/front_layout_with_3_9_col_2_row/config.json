@@ -25,6 +25,12 @@
     ]
   },
   "placeholders": {
+    "general": {
+      "type": "unit",
+      "tag": "general",
+      "title": "General",
+      "s" : true
+    },
     "left_bar": {
       "type": "unit",
       "tag": "left_bar",
@@ -36,12 +42,15 @@
       "type": "unit",
       "tag": "breadcrumb",
       "title": "Top Right",
-      "f" : true
+      "f" : true,
+      "s" : true
     } ,
     "main_right": {
       "type": "unit",
       "tag": "breadcrumb",
       "title": "Main Right"
+      "f" : true,
+      "s" : true
     }
   },
   "folder": "front_layout_with_3_9_col_2_row",

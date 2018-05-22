@@ -21,55 +21,33 @@
                     <div class="col-xs-3">
                         <div class="left">
                             <ul>
-                                <li>
-                                    <div>
-                                        <span class="left-li">Left Bar </span>
-                                        <div class="button">
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-warning">F</a>
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-info">S</a>
-                                        </div>
+                                @isset($model->placeholders)
+                                    @foreach($model->placeholders as $key => $placeholder)
+                                        <li>
+                                            <div>
+                                                <span class="left-li">{{ $placeholder['title'] }} </span>
+                                                <div class="button">
+                                                    @isset($placeholder['f'])
+                                                        <a href="javascript:void(0)" data-key="{{ $key }}" data-type="f" class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                    @endisset
 
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="left-li">Middle Area</span>
-                                        <div class="button">
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-info">S</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="left-li">Right Bar </span>
-                                        <div class="button">
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-warning">F</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="left-li">Somthing else</span>
-                                    </div>
-                                </li>
+                                                    @isset($placeholder['s'])
+                                                            <a href="javascript:void(0)" data-key="{{ $key }}" data-type="s" class="btn btn-sm btn-info action-placeholder">S</a>
+                                                    @endisset
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endisset
                             </ul>
                         </div>
                     </div>
                     <div class="col-xs-9">
                         <div class="right">
-                            <form class="form-horizontal" action="">
-                                <div class="form-group">
-                                        <label class="control-label col-sm-2">Select Data</label>
-                                        <div class="col-sm-10">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                            </select>
-                                        </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </form>
+                            {!! Form::model($model,['id'=>'add_custome_page']) !!}
+                                @include($settingsHtml)
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

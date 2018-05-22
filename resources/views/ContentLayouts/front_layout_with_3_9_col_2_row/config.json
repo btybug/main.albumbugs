@@ -28,12 +28,15 @@
     "left_bar": {
       "type": "unit",
       "tag": "left_bar",
-      "title": "Left Sidebar"
+      "title": "Left Sidebar",
+      "f" : true,
+      "s" : true
     },
     "top_right": {
       "type": "unit",
       "tag": "breadcrumb",
-      "title": "Top Right"
+      "title": "Top Right",
+      "f" : true
     } ,
     "main_right": {
       "type": "unit",

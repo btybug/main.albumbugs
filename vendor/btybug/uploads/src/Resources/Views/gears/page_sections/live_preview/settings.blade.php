@@ -169,7 +169,7 @@
     @stack('css')
 @stop
 @section('JS')
-    {!! HTML::script("public/js/UiElements/bb_styles.js?v=1") !!}
+    {!! HTML::script("public/js/UiElements/bb_styles.js?v=".rand(999.9999)) !!}
     {!! HTML::script("public/js/UiElements/bb_div.js") !!}
     {!! HTML::script("public/js/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js") !!}
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js") !!}

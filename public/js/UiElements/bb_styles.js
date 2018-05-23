@@ -351,4 +351,20 @@ $('body').on('click','.clean-bb-button',function () {
             }
         });
     });
+
+
+    $('[data-responsiveview]').click(function(){
+        $('[data-responsiveview]').removeClass('active')
+        $(this).addClass('active')
+        var getsize = $(this).data('responsiveview')
+        var getmode = $(this).data('mode')
+        $('#iframepreview').width(getsize)
+    })
+
+    $('[data-openresponsiveview="modal"]').click(function(){
+       var data=$('#page-sections-settings-area').find('form').serialize();
+        $('#iframepreview').attr('src','/admin/uploads/layouts/responsive/front_layout_with_3_9_col_2_row.default?'+data);
+        $('#view-responsives-modal').modal('show')
+    });
+
 });

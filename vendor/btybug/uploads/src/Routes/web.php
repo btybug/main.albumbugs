@@ -94,6 +94,7 @@ Route::group(['prefix' => 'layouts'], function () {
     Route::get('/remove-layout', 'PageSectionsController@removeLayout', true)->name('remove-layout');
     Route::post('/settings/options', 'PageSectionsController@postOptions')->name('uploads_settings_options');
     Route::get('/settings/{slug}', 'PageSectionsController@getSettings', true)->name('uploads_layouts_settings');
+    Route::get('/responsive/{slug}', 'PageSectionsController@getSettingsResponsive', true)->name('uploads_layouts_responsive');
     Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout', true)->name('create_variation_for_layout');
     Route::get('/variations/{slug}', 'PageSectionsController@getVariations', true)->name('uploads_layouts_variations');
     Route::post('/settings/{slug}/{save?}', 'PageSectionsController@postSettings');

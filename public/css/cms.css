@@ -15680,4 +15680,15 @@ div.d4{
     border:1px solid black;
 }
 
+.view-responsives-modal .modal-dialog { width:90%; }
+.view-responsives-modal .modal-content { border-radius:0; }
+.view-responsives-modal .modal-header { padding:0; position: relative; }
+.responsive-list-view {  background-color: #397688; margin-bottom: 0;  }
+.responsive-list-view li { float:left }
+.responsive-list-view li button { background-color: transparent; border:0; padding:15px 30px; display: block; height:51px; }
+.responsive-list-view li button.active { background-color:#1d4956; box-shadow:1px 0 10px rgba(0,0,0,0.21); }
+.view-responsives-modal .close { opacity:1; position: absolute; top:0; right:25px; }
+.desktop-text-view { background: url(../img/top-design-bg.png) repeat-y center 0; display: block; line-height:30px; clear:both; text-align:center }
+.view-responsives-modal .modal-body { text-align:center; }
+
 /***responsive***/

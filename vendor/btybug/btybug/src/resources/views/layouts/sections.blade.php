@@ -51,7 +51,7 @@
             {!! Form::select('copy_data',['' =>'Select Variation'] + BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control','id' => 'copy_data']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
-            <button class="btn btn-info" data-settingaction="responsive">Responsive</button>
+            <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>
             <button class="btn btn-danger" data-settingaction="console">Console</button>
             <button class="btn btn-info" data-settingaction="setting"> Setting</button>
             <button class="btn btn-success" data-settingaction="save"> Save</button>
@@ -72,6 +72,7 @@
 
 @include('resources::assests.stylesModal')
 @include('resources::assests.magicModal')
+@include('resources::assests.responsiveModal')
 <div class="modal fade" id="save-as-variation" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -98,11 +99,11 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <div class="previewlivesetting">
-    <div data-loadifram="preview">
+    <div id="page-preview-settings-area" data-loadifram="preview">
 
         @yield('content')
     </div>
-    <div>
+    <div id="page-sections-settings-area">
         @yield('settings')
     </div>
 </div>

@@ -228,67 +228,7 @@ foreach ($placeholdersData as $key => $datum) {
 
     @option('general','s',$data)
         <div class="col-md-12">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Main place holder</label>
-                </div>
-                <div class="col-md-8">
-                    {!! Form::select('main_placeholder',[null=>'Select Main Plaeholder']+$placeholders,null,['class'=>'form-control']) !!}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Main page style</label>
-                </div>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <div class="input-group-addon">Change</div>
-                        <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control"
-                               title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!"
-                               data-original-title="info">
-                        <div class="input-group-addon">
-                            <button type="button" class="BBbuttons" data-type="frontend">Change</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Select</label>
-                </div>
-                <div class="col-md-8">
-                    <select name="main_page_style" id="" class="form-control">
-                        {!! $container_styles !!}
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Right area style</label>
-                </div>
-                <div class="col-md-8">
-                    {!! BBstyles() !!}
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Select</label>
-                </div>
-                <div class="col-md-8">
-                    <select name="right_area_style" id="" class="form-control">
-                        {!! $container_styles !!}
-                    </select>
-                </div>
-            </div>
+         
         </div>
     @endoption
 </div>

@@ -9,9 +9,8 @@
 namespace Btybug\btybug\Models\Universal;
 
 
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\Support\Renderable;
 use File;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Collection;
 
 class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlable
@@ -25,6 +24,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
 
     public function __construct($obj, $hidden = true)
     {
+
         $this->view = $obj->getViewFile();
         $this->model = $obj;
         $this->path = $obj->getVariationsPath();
@@ -86,6 +86,16 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         }
         $this->items = collect($array);
         return $this;
+    }
+
+    public function default()
+    {
+        foreach ($this->all()->items as $variation) {
+
+            if ($variation->title == 'default' || $variation->title == 'default') {
+                return $variation;
+            }
+        }
     }
 
     public function find($id)

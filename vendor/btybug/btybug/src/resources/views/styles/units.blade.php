@@ -20,9 +20,19 @@
         </div>
         @endif
         <div class="col-md-9 modal-list-content builder-modalright modal-data-items">
-            <iframe class="magic-modal-iframe"  style="width: 100%; height: 100%;" src="javascrip:void(0)"></iframe>
+            @if(!isset($items))
+                @php
+                $default=$tpl->variations()->default();
+                @endphp
+
+            @else
+                @php
+                    $default=$items->default();
+                @endphp
+
+                @endif
+                <iframe class="magic-modal-iframe"  style="width: 100%; height: 100%;" src="{!! ($default)?url('/admin/uploads/gears/settings-iframe',$default->id):'javascript:void(0)'!!}"></iframe>
         <script type="template" id="magic-modal-options">
-            <option> Select Variation</option>
             @if(!isset($items))
                 @foreach($tpl->variations()->all() as $item)
                 <option value="{!! $item->id !!}"> {!! $item->title?$item->title:"no title" !!}</option>

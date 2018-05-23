@@ -43,22 +43,7 @@
                         @endswitch
                     </div>
                     <div class="{{(isset($settings['mr_style'])&& $settings['mr_style']) ? $settings['mr_style']: ''}} ">
-                        @switch(issetReturn($settings,'main_content_type'))
-                            @case('unit')
-                            @if(has_setting($settings,'main_unit'))
-                                {!! BBRenderUnits($settings['main_unit'],isset($settings['_page'])?['_page'=>$settings['_page']]:[]) !!}
-                            @endif
-                            @break
-
-                            @case('hook')
-                            @if(has_setting($settings,'hooks') && is_array($settings['hooks']['main_hook']))
-                                {!! BBrenderHook($settings['hooks']['main_hook']) !!}
-                            @endif
-                            @break
-
-                            @default
-                            <span>Something went wrong, please try again</span>
-                        @endswitch
+                        {!! main_content($variation,'main_unit') !!}
                     </div>
                 </div>
             </div>

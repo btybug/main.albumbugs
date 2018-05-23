@@ -226,11 +226,15 @@ dd(1);
                 $variation = $tpl->variations()->find($data['variation_id']);
 
                 if($tpl && $variation){
-                    return ['data' => $tpl->renderLive($variation->settings)];
+                    $settingsData = $variation->settings;
+                    $settingsData['variation'] = $variation;
+                    return ['data' => $tpl->renderLive($settingsData)];
                 }
             } else{
-
-                return ['data' => self::findByVariation($slug)->renderLive($data)];
+                $tpl = self::findByVariation($slug);
+                $variation = self::findVariation($slug);
+                $data['variation'] = $variation;
+                return ['data' => $tpl->renderLive($data)];
             }
         }
 
@@ -432,12 +436,13 @@ dd(1);
         $json = json_encode($settings, true);
         $settingsHtml = "ContentLayouts.$slug.$setting";
         $model = $this;
+        $usedIn = (isset($variation['used_in'])) ? BBgetFrontPage($variation['used_in']) : null;
         if ($this->autoinclude) {
             $html = $this->getAutoInclude()->getRender($settings, "ContentLayouts.$slug");
         } else {
-            $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $settings, '_this' => $this])->render();
+            $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $settings, '_this' => $this, 'variation' => $variables['variation']])->render();
         }
-        return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html', 'settings', 'data', 'variation']));
+        return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html', 'settings', 'data', 'variation', 'usedIn']));
     }
 
     /**
@@ -448,7 +453,8 @@ dd(1);
     {
         $slug = $this->folder;
         $layout = ($this->example) ? $this->example : $this->layout;
-        $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $variables, '_this' => $this])->render();
+        $variation = issetReturn($variables,'variation',null);
+        $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $variables, '_this' => $this,'variation' => $variation])->render();
         return $html;
     }
 

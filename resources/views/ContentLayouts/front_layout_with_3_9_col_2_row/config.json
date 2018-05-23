@@ -4,7 +4,6 @@
   "self_type": "page_sections",
   "type": "general",
   "version": 1,
-  "example":"demo",
   "descrition": "Base Layout",
   "layout": "main",
   "panel": "panel",
@@ -50,7 +49,8 @@
       "tag": "breadcrumb",
       "title": "Main Right",
       "f" : true,
-      "s" : true
+      "s" : true,
+      "main" : true
     }
   },
   "folder": "front_layout_with_3_9_col_2_row",

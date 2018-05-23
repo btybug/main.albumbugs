@@ -7,6 +7,7 @@
     <textarea type="hidden" class="hide" id="hidden_data" hidden>{!! $json !!}</textarea>
 
     <input type="hidden" id="layout_slug" value="{!! $model->slug !!}">
+    <input type="hidden" id="layout_variation" value="{!! @$variation->id  !!}">
     <div id="output-content" style="display: none"></div>
 @stop
 
@@ -36,7 +37,14 @@
                                                 <span class="left-li">{{ $placeholder['title'] }} </span>
                                                 <div class="button">
                                                     @isset($placeholder['f'])
-                                                        <a href="javascript:void(0)" data-key="{{ $key }}" data-type="f" class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                        @if($usedIn && isset($placeholder['main']))
+                                                            @if($usedIn->type == 'custom')
+                                                                <a href="javascript:void(0)" data-key="{{ $key }}" data-type="f" class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                            @endif
+                                                        @else
+                                                            <a href="javascript:void(0)" data-key="{{ $key }}" data-type="f" class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                        @endif
+
                                                     @endisset
 
                                                     @isset($placeholder['s'])

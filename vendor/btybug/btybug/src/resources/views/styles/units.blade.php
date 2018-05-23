@@ -31,6 +31,7 @@
                 @endphp
 
                 @endif
+            <input type="hidden" class="tpl-default-variation" value="{!! ($default)?$default->id:null !!}">
                 <iframe class="magic-modal-iframe"  style="width: 100%; height: 100%;" src="{!! ($default)?url('/admin/uploads/gears/settings-iframe',$default->id):'javascript:void(0)'!!}"></iframe>
         <script type="template" id="magic-modal-options">
             @if(!isset($items))

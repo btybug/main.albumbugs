@@ -15681,7 +15681,9 @@ div.d4{
 }
 
 .view-responsives-modal .modal-dialog { width:90%; }
-.view-responsives-modal .modal-content { border-radius:0; }
+.view-responsives-modal .modal-content {
+    border-radius:0;
+}
 .view-responsives-modal .modal-header { padding:0; position: relative; }
 .responsive-list-view {  background-color: #397688; margin-bottom: 0;  }
 .responsive-list-view li { float:left }
@@ -15690,5 +15692,18 @@ div.d4{
 .view-responsives-modal .close { opacity:1; position: absolute; top:0; right:25px; }
 .desktop-text-view { background: url(../img/top-design-bg.png) repeat-y center 0; display: block; line-height:30px; clear:both; text-align:center }
 .view-responsives-modal .modal-body { text-align:center; }
+.view-responsives-modal .rotate-icon i{
+    transform: rotate(90deg);
+}
+.view-responsives-modal .responsive-list-view i{
+    color: white;
+    font-size: 22px;
+}
+.view-responsives-modal .modal-body{
+    min-height: 500px;
+}
+.view-responsives-modal .modal-body .ifreampreviewcontainr ,.view-responsives-modal .modal-body .ifreampreviewcontainr iframe{
+    min-height: inherit;
+}
 
 /***responsive***/

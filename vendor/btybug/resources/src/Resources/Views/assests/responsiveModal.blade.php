@@ -5,19 +5,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <i class="icon-close-red"></i> </button>
                 <ul class="list-unstyled responsive-list-view clearfix">
                     <li>
-                        <button type="button" class="active" data-responsiveview="1800" data-mode="desktop"><i class="icon iconDesktop"></i></button>
+                        <button type="button" class="active" data-responsiveview="1800" data-mode="desktop"><i class="fa fa-desktop"></i></button>
+                    </li>
+                    <li class="rotate-icon">
+                        <button type="button" data-responsiveview="1024" data-mode="tablet"><i class="fa fa-tablet"></i></button>
                     </li>
                     <li>
-                        <button type="button" data-responsiveview="1024" data-mode="tablet"><i class="icon ipadView"></i></button>
+                        <button type="button " data-responsiveview="800" data-mode="tabletportrait"><i class="fa fa-tablet"></i></button>
+                    </li>
+                    <li class="rotate-icon">
+                        <button type="button" data-responsiveview="680" data-mode="mobile"><i class="fa fa-mobile"></i></button>
                     </li>
                     <li>
-                        <button type="button " data-responsiveview="800" data-mode="tabletportrait"><i class="icon portraitIpadView"></i></button>
-                    </li>
-                    <li>
-                        <button type="button" data-responsiveview="680" data-mode="mobile"><i class="icon landscapeMobileIpadView"></i></button>
-                    </li>
-                    <li>
-                        <button type="button" data-responsiveview="400" data-mode="mobileportrait"><i class="icon mobileView"></i></button>
+                        <button type="button" data-responsiveview="400" data-mode="mobileportrait"><i class="fa fa-mobile"></i></button>
                     </li>
 
                 </ul>

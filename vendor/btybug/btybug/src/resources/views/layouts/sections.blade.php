@@ -51,6 +51,7 @@
             {!! Form::select('copy_data',['' =>'Select Variation'] + BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control','id' => 'copy_data']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
+            <button class="btn btn-info" data-settingaction="responsive">Responsive</button>
             <button class="btn btn-danger" data-settingaction="console">Console</button>
             <button class="btn btn-info" data-settingaction="setting"> Setting</button>
             <button class="btn btn-success" data-settingaction="save"> Save</button>

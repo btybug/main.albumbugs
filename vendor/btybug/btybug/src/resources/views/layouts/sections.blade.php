@@ -90,7 +90,7 @@
     {{--{!! Form::close() !!}--}}
 </div>
 
-@include('resources::assests.stylesModal')
+{{--@include('resources::assests.stylesModal')--}}
 @include('resources::assests.magicModal')
 <div class="modal fade" id="save-as-variation" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

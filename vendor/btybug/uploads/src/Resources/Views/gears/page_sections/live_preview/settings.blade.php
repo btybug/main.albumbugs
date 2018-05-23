@@ -22,11 +22,17 @@
                 <div class="row">
                     <div class="col-xs-3">
                         <div class="left">
-                            <ul>
+                            <ul id="placeholders-render-list-main-box-bty">
                                 @isset($model->placeholders)
                                     @foreach($model->placeholders as $key => $placeholder)
                                         <li>
-                                            <div class="item">
+                                            <div class="item action-placeholder" data-key="{{ $key }}"
+                                                 @if(isset($placeholder['f']))
+                                                    data-type="f"
+                                                 @elseif(isset($placeholder['s']))
+                                                    data-type="s"
+                                                @endif
+                                             >
                                                 <span class="left-li">{{ $placeholder['title'] }} </span>
                                                 <div class="button">
                                                     @isset($placeholder['f'])
@@ -46,8 +52,9 @@
                         </div>
                     </div>
                     <div class="col-xs-9">
-                        <div class="right">
+                        <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($model,['id'=>'add_custome_page']) !!}
+                                <h3 id="main-box-title"></h3>
                                 <div class="settings-place">
                                     @include($settingsHtml)
                                 </div>

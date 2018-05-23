@@ -27,7 +27,7 @@
             </div>
             <div class="modal-body">
                 <div class="ifreampreviewcontainr text-center">
-                    <iframe id="iframepreview" class="iframepreview123 iframeView" src="/admin"></iframe>
+                    <iframe id="iframepreview" class="iframepreview123 iframeView" src="javascript:void(0)"></iframe>
                 </div>
             </div>
         </div>

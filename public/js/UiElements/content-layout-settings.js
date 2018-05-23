@@ -19,14 +19,9 @@ $(document).ready(function () {
     });
     
     $('#right-settings-main-box-bty').on('change', 'select', function () {
-        if($(this).attr('id') != 'copy_data'){
             evens($(this));
-        }else{
-            if($(this).val() != '' && $(this).val() != undefined){
-                load_variation({"variation_id" : $(this).val(),"copy_data":true});
-            }
-        }
     });
+
     $('#right-settings-main-box-bty').on('click', 'input[type="radio"]', function () {
         evens($(this));
     });
@@ -224,6 +219,11 @@ $(document).ready(function () {
 
 	$('.fullheight').addClass('editplaceholders');
 
+	$('body').on('change', '#copy_data', function () {
+        if($(this).val() != '' && $(this).val() != undefined){
+            load_variation({"variation_id" : $(this).val(),"copy_data":true});
+        }
+    });
 
     $('#placeholders-render-list-main-box-bty').on('click','.action-placeholder',  function(e){
         if (e.target !== this)

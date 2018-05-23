@@ -26,7 +26,7 @@
                                 @isset($model->placeholders)
                                     @foreach($model->placeholders as $key => $placeholder)
                                         <li>
-                                            <div>
+                                            <div class="item">
                                                 <span class="left-li">{{ $placeholder['title'] }} </span>
                                                 <div class="button">
                                                     @isset($placeholder['f'])
@@ -166,13 +166,14 @@
             transition: 0.5s ease;
         }
 
-        .settings-bottom .content .left ul li > div:hover {
-            background-color: #fff;
+        .settings-bottom .content .left ul li > div:hover, .item.hover-cl {
+            background-color: #fff !important;
             color: black;
         }
         .closeCSSEditor.top-show i{
             transform: rotate(180deg);
         }
+
     </style>
     @yield('CSS')
     @stack('css')

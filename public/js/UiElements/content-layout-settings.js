@@ -244,5 +244,7 @@ $(document).ready(function () {
                 }
             }
         });
+        $('.settings-bottom .content .left .item').removeClass('hover-cl');
+        $(this).closest('.item').addClass('hover-cl');
     });
 });

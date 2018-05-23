@@ -175,7 +175,7 @@ console.log(1);
                 .addClass('btn-info');
             $(this).removeClass('btn-info')
             $(this).addClass('btn-primary').addClass('active');
-            $("input[data-name='" + BBbutton.attr("data-key") + "']").val($(this).attr('data-value')).trigger('change');
+            $("input[data-name='" + BBbutton.attr("data-key") + "']").val($(this).attr('data-value')).trigger('input');
             $('#magic-settings span[aria-hidden=true]').click();
 
             $('[data-bbplace="' + BBbutton.attr('data-key') + '"]')

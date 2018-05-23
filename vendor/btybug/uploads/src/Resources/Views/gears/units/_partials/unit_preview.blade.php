@@ -1,6 +1,5 @@
 <head>
     {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
-    {!! HTML::script("public/js/bootstrap.js?v=".rand('1111','9999')) !!}
     {!! BBCss()  !!}
     {!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
     {!! HTML::style("public/js/jquery-ui/jquery-ui.min.css") !!}

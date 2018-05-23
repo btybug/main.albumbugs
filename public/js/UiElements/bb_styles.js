@@ -276,7 +276,7 @@ console.log(1);
 
     $('body').on('click', '.BBbuttons', function () {
         var $button = $(this);
-        $('body').on('change', 'input[data-name=' + $button.data('key') + ']', function () {
+        $('body').on('input', 'input[data-name=' + $button.data('key') + ']', function () {
             getBBbuttonData($(this).val(), $button.attr('data-action'), $button.data('key'));
         });
     });

@@ -88,7 +88,7 @@ function BBRenderPageSections($variation_id, $source = [], $main_view = null)
         $content_layout = $slug[0];
         $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($content_layout);
         if (!is_null($section)) {
-            $variation = $section->variations(false)->find($variation_id);
+            $variation = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($variation_id);
             if (!is_null($variation)) {
                 return $variation->render($source);
             }

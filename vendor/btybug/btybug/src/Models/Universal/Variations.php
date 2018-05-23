@@ -40,7 +40,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         \View::addLocation($this->model->getPath());
         \View::addNamespace($slug, $this->model->getPath());
         $variables = $this->mixer($additionalSettings);
-        return \View::make("$slug::$tpl")->with('settings', $variables)->with(['tplPath' => $path, '_this' => $this->model])->render();
+        return \View::make("$slug::$tpl")->with('settings', $variables)->with('variation', $this)->with(['tplPath' => $path, '_this' => $this->model])->render();
     }
 
     private function mixer($liveSettings)

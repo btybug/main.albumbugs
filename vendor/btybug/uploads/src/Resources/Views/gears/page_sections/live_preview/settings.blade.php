@@ -29,26 +29,31 @@
                                         <li>
                                             <div class="pl-item action-placeholder" data-key="{{ $key }}"
                                                  @if(isset($placeholder['f']))
-                                                    data-type="f"
+                                                 data-type="f"
                                                  @elseif(isset($placeholder['s']))
-                                                    data-type="s"
-                                                @endif
-                                             >
+                                                 data-type="s"
+                                                    @endif
+                                            >
                                                 <span class="left-li">{{ $placeholder['title'] }} </span>
                                                 <div class="button">
                                                     @isset($placeholder['f'])
                                                         @if($usedIn && isset($placeholder['main']))
                                                             @if($usedIn->type == 'custom')
-                                                                <a href="javascript:void(0)" data-key="{{ $key }}" data-type="f" class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                                <a href="javascript:void(0)" data-key="{{ $key }}"
+                                                                   data-type="f"
+                                                                   class="btn btn-sm btn-warning action-placeholder">F</a>
                                                             @endif
                                                         @else
-                                                            <a href="javascript:void(0)" data-key="{{ $key }}" data-type="f" class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                            <a href="javascript:void(0)" data-key="{{ $key }}"
+                                                               data-type="f"
+                                                               class="btn btn-sm btn-warning action-placeholder">F</a>
                                                         @endif
 
                                                     @endisset
 
                                                     @isset($placeholder['s'])
-                                                            <a href="javascript:void(0)" data-key="{{ $key }}" data-type="s" class="btn btn-sm btn-info action-placeholder">S</a>
+                                                        <a href="javascript:void(0)" data-key="{{ $key }}" data-type="s"
+                                                           class="btn btn-sm btn-info action-placeholder">S</a>
                                                     @endisset
                                                 </div>
 
@@ -62,8 +67,8 @@
                     <div class="col-xs-9">
                         <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($model,['id'=>'add_custome_page']) !!}
-                                <h3 id="main-box-title"></h3>
-                                @include($settingsHtml)
+                            <h3 id="main-box-title"></h3>
+                            @include($settingsHtml)
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -93,6 +98,7 @@
             padding: 15px;
             color: white;
             background-color: #090909;
+            cursor: n-resize;
         }
 
         .settings-bottom .head a {
@@ -158,8 +164,14 @@
             background-color: #fff !important;
             color: black;
         }
-        .closeCSSEditor.top-show i{
+
+        .closeCSSEditor.top-show i {
             transform: rotate(180deg);
+        }
+
+        .settings-bottom .content > .container-fluid, .settings-bottom .content > .container-fluid > .row, .settings-bottom .content > .container-fluid > .row > [class*="col-"],
+        .settings-bottom .content > .container-fluid > .row > [class*="col-"] > div {
+            height: 100%;
         }
 
     </style>
@@ -170,6 +182,7 @@
     {!! HTML::script("public/js/UiElements/bb_styles.js?v=".rand(999,9999)) !!}
     {!! HTML::script("public/js/UiElements/bb_div.js") !!}
     {!! HTML::script("public/js/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js") !!}
+    {!! HTML::script("public/js/jquery-ui/jquery-ui.js") !!}
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js") !!}
     {!! HTML::script("https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js") !!}
 
@@ -186,7 +199,24 @@
                     $(this).addClass('top-show')
                 }
 
-            })
+            });
+            $('.settings-bottom').draggable({
+                cursor: 'n-resize',
+                axis: 'y',
+//                containment: 'body',
+                start: function () {
+                    $(this).find('.content').height('calc(100% - 50px)');
+                    $(this).find('.content').removeClass('hide');
+                     $(this).find('.closeCSSEditor').on('click',function () {
+                         $(this).closest('.settings-bottom').attr('style','');
+                     })
+
+                },
+                stop: function () {
+                    $(this).find('.content').height('calc(100% - 50px)');
+                    $(this).find('.content').removeClass('hide');
+                }
+            });
         });
     </script>
 @stop

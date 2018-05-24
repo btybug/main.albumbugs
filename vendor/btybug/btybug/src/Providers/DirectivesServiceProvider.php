@@ -39,6 +39,11 @@ class DirectivesServiceProvider extends ServiceProvider
         });
     }
 
+    public static function stripQuotes($expression)
+    {
+        return str_replace("'", '', $expression);
+    }
+
     /**
      * Register any application services.
      *

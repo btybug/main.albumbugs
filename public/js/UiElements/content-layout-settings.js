@@ -229,14 +229,14 @@ $(document).ready(function () {
         if (e.target !== this)
             return;
 
-        $('.settings-bottom .content .left .item').removeClass('hover-cl');
-        $(this).closest('.item').addClass('hover-cl');
+        $('.settings-bottom .content .left .pl-item').removeClass('hover-cl');
+        $(this).closest('.pl-item').addClass('hover-cl');
 
         var key = $(this).data('key');
         var type = $(this).data('type');
         if(type != undefined){
             var data = $('form').serialize();
-            data += '&key=' + key + '&type=' + type + '&slug=' + $("#layout_slug").val();
+            data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val();
             $.ajax({
                 type: "post",
                 datatype: "json",
@@ -247,19 +247,17 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (!data.error) {
+                        $('#right-settings-main-box-bty').html(data.html);
                         if(type == 'f'){
-                            $('#main-box-title').html('Functions');
+                            $('#right-settings-main-box-bty #main-box-title').html('Functions');
                         }else{
-                            $('#main-box-title').html('Styles');
+                            $('#right-settings-main-box-bty #main-box-title').html('Styles');
                         }
-
-                        $('.settings-place').html(data.html);
                         $('.fullheight').addClass('editplaceholders');
                         tinymceeditor()
                     }
                 }
             });
         }
-
     });
 });

@@ -27,7 +27,7 @@
                                 @isset($model->placeholders)
                                     @foreach($model->placeholders as $key => $placeholder)
                                         <li>
-                                            <div class="item action-placeholder" data-key="{{ $key }}"
+                                            <div class="pl-item action-placeholder" data-key="{{ $key }}"
                                                  @if(isset($placeholder['f']))
                                                     data-type="f"
                                                  @elseif(isset($placeholder['s']))
@@ -63,9 +63,7 @@
                         <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($model,['id'=>'add_custome_page']) !!}
                                 <h3 id="main-box-title"></h3>
-                                <div class="settings-place">
-                                    @include($settingsHtml)
-                                </div>
+                                @include($settingsHtml)
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -156,7 +154,7 @@
             transition: 0.5s ease;
         }
 
-        .settings-bottom .content .left ul li > div:hover, .item.hover-cl {
+        .settings-bottom .content .left ul li > div:hover, .pl-item.hover-cl {
             background-color: #fff !important;
             color: black;
         }

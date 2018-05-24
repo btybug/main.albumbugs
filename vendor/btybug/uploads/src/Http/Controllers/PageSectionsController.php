@@ -189,13 +189,18 @@ class PageSectionsController extends Controller
 
     public function postOptions(Request $request)
     {
-        $model = ContentLayouts::find($request->slug);
+        $model = ContentLayouts::find($request->bb_slug);
         if ($model) {
             $settingsHtml = "ContentLayouts.$model->folder.settings";
-            $html = \view($settingsHtml)->with([
+            $settings = $request->except('key', 'type');
+            $data = $request->only('key', 'type');
+            $preview = \view($settingsHtml)->with([
                 'model' => $model,
-                'settings' => $request->except('key', 'type'),
-                'data' => $request->only('key', 'type')])->render();
+                'settings' => $settings,
+                'data' => $data])->render();
+
+
+            $html = \View('uploads::gears.page_sections._partials.right_box',compact(['model','preview','settings','data']))->with('variation',$request->get('bb_variation'))->render();
             return response()->json([
                 'html' => $html,
                 'error' => false

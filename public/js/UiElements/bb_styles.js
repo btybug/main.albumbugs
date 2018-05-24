@@ -314,7 +314,7 @@ console.log(1);
     $('body').on('change','.magic-modal-select-variations',function () {
        var id=$(this).val();
         $('#select-unit-item-button').attr('data-value',id);
-       $('body').find('.magic-modal-iframe').attr('src','/admin/uploads/gears/settings-iframe/'+id).contentWindow.location.reload(true);
+       $('body').find('.magic-modal-iframe').attr('src','/admin/uploads/gears/settings-iframe/'+id);
     });
 $('body').on('click','.clean-bb-button',function () {
    var slug= $(this).data('id');

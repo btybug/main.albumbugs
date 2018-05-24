@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row row-no-gutter {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : 'div-flex'}}">
-        <div class="col-md-3 col-sm-3 col-xs-12 ">
+        <div class="{!! issetReturn($settings,'ls_desktop').' '.issetReturn($settings,'ls_l_table').' '.issetReturn($settings,'ls_p_table').' '.issetReturn($settings,'ls_mobile')!!}">
             <div class=" default-column {{(isset($settings['ls_style'])&& $settings['ls_style'] ) ? $settings['ls_style'] : 'demo-column'}}">
                 <div>
                     @switch(issetReturn($settings,'ls_content_type'))
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9 col-sm-9 col-xs-12 ">
+        <div class="{!! issetReturn($settings,'rc_desktop').' '.issetReturn($settings,'rc_l_table').' '.issetReturn($settings,'rc_p_table').' '.issetReturn($settings,'rc_mobile')!!}">
             <div class="default-column  {{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
                 <div>
                     <div class="{{(isset($settings['tr_style'])&& $settings['tr_style']) ? $settings['tr_style'] : 'demo-column'}} ">

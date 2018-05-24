@@ -254,67 +254,67 @@ foreach ($placeholdersData as $key => $datum) {
                 </div>
                 <div class="col-sm-10">
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="ls_desktop"  class="form-control">
+                            <option value="col-lg-1" >1</option>
+                            <option value="col-lg-2" >2</option>
+                            <option value="col-lg-3" >3</option>
+                            <option value="col-lg-4" >4</option>
+                            <option value="col-lg-5" >5</option>
+                            <option value="col-lg-6" >6</option>
+                            <option value="col-lg-7" >7</option>
+                            <option value="col-lg-8" >8</option>
+                            <option value="col-lg-9" >9</option>
+                            <option value="col-lg-10" >10</option>
+                            <option value="col-lg-11" >11</option>
+                            <option value="col-lg-12" >12</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="ls_l_table"  class="form-control">
+                            <option value="col-md-1" >1</option>
+                            <option value="col-md-2" >2</option>
+                            <option value="col-md-3" >3</option>
+                            <option value="col-md-4" >4</option>
+                            <option value="col-md-5" >5</option>
+                            <option value="col-md-6" >6</option>
+                            <option value="col-md-7" >7</option>
+                            <option value="col-md-8" >8</option>
+                            <option value="col-md-9" >9</option>
+                            <option value="col-md-10" >10</option>
+                            <option value="col-md-11" >11</option>
+                            <option value="col-md-12" >12</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="ls_p_table"  class="form-control">
+                            <option value="col-sm-1" >1</option>
+                            <option value="col-sm-2" >2</option>
+                            <option value="col-sm-3" >3</option>
+                            <option value="col-sm-4" >4</option>
+                            <option value="col-sm-5" >5</option>
+                            <option value="col-sm-6" >6</option>
+                            <option value="col-sm-7" >7</option>
+                            <option value="col-sm-8" >8</option>
+                            <option value="col-sm-9" >9</option>
+                            <option value="col-sm-10" >10</option>
+                            <option value="col-sm-11" >11</option>
+                            <option value="col-sm-12" >12</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="ls_mobile"  class="form-control">
+                            <option value="col-xs-1" >1</option>
+                            <option value="col-xs-2" >2</option>
+                            <option value="col-xs-3" >3</option>
+                            <option value="col-xs-4" >4</option>
+                            <option value="col-xs-5" >5</option>
+                            <option value="col-xs-6" >6</option>
+                            <option value="col-xs-7" >7</option>
+                            <option value="col-xs-8" >8</option>
+                            <option value="col-xs-9" >9</option>
+                            <option value="col-xs-10" >10</option>
+                            <option value="col-xs-11" >11</option>
+                            <option value="col-xs-12" >12</option>
                         </select>
                     </div>
                 </div>
@@ -326,67 +326,67 @@ foreach ($placeholdersData as $key => $datum) {
                 </div>
                 <div class="col-sm-10">
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="rc_desktop"  class="form-control">
+                            <option value="col-lg-1" >1</option>
+                            <option value="col-lg-2" >2</option>
+                            <option value="col-lg-3" >3</option>
+                            <option value="col-lg-4" >4</option>
+                            <option value="col-lg-5" >5</option>
+                            <option value="col-lg-6" >6</option>
+                            <option value="col-lg-7" >7</option>
+                            <option value="col-lg-8" >8</option>
+                            <option value="col-lg-9" >9</option>
+                            <option value="col-lg-10" >10</option>
+                            <option value="col-lg-11" >11</option>
+                            <option value="col-lg-12" >12</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="rc_l_table"  class="form-control">
+                            <option value="col-md-1" >1</option>
+                            <option value="col-md-2" >2</option>
+                            <option value="col-md-3" >3</option>
+                            <option value="col-md-4" >4</option>
+                            <option value="col-md-5" >5</option>
+                            <option value="col-md-6" >6</option>
+                            <option value="col-md-7" >7</option>
+                            <option value="col-md-8" >8</option>
+                            <option value="col-md-9" >9</option>
+                            <option value="col-md-10" >10</option>
+                            <option value="col-md-11" >11</option>
+                            <option value="col-md-12" >12</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="rc_p_table"  class="form-control">
+                            <option value="col-sm-1" >1</option>
+                            <option value="col-sm-2" >2</option>
+                            <option value="col-sm-3" >3</option>
+                            <option value="col-sm-4" >4</option>
+                            <option value="col-sm-5" >5</option>
+                            <option value="col-sm-6" >6</option>
+                            <option value="col-sm-7" >7</option>
+                            <option value="col-sm-8" >8</option>
+                            <option value="col-sm-9" >9</option>
+                            <option value="col-sm-10" >10</option>
+                            <option value="col-sm-11" >11</option>
+                            <option value="col-sm-12" >12</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
+                        <select name="rc_mobile"  class="form-control">
+                            <option value="col-xs-1" >1</option>
+                            <option value="col-xs-2" >2</option>
+                            <option value="col-xs-3" >3</option>
+                            <option value="col-xs-4" >4</option>
+                            <option value="col-xs-5" >5</option>
+                            <option value="col-xs-6" >6</option>
+                            <option value="col-xs-7" >7</option>
+                            <option value="col-xs-8" >8</option>
+                            <option value="col-xs-9" >9</option>
+                            <option value="col-xs-10" >10</option>
+                            <option value="col-xs-11" >11</option>
+                            <option value="col-xs-12" >12</option>
                         </select>
                     </div>
                 </div>

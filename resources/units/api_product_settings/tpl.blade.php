@@ -2,6 +2,7 @@
 @php
     $params = \Request::route()->parameters();
     $client=null;
+    $product = null;
     $url='javascript::void(0)';
     if(isset($params['param'])){
         $clientId=$params['param'];
@@ -31,8 +32,8 @@
 <div id="data" class="tabcontent">
     <h3>Data Manage</h3>
     <div>
-        @if(View::exists(@$product->app->form_path))
-            @include(@$product->app->form_path)
+        @if($product && View::exists($product->app->form_path))
+            @include($product->app->form_path)
         @endif
     </div>
 </div>

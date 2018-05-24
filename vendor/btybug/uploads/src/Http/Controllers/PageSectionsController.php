@@ -28,7 +28,7 @@ class PageSectionsController extends Controller
     /**
      * SectionsController constructor.
      */
-    public function __construct()
+    public function __construct ()
     {
         $this->upload = new CmsItemUploader('page_sections');
     }
@@ -37,7 +37,7 @@ class PageSectionsController extends Controller
      * @param Request $request
      * @return View
      */
-    public function getIndex(Request $request)
+    public function getIndex (Request $request)
     {
         $slug = $request->get('p', 0);
         $currentPageSection = null;
@@ -56,10 +56,10 @@ class PageSectionsController extends Controller
         return view('uploads::gears.page_sections.index', compact(['pageSections', 'all_layouts', 'currentPageSection', 'variations', 'type']));
     }
 
-    public function getIndexFromPost(Request $request)
+    public function getIndexFromPost (Request $request)
     {
         $pageSections = json_decode($request->arr, true);
-        if (!count($pageSections)) {
+        if (! count($pageSections)) {
             $all_layouts = ContentLayouts::all()->get();
             $pageSections = ContentLayouts::all()->paginate(4, 4, 'bty-pagination-2');
         } else {
@@ -71,7 +71,7 @@ class PageSectionsController extends Controller
         return \Response::json(View::make('uploads::gears.page_sections._partials.page_section_variations', compact(['pageSections', 'all_layouts']))->render());
     }
 
-    public function getFrontend(Request $request)
+    public function getFrontend (Request $request)
     {
         $slug = $request->get('p', 0);
         $currentPageSection = null;
@@ -91,10 +91,10 @@ class PageSectionsController extends Controller
         return view('uploads::gears.page_sections.index', compact(['pageSections', 'all_layouts', 'currentPageSection', 'variations', 'type']));
     }
 
-    public function getFrontendFromPost(Request $request)
+    public function getFrontendFromPost (Request $request)
     {
         $pageSections = json_decode($request->arr, true);
-        if (!count($pageSections)) {
+        if (! count($pageSections)) {
             $all_layouts = ContentLayouts::all()->get();
             $pageSections = ContentLayouts::all()->paginate(4, 4, 'bty-pagination-2');
         } else {
@@ -106,7 +106,7 @@ class PageSectionsController extends Controller
         return \Response::json(View::make('uploads::gears.page_sections._partials.page_section_variations', compact(['pageSections', 'all_layouts']))->render());
     }
 
-    public function filterLayouts(Request $request)
+    public function filterLayouts (Request $request)
     {
         $date_from = $request->date_from;
         $date_to = $request->date_to;
@@ -132,10 +132,10 @@ class PageSectionsController extends Controller
     }
 
 
-    public function getVariations($slug)
+    public function getVariations ($slug)
     {
         $pageSection = ContentLayouts::find($slug);
-        if (!$pageSection) abort(404);
+        if (! $pageSection) abort(404);
         $variations = $pageSection->variations()->all();
         $used_in_variations = $pageSection->usedInVariations();
 
@@ -146,11 +146,12 @@ class PageSectionsController extends Controller
     /**
      * @param $slug
      */
-    public function getSettings($slug, Request $request)
+    public function getSettings ($slug, Request $request)
     {
         $settings = $request->all();
         if ($slug) {
             $view = ContentLayouts::renderLivePreview($slug, $settings);
+
             return $view ? $view : abort('404');
         } else {
             abort('404');
@@ -158,7 +159,7 @@ class PageSectionsController extends Controller
 
     }
 
-    public function createVariationForlayout($slug)
+    public function createVariationForlayout ($slug)
     {
         $unit = ContentLayouts::find($slug);
         $variation = $unit->variations()->createVariation([]);
@@ -170,24 +171,25 @@ class PageSectionsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postSettings(Request $request)
+    public function postSettings (Request $request)
     {
         $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
 
         return response()->json([
-            'url' => isset($output['id']) ? url('/admin/uploads/layouts/settings/' . $output['id']) : false,
+            'url'  => isset($output['id']) ? url('/admin/uploads/layouts/settings/' . $output['id']) : false,
             'html' => isset($output['data']) ? $output['data'] : false
         ]);
     }
 
-    public function getSettingsResponsive($slug, Request $request)
+    public function getSettingsResponsive ($slug, Request $request)
     {
         $output = ContentLayouts::savePageSectionSettings($slug, $request->itemname, $request->except(['_token', 'itemname']), false);
-        $html= isset($output['data']) ? $output['data'] : false;
-        return view('uploads::assets.responsive',compact('html'));
+        $html = isset($output['data']) ? $output['data'] : false;
+
+        return view('uploads::assets.responsive', compact('html'));
     }
 
-    public function postOptions(Request $request)
+    public function postOptions (Request $request)
     {
         $model = ContentLayouts::find($request->bb_slug);
         if ($model) {
@@ -195,14 +197,15 @@ class PageSectionsController extends Controller
             $settings = $request->except('key', 'type');
             $data = $request->only('key', 'type');
             $preview = \view($settingsHtml)->with([
-                'model' => $model,
+                'model'    => $model,
                 'settings' => $settings,
-                'data' => $data])->render();
+                'data'     => $data])->render();
 
 
-            $html = \View('uploads::gears.page_sections._partials.right_box',compact(['model','preview','settings','data']))->with('variation',$request->get('bb_variation'))->render();
+            $html = \View('uploads::gears.page_sections._partials.right_box', compact(['model', 'preview', 'settings', 'data']))->with('variation', $request->get('bb_variation'))->render();
+
             return response()->json([
-                'html' => $html,
+                'html'  => $html,
                 'error' => false
             ]);
         }
@@ -212,7 +215,7 @@ class PageSectionsController extends Controller
         ]);
     }
 
-    public function getConsole(Request $request)
+    public function getConsole (Request $request)
     {
         return dd($request->except('_token'));
     }
@@ -221,7 +224,7 @@ class PageSectionsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postDeleteVariation(Request $request)
+    public function postDeleteVariation (Request $request)
     {
         $result = false;
         if ($request->slug) {
@@ -235,7 +238,7 @@ class PageSectionsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postDelete(Request $request)
+    public function postDelete (Request $request)
     {
         $slug = $request->get('slug');
         $pageSection = ContentLayouts::find($slug);
@@ -250,7 +253,7 @@ class PageSectionsController extends Controller
      * @param Request $request
      * @return array|\Illuminate\Http\JsonResponse|string
      */
-    public function postUpload(Request $request)
+    public function postUpload (Request $request)
     {
         return $this->upload->run($request, 'frontend');
     }
@@ -259,7 +262,7 @@ class PageSectionsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postMakeActive(Request $request)
+    public function postMakeActive (Request $request)
     {
         $data = $request->all();
         $result = false;
@@ -267,7 +270,7 @@ class PageSectionsController extends Controller
             ContentLayouts::active()->makeInActive()->save();
             $page_section = ContentLayouts::find($data['slug']);
             if ($page_section) $result = $page_section->setAttributes("active", true)->save() ? false : true;
-            if (!ContentLayouts::activeVariation($data['slug'])) {
+            if (! ContentLayouts::activeVariation($data['slug'])) {
                 $main = $page_section->variations()[0];
                 $result = $main->setAttributes("active", true)->save() ? false : true;
             }
@@ -282,7 +285,7 @@ class PageSectionsController extends Controller
 
     }
 
-    public function removeLayout()
+    public function removeLayout ()
     {
         ContentLayouts::removeLayoutJson();
 

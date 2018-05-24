@@ -5,28 +5,29 @@
  * Date: 7/18/17
  * Time: 5:23 PM
  */
-function module_path($path = '')
+function module_path ($path = '')
 {
     return app()->basePath() . (DS . 'vendor' . DS . 'btybug') . ($path ? DS . $path : $path);
 }
 
-function BBaddShortcode($key, $function)
+function BBaddShortcode ($key, $function)
 {
     $codes = \Config::get('shortcode.extra', []);
     array_push($codes, [$key => $function]);
     \Config::set('shortcode.extra', $codes);
 }
 
-function BBGetAdminLoginUrl()
+function BBGetAdminLoginUrl ()
 {
     $adminPagesReopsitory = new \Btybug\Console\Repository\AdminPagesRepository();
     $adminLoginPage = $adminPagesReopsitory->findBy('slug', 'admin-login');
+
     return $adminLoginPage ? $adminLoginPage->url : '/admin/login';
 
 }
 
 
-function BBCheckMemberAccessEnabled()
+function BBCheckMemberAccessEnabled ()
 {
     $reg = BBCheckRegistrationEnabled();
     if ($reg) {
@@ -35,28 +36,30 @@ function BBCheckMemberAccessEnabled()
             return ($settings->val == "1");
         }
     }
+
     return false;
 }
 
-function BBCheckRegistrationEnabled()
+function BBCheckRegistrationEnabled ()
 {
     $settings = \Btybug\btybug\Models\Settings::where('settingkey', 'enable_registration')->first();
     if ($settings) {
         return ($settings->val) ? true : false;
     }
+
     return false;
 }
 
 
-function BBheader()
+function BBheader ()
 {
     $tpl = \Btybug\btybug\Models\Settings::where('section', 'setting_system')->where('settingkey', 'header_tpl')->first();
-    if ($tpl and !empty($tpl->val)) {
+    if ($tpl and ! empty($tpl->val)) {
         return BBRenderTpl($tpl->val);
     }
 }
 
-function BBRenderTpl($variation_id, $on_empty = null)
+function BBRenderTpl ($variation_id, $on_empty = null)
 {
     $slug = explode('.', $variation_id);
 
@@ -64,40 +67,43 @@ function BBRenderTpl($variation_id, $on_empty = null)
         $widget_id = $slug[0];
         $variationID = $slug[1];
         $widget = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
-        if (!is_null($widget)) {
+        if (! is_null($widget)) {
             $variation = $widget->variations()->find($variation_id);
-            if (!is_null($variation)) {
+            if (! is_null($variation)) {
                 $section = '';//$widget->section();
                 $settings = $variation->settings;
-                if ($widget->have_settings && !$settings) {
+                if ($widget->have_settings && ! $settings) {
                     return 'Settings are empty';
                 }
+
                 return $widget->render(compact(['variation', 'section', 'settings']));
             }
         }
+
         return 'Wrong widget';
     }
 
     return $on_empty;
 }
 
-function BBRenderPageSections($variation_id, $source = [], $main_view = null)
+function BBRenderPageSections ($variation_id, $source = [], $main_view = null)
 {
     $slug = explode('.', $variation_id);
     if (isset($slug[0]) && isset($slug[1])) {
         $content_layout = $slug[0];
         $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($content_layout);
-        if (!is_null($section)) {
+        if (! is_null($section)) {
             $variation = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($variation_id);
-            if (!is_null($variation)) {
+            if (! is_null($variation)) {
                 return $variation->render($source);
             }
         }
+
         return false;
     }
 }
 
-function BBRenderFrontLayout($page, $settings)
+function BBRenderFrontLayout ($page, $settings)
 {
     if ($page->parent_id) {
         $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
@@ -125,19 +131,21 @@ function BBRenderFrontLayout($page, $settings)
     return BBRenderPageSections($page->page_layout, $settings);
 }
 
-function BBgetFrontPage($idOrSlug)
+function BBgetFrontPage ($idOrSlug)
 {
     $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+
     return $forntPageRepository->model()->where('id', $idOrSlug)->orWhere('slug', $idOrSlug)->first();
 }
 
-function BBRenderPageBody($slug, $data = [], $main_view = null)
+function BBRenderPageBody ($slug, $data = [], $main_view = null)
 {
     $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::renderPageBody($slug, $data);
+
     return $section;
 }
 
-function BBdiv($key, $html, array $array = [])
+function BBdiv ($key, $html, array $array = [])
 {
 
     $atributes = ' ';
@@ -171,10 +179,11 @@ function BBdiv($key, $html, array $array = [])
         $array = 'data-array="true"';
     }
     $renderedUnit = BBRenderUnits($value);
+
     return '<div data-action="unit"' . ' data-key="' . $key . '" ' . $atributes . ' >' . (($renderedUnit) ? $renderedUnit : $html) . '</div><input class="bb-button-realted-hidden-input" type="hidden" ' . $array . ' value="' . $value . '" data-name="' . $key . '" name="' . $key . '">';
 }
 
-function BBDiv2($key, $tag, $html, $array = [])
+function BBDiv2 ($key, $tag, $html, $array = [])
 {
     $atributes = ' ';
     $value = '';
@@ -209,10 +218,11 @@ function BBDiv2($key, $tag, $html, $array = [])
     $data_key = str_replace('[]', '', $key);
 
     $renderedUnit = BBRenderUnits($value);
+
     return '<div data-action="unit"' . ' data-key="' . $data_key . '" ' . $atributes . ' >' . (($renderedUnit) ? $renderedUnit : $html) . '</div><input class="bb-button-realted-hidden-input" type="hidden" ' . $array . ' value="' . $value . '" data-name="' . $key . '" name="' . $key . '">';
 }
 
-function BBRenderSections($variation_id, $source = [])
+function BBRenderSections ($variation_id, $source = [])
 {
     if (is_array($variation_id)) {
         $variation_id = $variation_id['id'];
@@ -221,29 +231,31 @@ function BBRenderSections($variation_id, $source = [])
     if (isset($slug[0]) && isset($slug[1])) {
         $section_id = $slug[0];
         $section = \Btybug\btybug\Models\Templates\Sections::find($section_id);
-        if (!is_null($section)) {
+        if (! is_null($section)) {
             $variation = $section->findVariation($variation_id);
-            if (!is_null($variation)) {
+            if (! is_null($variation)) {
                 $settings = $variation->settings;
-                if ($section->have_settings && !$settings) {
+                if ($section->have_settings && ! $settings) {
                     $settings = [];
                 }
+
                 return $section->render(compact(['variation', 'settings', 'source']));
             }
         }
+
         return false;
     }
 }
 
-function BBfooter()
+function BBfooter ()
 {
     $tpl = \Btybug\btybug\Models\Settings::where('section', 'setting_system')->where('settingkey', 'footer_tpl')->first();
-    if ($tpl and !empty($tpl->val)) {
+    if ($tpl and ! empty($tpl->val)) {
         return BBRenderTpl($tpl->val);
     }
 }
 
-function BBRenderBackTpl($variation_id, $on_empty = null)
+function BBRenderBackTpl ($variation_id, $on_empty = null)
 {
     $slug = explode('.', $variation_id);
     if (isset($slug[0]) && isset($slug[1])) {
@@ -251,14 +263,15 @@ function BBRenderBackTpl($variation_id, $on_empty = null)
         $variationID = $slug[1];
 
         $widget = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
-        if (!is_null($widget)) {
+        if (! is_null($widget)) {
             $variation = $widget->variations()->find($variation_id);
-            if (!is_null($variation)) {
+            if (! is_null($variation)) {
                 $section = '';//$widget->section();
                 $settings = $variation->settings;
-                if ($widget->have_settings && !$settings) {
+                if ($widget->have_settings && ! $settings) {
                     return 'Settings are empty';
                 }
+
                 return $widget->render(compact(['variation', 'section', 'settings']));
             }
         }
@@ -269,16 +282,16 @@ function BBRenderBackTpl($variation_id, $on_empty = null)
     return $on_empty;
 }
 
-function BBleftBar()
+function BBleftBar ()
 {
     $tpl = \Btybug\btybug\Models\Settings::where('section', 'setting_system')->where('settingkey', 'backend_left_bar')->first();
 //    dd($tpl);
-    if ($tpl and !empty($tpl->val)) {
+    if ($tpl and ! empty($tpl->val)) {
         return BBRenderBackTpl($tpl->val);
     }
 }
 
-function BBheaderBack()
+function BBheaderBack ()
 {
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
 
@@ -292,7 +305,7 @@ function BBheaderBack()
     }
 }
 
-function BBfooterBack()
+function BBfooterBack ()
 {
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
 
@@ -306,7 +319,7 @@ function BBfooterBack()
     }
 }
 
-function main_content($variation = null, $section = null)
+function main_content ($variation = null, $section = null)
 {
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
     if ($page) {
@@ -315,19 +328,19 @@ function main_content($variation = null, $section = null)
         } else {
             return BBRenderUnits($page->template, ['_page' => $page]);
         }
-    }elseif(isset($variation['used_in'])){
+    } elseif (isset($variation['used_in'])) {
         $usedIn = BBgetFrontPage($variation['used_in']);
         if ($usedIn->content_type == "editor") {
             echo $usedIn->main_content;
         } else {
             return BBRenderUnits($usedIn->template, ['_page' => $usedIn]);
         }
-    }else{
+    } else {
         return BBRenderUnits($section);
     }
 }
 
-function BBgetPageLayout()
+function BBgetPageLayout ()
 {
 
     $route = \Request::route();
@@ -335,10 +348,11 @@ function BBgetPageLayout()
         if (isset($_GET['pl_live_settings']) && $_GET['pl_live_settings'] == 'page_live') {
             $layoutID = $_GET['pl'];
             $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($layoutID);
-            if (!$layout) return \Btybug\btybug\Models\ContentLayouts\ContentLayouts::defaultPageSection();
+            if (! $layout) return \Btybug\btybug\Models\ContentLayouts\ContentLayouts::defaultPageSection();
             $data = explode('.', $layoutID);
             $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($data[0]);
             dd(1);
+
             return 'ContentLayouts.' . $layout->folder . '.' . $layout->layout;
         }
     }
@@ -363,7 +377,7 @@ function BBgetPageLayout()
     }
 }
 
-function BBgetPageLayoutSettings()
+function BBgetPageLayoutSettings ()
 {
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
     if (isset($_GET['pl_live_settings']) && $_GET['pl_live_settings'] == 'page_live') {
@@ -373,7 +387,7 @@ function BBgetPageLayoutSettings()
         if ($live_page) {
             if ($live_page->settings && isset($_GET['variation'])) {
                 $page_settings = json_decode($live_page->settings, true);
-                if (!empty($page_settings)) $data = array_merge($page_settings, $data);
+                if (! empty($page_settings)) $data = array_merge($page_settings, $data);
             } else {
                 $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($data['pl']);
                 if ($layout) $data = array_merge($layout->settings, $data);
@@ -382,6 +396,7 @@ function BBgetPageLayoutSettings()
             $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($data['pl']);
             if ($layout) $data = array_merge($layout->settings, $data);
         }
+
         return $data;
     }
 
@@ -395,6 +410,7 @@ function BBgetPageLayoutSettings()
                 $mainSettings = array_merge($data, $layout->settings);
                 $json = '<input type="hidden" id="page_layout_settings_json" data-json=' . json_encode($mainSettings, true) . '>';
                 echo $json;
+
                 return $mainSettings;
             }
         } else {
@@ -408,16 +424,18 @@ function BBgetPageLayoutSettings()
                     $mainSettings = array_merge($data, $layout->settings);
                     $json = '<input type="hidden" id="page_layout_settings_json" data-json=' . json_encode($mainSettings, true) . '>';
                     echo $json;
+
                     return $mainSettings;
                 }
             }
         }
     }
+
     return ['options' => [], 'json' => json_encode([], true)];
 }
 
 //TODO Transver in Hooks package
-function BBscriptsHook()
+function BBscriptsHook ()
 {
     $codes = \Config::get('scripts', []);
     $scripts = '';
@@ -425,25 +443,26 @@ function BBscriptsHook()
     foreach ($codes as $key => $value) {
         $scripts .= HTML::script($value);
     }
+
     return $scripts;
 }
 
 //TODO Transver in Framework api.php
-function BBFrameworkJs()
+function BBFrameworkJs ()
 {
     return \Btybug\Framework\Models\Framework::activeJs();
 }
 
-if (!function_exists('BBGetUserName')) {
+if (! function_exists('BBGetUserName')) {
     /**
      * @param null $id
      * @return mixed|null|string
      */
-    function BBGetUserName($id = null)
+    function BBGetUserName ($id = null)
     {
         if ($id) {
             if ($user = \App\User::find($id)) {
-                if (!isset($user->profile)) {
+                if (! isset($user->profile)) {
                     return $user->username;
                 }
 
@@ -452,7 +471,7 @@ if (!function_exists('BBGetUserName')) {
             }
         } else {
             if (Auth::check()) {
-                if (!isset(Auth::user()->profile)) {
+                if (! isset(Auth::user()->profile)) {
                     return Auth::user()->username;
                 }
 
@@ -464,12 +483,12 @@ if (!function_exists('BBGetUserName')) {
     }
 }
 
-function BBAdminMenu($html = true)
+function BBAdminMenu ($html = true)
 {
 
     // Get json file
     $menu_array = \Config::get('admin_menus');
-    if (!$menu_array) {
+    if (! $menu_array) {
         $menu_json_file = file_get_contents(base_path('resources/menus/admin/1.json'));
         $menu_array = json_decode($menu_json_file, true);
     }
@@ -477,7 +496,7 @@ function BBAdminMenu($html = true)
     return ($html) ? BBAdminMenuWalker($menu_array) : $menu_array;
 }
 
-function BBAdminMenuWalker($menu_array)
+function BBAdminMenuWalker ($menu_array)
 {
 
     $menu = '';
@@ -521,23 +540,24 @@ function BBAdminMenuWalker($menu_array)
     return $menu;
 }
 
-function BBgetSiteLogo()
+function BBgetSiteLogo ()
 {
     $settingRepo = new Btybug\btybug\Repositories\AdminsettingRepository();
     $logo = $settingRepo->getSettings('setting_system', 'site_logo');
-    if (!$logo) return '';
+    if (! $logo) return '';
 
     return url('public/images/logo', $logo->val);
 }
 
-function BBgetSiteName()
+function BBgetSiteName ()
 {
     $settingRepo = new Btybug\btybug\Repositories\AdminsettingRepository();
     $name = $settingRepo->getSettings('setting_system', 'site_name');
+
     return $name->val;
 }
 
-function BBRenderUnits($variation_id, $source = [], $data = NULL)
+function BBRenderUnits ($variation_id, $source = [], $data = null)
 {
     $field = null;
     $cheked = null;
@@ -548,12 +568,12 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
         $variationID = $slug[1];
 
         $unit = \Btybug\btybug\Models\Painter\Painter::find($widget_id);
-        if (!is_null($unit)) {
+        if (! is_null($unit)) {
             $variation = $unit->variations(false)->find($variation_id);
-            if (!is_null($variation)) {
+            if (! is_null($variation)) {
                 $settings = $variation->settings;
 
-                if ($unit->have_settings && !$settings) {
+                if ($unit->have_settings && ! $settings) {
                     $settings = [];
                 }
 
@@ -568,6 +588,7 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
                     });
                     $settings = array_merge($settings, $liveSettings);
                 }
+
                 return $unit->render(compact(['variation', 'settings', 'source', 'field', 'cheked', 'data']));
             }
         }
@@ -577,13 +598,13 @@ function BBRenderUnits($variation_id, $source = [], $data = NULL)
 }
 
 //TODO transver in Avatar
-function plugins_path($path = null)
+function plugins_path ($path = null)
 {
     return rtrim(base_path(config('avatar.plugins.path') . DS . $path), '/');
 }
 
 //TODO transver in Manage
-function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 0)
+function hierarchyAdminPagesListFull ($data, $parent = true, $icon = true, $id = 0)
 {
     $output = '';
     // Loop through items
@@ -643,11 +664,12 @@ function hierarchyAdminPagesListFull($data, $parent = true, $icon = true, $id = 
             $output .= '</li>';
         }
     }
+
     // Return data tree
     return $output;
 }
 
-function BBGetTables()
+function BBGetTables ()
 {
     $tables = \DB::select('SHOW TABLES');
     $data = [];
@@ -662,7 +684,7 @@ function BBGetTables()
     return $data;
 }
 
-function BBGetTableColumn($table = null)
+function BBGetTableColumn ($table = null)
 {
     $data = [];
     if ($table && \Schema::hasTable($table)) {
@@ -677,7 +699,7 @@ function BBGetTableColumn($table = null)
     return $data;
 }
 
-function BBGetTableColumnData($table = null, $column = null)
+function BBGetTableColumnData ($table = null, $column = null)
 {
     $data = [];
     if ($table && \Schema::hasTable($table)) {
@@ -688,10 +710,11 @@ function BBGetTableColumnData($table = null, $column = null)
             }
         }
     }
+
     return $data;
 }
 
-function BBbutton($action, $key, $text, array $array = [])
+function BBbutton ($action, $key, $text, array $array = [])
 {
     $route = Request::route();
     if ($action == 'main_body' && $route->uri() == "admin/manage/structure/front-pages/page-preview/{id}") {
@@ -733,12 +756,13 @@ function BBbutton($action, $key, $text, array $array = [])
         $array = 'data-array="true"';
     }
     $data_key = str_replace('[]', '', $key);
+
     return '<button type="button" data-action=' . $action . ' data-key="' . $data_key . '" ' . $atributes . ' >'
         . $text . '</button><input class="bb-button-realted-hidden-input" type="hidden" '
         . $array . ' value="' . $value . '" data-name="' . $data_key . '" name="' . $hiddenName . '">';
 }
 
-function BBcustomize($type, $key, $tag, $text, $structure, $array = [])
+function BBcustomize ($type, $key, $tag, $text, $structure, $array = [])
 {
     $atributes = ' ';
     $value = '';
@@ -772,10 +796,11 @@ function BBcustomize($type, $key, $tag, $text, $structure, $array = [])
     }
     $data_key = str_replace('[]', '', $key);
     $html = View::make('btybug::bbcustomize', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName', 'structure'))->render();
+
     return $html;
 }
 
-function BBbutton2($type, $key, $tag, $text, $array = [], $getData = [])
+function BBbutton2 ($type, $key, $tag, $text, $array = [], $getData = [])
 {
     $atributes = ' ';
     $value = '';
@@ -809,21 +834,23 @@ function BBbutton2($type, $key, $tag, $text, $array = [], $getData = [])
     }
     $data_key = str_replace('[]', '', $key);
     $html = View::make('btybug::bbbutton', compact('type', 'data_key', 'atributes', 'text', 'array', 'value', 'hiddenName', 'getData'))->render();
+
     return $html;
 }
 
-function BBstyles()
+function BBstyles ()
 {
 
     $html = View::make('btybug::bbstyles')->render();
+
     return $html;
 }
 
-function BBgetDateFormat($date, $format = null)
+function BBgetDateFormat ($date, $format = null)
 {
-    if (!$date) null;
+    if (! $date) null;
 
-    if (!is_numeric($date))
+    if (! is_numeric($date))
         $date = strtotime($date);
 
     if ($format) {
@@ -850,9 +877,9 @@ function BBgetDateFormat($date, $format = null)
  * @param $time
  * @return bool|string
  */
-function BBgetTimeFormat($time)
+function BBgetTimeFormat ($time)
 {
-    if (!$time) null;
+    if (! $time) null;
 
     $settings = \DB::table('settings')->where('section', 'setting_system')->where(
         'settingkey',
@@ -873,7 +900,7 @@ function BBgetTimeFormat($time)
     return date("H:i", strtotime($time));
 }
 
-function BBField($data)
+function BBField ($data)
 {
     $fieldHtml = '';
     if (isset($data['slug'])) {
@@ -905,10 +932,11 @@ function BBField($data)
 
         }
     }
+
     return $fieldHtml;
 }
 
-function BBFieldHidden($data)
+function BBFieldHidden ($data)
 {
     $fieldHtml = '';
     if (isset($data['slug'])) {
@@ -923,9 +951,10 @@ function BBFieldHidden($data)
     return $fieldHtml;
 }
 
-function BBMasterFormsList()
+function BBMasterFormsList ()
 {
     $forms = new \Btybug\Console\Repository\FormsRepository();
+
     return $forms->getByTypeNewPluck()->toArray();
 }
 
@@ -933,7 +962,7 @@ function BBMasterFormsList()
  * @param null $id
  * @return URL|null|string
  */
-function BBGetUserCover($id = null)
+function BBGetUserCover ($id = null)
 {
     if ($id) {
         $userRepository = new \Btybug\User\Repository\UserRepository();
@@ -950,7 +979,7 @@ function BBGetUserCover($id = null)
 }
 
 //TODO transver in User
-function BBGetUserRole($id = null)
+function BBGetUserRole ($id = null)
 {
     if ($id) {
         $userRepository = new \Btybug\User\Repository\UserRepository();
@@ -966,12 +995,12 @@ function BBGetUserRole($id = null)
     return null;
 }
 
-function BBGetAllValidations()
+function BBGetAllValidations ()
 {
     return \Config::get('validations');
 }
 
-function issetReturn($array, $item, $default = null)
+function issetReturn ($array, $item, $default = null)
 {
 
     if (is_array($array)) {
@@ -989,7 +1018,7 @@ function issetReturn($array, $item, $default = null)
  * @return mixed|null|string
  */
 //TODO transver in USER
-function BBGetUser($id = null, $column = 'username')
+function BBGetUser ($id = null, $column = 'username')
 {
     if ($id) {
         $userRepo = new \Btybug\User\Repository\UserRepository();
@@ -1016,13 +1045,13 @@ function BBGetUser($id = null, $column = 'username')
     return null;
 }
 
-function BBGetUserAvatar($id = null)
+function BBGetUserAvatar ($id = null)
 {
     return url('public/images/avatar.png');
 }
 
 //TODO transver in Console
-function hierarchyAdminPagesListWithModuleName($data, $moduleCh = null, $icon = true, $roleSlug = null, $checkbox = false)
+function hierarchyAdminPagesListWithModuleName ($data, $moduleCh = null, $icon = true, $roleSlug = null, $checkbox = false)
 {
     $plugins = new \Avatar\Avatar\Repositories\Plugins();
     $plugins->modules();
@@ -1035,7 +1064,7 @@ function hierarchyAdminPagesListWithModuleName($data, $moduleCh = null, $icon = 
     if (count($data)) {
         foreach ($data as $module) {
             if ($moduleCh == null or $moduleCh->namespace == $module->module_id) {
-                if (!$module->module_id) {
+                if (! $module->module_id) {
                     if ($checkbox === true) {
                         $output .= hierarchyAdminPagesListPermissions($adminRepo->main(), true, $icon, $roleSlug);
                     } else {
@@ -1048,7 +1077,7 @@ function hierarchyAdminPagesListWithModuleName($data, $moduleCh = null, $icon = 
                 } else {
                     $plugins->modules();
                     $value = $plugins->find($module->module_id);
-                    if (!$value) {
+                    if (! $value) {
                         $plugins->plugins();
                         $value = $plugins->find($module->module_id);
                     }
@@ -1072,7 +1101,7 @@ function hierarchyAdminPagesListWithModuleName($data, $moduleCh = null, $icon = 
 }
 
 //TODO transver in Console
-function hierarchyAdminPagesList($data, $parent = true, $icon = true, $id = 0, $roleSlug = null)
+function hierarchyAdminPagesList ($data, $parent = true, $icon = true, $id = 0, $roleSlug = null)
 {//dd($roleSlug);
     $children = [];
     $output = ' <ul id="accordion" class="panel-group" data-nav-drag="" role="tablist" aria-multiselectable="true">';
@@ -1127,7 +1156,7 @@ function hierarchyAdminPagesList($data, $parent = true, $icon = true, $id = 0, $
 }
 
 //TODO transver in Console
-function hierarchyAdminPagesListPermissions($data, $parent = true, $icon = true, $role, $checkbox = false)
+function hierarchyAdminPagesListPermissions ($data, $parent = true, $icon = true, $role, $checkbox = false)
 {
     $children = [];
     $output = ' <ul class="panel-group" role="tablist" aria-multiselectable="true">';
@@ -1179,12 +1208,13 @@ function hierarchyAdminPagesListPermissions($data, $parent = true, $icon = true,
         // If this is the top parent
     }
     $output .= '</ul>';
+
     // Return data tree
     return $output;
 }
 
 //TODO transver in Manage
-function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $id = 0, $module = false)
+function hierarchyAdminPagesListHierarchy ($data, $parent = true, $icon = true, $id = 0, $module = false)
 {
     $output = '';
     // Loop through items
@@ -1230,6 +1260,7 @@ function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $
             $output .= '</ol>';
         }
     }
+
     // Return data tree
     return $output;
 }
@@ -1249,28 +1280,30 @@ function hierarchyAdminPagesListHierarchy($data, $parent = true, $icon = true, $
 //    return $links;
 //}
 //TODO:find the right direction for this function
-function BBgetUnitAttr($id, $key)
+function BBgetUnitAttr ($id, $key)
 {
     $section = \Btybug\btybug\Models\Painter\Painter::findByVariation($id);
     if ($section) return $section->{$key};
+
     return false;
 
 }
 
-function BBgetLayoutAttr($id, $key)
+function BBgetLayoutAttr ($id, $key)
 {
     $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findByVariation($id);
     if ($section) return $section->{$key};
+
     return false;
 
 }
 
 //TODO: move to console module
-function BBRegisterAdminPages($module, $title = null, $url, $layout = null, $parent = 0)
+function BBRegisterAdminPages ($module, $title = null, $url, $layout = null, $parent = 0)
 {
 
     $adminPagesRepo = new \Btybug\Console\Repository\AdminPagesRepository();
-    if (!$title) $title = $module . ' page title';
+    if (! $title) $title = $module . ' page title';
 
     if (substr($url, 0, 6) != "/admin" && substr($url, 0, 5) != "admin") {
         $adminstr = "/admin";
@@ -1279,22 +1312,22 @@ function BBRegisterAdminPages($module, $title = null, $url, $layout = null, $par
     }
 
     $page = $adminPagesRepo->create([
-        'module_id' => $module,
-        'title' => $title,
-        'url' => $url,
+        'module_id'  => $module,
+        'title'      => $title,
+        'url'        => $url,
         'permission' => BBmakeUrlPermission($url),
-        'slug' => uniqid(),
-        'layout_id' => null,
+        'slug'       => uniqid(),
+        'layout_id'  => null,
         'is_default' => 0,
-        'parent_id' => $parent
+        'parent_id'  => $parent
     ]);
 
     return $page;
 }
 
-function BBmakeUrlPermission($url, $sinbol = '.')
+function BBmakeUrlPermission ($url, $sinbol = '.')
 {
-    if (!$url) return false;
+    if (! $url) return false;
     $url = str_replace('/', $sinbol, $url);
     $url = parametazor($url);
     if (isset($url[0]) && $url[0] == '.') {
@@ -1304,7 +1337,7 @@ function BBmakeUrlPermission($url, $sinbol = '.')
     return $url;
 }
 
-function parametazor($url)
+function parametazor ($url)
 {
     preg_match('/{(.*?)}/', $url, $matches);
     if (count($matches)) {
@@ -1313,41 +1346,44 @@ function parametazor($url)
         $url = parametazor($url);
     }
     $url = str_replace('code_1941', '{param}', $url);
+
     return $url;
 }
 
-function modules_path($path = '')
+function modules_path ($path = '')
 {
     return app()->basePath('vendor' . DS . 'btybug') . ($path ? DS . $path : $path);
 }
 
-function BBCheckLoginEnabled()
+function BBCheckLoginEnabled ()
 {
     $settings = \Btybug\btybug\Models\Settings::where('settingkey', 'enable_login')->first();
     if ($settings) {
         return ($settings->val) ? true : false;
     }
+
     return false;
 }
 
-function BBrenderPageContent($settings)
+function BBrenderPageContent ($settings)
 {
-    if (!isset($settings['content_type'])) return null;
+    if (! isset($settings['content_type'])) return null;
     if ($settings['content_type'] == 'template') {
         return BBRenderUnits($settings['template']);
     }
     if ($settings['content_type'] == 'editor') {
         return $settings['main_content'];
     }
+
     return 'Main Content';
 }
 
-function BBstyle($path, $unit = null)
+function BBstyle ($path, $unit = null)
 {
     if ($unit) {
         $actives = \Config::get('units_css', []);
         $key = $unit->getSlug();
-        if (!isset($actives[$key])) $actives[$key] = [];
+        if (! isset($actives[$key])) $actives[$key] = [];
         $actives[$key][] = $path;
         \Config::set('units_css', $actives);
     }
@@ -1360,12 +1396,12 @@ function BBstyle($path, $unit = null)
     \Session::put('custom.styles', $styles);
 }
 
-function BBscript($path, $unit = null)
+function BBscript ($path, $unit = null)
 {
     if ($unit) {
         $actives = \Config::get('units_js', []);
         $key = $unit->getSlug();
-        if (!isset($actives[$key])) $actives[$key] = [];
+        if (! isset($actives[$key])) $actives[$key] = [];
         $actives[$key][] = $path;
         \Config::set('units_js', $actives);
     }
@@ -1379,7 +1415,7 @@ function BBscript($path, $unit = null)
     \Session::put('custom.scripts', $scripts);
 }
 
-function BBGiveMe($type, $data = null, $index = null)
+function BBGiveMe ($type, $data = null, $index = null)
 {
     $type = strtolower($type);
     switch ($type) {
@@ -1398,7 +1434,7 @@ function BBGiveMe($type, $data = null, $index = null)
     }
 }
 
-function recursiveItems($menus, $i = 0, $data = [])
+function recursiveItems ($menus, $i = 0, $data = [])
 {
     if (count($menus)) {
         $menu = $menus[$i];
@@ -1425,15 +1461,15 @@ function recursiveItems($menus, $i = 0, $data = [])
     }
 }
 
-function recursivePageChild($data, $i = 0, $result = [])
+function recursivePageChild ($data, $i = 0, $result = [])
 {
     if (count($data)) {
         $item = $data[$i];
         $result[$i] = [
-            'id' => $item->id,
-            'title' => $item->title,
-            'url' => $item->url,
-            'icon' => null,
+            'id'       => $item->id,
+            'title'    => $item->title,
+            'url'      => $item->url,
+            'icon'     => null,
             'children' => $item->childs->toArray()
         ];
 
@@ -1450,17 +1486,18 @@ function recursivePageChild($data, $i = 0, $result = [])
     }
 }
 
-function BBGetMenu($id)
+function BBGetMenu ($id)
 {
     $menuRepo = new \Btybug\btybug\Repositories\MenuRepository();
     $menu = $menuRepo->find($id);
     $data = json_decode($menu->json_data, true);
     $result = recursiveItems($data);
+
     return $result;
 }
 
 
-function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon = true, $membershipSlug = null, $checkbox = false)
+function hierarchyFrontendPagesListWithModuleName ($data, $moduleCh = null, $icon = true, $membershipSlug = null, $checkbox = false)
 {
     $plugins = new \Btybug\Uploads\Repository\Plugins();
     $plugins->modules();
@@ -1474,7 +1511,7 @@ function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon
         foreach ($data as $module) {
             if ($moduleCh == null or $moduleCh->slug == $module->module_id) {
                 $frontPageRepo = new \Btybug\Console\Repository\FrontPagesRepository();
-                if (!$module->module_id) {
+                if (! $module->module_id) {
                     if ($checkbox === true) {
 
                         $output .= hierarchyFrontendPagesListPermissions($frontPageRepo->getMain(), true, $icon, $membershipSlug);
@@ -1489,7 +1526,7 @@ function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon
                 } else {
                     $plugins->modules();
                     $value = $plugins->find($module->module_id);
-                    if (!$value) {
+                    if (! $value) {
                         $plugins->plugins();
                         $value = $plugins->find($module->module_id);
                     }
@@ -1513,7 +1550,7 @@ function hierarchyFrontendPagesListWithModuleName($data, $moduleCh = null, $icon
 }
 
 
-function hierarchyFrontPagesList($data, $parent = true, $icon = true, $id = 0, $roleSlug = null)
+function hierarchyFrontPagesList ($data, $parent = true, $icon = true, $id = 0, $roleSlug = null)
 {
     $children = [];
     $output = ' <ul id="accordion" class="panel-group" data-nav-drag="" role="tablist" aria-multiselectable="true">';
@@ -1556,11 +1593,12 @@ function hierarchyFrontPagesList($data, $parent = true, $icon = true, $id = 0, $
         }
     }
     $output .= '</ul>';
+
     // Return data tree
     return $output;
 }
 
-function hierarchyFrontendPagesListPermissions($data, $parent = true, $icon = true, $membership, $checkbox = false)
+function hierarchyFrontendPagesListPermissions ($data, $parent = true, $icon = true, $membership, $checkbox = false)
 {
     $children = [];
     $output = ' <ul class="panel-group" role="tablist" aria-multiselectable="true">';
@@ -1616,7 +1654,7 @@ function hierarchyFrontendPagesListPermissions($data, $parent = true, $icon = tr
     return $output;
 }
 
-function BBRenderArea($settings, $key)
+function BBRenderArea ($settings, $key)
 {
     if (isset($settings[$key]['content_type'])) {
         if ($settings[$key]['content_type'] == 'template') {
@@ -1628,7 +1666,7 @@ function BBRenderArea($settings, $key)
 }
 
 $_PLUGIN_PROVIDERS = [];
-function addProvider($provider, $options = [], $force = false)
+function addProvider ($provider, $options = [], $force = false)
 {
     global $_PLUGIN_PROVIDERS;
     $providers = isset($_PLUGIN_PROVIDERS['pluginProviders']) ? $_PLUGIN_PROVIDERS['pluginProviders'] : [];
@@ -1636,17 +1674,18 @@ function addProvider($provider, $options = [], $force = false)
     $_PLUGIN_PROVIDERS['pluginProviders'] = $providers;
 }
 
-function BBrenderHook($id)
+function BBrenderHook ($id)
 {
     $hookRepository = new \Btybug\btybug\Repositories\HookRepository();
     $html = $hookRepository->render($id);
+
     return $html;
 }
 
-function has_setting($settings, $setting, $compare = false)
+function has_setting ($settings, $setting, $compare = false)
 {
 
-    if (!isset($settings[$setting])) return false;
+    if (! isset($settings[$setting])) return false;
     if ($compare) {
         if ($settings[$setting] != $compare) return false;
     }
@@ -1654,7 +1693,7 @@ function has_setting($settings, $setting, $compare = false)
     return true;
 }
 
-function get_settings($settings, $setting, $default = '')
+function get_settings ($settings, $setting, $default = '')
 {
 
     if (has_setting($settings, $setting)) {
@@ -1664,7 +1703,7 @@ function get_settings($settings, $setting, $default = '')
     return $default;
 }
 
-function form_render($attr)
+function form_render ($attr)
 {
     $formRepo = new \Btybug\Console\Repository\FormsRepository();
     $form = $formRepo->findByIdOrSlug(issetReturn($attr, 'id', issetReturn($attr, 'slug', null)));
@@ -1674,7 +1713,7 @@ function form_render($attr)
     }
 }
 
-function field_render($attr)
+function field_render ($attr)
 {
     if (count($attr)) {
         $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
@@ -1688,21 +1727,22 @@ function field_render($attr)
     }
 }
 
-function get_field_by_slug($slug)
+function get_field_by_slug ($slug)
 {
     $fieldRepo = new \Btybug\Console\Repository\FieldsRepository();
     $field = $fieldRepo->findBy('slug', $slug);
+
     return ($field) ? $field->id : null;
 }
 
-function register_frontend_page(array $data)
+function register_frontend_page (array $data)
 {
     return \Btybug\FrontSite\Services\FrontendPageService::register(
         $data
     );
 }
 
-function renderPagesInMenu($data, $parent = true, $i = 0, $children = true)
+function renderPagesInMenu ($data, $parent = true, $i = 0, $children = true)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
@@ -1788,11 +1828,12 @@ function renderPagesInMenu($data, $parent = true, $i = 0, $children = true)
             $output .= '</li>';
         }
     }
+
     // Return data tree
     return $output;
 }
 
-function get_pages_menu_array($data, $i = 0, $array = [])
+function get_pages_menu_array ($data, $i = 0, $array = [])
 {
     $array[$i]['title'] = $data[$i]['title'];
     $array[$i]['custom-link'] = $data[$i]['url'];
@@ -1805,10 +1846,11 @@ function get_pages_menu_array($data, $i = 0, $array = [])
     if (isset($data[$i])) {
         $array = get_pages_menu_array($data, $i, $array);
     }
+
     return $array;
 }
 
-function renderSavedPagesInMenu($data, $parent = true, $i = 0)
+function renderSavedPagesInMenu ($data, $parent = true, $i = 0)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
@@ -1912,12 +1954,13 @@ function renderSavedPagesInMenu($data, $parent = true, $i = 0)
             $output .= '</li>';
         }
     }
+
     // Return data tree
     return $output;
 }
 
 
-function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
+function renderFrontPagesInMenu ($data, $parent = true, $i = 0, $children = true)
 {
     $roles = new \Btybug\User\Repository\RoleRepository();
     $output = '';
@@ -1998,29 +2041,32 @@ function renderFrontPagesInMenu($data, $parent = true, $i = 0, $children = true)
         $output .= '</li>';
 
     }
+
     // Return data tree
     return $output;
 }
 
-function recursive_hook_menus()
+function recursive_hook_menus ()
 {
 }
 
-function get_classifier_items($classify_id)
+function get_classifier_items ($classify_id)
 {
     $classifyRepo = new \Btybug\FrontSite\Repository\ClassifierRepository();
     $classify = $classifyRepo->findby('id', $classify_id);
+
     return ($classify) ? $classify->classifierItem : [];
 }
 
-function get_classifiers($array = false)
+function get_classifiers ($array = false)
 {
     $classifyRepo = new \Btybug\FrontSite\Repository\ClassifierRepository();
     $classifiers = $classifyRepo->pluck('title', 'id');
+
     return ($array) ? $classifiers->toArray() : $classifiers;
 }
 
-function get_field_data($field)
+function get_field_data ($field)
 {
     if ($field && count($field['json_data'])) {
         switch ($field['data_source']) {
@@ -2030,6 +2076,7 @@ function get_field_data($field)
                     $column = $field['json_data']['data_source_columns'];
                     if (\Schema::hasColumn($table, $column)) {
                         $result = \DB::table($table)->pluck($column, 'id');
+
                         return (count($result)) ? $result->toArray() : [];
                     }
                 }
@@ -2041,22 +2088,23 @@ function get_field_data($field)
                 break;
         }
     }
+
     return null;
 }
 
-function print_field_name($field)
+function print_field_name ($field)
 {
     return $field['table_name'] . '_' . $field['column_name'];
 }
 
 //TODO: make this for plugins
-function register_form()
+function register_form ()
 {
 
 }
 
 // Extract ajax data
-function ajaxExtract($data)
+function ajaxExtract ($data)
 {
     $return = [];
     foreach ($data as $datum) {
@@ -2066,66 +2114,74 @@ function ajaxExtract($data)
     return $return;
 }
 
-function get_frontend_pages_pluck($is_array = false)
+function get_frontend_pages_pluck ($is_array = false)
 {
     $pageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
     $page = $pageRepository->pluck('title', 'id');
+
     return ($is_array) ? $page->toArray() : $page;
 }
 
-function getDinamicStyle($filename)
+function getDinamicStyle ($filename)
 {
     $styles = \App\Http\Controllers\PhpJsonParser::getClasses(base_path('public/dinamiccss/' . $filename . '.css'));
+
     return $styles;
 }
 
-function BBmakeCssClasses($filename)
+function BBmakeCssClasses ($filename)
 {
     $parser = new \App\Http\Controllers\PhpJsonParser();
     $parser->makeCssClasses(base_path('public/dinamiccss/' . $filename . '.css'));
+
     return $parser;
 }
 
-function getDinamicStyleDemo($filename)
+function getDinamicStyleDemo ($filename)
 {
     $styles = \App\Http\Controllers\PhpJsonParser::getClassesForDemo(base_path('public/dinamiccss/' . $filename . '.css'));
+
     return $styles;
 }
 
-function getDinamicStyleForCssFileDemo($filename, $table_name)
+function getDinamicStyleForCssFileDemo ($filename, $table_name)
 {
     $styles = \App\Http\Controllers\PhpJsonParser::getClassesCssFileDemo($filename, $table_name);
+
     return $styles;
 }
 
-function useDinamicStyle($filename)
+function useDinamicStyle ($filename)
 {
     return '<link href="' . asset('public/dinamiccss/' . $filename . '.css?v=8') . '" rel="stylesheet">';
 }
 
-function useDinamicStyleByPath($path, $main)
+function useDinamicStyleByPath ($path, $main)
 {
     $arr = explode(DS, $path);
     $filename = $arr[count($arr) - 1];
     $foldername = $arr[count($arr) - 2];
+
     return '<link href="' . asset($main . DS . $foldername . DS . $filename . '?v=' . rand(111, 999)) . '" rel="stylesheet">';
 }
 
-function BBregistreApi($name, $edit_url, $data = [])
+function BBregistreApi ($name, $edit_url, $data = [])
 {
     $data['edit_url'] = $edit_url;
     $data['name'] = $name;
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
+
     return $setting->createOrUpdateToJson($data, 'out_side_api', md5($name));
 }
 
-function BBgetAllAegistreApi()
+function BBgetAllAegistreApi ()
 {
     $setting = new \Btybug\btybug\Repositories\AdminsettingRepository();
+
     return $setting->getAllSettingsBySection('out_side_api');
 }
 
-function BBeditApisettings($name, array $data)
+function BBeditApisettings ($name, array $data)
 {
     $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
     $setting = $settingRepository->getSettings('out_side_api', md5($name));
@@ -2134,24 +2190,28 @@ function BBeditApisettings($name, array $data)
         $data['name'] = $settingData['name'];
         $data['edit_url'] = $settingData['edit_url'];
         $setting->val = json_encode($data, true);
+
         return $setting->save();
     }
+
     return false;
 }
 
-function BBgetApiSettings($name)
+function BBgetApiSettings ($name)
 {
     $settingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
+
     return $settingRepository->getSettings('out_side_api', md5($name));
 }
 
-function getCmsConnectionByID($id)
+function getCmsConnectionByID ($id)
 {
     $repository = new \Btybug\FrontSite\Repository\CmsConnectionsRepository();
+
     return ($id) ? $repository->find($id) : null;
 }
 
-function BBgetContentLayoutVariationsPluck($layout)
+function BBgetContentLayoutVariationsPluck ($layout)
 {
     $variations = $layout->variations()->all();
     $data = [];
@@ -2160,17 +2220,18 @@ function BBgetContentLayoutVariationsPluck($layout)
             $data[$variation->id] = $variation->title;
         }
     }
+
     return $data;
 }
 
-function BBeditor()
+function BBeditor ()
 {
 //    BBscript(public_path('js/tinymice/tinymce.min.js'));
 //    BBscript(public_path('js/editor.js'));
     return '<textarea name=\'test\' class=\'cms_editor\'></textarea>';
 }
 
-function BBgetFrontPagesPanels($page, $poss = 'front')
+function BBgetFrontPagesPanels ($page, $poss = 'front')
 {
     $panels = Config::get($poss . '_page_edit_widget', []);
     foreach ($panels as $panel) {
@@ -2197,7 +2258,7 @@ function BBgetFrontPagesPanels($page, $poss = 'front')
                     }
                     break;
                 default:
-                    if (!in_array($data['id'], array('panel_info', 'panel_header_footer', 'panel_main_content', 'panel_assets'))) {
+                    if (! in_array($data['id'], ['panel_info', 'panel_header_footer', 'panel_main_content', 'panel_assets'])) {
                         BBrenderPanel($data['view'], $key, $page);
                     }
                     break;
@@ -2206,7 +2267,7 @@ function BBgetFrontPagesPanels($page, $poss = 'front')
     }
 }
 
-function BBrenderPanel($view, $title, $page)
+function BBrenderPanel ($view, $title, $page)
 {
     echo ' <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 page-data p-20">
  <div class="panel panel-default custompanel m-t-20"><div class="panel-heading">' . $title . '</div>
@@ -2218,7 +2279,7 @@ function BBrenderPanel($view, $title, $page)
             </div>';
 }
 
-function BBgetProfile($id, $type = 'js', $render = false)
+function BBgetProfile ($id, $type = 'js', $render = false)
 {
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
     $profile = $profileRepository->findOneByMultiple(['id' => $id, 'type' => $type]);
@@ -2237,7 +2298,7 @@ function BBgetProfile($id, $type = 'js', $render = false)
     }
 }
 
-function BBlinkAssets($data, $type = 'js')
+function BBlinkAssets ($data, $type = 'js')
 {
     $assets = '';
     if (count($data)) {
@@ -2253,21 +2314,21 @@ function BBlinkAssets($data, $type = 'js')
     return $assets;
 }
 
-function BBRegisterProfile($name, $file_path, $type)
+function BBRegisterProfile ($name, $file_path, $type)
 {
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
     $profile = $profileRepository->create([
-        'name' => $name,
-        'hint_path' => $file_path,
-        'type' => $type,
+        'name'          => $name,
+        'hint_path'     => $file_path,
+        'type'          => $type,
         'structured_by' => true,
-        'user_id' => Auth::id(),
+        'user_id'       => Auth::id(),
     ]);
 
     return $profile;
 }
 
-function BBmakePabeCss($page)
+function BBmakePabeCss ($page)
 {
     $stylePaths = session()->get('custom.styles', []);
     $contentArray = [];
@@ -2289,7 +2350,7 @@ function BBmakePabeCss($page)
     File::put(public_path('css' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.css'), $content);
 }
 
-function BBmakePabeJs($page)
+function BBmakePabeJs ($page)
 {
     $stylePaths = session()->get('custom.scripts', []);
     $contentArray = [];
@@ -2311,13 +2372,14 @@ function BBmakePabeJs($page)
     File::put(public_path('js' . DS . 'pages' . DS . str_replace(' ', '-', $page->title) . '.js'), $content);
 }
 
-function get_filename_from_path($path, $delimiter = '\\')
+function get_filename_from_path ($path, $delimiter = '\\')
 {
     $exploded = explode($delimiter, $path);
+
     return end($exploded);
 }
 
-function BBmargeJs()
+function BBmargeJs ()
 {
     $path = public_path('js' . DS . 'pages');
     $files = File::allFiles($path);
@@ -2329,7 +2391,7 @@ function BBmargeJs()
     File::put(public_path('js' . DS . 'cms_main.js'), $content);
 }
 
-function BBpageAssetsOptimise()
+function BBpageAssetsOptimise ()
 {
     $home = new \Btybug\btybug\Models\Home();
     $frontPagesRepository = new \Btybug\Console\Repository\FrontPagesRepository();
@@ -2364,14 +2426,15 @@ function BBpageAssetsOptimise()
     }
 }
 
-function BBgetVersion($id, $col = "name")
+function BBgetVersion ($id, $col = "name")
 {
     $versionRepositroy = new \Btybug\Uploads\Repository\VersionsRepository();
     $v = $versionRepositroy->find($id);
+
     return ($v) ? $v->$col : null;
 }
 
-function BBgetProfileAssets($id, $type = 'js', $section = 'headerJs')
+function BBgetProfileAssets ($id, $type = 'js', $section = 'headerJs')
 {
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
     $profile = $profileRepository->findOneByMultiple(['id' => $id, 'type' => $type]);
@@ -2403,6 +2466,7 @@ function BBgetProfileAssets($id, $type = 'js', $section = 'headerJs')
                 }
             }
         }
+
         return $result;
     }
 }

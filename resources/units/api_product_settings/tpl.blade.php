@@ -31,8 +31,8 @@
 <div id="data" class="tabcontent">
     <h3>Data Manage</h3>
     <div>
-        @if(View::exists($product->app->form_path))
-            @include($product->app->form_path)
+        @if(View::exists(@$product->app->form_path))
+            @include(@$product->app->form_path)
         @endif
     </div>
 </div>

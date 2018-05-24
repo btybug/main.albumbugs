@@ -283,6 +283,7 @@ foreach ($placeholdersData as $key => $datum) {
                             <option value="col-md-10" >10</option>
                             <option value="col-md-11" >11</option>
                             <option value="col-md-12" >12</option>
+                            <option value="hidden-md" >hidden</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -299,6 +300,7 @@ foreach ($placeholdersData as $key => $datum) {
                             <option value="col-sm-10" >10</option>
                             <option value="col-sm-11" >11</option>
                             <option value="col-sm-12" >12</option>
+                            <option value="hidden-sm" >hidden</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -315,6 +317,7 @@ foreach ($placeholdersData as $key => $datum) {
                             <option value="col-xs-10" >10</option>
                             <option value="col-xs-11" >11</option>
                             <option value="col-xs-12" >12</option>
+                            <option value="hidden-xs" >hidden</option>
                         </select>
                     </div>
                 </div>
@@ -355,6 +358,7 @@ foreach ($placeholdersData as $key => $datum) {
                             <option value="col-md-10" >10</option>
                             <option value="col-md-11" >11</option>
                             <option value="col-md-12" >12</option>
+                            <option value="hidden-md" >hidden</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -371,6 +375,7 @@ foreach ($placeholdersData as $key => $datum) {
                             <option value="col-sm-10" >10</option>
                             <option value="col-sm-11" >11</option>
                             <option value="col-sm-12" >12</option>
+                            <option value="hidden-sm" >hidden</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -387,6 +392,7 @@ foreach ($placeholdersData as $key => $datum) {
                             <option value="col-xs-10" >10</option>
                             <option value="col-xs-11" >11</option>
                             <option value="col-xs-12" >12</option>
+                            <option value="hidden-xs" >hidden</option>
                         </select>
                     </div>
                 </div>

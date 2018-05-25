@@ -150,7 +150,7 @@
                                                         <a href="javascript:void(0)" data-key="{{ $key }}"
                                                            data-type="f"
                                                            class="btn btn-sm btn-warning action-placeholder">F</a>
-                                           
+
 
                                                 @endisset
 

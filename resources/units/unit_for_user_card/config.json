@@ -15,33 +15,18 @@
   "is_core": 0,
   "place": "frontend",
   "placeholders": {
-    "general": {
+    "image": {
       "type": "unit",
       "tag": "general",
       "title": "General",
       "s" : true
     },
-    "left_bar": {
+    "name": {
       "type": "unit",
       "tag": "left_bar",
       "title": "Left Sidebar",
       "f" : true,
       "s" : true
-    },
-    "top_right": {
-      "type": "unit",
-      "tag": "breadcrumb",
-      "title": "Top Right",
-      "f" : true,
-      "s" : true
-    } ,
-    "main_right": {
-      "type": "unit",
-      "tag": "breadcrumb",
-      "title": "Main Right",
-      "f" : true,
-      "s" : true,
-      "main" : true
     }
   },
   "tags": ["user_cart","frontend"],

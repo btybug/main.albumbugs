@@ -1,18 +1,3 @@
-<div class="content bty-settings-panel">
-    <div class="col-md-12">
-        <div class="form-group">
-            <div class="col-md-4">
-                <label for="">Content</label>
-            </div>
-            <div class="col-md-8">
-                {!! Form::select('tr_content_type',
-                [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
-                null,['class'=>'form-control content_type','data-value'=>'top_right']) !!}
-            </div>
-        </div>
-    </div>
-</div>
-
 @option('name','f',$data)
 <div class="content bty-settings-panel">
     <div class="col-md-12">

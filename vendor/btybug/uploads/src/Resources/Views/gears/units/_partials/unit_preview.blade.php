@@ -168,10 +168,7 @@
                 </div>
                 <div class="col-xs-9">
                     <div class="right" id="right-settings-main-box-bty">
-                        {!! Form::model($settings,['url'=>'/admin/uploads/gears/settings/'.$id, 'id'=>'add_custome_page','files'=>true]) !!}
-                            <input name="itemname" type="hidden" data-parentitemname="itemname"/>
-                            {!! $htmlSettings !!}
-                        {!! Form::close() !!}
+                        @include("uploads::gears.units._partials.right_box")
                     </div>
                 </div>
             </div>

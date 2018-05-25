@@ -185,7 +185,7 @@ $(document).ready(function () {
         var key = $(this).data('key');
         var type = $(this).data('type');
         if(type != undefined){
-            var data = $('form').serialize();
+            var data = $('body #add_custome_page').serialize();
             data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#unit_slug").val() + '&bb_variation=' + $("#unit_variation").val();
             $.ajax({
                 type: "post",

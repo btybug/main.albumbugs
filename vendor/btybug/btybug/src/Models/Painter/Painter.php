@@ -75,7 +75,7 @@ class Painter extends BasePainter
      * @param null $variables
      * @return bool|mixed|string
      */
-    public function scopeRenderSettings($variables = null)
+    public function scopeRenderSettings($variables = null,$data = [])
     {
         $path = $this->getPath();
         $variables['tplPath'] = $path;
@@ -91,7 +91,7 @@ class Painter extends BasePainter
         View::addLocation($path);
         View::addNamespace("$slug", $path);
 
-        return View::make("$slug::settings")->with($variables)->render();
+        return View::make("$slug::settings")->with($variables)->with($data)->render();
     }
 
     /**

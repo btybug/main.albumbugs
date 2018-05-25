@@ -4,7 +4,7 @@
              alt="">
     </div>
     <div>
-        <h3>User Name</h3>
+        <h3>@if(isset($settinds['name_type'])&& $settinds['name_type']=='static' ) {!! $setting['name'] !!} @endif</h3>
         <h4>profession</h4>
         <p><i class="fa fa-map-marker"></i>location</p>
         <h5>Info</h5>

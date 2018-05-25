@@ -18,13 +18,13 @@
     "image": {
       "type": "unit",
       "tag": "general",
-      "title": "General",
+      "title": "Image",
       "s" : true
     },
     "name": {
       "type": "unit",
       "tag": "left_bar",
-      "title": "Left Sidebar",
+      "title": "Name",
       "f" : true,
       "s" : true
     }

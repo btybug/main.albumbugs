@@ -82,6 +82,7 @@ Route::group(['prefix' => 'gears'], function () {
 
     Route::get('/html-iframe/{slug}/{settings?}', 'UnitsController@htmlPreviewIframe', true)->name('uploads_settings_iframe');
 
+    Route::post('/settings/options', 'UnitsController@postOptions')->name('uploads_gears_settings_options');
     Route::post('/settings/{id}/{save?}', 'UnitsController@postSettings');
     Route::post('/delete', 'UnitsController@postDelete');
     Route::post('/filter', 'UnitsController@filterUnits')->name('filter-units');

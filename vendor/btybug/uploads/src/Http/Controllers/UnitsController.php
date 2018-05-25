@@ -247,6 +247,7 @@ class UnitsController extends Controller
 
     public function postSettings (Request $request)
     {
+        dd($request->all());
         $output = Painter::saveSettings($request->id, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
 
         return response()->json([
@@ -254,6 +255,35 @@ class UnitsController extends Controller
             'url'   => $output ? url('/admin/uploads/gears/settings/' . $output['slug']) : false,
             'html'  => $output ? $output['html'] : false,
             'slug'  => $output['slug']
+        ]);
+    }
+
+    public function postOptions(Request $request)
+    {
+        $model = Painter::find($request->bb_slug);
+
+        dd($model, $request->all());
+
+        if ($model) {
+            $settingsHtml = "ContentLayouts.$model->folder.settings";
+            $settings = $request->except('key', 'type');
+            $data = $request->only('key', 'type');
+            $preview = \view($settingsHtml)->with([
+                'model'    => $model,
+                'settings' => $settings,
+                'data'     => $data])->render();
+
+
+            $html = \View('uploads::gears.page_sections._partials.right_box', compact(['model', 'preview', 'settings', 'data']))->with('variation', $request->get('bb_variation'))->render();
+
+            return response()->json([
+                'html'  => $html,
+                'error' => false
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
         ]);
     }
 

@@ -103,6 +103,8 @@
 </head>
 
 <body>
+<input type="hidden" id="unit_slug" value="{!! $ui->slug !!}">
+<input type="hidden" id="unit_variation" value="{!! $id  !!}">
 {!! csrf_field() !!}
 @include('resources::assests.magicModal')
 <div class="container-fluid">
@@ -146,12 +148,9 @@
                                             <span class="left-li">{{ $placeholder['title'] }} </span>
                                             <div class="button">
                                                 @isset($placeholder['f'])
-
                                                         <a href="javascript:void(0)" data-key="{{ $key }}"
                                                            data-type="f"
                                                            class="btn btn-sm btn-warning action-placeholder">F</a>
-
-
                                                 @endisset
 
                                                 @isset($placeholder['s'])
@@ -168,10 +167,11 @@
                     </div>
                 </div>
                 <div class="col-xs-9">
-                    <div class="right">
-                        <div>
+                    <div class="right" id="right-settings-main-box-bty">
+                        {!! Form::model($settings,['url'=>'/admin/uploads/gears/settings/'.$id, 'id'=>'add_custome_page','files'=>true]) !!}
+                            <input name="itemname" type="hidden" data-parentitemname="itemname"/>
                             {!! $htmlSettings !!}
-                        </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

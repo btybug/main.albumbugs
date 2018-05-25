@@ -60,35 +60,35 @@ $(document).ready(function () {
     }
 
 
-    $('#add_custome_page').on('input', 'input', function () {
+    $('#right-settings-main-box-bty').on('input', 'input', function () {
         savesettingevent();
     });
-    $('#add_custome_page').on('change', 'select', function () {
+    $('#right-settings-main-box-bty').on('change', 'select', function () {
         savesettingevent();
     });
 
 
-    $('#add_custome_page').on('click', 'input[type="radio"]', function () {
+    $('#right-settings-main-box-bty').on('click', 'input[type="radio"]', function () {
         savesettingevent();
     });
-    $('#add_custome_page').on('click', 'input[type="checkbox"]', function () {
+    $('#right-settings-main-box-bty').on('click', 'input[type="checkbox"]', function () {
         savesettingevent();
     });
-    $('#add_custome_page').submit(function (e) {
+    $('#right-settings-main-box-bty').submit(function (e) {
         e.preventDefault();
         savesettingevent();
     });
 
-    $('#add_custome_page').on('click', '[data-uisetting]', function () {
+    $('#right-settings-main-box-bty').on('click', '[data-uisetting]', function () {
         savesettingevent();
 
     });
 
-    $('#add_custome_page').on('keyup', 'input[type="text"]', function () {
+    $('#right-settings-main-box-bty').on('keyup', 'input[type="text"]', function () {
         savesettingevent();
     });
 
-    $('textarea').on('keyup', function () {
+    $('#right-settings-main-box-bty').on('keyup', 'textarea' ,function () {
         savesettingevent();
     });
 
@@ -174,5 +174,41 @@ $(document).ready(function () {
             $('[data-bb-item]').removeClass("active");
         });
 
+
+    $('#placeholders-render-list-main-box-bty').on('click','.action-placeholder',  function(e){
+        if (e.target !== this)
+            return;
+
+        $('.settings-bottom .content .left .pl-item').removeClass('hover-cl');
+        $(this).closest('.pl-item').addClass('hover-cl');
+
+        var key = $(this).data('key');
+        var type = $(this).data('type');
+        if(type != undefined){
+            var data = $('form').serialize();
+            data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#unit_slug").val() + '&bb_variation=' + $("#unit_variation").val();
+            $.ajax({
+                type: "post",
+                datatype: "json",
+                url: "/admin/uploads/gears/settings/options",
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $("#token").val()
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $('#right-settings-main-box-bty').html(data.html);
+                        if(type == 'f'){
+                            $('#right-settings-main-box-bty #main-box-title').html('Functions');
+                        }else{
+                            $('#right-settings-main-box-bty #main-box-title').html('Styles');
+                        }
+                        $('.fullheight').addClass('editplaceholders');
+                        tinymceeditor()
+                    }
+                }
+            });
+        }
+    });
 
 });

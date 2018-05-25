@@ -173,6 +173,7 @@ class PageSectionsController extends Controller
      */
     public function postSettings (Request $request)
     {
+
         $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
 
         return response()->json([

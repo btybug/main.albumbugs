@@ -4,6 +4,7 @@ use Btybug\btybug\Models\Painter\BasePainter;
 use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Models\Universal\VariationAccess;
 use Btybug\btybug\Repositories\HookRepository;
+use Btybug\FrontSite\Models\FrontendPage;
 use File;
 use Btybug\btybug\Models\Hook;
 use Btybug\btybug\Repositories\AdminsettingRepository;
@@ -183,14 +184,21 @@ dd(1);
     public static function savePageSectionSettings($slug, $title = NULL, $data, $isSave = NULL)
     {
         if ($isSave && $isSave == 'save') {
+
             // $variation = new static();
             $tpl = self::findByVariation($slug);
             $existingVariation = $variation = $tpl->variations(false)->find($slug);
+            $main_unit=null;
+            if(isset($data['main_unit'])){
+                $main_unit=$data['main_unit'];
+                unset($data['main_unit']);
+            }
             $dataToInsert = [
                 'title' => $title,
                 'settings' => $data
             ];
             if (!$existingVariation) {
+                dd(1);
                 $variation = new ContentLayoutVariations($tpl);
                 if ($tpl->autoinclude) {
                     $variation = $tpl->makeAutoIncludeVariation(null, $dataToInsert);
@@ -204,6 +212,7 @@ dd(1);
                     $variation = $variation->createVariation($dataToInsert,issetReturn($variationID,1,null),(isset($variationID[1]))?true:false);
                 }
             } else {
+//                FrontendPage::where('page_layout',$slug)->update(['']);
                 $existingVariation->setAttributes('title', $title);
                 $existingVariation->setAttributes('settings', $dataToInsert['settings']);
                 $variation = $existingVariation;

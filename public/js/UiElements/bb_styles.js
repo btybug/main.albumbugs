@@ -107,6 +107,9 @@ console.log(1);
             success: function (data) {
                 if (!data.error) {
                     console.log(2);
+                    var html=$(data.html);
+                    var script=html.find('script').html();
+                    $('body').find('.magic-modal-select-variations').html(script)
                     $('#magic-settings .modal-title').html("Select " + action);
                     $('#magic-body').html(data.html);
                     $('#magic-settings').modal();

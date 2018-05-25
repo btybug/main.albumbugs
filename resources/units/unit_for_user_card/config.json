@@ -15,6 +15,12 @@
   "is_core": 0,
   "place": "frontend",
   "placeholders": {
+    "general": {
+      "type": "unit",
+      "tag": "general",
+      "title": "General",
+      "s" : true
+    },
     "image": {
       "type": "unit",
       "tag": "general",

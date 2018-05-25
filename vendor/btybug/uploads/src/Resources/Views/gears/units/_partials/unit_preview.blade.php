@@ -9,7 +9,7 @@
     {!! HTML::style('public-x/custom/css/'.str_replace(' ','-',$ui->slug).'.css') !!}
     <style>
         .settings-bottom {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.76);

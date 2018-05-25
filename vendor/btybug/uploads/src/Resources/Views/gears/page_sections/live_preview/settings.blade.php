@@ -84,7 +84,7 @@
     {!! HTML::style('public/js/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') !!}
     <style>
         .settings-bottom {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.76);

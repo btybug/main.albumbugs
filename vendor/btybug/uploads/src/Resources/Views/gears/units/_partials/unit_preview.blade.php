@@ -133,8 +133,8 @@
                 <div class="col-xs-3">
                     <div class="left">
                         <ul id="placeholders-render-list-main-box-bty">
-                            @isset($model->placeholders)
-                                @foreach($model->placeholders as $key => $placeholder)
+                            @isset($ui->placeholders)
+                                @foreach($ui->placeholders as $key => $placeholder)
                                     <li>
                                         <div class="pl-item action-placeholder" data-key="{{ $key }}"
                                              @if(isset($placeholder['f']))
@@ -146,17 +146,11 @@
                                             <span class="left-li">{{ $placeholder['title'] }} </span>
                                             <div class="button">
                                                 @isset($placeholder['f'])
-                                                    @if($usedIn && isset($placeholder['main']))
-                                                        @if($usedIn->type == 'custom')
-                                                            <a href="javascript:void(0)" data-key="{{ $key }}"
-                                                               data-type="f"
-                                                               class="btn btn-sm btn-warning action-placeholder">F</a>
-                                                        @endif
-                                                    @else
+
                                                         <a href="javascript:void(0)" data-key="{{ $key }}"
                                                            data-type="f"
                                                            class="btn btn-sm btn-warning action-placeholder">F</a>
-                                                    @endif
+                                           
 
                                                 @endisset
 

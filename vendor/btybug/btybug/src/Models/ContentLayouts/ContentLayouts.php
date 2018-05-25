@@ -198,7 +198,6 @@ dd(1);
                 'settings' => $data
             ];
             if (!$existingVariation) {
-                dd(1);
                 $variation = new ContentLayoutVariations($tpl);
                 if ($tpl->autoinclude) {
                     $variation = $tpl->makeAutoIncludeVariation(null, $dataToInsert);
@@ -212,7 +211,7 @@ dd(1);
                     $variation = $variation->createVariation($dataToInsert,issetReturn($variationID,1,null),(isset($variationID[1]))?true:false);
                 }
             } else {
-//                FrontendPage::where('page_layout',$slug)->update(['']);
+                FrontendPage::where('page_layout',$slug)->update(['content_type'=>'template','template'=>$main_unit]);
                 $existingVariation->setAttributes('title', $title);
                 $existingVariation->setAttributes('settings', $dataToInsert['settings']);
                 $variation = $existingVariation;

@@ -43,7 +43,7 @@
                         @endswitch
                     </div>
                     <div class="{{(isset($settings['mr_style'])&& $settings['mr_style']) ? $settings['mr_style']: ''}} ">
-                        {!! main_content($variation,'main_unit') !!}
+                        {!! main_content($variation,issetReturn($settings,'main_unit')) !!}
                     </div>
                 </div>
             </div>

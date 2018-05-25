@@ -19,6 +19,7 @@
       "type": "unit",
       "tag": "general",
       "title": "Image",
+      "f" : true,
       "s" : true
     },
     "name": {

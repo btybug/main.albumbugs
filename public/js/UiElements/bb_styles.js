@@ -50,7 +50,6 @@ $(document).ready(function () {
             success: function (data) {
                 if (!data.error) {
 
-console.log(1);
                     $('#magic-settings .modal-title').html("Select " + action);
                     var html=$(data.html);
                     var script=html.find('script').html();
@@ -166,9 +165,18 @@ console.log(1);
         });
     });
     $('[data-toggle="popover"]').popover();
-
+$('body').on('click','.page-section-item',function () {
+    var id=$(this).data('id');
+    $('body').find('#select-unit-item-button').attr('data-value',id)
+        .attr('data-key',$(this).attr('data-key'))
+        .attr('data-action','layouts').addClass('customize-item');
+    $('#iframepreview').attr('src','/modality/page-sections/modal/'+id);
+});
     $('body').on('click', '.item', function () {
+        console.log(123,BBbutton)
         if (BBbutton) {
+            console.log(321)
+
             $('body').find('.modal-data-items .btn-primary')
                 .removeAttr('name')
                 .removeAttr('value');

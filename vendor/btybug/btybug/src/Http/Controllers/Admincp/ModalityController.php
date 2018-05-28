@@ -12,16 +12,16 @@
 namespace Btybug\btybug\Http\Controllers\Admincp;
 
 use App\Http\Controllers\Controller;
-use Btybug\btybug\Models\Painter\Painter;
-use Btybug\btybug\Repositories\HookRepository;
-use Btybug\Console\Repository\FieldsRepository;
-use Illuminate\Http\Request;
 use Btybug\btybug\Helpers\helpers;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Templates\Sections;
 use Btybug\btybug\Models\Widgets;
+use Btybug\btybug\Repositories\HookRepository;
 use Btybug\btybug\Repositories\MenuRepository;
 use Btybug\btybug\Services\CmsItemReader;
+use Btybug\Console\Repository\FieldsRepository;
+use Illuminate\Http\Request;
 use View;
 
 
@@ -217,7 +217,7 @@ class ModalityController extends Controller
         $variationName = $slug . '.' . $key;
 
         $layout = ContentLayouts::find($slug);
-        if (! $layout) return \Response::json(['error' => true]);
+        if (!$layout) return \Response::json(['error' => true]);
 
         $variation = $layout->variations()->find($variationName);
 //
@@ -453,6 +453,12 @@ class ModalityController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function pageSectionPreview($slug)
+    {
+        $layout = ContentLayouts::find($slug)->scopeRenderLive();
+        return $layout;
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -591,17 +597,17 @@ class ModalityController extends Controller
     public function postLivePreview(Request $request)
     {
         $variation = $request->get('variation');
-        if (! $variation) {
+        if (!$variation) {
             return \Response::json(['error' => true]);
         }
 
         $type = $request->get('type');
-        if($type == 'layouts'){
+        if ($type == 'layouts') {
             $url = route('uploads_layouts_settings', $variation);
-        }else{
+        } else {
             $url = route('uploads_settings', $variation);
         }
-        $html = '<iframe style="width: 100%;height: 100vh;" src="'.$url.'" ></iframe>';
+        $html = '<iframe style="width: 100%;height: 100vh;" src="' . $url . '" ></iframe>';
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

@@ -16,7 +16,7 @@
                         <div class="mod-head-right">
                             <div>
                                 <select   class="form-control magic-modal-select-variations"></select>
-                                <button class="btn btn-default item" id="select-unit-item-button" data-value="" >Select</button>
+                                <button class="btn btn-default item item-unit" data-key="" id="select-unit-item-button" data-value="" >Select</button>
                             </div>
 
                             <button type="button" class="close btn-red-close " data-dismiss="modal" aria-label="Close"><span

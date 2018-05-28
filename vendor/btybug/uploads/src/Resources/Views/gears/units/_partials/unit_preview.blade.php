@@ -126,7 +126,6 @@
 <div class="settings-bottom ">
     <div class="head">
         <span id="current-node-text">SELECT ELEMENT</span>
-
         <a href="#" class="float-right closeCSSEditor"><i class="fa fa-arrow-down"></i></a>
     </div>
     <div class="content animated bounceInRight hide" data-settinglive="settings">
@@ -148,9 +147,9 @@
                                             <span class="left-li">{{ $placeholder['title'] }} </span>
                                             <div class="button">
                                                 @isset($placeholder['f'])
-                                                        <a href="javascript:void(0)" data-key="{{ $key }}"
-                                                           data-type="f"
-                                                           class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                    <a href="javascript:void(0)" data-key="{{ $key }}"
+                                                       data-type="f"
+                                                       class="btn btn-sm btn-warning action-placeholder">F</a>
                                                 @endisset
 
                                                 @isset($placeholder['s'])
@@ -176,7 +175,6 @@
     </div>
 </div>
 
-
 <button data-settingaction="save" class="hide" id="settings_savebtn"></button>
 <input type="hidden" id="hidden_data" value='{!!$settings_json!!}'>
 {!! BBMainFrontJS() !!}
@@ -194,7 +192,6 @@
                 $(this).closest('.head').next().addClass('hide');
                 $(this).addClass('top-show')
             }
-
         });
         $('.settings-bottom').draggable({
             cursor: 'n-resize',
@@ -206,7 +203,6 @@
                 $(this).find('.closeCSSEditor').on('click', function () {
                     $(this).closest('.settings-bottom').attr('style', '');
                 })
-
             },
             stop: function () {
                 $(this).find('.content').height('calc(100% - 50px)');

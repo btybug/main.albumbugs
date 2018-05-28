@@ -28,19 +28,19 @@
                                     @foreach($model->placeholders as $key => $placeholder)
                                         <li>
                                             <div class="pl-item action-placeholder" data-key="{{ $key }}"
-                                            @if(isset($placeholder['f']))
-                                                @if($usedIn && isset($placeholder['main']))
-                                                    @if($usedIn->type == 'custom')
-                                                        data-type="f"
-                                                     @elseif(isset($placeholder['s']))
-                                                            data-type="s"
-                                                     @endif
-                                                @else
-                                                    data-type="f"
-                                                @endif
-                                            @elseif(isset($placeholder['s']))
+                                                 @if(isset($placeholder['f']))
+                                                 @if($usedIn && isset($placeholder['main']))
+                                                 @if($usedIn->type == 'custom')
+                                                 data-type="f"
+                                                 @elseif(isset($placeholder['s']))
                                                  data-type="s"
-                                            @endif
+                                                 @endif
+                                                 @else
+                                                 data-type="f"
+                                                 @endif
+                                                 @elseif(isset($placeholder['s']))
+                                                 data-type="s"
+                                                    @endif
                                             >
                                                 <span class="left-li">{{ $placeholder['title'] }} </span>
                                                 <div class="button">
@@ -214,9 +214,9 @@
                 start: function () {
                     $(this).find('.content').height('calc(100% - 50px)');
                     $(this).find('.content').removeClass('hide');
-                     $(this).find('.closeCSSEditor').on('click',function () {
-                         $(this).closest('.settings-bottom').attr('style','');
-                     })
+                    $(this).find('.closeCSSEditor').on('click', function () {
+                        $(this).closest('.settings-bottom').attr('style', '');
+                    })
 
                 },
                 stop: function () {

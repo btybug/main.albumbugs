@@ -1,5 +1,4 @@
 @option('name','f',$data)
-<input type="text" name="test">
 <div class="content bty-settings-panel">
     <div class="col-md-12">
         <div class="form-group">
@@ -7,8 +6,7 @@
                 <label for="">Name Area Type</label>
             </div>
             <div class="col-md-8">
-                {!! Form::select('name_type',
-                [null=>'Select Content Type','static'=>'Static','dynamic'=>'Dynamic'],null,['class'=>'form-control name_type','data-value'=>'name']) !!}
+                {!! Form::select('name_type',[null=>'Select Content Type','static'=>'Static','dynamic'=>'Dynamic'],null,['class'=>'form-control name_type','data-value'=>'name']) !!}
             </div>
         </div>
     </div>

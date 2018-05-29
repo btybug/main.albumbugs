@@ -72,6 +72,7 @@
                         </div>
                     </div>
                     <div class="col-xs-9">
+                        <img src="{!! url('/public/images/loader.gif') !!}" style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide" />
                         <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($model,['id'=>'add_custome_page']) !!}
                             <h3 id="main-box-title"></h3>

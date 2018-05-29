@@ -414,7 +414,7 @@ foreach ($placeholdersData as $key => $datum) {
                             'col-xs-12' => 12,
                             'hidden-xs' => 'hidden',
                         ],null,['class' => 'form-control']) !!}
-                        
+
                     </div>
                 </div>
                 <div class="clearfix"></div>

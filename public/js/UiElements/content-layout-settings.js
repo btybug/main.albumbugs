@@ -235,6 +235,9 @@ $(document).ready(function () {
         var key = $(this).data('key');
         var type = $(this).data('type');
         if(type != undefined){
+            $('#right-settings-main-box-bty').html('');
+            $("#loader-img").removeClass('hide');
+
             var data = $('form').serialize();
             data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val();
             $.ajax({
@@ -247,6 +250,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     if (!data.error) {
+                        $("#loader-img").addClass('hide');
                         $('#right-settings-main-box-bty').html(data.html);
                         if(type == 'f'){
                             $('#right-settings-main-box-bty #main-box-title').html('Functions');

@@ -399,7 +399,7 @@ foreach ($placeholdersData as $key => $datum) {
 
                     </div>
                     <div class="col-sm-3">
-                        ]  {!! Form::select('rc_mobile',[
+                        {!! Form::select('rc_mobile',[
                             'col-xs-1' => 1,
                             'col-xs-2' => 2,
                             'col-xs-3' => 3,

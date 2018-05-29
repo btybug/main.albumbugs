@@ -92,7 +92,7 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
     {
         foreach ($this->all()->items as $variation) {
 
-            if ($variation->title == 'default' || $variation->title == 'default') {
+            if (strtolower($variation->title) == 'default') {
                 return $variation;
             }
         }

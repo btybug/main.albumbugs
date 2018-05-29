@@ -64,6 +64,7 @@
     <div class="col-md-8 custom_html_for_filter">
         @include('uploads::gears.units._partials.unit_variations')
     </div>
+    <div class="clearfix"></div>
     {{--<div class="loadding"><em class="loadImg"></em></div>
     {!! $units->links() !!}--}}
 
@@ -91,6 +92,7 @@
 @stop
 @section('JS')
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
+
     {!! BBscript('public/js/custom_plugin.js') !!}
     {!! BBscript('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
     <script>

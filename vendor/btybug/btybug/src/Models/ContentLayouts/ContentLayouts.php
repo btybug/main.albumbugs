@@ -191,7 +191,6 @@ dd(1);
             $main_unit=null;
             if(isset($data['main_unit'])){
                 $main_unit=$data['main_unit'];
-                unset($data['main_unit']);
             }
             $dataToInsert = [
                 'title' => $title,

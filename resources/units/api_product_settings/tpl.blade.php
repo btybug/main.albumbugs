@@ -4,7 +4,7 @@
     $client=null;
     $product = null;
     $url='javascript::void(0)';
-    if(isset($params['param'])){
+    if(isset($params['param']) && isset($params['id'])){
         $clientId=$params['param'];
         $productId=$params['id'];
         $url=url('/oauth/clients/',$clientId);

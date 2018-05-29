@@ -9,11 +9,13 @@
 namespace Btybug\FrontSite\Services;
 
 
-use Illuminate\Http\Request;
+use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
+use Btybug\btybug\Repositories\AdminsettingRepository;
 use Btybug\btybug\Services\GeneralService;
 use Btybug\Console\Repository\FrontPagesRepository;
-use Btybug\btybug\Repositories\AdminsettingRepository;
+use Btybug\FrontSite\Models\FrontendPage;
 use Btybug\User\Repository\PermissionRoleRepository;
+use Illuminate\Http\Request;
 
 class FrontendPageService extends GeneralService
 {
@@ -142,8 +144,19 @@ class FrontendPageService extends GeneralService
                 ]);
             }
         }
-
+        $this->savePageMainContent($page);
         return $page;
+    }
+
+    public function savePageMainContent(FrontendPage $page)
+    {
+        if ($page->content_type == 'template' && $page->page_layout) {
+            $variation = ContentLayouts::findVariation($page->page_layout);
+            if($variation){
+                $variation->main_unit=$page->template;
+                $variation->save();
+            }
+        }
     }
 
     public function saveSpecialSettings(

@@ -323,22 +323,17 @@ function main_content ($variation = null, $section = null)
 {
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
     if ($page) {
-        if($page->type != 'custom') {
-            if ($page->content_type == "editor") {
-                echo $page->main_content;
-            } else {
-                return BBRenderUnits($page->template, ['_page' => $page]);
-            }
+        if ($page->content_type == "editor") {
+            echo $page->main_content;
+        } else {
+            return BBRenderUnits($page->template, ['_page' => $page]);
         }
-
     } elseif (isset($variation['used_in'])) {
         $usedIn = BBgetFrontPage($variation['used_in']);
-        if($usedIn->type != 'custom') {
-            if ($usedIn->content_type == "editor") {
-                echo $usedIn->main_content;
-            } else {
-                return BBRenderUnits($usedIn->template, ['_page' => $usedIn]);
-            }
+        if ($usedIn->content_type == "editor") {
+            echo $usedIn->main_content;
+        } else {
+            return BBRenderUnits($usedIn->template, ['_page' => $usedIn]);
         }
     } else {
         return BBRenderUnits($section);
@@ -2475,3 +2470,4 @@ function BBgetProfileAssets ($id, $type = 'js', $section = 'headerJs')
         return $result;
     }
 }
+

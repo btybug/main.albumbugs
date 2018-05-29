@@ -25,6 +25,7 @@ foreach ($placeholdersData as $key => $datum) {
                     </div>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div class="col-md-12">
@@ -37,6 +38,7 @@ foreach ($placeholdersData as $key => $datum) {
                     {!! $container_styles !!}
                 </select>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     @endoption
@@ -52,13 +54,14 @@ foreach ($placeholdersData as $key => $datum) {
                 'unit'=>'Unit','hook'=>'HooK','editor'=>'Editor']
                 ,null,['class'=>'form-control content_type','data-value'=>'left_side_bar']) !!}
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 
     <div id="main_content_select_left_side_bar_unit"
          class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'ls_content_type') !=='unit') hide   @endif"
          data-type="unit" aria-expanded="true" style="">
-        <div class="content bty-settings-panel">
+        <div class="bty-settings-panel">
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -67,6 +70,7 @@ foreach ($placeholdersData as $key => $datum) {
                     <div class="col-md-8">
                         {!! BBbutton2('unit','ls_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -74,7 +78,7 @@ foreach ($placeholdersData as $key => $datum) {
     <div id="main_content_select_left_side_bar_hook"
          class=" main_content_type_left_side_bar collapse in @if(issetReturn($settings,'ls_content_type') !=='hook') hide   @endif"
          data-type="hook" aria-expanded="true" style="">
-        <div class="content bty-settings-panel">
+        <div class="bty-settings-panel">
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -85,6 +89,7 @@ foreach ($placeholdersData as $key => $datum) {
                       ['class'=>'btn btn-default change-layout','data-name-prefix' => 'hooks','data-type'=>'frontend_sidebar',
                       'model'=>(isset($settings['hooks']) && isset($settings['hooks']['ls_hook'])) ? $settings['hooks']['ls_hook'] : null]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -93,7 +98,7 @@ foreach ($placeholdersData as $key => $datum) {
 
 
     @option('top_right','f',$data)
-    <div class="content bty-settings-panel">
+    <div class="bty-settings-panel">
         <div class="col-md-12">
             <div class="form-group">
                 <div class="col-md-4">
@@ -104,6 +109,7 @@ foreach ($placeholdersData as $key => $datum) {
                     [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','main_content'=>'Main Content'],
                     null,['class'=>'form-control content_type','data-value'=>'top_right']) !!}
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
@@ -111,7 +117,7 @@ foreach ($placeholdersData as $key => $datum) {
     <div id="main_content_select_top_right_unit"
          class=" main_content_type_top_right collapse in @if(issetReturn($settings,'tr_content_type') !=='unit') hide   @endif"
          data-type="unit" aria-expanded="true" style="">
-        <div class="content bty-settings-panel">
+        <div class="bty-settings-panel">
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -120,6 +126,7 @@ foreach ($placeholdersData as $key => $datum) {
                     <div class="col-md-8">
                         {!! BBbutton2('unit','tr_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
 
@@ -128,7 +135,7 @@ foreach ($placeholdersData as $key => $datum) {
     <div id="main_content_select_top_right_hook"
          class=" main_content_type_top_right collapse in @if(issetReturn($settings,'tr_content_type') !=='hook') hide   @endif"
          data-type="hook" aria-expanded="true" style="">
-        <div class="content bty-settings-panel">
+        <div class="bty-settings-panel">
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -139,6 +146,7 @@ foreach ($placeholdersData as $key => $datum) {
                         ['class'=>'btn btn-default change-layout','data-name-prefix' => 'hooks','data-type'=>'frontend_sidebar',
                         'model'=>(isset($settings['hooks']) && isset($settings['hooks']['tr_hook'])) ? $settings['hooks']['tr_hook'] : null]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
 
@@ -157,6 +165,7 @@ foreach ($placeholdersData as $key => $datum) {
                     {!! $container_styles !!}
                 </select>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     @endoption
@@ -172,6 +181,7 @@ foreach ($placeholdersData as $key => $datum) {
                     {!! $container_styles !!}
                 </select>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     @endoption
@@ -187,12 +197,13 @@ foreach ($placeholdersData as $key => $datum) {
                 [null=>'Select Content Type','unit'=>'Unit','hook'=>'HooK','editor'=>'Editor'],
                 null,['class'=>'form-control content_type','data-value'=>'main_right']) !!}
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div id="main_content_select_main_right_unit"
          class=" main_content_type_main_right collapse in @if(issetReturn($settings,'main_content_type') !=='unit') hide   @endif"
          data-type="unit" aria-expanded="true" style="">
-        <div class="content bty-settings-panel">
+        <div class="bty-settings-panel">
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -201,6 +212,7 @@ foreach ($placeholdersData as $key => $datum) {
                     <div class="col-md-8">
                         {!! BBbutton2('unit','main_unit',"frontend","Change",['class'=>'btn btn-default change-layout','data-type'=>'frontend_sidebar','model'=>$settings]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
 
@@ -209,7 +221,7 @@ foreach ($placeholdersData as $key => $datum) {
     <div id="main_content_select_main_right_hook"
          class=" main_content_type_main_right collapse in @if(issetReturn($settings,'main_content_type') !=='hook') hide   @endif"
          data-type="hook" aria-expanded="true" style="">
-        <div class="content bty-settings-panel">
+        <div class="bty-settings-panel">
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -220,6 +232,7 @@ foreach ($placeholdersData as $key => $datum) {
                        ['class'=>'btn btn-default change-layout','data-name-prefix' => 'hooks','data-type'=>'frontend_sidebar',
                        'model'=>(isset($settings['hooks']) && isset($settings['hooks']['main_hook'])) ? $settings['hooks']['main_hook'] : null]) !!}
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

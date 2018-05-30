@@ -228,6 +228,7 @@
                     $(this).find('.content').removeClass('hide');
                     if($(this).height() <= 50){
                         $(this).css({"height" : "50px","top" : "auto"});
+                        $('[data-settinglive="settings"]').addClass('hide');
                     }
                 }
             });

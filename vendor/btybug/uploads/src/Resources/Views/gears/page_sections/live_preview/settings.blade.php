@@ -208,11 +208,14 @@
                 }
 
             });
+
             $('.settings-bottom').draggable({
                 cursor: 'n-resize',
                 axis: 'y',
-//                containment: 'body',
+               // containment: 'body',
                 start: function () {
+                    $(this).css({"height" : "auto","top" : "auto"});
+
                     $(this).find('.content').height('calc(100% - 50px)');
                     $(this).find('.content').removeClass('hide');
                     $(this).find('.closeCSSEditor').on('click', function () {
@@ -223,6 +226,9 @@
                 stop: function () {
                     $(this).find('.content').height('calc(100% - 50px)');
                     $(this).find('.content').removeClass('hide');
+                    if($(this).height() <= 50){
+                        $(this).css({"height" : "50px","top" : "auto"});
+                    }
                 }
             });
         });

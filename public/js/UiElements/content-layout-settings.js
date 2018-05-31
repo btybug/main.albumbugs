@@ -235,11 +235,12 @@ $(document).ready(function () {
         var key = $(this).data('key');
         var type = $(this).data('type');
         if(type != undefined){
+            var data = $('#right-settings-main-box-bty').find('form').serialize();
+            data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val();
+
             $('#right-settings-main-box-bty').html('');
             $("#loader-img").removeClass('hide');
 
-            var data = $('form').serialize();
-            data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val();
             $.ajax({
                 type: "post",
                 datatype: "json",

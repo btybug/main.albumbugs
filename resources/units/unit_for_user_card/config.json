@@ -19,7 +19,8 @@
       "type": "unit",
       "tag": "general",
       "title": "General",
-      "s" : true
+      "s" : true,
+      "f" : true
     },
     "image": {
       "type": "unit",

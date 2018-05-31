@@ -1,3 +1,19 @@
+@option('general','f',$data)
+<div class="content bty-settings-panel">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Functions</label>
+            </div>
+            <div class="col-md-8">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@endoption
+
 @option('name','f',$data)
 <div class="content bty-settings-panel">
     <div class="col-md-12">

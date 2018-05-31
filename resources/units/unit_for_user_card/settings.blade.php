@@ -15,6 +15,24 @@
         </div>
     </div>
 </div>
+<div id="main_function_main_specificUsers"
+           class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificUsers') hide   @endif"
+           data-type="unit" aria-expanded="true" style="">
+    <div class="content bty-settings-panel">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Static Name</label>
+                </div>
+                <div class="col-md-8">
+                    {!! Form::select('specificUsers',\Btybug\User\User::all()->pluck('username','id'),null,['class'=>'form-control']) !!}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div id="main_function_main_specificUser"
      class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificUser') hide   @endif"
      data-type="unit" aria-expanded="true" style="">

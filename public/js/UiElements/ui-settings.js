@@ -204,7 +204,7 @@ $(document).ready(function () {
                             $('#right-settings-main-box-bty #main-box-title').html('Styles');
                         }
                         $('.fullheight').addClass('editplaceholders');
-                        tinymceeditor()
+                        // tinymceeditor()
                     }
                 }
             });

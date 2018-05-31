@@ -1,5 +1,1 @@
-{
-  "title": "default",
-  "id": "unit_for_user_card.default",
-  "settings": {}
-}
+{"title":"default","id":"unit_for_user_card.default","settings":{"main_function":"specificUser","specificUser":"3","name_type":"static","name":null}}

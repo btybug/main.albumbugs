@@ -15,17 +15,17 @@
         </div>
     </div>
 </div>
-<div id="main_function_main_specificUsers"
-           class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificUsers') hide   @endif"
+<div id="main_function_main_specificUser"
+           class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificUser') hide   @endif"
            data-type="unit" aria-expanded="true" style="">
     <div class="content bty-settings-panel">
         <div class="col-md-12">
             <div class="form-group">
                 <div class="col-md-4">
-                    <label for="">Static Name</label>
+                    <label for="">Specific User</label>
                 </div>
                 <div class="col-md-8">
-                    {!! Form::select('specificUsers',\Btybug\User\User::all()->pluck('username','id'),null,['class'=>'form-control']) !!}
+                    {!! Form::select('specificUser',\Btybug\User\User::all()->pluck('username','id'),null,['class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -33,17 +33,17 @@
     </div>
 </div>
 
-<div id="main_function_main_specificUser"
-     class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificUser') hide   @endif"
+<div id="main_function_main_specificUsers"
+     class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificUsers') hide   @endif"
      data-type="unit" aria-expanded="true" style="">
     <div class="content bty-settings-panel">
         <div class="col-md-12">
             <div class="form-group">
                 <div class="col-md-4">
-                    <label for="">Static Name</label>
+                    <label for="">Specific Users</label>
                 </div>
                 <div class="col-md-8">
-                    {!! Form::select('specificUser',\Btybug\User\User::all()->pluck('username','id'),null,['class'=>'form-control']) !!}
+                    {!! Form::select('specificUsers',\Btybug\User\User::all()->pluck('username','id'),null,['class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -89,10 +89,8 @@
         $('body').on('change','.double-select', function () {
             var prefix=$(this).attr('name')+'_';
             var panel = $(this).data('value');
-
             $('.'+prefix + panel).addClass('hide');
             var id = '#'+prefix+panel + '_' + $(this).val();
-            console.log(prefix+panel)
             $(id).removeClass('hide');
         });
     });

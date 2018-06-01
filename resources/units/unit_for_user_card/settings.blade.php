@@ -96,6 +96,21 @@
                             </div>
                         @endforeach
                     @endif
+
+                @endif
+                @if(issetReturn($settings,'main_function') =='specificUser')
+                    @if(isset($settings['specificUser']) && \Btybug\User\User::find($settings['specificUser']))
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label for="">{!! \Btybug\User\User::find($settings['specificUser'])->username !!}</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="specificUserName" class="form-control">
+                            </div>
+                        </div>
+                    @else
+                        Select Specific User From General Tab Functions
+                    @endif
                 @endif
                 <div class="clearfix"></div>
             </div>

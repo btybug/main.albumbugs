@@ -84,17 +84,23 @@
                 </div>
 
                 @if(issetReturn($settings,'main_function') =='specificUsers')
-
                     @if(isset($settings['specificUsers']))
                         @foreach($settings['specificUsers'] as $user_id)
-                            <input type="text" name="names[{!! $user_id !!}]" class="form-control">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <label for="">{!! \Btybug\User\User::find($user_id)->username !!}</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="names[{!! $user_id !!}]" class="form-control">
+                                </div>
+                            </div>
                         @endforeach
                     @endif
                 @endif
                 <div class="clearfix"></div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
 @endoption

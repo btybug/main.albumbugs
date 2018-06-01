@@ -9,5 +9,4 @@ $(function () {
         var id = '#'+prefix+panel + '_' + $(this).val();
         $(id).removeClass('hide');
     });
-    $('.specific-users').select2();
 });

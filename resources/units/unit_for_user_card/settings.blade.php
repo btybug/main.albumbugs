@@ -118,6 +118,26 @@
         </div>
     </div>
 </div>
+
+
+<div id="name_type_name_dynamic"
+     class="name_type_dynamic collapse in @if(issetReturn($settings,'name_type') !=='dynamic') hide   @endif"
+     data-type="unit" aria-expanded="true" style="">
+    <div class="bty-settings-panel">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Dynamic Name</label>
+                </div>
+                <div class="col-md-8">
+                {!! Form::select('dynamic_name', BBGetTableColumn('users'),null,['class'=>'form-control']) !!}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endoption
 
 

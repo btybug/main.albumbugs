@@ -4,7 +4,7 @@
              alt="">
     </div>
     <div>
-        <h3>{!! Auth::user()->username !!}</h3>
+        <h3>{!! BBfindTableColumnData('users',$settings['dynamic_name'],Auth::id()) !!}</h3>
         <h4>profession</h4>
         <p><i class="fa fa-map-marker"></i>location</p>
         <h5>Info</h5>
@@ -19,4 +19,3 @@
         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
     </ul>
 </div>
-

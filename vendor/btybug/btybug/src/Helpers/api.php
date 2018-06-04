@@ -713,6 +713,11 @@ function BBGetTableColumnData ($table = null, $column = null)
 
     return $data;
 }
+function BBfindTableColumnData($table,$column,$id){
+    if(!$column || !$id) return null;
+   $row= DB::table($table)->find($id);
+   return ($row)?$row->$column:null;
+}
 
 function BBbutton ($action, $key, $text, array $array = [])
 {

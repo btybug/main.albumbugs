@@ -12,7 +12,7 @@
                 @endif
 
                 @if(isset($settings['name_type']) && $settings['name_type']=='dynamic')
-                    <h3>@if(isset($settings['specificUser'])) {!! \Btybug\User\User::find($settings['specificUser'])->username !!}@endif</h3>
+                    <h3>@if(isset($settings['specificUser'])) {!! BBfindTableColumnData('users',issetReturn($settings,'dynamic_name'),issetReturn($settings,'specificUser')) !!}@endif</h3>
                 @endif
             @endif
         @endif

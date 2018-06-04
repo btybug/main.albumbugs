@@ -9,7 +9,7 @@
                      alt="">
             </div>
             <div>
-                <h3>{!! ($settings['name_type']=='dynamic')?$user->username:((isset($settings['names'][$user_id]))?$settings['names'][$user_id]:'') !!}</h3>
+                <h3>{!! ($settings['name_type']=='dynamic')? BBfindTableColumnData('users',issetReturn($settings,'dynamic_name'),$user_id) :((isset($settings['names'][$user_id]))?$settings['names'][$user_id]:'') !!}</h3>
                 <h4>profession</h4>
                 <p><i class="fa fa-map-marker"></i>location</p>
                 <h5>Info</h5>

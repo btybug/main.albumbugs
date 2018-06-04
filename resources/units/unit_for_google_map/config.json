@@ -1,16 +1,16 @@
 {
-  "title": "Hovsep Shopping Card",
+  "title": "Google Map",
   "author": "Hovsep",
-  "site": "http:\/\/bootydev.co.uk",
+  "site": "",
   "version": "1.0",
   "example":"demo",
   "self_type": "units",
   "type": "units",
-  "description": "nice shopping Card",
+  "description": "My location in google map",
   "have_setting": 1,
   "image": "screenshot.png",
-  "slug": "hovsep_shopping_card",
-  "folder": "hovsep_shopping_card",
+  "slug": "unit_for_google_map",
+  "folder": "unit_for_google_map",
   "created_at": 1490088665,
   "is_core": 0,
   "place": "frontend",
@@ -23,6 +23,6 @@
       "f" : true
     }
   },
-  "tags": ["shopping","card","shopping_card","frontend"],
-  "path": "resources\/units\/hovsep_shopping_card"
+  "tags": ["google_map","frontend"],
+  "path": "resources\/units\/unit_for_google_map"
 }

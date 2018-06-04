@@ -230,7 +230,7 @@ dd(1);
         } else {
             if(isset($data['copy_data'])){
                 $tpl = self::findByVariation($data['variation_id']);
-                $variation = $tpl->variations()->find($data['variation_id']);
+                $variation = $tpl->variations(false)->find($data['variation_id']);
 
                 if($tpl && $variation){
                     $settingsData = $variation->settings;

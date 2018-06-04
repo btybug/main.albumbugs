@@ -41,14 +41,22 @@
                 @if(isset($variation))
                     <input type="hidden" id="itemname" value="{!! $variation->title !!}">
                     <div class="form-control">{!! $variation->title !!}</div>
+                    @php
+                        $current = [$variation->id => 'Current variation is the default selected'];
+                    @endphp
                 @else
                     <input type="text" class="form-control" id="itemname" placeholder="itemname"
                            value="">
+                    @php
+                        $current = ['' => 'Select Variation, there is no default'];
+                    @endphp
                 @endif
             </div>
         </div>
         <div class="col-xs-4  p-t-10">
-            {!! Form::select('copy_data',['' =>'Select Variation'] + BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control','id' => 'copy_data']) !!}
+            {!! Form::select('copy_data',
+                $current
+            + BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control','id' => 'copy_data']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>

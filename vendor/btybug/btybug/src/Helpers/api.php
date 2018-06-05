@@ -319,24 +319,23 @@ function BBfooterBack ()
     }
 }
 
-function main_content ($variation = null, $section = null)
+function main_content ($variation = null, $settings = null)
 {
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
-    if ($page) {
-        if ($page->content_type == "editor") {
-            echo $page->main_content;
-        } else {
-            return BBRenderUnits($page->template, ['_page' => $page]);
+    $pageModel = ($page) ?? ((isset($variation['used_in'])) ? BBgetFrontPage($variation['used_in']) : null);
+
+    if($pageModel){
+        if($pageModel->type =='custom' && isset($settings['live_preview_action'])){
+            return BBRenderUnits(issetReturn($settings,'main_unit',$pageModel->template), ['_page' => $pageModel]);
+        }else{
+            if ($pageModel->content_type == "editor") {
+                echo $pageModel->main_content;
+            } else {
+                return BBRenderUnits($pageModel->template, ['_page' => $pageModel]);
+            }
         }
-    } elseif (isset($variation['used_in'])) {
-        $usedIn = BBgetFrontPage($variation['used_in']);
-        if ($usedIn->content_type == "editor") {
-            echo $usedIn->main_content;
-        } else {
-            return BBRenderUnits($usedIn->template, ['_page' => $usedIn]);
-        }
-    } else {
-        return BBRenderUnits($section);
+    }else {
+        return BBRenderUnits(issetReturn($settings,'main_unit'));
     }
 }
 

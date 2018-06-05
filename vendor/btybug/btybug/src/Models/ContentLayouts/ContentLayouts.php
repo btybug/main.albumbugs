@@ -241,6 +241,7 @@ dd(1);
                 $tpl = self::findByVariation($slug);
                 $variation = self::findVariation($slug);
                 $data['variation'] = $variation;
+                $data['live_preview_action'] = true;
                 return ['data' => $tpl->renderLive($data)];
             }
         }

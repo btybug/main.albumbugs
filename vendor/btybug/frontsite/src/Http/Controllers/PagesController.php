@@ -489,4 +489,9 @@ class PagesController extends Controller
         return view('manage::frontend.pages.extra', compact('id'));
     }
 
+    public function getSettingsLayout()
+    {
+        return view('manage::frontend.pages.layout.preview');
+    }
+
 }

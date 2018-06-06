@@ -1,4 +1,4 @@
-<a href="javascript:void(0)" class="btn btn-info">Change</a>
+<a href="{!! route('frontsite_settings_layout',$page->id) !!}" class="btn btn-info">Change</a>
 
 
 {{--{!! BBcustomize('layouts','page_layout','frontend',--}}

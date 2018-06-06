@@ -60,6 +60,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
 
     public function scopeRenderLivePreview(string $slug)
     {
+        dd(2);
         $ui = $model = $this->findByVariation($slug);
 
         if (!$ui) {
@@ -151,6 +152,23 @@ dd(1);
         $variation = self::findVariation($slug);
 
         $data['view'] = "uploads::gears.page_sections.live_preview.settings";
+        $data['request'] = $settings;
+        if ($variation) {
+            $data['variation'] = $variation;
+            return self::findByVariation($slug)->renderSettings($data);
+        } else if (self::find($slug)) {
+            if(! $variation){
+                $variation = self::find($slug)->variations(false)->find($slug);
+            }
+            $data['variation'] = $variation;
+            return self::find($slug)->renderSettings($data);
+        }
+    }
+    public static function renderPageLivePreview($slug, $settings = [])
+    {
+        $variation = self::findVariation($slug);
+
+        $data['view'] = "uploads::gears.page_sections.live_preview.page_settings";
         $data['request'] = $settings;
         if ($variation) {
             $data['variation'] = $variation;

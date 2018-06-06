@@ -495,13 +495,12 @@ class PagesController extends Controller
         $slug=$page->page_layout;
 //        $settings = $request->all();
         if ($slug) {
-            $view = ContentLayouts::renderLivePreview($slug, []);
+            $view = ContentLayouts::renderPageLivePreview($slug, []);
 
             return $view ? $view : abort('404');
         } else {
             abort('404');
         }
-        return view('manage::frontend.pages.layout.preview');
     }
 
 }

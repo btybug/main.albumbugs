@@ -38,6 +38,18 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Icon Size</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="">Width</label>
+                    {!!Form::text('icon_width', null, ['class'=>'form-control']);!!}
+                    <label for="">Height</label>
+                    {!!Form::text('icon_height', null, ['class'=>'form-control']);!!}
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
 
     </div>
@@ -139,15 +151,17 @@
                 <label for="">Zoom</label>
                 {!!Form::checkbox('zoom');!!}<br>
                 <label for="">Map Type</label>
-                {!!Form::checkbox('mapType', null, ['class'=>'form-control']);!!}<br>
+                {!!Form::checkbox('mapType')!!}<br>
                 <label for="">Scale</label>
-                {!!Form::checkbox('scale', null, ['class'=>'form-control']);!!}<br>
+                {!!Form::checkbox('scale')!!}<br>
                 <label for="">Street</label>
-                {!!Form::checkbox('street', null, ['class'=>'form-control']);!!}<br>
+                {!!Form::checkbox('street');!!}<br>
                 <label for="">Rotate</label>
-                {!!Form::checkbox('rotate', null, ['class'=>'form-control']);!!}<br>
+                {!!Form::checkbox('rotate');!!}<br>
                 <label for="">Fullscreen</label>
-                {!!Form::checkbox('fullscreen');!!}
+                {!!Form::checkbox('fullscreen');!!}<br>
+                <label for="">Drawing Manager</label>
+                {!!Form::checkbox('drawing_manager');!!}
             </div>
             <div class="clearfix"></div>
         </div>

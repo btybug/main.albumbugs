@@ -28,6 +28,9 @@
 <div style="display: none" id="rotate">@if(isset($settings['rotate'])) {{$settings['rotate']}} @else {{0}} @endif</div>
 <div style="display: none" id="fullscreen">@if(isset($settings['fullscreen'])) {{$settings['fullscreen']}} @else {{0}} @endif</div>
 <div style="display: none" id="icon">@if(isset($settings['icon'])) {{$settings['icon']}} @else {{0}} @endif</div>
+<div style="display: none" id="icon_width">@if(isset($settings['icon_width'])) {{$settings['icon_width']}} @else {{20}} @endif</div>
+<div style="display: none" id="icon_height">@if(isset($settings['icon_height'])) {{$settings['icon_height']}} @else {{20}} @endif</div>
+<div style="display: none" id="drawing_manager">@if(isset($settings['drawing_manager'])) {{$settings['drawing_manager']}} @else {{0}} @endif</div>
 <script>
     // Initialize and add the map
     function initMap() {
@@ -40,12 +43,14 @@
         var streetView;
         var rotate;
         var fullscreen;
+        var draw_manager;
         if(Number($('#zoom').text()) == 1) zoom = true; else zoom = false;
         if(Number($('#mapType').text()) == 1) mapType = true; else mapTupe = false;
         if(Number($('#scale').text()) == 1) scale = true; else scaleControl = false;
         if(Number($('#street').text()) == 1) streetView = true; else streetView= false;
         if(Number($('#rotate').text()) == 1) rotate = true; else rotate = false;
         if(Number($('#fullscreen').text()) == 1) fullscreen = true; else fullscreen = false;
+        if(Number($('#drawing_manager').text()) == 1) draw_manager = true; else draw_manager = false;
         if(isNaN(main_function)) main_function = 1;
 
         if(main_function == 1) {
@@ -66,10 +71,12 @@
                                                 fullscreenControl: fullscreen});
             // The marker, positioned at Uluru
             var url = null;
+            var icon_width = Number($('#icon_width').text());
+            var icon_height = Number($('#icon_height').text());
             if(Number($("#icon").text()) !== 0) url = $("#icon").text();
             var icon = {
                 url: url,
-                scaledSize: new google.maps.Size(50, 50),
+                scaledSize: new google.maps.Size(icon_width, icon_height),
                 //origin: new google.maps.Point(0,0),
                 //anchor: new google.maps.Point(0, 0)
             };
@@ -118,9 +125,29 @@
             map.setMapTypeId('hybrid');
         else if(styles == 3)
             map.setMapTypeId('terrain');
+        if(draw_manager) {
+            var drawingManager = new google.maps.drawing.DrawingManager({
+                drawingMode: google.maps.drawing.OverlayType.MARKER,
+                drawingControl: true,
+                drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                    drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+                },
+                markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+                circleOptions: {
+                    fillColor: '#ffff00',
+                    fillOpacity: 1,
+                    strokeWeight: 5,
+                    clickable: false,
+                    editable: true,
+                    zIndex: 1
+                }
+            });
+            drawingManager.setMap(map);
+        }
     }
 </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAud3CAgSUNCWBRlSZQjKz8a7M0RV7R_IA&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAud3CAgSUNCWBRlSZQjKz8a7M0RV7R_IA&callback=initMap&libraries=drawing">
 </script>
 

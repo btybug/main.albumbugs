@@ -2475,3 +2475,7 @@ function BBgetProfileAssets ($id, $type = 'js', $section = 'headerJs')
     }
 }
 
+function BBgetTable($table){
+    return DB::table($table);
+}
+

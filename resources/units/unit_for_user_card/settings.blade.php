@@ -10,7 +10,9 @@
                 null=>'Main Function',
                 'authUser'=>'Auth User',
                 'specificUser'=>'Specific User',
-                'specificUsers'=>'Specific Users'],null,['class'=>'form-control double-select','data-value'=>'main']) !!}
+                'specificUsers'=>'Specific Users',
+                'specificPost'=>'Specific Posts'
+                ],null,['class'=>'form-control double-select','data-value'=>'main']) !!}
             </div>
             <div class="clearfix"></div>
         </div>
@@ -27,6 +29,25 @@
                 </div>
                 <div class="col-md-8">
                     {!! Form::select('specificUser',\Btybug\User\User::all()->pluck('username','id'),null,['class'=>'form-control ']) !!}
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="main_function_main_specificPost"
+     class="main_function_main collapse in @if(issetReturn($settings,'main_function') !=='specificPost') hide   @endif"
+     data-type="unit" aria-expanded="true" style="">
+    <div class="bty-settings-panel">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Specific Post</label>
+                </div>
+                <div class="col-md-8">
+                    {!! Form::select('specificPost',BBgetTable('posts')->pluck('title','id'),null,['class'=>'form-control ']) !!}
 
                 </div>
                 <div class="clearfix"></div>
@@ -121,7 +142,7 @@
 
 
 <div id="name_type_name_dynamic"
-     class="name_type_dynamic collapse in @if(issetReturn($settings,'name_type') !=='dynamic') hide   @endif"
+     class="name_type_dynamic user_table collapse in @if(issetReturn($settings,'name_type') !=='dynamic' || issetReturn($settings,'main_function')=='specificPost') hide   @endif"
      data-type="unit" aria-expanded="true" style="">
     <div class="bty-settings-panel">
         <div class="col-md-12">
@@ -131,6 +152,25 @@
                 </div>
                 <div class="col-md-8">
                 {!! Form::select('dynamic_name', BBGetTableColumn('users'),null,['class'=>'form-control']) !!}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="name_type_name_dynamic"
+     class="name_type_dynamic posts_table collapse in @if(issetReturn($settings,'main_function')!='specificPost') hide   @endif"
+     data-type="unit" aria-expanded="true" style="">
+    <div class="bty-settings-panel">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Dynamic Name</label>
+                </div>
+                <div class="col-md-8">
+                {!! Form::select('dynamic_name', BBGetTableColumn('posts'),null,['class'=>'form-control']) !!}
                 </div>
                 <div class="clearfix"></div>
             </div>

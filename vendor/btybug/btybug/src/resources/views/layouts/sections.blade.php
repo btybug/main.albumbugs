@@ -54,9 +54,9 @@
             </div>
         </div>
         <div class="col-xs-4  p-t-10">
-            {!! Form::select('copy_data',
-                $current
-            + BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control','id' => 'copy_data']) !!}
+            {{--{!! Form::select('copy_data',--}}
+                {{--$current--}}
+            {{--+ BBgetContentLayoutVariationsPluck($model),null,['class' => 'form-control','id' => 'copy_data']) !!}--}}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>

@@ -26,13 +26,13 @@ class PhpJsonParser
 
         preg_match_all('/(?<=\/\*).+(?=\*\/)/', $file, $match);
 
-        $html = '';
+        $array=[];
 
         if (count($matches[0])) {
-            $html = self::renderHtml($matches[0], $match[0]);
+            $array=  self::toArray($matches[0], $match[0]);
         }
 
-        return $html;
+        return $array;
     }
 
     public function makeCssClasses($path)
@@ -46,17 +46,17 @@ class PhpJsonParser
         return $this;
     }
 
-    public static function renderHtml($data, $desc = [])
+    public static function toArray($data, $desc = [])
     {
-        $str = '';
+        $array = [];
         foreach ($data as $key => $item) {
             if (isset($desc[$key])) {
-                $str .= "<option value='" . $item . "'>" . $desc[$key] . "</option>";
+                $array[$item]= $desc[$key];
             } else {
-                $str .= "<option value='" . $item . "'>" . $item . "</option>";
+                $array[$item] = $item;
             }
         }
-        return $str;
+        return $array;
     }
 
     public function collect()

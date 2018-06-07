@@ -1,6 +1,4 @@
 <?php
-$container_styles = getDinamicStyle('containers');
-$container_styles = '<option value="0">Select Class</option>' . $container_styles;
 $placeholdersData = $model->placeholders;
 $placeholders = [];
 foreach ($placeholdersData as $key => $datum) {
@@ -34,9 +32,7 @@ foreach ($placeholdersData as $key => $datum) {
                 <label for="">Select</label>
             </div>
             <div class="col-md-8">
-                <select name="ls_style" id="" class="form-control">
-                    {!! $container_styles !!}
-                </select>
+                {!! Form::select('ls_style',['' => 'Select'] + getDinamicStyle('containers'),null,['class' => 'form-control']) !!}
             </div>
             <div class="clearfix"></div>
         </div>
@@ -161,9 +157,7 @@ foreach ($placeholdersData as $key => $datum) {
                 <label for="">Select</label>
             </div>
             <div class="col-md-8">
-                <select name="tr_style" id="" class="form-control">
-                    {!! $container_styles !!}
-                </select>
+                {!! Form::select('tr_style',['' => 'Select'] + getDinamicStyle('containers'),null,['class' => 'form-control']) !!}
             </div>
             <div class="clearfix"></div>
         </div>
@@ -177,9 +171,7 @@ foreach ($placeholdersData as $key => $datum) {
                 <label for="">Select</label>
             </div>
             <div class="col-md-8">
-                <select name="mr_style" id="" class="form-control">
-                    {!! $container_styles !!}
-                </select>
+                {!! Form::select('mr_style',['' => 'Select'] + getDinamicStyle('containers'),null,['class' => 'form-control']) !!}
             </div>
             <div class="clearfix"></div>
         </div>

@@ -82,25 +82,6 @@ foreach ($placeholdersData as $key => $datum) {
         <div class="col-md-12">
             <div class="form-group">
                 <div class="col-md-4">
-                    <label for="">Select style</label>
-                </div>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <div class="input-group-addon">Change</div>
-                        <input type="text" readonly="readonly" data-id="" class="page-layout-title form-control"
-                               title="" style="width: 100%; background: #fff;" value="Nothing Selected!!!"
-                               data-original-title="info">
-                        <div class="input-group-addon">
-                            <button type="button" class="BBbuttons" data-type="frontend">Change</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="col-md-4">
                     <label for="">Select</label>
                 </div>
                 <div class="col-md-8">

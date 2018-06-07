@@ -52,8 +52,8 @@
         </div>
 
         <div class="{!! issetReturn($settings,'rc_desktop').' '.issetReturn($settings,'rc_l_table').' '.issetReturn($settings,'rc_p_table').' '.issetReturn($settings,'rc_mobile')!!}">
-            <div class="default-column {{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
-                <div class="{{(isset($settings['tr_style'])&& $settings['tr_style']) ? $settings['tr_style'] : ''}} ">
+            <div class="default-column {{(isset($settings['tr_style'])&& $settings['tr_style']) ? $settings['tr_style'] : ''}}">
+                <div>
                     @switch(issetReturn($settings,'tr_content_type'))
                         @case('unit')
                         @if(has_setting($settings,'tr_unit'))

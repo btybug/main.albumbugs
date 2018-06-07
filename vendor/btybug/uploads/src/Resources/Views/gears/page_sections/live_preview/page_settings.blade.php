@@ -5,7 +5,6 @@
         {!! $html !!}
     </div>
     <textarea type="hidden" class="hide" id="hidden_data" hidden>{!! $json !!}</textarea>
-
     <input type="hidden" id="layout_slug" value="{!! $model->slug !!}">
     <input type="hidden" id="layout_variation" value="{!! @$variation->id  !!}">
     <div id="output-content" style="display: none"></div>
@@ -72,6 +71,7 @@
                         </div>
                     </div>
                     <div class="col-xs-9">
+
                         <img src="{!! url('/public/images/loader.gif') !!}" style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide" />
                         <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($model,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/settings',$model->slug)]) !!}
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-
+<input type="hidden" value="{!! route('uploads_page_settings_options') !!}" id="options-url">
 @stop
 @section('CSS')
     {!! HTML::style("https://jqueryvalidation.org/files/demo/site-demos.css") !!}

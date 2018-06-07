@@ -244,7 +244,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "post",
                 datatype: "json",
-                url: "/admin/uploads/layouts/settings/options",
+                url: $('#options-url').val(),
                 data: data,
                 headers: {
                     'X-CSRF-TOKEN': $("#token").val()

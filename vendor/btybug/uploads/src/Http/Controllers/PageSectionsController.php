@@ -215,6 +215,31 @@ class PageSectionsController extends Controller
             'error' => true
         ]);
     }
+    public function postPageOptions(Request $request)
+    {
+        $model = ContentLayouts::find($request->bb_slug);
+        if ($model) {
+            $settingsHtml = "ContentLayouts.$model->folder.settings";
+            $settings = $request->except('key', 'type');
+            $data = $request->only('key', 'type');
+            $preview = \view($settingsHtml)->with([
+                'model' => $model,
+                'settings' => $settings,
+                'data' => $data])->render();
+
+
+            $html = \View('uploads::gears.page_sections._partials.right_box', compact(['model', 'preview', 'settings', 'data']))->with('variation', $request->get('bb_variation'))->render();
+
+            return response()->json([
+                'html' => $html,
+                'error' => false
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
+        ]);
+    }
 
     public function getConsole(Request $request)
     {

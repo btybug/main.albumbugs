@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-
+    <input type="hidden" value="{!! route('uploads_settings_options') !!}" id="options-url">
 @stop
 @section('CSS')
     {!! HTML::style("https://jqueryvalidation.org/files/demo/site-demos.css") !!}

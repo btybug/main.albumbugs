@@ -493,7 +493,7 @@ class PagesController extends Controller
     {
         $page=$repository->find($id);
         $layout=$request->get('layout',false);
-        $slug=$request->get('variation',($layout)?$layout:$page->page_layout);
+        $slug=$request->get('variations',($layout)?$layout:$page->page_layout);
 
 //        $settings = $request->all();
         if ($slug) {

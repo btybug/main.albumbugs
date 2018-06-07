@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
 use Btybug\btybug\Models\Sections;
 use Btybug\btybug\Services\CmsItemUploader;
+use Btybug\Console\Repository\FrontPagesRepository;
 use Illuminate\Http\Request;
 use Resources;
 use View;
@@ -182,14 +183,18 @@ class PageSectionsController extends Controller
         ]);
     }
 
-    public function postPageSectionSettings(Request $request)
+    public function postPageSectionSettings(Request $request,$page_id,FrontPagesRepository $repository)
     {
-        dd($request->all());
-
-        $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
-
+       if($request->save){
+           $slug = explode('.', $request->slug);
+           $page=$repository->find($page_id);
+           $page->page_layout=$slug[0];
+           $page->page_layout_settings=json_encode($request->all(),true);
+           $page->save();
+       }
+        $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), null);
         return response()->json([
-            'url' => isset($output['id']) ? url('/admin/uploads/layouts/settings/' . $output['id']) : false,
+            'url' => ($request->save) ? url('/admin/front-site/structure/front-pages/settings/'.$page_id.'/layout') : false,
             'html' => isset($output['data']) ? $output['data'] : false
         ]);
     }

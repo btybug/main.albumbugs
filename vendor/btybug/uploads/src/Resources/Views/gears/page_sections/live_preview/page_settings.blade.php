@@ -73,11 +73,12 @@
                     </div>
                     <div class="col-xs-9">
 
-                        <img src="{!! url('/public/images/loader.gif') !!}" style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide" />
+                        <img src="{!! url('/public/images/loader.gif') !!}"
+                             style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide"/>
                         <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($model,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/page-settings',[$page->id,$model->slug])]) !!}
-                                <h3 id="main-box-title"></h3>
-                                @include($settingsHtml)
+                            <h3 id="main-box-title"></h3>
+                            @include($settingsHtml)
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -85,7 +86,7 @@
             </div>
         </div>
     </div>
-<input type="hidden" value="{!! route('uploads_page_settings_options') !!}" id="options-url">
+    <input type="hidden" value="{!! route('uploads_page_settings_options') !!}" id="options-url">
 @stop
 @section('CSS')
     {!! HTML::style("https://jqueryvalidation.org/files/demo/site-demos.css") !!}
@@ -213,9 +214,9 @@
             $('.settings-bottom').draggable({
                 cursor: 'n-resize',
                 axis: 'y',
-               // containment: 'body',
+                // containment: 'body',
                 start: function () {
-                    $(this).css({"height" : "auto","top" : "auto"});
+                    $(this).css({"height": "auto", "top": "auto"});
 
                     $(this).find('.content').height('calc(100% - 50px)');
                     $(this).find('.content').removeClass('hide');
@@ -227,8 +228,8 @@
                 stop: function () {
                     $(this).find('.content').height('calc(100% - 50px)');
                     $(this).find('.content').removeClass('hide');
-                    if($(this).height() <= 50){
-                        $(this).css({"height" : "50px","top" : "auto"});
+                    if ($(this).height() <= 50) {
+                        $(this).css({"height": "50px", "top": "auto"});
                         $('[data-settinglive="settings"]').addClass('hide');
                     }
                 }

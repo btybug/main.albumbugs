@@ -11,7 +11,7 @@
                     @php
                         $items = BBGetMenu($settings['top_menu'])
                     @endphp
-                    @if(count($items))
+                    @if(is_array($items) && count($items))
                         @foreach($items as $item)
                             @if(isset($item->children))
                                 <li class="dropdown default-dropdown">

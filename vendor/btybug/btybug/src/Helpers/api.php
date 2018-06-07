@@ -1495,6 +1495,7 @@ function BBGetMenu ($id)
     $menuRepo = new \Btybug\btybug\Repositories\MenuRepository();
     $menu = $menuRepo->find($id);
     $data = json_decode($menu->json_data, true);
+    if(!$data)return null;
     $result = recursiveItems($data);
 
     return $result;

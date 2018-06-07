@@ -167,16 +167,21 @@ dd(1);
     public static function renderPageLivePreview($slug, $settings = [])
     {
         $variation = self::findVariation($slug);
-
         $data['view'] = "uploads::gears.page_sections.live_preview.page_settings";
         $data['request'] = $settings;
         if ($variation) {
             $data['variation'] = $variation;
-            return self::findByVariation($slug)->renderSettings($data);
+            $layout=self::findByVariation($slug);
+            $data['variations']=$layout->variations(false)->all()->getItems();
+
+            return $layout->renderSettings($data);
         } else if (self::find($slug)) {
             if(! $variation){
-                $variation = self::find($slug)->variations(false)->find($slug);
+                $layout=self::find($slug);
+                $data['variations']=$layout->variations(false)->all()->getItems();
+                $variation = $layout->variations(false)->find($slug);
             }
+
             $data['variation'] = $variation;
             return self::find($slug)->renderSettings($data);
         }
@@ -447,6 +452,7 @@ dd(1);
     public function scopeRenderSettings(array $variables = [], array $data = [])
     {
         $variation = $variables['variation'];
+        $variations = isset($variables['variations'])?$variables['variations']:null;
         $settings = ($variation) ? $variation->toArray() : $variation;
         if ($settings) {
             if (isset($variables['request'])) {
@@ -468,7 +474,7 @@ dd(1);
         } else {
             $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $settings, '_this' => $this, 'variation' => $variables['variation']])->render();
         }
-        return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html', 'settings', 'data', 'variation', 'usedIn']));
+        return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html', 'settings', 'data', 'variation', 'usedIn','variations']));
     }
 
     /**

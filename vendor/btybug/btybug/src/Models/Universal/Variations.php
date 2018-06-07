@@ -66,6 +66,11 @@ class Variations implements \ArrayAccess, \Countable, \IteratorAggregate, Htmlab
         return false;
     }
 
+    public function getItems()
+    {
+        return $this->items;
+    }
+
     public function all()
     {
         $vars = File::allFiles($this->path);

@@ -489,10 +489,12 @@ class PagesController extends Controller
         return view('manage::frontend.pages.extra', compact('id'));
     }
 
-    public function getSettingsLayout($id,FrontPagesRepository $repository)
+    public function getSettingsLayout($id,FrontPagesRepository $repository,Request $request)
     {
         $page=$repository->find($id);
-        $slug=$page->page_layout;
+        $layout=$request->get('layout',false);
+        $slug=$request->get('variation',($layout)?$layout:$page->page_layout);
+
 //        $settings = $request->all();
         if ($slug) {
             $view = ContentLayouts::renderPageLivePreview($slug, []);

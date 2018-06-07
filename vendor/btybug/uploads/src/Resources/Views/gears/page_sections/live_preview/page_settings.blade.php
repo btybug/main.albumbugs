@@ -7,9 +7,10 @@
     <textarea type="hidden" class="hide" id="hidden_data" hidden>{!! $json !!}</textarea>
     <input type="hidden" id="layout_slug" value="{!! $model->slug !!}">
     <input type="hidden" id="layout_variation" value="{!! @$variation->id  !!}">
+    <input type="hidden" id="page_id" value="{!! $page->id  !!}">
     <div id="output-content" style="display: none"></div>
-@stop
 
+@stop
 @section('settings')
     <div class="settings-bottom ">
         <div class="head">
@@ -74,7 +75,7 @@
 
                         <img src="{!! url('/public/images/loader.gif') !!}" style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide" />
                         <div class="right" id="right-settings-main-box-bty">
-                            {!! Form::model($model,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/settings',$model->slug)]) !!}
+                            {!! Form::model($model,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/page-settings',[$page->id,$model->slug])]) !!}
                                 <h3 id="main-box-title"></h3>
                                 @include($settingsHtml)
                             {!! Form::close() !!}

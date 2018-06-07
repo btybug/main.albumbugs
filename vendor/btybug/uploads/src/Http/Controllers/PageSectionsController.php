@@ -182,6 +182,18 @@ class PageSectionsController extends Controller
         ]);
     }
 
+    public function postPageSectionSettings(Request $request)
+    {
+        dd($request->all());
+
+        $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), $request->save);
+
+        return response()->json([
+            'url' => isset($output['id']) ? url('/admin/uploads/layouts/settings/' . $output['id']) : false,
+            'html' => isset($output['data']) ? $output['data'] : false
+        ]);
+    }
+
     public function getSettingsResponsive($slug, Request $request)
     {
         $output = ContentLayouts::savePageSectionSettings($slug, $request->itemname, $request->except(['_token', 'itemname']), false);
@@ -215,9 +227,11 @@ class PageSectionsController extends Controller
             'error' => true
         ]);
     }
+
     public function postPageOptions(Request $request)
     {
         $model = ContentLayouts::find($request->bb_slug);
+        $page_id=$request->bb_page;
         if ($model) {
             $settingsHtml = "ContentLayouts.$model->folder.settings";
             $settings = $request->except('key', 'type');
@@ -227,8 +241,8 @@ class PageSectionsController extends Controller
                 'settings' => $settings,
                 'data' => $data])->render();
 
-
-            $html = \View('uploads::gears.page_sections._partials.right_box', compact(['model', 'preview', 'settings', 'data']))->with('variation', $request->get('bb_variation'))->render();
+            $variation = ($request->get('bb_variation')) ?? $model->slug . '.default';
+            $html = \View('uploads::gears.page_sections._partials.right_box_page_section', compact(['model','page_id','preview', 'settings', 'data']))->with('variation', $variation)->render();
 
             return response()->json([
                 'html' => $html,

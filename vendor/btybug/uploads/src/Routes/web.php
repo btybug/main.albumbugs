@@ -101,6 +101,7 @@ Route::group(['prefix' => 'layouts'], function () {
     Route::get('/settings/create/{slug?}', 'PageSectionsController@createVariationForlayout', true)->name('create_variation_for_layout');
     Route::get('/variations/{slug}', 'PageSectionsController@getVariations', true)->name('uploads_layouts_variations');
     Route::post('/settings/{slug}/{save?}', 'PageSectionsController@postSettings')->name('uploads_layouts_settings_post');
+    Route::post('/page-settings/{page_id}/{slug}/{save?}', 'PageSectionsController@postPageSectionSettings')->name('uploads_page_layouts_settings_post');
     Route::post('/console', 'PageSectionsController@getConsole');
     Route::post('/make-active', 'PageSectionsController@postMakeActive');
     Route::post('/upload', 'PageSectionsController@postUpload');

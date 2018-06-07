@@ -494,10 +494,8 @@ class PagesController extends Controller
         $page=$repository->find($id);
         $layout=$request->get('layout',false);
         $slug=$request->get('variations',($layout)?$layout:$page->page_layout);
-
-//        $settings = $request->all();
         if ($slug) {
-            $view = ContentLayouts::renderPageLivePreview($slug, []);
+            $view = ContentLayouts::renderPageLivePreview($slug, [],$page);
 
             return $view ? $view : abort('404');
         } else {

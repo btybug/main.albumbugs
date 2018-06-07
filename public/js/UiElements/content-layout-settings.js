@@ -236,7 +236,7 @@ $(document).ready(function () {
         var type = $(this).data('type');
         if(type != undefined){
             var data = $('#right-settings-main-box-bty').find('form').serialize();
-            data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val();
+            data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val()+ '&bb_page=' + $("#page_id").val();
 
             $('#right-settings-main-box-bty').html('');
             $("#loader-img").removeClass('hide');

@@ -26,15 +26,13 @@
       "type": "unit",
       "tag": "position",
       "title": "Position",
-      "s" : false,
-      "f" : true
+      "s" : true
     },
     "destination": {
       "type": "unit",
       "tag": "destination",
       "title": "Destination",
-      "s" : false,
-      "f" : true
+      "s" : true
     }
   },
   "tags": ["google_map","frontend"],

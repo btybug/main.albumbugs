@@ -9,24 +9,16 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
 
-                    <h3>Jonathan Doe</h3>
-                    <h4 class="subHeading">Webdesigner &amp; Web Developer from Melbourne</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat. cillum dolore eu fugiat nulla pariatur. olore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                        ex ea commodo consequat.</p>
-                    <p>nulla pariatur.uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h3>@if(isset($settings['name'])){{$settings['name']}}@else{{"Your Name"}}@endif</h3>
+                    <h4 class="subHeading">@if(isset($settings['spec'])){{$settings['spec']}}@else{{"Your Specialty"}}@endif from @if(isset($settings['city'])){{$settings['city']}}@else{{"Your City"}}@endif</h4>
+                    <p>@if(isset($settings['about_me'])){{$settings['about_me']}}@else{{"About You"}}@endif</p>
                     <a href="javascript:void(0);" class="bntDownload">Download Resume</a>
                 </div>
 
 
                 <div class=" col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1 proPic">
 
-                    <img src="http://themesquared.com/flato/wp-content/uploads/2014/08/me.jpg" alt=""
+                    <img style="@if(isset($settings['image_width'])){{"width:".$settings['image_width'].";height:".$settings['image_width']}}@else{{"100%"}}@endif" src="@if(isset($settings['image_url'])){{$settings['image_url']}}@else{{"http://themesquared.com/flato/wp-content/uploads/2014/08/me.jpg"}}@endif" alt=""
                          class="img-circle">
 
                 </div>

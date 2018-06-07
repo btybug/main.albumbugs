@@ -70,4 +70,5 @@ section#about-flato>.container {
 
 #about-flato .aboutme .proPic img{
     margin-top: 20px;
+    object-fit: cover;
 }

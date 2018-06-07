@@ -61,14 +61,14 @@
             // The map, centered at Uluru
             var map = new google.maps.Map(
                 document.getElementById('map'), {zoom: 4, center: uluru,
-                                                mapTypeId: "roadmap",
-                                                disableDefaultUI: true,
-                                                zoomControl: zoom,
-                                                mapTypeControl: mapType,
-                                                scaleControl: scale,
-                                                streetViewControl: streetView,
-                                                rotateControl: rotate,
-                                                fullscreenControl: fullscreen});
+                    mapTypeId: "roadmap",
+                    disableDefaultUI: true,
+                    zoomControl: zoom,
+                    mapTypeControl: mapType,
+                    scaleControl: scale,
+                    streetViewControl: streetView,
+                    rotateControl: rotate,
+                    fullscreenControl: fullscreen});
             // The marker, positioned at Uluru
             var url = null;
             var icon_width = Number($('#icon_width').text());
@@ -147,7 +147,6 @@
         }
     }
 </script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAud3CAgSUNCWBRlSZQjKz8a7M0RV7R_IA&callback=initMap&libraries=drawing">
-</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAud3CAgSUNCWBRlSZQjKz8a7M0RV7R_IA&callback=initMap&libraries=drawing"></script>
+
 

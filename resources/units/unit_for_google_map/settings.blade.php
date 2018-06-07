@@ -29,27 +29,6 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Icon Url</label>
-                </div>
-                <div class="col-md-8">
-                    {!!Form::text('icon', null, ['class'=>'form-control']);!!}
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="">Icon Size</label>
-                </div>
-                <div class="col-md-8">
-                    <label for="">Width</label>
-                    {!!Form::text('icon_width', null, ['class'=>'form-control']);!!}
-                    <label for="">Height</label>
-                    {!!Form::text('icon_height', null, ['class'=>'form-control']);!!}
-                </div>
-                <div class="clearfix"></div>
-            </div>
         </div>
 
     </div>
@@ -162,6 +141,33 @@
                 {!!Form::checkbox('fullscreen');!!}<br>
                 <label for="">Drawing Manager</label>
                 {!!Form::checkbox('drawing_manager');!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+@endoption
+@option('position','s',$data)
+<div class="bty-settings-panel">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Icon Url</label>
+            </div>
+            <div class="col-md-8">
+                {!!Form::text('icon', null, ['class'=>'form-control']);!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Icon Size</label>
+            </div>
+            <div class="col-md-8">
+                <label for="">Width</label>
+                {!!Form::text('icon_width', null, ['class'=>'form-control']);!!}
+                <label for="">Height</label>
+                {!!Form::text('icon_height', null, ['class'=>'form-control']);!!}
             </div>
             <div class="clearfix"></div>
         </div>

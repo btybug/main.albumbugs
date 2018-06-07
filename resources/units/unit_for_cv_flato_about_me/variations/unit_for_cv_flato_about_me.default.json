@@ -1,5 +1,1 @@
-{
-  "title": "default",
-  "id": "unit_for_cv_flato_about_me.default",
-  "settings": {}
-}
+{"title":"default","id":"unit_for_cv_flato_about_me.default","settings":{"image_url":"https:\/\/www.rd.com\/wp-content\/uploads\/2017\/09\/01-shutterstock_476340928-Irina-Bg-1024x683.jpg","image_width":"300","name":"Hovsep","spec":"PHP Developer","city":"Yerevan","about_me":"I am PHP develper."}}

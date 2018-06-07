@@ -14,6 +14,16 @@
   "created_at": 1490088665,
   "is_core": 0,
   "place": "frontend",
+  "placeholders": {
+    "aboutme": {
+      "type": "unit",
+      "tag": "about_me",
+      "title": "About Me",
+      "s": true,
+      "f": true
+    }
+  },
   "tags": ["my_account","frontend"],
   "path": "resources\/units\/unit_for_cv_flato_about_me"
+
 }

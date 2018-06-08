@@ -96,19 +96,20 @@ class PagesController extends Controller
         AdminsettingRepository $adminsettingRepository
     )
     {
+
         $id = $request->param;
         $page = $frontPagesRepository->find($id);
         $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
         $tags = $page->tags;
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
-        $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
+
         $cssData = $profilesRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
         $jsData = $profilesRepository->wherePluck('type', 'js', 'name', 'id')->toArray();
         $page->setAttribute('cssData', $cssData);
         $page->setAttribute('jsData', $jsData);
 
-        return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'cssData', 'jsData']));
+        return view('manage::frontend.pages.settings', compact(['page', 'admins', 'tags', 'id', 'classifies', 'classifierPageRelations', 'cssData', 'jsData']));
     }
 
     public function getSpecialSettings(

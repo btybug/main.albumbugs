@@ -61,7 +61,7 @@ $text_styles = getDinamicStyle('texts');
                                             <label for="">To</label>
                                         </div>
                                         <div class="col-md-8">
-                                            {!! Form::text('work['.$key.'][to]', issetReturn($settings,'to'), ['class'=>'form-control ']) !!}
+                                            {!! Form::text('work['.$key.'][to]', issetReturn($work,'to'), ['class'=>'form-control ']) !!}
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>

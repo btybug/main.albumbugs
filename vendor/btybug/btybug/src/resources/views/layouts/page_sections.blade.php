@@ -32,19 +32,18 @@
     @stack('css')
 </head>
 <body>
-
 <div class="container-fluid coreheadersetting m-b-10">
     {!! Form::open(['id'=>'page-section-layout-form','method'=>'GET']) !!}
     <div class="row">
         <div class="col-xs-4 p-t-10">
             <div class="form-group">
                 <label class="sr-only" for="itemname">itemname</label>
-                {!! Form::select('layout',[null=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray(),null,['class'=>'form-control']) !!}
+                {!! Form::select('layout',[0=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray(),0,['class'=>'form-control']) !!}
 
             </div>
         </div>
         <div class="col-xs-4  p-t-10">
-            {!! Form::select('variations',$variations->pluck('title','id'),null,['class'=>'form-control']) !!}
+            {!! Form::select('variations',[0=>'Select Variation']+$variations->pluck('title','id')->toArray(),null,['class'=>'form-control']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>

@@ -103,7 +103,6 @@ class PagesController extends Controller
         $tags = $page->tags;
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
-
         $cssData = $profilesRepository->wherePluck('type', 'css', 'name', 'id')->toArray();
         $jsData = $profilesRepository->wherePluck('type', 'js', 'name', 'id')->toArray();
         $page->setAttribute('cssData', $cssData);

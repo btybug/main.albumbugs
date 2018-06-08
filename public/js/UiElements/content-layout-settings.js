@@ -3,14 +3,15 @@ $(document).ready(function () {
 
     $('form button').attr('type', 'button');
     var json = JSON.parse($('#hidden_data').val());
+    var f=$('#add_custome_page');
 	if(json){
 			$.each(json, function (k, v) {
-				if ($('input[name=' + k + ']').attr('type') == 'checkbox') {
-					$('input[name=' + k + ']').attr('checked', true);
-				}else if($('[name=' + k + ']').is('select')){
-					 $('select[name=' + k + ']').val(v);
+				if (f.find('input[name=' + k + ']').attr('type') == 'checkbox') {
+                    f.find('input[name=' + k + ']').attr('checked', true);
+				}else if(f.find('[name=' + k + ']').is('select')){
+                    f.find('select[name=' + k + ']').val(v);
 				}else{
-					$('input[name=' + k + ']').val(v);
+                    f.find('input[name=' + k + ']').val(v);
 				}
 			});
 		}

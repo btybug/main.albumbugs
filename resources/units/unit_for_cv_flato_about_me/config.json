@@ -15,12 +15,25 @@
   "is_core": 0,
   "place": "frontend",
   "placeholders": {
-    "aboutme": {
+    "general": {
       "type": "unit",
-      "tag": "about_me",
-      "title": "About Me",
+      "tag": "general",
+      "title": "General",
       "s": true,
       "f": true
+    },
+    "image": {
+      "type": "unit",
+      "tag": "image",
+      "title": "Image",
+      "f": true,
+      "s": true
+    },
+    "text": {
+      "type": "unit",
+      "tag": "text",
+      "title": "Text",
+      "s": true
     }
   },
   "tags": ["my_account","frontend"],

@@ -234,6 +234,7 @@ class PageSectionsController extends Controller
 
     public function postPageOptions(Request $request)
     {
+//        dd($request->all(),333);
         $model = ContentLayouts::find($request->bb_slug);
         $page_id=$request->bb_page;
         if ($model) {
@@ -247,7 +248,6 @@ class PageSectionsController extends Controller
 
             $variation = ($request->get('bb_variation')) ?? $model->slug . '.default';
             $html = \View('uploads::gears.page_sections._partials.right_box_page_section', compact(['model','page_id','preview', 'settings', 'data']))->with('variation', $variation)->render();
-
             return response()->json([
                 'html' => $html,
                 'error' => false

@@ -456,12 +456,11 @@ dd(1);
         $settings = ($variation) ? $variation->toArray() : $variation;
         if ($settings) {
             if (isset($variables['request'])) {
-                $settings = array_merge($variables['request'], $settings['settings']);
+                $settings = array_merge($settings['settings'],$variables['request']);
             } else {
                 $settings = $settings['settings'];
             }
         }
-
         $slug = $this->folder;
         $layout = ($this->example) ? $this->example : $this->layout;
         $setting = isset($this->settings['file']) ? $this->settings['file'] : NULL;

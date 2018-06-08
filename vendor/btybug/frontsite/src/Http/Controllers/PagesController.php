@@ -495,7 +495,6 @@ class PagesController extends Controller
         $layout=$request->get('layout',$page->page_layout);
         $slug=$request->get('variations',$layout.'.default');
         $settings=($request->get('layout'))?[]:(@json_decode($page->page_layout_settings,true))?json_decode($page->page_layout_settings,true):[];
-//        dd($settings);
         if ($slug) {
             $view = ContentLayouts::renderPageLivePreview($slug,$settings,$page);
 

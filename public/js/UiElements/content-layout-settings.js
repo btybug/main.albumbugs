@@ -70,7 +70,7 @@ $(document).ready(function () {
         var new_name = $('#new_name').val();
 
         if(new_name.length > 0){
-            var data = $('form').serialize();
+            var data = $('form#add_custome_page').serialize();
             data += '&itemname=' + new_name + '&save_us=' + true;
             var url = $('#add_custome_page').attr('action');
             $.ajax({
@@ -115,7 +115,7 @@ $(document).ready(function () {
 	
     function evens(input) {
 
-        var data = $('form').serialize();
+        var data = $('form#add_custome_page').serialize();
         var url = $('#add_custome_page').attr('action');
         $.ajax({
             type: "post",
@@ -236,19 +236,19 @@ $(document).ready(function () {
         var key = $(this).data('key');
         var type = $(this).data('type');
         if(type != undefined){
-            var data = $('#right-settings-main-box-bty').find('form').serialize();
+            var data = $('#right-settings-main-box-bty').find('form#add_custome_page').serialize();
             data += '&key=' + key + '&type=' + type + '&bb_slug=' + $("#layout_slug").val() + '&bb_variation=' + $("#layout_variation").val()+ '&bb_page=' + $("#page_id").val();
 
             $('#right-settings-main-box-bty').html('');
             $("#loader-img").removeClass('hide');
-
+            var url = $('#options-url').val();
             $.ajax({
                 type: "post",
                 datatype: "json",
-                url: $('#options-url').val(),
+                url: url,
                 data: data,
                 headers: {
-                    'X-CSRF-TOKEN': $("#token").val()
+                    'X-CSRF-TOKEN': $("input[name=_token]").val()
                 },
                 success: function (data) {
                     if (!data.error) {

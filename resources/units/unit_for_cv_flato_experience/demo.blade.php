@@ -30,3 +30,6 @@
 </section>
 
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
+{!! useDinamicStyle('containers') !!}
+{!! useDinamicStyle('texts') !!}
+{!! useDinamicStyle('images') !!}

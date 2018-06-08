@@ -138,9 +138,8 @@ class PageSectionsController extends Controller
         $pageSection = ContentLayouts::find($slug);
         if (!$pageSection) abort(404);
         $variations = $pageSection->variations()->all();
-        $used_in_variations = $pageSection->usedInVariations();
 
-        return view('uploads::gears.page_sections.variations', compact(['pageSection', 'variations', 'used_in_variations']));
+        return view('uploads::gears.page_sections.variations', compact(['pageSection', 'variations']));
     }
 
 

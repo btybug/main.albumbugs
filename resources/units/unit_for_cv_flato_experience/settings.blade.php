@@ -12,7 +12,7 @@ $text_styles = getDinamicStyle('texts');
                     <div>
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne-{{$key}}" aria-expanded="true">
                             <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                            <span class="title">Work Section# {{$key}}</span>
+                            <span class="title">Work Section</span>
                         </a>
                         <a href="#" id="{{$key}}" class="btn btn-sm btn-danger delete"><i class="fa fa-minus"></i></a>
                     </div>
@@ -71,7 +71,6 @@ $text_styles = getDinamicStyle('texts');
                         </div>
                     </div>
                 </div>
-
         @endforeach
     @endif
     </div>
@@ -97,6 +96,48 @@ $text_styles = getDinamicStyle('texts');
     </div>
 </div>
 @endoption
+@option('text','s',$data)
+<div class="bty-settings-panel">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select Header Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('header_style', $text_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select Company Name Text Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('company_style', $text_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select Position Text Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('position_style', $text_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select Description Text Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('desc_style', $text_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+@endoption
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 <script>
     $('a.delete').click(function(){
@@ -111,7 +152,7 @@ $text_styles = getDinamicStyle('texts');
             "                    <div>\n" +
             "                        <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne-"+exp_index+"\" aria-expanded=\"true\">\n" +
             "                            <span class=\"icon\"><i class=\"fa fa-chevron-down\" aria-hidden=\"true\"></i></span>\n" +
-            "                            <span class=\"title\">Work Section# "+exp_index+"</span>\n" +
+            "                            <span class=\"title\">Work Section</span>\n" +
             "                        </a>\n" +
             "                        <a href=\"#\" id=\""+exp_index+"\" class=\"btn btn-sm btn-danger delete\"><i class=\"fa fa-minus\"></i></a>\n" +
             "                    </div>\n" +

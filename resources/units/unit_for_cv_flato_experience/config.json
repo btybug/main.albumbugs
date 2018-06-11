@@ -21,7 +21,14 @@
       "title": "General",
       "s": true,
       "f": true
+    },
+    "text": {
+      "type": "unit",
+      "tag": "text",
+      "title": "Text",
+      "s": true
     }
+
   },
   "tags": ["my_account","frontend"],
   "path": "resources\/units\/unit_for_cv_flato_experience"

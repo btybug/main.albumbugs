@@ -2,7 +2,7 @@
     <div class="container">
         <div class="experience">
                 <div class="heading">
-                    <h2 class="title">Work Experience</h2>
+                    <h2 class="title {{(isset($settings['header_style'])&& $settings['header_style'] ) ? $settings['header_style'] : 'demo-column'}}">Work Experience</h2>
                     <p>My previous associations</p>
                 </div>
             <div class="content-experience">
@@ -15,9 +15,9 @@
                         <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 rightArea">
                             <div class="arrowpart"></div>
                             <div class="exCon">
-                                <h4>@if(isset($work['company_name'])){{$work['company_name']}}@else Company Name @endif</h4>
-                                <h5>@if(isset($work['position'])){{$work['position']}}@else Position @endif</h5>
-                                <p>@if(isset($work['desc'])){{$work['desc']}}@else Description @endif</p>
+                                <h4 class="{{(isset($settings['company_style'])&& $settings['company_style'] ) ? $settings['company_style'] : 'demo-column'}}">@if(isset($work['company_name'])){{$work['company_name']}}@else Company Name @endif</h4>
+                                <h5  class="{{(isset($settings['position_style'])&& $settings['position_style'] ) ? $settings['position_style'] : 'demo-column'}}">@if(isset($work['position'])){{$work['position']}}@else Position @endif</h5>
+                                <p  class="{{(isset($settings['desc_style'])&& $settings['desc_style'] ) ? $settings['desc_style'] : 'demo-column'}}">@if(isset($work['desc'])){{$work['desc']}}@else Description @endif</p>
                             </div>
                         </div>
                     </div>

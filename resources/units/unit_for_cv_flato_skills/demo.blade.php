@@ -11,7 +11,7 @@
                     @if(isset($settings['work']))
                         @foreach($settings['work'] as $key=>$work)
                         <div class="col-md-4 skillsArea @if($i % 3 == 0){{"column_last"}}@elseif($i % 3 == 1){{"column_first"}}@endif">
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6 skills">
+                            <div class="skills">
 
                                 <span class="chart">
                                     <span class="percent {{(isset($settings['percent_style'])&& $settings['percent_style'] ) ? $settings['percent_style'] : 'demo-column'}}">@if(isset($work['percent'])){{$work['percent']}}@else 0 @endif</span>

@@ -86,48 +86,42 @@ function BBRenderTpl ($variation_id, $on_empty = null)
     return $on_empty;
 }
 
-function BBRenderPageSections ($variation_id, $source = [], $main_view = null)
+function BBRenderPageSections ($layout, $settings = [], $main_view = null)
 {
-    $slug = explode('.', $variation_id);
-    if (isset($slug[0]) && isset($slug[1])) {
-        $content_layout = $slug[0];
-        $section = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($content_layout);
-        if (! is_null($section)) {
-            $variation = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::findVariation($variation_id);
-            if (! is_null($variation)) {
-                return $variation->render($source);
-            }
-        }
-
-        return false;
+    $content_layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($layout);
+    if (! is_null($content_layout)) {
+        return $content_layout->render($settings);
     }
+
+    return false;
 }
 
-function BBRenderFrontLayout ($page, $settings)
+function BBRenderFrontLayout ($page)
 {
-    if ($page->parent_id) {
-        $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
-
-        $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
-        if (count($p)) {
-            $firstParent = array_first($p);
-            $page_settings = json_decode($firstParent->settings, true);
-            if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
-                return BBRenderPageSections($page_settings['children']['page_layout'],
-                    (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
-            }
-        } else {
-            $parent = $forntPageRepository->find($page->parent_id);
-            if ($parent && $parent->settings) {
-                $page_settings = json_decode($parent->settings, true);
-                if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
-                    return BBRenderPageSections($page_settings['children']['page_layout'],
-                        (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
-                }
-            }
-        }
-    }
-
+    //TODO: make with new structure
+//    if ($page->parent_id) {
+//        $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
+//
+//        $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
+//        if (count($p)) {
+//            $firstParent = array_first($p);
+//            $page_settings = json_decode($firstParent->settings, true);
+//            if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
+//                return BBRenderPageSections($page_settings['children']['page_layout'],
+//                    (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
+//            }
+//        } else {
+//            $parent = $forntPageRepository->find($page->parent_id);
+//            if ($parent && $parent->settings) {
+//                $page_settings = json_decode($parent->settings, true);
+//                if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
+//                    return BBRenderPageSections($page_settings['children']['page_layout'],
+//                        (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
+//                }
+//            }
+//        }
+//    }
+    $settings = ($page->page_layout_settings) ? json_decode($page->page_layout_settings,true) : [];
     return BBRenderPageSections($page->page_layout, $settings);
 }
 
@@ -319,21 +313,13 @@ function BBfooterBack ()
     }
 }
 
-function main_content ($variation = null, $settings = null)
+function main_content ($settings = null)
 {
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
-    $pageModel = ($page) ?? ((isset($variation['used_in'])) ? BBgetFrontPage($variation['used_in']) : null);
+    $pageModel = ($page) ?? ((\Request::route()->parameter('param')) ? BBgetFrontPage(\Request::route()->parameter('param')) : null);
 
-    if($pageModel){
-        if($pageModel->type =='custom' && isset($settings['live_preview_action'])){
-            return BBRenderUnits(issetReturn($settings,'main_unit',$pageModel->template), ['_page' => $pageModel]);
-        }else{
-            if ($pageModel->content_type == "editor") {
-                echo $pageModel->main_content;
-            } else {
-                return BBRenderUnits($pageModel->template, ['_page' => $pageModel]);
-            }
-        }
+    if($pageModel && $pageModel->content_type == "editor"){
+        echo $pageModel->main_content;
     }else {
         return BBRenderUnits(issetReturn($settings,'main_unit'));
     }

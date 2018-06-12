@@ -3,25 +3,29 @@
     margin: 15px;
     background-color: whitesmoke;
     padding: 15px;
-    border: 1px solid #ccc; }
+    border: 1px solid #ccc;
+    overflow: hidden; }
 /*pad-20,mar-15,bg-light,border*/
 .bty-div-p20-m15-bg-light-border-bg {
     margin: 15px;
     background-color: #f5f5f54d;
     padding: 20px;
-    border: 1px solid #e8e7e7; }
+    border: 1px solid #e8e7e7;
+    overflow: hidden; }
 /*pad-15,mar-15,bg-light,shadow*/
 .bty-div-p15-m15-bg-light-shad-bg {
     margin: 15px;
     background-color: whitesmoke;
     padding: 15px;
-    box-shadow: 0 0 6px #adadad; }
+    box-shadow: 0 0 6px #adadad;
+    overflow: hidden; }
 /*pad-20,mar-15,bg-light,shadow*/
 .bty-div-p20-m15-bg-light-shad-bg {
     margin: 15px;
     background-color: whitesmoke;
     padding: 20px;
-    box-shadow: 0 0 6px #adadad; }
+    box-shadow: 0 0 6px #adadad;
+    overflow: hidden; }
 /*pad-20,mar-15,shadow*/
 .bty-div-p20-m15-shad {
     margin: 15px;

@@ -2144,7 +2144,7 @@ function getDinamicStyleForCssFileDemo ($filename, $table_name)
 
 function useDinamicStyle ($filename)
 {
-    return '<link href="' . asset('public/dinamiccss/' . $filename . '.css?v=8') . '" rel="stylesheet">';
+    return '<link href="' . asset('public/dinamiccss/' . $filename . '.css?v='.rand(111,999)) . '" rel="stylesheet">';
 }
 
 function useDinamicStyleByPath ($path, $main)

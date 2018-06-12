@@ -92,7 +92,7 @@ $container_styles = getDinamicStyle('containers');
                 <label for="">Menu</label>
             </div>
             <div class="col-md-8">
-                {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
+                {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control','model'=>$settings]) !!}
             </div>
             <div class="clearfix"></div>
         </div>

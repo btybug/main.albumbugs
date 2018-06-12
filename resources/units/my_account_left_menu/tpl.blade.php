@@ -29,17 +29,17 @@
         @endphp
         @if(count($items))
             @foreach($items as $item)
-                @if(isset($item->children))
+                @if(isset($item['children']))
                     <li class="item">
-                        <a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item->title !!}<i class="fa fa-caret-down"></i></a>
+                        <a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item['title'] !!}<i class="fa fa-caret-down"></i></a>
                         <ul class="cute">
-                            @foreach($item->children as $child)
-                                <li><a href="{!! url($child->url) !!}"><i class="fa {!! $child->icon !!}"></i> {!! $child->title !!}</a></li>
+                            @foreach($item['children'] as $child)
+                                <li><a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {!! $child['title'] !!}</a></li>
                             @endforeach
                         </ul>
                     </li>
                 @else
-                    <li class="item"><a href="{!! url($item->url) !!}"><i class="fa {!! $item->icon !!}"></i> {!! $item->title !!}</a></li>
+                    <li class="item"><a href="{!! url($item['url']) !!}"><i class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>
                 @endif
             @endforeach
         @endif

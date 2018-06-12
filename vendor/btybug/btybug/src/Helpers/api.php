@@ -121,7 +121,9 @@ function BBRenderFrontLayout ($page)
 //            }
 //        }
 //    }
-    $settings = ($page->page_layout_settings) ? json_decode($page->page_layout_settings,true) : [];
+    //TODO: remove is_array conditon when DB cleaned
+    $settings = ($page->page_layout_settings && !is_array($page->page_layout_settings)) ? json_decode($page->page_layout_settings,true) : [];
+
     return BBRenderPageSections($page->page_layout, $settings);
 }
 

@@ -1,13 +1,10 @@
 <?php namespace Btybug\btybug\Models\ContentLayouts;
 
 use Btybug\btybug\Models\Painter\BasePainter;
-use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Models\Universal\VariationAccess;
 use Btybug\btybug\Repositories\HookRepository;
 use Btybug\FrontSite\Models\FrontendPage;
 use File;
-use Btybug\btybug\Models\Hook;
-use Btybug\btybug\Repositories\AdminsettingRepository;
 
 /**
  * Class ContentLayouts
@@ -77,7 +74,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         $dataSettings = url('/admin/uploads/gears/settings-iframe', $slug) . '/settings';
         $data['body'] = $body;
         $data['settings'] = $dataSettings;
-dd(1);
+        dd(1);
         return view('uploads::gears.units.preview', compact(['model', "ui", 'data', 'settings', 'variation']));
     }
 
@@ -157,28 +154,29 @@ dd(1);
             $data['variation'] = $variation;
             return self::findByVariation($slug)->renderSettings($data);
         } else if (self::find($slug)) {
-            if(! $variation){
+            if (!$variation) {
                 $variation = self::find($slug)->variations(false)->find($slug);
             }
             $data['variation'] = $variation;
             return self::find($slug)->renderSettings($data);
         }
     }
-    public static function renderPageLivePreview($slug, $settings = [],$page)
+
+    public static function renderPageLivePreview($slug, $settings = [], $page)
     {
         $variation = self::findVariation($slug);
-        $data['page']=$page;
+        $data['page'] = $page;
         $data['view'] = "uploads::gears.page_sections.live_preview.page_settings";
         $data['request'] = $settings;
         if ($variation) {
             $data['variation'] = $variation;
-            $layout=self::findByVariation($slug);
-            $data['variations']=$layout->variations(false)->all()->getItems();
+            $layout = self::findByVariation($slug);
+            $data['variations'] = $layout->variations(false)->all()->getItems();
             return $layout->renderSettings($data);
         } else if (self::find($slug)) {
-            if(! $variation){
-                $layout=self::find($slug);
-                $data['variations']=$layout->variations(false)->all()->getItems();
+            if (!$variation) {
+                $layout = self::find($slug);
+                $data['variations'] = $layout->variations(false)->all()->getItems();
                 $variation = $layout->variations(false)->find($slug);
             }
             $data['variation'] = $variation;
@@ -210,9 +208,9 @@ dd(1);
             // $variation = new static();
             $tpl = self::findByVariation($slug);
             $existingVariation = $variation = $tpl->variations(false)->find($slug);
-            $main_unit=null;
-            if(isset($data['main_unit'])){
-                $main_unit=$data['main_unit'];
+            $main_unit = null;
+            if (isset($data['main_unit'])) {
+                $main_unit = $data['main_unit'];
             }
             $dataToInsert = [
                 'title' => $title,
@@ -225,20 +223,20 @@ dd(1);
 
                 } else {
                     $variationID = explode('.', $slug);
-                    if(isset($variationID[1])){
+                    if (isset($variationID[1])) {
                         $pageID = explode('_', $variationID[1]);
                         $dataToInsert['used_in'] = end($pageID);
                     }
-                    $variation = $variation->createVariation($dataToInsert,issetReturn($variationID,1,null),(isset($variationID[1]))?true:false);
+                    $variation = $variation->createVariation($dataToInsert, issetReturn($variationID, 1, null), (isset($variationID[1])) ? true : false);
                 }
             } else {
-                FrontendPage::where('page_layout',$slug)->update(['content_type'=>'template','template'=>$main_unit]);
+                FrontendPage::where('page_layout', $slug)->update(['content_type' => 'template', 'template' => $main_unit]);
                 $existingVariation->setAttributes('title', $title);
                 $existingVariation->setAttributes('settings', $dataToInsert['settings']);
                 $variation = $existingVariation;
             }
 
-            if(isset($data['save_us'])){
+            if (isset($data['save_us'])) {
                 $variation->removeAttributes('hidden');
                 $variation->removeAttributes('used_in');
                 if ($new = $variation->copy()) {
@@ -250,16 +248,16 @@ dd(1);
                 return ['id' => $variation->id];
             }
         } else {
-            if(isset($data['copy_data'])){
+            if (isset($data['copy_data'])) {
                 $tpl = self::findByVariation($data['variation_id']);
                 $variation = $tpl->variations(false)->find($data['variation_id']);
 
-                if($tpl && $variation){
+                if ($tpl && $variation) {
                     $settingsData = $variation->settings;
                     $settingsData['variation'] = $variation;
                     return ['data' => $tpl->renderLive($settingsData)];
                 }
-            } else{
+            } else {
                 $tpl = self::findByVariation($slug);
                 $variation = self::findVariation($slug);
                 $data['variation'] = $variation;
@@ -451,12 +449,12 @@ dd(1);
     public function scopeRenderSettings(array $variables = [], array $data = [])
     {
         $variation = $variables['variation'];
-        $variations = isset($variables['variations'])?$variables['variations']:null;
-        $page = isset($variables['page'])?$variables['page']:null;
+        $variations = isset($variables['variations']) ? $variables['variations'] : null;
+        $page = isset($variables['page']) ? $variables['page'] : null;
         $settings = ($variation) ? $variation->toArray() : $variation;
         if ($settings) {
             if (isset($variables['request'])) {
-                $settings = array_merge($settings['settings'],$variables['request']);
+                $settings = array_merge($settings['settings'], $variables['request']);
             } else {
                 $settings = $settings['settings'];
             }
@@ -473,7 +471,7 @@ dd(1);
         } else {
             $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $settings, '_this' => $this, 'variation' => $variables['variation']])->render();
         }
-        return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html','page', 'settings', 'data', 'variation', 'usedIn','variations']));
+        return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html', 'page', 'settings', 'data', 'variation', 'usedIn', 'variations']));
     }
 
     /**
@@ -484,8 +482,8 @@ dd(1);
     {
         $slug = $this->folder;
         $layout = ($this->example) ? $this->example : $this->layout;
-        $variation = issetReturn($variables,'variation',null);
-        $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $variables, '_this' => $this,'variation' => $variation])->render();
+        $variation = issetReturn($variables, 'variation', null);
+        $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $variables, '_this' => $this, 'variation' => $variation])->render();
         return $html;
     }
 

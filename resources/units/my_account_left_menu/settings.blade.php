@@ -11,9 +11,6 @@ $container_styles = getDinamicStyle('containers');
 
 <div class="col-md-12">
     @option('image','s',$data)
-        <div id="menu" class="collapse in" aria-expanded="true" style="">
-            <div class="content bty-settings-panel">
-                <div class="col-md-6">
                     <div class="form-group">
                         <div class="col-md-4">
                             <label for="">Select style</label>
@@ -21,14 +18,10 @@ $container_styles = getDinamicStyle('containers');
                         <div class="col-md-8">
                             {!! Form::select('image_style', $image_styles, null, ['class'=>'form-control'])!!}
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                </div>
-            </div>
-        </div>
     @endoption
     @option('title', 's', $data)
-    <div class="bty-settings-panel">
-        <div class="col-md-6">
             <div class="form-group">
                 <div class="col-md-4">
                     <label for="">Title Style</label>
@@ -36,12 +29,11 @@ $container_styles = getDinamicStyle('containers');
                 <div class="col-md-8">
                     {!! Form::select('top_style', $text_styles, null, ['class'=>'form-control'])!!}
                 </div>
+                <div class="clearfix"></div>
             </div>
-        </div>
-    </div>
     @endoption
     @option('title', 'f', $data)
-    <div class="col-md-6">
+
         <div class="form-group">
             <div class="col-md-4">
                 <label for="">Select title</label>
@@ -57,12 +49,10 @@ $container_styles = getDinamicStyle('containers');
                     @endforeach
                 </select>
             </div>
+            <div class="clearfix"></div>
         </div>
-    </div>
     @endoption
     @option('subtitle', 's', $data)
-    <div class="bty-settings-panel">
-        <div class="col-md-6">
             <div class="form-group">
                 <div class="col-md-4">
                     <label for="">Title Style</label>
@@ -70,13 +60,12 @@ $container_styles = getDinamicStyle('containers');
                 <div class="col-md-8">
                     {!! Form::select('sub_style', $text_styles, null, ['class'=>'form-control'])!!}
                 </div>
+                <div class="clearfix"></div>
             </div>
-        </div>
-    </div>
     @endoption
 
     @option('subtitle', 'f', $data)
-    <div class="col-md-6">
+
         <div class="form-group">
             <div class="col-md-4">
                 <label for="">Select subtitle</label>
@@ -92,8 +81,9 @@ $container_styles = getDinamicStyle('containers');
                     @endforeach
                 </select>
             </div>
+            <div class="clearfix"></div>
         </div>
-    </div>
+
     @endoption
     @option('menu', 'f', $data)
     <div class="col-md-6">
@@ -104,11 +94,12 @@ $container_styles = getDinamicStyle('containers');
             <div class="col-md-8">
                 {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     @endoption
     @option('menu', 's', $data)
-    <div class="col-md-6">
+
         <div class="form-group">
             <div class="col-md-4">
                 <label for="">Style</label>
@@ -116,8 +107,9 @@ $container_styles = getDinamicStyle('containers');
             <div class="col-md-8">
                 {!! Form::select('menu_area_style', $menu_styles, null, ['class'=>'form-control'])!!}
             </div>
+            <div class="clearfix"></div>
         </div>
-    </div>
+
     @endoption
     @option('placeholder','f',$data)
 
@@ -130,7 +122,7 @@ $container_styles = getDinamicStyle('containers');
             </a>
         </div>
         <div id="placeholder" class="collapse in" aria-expanded="true" style="">
-            <div class="content bty-settings-panel">
+            <div class="bty-settings-panel">
                 @if(isset($settings['icons']))
                     @foreach($settings['icons'] as $key => $value)
                         <div class="form-group lets_each">
@@ -158,12 +150,14 @@ $container_styles = getDinamicStyle('containers');
                             <div class="col-md-1">
                                 <button class="btn btn-danger pull-right remove_this"><i class="fa fa-minus"></i></button>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     @endforeach
                 @endif
                 <div class="col-md-12 prepend_template">
                     <button class="btn btn-primary pull-right render_icons"><i class="fa fa-plus"></i></button>
                 </div>
+                    <div class="clearfix"></div>
             </div>
         </div>
     </div>
@@ -180,7 +174,7 @@ $container_styles = getDinamicStyle('containers');
             </a>
         </div>
         <div id="social" class="collapse in" aria-expanded="true" style="">
-            <div class="content bty-settings-panel">
+            <div class="bty-settings-panel">
                 @if(isset($settings['socials']))
                     @foreach($settings['socials'] as $key => $value)
                         <div class="form-group soc_lets_each">
@@ -208,13 +202,14 @@ $container_styles = getDinamicStyle('containers');
                             <div class="col-md-1">
                                 <button class="btn btn-danger pull-right soc_remove_this"><i class="fa fa-minus"></i></button>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     @endforeach
                 @endif
                 <div class="col-md-12 soc_prepend_template">
                     <button class="btn btn-primary pull-right soc_render_icons"><i class="fa fa-plus"></i></button>
                 </div>
-
+                    <div class="clearfix"></div>
             </div>
         </div>
     </div>
@@ -222,7 +217,6 @@ $container_styles = getDinamicStyle('containers');
     @endoption
 
     @option('general','s',$data)
-    <div class="col-md-12">
         <div class="form-group">
             <div class="col-md-4">
                 <label for="">Select Style</label>
@@ -232,7 +226,6 @@ $container_styles = getDinamicStyle('containers');
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
     @endoption
 </div>
 <script type="template" id="temp1">
@@ -261,6 +254,7 @@ $container_styles = getDinamicStyle('containers');
         <div class="col-md-1">
             <button class="btn btn-danger pull-right remove_this"><i class="fa fa-minus"></i></button>
         </div>
+        <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
 </script>
@@ -291,6 +285,7 @@ $container_styles = getDinamicStyle('containers');
         <div class="col-md-1">
             <button class="btn btn-danger pull-right soc_remove_this"><i class="fa fa-minus"></i></button>
         </div>
+        <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
 </script>

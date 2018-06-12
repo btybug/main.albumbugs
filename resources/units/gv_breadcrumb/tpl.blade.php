@@ -1,5 +1,10 @@
 <?php
-$parentsArray = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
+
+$parentsArray = [];
+if(isset($page) && $page){
+    $parentsArray = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
+}
+
 ?>
 
 <div class="col-md-12">

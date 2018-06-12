@@ -47,7 +47,7 @@
 
         <div class="{!! issetReturn($settings,'main_desktop').' '.issetReturn($settings,'main_l_table').' '.issetReturn($settings,'mainp_table').' '.issetReturn($settings,'main_mobile')!!}">
             <div class="default-column {{(isset($settings['mr_style'])&& $settings['mr_style']) ? $settings['mr_style']: ''}} ">
-                {!! main_content($variation,$settings) !!}
+                {!! main_content($settings) !!}
             </div>
         </div>
 

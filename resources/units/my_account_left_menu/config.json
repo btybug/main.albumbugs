@@ -52,13 +52,13 @@
       "type": "unit",
       "tag": "placeholder",
       "title": "Placeholder",
-      "s": true
+      "f": true
     },
     "social": {
       "type": "unit",
       "tag": "social",
       "title": "Social",
-      "s": true
+      "f": true
     }
   },
   "tags": ["my_account_left_menu","left_bar","frontend"],

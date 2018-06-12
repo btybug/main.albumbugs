@@ -4,19 +4,13 @@ $image_styles = getDinamicStyle('images');
 $text_styles = getDinamicStyle('texts');
 $icon_styles = getDinamicStyle('icons');
 $menu_styles = getDinamicStyle('menus');
+$container_styles = getDinamicStyle('containers');
+
 ?>
 
 
 <div class="col-md-12">
-
-    <div class="bty-panel-collapse">
-        <div>
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menu"
-               aria-expanded="true">
-                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Image style</span>
-            </a>
-        </div>
+    @option('image','s',$data)
         <div id="menu" class="collapse in" aria-expanded="true" style="">
             <div class="content bty-settings-panel">
                 <div class="col-md-6">
@@ -25,142 +19,108 @@ $menu_styles = getDinamicStyle('menus');
                             <label for="">Select style</label>
                         </div>
                         <div class="col-md-8">
-                            <select name="image_style" id="" class="form-control">
-                                {!! $image_styles !!}
-                            </select>
+                            {!! Form::select('image_style', $image_styles, null, ['class'=>'form-control'])!!}
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
+    @endoption
+    @option('title', 's', $data)
+    <div class="bty-settings-panel">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Title Style</label>
+                </div>
+                <div class="col-md-8">
+                    {!! Form::select('top_style', $text_styles, null, ['class'=>'form-control'])!!}
+                </div>
             </div>
         </div>
     </div>
-
-
-    <div class="bty-panel-collapse">
-        <div>
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menutitle"
-               aria-expanded="true">
-                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Title</span>
-            </a>
-        </div>
-        <div id="menutitle" class="collapse in" aria-expanded="true" style="">
-            <div class="content bty-settings-panel">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label for="">Select title</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select name="top_column" id="" class="form-control">
-                                @foreach($user as $key => $value)
-                                    @if($key == "role")
-                                        @continue
-                                    @else
-                                        <option value="{{$key}}">{{$key}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label for="">Style</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select name="top_style" id="" class="form-control">
-                                {!! $text_styles !!}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
+    @endoption
+    @option('title', 'f', $data)
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select title</label>
+            </div>
+            <div class="col-md-8">
+                <select name="top_column" id="" class="form-control">
+                    @foreach($user as $key => $value)
+                        @if($key == "role")
+                            @continue
+                        @else
+                            <option @if(issetReturn($settings, 'top_column') == $key)selected @endif value="{{$key}}">{{$key}}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
-    <div class="bty-panel-collapse">
-        <div>
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menusubtitle"
-               aria-expanded="true">
-                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Subtitle</span>
-            </a>
-        </div>
-        <div id="menusubtitle" class="collapse in" aria-expanded="true" style="">
-            <div class="content bty-settings-panel">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label for="">Select subtitle</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select name="sub_column" id="" class="form-control">
-                                @foreach($user as $key => $value)
-                                    @if($key == "role")
-                                        @continue
-                                    @else
-                                        <option value="{{$key}}">{{$key}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+    @endoption
+    @option('subtitle', 's', $data)
+    <div class="bty-settings-panel">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="">Title Style</label>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label for="">Style</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select name="sub_style" id="" class="form-control">
-                                {!! $text_styles !!}
-                            </select>
-                        </div>
-                    </div>
+                <div class="col-md-8">
+                    {!! Form::select('sub_style', $text_styles, null, ['class'=>'form-control'])!!}
                 </div>
-
             </div>
         </div>
     </div>
-    <div class="bty-panel-collapse">
-        <div>
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menu"
-               aria-expanded="true">
-                <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                <span class="title">Menu</span>
-            </a>
-        </div>
-        <div id="menu" class="collapse in" aria-expanded="true" style="">
-            <div class="content bty-settings-panel">
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <label for="">Menu</label>
-                            </div>
-                            <div class="col-md-8">
-                                {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
-                            </div>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label for="">Style</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select name="menu_area_style" id="" class="form-control">
-                                {!! $menu_styles !!}
-                            </select>
-                        </div>
-                    </div>
-                </div>
+    @endoption
 
+    @option('subtitle', 'f', $data)
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select subtitle</label>
+            </div>
+            <div class="col-md-8">
+                <select name="sub_column" id="" class="form-control">
+                    @foreach($user as $key => $value)
+                        @if($key == "role")
+                            @continue
+                        @else
+                            <option @if(issetReturn($settings, 'sub_column') == $key)selected @endif value="{{$key}}">{{$key}}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
+    @endoption
+    @option('menu', 'f', $data)
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Menu</label>
+            </div>
+            <div class="col-md-8">
+                {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control input-md','model'=>$settings]) !!}
+            </div>
+        </div>
+    </div>
+    @endoption
+    @option('menu', 's', $data)
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('menu_area_style', $menu_styles, null, ['class'=>'form-control'])!!}
+            </div>
+        </div>
+    </div>
+    @endoption
+    @option('placeholder','f',$data)
+
     <div class="bty-panel-collapse">
         <div>
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#placeholder"
@@ -192,9 +152,7 @@ $menu_styles = getDinamicStyle('menus');
                             <div class="col-md-4">
                                 <label for="" class="col-sm-4">Style</label>
                                 <div class="col-md-8">
-                                    <select name="icons[{{$key}}][style]" id="" class="form-control style">
-                                        {!! $icon_styles !!}
-                                    </select>
+                                    {!! Form::select('icons['.$key.'][style]', $icon_styles, null, ['class'=>'form-control'])!!}
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -209,6 +167,10 @@ $menu_styles = getDinamicStyle('menus');
             </div>
         </div>
     </div>
+
+    @endoption
+
+    @option('social','f',$data)
     <div class="bty-panel-collapse">
         <div>
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#social"
@@ -240,9 +202,7 @@ $menu_styles = getDinamicStyle('menus');
                             <div class="col-md-4">
                                 <label for="" class="col-sm-4">Style</label>
                                 <div class="col-md-8">
-                                    <select name="socials[{{$key}}][style]" id="" class="form-control soc_style">
-                                        {!! $icon_styles !!}
-                                    </select>
+                                    {!! Form::select('socials['.$key.'][style]', $icon_styles, null, ['class'=>'form-control'])!!}
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -259,8 +219,22 @@ $menu_styles = getDinamicStyle('menus');
         </div>
     </div>
 
-</div>
+    @endoption
 
+    @option('general','s',$data)
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('style', $container_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    @endoption
+</div>
 <script type="template" id="temp1">
     <div class="form-group lets_each">
         <div class="col-md-4">
@@ -281,9 +255,7 @@ $menu_styles = getDinamicStyle('menus');
         <div class="col-md-4">
             <label for="" class="col-sm-4">Style</label>
             <div class="col-md-8">
-                <select name="icons[{repl2}][style]" id="" class="form-control style">
-                    {!! $icon_styles !!}
-                </select>
+                {!! Form::select('icons[{repl2}][style]', $icon_styles, null, ['class'=>'form-control'])!!}
             </div>
         </div>
         <div class="col-md-1">
@@ -313,9 +285,7 @@ $menu_styles = getDinamicStyle('menus');
         <div class="col-md-4">
             <label for="" class="col-sm-4">Style</label>
             <div class="col-md-8">
-                <select name="socials[{repl2}][style]" id="" class="form-control soc_style">
-                    {!! $icon_styles !!}
-                </select>
+                {!! Form::select('socials[{repl2}][style]', $icon_styles, null, ['class'=>'form-control'])!!}
             </div>
         </div>
         <div class="col-md-1">

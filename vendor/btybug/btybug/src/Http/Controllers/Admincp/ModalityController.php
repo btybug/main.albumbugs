@@ -130,7 +130,7 @@ class ModalityController extends Controller
 
         $html = View::make('btybug::styles.menus', compact('menus'))->render();
 
-        return \Response::json(['error' => false, 'html' => $html]);
+        return \Response::json(['error' => false,'type'=>'menu','html' => $html]);
     }
 
     public function getFields($data)

@@ -121,6 +121,7 @@ Route::group(['prefix'=>'structure'], function () {
         Route::get('/data', 'MenuFrontController@getData');
         Route::get('/menufile', 'MenuFrontController@getMenufile');
         Route::get('/sidebarmenus', 'MenuFrontController@getSidebarmenus');
+        Route::get('/iframe-preview/{id?}', 'MenusController@getMenuPreview');
     });
 
     Route::group(['prefix' => 'hooks'], function () {

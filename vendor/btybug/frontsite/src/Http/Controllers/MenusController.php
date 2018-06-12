@@ -71,4 +71,10 @@ class MenusController extends Controller
 
         return redirect()->to('admin/front-site/structure/menus');
     }
+
+    public function getMenuPreview($id=null,MenuRepository $repository)
+    {
+       $items= $repository->find($id);
+        return view('manage::frontend.menus.preview',compact('items'));
+    }
 }

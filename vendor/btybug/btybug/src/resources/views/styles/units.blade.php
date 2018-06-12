@@ -49,3 +49,4 @@
     @if(!isset($ajax))
     </div>
 @endif
+<input type="hidden" id="iframe-url" value="/admin/uploads/gears/settings-iframe/">

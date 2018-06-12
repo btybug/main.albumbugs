@@ -55,12 +55,13 @@ $(document).ready(function () {
                     var script=html.find('script').html();
                     $('body').find('.magic-modal-select-variations').html(script)
                     $('#magic-body').html(html);
+
                     $('#magic-settings').modal();
+
                 }
             }
         });
     });
-
     $('body').on('click', '.BBcustomize', function () {
         var action = $(this).attr('data-action');
         var key = $(this).attr('data-key');
@@ -324,8 +325,9 @@ $('body').on('click','.page-section-item',function () {
     }
     $('body').on('change','.magic-modal-select-variations',function () {
        var id=$(this).val();
+       var url=$('body').find('#iframe-url').val();
         $('#select-unit-item-button').attr('data-value',id);
-       $('body').find('.magic-modal-iframe').attr('src','/admin/uploads/gears/settings-iframe/'+id);
+       $('body').find('.magic-modal-iframe').attr('src',url+id);
     });
 $('body').on('click','.clean-bb-button',function () {
    var slug= $(this).data('id');

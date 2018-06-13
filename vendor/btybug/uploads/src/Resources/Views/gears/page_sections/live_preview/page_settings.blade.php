@@ -29,8 +29,8 @@
                                         <li>
                                             <div class="pl-item action-placeholder" data-key="{{ $key }}"
                                                  @if(isset($placeholder['f']))
-                                                 @if($usedIn && isset($placeholder['main']))
-                                                 @if($usedIn->type == 'custom')
+                                                 @if($page && isset($placeholder['main']))
+                                                 @if($page->type == 'custom')
                                                  data-type="f"
                                                  @elseif(isset($placeholder['s']))
                                                  data-type="s"
@@ -45,8 +45,8 @@
                                                 <span class="left-li">{{ $placeholder['title'] }} </span>
                                                 <div class="button">
                                                     @isset($placeholder['f'])
-                                                        @if($usedIn && isset($placeholder['main']))
-                                                            @if($usedIn->type == 'custom')
+                                                        @if($page && isset($placeholder['main']))
+                                                            @if($page->type == 'custom')
                                                                 <a href="javascript:void(0)" data-key="{{ $key }}"
                                                                    data-type="f"
                                                                    class="btn btn-sm btn-warning action-placeholder">F</a>
@@ -76,8 +76,8 @@
                              style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide"/>
                         <div class="right" id="right-settings-main-box-bty">
                             {!! Form::model($settings,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/page-settings',[$page->id,$model->slug])]) !!}
-                            <h3 id="main-box-title"></h3>
-                                @include($settingsHtml)
+                                <h3 id="main-box-title"></h3>
+                                    @include($settingsHtml)
                             {!! Form::close() !!}
                         </div>
                     </div>

@@ -318,10 +318,18 @@ function BBfooterBack ()
 function main_content ($settings = null)
 {
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
-    $pageModel = ($page) ?? ((\Request::route()->parameter('param')) ? BBgetFrontPage(\Request::route()->parameter('param')) : null);
+    $pageModel = ($page) ?? ((\Request::route()->parameter('param')) ? BBgetFrontPage(\Request::route()->parameter('param')) : BBgetFrontPage(issetReturn($settings,'bb_page')));
 
-    if($pageModel && $pageModel->content_type == "editor"){
-        echo $pageModel->main_content;
+    if($pageModel){
+        if($pageModel->type =='custom' && isset($settings['live_preview_action'])){
+            return BBRenderUnits(issetReturn($settings,'main_unit',$pageModel->template), ['_page' => $pageModel]);
+        }else{
+            if ($pageModel->content_type == "editor") {
+                echo $pageModel->main_content;
+            } else {
+                return BBRenderUnits($pageModel->template, ['_page' => $pageModel]);
+            }
+        }
     }else {
         return BBRenderUnits(issetReturn($settings,'main_unit'));
     }

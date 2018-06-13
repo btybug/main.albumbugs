@@ -116,6 +116,7 @@ $(document).ready(function () {
     function evens(input) {
 
         var data = $('form#add_custome_page').serialize();
+        data += '&bb_page=' + $("#page_id").val();
         var url = $('#add_custome_page').attr('action');
         $.ajax({
             type: "post",

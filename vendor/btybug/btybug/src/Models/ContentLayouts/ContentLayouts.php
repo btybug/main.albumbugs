@@ -469,7 +469,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         if ($this->autoinclude) {
             $html = $this->getAutoInclude()->getRender($settings, "ContentLayouts.$slug");
         } else {
-            $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $settings, '_this' => $this, 'variation' => $variables['variation']])->render();
+            $html = \View::make("ContentLayouts.$slug.$layout")->with(['settings' => $settings, '_this' => $this, 'variation' => $variables['variation'],'page' => $page])->render();
         }
         return view($variables['view'], compact(['model', 'settingsHtml', 'json', 'html', 'page', 'settings', 'data', 'variation', 'usedIn', 'variations']));
     }

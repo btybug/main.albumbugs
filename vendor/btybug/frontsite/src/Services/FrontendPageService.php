@@ -144,7 +144,7 @@ class FrontendPageService extends GeneralService
                 ]);
             }
         }
-        $this->savePageMainContent($page);
+//        $this->savePageMainContent($page);
         return $page;
     }
 

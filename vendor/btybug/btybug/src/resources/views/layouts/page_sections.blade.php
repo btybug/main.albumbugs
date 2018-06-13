@@ -40,9 +40,14 @@
             </div>
             <div class="col-xs-4">
                 <div class="form-group">
-                    {!! Form::select('inherit',
-                        ['custom'=>'Custom','inherit' => "Inherit"]
-                    ,null,['class'=>'form-control','id' => 'bb-select-inheritance']) !!}
+                    @if($page->parent_id == ZERO)
+                        {!! Form::hidden('inherit','custom') !!}
+                        <label class="form-control" for="itemname"> No Parent</label>
+                    @else
+                        {!! Form::select('inherit',
+                            ['custom'=>'Custom','inherit' => "Inherit"]
+                        ,null,['class'=>'form-control','id' => 'bb-select-inheritance']) !!}
+                    @endif
                 </div>
             </div>
         </div>
@@ -50,13 +55,13 @@
             <div class="form-group">
                 {!! Form::select('layout',
                     [0=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray()
-                ,null,['class'=>'form-control','id' => 'bb-select-layout']) !!}
+                ,null,['class'=>'form-control bb-layout','id' => 'bb-select-layout']) !!}
             </div>
         </div>
         <div class="col-xs-2  p-t-10">
             {!! Form::select('variations',
                 [0=>'Select Variation']+$variations->pluck('title','id')->toArray(),null,
-            ['class'=>'form-control','id' => 'bb-select-variation']) !!}
+            ['class'=>'form-control bb-layout','id' => 'bb-select-variation']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>

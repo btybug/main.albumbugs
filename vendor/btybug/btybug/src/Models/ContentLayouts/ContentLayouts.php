@@ -191,7 +191,11 @@ class ContentLayouts extends BasePainter implements VariationAccess
     public static function findVariation($id)
     {
         $layout = new self();
-        return $layout->findByVariation($id)->variations(false)->find($id);
+        if($contentLayout = $layout->findByVariation($id)){
+            return $contentLayout->variations(false)->find($id);
+
+        }
+        return null;
     }
 
     /**

@@ -4,6 +4,8 @@ $placeholders = [];
 foreach ($placeholdersData as $key => $datum) {
     $placeholders[$key] = $datum['title'];
 }
+$menu_styles = getDinamicStyle('menus');
+$container_styles = getDinamicStyle('containers');
 ?>
 <div class="col-md-12">
     @option("left_bar","s",$data)
@@ -414,6 +416,40 @@ foreach ($placeholdersData as $key => $datum) {
         </div>
     </div>
     @endoption
+    @option('menu', 'f', $data)
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Menu</label>
+            </div>
+            <div class="col-md-8">
+                {!! BBbutton2('menus','menu_area','frontend','Select Menu',['class'=>'form-control','model'=>$settings]) !!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    @endoption
+    @option('menu', 's', $data)
+    <div class="form-group">
+        <div class="col-md-4">
+            <label for="">Menu Container Style</label>
+        </div>
+        <div class="col-md-8">
+            {!! Form::select('style', $container_styles, null, ['class'=>'form-control'])!!}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            <label for="">Menu Style</label>
+        </div>
+        <div class="col-md-8">
+            {!! Form::select('menu_area_style', $menu_styles, null, ['class'=>'form-control'])!!}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    @endoption
+
 </div>
 {!!BBstyle($model->path.DS.'css/settings.css') !!}
 <script>

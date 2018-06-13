@@ -51,6 +51,13 @@
       "f" : true,
       "s" : true,
       "main" : true
+    },
+    "menu": {
+      "type": "unit",
+      "tag": "breadcrumb",
+      "title": "Menu",
+      "f" : true,
+      "s" : true
     }
   },
   "folder": "front_layout_with_3_9_col_2_row",

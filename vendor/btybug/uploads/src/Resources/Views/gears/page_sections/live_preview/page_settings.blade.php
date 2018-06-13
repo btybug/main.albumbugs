@@ -1,4 +1,4 @@
-@extends('btybug::layouts.page_sections')
+@extends("btybug::layouts.page_sections")
 @section('content')
 
     <div class="center-block" id="widget_container">

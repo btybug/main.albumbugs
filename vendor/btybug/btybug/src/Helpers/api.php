@@ -2476,3 +2476,9 @@ function BBgetTable($table){
     return DB::table($table);
 }
 
+function BBgetLayoutAttribute($id,$attribute = 'title'){
+    $layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($id);
+
+    return ($layout) ? $layout->$attribute : 'No Layout';
+}
+

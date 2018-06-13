@@ -35,15 +35,31 @@
 <div class="container-fluid coreheadersetting m-b-10">
     {!! Form::open(['id'=>'page-section-layout-form','method'=>'GET']) !!}
     <div class="row">
-        <div class="col-xs-4 p-t-10">
-            <div class="form-group">
-                <label class="sr-only" for="itemname">itemname</label>
-                {!! Form::select('layout',[0=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray(),0,['class'=>'form-control']) !!}
-
+        <div class="col-xs-3 p-t-10">
+            <div class="col-xs-8">
+                <div class="form-group">
+                    <label class="form-control" for="itemname">{{ BBgetLayoutAttribute($page->page_layout) }}</label>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    {!! Form::select('inherit',
+                        ['custom'=>'Custom','inherit' => "Inherit"]
+                    ,null,['class'=>'form-control','id' => 'bb-select-inheritance']) !!}
+                </div>
             </div>
         </div>
-        <div class="col-xs-4  p-t-10">
-            {!! Form::select('variations',[0=>'Select Variation']+$variations->pluck('title','id')->toArray(),null,['class'=>'form-control']) !!}
+        <div class="col-xs-3 p-t-10">
+            <div class="form-group">
+                {!! Form::select('layout',
+                    [0=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray()
+                ,null,['class'=>'form-control','id' => 'bb-select-layout']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2  p-t-10">
+            {!! Form::select('variations',
+                [0=>'Select Variation']+$variations->pluck('title','id')->toArray(),null,
+            ['class'=>'form-control','id' => 'bb-select-variation']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>

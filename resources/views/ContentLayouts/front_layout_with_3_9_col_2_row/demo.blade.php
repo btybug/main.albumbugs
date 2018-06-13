@@ -10,10 +10,19 @@
                         @foreach($items as $item)
                             @if(isset($item['children']))
                                 <li class="item">
-                                    <a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item['title'] !!}<i class="fa fa-caret-down"></i></a>
                                     <ul class="cute">
                                         @foreach($item['children'] as $child)
                                             <li><a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {!! $child['title'] !!}</a></li>
+                                            @if(isset($child['children']) && !empty($child['children']))
+                                                <a class="sublink" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-caret-down"></i></a>
+                                            @endif
+                                            @if(isset($child['children']))
+                                                <ul class="cute">
+                                                    @foreach($child['children'] as $next_child)
+                                                        <li><a href="{!! url($next_child['url']) !!}"><i class="fa {!! $next_child['icon'] !!}"></i> {!! $next_child['title'] !!}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </li>

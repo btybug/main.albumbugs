@@ -1,8 +1,21 @@
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".dropdown").forEach(item => item.addEventListener("click", () => item.classList.toggle("open")))
+
+    })
+
+
+</script>
+
+
 <div class="container-fluid">
 
     <div class="row row-no-gutter {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : ''}}">
         <div class="top-menu-container {{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
             <div class="top-menu">
+                @php
+                    $items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];
+                @endphp
                 <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
@@ -16,53 +29,30 @@
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">Home</a></li>
-                                <li class="dropdown">
-                                    <a href="#">Page 1</a>
-
-                                    <a data-toggle="dropdown" class="dropdown-toggle"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Page 1-1</a></li>
-                                        <li><a href="#">Page 1-2</a></li>
-                                        <li><a href="#">Page 1-3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Page 2</a></li>
-                                <li><a href="#">Page 3</a></li>
+                                @if(count($items))
+                                    @foreach($items as $item)
+                                        @if(isset($item['children']))
+                                            @foreach($item['children'] as $child)
+                                            <li class="dropdown">
+                                                <a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {{$child['title']}}</a>
+                                                @if(isset($child['children']) && !empty($child['children']))
+                                                <a data-toggle="dropdown" class="dropdown-toggle"><span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    @foreach($child['children'] as $next_child)
+                                                        <li><a href="{!! url($next_child['url']) !!}"><i class="fa {!! $next_child['icon'] !!}"></i> {!! $next_child['title'] !!}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                                @endif
+                                            </li>
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
                             </ul>
 
                         </div>
                     </div>
                 </nav>
-                <ul class="profile-menu {{isset($settings['menu_area_style']) ? $settings['menu_area_style'] : ''}}">
-                    @php
-                        $items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];
-                    @endphp
-                    @if(count($items))
-                        @foreach($items as $item)
-                            @if(isset($item['children']))
-                                <li class="item">
-                                    <ul class="cute">
-                                        @foreach($item['children'] as $child)
-                                            <li><a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {!! $child['title'] !!}</a></li>
-                                            @if(isset($child['children']) && !empty($child['children']))
-                                            <a class="sublink" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-caret-down"></i></a>
-                                            @endif
-                                            @if(isset($child['children']))
-                                            <ul class="cute">
-                                                @foreach($child['children'] as $next_child)
-                                                    <li><a href="{!! url($next_child['url']) !!}"><i class="fa {!! $next_child['icon'] !!}"></i> {!! $next_child['title'] !!}</a></li>
-                                                @endforeach
-                                            </ul>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @else
-                                <li class="item"><a href="{!! url($item['url']) !!}"><i class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>
-                            @endif
-                        @endforeach
-                    @endif
-                </ul>
             </div>
         </div>
         <div class="{!! issetReturn($settings,'ls_desktop').' '.issetReturn($settings,'ls_l_table').' '.issetReturn($settings,'ls_p_table').' '.issetReturn($settings,'ls_mobile')!!}">

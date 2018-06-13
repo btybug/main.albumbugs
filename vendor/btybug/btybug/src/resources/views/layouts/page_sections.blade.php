@@ -17,7 +17,6 @@
     <meta content="" name="author"/>
     {!! BBCss() !!}
     {!! HTML::script("public/js/jquery-2.1.4.min.js") !!}
-    {!! HTML::script("public/css/bootstrap/3.3.7/js/bootstrap.min.js") !!}
     {!! HTML::style('public/js/jquery-ui/jquery-ui.min.css') !!}
     {!! HTML::style("public/css/font-awesome/css/font-awesome.min.css") !!}
     {!! HTML::style('public/css/cms.css?v=1') !!}
@@ -118,6 +117,8 @@
 <input name="token" type="hidden" value="{{ csrf_token() }}" id="token"/>
 
 </body>
+{!! HTML::script("public/css/bootstrap/3.3.7/js/bootstrap.min.js") !!}
+
 {!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
 {!! HTML::script('public/js/UiElements/page-sections.js') !!}
 {!! HTML::script('public-x/custom/js/'.uniqid().'.js') !!}

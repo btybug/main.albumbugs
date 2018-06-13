@@ -1,5 +1,10 @@
 <div class="container-fluid">
     <div class="row row-no-gutter {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : ''}}">
+        <div class="top-menu-container">
+            <div class="top-menu">
+
+            </div>
+        </div>
         <div class="{!! issetReturn($settings,'ls_desktop').' '.issetReturn($settings,'ls_l_table').' '.issetReturn($settings,'ls_p_table').' '.issetReturn($settings,'ls_mobile')!!}">
             <div class="default-column {{(isset($settings['ls_style'])&& $settings['ls_style'] ) ? $settings['ls_style'] : ''}}">
                 <div>

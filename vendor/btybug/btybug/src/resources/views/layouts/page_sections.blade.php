@@ -48,7 +48,7 @@
                             [0=>'Custom',1 => "Inherit"]
                         ,$page->page_layout_inheritance,['class'=>'form-control','id' => 'bb-select-inheritance']) !!}
                     @endif
-                    <button class="btn btn-primary change-button"> Change</button>
+                    <button class="btn btn-primary change-button {{ ($page->page_layout_inheritance) ? 'hide' : '' }}"> Change</button>
                 </div>
             </div>
         </div>
@@ -116,7 +116,9 @@
         @yield('content')
     </div>
     <div id="page-sections-settings-area">
-        @yield('settings')
+        @if(! $page->page_layout_inheritance)
+            @yield('settings')
+        @endif
     </div>
 </div>
 

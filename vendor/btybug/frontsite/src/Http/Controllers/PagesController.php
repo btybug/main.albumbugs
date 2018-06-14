@@ -502,6 +502,8 @@ class PagesController extends Controller
             $page->page_layout = $parent->page_layout;
             $slug = $parent->page_layout;
         }
+        $page->page_layout_inheritance = $inherit;
+
         $settings=($request->get('layout'))?[]:(@json_decode($page->page_layout_settings,true))?json_decode($page->page_layout_settings,true):[];
         if ($slug) {
             $view = ContentLayouts::renderPageLivePreview($slug,$settings,$page);

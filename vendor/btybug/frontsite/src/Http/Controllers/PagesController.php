@@ -149,10 +149,10 @@ class PagesController extends Controller
         $tags = $page->tags;
         $classifies = $classifierRepository->getAll();
         $classifierPageRelations = $classifierService->getClassifierPageRelations($page->id);
-        $placeholders = $frontendPageService->getPlaceholdersInUrl($page->page_layout_settings);
         $memberships = $membershipRepository->pluck('name', 'id')->toArray();
         $specials = $specialAccessRepository->pluck('name', 'id')->toArray();
-        return view('manage::frontend.pages.general', compact(['page', 'admins', 'specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'placeholders', 'memberships']));
+
+        return view('manage::frontend.pages.general', compact(['page', 'admins', 'specials', 'tags', 'id', 'classifies', 'classifierPageRelations', 'memberships']));
     }
 
     public function getSpecialGeneral(

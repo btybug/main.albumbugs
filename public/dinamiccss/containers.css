@@ -77,21 +77,21 @@
     background-color: whitesmoke; }
 /*left,bg-black*/
 .bty-div-bg-black-align-left {
-    background: rgba(0, 0, 0, .6);
+    background: #000000;
     text-align: left;
     padding-left: 15px;
     padding-right: 15px;
 }
 /*right,bg-black*/
 .bty-div-bg-black-align-right {
-    background: rgba(0, 0, 0, .6);
+    background: #000000;
     text-align: right;
     padding-left: 15px;
     padding-right: 15px;
 }
 /*center,bg-black*/
 .bty-div-bg-black-align-center {
-    background: rgba(0, 0, 0, .6);
+    background: #000000;
     text-align: center;
     padding-left: 15px;
     padding-right: 15px;

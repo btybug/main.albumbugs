@@ -40,3 +40,10 @@
     float: left;
     padding-left: 0;
 }
+.top-menu  .navbar-inverse{
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+}

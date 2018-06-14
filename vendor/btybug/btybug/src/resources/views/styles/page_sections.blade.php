@@ -1,125 +1,53 @@
 @if(!isset($ajax))
     <div class="row modal-data">
-        <div class="col-md-3 builder-modalleft modal-list-menu">
-            <ul class="filedcolumntype " role="tablist">
-                @foreach($layouts as $layout)
+        <div class="col-md-3 modal-list-menu builder-modalleft">
+            <ul class="filedcolumntype list-group listdatagroup" role="tablist">
+                @foreach($layouts as $tpl)
                     <li class="menu-nav">
                         <div class="nav-bg"></div>
                         <div class="title">
-                            <div class="icon">
+                            <div class=icon>
                                 <i class="fa fa-server" aria-hidden="true"></i>
                             </div>
-                            <a class="styles" data-id="{!! $layout->slug !!}" data-action="page_sections"
-                               href="javascript:void(0)">
-                                {{--<img src="{!! url('images/form-list2.jpg') !!}">--}}
-                                <span>{!! $layout->title !!}</span></a>
+                            <a href="javascript:void(0)" type="button" data-id="{!! $tpl->slug !!}"
+                               data-action="page_sections" data-key="" class="styles">
+                                {{--<img src="{!! url('images/form-list.jpg') !!}">--}}
+                                <span>{!! $tpl->title !!}</span></a>
                         </div>
-
                     </li>
                 @endforeach
             </ul>
         </div>
         @endif
-        <div class="col-md-9 modal-data-items builder-modalright modal-list-content">
-            <h5>Select Variation</h5>
+        <div class="col-md-9 modal-list-content builder-modalright modal-data-items">
             @if(!isset($items))
-                @foreach($layouts[0]->variations()->all() as $item)
-                    <ul class="formlisting">
-                        {{--<li>--}}
-                            {{--<a class="btn item" data-value="{!! $item->id !!}" href="javascript:void(0)">--}}
-                                {{--<input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/> <img--}}
-                                        {{--src="{!! url('images/form-list2.jpg') !!}">--}}
-                            {{--</a>--}}
-                            {{--<span>{!! $item->title !!}<a href="#" target="_blank"><i class="fa fa-pencil pull-right"--}}
-                                                                                     {{--aria-hidden="true"></i></a></span>--}}
+                @php
+                    $default=$tpl->variations()->default();
+                @endphp
 
-                        {{--</li>--}}
-                        <li class="col-md-3 col-sm-3 col-xs-12">
-                            <figure>
-                                <a class="text-center item item-unit zzzzz" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                    <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
-                                    <img src="{!! asset('public/images/default.jpg') !!}">
+            @else
+                @php
+                    $default=$items->default();
+                @endphp
 
-                                </a>
-
-                                <p>
-                                    <a class="btn text-center item item-unit zzzzz custom_color_white" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                        <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
-                                        {!! $item->title?$item->title:"no title" !!}
-
-                                    </a>
-                                </p>
-                                <figcaption>
-                                    <div>
-                                        <a href="#" target="_blank">
-                                            <i class="fa fa-pencil pull-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            <a class="btn text-center item item-unit zzzzz custom_color_white" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                                <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
-                                                {!! $item->title?$item->title:"no title" !!}
-
-                                            </a>
-                                        </p>
-                                    </div>
-
-                                </figcaption>
-                            </figure>
-                        </li>
-                        @endforeach
-                    </ul>
-                    @else
-                        <ul class="formlisting">
-                            @foreach($items as $item)
-                                {{--<li>--}}
-                                    {{--<a class="btn item" data-value="{!! $item->id !!}" href="javascript:void(0)">--}}
-                                        {{--<input type="hidden" data-action="page_sections"--}}
-                                               {{--data-value="{!! $item->id !!}"/>--}}
-                                        {{--<img src="{!! url('images/form-list2.jpg') !!}"></a>--}}
-                                    {{--<span>{!! $item->title !!}<a href="#" target="_blank"><i--}}
-                                                    {{--class="fa fa-pencil pull-right" aria-hidden="true"></i></a></span>--}}
-
-                                {{--</li>--}}
-                                <li class="col-md-3 col-sm-3 col-xs-12">
-                                    <figure>
-                                        <a class="text-center item item-unit zzzzz" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                            <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
-                                            <img src="{!! asset('public/images/default.jpg') !!}">
-
-                                        </a>
-
-                                        <p>
-                                            <a class="btn text-center item item-unit zzzzz custom_color_white" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                                <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
-                                                {!! $item->title?$item->title:"no title" !!}
-
-                                            </a>
-                                        </p>
-                                        <figcaption>
-                                            <div>
-                                                <a href="#" target="_blank">
-                                                    <i class="fa fa-pencil pull-right" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <p>
-                                                    <a class="btn text-center item item-unit zzzzz custom_color_white" data-value="{!! $item->id !!}" href="javascript:void(0)">
-                                                        <input type="hidden" data-action="page_sections" data-value="{!! $item->id !!}"/>
-                                                        {!! $item->title?$item->title:"no title" !!}
-
-                                                    </a>
-                                                </p>
-                                            </div>
-
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
+            @endif
+            <input type="hidden" class="tpl-default-variation" value="{!! ($default)?$default->id:null !!}">
+            <iframe class="magic-modal-iframe" style="width: 100%; height: 100%;"
+                    src="{!! ($default)?url('/modality/page-sections/options',$default->id):'javascript:void(0)'!!}"></iframe>
+            <script type="template" id="magic-modal-options">
+                @if(!isset($items))
+                @foreach($tpl->variations()->all() as $item)
+                <option value="{!! $item->id !!}"> {!! $item->title?$item->title:"no title" !!}</option>
+                @endforeach
+                @else
+                @foreach($items as $item)
+                <option value="{!! $item->id !!}"> {!! $item->title?$item->title:"no title" !!}</option>
+                @endforeach
+                @endif
+            </script>
         </div>
+
         @if(!isset($ajax))
     </div>
 @endif
+<input type="hidden" id="iframe-url" value="/modality/page-sections/options">

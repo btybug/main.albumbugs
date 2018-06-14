@@ -449,7 +449,6 @@ class ModalityController extends Controller
         $items = $layout->variations()->all();
         $ajax = true;
         $html = View::make('btybug::styles.page_sections', compact(['items', 'ajax']))->render();
-
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

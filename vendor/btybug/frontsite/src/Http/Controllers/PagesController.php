@@ -501,10 +501,11 @@ class PagesController extends Controller
 //        dd($inherit);
         if($inherit){
             $parent = $page->parent;
-            $page->page_layout_settings = $parent->page_layout_settings;
-            $page->page_layout = $parent->page_layout;
-            $slug = $parent->page_layout;
-
+            if($parent){
+                $page->page_layout_settings = $parent->page_layout_settings;
+                $page->page_layout = $parent->page_layout;
+                $slug = $parent->page_layout;
+            }
         }
 
         $page->page_layout_inheritance = $inherit;

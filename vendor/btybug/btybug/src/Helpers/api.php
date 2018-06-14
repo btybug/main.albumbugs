@@ -121,9 +121,12 @@ function BBRenderFrontLayout ($page)
 //            }
 //        }
 //    }
-    //TODO: remove is_array conditon when DB cleaned
-    $settings = ($page->page_layout_settings && !is_array($page->page_layout_settings)) ? json_decode($page->page_layout_settings,true) : [];
 
+    if($page->parent && $page->page_layout_inheritance){
+        $settings = ($page->parent->page_layout_settings && !is_array($page->parent->page_layout_settings)) ? json_decode($page->parent->page_layout_settings,true) : [];
+    }else{
+        $settings = ($page->page_layout_settings && !is_array($page->page_layout_settings)) ? json_decode($page->page_layout_settings,true) : [];
+    }
     return BBRenderPageSections($page->page_layout, $settings);
 }
 

@@ -41,7 +41,7 @@
             <div class="col-xs-6">
                 <div class="form-group">
                     @if($page->parent_id == ZERO)
-                        {!! Form::hidden('inherit','custom') !!}
+                        {!! Form::hidden('inherit',0) !!}
                         <label class="form-control" for="itemname"> No Parent</label>
                     @else
                         {!! Form::select('inherit',

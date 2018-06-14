@@ -470,11 +470,16 @@ class ContentLayouts extends BasePainter implements VariationAccess
         $variations = isset($variables['variations']) ? $variables['variations'] : null;
         $page = isset($variables['page']) ? $variables['page'] : null;
         $settings = ($variation) ? $variation->toArray() : $variation;
+
         if ($settings) {
             if (isset($variables['request'])) {
                 $settings = array_merge($settings['settings'], $variables['request']);
             } else {
                 $settings = $settings['settings'];
+            }
+        }else{
+            if (isset($variables['request'])) {
+                $settings = $variables['request'];
             }
         }
         $slug = $this->folder;

@@ -497,7 +497,10 @@ class PagesController extends Controller
         $inherit = $request->get('inherit');
 //        dd($page->page_layout,$slug);
         if($inherit){
-
+            $parent = $page->parent;
+            $page->page_layout_settings = $parent->page_layout_settings;
+            $page->page_layout = $parent->page_layout;
+            $slug = $parent->page_layout;
         }
         $settings=($request->get('layout'))?[]:(@json_decode($page->page_layout_settings,true))?json_decode($page->page_layout_settings,true):[];
         if ($slug) {

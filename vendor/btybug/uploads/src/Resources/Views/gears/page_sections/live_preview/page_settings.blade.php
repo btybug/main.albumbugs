@@ -11,82 +11,88 @@
     <div id="output-content" style="display: none"></div>
 
 @stop
-@section('settings')
-    <div class="settings-bottom ">
-        <div class="head">
-            <span id="current-node-text">SELECT ELEMENT</span>
 
-            <a href="#" class="float-right closeCSSEditor"><i class="fa fa-arrow-down"></i></a>
-        </div>
-        <div class="content animated bounceInRight hide" data-settinglive="settings">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <div class="left">
-                            <ul id="placeholders-render-list-main-box-bty">
-                                @isset($model->placeholders)
-                                    @foreach($model->placeholders as $key => $placeholder)
-                                        <li>
-                                            <div class="pl-item action-placeholder" data-key="{{ $key }}"
-                                                 @if(isset($placeholder['f']))
-                                                 @if($page && isset($placeholder['main']))
-                                                 @if($page->type == 'custom')
-                                                 data-type="f"
-                                                 @elseif(isset($placeholder['s']))
-                                                 data-type="s"
-                                                 @endif
-                                                 @else
-                                                 data-type="f"
-                                                 @endif
-                                                 @elseif(isset($placeholder['s']))
-                                                 data-type="s"
-                                                    @endif
-                                            >
-                                                <span class="left-li">{{ $placeholder['title'] }} </span>
-                                                <div class="button">
-                                                    @isset($placeholder['f'])
-                                                        @if($page && isset($placeholder['main']))
-                                                            @if($page->type == 'custom')
+@if(! $page->page_layout_inheritance)
+    @section('settings')
+        <div class="settings-bottom ">
+            <div class="head">
+                <span id="current-node-text">SELECT ELEMENT</span>
+
+                <a href="#" class="float-right closeCSSEditor"><i class="fa fa-arrow-down"></i></a>
+            </div>
+            <div class="content animated bounceInRight hide" data-settinglive="settings">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="left">
+                                <ul id="placeholders-render-list-main-box-bty">
+                                    @isset($model->placeholders)
+                                        @foreach($model->placeholders as $key => $placeholder)
+                                            <li>
+                                                <div class="pl-item action-placeholder" data-key="{{ $key }}"
+                                                     @if(isset($placeholder['f']))
+                                                     @if($page && isset($placeholder['main']))
+                                                     @if($page->type == 'custom')
+                                                     data-type="f"
+                                                     @elseif(isset($placeholder['s']))
+                                                     data-type="s"
+                                                     @endif
+                                                     @else
+                                                     data-type="f"
+                                                     @endif
+                                                     @elseif(isset($placeholder['s']))
+                                                     data-type="s"
+                                                        @endif
+                                                >
+                                                    <span class="left-li">{{ $placeholder['title'] }} </span>
+                                                    <div class="button">
+                                                        @isset($placeholder['f'])
+                                                            @if($page && isset($placeholder['main']))
+                                                                @if($page->type == 'custom')
+                                                                    <a href="javascript:void(0)" data-key="{{ $key }}"
+                                                                       data-type="f"
+                                                                       class="btn btn-sm btn-warning action-placeholder">F</a>
+                                                                @endif
+                                                            @else
                                                                 <a href="javascript:void(0)" data-key="{{ $key }}"
                                                                    data-type="f"
                                                                    class="btn btn-sm btn-warning action-placeholder">F</a>
                                                             @endif
-                                                        @else
-                                                            <a href="javascript:void(0)" data-key="{{ $key }}"
-                                                               data-type="f"
-                                                               class="btn btn-sm btn-warning action-placeholder">F</a>
-                                                        @endif
-                                                    @endisset
+                                                        @endisset
 
-                                                    @isset($placeholder['s'])
-                                                        <a href="javascript:void(0)" data-key="{{ $key }}" data-type="s"
-                                                           class="btn btn-sm btn-info action-placeholder">S</a>
-                                                    @endisset
+                                                        @isset($placeholder['s'])
+                                                            <a href="javascript:void(0)" data-key="{{ $key }}" data-type="s"
+                                                               class="btn btn-sm btn-info action-placeholder">S</a>
+                                                        @endisset
+                                                    </div>
+
                                                 </div>
-
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                @endisset
-                            </ul>
+                                            </li>
+                                        @endforeach
+                                    @endisset
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-9">
-                        <img src="{!! url('/public/images/loader.gif') !!}"
-                             style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide"/>
-                        <div class="right" id="right-settings-main-box-bty">
-                            {!! Form::model($settings,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/page-settings',[$page->id,$model->slug])]) !!}
+                        <div class="col-xs-9">
+                            <img src="{!! url('/public/images/loader.gif') !!}"
+                                 style="position: relative;left: 40%;width: 100px;top: 70px;" id="loader-img" class="hide"/>
+                            <div class="right" id="right-settings-main-box-bty">
+                                {!! Form::model($settings,['id'=>'add_custome_page','url'=>url('admin/uploads/layouts/page-settings',[$page->id,$model->slug])]) !!}
                                 <h3 id="main-box-title"></h3>
-                                    @include($settingsHtml)
-                            {!! Form::close() !!}
+                                @include($settingsHtml)
+                                {!! Form::close() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <input type="hidden" value="{!! route('uploads_page_settings_options') !!}" id="options-url">
-@stop
+        <input type="hidden" value="{!! route('uploads_page_settings_options') !!}" id="options-url">
+    @stop
+@else
+    <input type="hidden" action="{!! url('admin/uploads/layouts/page-settings',[$page->id,$model->slug]) !!}" id="add_custome_page">
+@endif
+
 @section('CSS')
     {!! HTML::style("https://jqueryvalidation.org/files/demo/site-demos.css") !!}
     {!! HTML::style('public/css/preview-template.css') !!}

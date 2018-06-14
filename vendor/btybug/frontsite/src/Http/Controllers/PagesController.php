@@ -492,19 +492,24 @@ class PagesController extends Controller
     public function getSettingsLayout($id,FrontPagesRepository $repository,Request $request)
     {
         $page=$repository->find($id);
-        $layout=$request->get('layout',$page->page_layout);
-        $slug=$request->get('variations',$layout.'.default');
-        $inherit = $request->get('inherit');
-//        dd($page->page_layout,$slug);
+        $layout=$request->get('layout');
+        if(! $layout) $layout = $page->page_layout;
+        $slug = $request->get('variations');
+        if(! $slug) $slug = $layout.'.default';
+
+        $inherit = $request->get('inherit',$page->page_layout_inheritance);
+//        dd($inherit);
         if($inherit){
             $parent = $page->parent;
             $page->page_layout_settings = $parent->page_layout_settings;
             $page->page_layout = $parent->page_layout;
             $slug = $parent->page_layout;
-        }
-        $page->page_layout_inheritance = $inherit;
 
+        }
+
+        $page->page_layout_inheritance = $inherit;
         $settings=($request->get('layout'))?[]:(@json_decode($page->page_layout_settings,true))?json_decode($page->page_layout_settings,true):[];
+
         if ($slug) {
             $view = ContentLayouts::renderPageLivePreview($slug,$settings,$page);
 

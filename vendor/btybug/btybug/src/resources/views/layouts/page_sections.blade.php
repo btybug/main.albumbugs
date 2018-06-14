@@ -116,9 +116,7 @@
         @yield('content')
     </div>
     <div id="page-sections-settings-area">
-        @if(! $page->page_layout_inheritance)
-            @yield('settings')
-        @endif
+        @yield('settings')
     </div>
 </div>
 

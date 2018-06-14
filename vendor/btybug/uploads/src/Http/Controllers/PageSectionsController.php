@@ -187,8 +187,12 @@ class PageSectionsController extends Controller
        if($request->save){
            $slug = explode('.', $request->slug);
            $page=$repository->find($page_id);
-           $page->page_layout=$slug[0];
-           $page->page_layout_settings=json_encode($request->all(),true);
+           if(! $request->inherit){
+               $page->page_layout=$slug[0];
+               $page->page_layout_settings=json_encode($request->all(),true);
+           }
+           $page->page_layout_inheritance = $request->inherit;
+
            $page->save();
        }
         $output = ContentLayouts::savePageSectionSettings($request->slug, $request->itemname, $request->except(['_token', 'itemname']), null);

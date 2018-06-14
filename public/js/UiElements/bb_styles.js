@@ -90,7 +90,8 @@ $(document).ready(function () {
     $("body").on("click", ".item", function () {
         console.log(123, BBbutton);
         if (BBbutton) {
-            console.log($('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]'));
+            let btn = $('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]')
+            console.log();
 
             $("body")
                 .find(".modal-data-items .btn-primary")
@@ -110,7 +111,14 @@ $(document).ready(function () {
                 .trigger("input");
             $("#magic-settings span[aria-hidden=true]").click();
 
-            $('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]').removeClass($('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]').attr("data-style-old")).attr("data-style-old", $(this).attr("data-value")).addClass($(this).attr("data-value"));
+            btn.removeClass(
+                    btn.attr(
+                        "data-style-old"
+                    )
+                )
+                .attr("data-style-old", $(this).attr("data-value"))
+                .addClass($(this).attr("data-value"));
+
         }
     });
 

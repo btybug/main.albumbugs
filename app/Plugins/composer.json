@@ -10,6 +10,7 @@
     "btybug.hook/newstudio": "dev-master",
     "btybug.hook/api": "dev-master",
     "btybug.hook/cmslogin": "dev-master",
-    "btybug.hook/apiuser": "dev-master"
+    "btybug.hook/apiuser": "dev-master",
+    "sahak.avatar/social": "dev-master"
   }
 }

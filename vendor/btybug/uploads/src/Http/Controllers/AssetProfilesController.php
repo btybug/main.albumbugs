@@ -212,8 +212,7 @@ class AssetProfilesController extends Controller
         VersionsRepository $versionsRepository
     )
     {
-        $result = $versionsRepository->getByWhereInId($request->get('files'));
-
+        $result = $versionsRepository->getByWhereInId($request->get('files',[]));
         return $result;
     }
 }

@@ -33,35 +33,36 @@
     {!! Form::open(['id'=>'page-section-layout-form','method'=>'GET']) !!}
     <div class="row">
         <div class="col-xs-3 p-t-10">
-            <div class="col-xs-8">
+            <div class="col-xs-6">
                 <div class="form-group">
                     <label class="form-control" for="itemname">{{ $page->title }} layout</label>
                 </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-6">
                 <div class="form-group">
                     @if($page->parent_id == ZERO)
                         {!! Form::hidden('inherit','custom') !!}
                         <label class="form-control" for="itemname"> No Parent</label>
                     @else
                         {!! Form::select('inherit',
-                            ['custom'=>'Custom','inherit' => "Inherit"]
-                        ,null,['class'=>'form-control','id' => 'bb-select-inheritance']) !!}
+                            [0=>'Custom',1 => "Inherit"]
+                        ,$page->page_layout_inheritance,['class'=>'form-control','id' => 'bb-select-inheritance']) !!}
                     @endif
+                    <button class="btn btn-primary change-button"> Change</button>
                 </div>
             </div>
         </div>
         <div class="col-xs-3 p-t-10">
             <div class="form-group">
                 {!! Form::select('layout',
-                    [0=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray()
-                ,null,['class'=>'form-control bb-layout','id' => 'bb-select-layout']) !!}
+                    [null=>'Select Layout']+\Btybug\btybug\Models\ContentLayouts\ContentLayouts::all()->get()->pluck('title','slug')->toArray()
+                ,null,['class'=>'form-control bb-layout hide','id' => 'bb-select-layout']) !!}
             </div>
         </div>
         <div class="col-xs-2  p-t-10">
             {!! Form::select('variations',
-                [0=>'Select Variation']+$variations->pluck('title','id')->toArray(),null,
-            ['class'=>'form-control bb-layout','id' => 'bb-select-variation']) !!}
+                [null=>'Select Variation']+$variations->pluck('title','id')->toArray(),null,
+            ['class'=>'form-control bb-layout hide','id' => 'bb-select-variation']) !!}
         </div>
         <div class="col-xs-4 text-right  p-t-10">
             <button class="btn btn-info" data-openresponsiveview="modal" data-viewtoolbar="reponsive" data-settingaction="responsive">Responsive</button>

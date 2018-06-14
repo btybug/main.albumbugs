@@ -2,6 +2,7 @@
 
 use Btybug\btybug\Models\Painter\BasePainter;
 use Btybug\btybug\Models\Universal\VariationAccess;
+use Btybug\btybug\Repositories\AdminsettingRepository;
 use Btybug\btybug\Repositories\HookRepository;
 use Btybug\FrontSite\Models\FrontendPage;
 use File;
@@ -181,6 +182,19 @@ class ContentLayouts extends BasePainter implements VariationAccess
             }
             $data['variation'] = $variation;
             return self::find($slug)->renderSettings($data);
+        }else{
+            $adminsettingRepository = new AdminsettingRepository();
+            $model = $adminsettingRepository->getSystemSettings();
+            if(isset($model['page_layout'])){
+                $slug= $model['page_layout'];
+                $variation = self::findVariation($slug);
+                if ($variation) {
+                    $data['variation'] = $variation;
+                    $layout = self::findByVariation($slug);
+                    $data['variations'] = $layout->variations(false)->all()->getItems();
+                    return $layout->renderSettings($data);
+                }
+            }
         }
     }
 

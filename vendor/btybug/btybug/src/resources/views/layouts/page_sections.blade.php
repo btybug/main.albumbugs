@@ -35,7 +35,7 @@
         <div class="col-xs-3 p-t-10">
             <div class="col-xs-8">
                 <div class="form-group">
-                    <label class="form-control" for="itemname">{{ BBgetLayoutAttribute($page->page_layout) }}</label>
+                    <label class="form-control" for="itemname">{{ $page->title }} layout</label>
                 </div>
             </div>
             <div class="col-xs-4">

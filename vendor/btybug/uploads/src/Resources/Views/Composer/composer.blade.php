@@ -45,6 +45,7 @@
         </ul>
         <div class="shelf"></div>
     </div>
+    <input type="hidden" id="route_composer_main" value="{!! route('composer_main') !!}">
 @stop
 @section('CSS')
     <style>
@@ -311,99 +312,6 @@
     </style>
 @stop
 @section('JS')
-    <script type="text/javascript">
-        $(document).ready(function () {
-            check();
-        });
+    {!! Html::script('public/js/modules/composer.js') !!}
 
-        function url() {
-            return '{!! route('composer_main') !!}';
-        }
-
-        function call(func) {
-            $(".bookshelf_wrapper").removeClass("hidden");
-            $("#output").append("\n please wait...\n");
-            $("#output").append("\n===================================================================\n");
-            $("#output").append("Executing Started");
-            $("#output").append("\n===================================================================\n");
-            $.post('{!! route('composer_main') !!}',
-                {
-                    "path": $("#path").val(),
-                    "package": $("#package").val(),
-                    "command": func,
-                    "function": "command",
-                    "_token": "<?php echo csrf_token()?>"
-
-                },
-                function (data) {
-                    $("#output").append(data);
-                    $("#output").append("\n===================================================================\n");
-                    $("#output").append("Execution Ended");
-                    $("#output").append("\n===================================================================\n");
-                    $(".bookshelf_wrapper").addClass("hidden");
-                    autoloadUp();
-
-                }
-            );
-        }
-
-        function autoloadUp() {
-            $.post('{!! route('composer_main') !!}',
-                {
-                    "package": $("#package").val(),
-                    "function": "autoloadUp",
-                    "_token": "<?php echo csrf_token()?>"
-                },
-                function (data) {
-                    $("#output").append(data);
-                    $("#output").append("\n===================================================================\n");
-                    $("#output").append("Execution Ended");
-                    $("#output").append("\n===================================================================\n");
-                    $(".bookshelf_wrapper").addClass("hidden");
-
-                }
-            );
-        }
-
-        function check() {
-            $("#output").append('\nloading...\n');
-            $.post(url(),
-                {
-                    "function": "getStatus",
-                    "password": $("#password").val(),
-                    "_token": "<?php echo csrf_token()?>"
-                },
-                function (data) {
-                    if (data.composer_extracted) {
-                        $("#output").html("Ready. All commands are available.\n");
-                        $("button").removeClass('disabled');
-                    }
-                    else if (data.composer) {
-                        $.post(url(),
-                            {
-                                "password": $("#password").val(),
-                                "function": "extractComposer",
-                                "_token": "<?php echo csrf_token()?>"
-                            },
-                            function (data) {
-                                $("#output").append(data);
-                                window.location.reload();
-                            }, 'text');
-                    }
-                    else {
-                        $("#output").html("Please wait till composer is being installed...\n");
-                        $.post(url(),
-                            {
-                                "password": $("#password").val(),
-                                "function": "downloadComposer",
-                                "_token": "<?php echo csrf_token()?>"
-                            },
-                            function (data) {
-                                $("#output").append(data);
-//                                check();
-                            }, 'text');
-                    }
-                });
-        }
-    </script>
 @stop

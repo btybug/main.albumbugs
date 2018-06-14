@@ -86,6 +86,7 @@
 @section('CSS')
     {!! HTML::style('public/css/new-store.css') !!}
     {!! HTML::style('public/js/bootstrap-select/css/bootstrap-select.min.css') !!}
+    {!! HTML::style('public/js/bootstrap-datepicker/bootstrap-datepicker.css') !!}
     <style>
         .child-tpl {
             width: 95% !important;
@@ -105,6 +106,7 @@
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
     {!! BBscript('public/js/custom_plugin.js') !!}
     {!! HTML::script('public/js/bootstrap-select/js/bootstrap-select.min.js') !!}
+    {!! HTML::script('public/js/jquery-ui/jquery-ui.js') !!}
     <script>
         Dropzone.options.myAwesomeDropzone = {
             init: function () {

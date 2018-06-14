@@ -110,14 +110,7 @@ $(document).ready(function () {
                 .trigger("input");
             $("#magic-settings span[aria-hidden=true]").click();
 
-            $('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]')
-                .removeClass(
-                    $('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]').attr(
-                        "data-style-old"
-                    )
-                )
-                .attr("data-style-old", $(this).attr("data-value"))
-                .addClass($(this).attr("data-value"));
+            $('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]').removeClass($('[data-bbplace="' + BBbutton.getAttribute("data-key") + '"]').attr("data-style-old")).attr("data-style-old", $(this).attr("data-value")).addClass($(this).attr("data-value"));
         }
     });
 

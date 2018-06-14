@@ -56,6 +56,7 @@ function getPosts(page) {
     });
 }
 
+$( function() {
 $(".date").datepicker({
     onClose:function(selectedDate){
         if(selectedDate){
@@ -63,3 +64,4 @@ $(".date").datepicker({
         }
     }
 });
+} );

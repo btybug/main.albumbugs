@@ -29,6 +29,7 @@
 {{--{!! BBMainJS() !!}--}}
 {!! BBJs("backend") !!}
 {!! HTML::script("public/js/jquery-ui/jquery-ui.min.js") !!}
+{!! HTML::script("public/js/helper.js") !!}
 @yield('CSS')
 @stack('css')
 

@@ -12,7 +12,7 @@
 
     <div class="row row-no-gutter {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : ''}}">
         <div class="top-menu-container {{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
-            <div class="top-menu">
+            <div class="top-menu {{(isset($settings['menu_style'])&& $settings['menu_style'] ) ? $settings['menu_style'] : 'demo-column'}}">
                 @php
                     $items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];
                 @endphp

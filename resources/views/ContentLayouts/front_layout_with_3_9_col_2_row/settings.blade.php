@@ -4,7 +4,7 @@ $placeholders = [];
 foreach ($placeholdersData as $key => $datum) {
     $placeholders[$key] = $datum['title'];
 }
-$menu_styles = getDinamicStyle('menus');
+$menu_styles = getDinamicStyle('horizontal-menus');
 $container_styles = getDinamicStyle('containers');
 ?>
 <div class="col-md-12">
@@ -444,7 +444,7 @@ $container_styles = getDinamicStyle('containers');
             <label for="">Menu Style</label>
         </div>
         <div class="col-md-8">
-            {!! Form::select('menu_area_style', $menu_styles, null, ['class'=>'form-control'])!!}
+            {!! Form::select('menu_style', $menu_styles, null, ['class'=>'form-control'])!!}
         </div>
         <div class="clearfix"></div>
     </div>

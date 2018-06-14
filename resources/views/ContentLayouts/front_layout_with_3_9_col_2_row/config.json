@@ -54,7 +54,7 @@
     },
     "menu": {
       "type": "unit",
-      "tag": "breadcrumb",
+      "tag": "menu",
       "title": "Menu",
       "f" : true,
       "s" : true

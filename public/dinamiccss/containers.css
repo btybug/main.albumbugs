@@ -96,3 +96,24 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+/*bg-black,fixed*/
+.bty-div-bg-black-fixed {
+    background: #000000;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+/*menu-bg-gray*/
+.bty-div-menu-bg-gray {
+    background: #34495d;
+}
+/*menu-bg-black-center*/
+.bty-div-menu-bg-black-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #000;
+}

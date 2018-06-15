@@ -1,4 +1,4 @@
-<div class="container-fluid">
+
     <div class="profile-main {{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
         <section id="skills-flato" class="{{(isset($settings['skill_container_style'])&& $settings['skill_container_style'] ) ? $settings['skill_container_style'] : ''}}">
             <div class="container">
@@ -60,7 +60,7 @@
         </section>
     </div>
     <div class="clearfix"></div>
-</div>
+
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css',$_this) !!}
 {!! BBscript($_this->path.DS.'js'.DS.'custom.js',$_this) !!}
 {!! useDinamicStyle('containers') !!}

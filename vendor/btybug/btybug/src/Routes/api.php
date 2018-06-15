@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/modality/settings-live-react', 'Admincp\ModalityReactController@postSettingsLive');
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();

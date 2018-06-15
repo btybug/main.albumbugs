@@ -1,7 +1,17 @@
 /*pad-tb-50*/
 .bty-div-p-tb-50 {
-    padding: 0 50px;
-     }
+    padding: 50px 0;}
+/*pad-lr-15*/
+.bty-div-p-lr-15 {
+    padding: 0 15px;}
+/*pad-tb-85,bg-gray*/
+.bty-div-p-tb-85-bg-gray {
+    padding: 85px 0;
+    background-color: #EEEEEE;}
+/*pad-tb-85,bg-white*/
+.bty-div-p-tb-85-bg-white {
+    padding: 85px 0;
+    background-color: white;}
 /*pad-15,mar-15,bg-light,border*/
 .bty-div-p15-m15-bg-light-border-bg {
     margin: 15px;

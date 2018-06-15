@@ -1,5 +1,5 @@
 
-    <div class="profile-main {{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
+    <div class="{{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
         <section id="skills-flato" class="{{(isset($settings['skill_container_style'])&& $settings['skill_container_style'] ) ? $settings['skill_container_style'] : ''}}">
             <div class="container">
                 <div class="skills">

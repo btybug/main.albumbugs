@@ -156,14 +156,14 @@ class UserController extends Controller
     public function getCreate(Request $request)
     {
         //TODO change functionality, move with cms forms
-        $formSettings = FormSettings::where('form_id', '58e21be5a8bd8')->first();
-        if (!$formSettings) {
-            abort(404);
-        }
-        $formSettings = $formSettings->additional_settings;
-        $user_id = null;
+//        $formSettings = FormSettings::where('form_id', '58e21be5a8bd8')->first();
+//        if (!$formSettings) {
+//            abort(404);
+//        }
+//        $formSettings = $formSettings->additional_settings;
+//        $user_id = null;
 
-        return view('users::users.create', compact('formSettings', 'user_id'));
+        return view('users::users.create');
     }
 
     /**

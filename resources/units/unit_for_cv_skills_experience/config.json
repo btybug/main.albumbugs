@@ -25,13 +25,15 @@
       "type": "unit",
       "tag": "skills",
       "title": "Technical Skills",
-      "f": true
+      "f": true,
+      "s": true
     },
     "experience": {
       "type": "unit",
       "tag": "experience",
       "title": "Work Experience",
-      "f": true
+      "f": true,
+      "s": true
     }
   },
   "tags": ["cv", "skills", "experience"],

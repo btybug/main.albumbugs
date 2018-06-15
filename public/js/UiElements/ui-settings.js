@@ -60,7 +60,7 @@ $(document).ready(function () {
     }
 
 
-    $('#right-settings-main-box-bty').on('click', '.click-action', function () {
+    $('#right-settings-main-box-bty').on('click', '[data-setting-delete]', function () {
         savesettingevent();
     });
 

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="profile-main {{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
-        <section id="skills-flato">
+        <section id="skills-flato" class="{{(isset($settings['skill_container_style'])&& $settings['skill_container_style'] ) ? $settings['skill_container_style'] : ''}}">
             <div class="container">
                 <div class="skills">
                     <div class="heading">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </section>
-        <section id="experience-flato">
+        <section id="experience-flato" class="{{(isset($settings['exp_container_style'])&& $settings['exp_container_style'] ) ? $settings['exp_container_style'] : ''}}">
             <div class="container">
                 <div class="experience">
                     <div class="heading">

@@ -51,7 +51,7 @@ $text_styles = getDinamicStyle('texts');
                         <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                         <span class="title">Skill Section</span>
                     </a>
-                    <a href="#" id="skill{{$key}}" class="btn btn-sm btn-danger delete click-action"><i class="fa fa-minus"></i></a>
+                    <a href="#" id="skill{{$key}}" data-setting-delete="" class="btn btn-sm btn-danger delete click-action"><i class="fa fa-minus"></i></a>
                 </div>
                 <div id="collapseOne-skill{{$key}}" class="collapse" aria-expanded="true" style="">
                     <div class="content-panel">
@@ -98,6 +98,15 @@ $text_styles = getDinamicStyle('texts');
 @option('skills', 's', $data)
 <div class="bty-settings-panel">
     <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Select Container Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('skill_container_style', $container_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
         <div class="form-group">
             <div class="col-md-4">
                 <label for="">Select Header Style</label>
@@ -147,7 +156,7 @@ $text_styles = getDinamicStyle('texts');
                         <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                         <span class="title">Work Section</span>
                     </a>
-                    <a href="#" id="exp{{$key}}" class="btn btn-sm btn-danger delete click-action"><i class="fa fa-minus"></i></a>
+                    <a href="#" id="exp{{$key}}" data-setting-delete="" class="btn btn-sm btn-danger delete click-action"><i class="fa fa-minus"></i></a>
                 </div>
                 <div id="collapseOne-exp{{$key}}" class="collapse" aria-expanded="true" style="">
                     <div class="content-panel">
@@ -218,6 +227,15 @@ $text_styles = getDinamicStyle('texts');
     <div class="col-md-12">
         <div class="form-group">
             <div class="col-md-4">
+                <label for="">Select Container Style</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::select('exp_container_style', $container_styles, null, ['class'=>'form-control'])!!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
                 <label for="">Select Header Style</label>
             </div>
             <div class="col-md-8">
@@ -257,8 +275,7 @@ $text_styles = getDinamicStyle('texts');
 @endoption
 {!! BBstyle($_this->path.DS.'css'.DS.'settings.css') !!}
 <script>
-    $('a.delete').click(function(){
-        console.log($("div."+$(this).attr('id')));
+    $('body').on('click','a.delete',function(){
         $("div."+$(this).attr('id')).remove();
     })
     $('#plus_exp').click(function(){
@@ -271,7 +288,7 @@ $text_styles = getDinamicStyle('texts');
             "                            <span class=\"icon\"><i class=\"fa fa-chevron-down\" aria-hidden=\"true\"></i></span>\n" +
             "                            <span class=\"title\">Work Section</span>\n" +
             "                        </a>\n" +
-            "                        <a href=\"#\" id=\"exp"+exp_index+"\" class=\"btn btn-sm btn-danger delete click-action\"><i class=\"fa fa-minus\"></i></a>\n" +
+            "                        <a href=\"#\" data-setting-delete=\"\" id=\"exp"+exp_index+"\" class=\"btn btn-sm btn-danger delete click-action\"><i class=\"fa fa-minus\"></i></a>\n" +
             "                    </div>\n" +
             "                    <div id=\"collapseOne-exp"+exp_index+"\" class=\"collapse\" aria-expanded=\"true\" style=\"\">\n" +
             "                        <div class=\"content-panel\">\n" +
@@ -328,15 +345,10 @@ $text_styles = getDinamicStyle('texts');
             "                    </div>\n" +
             "                </div>");
         $("#right-settings-main-box-bty").animate({ scrollTop: $('#right-settings-main-box-bty').prop("scrollHeight")}, 1000);
-        $('a.delete').click(function(){
-            $("div."+$(this).attr('id')).remove();
-        })
-
     })
 </script>
 <script>
-    $('a.delete').click(function(){
-        console.log($("div."+$(this).attr('id')));
+    $('body').on('click','a.delete',function(){
         $("div."+$(this).attr('id')).remove();
     })
     $('#plus_skill').click(function(){
@@ -349,7 +361,7 @@ $text_styles = getDinamicStyle('texts');
             "                            <span class=\"icon\"><i class=\"fa fa-chevron-down\" aria-hidden=\"true\"></i></span>\n" +
             "                            <span class=\"title\">Skill Section</span>\n" +
             "                        </a>\n" +
-            "                        <a href=\"#\" id=\"skill"+skill_index+"\" class=\"btn btn-sm btn-danger delete click-action\"><i class=\"fa fa-minus\"></i></a>\n" +
+            "                        <a href=\"#\" data-setting-delete=\"\" id=\"skill"+skill_index+"\" class=\"btn btn-sm btn-danger delete click-action\"><i class=\"fa fa-minus\"></i></a>\n" +
             "                    </div>\n" +
             "                    <div id=\"collapseOne-skill"+skill_index+"\" class=\"collapse\" aria-expanded=\"true\" style=\"\">\n" +
             "                        <div class=\"content-panel\">\n" +
@@ -386,9 +398,6 @@ $text_styles = getDinamicStyle('texts');
             "                    </div>\n" +
             "                </div>");
         $("#right-settings-main-box-bty").animate({ scrollTop: $('#right-settings-main-box-bty').prop("scrollHeight")}, 1000);
-        $('a.delete').click(function(){
-            $("div."+$(this).attr('id')).remove();
-        })
     })
 </script>
 

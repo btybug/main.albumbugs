@@ -41,6 +41,7 @@
                             </td>
 
                             <td>
+                                {{ $admin->role->access }}
                                 {{-- $admin->role->getAccessName() --}}
                             </td>
 

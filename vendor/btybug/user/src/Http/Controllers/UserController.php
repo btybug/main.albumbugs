@@ -5,6 +5,7 @@ namespace Btybug\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Btybug\User\Http\Requests\User\ChangePassword;
 use Btybug\User\Http\Requests\User\EditUserRequest;
+use Btybug\User\Repository\RoleRepository;
 use Btybug\User\User;
 use Datatables;
 use Illuminate\Http\Request;
@@ -37,15 +38,17 @@ class UserController extends Controller
      */
     public function getAdmins(
         UserService $userService,
-        RoleService $roleService
+        RoleService $roleService,
+        RoleRepository $roleRepository
     )
     {
         $admins = $userService->getAdmins()->paginate();
         $roles = $roleService->getRolesList();
-
         foreach($admins as $item)
         {
-            $item->role->name = $roles[$item->role_id];
+            $role = $roleRepository->getBy('id', $item->role_id)[0];
+            $item->role->name = $role->name;
+            $item->role->access = $role->special;
         }
 //        $admins = DB::table('users')->where('role_id', '!=', '0')->get()->toArray();
         return view('users::admins.list', compact(['admins', 'userService', '$roleRepository']));

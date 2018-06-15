@@ -17,6 +17,30 @@ $text_styles = getDinamicStyle('texts');
     </div>
 </div>
 @endoption
+@option('general', 'f', $data)
+<div class="bty-settings-panel">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Skills Header Name</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::text('skill_header_name', issetReturn($settings,'skill_header_name'),['class'=>'form-control ']) !!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="">Experience Header Name</label>
+            </div>
+            <div class="col-md-8">
+                {!! Form::text('exp_header_name', issetReturn($settings,'exp_header_name'),['class'=>'form-control ']) !!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+@endoption
 @option('skills', 'f', $data)
 <div class="skill-panel">
     @if(isset($settings['skill']))

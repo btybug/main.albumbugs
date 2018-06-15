@@ -1,10 +1,10 @@
-<div class="col-md-9 right">
-    <div class="profile-main">
+<div class="container-fluid">
+    <div class="profile-main {{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
         <section id="skills-flato">
             <div class="container">
                 <div class="skills">
                     <div class="heading">
-                        <h2 class="title {{(isset($settings['skill_header_style'])&& $settings['skill_header_style']) ? $settings['skill_header_style'] : ''}}">TECHNICAL SKILLS</h2>
+                        <h2 class="title {{(isset($settings['skill_header_style'])&& $settings['skill_header_style']) ? $settings['skill_header_style'] : ''}}">@if(isset($settings['skill_header_name'])){{$settings['skill_header_name']}}@else TECHNICAL SKILLS @endif</h2>
                         <p>I can say i’m quite good at</p>
                     </div>
                     <div class="content-skills">
@@ -29,11 +29,11 @@
                 </div>
             </div>
         </section>
-        <section id="experience-flato" class="{{(isset($settings['style'])&& $settings['style'] ) ? $settings['style'] : 'demo-column'}}">
+        <section id="experience-flato">
             <div class="container">
                 <div class="experience">
                     <div class="heading">
-                        <h2 class="title {{(isset($settings['exp_header_style'])&& $settings['exp_header_style'] ) ? $settings['exp_header_style'] : ''}}">Work Experience</h2>
+                        <h2 class="title {{(isset($settings['exp_header_style'])&& $settings['exp_header_style'] ) ? $settings['exp_header_style'] : ''}}">@if(isset($settings['exp_header_name'])){{$settings['exp_header_name']}}@else  @endif</h2>
                         <p>My previous associations</p>
                     </div>
                     <div class="content-experience">

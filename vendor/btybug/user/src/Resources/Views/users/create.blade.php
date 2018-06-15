@@ -25,6 +25,11 @@
                     <label for="password">Password Confirmation:</label>
                     {!! Form::password('password_confirmation',['class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    <label for="email">Membership:</label>
+                    {!! Form::select('membership_id',$membership,null,['class' => 'form-control']) !!}
+                </div>
+
 
                 <div class="form-group">
                     <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>

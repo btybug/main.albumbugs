@@ -5,6 +5,7 @@ namespace Btybug\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Btybug\User\Http\Requests\User\ChangePassword;
 use Btybug\User\Http\Requests\User\EditUserRequest;
+use Btybug\User\User;
 use Datatables;
 use Illuminate\Http\Request;
 use Btybug\User\Http\Requests\User\CreateAdminRequest;
@@ -15,6 +16,7 @@ use Btybug\User\Repository\UserRepository;
 use Btybug\User\Services\RoleService;
 use Btybug\User\Services\UserService;
 use View;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -155,15 +157,12 @@ class UserController extends Controller
      */
     public function getCreate(Request $request)
     {
-        //TODO change functionality, move with cms forms
-//        $formSettings = FormSettings::where('form_id', '58e21be5a8bd8')->first();
-//        if (!$formSettings) {
-//            abort(404);
-//        }
-//        $formSettings = $formSettings->additional_settings;
-//        $user_id = null;
-
-        return view('users::users.create');
+        $membership = DB::table('memberships')->select('id', 'name', 'slug')->get()->toArray();
+        foreach($membership as $item)
+        {
+            $membership_array[$item->id] = $item->name;
+        }
+        return view('users::users.create', ['membership'=>$membership_array]);
     }
 
     /**
@@ -172,78 +171,25 @@ class UserController extends Controller
      */
     public function postCreate(Request $request)
     {
-        //TODO change functionality, move with cms forms
-        $vdata = $request->except('_token');
-        $data = $request->except('_token', 'password_confirmation', 'custom', 'plugin', 'form_setting_id', 'customs');
-        $customData = $request->custom;
-        $rules = array_merge([
-            'username' => 'required|max:255|unique:users,username',
-            'email' => 'required|email|max:255|unique:users,email',
-            'membership_id' => 'required|exists:memberships,id',
-            'status' => 'required',
-            'password' => 'required|min:6|max:255',
-            'password_confirmation' => 'min:6|max:255|same:password',
+        $data = $request->all();
+
+        $validator = \Validator::make($data, [
+            'username' => 'required|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            "membership_id" => 'required'
         ]);
-        $validator = \Validator::make($vdata, $rules);
-        if ($validator->fails()) return redirect()->back()->with('errors', $validator->errors())->withInput();
 
-        if ($data['role_id'] == '') {
-            $data['role_id'] = 0;
-        }
-        $pluginData = $request->plugin;
-        $user = User::create($data);
-        if ($user && $user->addProfile()) {
+        if($validator->fails()) return redirect()->back()->with('errors', $validator->errors())->withInput();
 
-            if ($pluginData) {
-                foreach ($pluginData as $pluginName => $plugin) {
-                    if (is_array($plugin)) {
-                        foreach ($plugin as $value) {
-                            if ($value != '') {
-                                $userMeta = new UserMeta;
-                                $userMeta->user_id = $user->id;
-                                $userMeta->key = $pluginName;
-                                $userMeta->value = $value;
-                                $userMeta->save();
-                            }
-                        }
-                    } else {
-                        if ($plugin != '') {
-                            $userMeta = new UserMeta;
-                            $userMeta->user_id = $user->id;
-                            $userMeta->key = $pluginName;
-                            $userMeta->value = $plugin;
-                            $userMeta->save();
-                        }
-                    }
-//                    BBAddMeta($pluginName, $user->id, $customData, 'post');
-                }
-            }
-
-            if ($customData) {
-                foreach ($customData as $key => $custom) {
-                    if (is_array($custom)) {
-                        foreach ($custom as $value) {
-                            $userMeta = new UserMeta;
-                            $userMeta->user_id = $user->id;
-                            $userMeta->key = $key;
-                            $userMeta->value = $value;
-                            $userMeta->save();
-                        }
-                    } else {
-                        $userMeta = new UserMeta;
-                        $userMeta->user_id = $user->id;
-                        $userMeta->key = $key;
-                        $userMeta->value = $custom;
-                        $userMeta->save();
-                    }
-//                    BBAddMeta($pluginName, $user->id, $customData, 'post');
-                }
-            }
-
-            return redirect()->route('admin.users.list')->with('message', "New User has been created successfully !!!");
-        }
-
-        return redirect()->back()->with('error', 'New User not created,Please try again');
+        User::create([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'membership_id' => $data['membership_id'],
+            'status' => 'active',
+        ]);
+        return redirect('/admin/users');
     }
 
     /**
@@ -445,7 +391,7 @@ class UserController extends Controller
         EditUserRequest $request
     )
     {
-        $data = $request->except("_token", 'id');
+        $data = $request->except('_token');
         $userRepository->update($request->get('id'), $data);
         return redirect()->back();
     }

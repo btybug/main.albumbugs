@@ -60,7 +60,10 @@ Route::group(
         //        Route::get(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@getAdminLogin')->middleware('guest');
         //        Route::post(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@postAdminLogin')->middleware('guest');
         Route::get('logout', '\Btybug\User\Http\Controllers\Auth\LoginController@logout')->middleware('auth');
+
         Route::post('/modality/settings-live', 'Admincp\ModalityController@postSettingsLive');
+        Route::post('/modality/settings-live-react', 'Admincp\ModalityReactController@postSettingsLive');
+
         Route::post('/modality/settings-customize', 'Admincp\ModalityController@postCustomizeUnit');
         Route::post('/modality/settings-customize-save', 'Admincp\ModalityController@postCustomizeUnitSave');
 

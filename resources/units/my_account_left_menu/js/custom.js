@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    $('.sublink').click(function(e) {
+    $('.profile-menu .sublink').click(function(e) {
         e.preventDefault();
 
         var $this = $(this);
@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
             $this.next().slideUp(0);
         }
         else {
-            $('.sublink').removeClass('active');
+            $('.profile-menu .sublink').removeClass('active');
             $this.addClass('active');
             $this.parent().parent().find('li .cute').removeClass('show');
             $this.parent().parent().find('li .cute').slideUp(0);

@@ -21,27 +21,48 @@
                 @endif
             </ul>
         </div>
-        <ul class="profile-menu {{isset($settings['menu_area_style']) ? $settings['menu_area_style'] : ''}}">
-            @php
-                $items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];
-            @endphp
-            @if(count($items))
-                @foreach($items as $item)
-                    @if(isset($item['children']))
-                        <li class="item">
-                            <a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item['title'] !!}<i class="fa fa-caret-down"></i></a>
-                            <ul class="cute">
-                                @foreach($item['children'] as $child)
-                                    <li><a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {!! $child['title'] !!}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @else
-                        <li class="item"><a href="{!! url($item['url']) !!}"><i class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>
-                    @endif
-                @endforeach
-            @endif
+        <ul class="profile-menu">
+            <li class="profile-item">
+                <a href="#" class="sublink">Menu1<i class="fa fa-chevron-down"></i></a>
+                <ul class="cute">
+                    <li class="subitem"><a href="#">sub menu1</a></li>
+                    <li class="subitem"><a href="#">sub menu2</a></li>
+                    <li class="subitem"><a href="#">sub menu3</a></li>
+                </ul>
+            </li>
+            <li class="profile-item">
+                <a href="#" class="sublink">Menu2<i class="fa fa-chevron-down"></i></a>
+                <ul class="cute">
+                    <li class="subitem"><a href="#">sub menu2.1</a></li>
+                    <li class="subitem"><a href="#">sub menu2.2</a></li>
+                    <li class="subitem"><a href="#">sub menu2.3</a></li>
+                </ul>
+            </li>
+            <li class="profile-item"><a href="#">Menu3</a></li>
+            <li class="profile-item"><a href="#">Menu4</a></li>
+            <li class="profile-item"><a href="#">Menu5</a></li>
         </ul>
+        {{--<ul class="profile-menu {{isset($settings['menu_area_style']) ? $settings['menu_area_style'] : ''}}">--}}
+            {{--@php--}}
+                {{--$items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];--}}
+            {{--@endphp--}}
+            {{--@if(count($items))--}}
+                {{--@foreach($items as $item)--}}
+                    {{--@if(isset($item['children']))--}}
+                        {{--<li class="item">--}}
+                            {{--<a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item['title'] !!}<i class="fa fa-caret-down"></i></a>--}}
+                            {{--<ul class="cute">--}}
+                                {{--@foreach($item['children'] as $child)--}}
+                                    {{--<li><a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {!! $child['title'] !!}</a></li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                    {{--@else--}}
+                        {{--<li class="item"><a href="{!! url($item['url']) !!}"><i class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>--}}
+                    {{--@endif--}}
+                {{--@endforeach--}}
+            {{--@endif--}}
+        {{--</ul>--}}
         <ul class="social-btn">
             @if(isset($settings['socials']))
                 @foreach($settings['socials'] as $key => $val)

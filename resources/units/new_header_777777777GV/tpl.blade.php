@@ -131,7 +131,7 @@
             </div>
             <div class="modal-body">
                 <fieldset>
-                    <h2>Please Login</h2>
+                    <h2>Please Sign Up</h2>
                     <hr class="colorgraph">
                     <div class="form-group">
                         <input type="text" name="" class="form-control input-lg" placeholder="Username">
@@ -150,7 +150,7 @@
                 </fieldset>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-success" value="Login">
+                    <input type="submit" class="btn btn-success" value="Save">
                 </div>
 
             </div>

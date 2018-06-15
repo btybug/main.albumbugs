@@ -60,6 +60,10 @@ $(document).ready(function () {
     }
 
 
+    $('#right-settings-main-box-bty').on('click', '.click-action', function () {
+        savesettingevent();
+    });
+
     $('#right-settings-main-box-bty').on('input', 'input', function () {
         savesettingevent();
     });

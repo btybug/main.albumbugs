@@ -51,7 +51,7 @@
                                         <a href="javascript:void(0);" data-toggle="modal" data-target="#login" class="rd-login log-reg">Login</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);" class="rd-registr log-reg">Registration</a>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#registration" class="rd-registr log-reg">Registration</a>
                                     </li>
                                 @endif
                             </ul>
@@ -114,6 +114,45 @@
                     <input type="submit" class="btn btn-success" value="Login">
                 </div>
                 {!! Form::close() !!}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registration" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Registration</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <h2>Please Login</h2>
+                    <hr class="colorgraph">
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control input-lg" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control input-lg" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="" class="form-control input-lg" placeholder="Password" >
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="" class="form-control input-lg" placeholder="Confirm password">
+                    </div>
+
+                    <hr class="colorgraph">
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-success" value="Login">
+                </div>
+
             </div>
 
         </div>

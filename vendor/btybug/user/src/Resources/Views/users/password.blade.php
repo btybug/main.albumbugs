@@ -2,10 +2,10 @@
 @section('tab')
     <div class="container-fluid">
         <div class="row">
-            <h2>Edit User</h2>
+            <h2>Change Password</h2>
         </div>
         <div class="col-md-8">
-            {!! Form::model($user,['url'=>route('user_change_details'),'class'=>'form-horizontal']) !!}
+            {!! Form::model($user,['url'=>route('user_change_password'),'class'=>'form-horizontal']) !!}
             {!! Form::hidden('id',null) !!}
             <div class="form-group">
                 <label class="col-md-2 control-label">Old Password</label>

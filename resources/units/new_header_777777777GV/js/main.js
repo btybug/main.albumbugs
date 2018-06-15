@@ -31,5 +31,11 @@ $(document).ready(function () {
             $('.bottom-mob').hide(300);
         }
     });
+    $('.section-header .rd-navbar-toggle').on('click',function () {
+        $(this).closest('.rd-navbar-main').find('.rd-navbar-nav-wrap').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+
+
 
 });

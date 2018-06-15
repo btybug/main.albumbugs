@@ -1,78 +1,135 @@
-<section id="header">
-    <nav class="navbar navbar-bg">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{route("go_to_home")}}"><img src="{!! BBgetSiteLogo() !!}" alt="logo"> <span>{!! BBgetSiteName() !!}</span></a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-
-
-                <ul class="nav navbar-nav navbar-right login-part">
-                    @if(!Auth::check())
-                        @if(isset($settings['widget']))
-                            <li>
-                                {!! BBRenderUnits($settings['widget']) !!}
-                            </li>
-                        @endif
-                            <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
-                            <li><a href="#">register</a></li>
-                    @else
-                        @if(isset($settings['widget']))
-                            <li>
-                                {!! BBRenderUnits($settings['widget']) !!}
-                            </li>
-                        @endif
-
-
-                    <li class="prof-pic"><a href=""><img src="{!! BBGetUserAvatar() !!}" alt=""></a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="">{{Auth::user()->username}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu">
-                            @if(isset($settings['user_menu']))
-                                @php
-                                    $items = BBGetMenu($settings['user_menu']);
-                                @endphp
-                                @if(count($items))
-                                    @foreach($items as $item)
-                                        <li><a href="{!! url($item->url) !!}"><i class="fa {!! $item->icon !!}"
-                                                                                                                                   aria-hidden="true"></i><span>{!! $item->title !!}</span></a>
+<header class="section-header">
+    <div class="rd-navbar-wrap context-dark">
+        <nav class="rd-navbar rd-navbar-thin">
+            <div class="container-fluid">
+                <div class="rd-navbar-main">
+                    <div class="rd-navbar-panel">
+                        <button class="rd-navbar-toggle"><span></span></button>
+                        <a class="rd-navbar-brand" href="#">
+                            <img src="{!! BBgetSiteLogo() !!}" alt="" />
+                        </a>
+                        <div class="rd-navbar-block">
+                            <ul class="list-inline-bordered">
+                                <li class="admin-pic"><a href=""><img src="{!! BBGetUserAvatar() !!}" alt=""></a></li>
+                                <li class="dropdown admin-log">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="">{{Auth::user()->username}}<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#"><i class="fa fa-users" aria-hidden="true"></i><span>My Account</span></a>
                                         </li>
-                                    @endforeach
-                                @endif
-                            @endif
-                            <li><a href="/my-account"><i class="fa fa-users" aria-hidden="true"></i><span>My Account</span></a></li>
-                            <li><a href="{!! url('logout') !!}"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a></li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="rd-login log-reg">Login</a>
+                                </li>
+                                <li>
+                                    <a href class="rd-registr log-reg">Registration</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rd-navbar-nav-wrap">
+                        <ul class="rd-navbar-nav">
+                            <li class="social-icon face">
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="social-icon goog">
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li class="social-icon twit">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                            </li>
 
                         </ul>
-                    </li>
-                    @endif
-                </ul>
-
-
-                @if(isset($settings['menu_area']))
-                    @php
-                        $items = BBGetMenu($settings['menu_area']);
-                    @endphp
-                    @if(count($items))
-                        <ul class="nav navbar-nav  navbar-right header-menu">
-                            @foreach($items as $item)
-                                <li><a href="{!! url($item['url']) !!}"><i
-                                                class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>
-                            @endforeach
-                        </ul>
-                    @endif
-                @endif
-
-
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-</section>
+        </nav>
+    </div>
+</header>
+{{--<section id="header">--}}
+    {{--<nav class="navbar navbar-bg">--}}
+        {{--<div class="container">--}}
+            {{--<div class="navbar-header">--}}
+                {{--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">--}}
+                    {{--<span class="icon-bar"></span>--}}
+                    {{--<span class="icon-bar"></span>--}}
+                    {{--<span class="icon-bar"></span>--}}
+                {{--</button>--}}
+                {{--<a class="navbar-brand" href="{{route("go_to_home")}}"><img src="{!! BBgetSiteLogo() !!}" alt="logo"> <span>{!! BBgetSiteName() !!}</span></a>--}}
+            {{--</div>--}}
+            {{--<div class="collapse navbar-collapse" id="myNavbar">--}}
+
+
+                {{--<ul class="nav navbar-nav navbar-right login-part">--}}
+                    {{--@if(!Auth::check())--}}
+                        {{--@if(isset($settings['widget']))--}}
+                            {{--<li>--}}
+                                {{--{!! BBRenderUnits($settings['widget']) !!}--}}
+                            {{--</li>--}}
+                        {{--@endif--}}
+                            {{--<li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>--}}
+                            {{--<li><a href="#">register</a></li>--}}
+                    {{--@else--}}
+                        {{--@if(isset($settings['widget']))--}}
+                            {{--<li>--}}
+                                {{--{!! BBRenderUnits($settings['widget']) !!}--}}
+                            {{--</li>--}}
+                        {{--@endif--}}
+
+
+                    {{--<li class="prof-pic"><a href=""><img src="{!! BBGetUserAvatar() !!}" alt=""></a></li>--}}
+                    {{--<li class="dropdown">--}}
+                        {{--<a class="dropdown-toggle" data-toggle="dropdown" href="">{{Auth::user()->username}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--@if(isset($settings['user_menu']))--}}
+                                {{--@php--}}
+                                    {{--$items = BBGetMenu($settings['user_menu']);--}}
+                                {{--@endphp--}}
+                                {{--@if(count($items))--}}
+                                    {{--@foreach($items as $item)--}}
+                                        {{--<li><a href="{!! url($item->url) !!}"><i class="fa {!! $item->icon !!}"--}}
+                                                                                                                                   {{--aria-hidden="true"></i><span>{!! $item->title !!}</span></a>--}}
+                                        {{--</li>--}}
+                                    {{--@endforeach--}}
+                                {{--@endif--}}
+                            {{--@endif--}}
+                            {{--<li><a href="/my-account"><i class="fa fa-users" aria-hidden="true"></i><span>My Account</span></a></li>--}}
+                            {{--<li><a href="{!! url('logout') !!}"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Log out</span></a></li>--}}
+
+                        {{--</ul>--}}
+                    {{--</li>--}}
+                    {{--@endif--}}
+                {{--</ul>--}}
+
+
+                {{--@if(isset($settings['menu_area']))--}}
+                    {{--@php--}}
+                        {{--$items = BBGetMenu($settings['menu_area']);--}}
+                    {{--@endphp--}}
+                    {{--@if(count($items))--}}
+                        {{--<ul class="nav navbar-nav  navbar-right header-menu">--}}
+                            {{--@foreach($items as $item)--}}
+                                {{--<li><a href="{!! url($item['url']) !!}"><i--}}
+                                                {{--class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>--}}
+                            {{--@endforeach--}}
+                        {{--</ul>--}}
+                    {{--@endif--}}
+                {{--@endif--}}
+
+
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</nav>--}}
+{{--</section>--}}
 
 
 
@@ -215,5 +272,5 @@
         </div>
     </div>
 </div>--}}
-{!! BBstyle($_this->path.DS.'css'.DS.'header.css',$_this) !!}
+{!! BBstyle($_this->path.DS.'css'.DS.'main.css',$_this) !!}
 {!! BBscript($_this->path.DS.'js'.DS.'main.js',$_this) !!}

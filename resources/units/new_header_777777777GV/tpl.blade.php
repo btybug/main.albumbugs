@@ -21,7 +21,7 @@
 
                                     <li class="admin-pic"><a href=""><img src="{!! BBGetUserAvatar() !!}" alt=""></a></li>
                                     <li class="dropdown admin-log">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="">{{Auth::user()->username}}<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">{{Auth::user()->username}}<i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
                                         <ul class="dropdown-menu">
                                             {{--@if(isset($settings['user_menu']))--}}
@@ -42,11 +42,11 @@
                                         </ul>
                                     </li>
                                 @else
-                                    @if(isset($settings['widget']))
-                                        <li>
-                                            {!! BBRenderUnits($settings['widget']) !!}
-                                        </li>
-                                    @endif
+                                    {{--@if(isset($settings['widget']))--}}
+                                        {{--<li>--}}
+                                            {{--{!! BBRenderUnits($settings['widget']) !!}--}}
+                                        {{--</li>--}}
+                                    {{--@endif--}}
                                     <li>
                                         <a href="#" data-toggle="modal" data-target="#login" class="rd-login log-reg">Login</a>
                                     </li>

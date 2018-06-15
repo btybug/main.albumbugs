@@ -48,10 +48,10 @@
                                         {{--</li>--}}
                                     {{--@endif--}}
                                     <li>
-                                        <a href="#" data-toggle="modal" data-target="#login" class="rd-login log-reg">Login</a>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#login" class="rd-login log-reg">Login</a>
                                     </li>
                                     <li>
-                                        <a href class="rd-registr log-reg">Registration</a>
+                                        <a href="javascript:void(0);" class="rd-registr log-reg">Registration</a>
                                     </li>
                                 @endif
                             </ul>

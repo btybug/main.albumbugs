@@ -38,11 +38,6 @@ if (\Illuminate\Support\Facades\Schema::hasTable('admin_pages')) {
 Route::get('migrate', function () {
 
 });
-
-
-Route::get('register', '\App\Modules\Users\Http\Controllers\Auth\AuthController@getRegister')->middleware('guest');
-Route::post('register', '\App\Modules\Users\Http\Controllers\Auth\AuthController@postRegister')->middleware('guest');
-Route::get('activate/{username}/{token}', '\App\Modules\Users\Http\Controllers\Auth\AuthController@activate')->middleware('guest');
 Route::group(
     ['domain' => env('DOMAIN'), 'middleware' => 'form'],
     function () {
@@ -57,6 +52,12 @@ Route::group(
         //deletable
         Route::get('login', '\Btybug\User\Http\Controllers\Auth\LoginController@showLoginForm')->middleware('guest')->name('login');
         Route::post('login', '\Btybug\User\Http\Controllers\Auth\LoginController@login')->middleware('guest');
+
+        Route::get('register', '\Btybug\btybug\Http\Controllers\Auth\RegisterController@getRegister')->middleware('guest');
+        Route::post('register', '\Btybug\btybug\Http\Controllers\Auth\RegisterController@register')->middleware('guest');
+
+        Route::get('activate/{username}/{token}', '\App\Modules\Users\Http\Controllers\Auth\AuthController@activate')->middleware('guest');
+
         //        Route::get(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@getAdminLogin')->middleware('guest');
         //        Route::post(BBGetAdminLoginUrl(), '\Btybug\Modules\Users\Http\Controllers\Auth\AuthController@postAdminLogin')->middleware('guest');
         Route::get('logout', '\Btybug\User\Http\Controllers\Auth\LoginController@logout')->middleware('auth');

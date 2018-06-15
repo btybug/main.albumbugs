@@ -133,17 +133,18 @@
                 <fieldset>
                     <h2>Please Sign Up</h2>
                     <hr class="colorgraph">
+                    {!! Form::open(['url'=>url('register')]) !!}
                     <div class="form-group">
-                        <input type="text" name="" class="form-control input-lg" placeholder="Username">
+                        <input type="text" name="username" class="form-control input-lg" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="" class="form-control input-lg" placeholder="Email">
+                        <input type="text" name="email" class="form-control input-lg" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="" class="form-control input-lg" placeholder="Password" >
+                        <input type="password" name="password" class="form-control input-lg" placeholder="Password" >
                     </div>
                     <div class="form-group">
-                        <input type="password" name="" class="form-control input-lg" placeholder="Confirm password">
+                        <input type="password" name="password_confirmation" class="form-control input-lg" placeholder="Confirm password">
                     </div>
 
                     <hr class="colorgraph">
@@ -152,7 +153,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <input type="submit" class="btn btn-success" value="Save">
                 </div>
-
+                {!! Form::close() !!}
             </div>
 
         </div>

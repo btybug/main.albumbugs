@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Btybug\btybug\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Btybug\User\User;
@@ -66,6 +66,8 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'membership_id' => 1,
+            'status' => 'active',
         ]);
     }
 }

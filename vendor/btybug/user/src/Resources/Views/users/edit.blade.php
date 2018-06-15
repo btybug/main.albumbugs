@@ -5,7 +5,6 @@
             <h2>Edit User</h2>
         </div>
         <div class="col-md-8">
-            [form slug=user-details data-id={{ $user->id }} edit=id]
             {!! Form::model($user,['url'=>route('user_change_details'),'class'=>'form-horizontal']) !!}
             {!! Form::hidden('id',null) !!}
             <div class="form-group">

@@ -32,7 +32,7 @@
     width: auto;
     height: auto;
     max-width: 200px;
-    max-height: 200px;
+    max-height: 70px;
     object-fit: cover;
 }
 .section-header .rd-navbar-block {

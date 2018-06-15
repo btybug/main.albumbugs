@@ -12,11 +12,11 @@
                             <ul class="list-inline-bordered">
 
                                 @if(Auth::check())
-                                    @if(isset($settings['widget']))
-                                        <li>
-                                            {!! BBRenderUnits($settings['widget']) !!}
-                                        </li>
-                                    @endif
+                                    {{--@if(isset($settings['widget']))--}}
+                                        {{--<li>--}}
+                                            {{--{!! BBRenderUnits($settings['widget']) !!}--}}
+                                        {{--</li>--}}
+                                    {{--@endif--}}
 
 
                                     <li class="admin-pic"><a href=""><img src="{!! BBGetUserAvatar() !!}" alt=""></a></li>

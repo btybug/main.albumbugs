@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     var btnlinksign = $('.bty-btn-sign-up');
     var btylogreg = $('.bty-log-reg');

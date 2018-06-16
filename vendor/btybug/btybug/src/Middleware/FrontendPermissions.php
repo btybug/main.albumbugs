@@ -40,6 +40,9 @@ class FrontendPermissions
     {
         $page = RenderService::getFrontPageByURL();
         if($page) {
+
+            if ($page->status == 'draft') abort(404);
+
             if ($page->page_access == 0) return $next($request);
 
             if ($page->page_access == 1 && \Auth::check() &&

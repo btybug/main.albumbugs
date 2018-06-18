@@ -29,8 +29,12 @@
                 @foreach($items as $item)
                     @if(isset($item['children']))
                         @foreach($item['children'] as $child)
-                        <li class="profile-item">
-                            <a href="{{$child['url']}}" class="sublink"><i class="fa {!! $child['icon'] !!}"></i>{{$child['title']}}@if(isset($child['children']) && !empty($child['children']))<i class="fa fa-chevron-down">@endif</i></a>
+                        <li>
+                            <div class="profile-item">
+                                <a href="{{$child['url']}}"><i class="fa {!! $child['icon'] !!}"></i>{{$child['title']}}</a>
+                                <span class="sublink">@if(isset($child['children']) && !empty($child['children']))<i class="fa fa-chevron-down"></i>@endif</span>
+                            </div>
+
                             @if(isset($child['children']) && !empty($child['children']))
                             <ul class="cute">
                                 @foreach($child['children'] as $next_child)

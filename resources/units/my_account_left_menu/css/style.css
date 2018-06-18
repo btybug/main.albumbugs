@@ -75,7 +75,7 @@ ul, li {
 .profile-user .profile-menu ul a{
     text-indent: 2em !important;
 }
-.profile-user .profile-menu li>a{
+.profile-user .profile-menu li a{
     width: 100%;
     line-height: 3.5em;
     text-indent: 1.2em;
@@ -83,12 +83,19 @@ ul, li {
     position: relative;
     color: #666;
     text-decoration: none;
-    border-bottom: 1px solid #ddd;
     font-weight: 700;
     font-size: 16px;
 }
+.profile-user .profile-menu li .profile-item{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+.profile-user .profile-menu li .profile-item span{
+    margin-right:10px;
+}
 
-.profile-user .profile-menu .sublink.active,.profile-user .profile-menu a:hover{
+.profile-user .profile-menu .profile-item.active,.profile-user .profile-menu .cute a:hover,.profile-user .profile-menu .profile-item:hover{
     background-color: #cacaca;
     color: white;
 }

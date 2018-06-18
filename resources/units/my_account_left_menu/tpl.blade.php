@@ -23,23 +23,25 @@
             @endif
         </ul>
     </div>
-    <ul class="profile-menu {{isset($settings['menu_area_style']) ? $settings['menu_area_style'] : ''}}">
+    <ul class="profile-menu">
         @php
             $items = isset($settings['menu_area']) ? BBGetMenu($settings['menu_area']) : [];
         @endphp
         @if(count($items))
             @foreach($items as $item)
                 @if(isset($item['children']))
-                    <li class="item">
-                        <a class="sublink" data-toggle="dropdown" aria-expanded="true">{!! $item['title'] !!}<i class="fa fa-caret-down"></i></a>
-                        <ul class="cute">
-                            @foreach($item['children'] as $child)
-                                <li><a href="{!! url($child['url']) !!}"><i class="fa {!! $child['icon'] !!}"></i> {!! $child['title'] !!}</a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-                @else
-                    <li class="item"><a href="{!! url($item['url']) !!}"><i class="fa {!! $item['icon'] !!}"></i> {!! $item['title'] !!}</a></li>
+                    @foreach($item['children'] as $child)
+                        <li class="profile-item">
+                            <a href="{{$child['url']}}" class="sublink"><i class="fa {!! $child['icon'] !!}"></i>{{$child['title']}}@if(isset($child['children']) && !empty($child['children']))<i class="fa fa-chevron-down">@endif</i></a>
+                            @if(isset($child['children']) && !empty($child['children']))
+                                <ul class="cute">
+                                    @foreach($child['children'] as $next_child)
+                                        <li class="subitem"><a href="{{$next_child['url']}}"><i class="fa {!! $next_child['icon'] !!}"></i>{{$next_child['title']}}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
                 @endif
             @endforeach
         @endif

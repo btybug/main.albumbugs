@@ -43,15 +43,8 @@ class UserController extends Controller
     )
     {
         $admins = $userService->getAdmins()->paginate();
-        $roles = $roleService->getRolesList();
-        foreach($admins as $item)
-        {
-            $role = $roleRepository->getBy('id', $item->role_id)[0];
-            $item->role->name = $role->name;
-            $item->role->access = $role->special;
-        }
-//        $admins = DB::table('users')->where('role_id', '!=', '0')->get()->toArray();
-        return view('users::admins.list', compact(['admins', 'userService', '$roleRepository']));
+
+        return view('users::admins.list', compact(['admins', 'userService']));
     }
 
     /**

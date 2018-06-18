@@ -9,6 +9,10 @@
 
 namespace Btybug\btybug\Repositories;
 
+/**
+ * Class GeneralRepository
+ * @package Btybug\btybug\Repositories
+ */
 abstract class GeneralRepository implements RepositoryInterface
 {
     /**
@@ -37,6 +41,15 @@ abstract class GeneralRepository implements RepositoryInterface
         return $this->model->all();
     }
 
+    /**
+     * @param string $ordering
+     * @param string $column
+     * @return mixed
+     */
+    public function getAllByOrder(string $ordering = 'desc', string $column = 'id')
+    {
+        return $this->model->orderBy($column,$ordering)->get();
+    }
     /**
      * @param string $attribute
      * @param string $value
@@ -218,6 +231,12 @@ abstract class GeneralRepository implements RepositoryInterface
         return $this->model->pluck($key, $value);
     }
 
+    /**
+     * @param array $conditions
+     * @param string $key
+     * @param string $value
+     * @return mixed
+     */
     public function plunckByCondition(array $conditions, string $key, string $value)
     {
         $model = $this->model;

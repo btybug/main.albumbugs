@@ -12,13 +12,13 @@ a {
 }
 
 a:hover, a:focus {
-    color: #499bc7;
+    color: #da521e;
     text-decoration: none;
     outline: none;
 }
 
 .primary-color {
-    color: #499bc7;
+    color: #da521e;
 }
 
 .white-color {
@@ -77,13 +77,13 @@ hr {
 
 .main-btn:hover, .main-btn:focus {
     color: #499bc7;
-    -webkit-box-shadow: 0 0 0 1px #499bc7 inset, 0 0 0 0 #499bc7;
-    box-shadow: 0 0 0 1px #499bc7 inset, 0 0 0 0 #499bc7;
+    -webkit-box-shadow: 0 0 0 1px #da521e inset, 0 0 0 0 #da521e;
+    box-shadow: 0 0 0 1px #da521e inset, 0 0 0 0 #da521e;
 }
 
 .primary-btn {
     color: #FFF;
-    background-color: #499bc7;
+    background-color: #da521e;
 }
 
 .primary-btn:hover, .primary-btn:focus {
@@ -108,8 +108,8 @@ hr {
 }
 
 .input:focus {
-    -webkit-box-shadow: 0 0 0 1px #499bc7 inset, 0 0 0 0 #499bc7;
-    box-shadow: 0 0 0 1px #499bc7 inset, 0 0 0 0 #499bc7;
+    -webkit-box-shadow: 0 0 0 1px #da521e inset, 0 0 0 0 #da521e;
+    box-shadow: 0 0 0 1px #da521e inset, 0 0 0 0 #da521e;
 }
 
 textarea.input {
@@ -165,7 +165,7 @@ textarea.input {
 }
 
 .list-links li>a:hover, .list-links li>a:focus, .list-links li.active>a {
-    color: #499bc7;
+    color: #da521e;
     -webkit-transform: translateX(10px);
     -ms-transform: translateX(10px);
     transform: translateX(10px);
@@ -208,7 +208,7 @@ textarea.input {
     bottom: -1.5px;
     height: 3px;
     width: 60px;
-    background-color: #499bc7;
+    background-color: #da521e;
 }
 /*=========================================================
 	10 -> FOOTER

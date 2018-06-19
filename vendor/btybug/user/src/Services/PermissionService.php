@@ -153,5 +153,30 @@ class PermissionService extends GeneralService
             return '';
         }
     }
+    public function membershipPermission($data)
+    {
+        $page = FrontendPage::find($data['pageID']);
+        $newMembership = Roles::find($data['roleID']);
+        $membershipString = FrontendPage::getRolesByPage($page->id, false);
+
+        if ($data['isChecked'] == 'yes') {
+            $membershipString[] = $newMembership->slug;
+        } else {
+            if (($key = array_search($newMembership->slug, $membershipString)) !== false) {
+                unset($membershipString[$key]);
+            }
+        }
+
+        if (count($membershipString)) {
+            $memberships = implode(',', $membershipString);
+        } else {
+            $memberships = null;
+        }
+        PermissionRole::optimizePageRoles($page, $memberships, 'front');
+        $dataFront = FrontendPage::where('parent_id', Null)->groupBy("module_id")->get();
+        $role = Roles::where('slug', $request->role_slug)->first();
+        $html = view('users::membership._partials.perm_list', compact(['role', 'dataFront']))->render();
+        return $html;
+    }
 
 }

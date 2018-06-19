@@ -26,8 +26,6 @@ Route::group(['prefix' => '/edit'], function () {
 Route::post('/edit/{id}', array('as' => 'admin.users.postEdit', 'uses' => 'UserController@postEdit'));
 Route::post('/delete', array('as' => 'admin.users.delete', 'uses' => 'UserController@postDelete'));
 Route::get('/show/{id}', array('as' => 'admin.users.show', 'uses' => 'UserController@getShow'),true)->name('user_show');
-Route::get('/settings', array('as' => 'admin.users.settings', 'uses' => 'UserController@getSettings'),true)->name('user_settings');
-Route::post('/settings', array('as' => 'admin.users.postSettings', 'uses' => 'UserController@postSettings'));
 Route::get('/profile', 'UserController@getProfile');
 Route::get('/registration', 'UserController@getRegistration',true);
 Route::post('/password/change', 'UserController@passwordChange')->name('user_change_password');

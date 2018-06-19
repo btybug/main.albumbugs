@@ -4,6 +4,18 @@
         <div class="row">
             <h2>Create User</h2>
         </div>
+        @if (isset($errors) && count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert"
+                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{!! $error !!}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
             {!! Form::open(['class' => 'form-horizontal']) !!}
                 <div class="form-group">

@@ -17,12 +17,17 @@ use Btybug\User\Repository\StatusRepository;
 
 class StatusController extends Controller
 {
+    public $statusRepository;
 
-    public function getIndex(
-        StatusRepository $statusRepository
-    )
+    public function __construct(StatusRepository $statusRepository)
     {
-        $statuses = $statusRepository->getAll();
+        $this->$statusRepository = $statusRepository;
+    }
+
+
+    public function getIndex()
+    {
+        $statuses = $this->statusRepository->getAll();
         return view('users::status.index', compact(['statuses']));
     }
 
@@ -31,52 +36,40 @@ class StatusController extends Controller
         return view('users::status.create');
     }
 
-    public function postCreate(
-        CreateStatusRequest $request,
-        StatusRepository $statusRepository
-    )
+    public function postCreate(CreateStatusRequest $request)
     {
         $requestData = $request->except('_token');
-        $statusRepository->create($requestData);
+        $this->statusRepository->create($requestData);
         return redirect('/admin/users/roles/statuses')->with('message', 'Status has been created successfully');
     }
 
-    public function getEdit(
-        Request $request,
-        StatusRepository $statusRepository
-    )
+    public function getEdit(Request $request)
     {
-        $status = $statusRepository->find($request->id);
+        $status = $this->statusRepository->find($request->id);
         if (!$status) {
             abort(404);
         }
         return view('users::status.edit', compact('status'));
     }
 
-    public function postEdit(
-        EditStatusRequest $request,
-        StatusRepository $statusRepository
-    )
+    public function postEdit(EditStatusRequest $request)
     {
-        $status = $statusRepository->find($request->id);
+        $status = $this->statusRepository->find($request->id);
         if (!$status) {
             abort(404);
         }
         $requestData = $request->except('_token');
-        $statusRepository->update($request->id, $requestData);
+        $this->statusRepository->update($request->id, $requestData);
         return redirect('/admin/users/roles/statuses')->with('message', 'Status has been updated successfully');
     }
 
-    public function postDelete(
-        Request $request,
-        StatusRepository $statusRepository
-    )
+    public function postDelete(Request $request)
     {
-        $status = $statusRepository->findOneByMultiple([
+        $status = $this->statusRepository->findOneByMultiple([
             'id' => $request->slug,
             'is_core' => 0
         ]);
-        $success = $status && $statusRepository->delete($status->id) ? true : false;
+        $success = $status && $this->statusRepository->delete($status->id) ? true : false;
         return \Response::json(['success' => $success]);
     }
 

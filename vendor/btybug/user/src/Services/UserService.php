@@ -9,9 +9,11 @@
 
 namespace Btybug\User\Services;
 
+use Btybug\User\Repository\UserProfileRepository;
 use Illuminate\Support\Facades\Auth;
 use Btybug\btybug\Services\GeneralService;
 use Btybug\User\Models\Roles;
+use Btybug\User\Models\FormSettings;
 use Btybug\User\Repository\UserRepository;
 use Btybug\User\User;
 
@@ -21,13 +23,15 @@ class UserService extends GeneralService
 
     private $userRepository;
     private $authUser;
-
+    private $userProfileRepository;
     public function __construct(
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        UserProfileRepository $userProfileRepository
     )
     {
         $this->userRepository = $userRepository;
         $this->authUser = Auth::user();
+        $this->userProfileRepository = $userProfileRepository;
     }
 
     public function getSiteUsers()
@@ -134,6 +138,73 @@ class UserService extends GeneralService
             }
         }
     }
+    public function createUser($data)
+    {
+        User::create([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'membership_id' => $data['membership_id'],
+            'status' => 'active',
+        ]);
+    }
+    public function createAdmin($data)
+    {
+        //TODO remove membership from users table
+        $data['membership_id'] = ZERO;
+        $user = $this->userRepository->create($data);
+        if ($user && $this->userProfileRepository->createProfile($user->id)) {
+            return true;
+        }
+        return false;
+    }
+    public function editAdmin($request)
+    {
+        $admin = $this->getAdmin($request->id);
+        if (!$admin) abort(404);
+
+        $requestData = $request->except('_token', 'password_confirmation');
+
+        if (empty($requestData['password'])) $requestData['password'] = $admin->password;
+
+        $user = $this->userRepository->update($admin->id, $requestData);
+        return $user;
+    }
+    public function editAdmins($id, $request)
+    {
+        $roles = Roles::all()->pluck('name', 'id');
+        $user = User::find($id);
+        if (!$user || !User::ranking($user, 'edit'))
+            return redirect()->back();
+
+        $user = $this->dhelper->formatCustomFld($user);
+        /*THIS is system function for edit user quickly*/
+        if ($request->ajax()) {
+            $data = $request->except('extra');
+            $metaData = [];
+
+            $rules = array_merge($metaData, [
+                'email' => 'required|email|max:255|unique:users,email,' . $user->id . ',id',
+                'username' => 'required|max:255|unique:users,username,' . $user->id . ',id',
+            ]);
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                $account = unserialize($user['meta_data']);
+                $html = View::make('users::_partials.edit_profile', compact('roles', 'user', 'account'))
+                    ->withErrors($validator->errors())
+                    ->render();
+                return \Response::json(['data' => $html, 'code' => 200, 'error' => true]);
+            }
+
+            $roleID = (isset($data['role'])) ? $data['role'] : null;
+            $userMeta = $request->get('extra', null);
+            //save data
+            $user = $this->user->updateUser($id, $data, $roleID, $userMeta);
+            $account = unserialize($user['user_meta']);
+            $html = View::make('users::_partials.edit_profile', compact('roles', 'user', 'profileFields', 'account'))->render();
+            return \Response::json(['data' => $html, 'code' => 200, 'error' => false]);
+        }
+    }
 
     private function replaceDynamicValuesWithModelAttributes($html, $model)
     {
@@ -148,5 +219,7 @@ class UserService extends GeneralService
         }
         return $html;
     }
+
+
 
 }

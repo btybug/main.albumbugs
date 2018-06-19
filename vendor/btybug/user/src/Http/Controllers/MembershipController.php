@@ -5,15 +5,19 @@ namespace Btybug\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\User\Repository\MembershipRepository;
+use Btybug\User\Services\PermissionService;
 use Illuminate\Http\Request;
+use Btybug\User\Http\Requests\Membership\CreateMembershipRequest;
 
 class MembershipController extends Controller
 {
     private $membershipRepository;
+    private $permissionService;
 
-    public function __construct(MembershipRepository $membershipRepository)
+    public function __construct(MembershipRepository $membershipRepository, PermissionService $permissionService)
     {
         $this->membershipRepository = $membershipRepository;
+        $this->permissionService = $permissionService;
     }
 
     public function getIndex()
@@ -27,16 +31,9 @@ class MembershipController extends Controller
         return view('users::membership.create');
     }
 
-    public function postCreate(Request $request)
+    public function postCreate(CreateMembershipRequest $request)
     {
         $data = $request->except('_token');
-        $rules = array_merge([
-            'name' => 'required|max:100',
-            'slug' => 'required|max:255|unique:memberships,slug',
-        ]);
-        $validator = \Validator::make($data, $rules);
-        if ($validator->fails()) return redirect()->back()->with('errors', $validator->errors());
-
         $this->membershipRepository->create($data);
         return redirect()->route('user_membership_index')->with('message', 'Membership has been created successfully');
     }
@@ -87,29 +84,7 @@ class MembershipController extends Controller
     public function postPermissions(Request $request)
     {
         $data = $request->except('_token');
-
-        $page = FrontendPage::find($data['pageID']);
-        $newMembership = Roles::find($data['roleID']);
-        $membershipString = FrontendPage::getRolesByPage($page->id, false);
-
-        if ($data['isChecked'] == 'yes') {
-            $membershipString[] = $newMembership->slug;
-        } else {
-            if (($key = array_search($newMembership->slug, $membershipString)) !== false) {
-                unset($membershipString[$key]);
-            }
-        }
-
-        if (count($membershipString)) {
-            $memberships = implode(',', $membershipString);
-        } else {
-            $memberships = null;
-        }
-        PermissionRole::optimizePageRoles($page, $memberships, 'front');
-        $dataFront = FrontendPage::where('parent_id', Null)->groupBy("module_id")->get();
-        $role = Roles::where('slug', $request->role_slug)->first();
-        $html = view('users::membership._partials.perm_list', compact(['role', 'dataFront']))->render();
-
+        $html = $this->permissionService->membershipPermission($data);
         return \Response::json(['error' => false, 'html' => $html]);
     }
 }

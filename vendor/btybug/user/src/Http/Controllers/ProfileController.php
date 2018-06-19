@@ -13,6 +13,8 @@ use Btybug\User\Services\AccountService;
 class ProfileController extends Controller
 {
 
+
+
     public function getIndex(
         Request $request,
         Guard $auth,

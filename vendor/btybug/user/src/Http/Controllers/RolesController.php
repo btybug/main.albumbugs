@@ -29,88 +29,82 @@ class RolesController extends Controller
 {
     private $modules;
     private $extra_modules;
-
-    public function getIndex(
-        RoleRepository $roleRepository,
-        UserRepository $userRepository
-    )
+    private $roleRepository;
+    private $adminPagesRepository;
+    private $frontPagesRepository;
+    private $permissionService;
+    private $userRepository;
+    public function __construct(RoleRepository $roleRepository,
+                                AdminPagesRepository $adminPagesRepository,
+                                FrontPagesRepository $frontPagesRepository,
+                                PermissionService $permissionService,
+                                UserRepository $userRepository)
     {
-        $roles = $roleRepository->getAll();
-        $defaultRoles = $userRepository->getDefaultRoles();
+        $this->roleRepository = $roleRepository;
+        $this->adminPagesRepository = $adminPagesRepository;
+        $this->frontPagesRepository = $frontPagesRepository;
+        $this->permissionService = $permissionService;
+        $this->userRepository = $userRepository;
+    }
+    public function getIndex()
+    {
+        $roles = $this->roleRepository->getAll();
+        $defaultRoles = $this->userRepository->getDefaultRoles();
         return view('users::roles.index', compact(['roles', 'defaultRoles']));
     }
 
-    public function getCreate(
-        RoleRepository $roleRepository
-    )
+    public function getCreate()
     {
         return view('users::roles.create');
     }
 
-    public function postCreate(
-        CreateRoleRequest $request,
-        RoleRepository $roleRepository
-    )
+    public function postCreate(CreateRoleRequest $request)
     {
         $requestData = $request->except('_token');
-        $roleRepository->create($requestData);
+        $this->roleRepository->create($requestData);
         return redirect('/admin/users/roles')->with('message', 'Role has been created successfully.');
     }
 
-    public function getEdit(
-        Request $request,
-        RoleRepository $roleRepository
-    )
+    public function getEdit(Request $request)
     {
-        $role = $roleRepository->find($request->id);
+        $role = $this->roleRepository->find($request->id);
         if (!$role) return redirect()->back();
 
         return view('users::roles.edit', compact(['role']));
     }
 
-    public function postEdit(
-        EditRoleRequest $request,
-        RoleRepository $roleRepository
-    )
+    public function postEdit(EditRoleRequest $request)
     {
-        $role = $roleRepository->findOrFail($request->id);
+        $role = $this->roleRepository->findOrFail($request->id);
         $requestData = $request->except('_token');
 
-        $roleRepository->update($role->id, $requestData);
+        $this->roleRepository->update($role->id, $requestData);
         return redirect('/admin/users/roles')->with('message', 'Role has been updated successfully.');
     }
 
-    public function postDelete(
-        Request $request,
-        RoleRepository $roleRepository
-    )
+    public function postDelete(Request $request)
     {
         $result = false;
         if ($request->slug) {
-            $role = $roleRepository->find($request->slug);
-            $result = $roleRepository->delete($role->id);
+            $role = $this->roleRepository->find($request->slug);
+            $result = $this->roleRepository->delete($role->id);
         }
         return \Response::json(['success' => $result]);
     }
 
-    public function getPermissions(
-        Request $request,
-        RoleRepository $roleRepository,
-        AdminPagesRepository $adminPagesRepository,
-        FrontPagesRepository $frontPagesRepository
-    )
+    public function getPermissions(Request $request)
     {
         $slug = $request->slug;
-        $role = $roleRepository->findBy('slug', $slug);
+        $role = $this->roleRepository->findBy('slug', $slug);
         if (!$role) abort(404);
-
+        $roleRepository = $this->roleRepository;
         switch ($role->access) {
             case $roleRepository::ACCESS_TO_BACKEND:
-                $data = $adminPagesRepository->getGroupedWithModule();
+                $data = $this->adminPagesRepository->getGroupedWithModule();
                 return view("users::roles.permissions", compact(['role', 'data', 'slug']));
                 break;
             case $roleRepository::ACCESS_TO_FRONTEND:
-                $dataFront = $frontPagesRepository->getGroupedWithModule();
+                $dataFront = $this->frontPagesRepository->getGroupedWithModule();
                 return view("users::roles.front_permissions", compact(['role', 'dataFront', 'slug']));
                 break;
             case $roleRepository::ACCESS_TO_BOTH:
@@ -122,13 +116,10 @@ class RolesController extends Controller
 
     }
 
-    public function postPermissions(
-        Request $request,
-        PermissionService $permissionService
-    )
+    public function postPermissions(Request $request)
     {
         $requestData = $request->except('_token');
-        $responseHtml = $permissionService->storePermission($requestData);
+        $responseHtml = $this->permissionService->storePermission($requestData);
         return \Response::json(['error' => false, 'html' => $responseHtml]);
     }
 
@@ -146,13 +137,10 @@ class RolesController extends Controller
 //        return false;
 //    }
 
-    public function assignPermissions(
-        Request $request,
-        PermissionService $permissionService
-    )
+    public function assignPermissions(Request $request)
     {
         $requestData = $request->except('_token');
-        $permissionService->assignPermissions($requestData);
+        $this->permissionService->assignPermissions($requestData);
         return redirect('/admin/users/roles-configuration')->with([
             'flash' => [
                 'message' => 'Permisiions successfuly assigned',
@@ -161,13 +149,10 @@ class RolesController extends Controller
         ]);
     }
 
-    public function toggleChild(
-        Request $request,
-        PermissionService $permissionService
-    )
+    public function toggleChild(Request $request)
     {
         $requestData = $request->except('_token');
-        $responseHtml = $permissionService->toggleChild($requestData);
+        $responseHtml = $this->permissionService->toggleChild($requestData);
         return \Response::json(['data' => $responseHtml, 'code' => 200, 'error' => false]);
 
     }

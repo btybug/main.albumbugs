@@ -7,9 +7,8 @@
  * Time: 2:58 PM
  */
 use App\Http\Controllers\Controller;
-use App\Models\Media\Folders;
-use App\Models\Media\Settings;
-use App\Modules\Media\Plugins\Drive\Autoload;
+use Btybug\Media\Models\Media\Folders;
+use Btybug\Media\Models\Media\Settings;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -23,7 +22,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('media.index');
+        return view('media::drive.index');
     }
 
     public function getSettings()
@@ -36,7 +35,7 @@ class IndexController extends Controller
         $settings = $this->settings->getSettingsBySection('folder_settings')
             ? $this->settings->getSettingsBySection('folder_settings')->pluck('val', 'settingkey')
             : null;
-        return view('Drive::settings', compact(['uploaders', 'settings']));
+        return view('media::drive.settings', compact(['uploaders', 'settings']));
     }
 
     public function postSettings(Request $request)
@@ -55,9 +54,4 @@ class IndexController extends Controller
     }
 
 
-    public function getMigrate()
-    {
-        $autoload = new Autoload();
-        $autoload->up([]);
-    }
 }

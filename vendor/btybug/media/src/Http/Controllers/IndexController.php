@@ -7,6 +7,7 @@
  * Time: 2:58 PM
  */
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
 {

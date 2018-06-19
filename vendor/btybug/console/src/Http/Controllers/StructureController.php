@@ -252,24 +252,24 @@ class StructureController extends Controller
     public function getCreateField()
     {
         $defaultFieldHtml = $this->adminsettingRepository->getSettings('setting_system', 'default_field_html');
-        return view('console::structure.create_field', compact('defaultFieldHtml'));
+        return view('console::structure.forms.create_field', compact('defaultFieldHtml'));
     }
 
     public function getCreateFieldNew()
     {
-        return view('console::structure.create_field_studio');
+        return view('console::structure.forms.create_field_studio');
     }
 
     public function getFields()
     {
         $fields = $this->fieldsRepository->getAll();
-        return view('console::structure.fields', compact(['fields']));
+        return view('console::structure.forms.fields', compact(['fields']));
     }
 
     public function getEditForms()
     {
         $forms = $this->formsRepository->getBy('type', 'edit');
-        return view('console::structure.edit_forms', compact(['forms']));
+        return view('console::structure.forms.edit_forms', compact(['forms']));
     }
 
     public function postCreateField(
@@ -290,7 +290,7 @@ class StructureController extends Controller
         $required = $this->fieldValidationService->isRequired($field->table_name, $field->column_name);
         $increment = $this->fieldValidationService->isAutoIncrement($field->table_name, $field->column_name);
 
-        return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required', 'increment']));
+        return view('console::structure.forms.edit_field', compact(['field', 'unit', 'rule', 'required', 'increment']));
     }
 
     public function postEditField(
@@ -323,7 +323,7 @@ class StructureController extends Controller
 
     public function getCreateAdvanced()
     {
-        return view('console::structure.advanced');
+        return view('console::structure.forms.advanced');
     }
 
     public function getUnitRender(
@@ -350,7 +350,7 @@ class StructureController extends Controller
         $fields = $this->fieldsRepository->getBy('table_name', $form->fields_type);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return view('console::structure.edit-form', compact('form', 'fields', 'existingFields','settings'));
+        return view('console::structure.forms.edit-form', compact('form', 'fields', 'existingFields','settings'));
     }
 
 
@@ -426,7 +426,7 @@ class StructureController extends Controller
         $fields = $this->structureService->getFieldsByFormType($form);
         $settings = json_decode($form->settings, true);
 
-        return view('console::structure.form-settings', compact(['form', 'fields', 'settings']));
+        return view('console::structure.forms.form-settings', compact(['form', 'fields', 'settings']));
     }
 
     public function postFormSettings(
@@ -460,7 +460,7 @@ class StructureController extends Controller
     )
     {
         $form = $this->formsRepository->findOrFail($id);
-        return view('console::structure.entries')->with(['form' => $form, 'entries' => $form->entries]);
+        return view('console::structure.forms.entries')->with(['form' => $form, 'entries' => $form->entries]);
     }
 
     public function postGetEntryData(
@@ -488,7 +488,7 @@ class StructureController extends Controller
             $fieldJson = json_encode($this->fieldsRepository->getByTableNameAndActive($form->fields_type)->toArray());
         }
 
-        return view('console::structure.create-form', compact(['form', 'blade', 'fields', 'bladeRendered', 'fieldJson']))->with($data);
+        return view('console::structure.forms.create-form', compact(['form', 'blade', 'fields', 'bladeRendered', 'fieldJson']))->with($data);
     }
 
     public function postRenderFieldHtmlForResult(

@@ -237,7 +237,7 @@ abstract class GeneralRepository implements RepositoryInterface
      * @param string $value
      * @return mixed
      */
-    public function plunckByCondition(array $conditions, string $key, string $value)
+    public function pluckByCondition(array $conditions, string $key, string $value)
     {
         $model = $this->model;
         foreach ($conditions as $column => $condition) {

@@ -23,7 +23,7 @@ class SpecialAccessController extends Controller
 
     public function getIndex()
     {
-        $blogs = $this->blogRepository->plunckByCondition(['status'=>true],'title','id')->toArray();
+        $blogs = $this->blogRepository->pluckByCondition(['status'=>true],'title','id')->toArray();
         $specials = $this->specialAccessRepo->getAll();
         return view('users::special_access.index', compact(['blogs','specials']));
     }

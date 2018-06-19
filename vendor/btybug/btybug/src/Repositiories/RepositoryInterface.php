@@ -9,6 +9,10 @@
 
 namespace Btybug\btybug\Repositories;
 
+/**
+ * Interface RepositoryInterface
+ * @package Btybug\btybug\Repositories
+ */
 interface RepositoryInterface
 {
     /**
@@ -16,6 +20,12 @@ interface RepositoryInterface
      */
     public function getAll();
 
+    /**
+     * @param string $ordering
+     * @param string $column
+     * @return mixed
+     */
+    public function getAllByOrder(string $ordering, string $column);
     /**
      * @param string $attribute
      * @param string $value
@@ -128,4 +138,11 @@ interface RepositoryInterface
     public function pluck(string $key, string $value);
 
 
+    /**
+     * @param array $conditions
+     * @param string $key
+     * @param string $value
+     * @return mixed
+     */
+    public function pluckByCondition(array $conditions, string $key, string $value);
 }

@@ -221,8 +221,12 @@
     width: 100%;
     /*background: #fff;*/
 }
+.bty-top-horizontal-menu-3 ul.navbar-nav>li>a:hover,.bty-top-horizontal-menu-3 ul.navbar-nav>li.open>a{
+    color: #da521e !important;
+    background-color: transparent !important;
+}
 .bty-top-horizontal-menu-3 ul.navbar-nav .dropdown-menu>li>a:hover{
-    color: #414042;
+    color: #ffffff;
     background: #da521e;
 }
 .bty-top-horizontal-menu-3 ul.navbar-nav .dropdown-menu>li>a:before{

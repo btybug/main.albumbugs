@@ -76,4 +76,27 @@ class FieldService extends GeneralService
         $fieldHtml = BBRenderUnits($field->unit,['field' => $field->toArray()]);
         return $fieldHtml;
     }
+
+    public function fieldsJson($request)
+    {
+        if ($request->form_type == 'user') {
+            $fieldJson = json_encode($this->fieldRepo->getWithTableAndStatusWhereNoAvailableUsers($request->fields_type));
+        } else {
+            $fieldJson = json_encode($this->fieldRepo->findAllByMultiple(['table_name' => $request->fields_type,'status' => $this->fieldRepo::ACTIVE])->toArray());
+        }
+
+        return $fieldJson;
+    }
+
+    public function getAvailableFields($fieldsType)
+    {
+        $success = false;
+        $fields = [];
+        if ($fieldsType) {
+            $fields = $this->fieldRepo->getByTableNameAndActive($fieldsType)->toArray();
+            $success = true;
+        }
+
+        return ['success' => $success, 'fields' => $fields];
+    }
 }

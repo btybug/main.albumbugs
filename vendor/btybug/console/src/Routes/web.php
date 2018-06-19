@@ -70,10 +70,10 @@ Route::group(['prefix' => 'structure'], function () {
         Route::post('/settings/{id}', 'StructureController@postFormSettings', true);
         Route::post('/get-available-fields-settings', 'StructureController@postAvailableFields');
         Route::post('/edit/{id}', 'StructureController@postFormEdit')->name('save_core_forms');
-        Route::get('/create', 'StructureController@getCreateForm');
-        Route::get('/edit-custom/{id}', 'StructureController@getEditForm');
+        Route::get('/create', 'StructureController@getCreateForm',true);
+        Route::get('/edit-custom/{id}', 'StructureController@getEditForm',true);
         Route::post('/save', 'StructureController@postSaveForm');
-        Route::get('/create-advanced', 'StructureController@getCreateAdvanced');
+        Route::get('/create-advanced', 'StructureController@getCreateAdvanced',true);
         Route::post('/get-unit-settings', 'StructureController@getUnitSettingsPage');
         Route::get('/get-add-field-modal', 'StructureController@getUnitFieldModal');
         Route::get('/add-field-modal', 'StructureController@getAddFieldModal');
@@ -150,7 +150,7 @@ Route::group(['prefix' => 'settings'], function () {
 
 Route::group(['prefix' => 'general'], function () {
     Route::get('/', function () {
-        return view('console::structure.general.index');
+        return view('console::general.index');
     }, true);
     Route::get('/validations', 'GeneralController@getValidations', true)->name('validations');
     Route::get('/trigger-events', 'GeneralController@getTriggerEvents', true)->name('trigger_events');

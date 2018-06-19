@@ -13,6 +13,7 @@ namespace Btybug\Console\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
+use Btybug\Console\Models\Fields;
 use Btybug\Console\Services\FieldService;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\ContentLayouts\ContentLayouts;
@@ -42,10 +43,42 @@ use Btybug\User\Services\UserService;
 class StructureController extends Controller
 {
     public $adminPagesRepository;
+    public $formsRepository;
+    public $fieldsRepository;
+    public $adminsettingRepository;
+    public $structureService;
+    public $roleService;
+    public $userService;
+    public $formService;
+    public $fieldService;
+    public $fieldValidationService;
+    public $painter;
 
-    public function __construct(AdminPagesRepository $adminPagesRepository)
+    public function __construct(
+        AdminPagesRepository $adminPagesRepository,
+        FormsRepository $formsRepository,
+        FieldsRepository $fieldsRepository,
+        AdminsettingRepository $adminsettingRepository,
+        StructureService $structureService,
+        RoleService $roleService,
+        UserService $userService,
+        FormService $formService,
+        FieldService $fieldService,
+        FieldValidationService $fieldValidationService,
+        Painter $painter
+    )
     {
         $this->adminPagesRepository = $adminPagesRepository;
+        $this->formsRepository = $formsRepository;
+        $this->fieldsRepository = $fieldsRepository;
+        $this->adminsettingRepository = $adminsettingRepository;
+        $this->structureService = $structureService;
+        $this->roleService = $roleService;
+        $this->userService = $userService;
+        $this->formService = $formService;
+        $this->fieldService = $fieldService;
+        $this->fieldValidationService = $fieldValidationService;
+        $this->painter = $painter;
     }
 
     public function getIndex()
@@ -53,48 +86,30 @@ class StructureController extends Controller
         return view('console::structure.index');
     }
 
-    public function getTables(
-        StructureService $structureService
-    )
+    public function getTables()
     {
-        $tables = $structureService->getTables();
-        return view('console::structure.tables', compact(['tables']));
+        return view('console::structure.tables', ['tables' => $this->structureService->getTables()]);
     }
 
     public function getPages(
-        Request $request,
-        RoleService $roleService,
-        Routes $routes
+        Request $request
     )
     {
-
-//        dd(Routes::registerPages('sahak.avatar/framework'));
         $pageGrouped = $this->adminPagesRepository->getGroupedWithModule();
-        if ($request->page) {
-            $page = $this->adminPagesRepository->find($request->page);
-        } else {
-            $page = $this->adminPagesRepository->first();
-        }
-
-        if ($page && !$page->layout_id) $page->layout_id = 0;
-
-        $rolesData = $roleService->getRolesSeperetedWith();
+        $page = $this->structureService->getPage($request->page);
+        $rolesData = $this->roleService->getRolesSeperetedWith();
         return view('console::structure.pages.index', compact(['pageGrouped', 'page', 'rolesData']));
     }
 
     public function getPageSettings(
-        Request $request,
-        UserService $userService
+        Request $request
     )
     {
-        $id = $request->id;
-        $page = $this->adminPagesRepository->findOrFail($id);
-        $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
-        $tags = $page->tags;
-        $placeholders = '';
+        $page = $this->adminPagesRepository->findOrFail($request->id);
+        $admins = $this->userService->getAdmins()->pluck('username', 'id')->toArray();
         $page->setAttribute('cssData', []);
         $page->setAttribute('jsData', []);
-        return view('console::structure.pages.settings', compact(['page', 'admins', 'tags', 'id', 'placeholders']));
+        return view('console::structure.pages.settings', compact(['page', 'admins']));
     }
 
     public function postPageSettings(
@@ -102,52 +117,40 @@ class StructureController extends Controller
         PageEditRequest $request
     )
     {
-        $cotnentData = $request->get('placeholders');
         $data = $request->except('_token', 'type', 'tags', 'classify', 'header_unit', 'backend_page_section', 'placeholders');
-        if (isset($data['url'])) {
-            (starts_with($data['url'], '/')) ? false : $data['url'] = "/" . $data['url'];
-        }
-        $data['settings'] = json_encode(['placeholders' => $cotnentData], true);
+        if(isset($data['url']) && ! starts_with($data['url'], '/')) $data['url'] = "/" . $data['url'];
         $this->adminPagesRepository->update($id, $data);
-        return redirect()->to('/admin/console/structure/pages')->with('message', 'Successfully Updated Page');
+        return redirect()->route('pages_index')->with('message', 'Successfully Updated Page');
     }
 
     public function getClassify()
     {
-        return view('console::structure.classify');
+        return view('console::structure.classify.index');
     }
 
     public function getUrls(
-        Request $request,
-        StructureService $service
+        Request $request
     )
     {
         $method = $request->get('method', 'all');
-        $data = $service->getUrls($method);
-        return view('console::structure.urls', compact('data', 'method'));
-    }
-
-    public function getSettings()
-    {
-        return view('console::structure.settings');
+        $data = $this->structureService->getUrls($method);
+        return view('console::structure.urls.index', compact('data', 'method'));
     }
 
     public function getPagePreview(
-        $page_id,
-        Request $request,
-        StructureService $structureService
+        $pageId,
+        Request $request
     )
     {
-        return $structureService->getPagePreview($page_id, $request);
+        return $this->structureService->getPagePreview($pageId, $request);
     }
 
     public function postSavePageSettings(
-        $page_id,
-        SavePageSettingsRequest $pageSettingsRequest,
-        StructureService $structureService
+        $pageId,
+        SavePageSettingsRequest $pageSettingsRequest
     )
     {
-        $page = $structureService->postPagePreview($page_id, $pageSettingsRequest);
+        $page = $this->structureService->postPagePreview($pageId, $pageSettingsRequest);
         return \Response::json(['error' => false, 'message' => 'Page Layout settings Successfully assigned', 'module' => $page->module_id]);
     }
 
@@ -162,137 +165,93 @@ class StructureController extends Controller
         return \Response::json(['error' => false, 'html' => $html, 'page' => $page, 'value' => ($layout) ? $layout->id : 0]);
     }
 
-    public function getForms(
-        FormsRepository $formsRepository
-    )
+    public function getForms()
     {
-        $forms = $formsRepository->getBy('type', 'new');
-        return view('console::structure.forms', compact('forms'));
+        $forms = $this->formsRepository->getBy('type', 'new');
+        return view('console::structure.forms.list', compact('forms'));
     }
 
-    public function getCreateForm(Request $request)
+    public function getCreateForm(
+        Request $request
+    )
     {
-        //TODO when modules will ready
-        $form_slug = uniqid();
-        $builders = [];
-        $modules = Structures::getBuilderModules()->toArray();
-        if (count($modules)) {
-            foreach ($modules as $builder) {
-                $builders[$builder->slug] = $builder->name;
-            }
-        }
-
-        $slug = $request->get('slug');
-        $builder = Structures::find($slug);
-
-        if ($builder && \File::exists(base_path($builder->path . DS . 'views' . DS . $builder->builder . '.blade.php'))) {
-            $file = view("$builder->namespace::" . $builder->builder, compact(['form']))->render();
-        }
-
-        $form_type = $request->get('form_type');
-        $fields_type = $request->get('fields_type');
-        if ($form_type == 'user') {
-            $fieldJson = json_encode(Fields::where('table_name', $fields_type)->where('status', Fields::ACTIVE)->where('available_for_users', '!=', 0)->get()->toArray());
-        } else {
-            $fieldJson = json_encode(Fields::where('table_name', $fields_type)->where('status', Fields::ACTIVE)->get()->toArray());
-        }
-
-        return view('console::structure.create-form', compact(['form_slug', 'builders', 'form_type', 'fields_type', 'fieldJson', 'file', 'slug']));
+        $builders = Structures::getBuilderModules()->pluck('name','slug')->toArray();
+        $builder = Structures::find($request->slug);
+        $fieldJson = $this->fieldService->fieldsJson($request);
+        $file = $this->formService->getBuilderRendered($builder);
+        return view('console::structure.forms.create-form', ['form_slug' => uniqid(), 'builders' => $builders,
+            'form_type' => $request->form_type, 'fields_type' => $request->fields_type, 'fieldJson'=>$fieldJson, 'file'=>$file, 'slug' => $request->slug]);
     }
 
     public function getAddFieldModal(
-        Request $request,
-        FormsRepository $formsRepository,
-        FieldsRepository $fieldsRepository,
-        StructureService $structureService
+        Request $request
     )
     {
-        $form = $formsRepository->getNewCoreFormsBySlug($request->slug);
-        return $structureService->getAddFieldModal($request->slug, $form, $fieldsRepository);
+        $form = $this->formsRepository->getNewCoreFormsBySlug($request->slug);
+        return $this->structureService->getAddFieldModal($request->slug, $form, $this->fieldsRepository);
     }
 
     public function getUnitFieldModal(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $html = $structureService->getUnitFieldModal($request);
-        return \Response::json(['html' => $html]);
+        return \Response::json(['html' => $this->structureService->getUnitFieldModal($request)]);
     }
 
     public function getUnitEditFieldModal(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $request->all();
-        $html = $structureService->getUnitEditFieldModal($data);
-        return \Response::json(['html' => $html]);
+        return \Response::json(['html' => $this->structureService->getUnitEditFieldModal($request->all())]);
     }
 
 
     public function getAvailableFieldsModal(
-        Request $request,
-        FieldsRepository $fieldsRepository
+        Request $request
     )
     {
-        $success = false;
-        $fields = [];
-        if ($request->fields_type) {
-            $fields = $fieldsRepository->getByTableNameAndActive($request->fields_type)->toArray();
-            $success = true;
-        }
-
-        return \Response::json(['success' => $success, 'fields' => $fields]);
+        return \Response::json($this->fieldService->getAvailableFields($request->fields_type));
     }
 
     public function getUnitVariations(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $html = $structureService->getUnitVariations($request);
-        return \Response::json(['html' => $html]);
+        return \Response::json(['html' => $this->structureService->getUnitVariations($request)]);
     }
 
     public function getUnitSettingsPage(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $structureService->getUnitSettingsPage($request);
+        $data = $this->structureService->getUnitSettingsPage($request);
         return \Response::json(['settings' => $data['settings'], 'type' => $data['type']]);
     }
 
     public function getComponentSettings(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        return $structureService->getComponentSettings($request);
+        return $this->structureService->getComponentSettings($request);
     }
 
     public function getUnitVariationField(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        return $structureService->getUnitVariationField($request);
+        return $this->structureService->getUnitVariationField($request);
     }
 
     public function getUnitVariationSettings(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        return $structureService->getUnitVariationSettings($request);
+        return $this->structureService->getUnitVariationSettings($request);
     }
 
-    public function getCreateField(
-        AdminsettingRepository $adminsettingRepository
-    )
+    public function getCreateField()
     {
-        $defaultFieldHtml = $adminsettingRepository->getSettings('setting_system', 'default_field_html');
+        $defaultFieldHtml = $this->adminsettingRepository->getSettings('setting_system', 'default_field_html');
         return view('console::structure.create_field', compact('defaultFieldHtml'));
     }
 
@@ -301,83 +260,66 @@ class StructureController extends Controller
         return view('console::structure.create_field_studio');
     }
 
-    public function getFields(
-        FieldsRepository $fieldsRepository
-    )
+    public function getFields()
     {
-        $fields = $fieldsRepository->getAll();
+        $fields = $this->fieldsRepository->getAll();
         return view('console::structure.fields', compact(['fields']));
     }
 
-    public function getEditForms(
-        FormsRepository $formsRepository
-    )
+    public function getEditForms()
     {
-        $forms = $formsRepository->getBy('type', 'edit');
+        $forms = $this->formsRepository->getBy('type', 'edit');
         return view('console::structure.edit_forms', compact(['forms']));
     }
 
     public function postCreateField(
-        FieldCreateRequest $request,
-        StructureService $structureService
+        FieldCreateRequest $request
     )
     {
-        $structureService->saveField($request->except('_token'));
-        return redirect('admin/console/structure/fields')->with('message', 'Field created');
+        $this->structureService->saveField($request->except('_token'));
+        return redirect()->route('fields')->with('message', 'Field created');
     }
 
     public function getEditField(
-        Request $request,
-        FieldsRepository $fieldsRepository,
-        FieldValidationService $fieldValidationService,
-        Painter $painter
+        Request $request
     )
     {
-        $field = $fieldsRepository->findOrFail($request->id);
-        $unitSlug = explode('.', $field->unit)[0];
-        $unit = $painter->find($unitSlug);
-        $rule = $fieldValidationService->getBaseValidationRulse($field->table_name, $field->column_name);
-        $required = $fieldValidationService->isRequired($field->table_name, $field->column_name);
-        $increment = $fieldValidationService->isAutoIncrement($field->table_name, $field->column_name);
+        $field = $this->fieldsRepository->findOrFail($request->id);
+        $unit = $this->painter->find(explode('.', $field->unit)[0]);
+        $rule = $this->fieldValidationService->getBaseValidationRulse($field->table_name, $field->column_name);
+        $required = $this->fieldValidationService->isRequired($field->table_name, $field->column_name);
+        $increment = $this->fieldValidationService->isAutoIncrement($field->table_name, $field->column_name);
 
         return view('console::structure.edit_field', compact(['field', 'unit', 'rule', 'required', 'increment']));
     }
 
     public function postEditField(
         $id,
-        Request $request,
-        FieldsRepository $fieldsRepository,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $request->except(['_token']);
-        $field = $fieldsRepository->findOrFail($id);
-        $structureService->fieldUpdate($data, $field);
-
-        return redirect('admin/console/structure/fields')->with('message', 'Field Updated');
+        $field = $this->fieldsRepository->findOrFail($id);
+        $this->structureService->fieldUpdate($request->except('_token'), $field);
+        return redirect()->route('fields')->with('message', 'Field Updated');
     }
 
     public function postRenderFieldHtml(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
         return \Response::json(['data' => BBRenderUnits($request->unit, $request->all())]);
     }
 
     public function postMapping(
-        Request $request,
-        FieldsRepository $fieldsRepository
+        Request $request
     )
     {
-        $field = $fieldsRepository->findOrFail($request->id);
+        $field = $this->fieldsRepository->findOrFail($request->id);
         $field->type = $request->type;
-
         $html = view("console::structure.developers._partials.mapping-column", compact('field'))->render();
 
         return \Response::json(['data' => $html]);
     }
-
 
     public function getCreateAdvanced()
     {
@@ -385,72 +327,60 @@ class StructureController extends Controller
     }
 
     public function getUnitRender(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        return $structureService->getComponentSettings($request);
+        return $this->structureService->getComponentSettings($request);
     }
 
     public function postSaveForm(
-        FormCreateRequest $request,
-        StructureService $structureService
+        FormCreateRequest $request
     )
     {
-        $data = $request->except('_token');
-        $structureService->createForm($data);
-
+        $this->structureService->createForm($request->except('_token'));
         return redirect()->to('/admin/console/structure/edit-forms')->with('message', 'Form Successfully created');
     }
 
     public function getFormEdit(
-        FormsRepository $formsRepository,
-        FormService $formService,
-        FieldsRepository $fieldsRepository,
         $id
     )
     {
-        $form = $formsRepository->findOrFail($id);
+        $form = $this->formsRepository->findOrFail($id);
         $settings = $form->settings;
-        $fields = $fieldsRepository->getBy('table_name', $form->fields_type);
+        $fields = $this->fieldsRepository->getBy('table_name', $form->fields_type);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
         return view('console::structure.edit-form', compact('form', 'fields', 'existingFields','settings'));
     }
 
 
-    public function getDefaultHtml(
-        StructureService $structureService
-    )
+    public function getDefaultHtml()
     {
-        $data = $structureService->getDefaultHtml();
+        $data = $this->structureService->getDefaultHtml();
         return \Response::json($data);
     }
 
     public function getCustomHtml(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $structureService->getCustomHtml($request);
+        $data = $this->structureService->getCustomHtml($request);
         return \Response::json($data);
     }
 
     public function getSavedHtmlType(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $structureService->getSavedHtmlType($request);
+        $data = $this->structureService->getSavedHtmlType($request);
         return \Response::json($data);
     }
 
     public function postChangeFieldStatus(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $success = $structureService->postChangeFieldStatus($request);
+        $success = $this->structureService->postChangeFieldStatus($request);
         return \Response::json([
             'success' => $success
         ]);
@@ -458,52 +388,42 @@ class StructureController extends Controller
 
     public function postFormEdit(
         $id,
-        Request $request,
-        FormService $formService
+        Request $request
     )
     {
-        $data = $request->except('_token');
-        $form = $formService->createOrUpdate($data);
-
+        $form = $this->formService->createOrUpdate($request->except('_token'));
         return redirect()->to('/admin/console/structure/forms');
     }
 
     public function postNewBuilder(
         $id,
-        Request $request,
-        FormsRepository $formsRepository,
-        FormService $formService,
-        StructureService $structureService
+        Request $request
     )
     {
         $data = $request->all();
-        $form = $formsRepository->findOrFail($id);
-        $response = $formService->validateColumns($form->id, $data['fields']);
+        $form = $this->formsRepository->findOrFail($id);
+        $response = $this->formService->validateColumns($form->id, $data['fields']);
 
         if ($response['error']) return \Response::json(['error' => true, 'message' => $response['message']]);
-        $data = $structureService->postNewBuilder($request, $id);
+        $data = $this->structureService->postNewBuilder($request, $id);
 
         return \Response::json($data);
     }
 
     public function postBuilder(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $structureService->postBuilder($request);
-
+        $data = $this->structureService->postBuilder($request);
         return \Response::json($data);
     }
 
     public function getFormSettings(
-        $id,
-        FormsRepository $formsRepository,
-        StructureService $structureService
+        $id
     )
     {
-        $form = $formsRepository->findOrFail($id);
-        $fields = $structureService->getFieldsByFormType($form);
+        $form = $this->formsRepository->findOrFail($id);
+        $fields = $this->structureService->getFieldsByFormType($form);
         $settings = json_decode($form->settings, true);
 
         return view('console::structure.form-settings', compact(['form', 'fields', 'settings']));
@@ -511,12 +431,11 @@ class StructureController extends Controller
 
     public function postFormSettings(
         $id,
-        FormSettingsUpdateRequest $request,
-        FormsRepository $formsRepository
+        FormSettingsUpdateRequest $request
     )
     {
         $settings = json_encode($request->only('message', 'is_ajax', 'event'));
-        $formsRepository->update($id, [
+        $this->formsRepository->update($id, [
             'fields_type' => $request->fields_type,
             'form_type' => $request->form_type,
             'settings' => $settings
@@ -526,11 +445,10 @@ class StructureController extends Controller
     }
 
     public function postAvailableFields(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $html = $structureService->postAvailableFields($request->table);
+        $html = $this->structureService->postAvailableFields($request->table);
         return \Response::json([
             'error' => false,
             'html' => $html
@@ -538,51 +456,46 @@ class StructureController extends Controller
     }
 
     public function getFormEntries(
-        $id,
-        FormsRepository $formsRepository
+        $id
     )
     {
-        $form = $formsRepository->findOrFail($id);
+        $form = $this->formsRepository->findOrFail($id);
         return view('console::structure.entries')->with(['form' => $form, 'entries' => $form->entries]);
     }
 
     public function postGetEntryData(
-        Request $request,
-        StructureService $structureService
+        Request $request
     )
     {
-        $data = $structureService->getEntryData($request);
-        return \Response::json($data);
+        return \Response::json($this->structureService->getEntryData($request));
     }
 
     public function getEditForm(
         $id,
-        Request $request,
-        FormsRepository $formsRepository,
-        FormService $formService,
-        StructureService $structureService,
-        FieldsRepository $fieldsRepository
+        Request $request
     )
     {
-        $form = $formsRepository->findOrFail($id);
-        $fields = $formService->getFields(true);
-        $blade = $formService->renderBlade($id);
+        $form = $this->formsRepository->findOrFail($id);
+        $fields = $this->formService->getFields(true);
+        $blade = $this->formService->renderBlade($id);
         $bladeRendered = $form->render($id);
-        //TODO get Modules from new system
         $modules = Structures::getBuilderModules()->toArray();
-        $data = $structureService->getBuilders($modules, $form, $request);
+        $data = $this->structureService->getBuilders($modules, $form, $request);
 
         if ($form->form_type == 'user') {
-            $fieldJson = json_encode($fieldsRepository->getByTableNameActiveAndAvailablity($form->fields_type)->toArray());
+            $fieldJson = json_encode($this->fieldsRepository->getByTableNameActiveAndAvailablity($form->fields_type)->toArray());
         } else {
-            $fieldJson = json_encode($fieldsRepository->getByTableNameAndActive($form->fields_type)->toArray());
+            $fieldJson = json_encode($this->fieldsRepository->getByTableNameAndActive($form->fields_type)->toArray());
         }
 
         return view('console::structure.create-form', compact(['form', 'blade', 'fields', 'bladeRendered', 'fieldJson']))->with($data);
     }
 
-    public function postRenderFieldHtmlForResult($id,FieldsRepository $fieldsRepository,Request $request){
-        $field = $fieldsRepository->findOrFail($id);
+    public function postRenderFieldHtmlForResult(
+        $id,
+        Request $request
+    ){
+        $field = $this->fieldsRepository->findOrFail($id);
         $data = $request->except('_token');
 
         foreach ($data as $key => $val){

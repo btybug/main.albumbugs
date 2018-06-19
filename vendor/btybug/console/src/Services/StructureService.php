@@ -660,5 +660,24 @@ class StructureService extends GeneralService
         return $routes;
     }
 
+    public function getPage($pageId)
+    {
+        if ($pageId) {
+            $page = $this->adminPages->find($pageId);
+        } else {
+            $page = $this->adminPages->first();
+        }
+
+        if ($page && !$page->layout_id) $page->layout_id = 0;
+
+        return $page;
+    }
+
+    public function checkUrl($data)
+    {
+        if (isset($data['url'])) {
+            (starts_with($data['url'], '/')) ? false : $data['url'] = "/" . $data['url'];
+        }
+    }
 
 }

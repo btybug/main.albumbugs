@@ -610,4 +610,14 @@ class FormService extends GeneralService
         if ($request->get('form_access') && count($request->roles))
             $this->formRolesRepository->optimizeFormRoles($this->formObject,$request->roles);
     }
+
+    public function getBuilderRendered($builder)
+    {
+        $file = null;
+        if ($builder && \File::exists(base_path($builder->path . DS . 'views' . DS . $builder->builder . '.blade.php'))) {
+            $file = \View("$builder->namespace::" . $builder->builder, compact(['form']))->render();
+        }
+
+        return $file;
+    }
 }

@@ -21,7 +21,7 @@
                                 {!! Form::select('fields_type',['' => 'Select Fields type'] +BBGetTables(),null,['class' => 'form-control table-change']) !!}
                             </div>
                             <div class="col-md-3 p-b-10">
-                                {!! Form::select('form_builder',['' => 'Select Builder'] +  $builders , $slug,['class'=>'select-builder', 'data-btnrole'=>'formtype', 'title'=>'Select Builder']) !!}
+                                {!! Form::select('form_builder',['' => 'Select Builder'] +  $builders, $slug,['class'=>'select-builder', 'data-btnrole'=>'formtype', 'title'=>'Select Builder']) !!}
                             </div>
                         </div>
 

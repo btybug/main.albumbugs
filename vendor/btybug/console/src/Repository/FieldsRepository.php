@@ -19,6 +19,7 @@ class FieldsRepository extends GeneralRepository
 {
 
     const ACTIVE = 1;
+    const INACTIVE = 0;
 
     public function getByTableNameAndActive($table_name)
     {
@@ -66,5 +67,10 @@ class FieldsRepository extends GeneralRepository
         $data = ($existings) ? json_decode($existings,true) : [];
         return $this->model()->where('table_name', $table)->where('column_name','!=','id')
             ->whereNotIn('id', $data)->get();
+    }
+
+    public function getWithTableAndStatusWhereNoAvailableUsers($fields_type)
+    {
+        return $this->model()->where('table_name', $fields_type)->where('status', self::ACTIVE)->where('available_for_users', '!=', self::INACTIVE)->get()->toArray();
     }
 }

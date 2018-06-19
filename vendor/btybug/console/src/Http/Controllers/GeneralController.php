@@ -19,17 +19,26 @@ use Btybug\btybug\Repositories\AdminsettingRepository;
 
 class GeneralController extends Controller
 {
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getIndex(
+
+    public $adminsettingRepository;
+    public $adminPagesRepository;
+
+    public function __construct(
         AdminsettingRepository $adminsettingRepository,
         AdminPagesRepository $adminPagesRepository
     )
     {
-        $adminLoginPage = $adminPagesRepository->findBy('slug', 'admin-login');
-        $data = $adminsettingRepository->getBackendSettings();
-        return view('console::structure.settings', compact(['data', 'adminLoginPage']));
+        $this->adminsettingRepository = $adminsettingRepository;
+        $this->adminPagesRepository = $adminPagesRepository;
+    }
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getIndex()
+    {
+        $adminLoginPage = $this->adminPagesRepository->findBy('slug', 'admin-login');
+        $data = $this->adminsettingRepository->getBackendSettings();
+        return view('console::general.settings', compact(['data', 'adminLoginPage']));
     }
 
     /**
@@ -37,27 +46,25 @@ class GeneralController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postSettings(
-        Request $request,
-        AdminsettingRepository $adminsettingRepository
+        Request $request
     )
     {
         $data = $request->except('_token', 'admin_login_url');
         if ($request->admin_login_url) {
-            $adminsettingRepository->createOrUpdate($request->admin_login_url, 'setting_system', 'admin-login-url');
+            $this->adminsettingRepository->createOrUpdate($request->admin_login_url, 'setting_system', 'admin-login-url');
         }
-
-        $adminsettingRepository->createOrUpdateToJson($data, 'backend_settings', 'backend_settings');
+        $this->adminsettingRepository->createOrUpdateToJson($data, 'backend_settings', 'backend_settings');
         return redirect()->back();
     }
 
     public function getValidations()
     {
         $validations = BBGetAllValidations();
-        return view('console::structure.general.validations', compact(['validations']));
+        return view('console::general.validations', compact(['validations']));
     }
 
     public function getTriggerEvents()
     {
-        return view('console::structure.general.trigger_events');
+        return view('console::general.trigger_events');
     }
 }

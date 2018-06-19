@@ -10,7 +10,6 @@
 
     @include('btybug::_partials.delete_modal')
 @stop
-{{--@include('tools::common_inc')--}}
 @section('CSS')
     {!! HTML::style('public/css/create_pages.css') !!}
     {!! HTML::style('public/css/menu.css?v=0.16') !!}

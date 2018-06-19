@@ -41,6 +41,13 @@ use Btybug\User\Services\UserService;
  */
 class StructureController extends Controller
 {
+    public $adminPagesRepository;
+
+    public function __construct(AdminPagesRepository $adminPagesRepository)
+    {
+        $this->adminPagesRepository = $adminPagesRepository;
+    }
+
     public function getIndex()
     {
         return view('console::structure.index');
@@ -56,18 +63,17 @@ class StructureController extends Controller
 
     public function getPages(
         Request $request,
-        AdminPagesRepository $adminPagesRepository,
         RoleService $roleService,
         Routes $routes
     )
     {
 
 //        dd(Routes::registerPages('sahak.avatar/framework'));
-        $pageGrouped = $adminPagesRepository->getGroupedWithModule();
+        $pageGrouped = $this->adminPagesRepository->getGroupedWithModule();
         if ($request->page) {
-            $page = $adminPagesRepository->find($request->page);
+            $page = $this->adminPagesRepository->find($request->page);
         } else {
-            $page = $adminPagesRepository->first();
+            $page = $this->adminPagesRepository->first();
         }
 
         if ($page && !$page->layout_id) $page->layout_id = 0;
@@ -78,12 +84,11 @@ class StructureController extends Controller
 
     public function getPageSettings(
         Request $request,
-        AdminPagesRepository $adminPagesRepository,
         UserService $userService
     )
     {
         $id = $request->id;
-        $page = $adminPagesRepository->findOrFail($id);
+        $page = $this->adminPagesRepository->findOrFail($id);
         $admins = $userService->getAdmins()->pluck('username', 'id')->toArray();
         $tags = $page->tags;
         $placeholders = '';
@@ -94,8 +99,7 @@ class StructureController extends Controller
 
     public function postPageSettings(
         $id,
-        PageEditRequest $request,
-        AdminPagesRepository $adminPagesRepository
+        PageEditRequest $request
     )
     {
         $cotnentData = $request->get('placeholders');
@@ -104,7 +108,7 @@ class StructureController extends Controller
             (starts_with($data['url'], '/')) ? false : $data['url'] = "/" . $data['url'];
         }
         $data['settings'] = json_encode(['placeholders' => $cotnentData], true);
-        $adminPagesRepository->update($id, $data);
+        $this->adminPagesRepository->update($id, $data);
         return redirect()->to('/admin/console/structure/pages')->with('message', 'Successfully Updated Page');
     }
 
@@ -148,11 +152,10 @@ class StructureController extends Controller
     }
 
     public function postPageData(
-        Request $request,
-        AdminPagesRepository $adminPagesRepository
+        Request $request
     )
     {
-        $page = $adminPagesRepository->findOrFail($request->id);
+        $page = $this->adminPagesRepository->findOrFail($request->id);
         $layout = ContentLayouts::findVariation($page->layout_id);
         $html = view('console::structure._partials.page_data', compact(['page']))->render();
 

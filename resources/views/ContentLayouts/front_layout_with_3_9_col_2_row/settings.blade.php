@@ -413,6 +413,22 @@ $container_styles = getDinamicStyle('containers');
                 </div>
                 <div class="clearfix"></div>
             </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <span>Right-Top Content</span>
+                </div>
+                <div class="col-sm-10">
+                    <div class="input-radio-1-bty">
+                        <input type="radio" id="bty-radio1" name="right_top_inp">
+                        <label for="bty-radio1">Show</label>
+                    </div>
+                    <div class="input-radio-1-bty">
+                        <input type="radio" id="bty-radio2" name="right_top_inp">
+                        <label for="bty-radio2">Hide</label>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
     @endoption

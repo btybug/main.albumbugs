@@ -19,6 +19,7 @@
             </ul>
         </div>
         @endif
+        
         <div class="col-md-9 modal-list-content builder-modalright modal-data-items">
             @if(!isset($items))
                 @php

@@ -2453,12 +2453,14 @@ function BBgetProfileAssets ($id,$type = 'js', $section = 'headerJs')
         $assets = $profile->files;
         if (isset($assets[$section]) && count($assets[$section])) {
             foreach ($assets[$section] as $item) {
-                $path = str_after($item['path'], DS . 'public' . DS);
+                $path = str_after($item['path'], 'public_html');
+                $path = str_after($path, 'public');
+                if(! starts_with($path, '/resources')) $path = 'public'.DS.$path;
                 if ($type == 'js') {
                     if ($item['type'] == 'link') {
                         $result .= Html::script($item['path']) . "\r\n";
                     } else {
-                        $result .= Html::script('public'.DS.$path) . "\r\n";
+                        $result .= Html::script($path) . "\r\n";
 //                        if (\File::exists($item['path'])) {
 //                            try {
 //                                $result .= "<script>" . \File::get($item['path']) . "</script> \r\n";

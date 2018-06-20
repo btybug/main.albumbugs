@@ -262,7 +262,7 @@ class Folders extends Model
 
     public function settings()
     {
-        return $this->hasOne('App\Models\Media\Settings', 'folder_id');
+        return $this->hasOne(Settings::class, 'folder_id');
     }
 
     public function trash()

@@ -2,8 +2,8 @@
 
 
 use App\Http\Controllers\Controller;
-use  App\Models\Media\Folders;
-use App\Models\Media\Settings;
+use  Btybug\Media\Models\Media\Folders;
+use Btybug\Media\Models\Media\Settings;
 //use Chumper\Zipper\Zipper;
 use Illuminate\Http\Request;
 

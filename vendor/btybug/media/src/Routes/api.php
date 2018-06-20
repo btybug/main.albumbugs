@@ -10,10 +10,9 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group([
-    'prefix' => 'api-media',
-], function () {
+
     //Js Tree Api
+Route::group(['middleware'=>'cors'],function (){
     Route::post('/jstree', 'Media\MediaApiController@getFolderChildrenJsTree');
 
     Route::post('/get-folder-childs', 'Media\MediaApiController@getFolderChilds');
@@ -36,6 +35,5 @@ Route::group([
     Route::post('/rename-item', 'Media\MediaItemsApiController@renameFile');
     Route::post('/copy-item', 'Media\MediaItemsApiController@getCopyItems');
     Route::post('/transfer-item', 'Media\MediaItemsApiController@getTransferItems');
-
-
 });
+

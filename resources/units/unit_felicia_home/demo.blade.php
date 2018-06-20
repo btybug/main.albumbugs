@@ -2,7 +2,7 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-title">
+                <div class="main-title">
                     <h2 class="title text-uppercase separator"> About Onepage</h2>
                     <div class="sub-title">
                         We’re a creative agency located in New York.<br>
@@ -95,7 +95,7 @@
 </section>
 
 <section class="section-felic-works">
-    <div class="section-title text-center">
+    <div class="main-title text-center">
         <h2 class="title separator">Our Works</h2>
         <div class="sub-title">Lorem Ipsum is simply dummy text of the printing.</div>
     </div>
@@ -251,7 +251,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="section-title text-center">
+                <div class="main-title text-center">
                     <h2 class="title separator">TESTIMONIAL</h2>
                     <div class="sub-title">Lorem Ipsum is simply dummy text of the printing and typesetting industry
                     </div>

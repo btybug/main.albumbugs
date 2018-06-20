@@ -1,9 +1,9 @@
 
-.section-felic-works .section-title {
+.section-felic-works .main-title {
     display: block;
     margin-bottom: 80px;
 }
-.section-felic-works .section-title .title {
+.section-felic-works .main-title .title {
     font-size: 36px;
     font-weight: 800;
     line-height: 46px;
@@ -13,7 +13,7 @@
     letter-spacing: 2px;
     color: #414141;
 }
-.section-felic-works .section-title .separator {
+.section-felic-works .main-title .separator {
     position: relative;
 }
 
@@ -37,18 +37,18 @@
     content: '';
     background: #757575;
 }
-.section-felic-works .section-title .sub-title {
+.section-felic-works .main-title .sub-title {
     font-size: 16px;
     line-height: 30px;
     margin-top: 30px;
     color: #757575;
 }
 @media (max-width: 568px){
-    .section-felic-works .section-title .title {
+    .section-felic-works .main-title .title {
         font-size: 26px;
         line-height: 36px;
     }
-    .section-felic-works .section-title{
+    .section-felic-works .main-title{
         margin-bottom: 50px;
     }
 }
@@ -135,6 +135,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     line-height: 1.3;
+    color: white;
 }
 .section-felic-works .portfolio-description p {
     font-size: 12px;
@@ -198,11 +199,11 @@
 .section-felic-about{
     padding:100px 0;
 }
-.section-felic-about .section-title {
+.section-felic-about .main-title {
     display: block;
     margin-bottom: 80px;
 }
-.section-felic-about .section-title .title {
+.section-felic-about .main-title .title {
     font-size: 36px;
     font-weight: 800;
     line-height: 46px;
@@ -212,7 +213,7 @@
     letter-spacing: 2px;
     color: #414141;
 }
-.section-felic-about .section-title .separator {
+.section-felic-about .main-title .separator {
     position: relative;
 }
 
@@ -236,7 +237,7 @@
     content: '';
     background: #757575;
 }
-.section-felic-about .section-title .sub-title {
+.section-felic-about .main-title .sub-title {
     font-size: 16px;
     line-height: 30px;
     margin-top: 30px;
@@ -278,11 +279,11 @@
     color: #6bbb30;
 }
 @media (max-width: 568px){
-    .section-felic-about .section-title .title {
+    .section-felic-about .main-title .title {
         font-size: 26px;
         line-height: 36px;
     }
-    .section-felic-about .section-title{
+    .section-felic-about .main-title{
         margin-bottom: 50px;
     }
 }
@@ -290,11 +291,11 @@
 .section-felic-testimonial{
     padding:100px 0;
 }
-.section-felic-testimonial .section-title {
+.section-felic-testimonial .main-title {
     display: block;
     margin-bottom: 80px;
 }
-.section-felic-testimonial .section-title .title {
+.section-felic-testimonial .main-title .title {
     font-size: 36px;
     font-weight: 800;
     line-height: 46px;
@@ -304,7 +305,7 @@
     letter-spacing: 2px;
     color: #414141;
 }
-.section-felic-testimonial .section-title .separator {
+.section-felic-testimonial .main-title .separator {
     position: relative;
 }
 
@@ -328,18 +329,18 @@
     content: '';
     background: #757575;
 }
-.section-felic-testimonial .section-title .sub-title {
+.section-felic-testimonial .main-title .sub-title {
     font-size: 16px;
     line-height: 30px;
     margin-top: 30px;
     color: #757575;
 }
 @media (max-width: 568px){
-    .section-felic-testimonial .section-title .title {
+    .section-felic-testimonial .main-title .title {
         font-size: 26px;
         line-height: 36px;
     }
-    .section-felic-testimonial .section-title{
+    .section-felic-testimonial .main-title{
         margin-bottom: 50px;
     }
 }

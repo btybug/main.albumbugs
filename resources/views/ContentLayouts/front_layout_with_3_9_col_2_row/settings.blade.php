@@ -274,6 +274,7 @@ $container_styles = getDinamicStyle('containers');
                             'col-lg-10' => 10,
                             'col-lg-11' => 11,
                             'col-lg-12' => 12,
+                            'hidden-lg' => 'hidden',
                         ],null,['class' => 'form-control']) !!}
 
                     </div>
@@ -352,6 +353,7 @@ $container_styles = getDinamicStyle('containers');
                             'col-lg-10' => 10,
                             'col-lg-11' => 11,
                             'col-lg-12' => 12,
+                            'hidden-lg' => 'hidden',
                         ],null,['class' => 'form-control']) !!}
 
                     </div>

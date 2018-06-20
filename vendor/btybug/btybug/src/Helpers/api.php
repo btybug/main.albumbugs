@@ -2438,8 +2438,14 @@ function BBgetVersion ($id, $col = "name")
     return ($v) ? $v->$col : null;
 }
 
-function BBgetProfileAssets ($id, $type = 'js', $section = 'headerJs')
+function BBgetProfileAssets ($id,$type = 'js', $section = 'headerJs')
 {
+    if($id == false){
+        $adminsettingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
+        $model = $adminsettingRepository->getVersionsSettings('versions', 'frontend');
+        $id = issetReturn($model, 'js_data');
+    }
+    
     $profileRepository = new \Btybug\Uploads\Repository\VersionProfilesRepository();
     $profile = $profileRepository->findOneByMultiple(['id' => $id, 'type' => $type]);
     $result = '';
@@ -2447,17 +2453,19 @@ function BBgetProfileAssets ($id, $type = 'js', $section = 'headerJs')
         $assets = $profile->files;
         if (isset($assets[$section]) && count($assets[$section])) {
             foreach ($assets[$section] as $item) {
+                $path = str_after($item['path'], DS . 'public');
                 if ($type == 'js') {
                     if ($item['type'] == 'link') {
                         $result .= Html::script($item['path']) . "\r\n";
                     } else {
-                        if (\File::exists($item['path'])) {
-                            try {
-                                $result .= "<script>" . \File::get($item['path']) . "</script> \r\n";
-                            } catch (\Exception $e) {
-//                               dd($item,$e->getMessage());
-                            }
-                        }
+                        $result .= Html::script('public'.$path) . "\r\n";
+//                        if (\File::exists($item['path'])) {
+//                            try {
+//                                $result .= "<script>" . \File::get($item['path']) . "</script> \r\n";
+//                            } catch (\Exception $e) {
+////                               dd($item,$e->getMessage());
+//                            }
+//                        }
                     }
                 } else {
                     if ($item['type'] == 'link') {

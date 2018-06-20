@@ -11,8 +11,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="radios">Select JS</label>
                         <div class="col-md-8">
-                            {!! Form::select('js_data[]',$jsData,null,
-                                ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
+                            {!! Form::select('js_data',$jsData,null,
+                                ['class' => 'form-control pull-right']) !!}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -30,8 +30,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="radios">Select Css</label>
                         <div class="col-md-8">
-                            {!! Form::select('css_version[]',$cssData,null,
-                            ['class' => 'form-control select-dropdowns pull-right','multiple' => 'multiple']) !!}
+                            {!! Form::select('css_version',$cssData,null,
+                            ['class' => 'form-control pull-right']) !!}
                         </div>
                     </div>
                     <div class="col-md-12">

@@ -24,13 +24,11 @@ function BBCss($section = 'frontend')
     $adminsettingRepository = new  \Btybug\btybug\Repositories\AdminsettingRepository();
     $model = $adminsettingRepository->getVersionsSettings('versions', $section);
     if (count($model)) {
-        if (isset($model['css_version']) && count($model['css_version'])) {
-            foreach ($model['css_version'] as $id){
-                $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
-                $version = $versionRepo->find($id);
-                if($version && \File::exists("public/" .$version->hint_path)){
-                    return Html::style("public/" .$version->hint_path);
-                }
+        if (isset($model['css_version'])) {
+            $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
+            $version = $versionRepo->find($model['css_version']);
+            if($version && \File::exists("public/" .$version->hint_path)){
+                return Html::style("public/" .$version->hint_path);
             }
         }
     }
@@ -42,13 +40,11 @@ function BBJs($section = 'frontend')
     $adminsettingRepository = new  \Btybug\btybug\Repositories\AdminsettingRepository();
     $model = $adminsettingRepository->getVersionsSettings('versions', $section);
     if (count($model)) {
-        if (isset($model['js_data']) && count($model['js_data'])) {
-            foreach ($model['js_data'] as $id){
-                $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
-                $version = $versionRepo->find($id);
-                if($version && \File::exists("public/" .$version->hint_path)){
-                    return Html::script("public/" .$version->hint_path);
-                }
+        if (isset($model['js_data'])) {
+            $versionRepo = new \Btybug\Uploads\Repository\VersionProfilesRepository();
+            $version = $versionRepo->find($model['js_data']);
+            if($version && \File::exists("public/" .$version->hint_path)){
+                return Html::script("public/" .$version->hint_path);
             }
         }
     }

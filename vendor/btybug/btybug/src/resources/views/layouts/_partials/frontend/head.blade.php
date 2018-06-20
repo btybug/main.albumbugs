@@ -27,8 +27,9 @@
 {{--start JS--}}
 @if($page->js_type == 'default')
      {{--TODO: need fix when know from where get default profile --}}
-     {!! BBgetProfileAssets(1) !!}
-     {!! BBgetProfile(1,'js',true) !!}
+     {!! BBgetProfileAssets(false) !!}
+     {{--{!! BBgetProfile(1,'js',true) !!}--}}
+     {{ BBJs() }}
     {{--{!! BBJs() !!}--}}
     {{--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>--}}
     {{--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--}}

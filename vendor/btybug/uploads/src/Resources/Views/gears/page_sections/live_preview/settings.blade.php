@@ -98,7 +98,7 @@
             background-color: rgba(0, 0, 0, 0.76);
             /*height: 220px;*/
             color: white;
-            z-index: 999999999;
+            z-index: 999;
         }
 
         .settings-bottom .head {

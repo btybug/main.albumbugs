@@ -1,12 +1,8 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".dropdown").forEach(item => item.addEventListener("click", () => item.classList.toggle("open")))
-
     })
-
-
 </script>
-
 
 <div class="container-fluid">
 
@@ -78,7 +74,7 @@
         <div class="{!! issetReturn($settings,'rc_desktop').' '.issetReturn($settings,'rc_l_table').' '.issetReturn($settings,'rc_p_table').' '.issetReturn($settings,'rc_mobile')!!}">
             <div class="default-column {{isset($settings['right_area_style']) ? $settings['right_area_style'] : ''}}">
                 <div>
-                    <div class="{{(isset($settings['tr_style'])&& $settings['tr_style']) ? $settings['tr_style'] : ''}} ">
+                    <div class="{{(isset($settings['right_top_inp'])&& $settings['right_top_inp']) ? '' : 'hide'}} {{(isset($settings['tr_style'])&& $settings['tr_style']) ? $settings['tr_style'] : ''}} ">
                         @switch(issetReturn($settings,'tr_content_type'))
                             @case('unit')
                             @if(has_setting($settings,'tr_unit'))

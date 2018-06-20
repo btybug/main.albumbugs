@@ -15,6 +15,7 @@
             background-color: rgba(0, 0, 0, 0.76);
             /*height: 220px;*/
             color: white;
+            z-index: 999999999;
         }
 
         .settings-bottom .head {

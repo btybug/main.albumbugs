@@ -1,9 +1,3 @@
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".dropdown").forEach(item => item.addEventListener("click", () => item.classList.toggle("open")))
-    })
-</script>
-
 <div class="container-fluid">
 
     <div class="row row-no-gutter {{(isset($settings['main_page_style'])&& $settings['main_page_style']) ? $settings['main_page_style'] : ''}}">

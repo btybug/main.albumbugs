@@ -33,6 +33,18 @@
                                                 @endif
                                             </li>
                                             @endforeach
+                                        @else
+                                            <li class="dropdown">
+                                                <a href="{!! url($item['url']) !!}"><i class="fa {!! $item['icon'] !!}"></i> {{$item['title']}}</a>
+                                                @if(isset($item['children']) && !empty($item['children']))
+                                                    <a data-toggle="dropdown" class="dropdown-toggle"><span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach($item['children'] as $next_child)
+                                                            <li><a href="{!! url($next_child['url']) !!}"><i class="fa {!! $next_child['icon'] !!}"></i> {!! $next_child['title'] !!}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
                                         @endif
                                     @endforeach
                                 @endif

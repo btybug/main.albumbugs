@@ -2,6 +2,8 @@
 @php
     if(!isset($page)){
        \Btybug\btybug\Services\RenderService::getFrontPageByURL();
+    }else{
+        \View::share('page', $page);
     }
 @endphp
 <html lang="@yield('locale')">

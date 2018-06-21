@@ -98,36 +98,13 @@ function BBRenderPageSections ($layout, $settings = [], $main_view = null)
 
 function BBRenderFrontLayout ($page)
 {
-    //TODO: make with new structure
-//    if ($page->parent_id) {
-//        $forntPageRepository = new \Btybug\Console\Repository\FrontPagesRepository();
-//
-//        $p = \Btybug\FrontSite\Services\FrontendPageService::getFirstParent($page);
-//        if (count($p)) {
-//            $firstParent = array_first($p);
-//            $page_settings = json_decode($firstParent->settings, true);
-//            if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
-//                return BBRenderPageSections($page_settings['children']['page_layout'],
-//                    (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
-//            }
-//        } else {
-//            $parent = $forntPageRepository->find($page->parent_id);
-//            if ($parent && $parent->settings) {
-//                $page_settings = json_decode($parent->settings, true);
-//                if (isset($page_settings['children']['enable_layout']) && $page_settings['children']['enable_layout'] && isset($page_settings['children']['page_layout'])) {
-//                    return BBRenderPageSections($page_settings['children']['page_layout'],
-//                        (isset($page_settings['children_page_layout_settings']) ? $page_settings['children_page_layout_settings'] : []));
-//                }
-//            }
-//        }
-//    }
-
     if($page->parent && $page->page_layout_inheritance){
         $settings = ($page->parent->page_layout_settings && !is_array($page->parent->page_layout_settings)) ? json_decode($page->parent->page_layout_settings,true) : [];
+        return BBRenderPageSections($page->parent->page_layout, $settings);
     }else{
         $settings = ($page->page_layout_settings && !is_array($page->page_layout_settings)) ? json_decode($page->page_layout_settings,true) : [];
+        return BBRenderPageSections($page->page_layout, $settings);
     }
-    return BBRenderPageSections($page->page_layout, $settings);
 }
 
 function BBgetFrontPage ($idOrSlug)

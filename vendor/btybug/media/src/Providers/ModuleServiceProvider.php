@@ -31,8 +31,8 @@ class ModuleServiceProvider extends ServiceProvider
             "is_core" => "yes",
             "children" => [
                 [
-                    "title" => "Trash",
-                    "custom-link" => "/admin/media/trash",
+                    "title" => "Drive",
+                    "custom-link" => "/admin/media/drive",
                     "icon" => "fa fa-trash",
                     "is_core" => "yes"
                 ], [

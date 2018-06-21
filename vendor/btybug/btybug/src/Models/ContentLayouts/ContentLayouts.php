@@ -50,7 +50,7 @@ class ContentLayouts extends BasePainter implements VariationAccess
         return $tpl;
     }
 
-    public function scopeFind(?string $slug)
+    public function scopeFind(string $slug)
     {
         $path = $this->getItemConfigJsonPath($slug);
         return $this->makeItem($path);

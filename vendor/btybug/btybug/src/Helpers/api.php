@@ -88,6 +88,7 @@ function BBRenderTpl ($variation_id, $on_empty = null)
 
 function BBRenderPageSections ($layout, $settings = [], $main_view = null)
 {
+    if(! $layout) = $layout = '';
     $content_layout = \Btybug\btybug\Models\ContentLayouts\ContentLayouts::find($layout);
     if (! is_null($content_layout)) {
         return $content_layout->render($settings);

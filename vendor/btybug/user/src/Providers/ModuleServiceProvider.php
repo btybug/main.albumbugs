@@ -157,7 +157,7 @@ class ModuleServiceProvider extends ServiceProvider
                 ]
             ]
         ]);
-        \Btybug\btybug\Models\Routes::registerPages('btybug/user');
+        // \Btybug\btybug\Models\Routes::registerPages('btybug/user');
     }
 
     /**

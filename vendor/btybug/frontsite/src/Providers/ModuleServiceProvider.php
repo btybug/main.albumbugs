@@ -144,7 +144,7 @@ class ModuleServiceProvider extends ServiceProvider
             ]
         ]);
 
-          \Btybug\btybug\Models\Routes::registerPages('btybug/frontsite');
+          // \Btybug\btybug\Models\Routes::registerPages('btybug/frontsite');
         \Eventy::action('front_page_edit_widget', ['Page Info'=> [
             'view' => 'manage::panels.page_info',
             'id' => 'panel_info',

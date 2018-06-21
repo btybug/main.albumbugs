@@ -191,7 +191,7 @@ class ModuleServiceProvider extends ServiceProvider
 
 
         //TODO; remove when finish all
-        \Btybug\btybug\Models\Routes::registerPages('btybug/console');
+        // \Btybug\btybug\Models\Routes::registerPages('btybug/console');
     }
 
     /**

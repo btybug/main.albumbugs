@@ -24,6 +24,8 @@
   | and give it the controller to call when that URI is requested.
   |
  */
+
+
 //Route::get('units/styles/{slug}/{path}', 'HomeController@unitStyles')->where('path', '.*');
 Route::get('public-x/custom/css/{file}', 'HomeController@unitStyles');
 Route::get('pages-optimize', 'HomeController@pagesOptimize');

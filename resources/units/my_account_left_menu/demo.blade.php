@@ -36,11 +36,11 @@
                             </div>
 
                             @if(isset($child['children']) && !empty($child['children']))
-                            <ul class="cute">
-                                @foreach($child['children'] as $next_child)
-                                <li class="subitem"><a href="{{$next_child['url']}}"><i class="fa {!! $next_child['icon'] !!}"></i>{{$next_child['title']}}</a></li>
-                                @endforeach
-                            </ul>
+                                <ul class="cute">
+                                    @foreach($child['children'] as $next_child)
+                                    <li class="subitem"><a href="{{$next_child['url']}}"><i class="fa {!! $next_child['icon'] !!}"></i>{{$next_child['title']}}</a></li>
+                                    @endforeach
+                                </ul>
                             @endif
                         </li>
                         @endforeach

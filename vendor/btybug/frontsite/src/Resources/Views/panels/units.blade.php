@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         @php
-            BBRenderFrontLayout($page,[]);
+            BBRenderFrontLayout($page);
             $units = \Config::get('units',[]);
         @endphp
         @if(count($units))

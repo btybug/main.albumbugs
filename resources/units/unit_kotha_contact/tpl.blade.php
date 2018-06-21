@@ -1,3 +1,4 @@
+<div class="container">
     <div class="contact-us-page">
         <div class="post-thumb">
             <img src="http://www.pawstexarkana.org/images/about.jpg" alt="">
@@ -44,5 +45,7 @@
             </div>
         </div>
     </div>
+</div>
+
 
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}

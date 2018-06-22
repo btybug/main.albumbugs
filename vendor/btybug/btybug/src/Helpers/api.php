@@ -2473,6 +2473,14 @@ function BBgetLayoutAttribute($id,$attribute = 'title'){
 
     return ($layout) ? $layout->$attribute : 'No Layout';
 }
+function BBmediaButton(){
+    static $a=0;
+    if(!$a){
+        $modalHtml=View::make('media::_partials.modal')->render();
+        echo $modalHtml;
+    }
+    $a++;
+}
 
 function BBgetUsersPluck(){
     $repository = new \Btybug\User\Repository\UserRepository();

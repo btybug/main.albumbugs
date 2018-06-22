@@ -1,20 +1,15 @@
 <div class="container">
     <div class="contact-us-page">
         <div class="post-thumb">
-            <img src="http://www.pawstexarkana.org/images/about.jpg" alt="">
+            <img src="@if(isset($settings['image_url'])){{$settings['image_url']}}@else{{"http://www.pawstexarkana.org/images/about.jpg"}}@endif" alt="" class="{{(isset($settings['image_style'])&& $settings['image_style'] ) ? $settings['image_style'] : 'demo-img'}}">
         </div>
         <div class="post-content">
             <div class="entry-header text-center text-uppercase">
 
-                <h2 class="text-left">contact us</h2>
+                <h2 class="text-left {{(isset($settings['title_style'])&& $settings['title_style'] ) ? $settings['title_style'] : 'demo-text'}}">@if(isset($settings['title'])){{$settings['title']}}@else Contact us @endif</h2>
             </div>
             <div class="entry-content">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
+                <p class="{{(isset($settings['text_style'])&& $settings['text_style'] ) ? $settings['text_style'] : 'demo-text'}}">@if(isset($settings['contact_us'])){{$settings['contact_us']}}@else{{"Contact Text"}}@endif
                 </p>
 
             </div>
@@ -49,3 +44,5 @@
 
 
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
+{!! useDinamicStyle('texts') !!}
+{!! useDinamicStyle('images') !!}

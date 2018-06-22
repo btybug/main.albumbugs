@@ -154,92 +154,44 @@
         <div class="widget insta-widget">
             <h2 class="widget-title text-uppercase text-center">INSTAGRAM FEED</h2>
             <div class="instagram-feed">
-                <div class="single-instagram">
-                    <a href="">
-                        <img src="https://static.boredpanda.com/blog/wp-content/uploads/2016/02/adorable-little-animals-that-i-make-from-wool__880.jpg" alt="">
-                    </a>
-                    <div class="insta-overlay">
-                        <div class="insta-meta">
-                            <ul class="list-inline text-center">
-                                <li><a href=""><i class="fa fa-heart-o"></i></a> 325</li>
-                                <li><a href=""><i class="fa fa-comment-o"></i></a> 20</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="" class="insta-link"></a>
-                </div>
-                <div class="single-instagram">
-                    <a href="">
-                        <img src="https://i.pinimg.com/originals/6d/2f/14/6d2f140c61ac6b28b72a3c14caf1e4f4.jpg" alt="">
-                    </a>
-                    <div class="insta-overlay">
-                        <div class="insta-meta">
-                            <ul class="list-inline text-center">
-                                <li><a href=""><i class="fa fa-heart-o"></i></a> 325</li>
-                                <li><a href=""><i class="fa fa-comment-o"></i></a> 20</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="" class="insta-link"></a>
-                </div>
-                <div class="single-instagram">
-                    <a href="">
-                        <img src="http://1.bp.blogspot.com/-mY4B-gt2dhQ/UeXGGiDOEiI/AAAAAAAACFg/mBleW2a004Y/s640/animales+tiernos+(1).jpg" alt="">
-                    </a>
-                    <div class="insta-overlay">
-                        <div class="insta-meta">
-                            <ul class="list-inline text-center">
-                                <li><a href=""><i class="fa fa-heart-o"></i></a> 325</li>
-                                <li><a href=""><i class="fa fa-comment-o"></i></a> 20</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="" class="insta-link"></a>
-                </div>
-                <div class="single-instagram">
-                    <a href="">
-                        <img src="http://cdn.akc.org/content/article-body-image/cwc.jpg" alt="">
-                    </a>
-                    <div class="insta-overlay">
-                        <div class="insta-meta">
-                            <ul class="list-inline text-center">
-                                <li><a href=""><i class="fa fa-heart-o"></i></a> 325</li>
-                                <li><a href=""><i class="fa fa-comment-o"></i></a> 20</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="" class="insta-link"></a>
-                </div>
-                <div class="single-instagram">
-                    <a href="">
-                        <img src="http://www.cutestpaw.com/wp-content/uploads/2013/08/Mother-dog-sitting-with-her-cute-puppies.jpg" alt="">
-                    </a>
-                    <div class="insta-overlay">
-                        <div class="insta-meta">
-                            <ul class="list-inline text-center">
-                                <li><a href=""><i class="fa fa-heart-o"></i></a> 325</li>
-                                <li><a href=""><i class="fa fa-comment-o"></i></a> 20</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="" class="insta-link"></a>
-                </div>
-                <div class="single-instagram">
-                    <a href="">
-                        <img src="https://i.pinimg.com/originals/b5/5c/3d/b55c3d2cc20732509a53ab6a266c4c34.jpg" alt="">
-                    </a>
-                    <div class="insta-overlay">
-                        <div class="insta-meta">
-                            <ul class="list-inline text-center">
-                                <li><a href=""><i class="fa fa-heart-o"></i></a> 325</li>
-                                <li><a href=""><i class="fa fa-comment-o"></i></a> 20</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="" class="insta-link"></a>
-                </div>
+                <ul id="rudr_instafeed"></ul>
             </div>
         </div>
     </aside>
+    <style>
+        #rudr_instafeed{
+            list-style:none
+        }
+        #rudr_instafeed li{
+            float:left;
+            width:200px;
+            height:200px;
+            margin:10px
+        }
+        #rudr_instafeed li img{
+            max-width:100%;
+            max-height:100%;
+        }
+    </style>
+    {{--<script>--}}
+        {{--var token = '1362124742.3ad74ca.6df307b8ac184c2d830f6bd7c2ac5644',--}}
+            {{--num_photos = 10;--}}
+
+        {{--$.ajax({--}}
+            {{--url: 'https://api.instagram.com/v1/users/self/media/recent',--}}
+            {{--dataType: 'jsonp',--}}
+            {{--type: 'GET',--}}
+            {{--data: {access_token: token, count: num_photos},--}}
+            {{--success: function(data){--}}
+                {{--console.log(data);--}}
+                {{--for( x in data.data ){--}}
+                    {{--$('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>');--}}
+                {{--}--}}
+            {{--},--}}
+            {{--error: function(data){--}}
+                {{--console.log(data);--}}
+            {{--}--}}
+        {{--});--}}
+    {{--</script>--}}
 
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}

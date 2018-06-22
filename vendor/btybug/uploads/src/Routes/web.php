@@ -133,6 +133,7 @@ Route::group(['prefix' => 'assets'], function () {
 
 Route::group(['prefix' => 'profiles'], function () {
     Route::get('/', 'AssetProfilesController@getIndex', true)->name('uploads_assets_profiles_index');
+    Route::get('/optimize', 'AssetProfilesController@getOptimized', true)->name('uploads_assets_optimize');
     Route::post('/delete', 'AssetProfilesController@delete')->name('uploads_assets_profiles_delete');
     Route::group(['prefix' => 'js'], function () {
         Route::get('/', 'AssetProfilesController@getJs', true)->name('uploads_assets_profiles_js');

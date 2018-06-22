@@ -137,7 +137,6 @@ class AssetProfilesController extends Controller
         $mains = $versionsRepository->getJQuery();
         $assets = $assetsRepository->getWithGroupBy();
 
-//        dd($model->files);
         return view('uploads::profiles.create_js', compact(['plugins', 'model', 'mains', 'assets']));
     }
 
@@ -214,6 +213,17 @@ class AssetProfilesController extends Controller
     {
         $result = $versionsRepository->getByWhereInId($request->get('files',[]));
         return $result;
+    }
+
+    public function getOptimized(Request $request)
+    {
+        try{
+            BBpageAssetsOptimise();
+        }catch (\Exception $exception ){
+            return redirect()->back()->with('error',$exception->getMessage());
+        }
+
+        return redirect()->back()->with('message','successfully optimized');
     }
 }
 

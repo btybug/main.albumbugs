@@ -4,6 +4,7 @@
         <div class="col-md-12">
             <a href="{!! url(route('uploads_assets_profiles_create_js')) !!}" class="btn btn-warning pull-right">add
                 new</a>
+            <a href="{!! url(route('uploads_assets_optimize')) !!}" class="btn btn-info pull-right">Optimize Assets</a>
         </div>
         <h2>JS</h2>
 

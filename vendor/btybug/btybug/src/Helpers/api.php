@@ -101,9 +101,11 @@ function BBRenderFrontLayout ($page)
 {
     if($page->parent && $page->page_layout_inheritance){
         $settings = ($page->parent->page_layout_settings && !is_array($page->parent->page_layout_settings)) ? json_decode($page->parent->page_layout_settings,true) : [];
+        $settings["_page"] = $page;
         return BBRenderPageSections($page->parent->page_layout, $settings);
     }else{
         $settings = ($page->page_layout_settings && !is_array($page->page_layout_settings)) ? json_decode($page->page_layout_settings,true) : [];
+        $settings["_page"] = $page;
         return BBRenderPageSections($page->page_layout, $settings);
     }
 }
@@ -299,8 +301,7 @@ function BBfooterBack ()
 function main_content ($settings = null)
 {
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
-    $pageModel = ($page) ?? ((\Request::route()->parameter('param')) ? BBgetFrontPage(\Request::route()->parameter('param')) : BBgetFrontPage(issetReturn($settings,'bb_page')));
-
+    $pageModel = ( $page ) ?? ((\Request::route()->parameter('param')) ? BBgetFrontPage(\Request::route()->parameter('param')) : issetReturn($settings,'_page'));
     if($pageModel){
         if($pageModel->type =='custom' && isset($settings['live_preview_action'])){
             return BBRenderUnits(issetReturn($settings,'main_unit',$pageModel->template), ['_page' => $pageModel]);

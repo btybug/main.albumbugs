@@ -2474,3 +2474,9 @@ function BBgetLayoutAttribute($id,$attribute = 'title'){
     return ($layout) ? $layout->$attribute : 'No Layout';
 }
 
+function BBgetUsersPluck(){
+    $repository = new \Btybug\User\Repository\UserRepository();
+
+    return $repository->pluck('username','id')->toArray();
+}
+

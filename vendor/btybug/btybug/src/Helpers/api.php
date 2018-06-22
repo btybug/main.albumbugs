@@ -1378,24 +1378,7 @@ function BBstyle ($path, $unit = null)
     \Session::put('custom.styles', $styles);
 }
 
-function BBscript ($path, $unit = null)
-{
-    if ($unit) {
-        $actives = \Config::get('units_js', []);
-        $key = $unit->getSlug();
-        if (! isset($actives[$key])) $actives[$key] = [];
-        $actives[$key][] = $path;
-        \Config::set('units_js', $actives);
-    }
 
-
-    $scripts = [];
-    if (\Session::has('custom.scripts')) {
-        $scripts = \Session::get('custom.scripts', []);
-    }
-    $scripts[md5($path)] = $path;
-    \Session::put('custom.scripts', $scripts);
-}
 
 function BBGiveMe ($type, $data = null, $index = null)
 {
@@ -2373,7 +2356,24 @@ function BBmargeJs ()
     };
     File::put(public_path('js' . DS . 'cms_main.js'), $content);
 }
+function BBscript ($path, $unit = null)
+{
+    if ($unit) {
+        $actives = \Config::get('units_js', []);
+        $key = $unit->getSlug();
+        if (! isset($actives[$key])) $actives[$key] = [];
+        $actives[$key][] = $path;
+        \Config::set('units_js', $actives);
+    }
 
+
+    $scripts = [];
+    if (\Session::has('custom.scripts')) {
+        $scripts = \Session::get('custom.scripts', []);
+    }
+    $scripts[md5($path)] = $path;
+    \Session::put('custom.scripts', $scripts);
+}
 function BBpageAssetsOptimise ()
 {
     $home = new \Btybug\btybug\Models\Home();

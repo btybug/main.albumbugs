@@ -153,45 +153,12 @@
         </div>
         <div class="widget insta-widget">
             <h2 class="widget-title text-uppercase text-center">INSTAGRAM FEED</h2>
-            <div class="instagram-feed">
-                <ul id="rudr_instafeed"></ul>
+            <div class="all-photo">
+                <ul id="rudr_instafeed" class="instagram-feed"></ul>
             </div>
         </div>
     </aside>
-    <style>
-        #rudr_instafeed{
-            list-style:none
-        }
-        #rudr_instafeed li{
-            float:left;
-            width:200px;
-            height:200px;
-            margin:10px
-        }
-        #rudr_instafeed li img{
-            max-width:100%;
-            max-height:100%;
-        }
-    </style>
-    {{--<script>--}}
-        {{--var token = '1362124742.3ad74ca.6df307b8ac184c2d830f6bd7c2ac5644',--}}
-            {{--num_photos = 10;--}}
 
-        {{--$.ajax({--}}
-            {{--url: 'https://api.instagram.com/v1/users/self/media/recent',--}}
-            {{--dataType: 'jsonp',--}}
-            {{--type: 'GET',--}}
-            {{--data: {access_token: token, count: num_photos},--}}
-            {{--success: function(data){--}}
-                {{--console.log(data);--}}
-                {{--for( x in data.data ){--}}
-                    {{--$('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>');--}}
-                {{--}--}}
-            {{--},--}}
-            {{--error: function(data){--}}
-                {{--console.log(data);--}}
-            {{--}--}}
-        {{--});--}}
-    {{--</script>--}}
 
 {!! BBstyle($_this->path.DS.'css'.DS.'style.css') !!}
+    {!! BBscript($_this->path.DS.'js'.DS.'custom.js') !!}

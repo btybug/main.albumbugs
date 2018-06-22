@@ -226,6 +226,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    list-style: none;
+    padding: 0;
 }
 .sidebar-left-col .insta-widget .single-instagram{
     flex-basis: 48%;
@@ -233,52 +235,8 @@
     position: relative;
     display: block;
 }
-.sidebar-left-col .insta-widget .single-instagram>a img{
+.sidebar-left-col .insta-widget .single-instagram img{
 height: 150px;
     object-fit: cover;
     width: 100%;
-}
-.sidebar-left-col .insta-widget .single-instagram .insta-overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(218, 82, 32, 0.75);
-    display: flex;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -ms-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-    opacity: 0;
-}
-.sidebar-left-col .insta-widget .single-instagram:hover .insta-overlay{
-    opacity: 1;
-}
-.sidebar-left-col .insta-widget .single-instagram .insta-overlay .insta-meta{
-    margin: auto;
-    z-index: 999;
-}
-.sidebar-left-col .insta-widget .single-instagram .insta-overlay ul{
-    margin-bottom: 0;
-}
-.sidebar-left-col .insta-widget .single-instagram .insta-overlay ul li{
-    font-size: 13px;
-    color: #fff;
-}
-.sidebar-left-col .insta-widget .single-instagram .insta-overlay ul li a{
-    color: #fff;
-    font-size: 13px;
-}
-.sidebar-left-col .insta-widget .single-instagram .insta-overlay ul li a .fa{
-    margin-right: 3px;
-}
-.sidebar-left-col .insta-widget .instagram-feed .insta-link{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    display: block;
 }

@@ -14,6 +14,21 @@
   "created_at": 1490088665,
   "is_core": 0,
   "place": "frontend",
+  "placeholders": {
+    "user": {
+      "type": "unit",
+      "tag": "user",
+      "title": "User",
+      "f": true,
+      "s": true
+    },
+    "instagram": {
+      "type": "unit",
+      "tag": "instagram",
+      "title": "Instagram",
+      "f": true
+    }
+  },
   "tags": ["kotha","blog","post","frontend"],
   "path": "resources\/units\/unit_kotha_left_col"
 }

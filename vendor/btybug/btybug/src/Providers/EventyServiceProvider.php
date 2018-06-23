@@ -46,9 +46,15 @@ class EventyServiceProvider extends ServiceProvider
         BackendTh::getCheckTheme();
         \Eventy::addAction('my.script', function ($what) {
             $codes = \Config::get('script');
-            $codes .= $what;
+            $codes.= $what;
             \Config::set('script', $codes);
             return (\Config::get('script'));
+        });
+        \Eventy::addAction('my.extraHtml', function ($what) {
+            $codes = \Config::get('extraHtml');
+            $codes[]= $what;
+            \Config::set('extraHtml', $codes);
+            return (\Config::get('extraHtml'));
         });
 
 //        \Eventy::addAction('add.validation', function ($what) {

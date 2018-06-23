@@ -175,6 +175,7 @@
         </div>
     </div>
 </div>
+{!! BBextraHtml() !!}
 
 <button data-settingaction="save" class="hide" id="settings_savebtn"></button>
 <input type="hidden" id="hidden_data" value='{!!$settings_json!!}'>
@@ -215,4 +216,5 @@
 @if(isset($ui))
     {!! HTML::script('public-x/custom/js/'.str_replace(' ','-',$ui->slug).'.js') !!}
 @endif
+{!! BBscriptsHook() !!}
 </body>

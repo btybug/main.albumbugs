@@ -22,6 +22,8 @@ class IndexController extends Controller
 
     public function index()
     {
+        \Eventy::action('my.scripts', ['url' => '//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js', 'attributes' => ['data-main' => url('public/elFinder/main.default.js')]]);
+        \Eventy::action('my.scripts', ['url' => url('public/elFinder/elfinder.js')]);
         return view('media::drive.index');
     }
 

@@ -1,15 +1,14 @@
 <div class="settingsModal">
-    <button type="button" class="btn btn-info btn-md btnsettingsModal">Open Modal</button>
     <!-- Modal -->
     <div class="modal fade" id="mysettingsModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close">&times;</button>
+                    <button type="button" class="close media-modal-close">&times;</button>
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <p>This is a large modal.</p>
+                   @include('media::_partials.drive')
                 </div>
             </div>
         </div>
@@ -40,10 +39,10 @@
     }
 </style>
 <script>
-    $('.settingsModal .btnsettingsModal').on('click', function () {
+    $('body').on('click','.media-modal-open', function () {
         $('#mysettingsModal').addClass('in');
     });
-    $('.settingsModal .close').on('click', function () {
+    $('body').on('click','.media-modal-close', function () {
         $(this).closest('.modal').removeClass('in');
     })
 </script>

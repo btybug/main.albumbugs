@@ -5,7 +5,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close media-modal-close">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    {{--<h4 class="modal-title">Modal Header</h4>--}}
+                    <textarea name="" id="" cols="30" rows="10" class="form-control" readonly></textarea>
                 </div>
                 <div class="modal-body">
                    @include('media::_partials.drive')
@@ -35,6 +36,19 @@
     .settingsModal .modal-content {
         height: auto;
         min-height: 100%;
+        border-radius: 0;
+    }
+    .settingsModal .modal-content .modal-header{
+        padding: 0;
+    }
+    .settingsModal .modal-content .modal-header .close{
+        margin-top: 7px;
+        margin-right: 7px;
+    }
+    .settingsModal .modal-content .modal-header textarea{
+        resize: none;
+        height: 35px;
+        width: 30%;
         border-radius: 0;
     }
 </style>

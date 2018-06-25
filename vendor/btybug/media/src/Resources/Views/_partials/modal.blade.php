@@ -4,13 +4,15 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                    <button class="btn btn-submit media-select">Select</button>
                     <button type="button" class="close media-modal-close">&times;</button>
                     {{--<h4 class="modal-title">Modal Header</h4>--}}
-                    <textarea name="" id="" cols="30" rows="10" class="form-control" readonly></textarea>
+                    <textarea name="" id="path-text-location" cols="30" rows="10" class="form-control" readonly></textarea>
                 </div>
                 <div class="modal-body">
                    @include('media::_partials.drive')
                 </div>
+                <input type="hidden" name="" id="path-location" value="">
             </div>
         </div>
     </div>
@@ -53,11 +55,6 @@
     }
 </style>
 <script>
-    $('body').on('click','.media-modal-open', function () {
-        $('#mysettingsModal').addClass('in');
-    });
-    $('body').on('click','.media-modal-close', function () {
-        $(this).closest('.modal').removeClass('in');
-    })
+   
 </script>
 {{--@include('media::_partials.drive')--}}

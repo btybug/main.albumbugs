@@ -2486,7 +2486,7 @@ function BBgetLayoutAttribute($id, $attribute = 'title')
     return ($layout) ? $layout->$attribute : 'No Layout';
 }
 
-function BBmediaButton()
+function BBmediaButton($name)
 {
     static $a = 0;
     if (!$a) {
@@ -2497,7 +2497,7 @@ function BBmediaButton()
          \Eventy::action('my.extraHtml',$modalHtml);
     }
     $a++;
-    return "<button type='button' class='btn btn-info btn-md btnsettingsModal media-modal-open' data-id='$a'>Open Modal</button>";
+    return "<button type='button' class='btn btn-info btn-md btnsettingsModal media-modal-open' data-id='$a'>Open Modal</button><input type='hidden' id='".$name.'-'.$a."' name='$name'>";
 }
 
 function BBgetUsersPluck()

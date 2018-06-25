@@ -85,7 +85,7 @@
                 <label for="">Name Area Type</label>
             </div>
             <div class="col-md-8">
-                {!! BBmediaButton('my_image') !!}
+                {!! BBmediaButton('my_image',$settings) !!}
                 {!! Form::select('name_type',[null=>'Select Content Type','static'=>'Static','dynamic'=>'Dynamic'],null,['class'=>'form-control double-select','data-value'=>'name']) !!}
             </div>
             <div class="clearfix"></div>

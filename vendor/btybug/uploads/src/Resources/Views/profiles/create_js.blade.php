@@ -148,23 +148,23 @@
                     {!! Form::open(['id' => 'assetsForm']) !!}
                     <div class="form-group">
                         {!! Form::label('files','Files') !!}
-                        <div>
-                            @if(count($mains))
-                                @foreach( $mains as $item)
-                                    @if($item->path)
-                                        <label class="checkbox-inline" data-path="{{ $item->path }}">
-                                            {!! Form::checkbox('files[]',$item->id,null) !!} {{ $item->name }}
-                                        </label>
-                                    @else
-                                        <label class="checkbox-inline">
-                                            <a href="{!! route('uploads_assets_js') !!}">Broken assets</a> {{ $item->name }}
-                                        </label>
-                                    @endif
-
-                                @endforeach
-                            @endif
-                        </div>
                         <div class="script-box">
+                            <div>
+                                @if(count($mains))
+                                    @foreach( $mains as $item)
+                                        @if($item->path)
+                                            <label class="checkbox-inline" data-path="{{ $item->path }}">
+                                                {!! Form::checkbox('files[]',$item->id,null) !!} {{ $item->name }}
+                                            </label>
+                                        @else
+                                            <label class="checkbox-inline">
+                                                <a href="{!! route('uploads_assets_js') !!}">Broken assets</a> {{ $item->name }}
+                                            </label>
+                                        @endif
+
+                                    @endforeach
+                                @endif
+                            </div>
                             @if(count($plugins))
                                 @foreach( $plugins as $plugin)
                                     <label class="checkbox-inline" data-path="{{ $item->path }}">

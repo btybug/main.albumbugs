@@ -30,9 +30,12 @@
                 {!! Form::label('password_confirmation ','Confirm Password',[])!!}
                 {!! Form::password('password_confirmation',['class'=>'form-control','placeholder'=>'Enter Confirm Password'])!!}
             </div>
-            {{--<div class="form-group">--}}
-            {{--@include('users::_partials.form_settings')--}}
-            {{--</div>--}}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Avatar</label>
+                <div class="col-sm-8">
+                    {!! BBmediaButton('avatar',$admin) !!}
+                </div>
+            </div>
             <div class="form-group">
                 {!! Form::submit('Edit',['class' => 'btn btn-primary']) !!}
             </div>

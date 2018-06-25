@@ -58,6 +58,12 @@
                     {!! Form::textarea('about',null,['class' => 'form-contro1']) !!}
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Avatar</label>
+                <div class="col-sm-8">
+                    {!! BBmediaButton('avatar',$user) !!}
+                </div>
+            </div>
             <div class="form-group button">
                 <button class="btn btn-info pull-right" type="submit">Save</button>
                 <a class="btn pull-right" href="/admin/users">Back</a>

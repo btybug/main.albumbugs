@@ -1038,6 +1038,20 @@ function BBGetUser($id = null, $column = 'username')
 
 function BBGetUserAvatar($id = null)
 {
+    if ($id) {
+        $userRepo = new \Btybug\User\Repository\UserRepository();
+        $user = $userRepo->find($id);
+        if ($user && $user->avatar) {
+            return url($user->avatar);
+        }
+    } else {
+        if (Auth::check()) {
+            if (Auth::user()->avatar) {
+                return url(Auth::user()->avatar);
+            }
+        }
+    }
+
     return url('public/images/avatar.png');
 }
 

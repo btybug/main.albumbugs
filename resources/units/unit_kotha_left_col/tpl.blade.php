@@ -12,7 +12,7 @@
 
             <div class="about-me-content">
                 <div class="about-me-img">
-                    <img src="https://jooinn.com/images/girl-162.jpg" alt="" class="img-me img-circle">
+                    <img src="{{ BBGetUserAvatar(issetReturn($settings,'selected_user',null)) }}" alt="" class="img-me img-circle">
                     <h2 class="text-uppercase">
                         {!! BBGetUser(issetReturn($settings,'selected_user',SUPERADMIN_ID),issetReturn($settings,'selected_user_col','username')) !!}
                     </h2>

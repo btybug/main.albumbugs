@@ -16,8 +16,8 @@ $("body").on("click", ".media-select", function() {
   console.log(elm);
   let location = document.querySelector("#path-location").value;
   document.querySelector(`#${elm}`).value = "public/" + location;
-  $(elm).trigger("input");
   $(this)
     .closest(".modal")
     .removeClass("in");
+    savesettingevent();
 });

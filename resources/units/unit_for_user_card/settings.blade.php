@@ -86,6 +86,7 @@
             </div>
             <div class="col-md-8">
                 {!! BBmediaButton('my_image',$settings) !!}
+                {!! BBmediaButton('my_image2',$settings) !!}
                 {!! Form::select('name_type',[null=>'Select Content Type','static'=>'Static','dynamic'=>'Dynamic'],null,['class'=>'form-control double-select','data-value'=>'name']) !!}
             </div>
             <div class="clearfix"></div>

@@ -49,7 +49,7 @@
                    @foreach($posts as $post)
                         <li>
                             <a href="{!! get_post_url($post->id) !!}" class="popular-img"><img
-                                        src="{!! url('public/storage/'.$post->image) !!}"
+                                        src="{!! url($post->image) !!}"
                                         alt="">
                             </a>
                             <div class="p-content">

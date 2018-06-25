@@ -51,6 +51,7 @@
             @else
                 @yield('content')
             @endif
+            {!! BBextraHtml() !!}
         </div>
         <div class="bty-footer-fix">
             {!! BBfooterBack() !!}

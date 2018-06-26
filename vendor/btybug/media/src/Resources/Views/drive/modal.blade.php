@@ -1,8 +1,6 @@
-
-
 <div class="bestbetter-modal bestbetter-modal-media-dialog">
     <!-- Modal -->
-    <div id="myModal"  role="dialog">
+    <div id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
@@ -22,35 +20,42 @@
                             <div class="icon">
                                 <i class="fa fa-folder" aria-hidden="true"></i>
                                 <ul class="list-unstyled list-inline text-center icons">
-                                    <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
-                                    <li class="text-center"><a href="#" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                    <li class="text-center"><a href="#"><i class="fa fa-info"
+                                                                           aria-hidden="true"></i></a></li>
+                                    <li class="text-center"><a href="#" target="_blank"><i class="fa fa-eye"
+                                                                                           aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="img">
-                                <a href="#" >
-                                    <img src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
+                                <a href="#">
+                                    <img src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg"
+                                         alt="">
                                 </a>
                                 <ul class="list-unstyled list-inline text-center icons">
-                                    <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
+                                    <li class="text-center"><a href="#"><i class="fa fa-info"
+                                                                           aria-hidden="true"></i></a></li>
                                     <li class="text-center">
-                                        <a href="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" target="_blank" data-lightbox="folder-set" data-title="Images title">
+                                        <a href="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg"
+                                           target="_blank" data-lightbox="folder-set" data-title="Images title">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     </li>
-                                    <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                    <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
 
 
-
                         <div class="content-upload media-modal-content-upload">
                             <div class="upload-space">
-                                    <label class="control-label">Upload Image</label>
-                                    <div class="file-loading">
-                                        <input id="input-ru" name="inputru[]" type="file" multiple>
-                                    </div>
+                                <label class="control-label">Upload Image</label>
+                                <div class="file-loading">
+                                    <input id="input-ru" name="inputru[]" type="file" multiple>
+                                </div>
 
                                 </label>
                                 <div id="errorBlock" class="help-block"></div>
@@ -84,7 +89,7 @@
 </script>
 <script type="template" id="media-modal-files">
     <div class="img">
-        <a href="#" >
+        <a href="#">
             <img src="{url}" alt="">
         </a>
         <ul class="list-unstyled list-inline text-center icons">

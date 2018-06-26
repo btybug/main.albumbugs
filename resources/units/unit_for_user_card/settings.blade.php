@@ -1,3 +1,5 @@
+
+
 @option('general','f',$data)
 <div class="bty-settings-panel">
     <div class="col-md-12">
@@ -81,12 +83,17 @@
 <div class="bty-settings-panel">
     <div class="col-md-12">
         <div class="form-group">
+            <div class="col-md-12">
+                {!! BBmediaButton('my_image',$settings) !!}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
             <div class="col-md-4">
                 <label for="">Name Area Type</label>
             </div>
             <div class="col-md-8">
-                {!! BBmediaButton('my_image',$settings) !!}
-                {!! BBmediaButton('my_image2',$settings) !!}
+
                 {!! Form::select('name_type',[null=>'Select Content Type','static'=>'Static','dynamic'=>'Dynamic'],null,['class'=>'form-control double-select','data-value'=>'name']) !!}
             </div>
             <div class="clearfix"></div>

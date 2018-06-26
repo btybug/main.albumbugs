@@ -421,12 +421,13 @@ function BBscriptsHook()
     }
     return $scripts;
 }
+
 function BBextraHtml()
 {
     $codes = \Config::get('extraHtml', []);
     $html = '';
     foreach ($codes as $key => $value) {
-        $html .=$value;
+        $html .= $value;
     }
     return $html;
 }
@@ -2500,7 +2501,7 @@ function BBgetLayoutAttribute($id, $attribute = 'title')
     return ($layout) ? $layout->$attribute : 'No Layout';
 }
 
-function BBmediaButton($name,$model=null,$text='Open Media')
+function BBmediaButton($name, $model = null, $text = 'Open Media')
 {
     static $a = 0;
     if (!$a) {
@@ -2508,20 +2509,28 @@ function BBmediaButton($name,$model=null,$text='Open Media')
         \Eventy::action('my.scripts', ['url' => url('public/elFinder/elfinder.js')]);
         \Eventy::action('my.scripts', ['url' => url('public/elFinder/media_button.js')]);
         $modalHtml = View::make('media::_partials.modal')->render();
-         \Eventy::action('my.extraHtml',$modalHtml);
+        \Eventy::action('my.extraHtml', $modalHtml);
     }
     $a++;
-    $value='';
-    if($model){
-        if(is_object($model) && isset($model->$name)){
-            $value='value='.$model->$name;
+    $value = '';
+    $value_tmp = '';
+    if ($model) {
+        if (is_object($model) && isset($model->$name)) {
+            $value = 'value=' . $model->$name;
+            $prop = "tmp_" . $name;
+            if (isset($model->$prop))
+                $value_tmp = 'value=' . $model["tmp_" . $name];
         }
-        if (is_array($model) && isset($model[$name])){
-            $value='value='.$model[$name];
+        if (is_array($model) && isset($model[$name])) {
+            $value = 'value=' . $model[$name];
+            if (isset($model["tmp_" . $name]))
+                $value_tmp = 'value=' . $model["tmp_" . $name];
         }
     }
 //    return "<button type='button' class='btn btn-info btn-md btnsettingsModal media-modal-open' data-id='".$name.'-'.$a."'>Open Media</button><input type='hidden' $value id='".$name.'-'.$a."' name='$name'>";
-    return "<div style='height: 60px;display: flex;align-items: center;'><span style='width: 60px;height: 100%;display: flex;border: 4px solid #fff;'><img style='width: 100%;height: 100%;object-fit: cover;' src='http://www.tourisme.fr/images/otf_offices/857/172313-203553606325436-5429368-o.jpg' alt=''></span><button type='button' style='background-color: rgb(101, 101, 101); width: 210px;height: 100%;outline: none;border: none;' class='btnsettingsModal  media-modal-open' data-id='".$name.'-'.$a."'><img style='width: 100%;height: 100%;object-fit: contain;' src='http://dpskurukshetra.com/wp-content/uploads/2018/01/Camara-GALLERY-Icon.png' alt=''></button></div><input type='hidden' $value id='".$name.'-'.$a."' name='$name'>";
+    return "<div style='height: 60px;display: flex;align-items: center;'><span style='width: 60px;height: 100%;display: flex;border: 4px solid #fff;'><img style='width: 100%;height: 100%;object-fit: cover;' src='http://www.tourisme.fr/images/otf_offices/857/172313-203553606325436-5429368-o.jpg' alt=''></span><button type='button' style='background-color: rgb(101, 101, 101); width: 210px;height: 100%;outline: none;border: none;' class='btnsettingsModal  media-modal-open' data-id='" . $name . '-' . $a . "'><img style='width: 100%;height: 100%;object-fit: contain;' src='http://dpskurukshetra.com/wp-content/uploads/2018/01/Camara-GALLERY-Icon.png' alt=''></button></div>
+<input type='hidden' $value id='" . $name . '-' . $a . "' name='$name'>
+<input type='hidden' $value_tmp id='tmp_" . $name . '-' . $a . "' name='tmp_$name'>";
 }
 
 function BBgetUsersPluck()

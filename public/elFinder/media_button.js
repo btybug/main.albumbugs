@@ -14,10 +14,14 @@ $("body").on("click", ".media-modal-close", function() {
 $("body").on("click", ".media-select", function() {
   console.log($(this));
   console.log(elm);
-  let location = document.querySelector("#path-location").value;
-  document.querySelector(`#${elm}`).value = "public/" + location;
+  let location = document.querySelector("#path-location");
+  document.querySelector(`#${elm}`).value = "public/" + location.value;
+  let temp = (document.querySelector(
+    `#tmp_${elm}`
+  ).value = location.getAttribute("data-small-image"));
+  console.log(temp);
   $(this)
     .closest(".modal")
     .removeClass("in");
-    savesettingevent();
+  savesettingevent();
 });

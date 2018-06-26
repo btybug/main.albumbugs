@@ -282,7 +282,7 @@ class VersionsService extends GeneralService
             \File::put(public_path("css/versions/" . $val->file_name), $code);
         } else {
             if (! \File::isDirectory(public_path("js/versions/" . $val->name . "/" . $val->version))) {
-                \File::makeDirectory(public_path("js/versions/" . $val->name . "/" . $val->version));
+                \File::makeDirectory(public_path("js/versions/" . $val->name . "/" . $val->version),493,true);
             }
             $a = \File::put(public_path("js/versions/" . $val->name . "/" . $val->version . "/" . $val->file_name), $code);
         }

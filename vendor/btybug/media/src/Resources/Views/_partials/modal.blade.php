@@ -4,10 +4,9 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                    <textarea name="" id="path-text-location" cols="30" rows="10" class="form-control" readonly></textarea>
                     <button class="btn btn-submit media-select">Select</button>
                     <button type="button" class="close media-modal-close">&times;</button>
-                    {{--<h4 class="modal-title">Modal Header</h4>--}}
-                    <textarea name="" id="path-text-location" cols="30" rows="10" class="form-control" readonly></textarea>
                 </div>
                 <div class="modal-body">
                    @include('media::_partials.drive')
@@ -42,10 +41,19 @@
     }
     .settingsModal .modal-content .modal-header{
         padding: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
     }
     .settingsModal .modal-content .modal-header .close{
-        margin-top: 7px;
         margin-right: 7px;
+        margin-left: auto;
+    }
+    .settingsModal .modal-content .modal-header .btn-submit{
+        border: none;
+        border-radius: 0;
+        background-color: #f0ad4e;
+        color: white;
     }
     .settingsModal .modal-content .modal-header textarea{
         resize: none;
